@@ -70,6 +70,53 @@
 </head>
 <body class="min-h-screen flex flex-col antialiased bg-slate-50 text-slate-900">
 
+  <!-- ========================================== -->
+  <!-- TELA DE LOGIN & GATE DE AUTENTICAÇÃO -->
+  <!-- ========================================== -->
+  <div id="authGateModal" class="fixed inset-0 z-50 bg-slate-950 flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-slate-200 p-8 flex flex-col gap-5 text-center relative overflow-hidden">
+      
+      <div class="mx-auto w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center font-black text-white text-2xl shadow-xl shadow-amber-500/25 font-mono">
+        PRX
+      </div>
+
+      <div>
+        <h2 class="text-xl font-extrabold text-slate-900">Acesso Restrito PRX Capital</h2>
+        <p class="text-xs text-slate-500 mt-1 font-medium">Ecossistema BDR & Pipeline CRM High-Ticket</p>
+      </div>
+
+      <form onsubmit="handleAuthLogin(event)" class="flex flex-col gap-3 text-left">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">E-mail Autorizado:</label>
+          <div class="relative">
+            <i class="fa-regular fa-envelope absolute left-3.5 top-3 text-slate-400 text-xs"></i>
+            <input type="email" id="authEmailInput" required placeholder="danielzanoncontato@gmail.com" class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3.5 py-2.5 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:bg-white transition">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Senha de Acesso:</label>
+          <div class="relative">
+            <i class="fa-solid fa-lock absolute left-3.5 top-3 text-slate-400 text-xs"></i>
+            <input type="password" id="authPasswordInput" required placeholder="••••••••" class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3.5 py-2.5 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:bg-white transition">
+          </div>
+        </div>
+
+        <div id="authErrorMsg" style="display: none;" class="text-[11px] font-bold text-rose-600 bg-rose-50 p-2.5 rounded-xl border border-rose-200 text-center">
+          Credenciais inválidas. Verifique o e-mail e a senha digitados.
+        </div>
+
+        <button type="submit" class="mt-2 w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-extrabold rounded-xl transition shadow-md flex items-center justify-center gap-2">
+          <i class="fa-solid fa-right-to-bracket"></i> Acessar Ecossistema
+        </button>
+      </form>
+
+      <div class="pt-3 border-t border-slate-100 text-[10px] text-slate-400 font-medium">
+        🔒 Acesso estritamente confidencial | Multi-Family Office PRX Capital
+      </div>
+    </div>
+  </div>
+
   <!-- AVISO FLUTUANTE DE CÓPIA E AÇÕES -->
   <div id="copyToast" style="display: none; position: fixed; bottom: 24px; right: 24px; z-index: 9999;" class="bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl items-center gap-3 border border-slate-800 transition-all duration-300">
     <div class="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></div>
@@ -79,463 +126,471 @@
     </div>
   </div>
 
-  <!-- CABEÇALHO EXECUTIVO PRX CAPITAL -->
-  <header class="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-40 shadow-sm">
-    <div class="max-w-[1950px] mx-auto px-4 sm:px-6 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
-      
-      <!-- LOGO & BRAND -->
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center font-black text-white text-base shadow-md shadow-amber-500/20 font-mono">
-          PRX
-        </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <h1 class="text-base font-extrabold tracking-tight text-slate-900">PRX Capital - BDR</h1>
-            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300">MULTI-FAMILY OFFICE</span>
-            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">HIGH TICKET B2B</span>
+  <!-- WRAPPER DA APLICAÇÃO (EXIBIDO APENAS APÓS AUTENTICAÇÃO) -->
+  <div id="mainAppWrapper" style="display: none;" class="min-h-screen flex flex-col antialiased bg-slate-50 text-slate-900">
+
+    <!-- CABEÇALHO EXECUTIVO PRX CAPITAL -->
+    <header class="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-40 shadow-sm">
+      <div class="max-w-[1950px] mx-auto px-4 sm:px-6 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
+        
+        <!-- LOGO & BRAND -->
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center font-black text-white text-base shadow-md shadow-amber-500/20 font-mono">
+            PRX
           </div>
-          <p class="text-xs text-slate-500 font-medium">Prospecção Ativa & CRM Automatizado | BDR Especialista: <span class="font-bold text-slate-700">Daniel Zanon</span> (prxcapital.com.br)</p>
+          <div>
+            <div class="flex items-center gap-2">
+              <h1 class="text-base font-extrabold tracking-tight text-slate-900">PRX Capital - BDR</h1>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300">MULTI-FAMILY OFFICE</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">HIGH TICKET B2B</span>
+            </div>
+            <p class="text-xs text-slate-500 font-medium">Prospecção Ativa & CRM Automatizado | BDR Especialista: <span class="font-bold text-slate-700">Daniel Zanon</span> (prxcapital.com.br)</p>
+          </div>
         </div>
-      </div>
 
-      <!-- SELETOR DE ABAS PRINCIPAIS -->
-      <div class="flex items-center bg-slate-100 p-1 rounded-2xl border border-slate-200 shadow-inner">
-        <button id="tab-prospects-btn" onclick="switchMainTab('prospects')" class="tab-btn active-tab px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 text-slate-700 hover:text-slate-900">
-          <i class="fa-solid fa-list-check text-amber-500"></i>
-          <span>1. Base de Prospecção</span>
-          <span id="tabProspectsBadge" class="px-1.5 py-0.5 rounded-md text-[10px] bg-slate-200 text-slate-800 font-mono font-bold">6300</span>
-        </button>
+        <!-- SELETOR DE ABAS PRINCIPAIS -->
+        <div class="flex items-center bg-slate-100 p-1 rounded-2xl border border-slate-200 shadow-inner">
+          <button id="tab-prospects-btn" onclick="switchMainTab('prospects')" class="tab-btn active-tab px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 text-slate-700 hover:text-slate-900">
+            <i class="fa-solid fa-list-check text-amber-500"></i>
+            <span>1. Base de Prospecção</span>
+            <span id="tabProspectsBadge" class="px-1.5 py-0.5 rounded-md text-[10px] bg-slate-200 text-slate-800 font-mono font-bold">6300</span>
+          </button>
 
-        <button id="tab-crm-btn" onclick="switchMainTab('crm')" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 text-slate-700 hover:text-slate-900">
-          <i class="fa-solid fa-chart-line text-blue-500"></i>
-          <span>2. Pipeline CRM High Ticket</span>
-          <span id="tabCrmBadge" class="px-1.5 py-0.5 rounded-md text-[10px] bg-blue-100 text-blue-800 font-mono font-bold">0</span>
-        </button>
+          <button id="tab-crm-btn" onclick="switchMainTab('crm')" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 text-slate-700 hover:text-slate-900">
+            <i class="fa-solid fa-chart-line text-blue-500"></i>
+            <span>2. Pipeline CRM High Ticket</span>
+            <span id="tabCrmBadge" class="px-1.5 py-0.5 rounded-md text-[10px] bg-blue-100 text-blue-800 font-mono font-bold">0</span>
+          </button>
 
-        <a href="crm_prx.html" target="_blank" title="Abrir CRM em janela dedicada/popup" class="ml-1 px-3 py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 hover:bg-slate-200 transition flex items-center gap-1.5 border border-transparent hover:border-slate-300">
-          <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[11px]"></i>
-          <span class="hidden sm:inline">Nova Janela</span>
-        </a>
-      </div>
-
-      <!-- CARDS DE MÉTRICAS -->
-      <div class="flex items-center gap-3">
-        <div class="bg-slate-100 border border-slate-200 px-3.5 py-1.5 rounded-xl flex items-center gap-2 text-xs font-bold text-slate-700 shadow-sm">
-          <i class="fa-solid fa-building text-amber-600"></i>
-          <span><b id="compHeaderCount" class="text-slate-900">6300</b> Mineradas</span>
+          <a href="crm_prx.html" target="_blank" title="Abrir CRM em janela dedicada/popup" class="ml-1 px-3 py-2 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 hover:bg-slate-200 transition flex items-center gap-1.5 border border-transparent hover:border-slate-300">
+            <i class="fa-solid fa-arrow-up-right-from-square text-slate-500 text-[11px]"></i>
+            <span class="hidden sm:inline">Nova Janela</span>
+          </a>
         </div>
-        <div class="bg-emerald-50 border border-emerald-200 px-3.5 py-1.5 rounded-xl flex items-center gap-2 text-xs font-bold text-emerald-700 shadow-sm">
-          <i class="fa-solid fa-phone-volume text-emerald-600"></i>
-          <span><b id="contactedHeaderCount" class="text-emerald-900">0</b> Abordadas</span>
+
+        <!-- CARDS DE MÉTRICAS & BOTÃO LOGOUT -->
+        <div class="flex items-center gap-3">
+          <div class="bg-slate-100 border border-slate-200 px-3.5 py-1.5 rounded-xl flex items-center gap-2 text-xs font-bold text-slate-700 shadow-sm">
+            <i class="fa-solid fa-building text-amber-600"></i>
+            <span><b id="compHeaderCount" class="text-slate-900">6300</b> Mineradas</span>
+          </div>
+          <div class="bg-emerald-50 border border-emerald-200 px-3.5 py-1.5 rounded-xl flex items-center gap-2 text-xs font-bold text-emerald-700 shadow-sm">
+            <i class="fa-solid fa-phone-volume text-emerald-600"></i>
+            <span><b id="contactedHeaderCount" class="text-emerald-900">0</b> Abordadas</span>
+          </div>
+          <button onclick="handleLogout()" class="px-3 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-sm" title="Encerrar Sessão">
+            <i class="fa-solid fa-arrow-right-from-bracket text-[11px]"></i> Sair
+          </button>
         </div>
+
       </div>
+    </header>
 
-    </div>
-  </header>
-
-  <!-- ========================================== -->
-  <!-- SEÇÃO 1: ABA DE PROSPECÇÃO ATIVA (6.300) -->
-  <!-- ========================================== -->
-  <main id="prospectsTabContent" class="max-w-[1950px] w-full mx-auto px-4 sm:px-6 py-5 flex-1 flex flex-col gap-4">
-    
-    <!-- BARRA DE FILTROS E PESQUISA -->
-    <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm flex flex-col gap-3">
+    <!-- ========================================== -->
+    <!-- SEÇÃO 1: ABA DE PROSPECÇÃO ATIVA (6.300) -->
+    <!-- ========================================== -->
+    <main id="prospectsTabContent" class="max-w-[1950px] w-full mx-auto px-4 sm:px-6 py-5 flex-1 flex flex-col gap-4">
       
-      <!-- PÍLULAS DE TODOS OS NICHOS ICP COM CÍRCULOS/BOLAS COLORIDAS -->
-      <div class="flex items-center gap-2 flex-wrap">
-        <span class="text-xs uppercase tracking-wider font-extrabold text-slate-700 flex items-center gap-1.5 mr-2">
-          <i class="fa-solid fa-layer-group text-amber-500"></i> Segmentos ICP:
-        </span>
+      <!-- BARRA DE FILTROS E PESQUISA -->
+      <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm flex flex-col gap-3">
         
-        <!-- TODOS -->
-        <button onclick="filterByColor('ALL')" id="pill-ALL" class="niche-btn active-niche px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
-          <span style="background-color: #0284c7; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #e0f2fe;"></span>
-          <span>Todos</span>
-          <span id="count-all" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">6300</span>
-        </button>
-
-        <!-- FÁBRICAS & INDÚSTRIAS -->
-        <button onclick="filterByColor('YELLOW')" id="pill-YELLOW" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
-          <span style="background-color: #d97706; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #fef3c7;"></span>
-          <span>Fábricas & Indústrias</span>
-          <span id="count-YELLOW" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
-        </button>
-
-        <!-- AGRONEGÓCIO -->
-        <button onclick="filterByColor('GREEN')" id="pill-GREEN" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
-          <span style="background-color: #16a34a; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #dcfce7;"></span>
-          <span>Agronegócio</span>
-          <span id="count-GREEN" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
-        </button>
-
-        <!-- MÉDICOS PJ -->
-        <button onclick="filterByColor('SPECIAL_MED')" id="pill-SPECIAL_MED" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
-          <span style="background-color: #e11d48; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #ffe4e6;"></span>
-          <span>Médicos PJ</span>
-          <span id="count-SPECIAL_MED" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
-        </button>
-
-        <!-- MARKETING & MÍDIA -->
-        <button onclick="filterByColor('SPECIAL_MKT')" id="pill-SPECIAL_MKT" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
-          <span style="background-color: #c026d3; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #fdf4ff;"></span>
-          <span>Marketing & Mídia</span>
-          <span id="count-SPECIAL_MKT" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
-        </button>
-
-        <!-- PILOTOS PJ -->
-        <button onclick="filterByColor('SPECIAL_AERO')" id="pill-SPECIAL_AERO" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
-          <span style="background-color: #06b6d4; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #cffafe;"></span>
-          <span>Pilotos PJ</span>
-          <span id="count-SPECIAL_AERO" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
-        </button>
-
-        <!-- ARTISTAS PJ -->
-        <button onclick="filterByColor('SPECIAL_ART')" id="pill-SPECIAL_ART" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
-          <span style="background-color: #ea580c; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #ffedd5;"></span>
-          <span>Artistas PJ</span>
-          <span id="count-SPECIAL_ART" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
-        </button>
-
-        <!-- CONSULTORIAS -->
-        <button onclick="filterByColor('SPECIAL_CONS')" id="pill-SPECIAL_CONS" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
-          <span style="background-color: #6366f1; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #e0e7ff;"></span>
-          <span>Consultorias</span>
-          <span id="count-SPECIAL_CONS" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
-        </button>
-
-        <!-- LOGÍSTICA & TRANSPORTES -->
-        <button onclick="filterByColor('SPECIAL_LOG')" id="pill-SPECIAL_LOG" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
-          <span style="background-color: #2563eb; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #dbeafe;"></span>
-          <span>Logística</span>
-          <span id="count-SPECIAL_LOG" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
-        </button>
-
-        <!-- POLÍTICOS & LIDERANÇAS -->
-        <button onclick="filterByColor('SPECIAL_POL')" id="pill-SPECIAL_POL" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
-          <span style="background-color: #0f766e; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #ccfbf1;"></span>
-          <span>Políticos</span>
-          <span id="count-SPECIAL_POL" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
-        </button>
-
-        <!-- EXPORTADORAS -->
-        <button onclick="filterByColor('RED')" id="pill-RED" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
-          <span style="background-color: #dc2626; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #fee2e2;"></span>
-          <span>Exportadoras</span>
-          <span id="count-RED" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
-        </button>
-
-        <!-- CONCURSADOS (ALTA RENDA) -->
-        <button onclick="filterByColor('SPECIAL_CONC')" id="pill-SPECIAL_CONC" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
-          <span style="background-color: #7c3aed; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #ede9fe;"></span>
-          <span>Concursados</span>
-          <span id="count-SPECIAL_CONC" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
-        </button>
-
-        <!-- FARMÁCIAS -->
-        <button onclick="filterByColor('SPECIAL_PHARM')" id="pill-SPECIAL_PHARM" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
-          <span style="background-color: #059669; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #d1fae5;"></span>
-          <span>Farmácias</span>
-          <span id="count-SPECIAL_PHARM" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
-        </button>
-
-        <!-- RESTAURANTES & MERCADOS -->
-        <button onclick="filterByColor('SPECIAL_FOOD')" id="pill-SPECIAL_FOOD" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
-          <span style="background-color: #e11d48; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #ffe4e6;"></span>
-          <span>Restaurantes & Mercados</span>
-          <span id="count-SPECIAL_FOOD" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
-        </button>
-
-        <!-- ATACADOS -->
-        <button onclick="filterByColor('SPECIAL_WHOLESALE')" id="pill-SPECIAL_WHOLESALE" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
-          <span style="background-color: #0284c7; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #e0f2fe;"></span>
-          <span>Atacados</span>
-          <span id="count-SPECIAL_WHOLESALE" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
-        </button>
-
-        <!-- CONSTRUÇÃO & INCORPORAÇÃO -->
-        <button onclick="filterByColor('SPECIAL_CONST')" id="pill-SPECIAL_CONST" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
-          <span style="background-color: #ca8a04; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #fef9c3;"></span>
-          <span>Construção & Incorporação</span>
-          <span id="count-SPECIAL_CONST" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
-        </button>
-
-        <!-- ADVOCACIA & JURÍDICO -->
-        <button onclick="filterByColor('SPECIAL_LAW')" id="pill-SPECIAL_LAW" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
-          <span style="background-color: #475569; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #f1f5f9;"></span>
-          <span>Advocacia & Jurídico</span>
-          <span id="count-SPECIAL_LAW" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
-        </button>
-
-        <!-- TECNOLOGIA & SOFTWARE -->
-        <button onclick="filterByColor('SPECIAL_TECH')" id="pill-SPECIAL_TECH" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
-          <span style="background-color: #0284c7; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #e0f2fe;"></span>
-          <span>Tecnologia & Software</span>
-          <span id="count-SPECIAL_TECH" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
-        </button>
-
-        <!-- ENERGIA & SOLAR -->
-        <button onclick="filterByColor('SPECIAL_ENERGY')" id="pill-SPECIAL_ENERGY" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
-          <span style="background-color: #eab308; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #fef08a;"></span>
-          <span>Energia & Solar</span>
-          <span id="count-SPECIAL_ENERGY" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
-        </button>
-
-        <!-- CONCESSIONÁRIAS & AUTO -->
-        <button onclick="filterByColor('SPECIAL_AUTO')" id="pill-SPECIAL_AUTO" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
-          <span style="background-color: #2563eb; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #dbeafe;"></span>
-          <span>Concessionárias & Auto</span>
-          <span id="count-SPECIAL_AUTO" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
-        </button>
-
-        <!-- EDUCAÇÃO & FACULDADES -->
-        <button onclick="filterByColor('SPECIAL_EDU')" id="pill-SPECIAL_EDU" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
-          <span style="background-color: #4338ca; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #e0e7ff;"></span>
-          <span>Educação & Faculdades</span>
-          <span id="count-SPECIAL_EDU" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
-        </button>
-
-        <!-- CONTABILIDADE & AUDITORIA -->
-        <button onclick="filterByColor('SPECIAL_ACC')" id="pill-SPECIAL_ACC" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
-          <span style="background-color: #0d9488; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #ccfbf1;"></span>
-          <span>Contabilidade & Auditoria</span>
-          <span id="count-SPECIAL_ACC" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
-        </button>
-      </div>
-
-      <!-- FILTRO DE SITE & BUSCA -->
-      <div class="flex flex-col md:flex-row gap-3 pt-2 border-t border-slate-100">
-        <div class="relative flex-1">
-          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-xs"></i>
-          <input type="text" id="searchInput" oninput="filterData()" placeholder="Buscar por empresa, CNPJ, sócio QSA, segmento (Contabilidade, Construção, Advocacia, Tecnologia, Energia, Concessionária, Educação...), cidade, atividade ou CNAE..." class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2 text-xs font-semibold text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:bg-white transition">
-        </div>
-        
-        <div class="w-full md:w-48">
-          <select id="siteFilter" onchange="filterData()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-900">
-            <option value="">🌐 Todos (Com & Sem Site)</option>
-            <option value="WITH_SITE">✅ Com Site Oficial</option>
-            <option value="NO_SITE">🔒 Sem Site (Rastreio CNPJ)</option>
-          </select>
-        </div>
-
-        <div class="w-full md:w-48">
-          <select id="stateFilter" onchange="filterData()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-900">
-            <option value="">📍 Todos os Estados</option>
-            <option value="SP">🔵 São Paulo (SP)</option>
-            <option value="MG">🟡 Minas Gerais (MG)</option>
-            <option value="PR">🟢 Paraná (PR)</option>
-            <option value="SC">🟣 Santa Catarina (SC)</option>
-            <option value="MS">🟣 Mato Grosso do Sul (MS)</option>
-            <option value="GO">🟢 Goiás (GO)</option>
-          </select>
-        </div>
-        
-        <button onclick="resetSearch()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition border border-slate-200 whitespace-nowrap">
-          <i class="fa-solid fa-rotate-left mr-1"></i> Limpar
-        </button>
-      </div>
-
-    </div>
-
-    <!-- TABELA MASTER COM TODAS AS COLUNAS DO PROMPT -->
-    <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
-      <div class="overflow-x-auto">
-        <table class="w-full text-left text-xs border-collapse min-w-[1900px]">
-          <thead class="bg-slate-100 text-slate-700 uppercase text-[11px] font-extrabold tracking-wider border-b border-slate-200 sticky top-0 z-10">
-            <tr>
-              <th class="py-3.5 px-3 text-center w-12 text-slate-500">#</th>
-              <th class="py-3.5 px-3 text-center w-24">CRM</th>
-              <th class="py-3.5 px-4 min-w-[220px]">Empresa / CNPJ / Fundação</th>
-              <th class="py-3.5 px-4 min-w-[170px]">Segmento ICP</th>
-              <th class="py-3.5 px-4 min-w-[220px]">Resumo da Atividade</th>
-              <th class="py-3.5 px-4 min-w-[200px] bg-slate-50/70 border-x border-slate-200">Site & LinkedIn Empresa</th>
-              <th class="py-3.5 px-4 min-w-[200px]">CNAEs & Cadeia</th>
-              <th class="py-3.5 px-4 min-w-[260px]">Decisores QSA & LinkedIn</th>
-              <th class="py-3.5 px-4 min-w-[150px]">Canais Gerais</th>
-              <th class="py-3.5 px-4 min-w-[290px] bg-slate-50/90 border-x border-slate-200">Contato (Tentativas Pessoal & Empresa)</th>
-              <th class="py-3.5 px-4 min-w-[310px] bg-amber-50/40 border-l border-slate-200 text-center">Mensagens Prontas (1 Clique)</th>
-            </tr>
-          </thead>
-          <tbody id="tableBody" class="divide-y divide-slate-100 font-sans text-slate-700">
-            <!-- Linhas geradas dinamicamente via JavaScript -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-  </main>
-
-  <!-- ========================================== -->
-  <!-- SEÇÃO 2: ABA DE PIPELINE CRM HIGH TICKET (6 ETAPAS) -->
-  <!-- ========================================== -->
-  <main id="crmTabContent" style="display: none;" class="max-w-[1950px] w-full mx-auto px-4 sm:px-6 py-5 flex-1 flex flex-col gap-4">
-    
-    <!-- BARRA DE CONTROLES E MÉTRICAS DO CRM -->
-    <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm flex flex-col gap-3">
-      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
-        
-        <div>
-          <h2 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
-            <i class="fa-solid fa-chart-kanban text-amber-500"></i> Pipeline CRM High-Ticket (Multi-Family Office & M&A)
-          </h2>
-          <p class="text-xs text-slate-500">Funil automatizado por agente BDR com regras de qualificação de patrimônio, estrutura corporativa e score ICP.</p>
-        </div>
-
-        <!-- CARDS DE RESUMO DO CRM -->
+        <!-- PÍLULAS DE TODOS OS NICHOS ICP COM CÍRCULOS/BOLAS COLORIDAS -->
         <div class="flex items-center gap-2 flex-wrap">
-          <div class="bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl text-xs font-bold text-slate-700">
-            <span>Oportunidades:</span> <b id="crmTotalDeals" class="text-slate-900 font-mono">0</b>
-          </div>
-          <div class="bg-blue-50 border border-blue-200 px-3 py-1.5 rounded-xl text-xs font-bold text-blue-800">
-            <span>🔍 Qualificados:</span> <b id="crmQualifiedCount" class="text-blue-900 font-mono">0</b>
-          </div>
-          <div class="bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-xl text-xs font-bold text-amber-800">
-            <span>💬 Interessados:</span> <b id="crmMeetingsCount" class="text-amber-900 font-mono">0</b>
-          </div>
-          <div class="bg-purple-50 border border-purple-200 px-3 py-1.5 rounded-xl text-xs font-bold text-purple-800">
-            <span>💼 Propostas/Neg:</span> <b id="crmProposalsCount" class="text-purple-900 font-mono">0</b>
-          </div>
-          <div class="bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl text-xs font-bold text-emerald-800">
-            <span>💰 Pipeline Estimado:</span> <b id="crmTotalValue" class="text-emerald-900 font-mono">R$ 0</b>
-          </div>
+          <span class="text-xs uppercase tracking-wider font-extrabold text-slate-700 flex items-center gap-1.5 mr-2">
+            <i class="fa-solid fa-layer-group text-amber-500"></i> Segmentos ICP:
+          </span>
+          
+          <!-- TODOS -->
+          <button onclick="filterByColor('ALL')" id="pill-ALL" class="niche-btn active-niche px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
+            <span style="background-color: #0284c7; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #e0f2fe;"></span>
+            <span>Todos</span>
+            <span id="count-all" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">6300</span>
+          </button>
+
+          <!-- FÁBRICAS & INDÚSTRIAS -->
+          <button onclick="filterByColor('YELLOW')" id="pill-YELLOW" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
+            <span style="background-color: #d97706; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #fef3c7;"></span>
+            <span>Fábricas & Indústrias</span>
+            <span id="count-YELLOW" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
+          </button>
+
+          <!-- AGRONEGÓCIO -->
+          <button onclick="filterByColor('GREEN')" id="pill-GREEN" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
+            <span style="background-color: #16a34a; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #dcfce7;"></span>
+            <span>Agronegócio</span>
+            <span id="count-GREEN" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
+          </button>
+
+          <!-- MÉDICOS PJ -->
+          <button onclick="filterByColor('SPECIAL_MED')" id="pill-SPECIAL_MED" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
+            <span style="background-color: #e11d48; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #ffe4e6;"></span>
+            <span>Médicos PJ</span>
+            <span id="count-SPECIAL_MED" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
+          </button>
+
+          <!-- MARKETING & MÍDIA -->
+          <button onclick="filterByColor('SPECIAL_MKT')" id="pill-SPECIAL_MKT" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
+            <span style="background-color: #c026d3; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #fdf4ff;"></span>
+            <span>Marketing & Mídia</span>
+            <span id="count-SPECIAL_MKT" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
+          </button>
+
+          <!-- PILOTOS PJ -->
+          <button onclick="filterByColor('SPECIAL_AERO')" id="pill-SPECIAL_AERO" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
+            <span style="background-color: #06b6d4; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #cffafe;"></span>
+            <span>Pilotos PJ</span>
+            <span id="count-SPECIAL_AERO" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
+          </button>
+
+          <!-- ARTISTAS PJ -->
+          <button onclick="filterByColor('SPECIAL_ART')" id="pill-SPECIAL_ART" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
+            <span style="background-color: #ea580c; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #ffedd5;"></span>
+            <span>Artistas PJ</span>
+            <span id="count-SPECIAL_ART" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
+          </button>
+
+          <!-- CONSULTORIAS -->
+          <button onclick="filterByColor('SPECIAL_CONS')" id="pill-SPECIAL_CONS" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
+            <span style="background-color: #6366f1; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #e0e7ff;"></span>
+            <span>Consultorias</span>
+            <span id="count-SPECIAL_CONS" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
+          </button>
+
+          <!-- LOGÍSTICA & TRANSPORTES -->
+          <button onclick="filterByColor('SPECIAL_LOG')" id="pill-SPECIAL_LOG" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
+            <span style="background-color: #2563eb; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #dbeafe;"></span>
+            <span>Logística</span>
+            <span id="count-SPECIAL_LOG" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
+          </button>
+
+          <!-- POLÍTICOS & LIDERANÇAS -->
+          <button onclick="filterByColor('SPECIAL_POL')" id="pill-SPECIAL_POL" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
+            <span style="background-color: #0f766e; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #ccfbf1;"></span>
+            <span>Políticos</span>
+            <span id="count-SPECIAL_POL" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
+          </button>
+
+          <!-- EXPORTADORAS -->
+          <button onclick="filterByColor('RED')" id="pill-RED" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
+            <span style="background-color: #dc2626; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #fee2e2;"></span>
+            <span>Exportadoras</span>
+            <span id="count-RED" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
+          </button>
+
+          <!-- CONCURSADOS (ALTA RENDA) -->
+          <button onclick="filterByColor('SPECIAL_CONC')" id="pill-SPECIAL_CONC" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
+            <span style="background-color: #7c3aed; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #ede9fe;"></span>
+            <span>Concursados</span>
+            <span id="count-SPECIAL_CONC" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
+          </button>
+
+          <!-- FARMÁCIAS -->
+          <button onclick="filterByColor('SPECIAL_PHARM')" id="pill-SPECIAL_PHARM" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
+            <span style="background-color: #059669; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #d1fae5;"></span>
+            <span>Farmácias</span>
+            <span id="count-SPECIAL_PHARM" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
+          </button>
+
+          <!-- RESTAURANTES & MERCADOS -->
+          <button onclick="filterByColor('SPECIAL_FOOD')" id="pill-SPECIAL_FOOD" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
+            <span style="background-color: #e11d48; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #ffe4e6;"></span>
+            <span>Restaurantes & Mercados</span>
+            <span id="count-SPECIAL_FOOD" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
+          </button>
+
+          <!-- ATACADOS -->
+          <button onclick="filterByColor('SPECIAL_WHOLESALE')" id="pill-SPECIAL_WHOLESALE" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
+            <span style="background-color: #0284c7; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #e0f2fe;"></span>
+            <span>Atacados</span>
+            <span id="count-SPECIAL_WHOLESALE" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
+          </button>
+
+          <!-- CONSTRUÇÃO & INCORPORAÇÃO -->
+          <button onclick="filterByColor('SPECIAL_CONST')" id="pill-SPECIAL_CONST" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
+            <span style="background-color: #ca8a04; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #fef9c3;"></span>
+            <span>Construção & Incorporação</span>
+            <span id="count-SPECIAL_CONST" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
+          </button>
+
+          <!-- ADVOCACIA & JURÍDICO -->
+          <button onclick="filterByColor('SPECIAL_LAW')" id="pill-SPECIAL_LAW" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
+            <span style="background-color: #475569; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #f1f5f9;"></span>
+            <span>Advocacia & Jurídico</span>
+            <span id="count-SPECIAL_LAW" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
+          </button>
+
+          <!-- TECNOLOGIA & SOFTWARE -->
+          <button onclick="filterByColor('SPECIAL_TECH')" id="pill-SPECIAL_TECH" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
+            <span style="background-color: #0284c7; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #e0f2fe;"></span>
+            <span>Tecnologia & Software</span>
+            <span id="count-SPECIAL_TECH" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
+          </button>
+
+          <!-- ENERGIA & SOLAR -->
+          <button onclick="filterByColor('SPECIAL_ENERGY')" id="pill-SPECIAL_ENERGY" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
+            <span style="background-color: #eab308; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #fef08a;"></span>
+            <span>Energia & Solar</span>
+            <span id="count-SPECIAL_ENERGY" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
+          </button>
+
+          <!-- CONCESSIONÁRIAS & AUTO -->
+          <button onclick="filterByColor('SPECIAL_AUTO')" id="pill-SPECIAL_AUTO" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
+            <span style="background-color: #2563eb; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #dbeafe;"></span>
+            <span>Concessionárias & Auto</span>
+            <span id="count-SPECIAL_AUTO" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
+          </button>
+
+          <!-- EDUCAÇÃO & FACULDADES -->
+          <button onclick="filterByColor('SPECIAL_EDU')" id="pill-SPECIAL_EDU" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
+            <span style="background-color: #4338ca; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #e0e7ff;"></span>
+            <span>Educação & Faculdades</span>
+            <span id="count-SPECIAL_EDU" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
+          </button>
+
+          <!-- CONTABILIDADE & AUDITORIA -->
+          <button onclick="filterByColor('SPECIAL_ACC')" id="pill-SPECIAL_ACC" class="niche-btn px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2">
+            <span style="background-color: #0d9488; width: 9px; height: 9px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px #ccfbf1;"></span>
+            <span>Contabilidade & Auditoria</span>
+            <span id="count-SPECIAL_ACC" class="count-badge text-[10px] font-extrabold px-1.5 py-0.2 rounded-md font-mono">300</span>
+          </button>
         </div>
 
-        <!-- AÇÕES DO CRM -->
-        <div class="flex items-center gap-2">
-          <button onclick="openNewDealModal()" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5 shadow-sm">
-            <i class="fa-solid fa-plus text-[10px]"></i> Novo Lead
-          </button>
-          <button onclick="exportCrmJson()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition border border-slate-200" title="Exportar Backup do CRM em JSON">
-            <i class="fa-solid fa-download mr-1"></i> Backup
-          </button>
-          <button onclick="exportCrmCsv()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition border border-slate-200" title="Exportar Relatório do CRM em CSV">
-            <i class="fa-solid fa-file-csv mr-1"></i> CSV CRM
+        <!-- FILTRO DE SITE & BUSCA -->
+        <div class="flex flex-col md:flex-row gap-3 pt-2 border-t border-slate-100">
+          <div class="relative flex-1">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-xs"></i>
+            <input type="text" id="searchInput" oninput="filterData()" placeholder="Buscar por empresa, CNPJ, sócio QSA, segmento (Contabilidade, Construção, Advocacia, Tecnologia, Energia, Concessionária, Educação...), cidade, atividade ou CNAE..." class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2 text-xs font-semibold text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:bg-white transition">
+          </div>
+          
+          <div class="w-full md:w-48">
+            <select id="siteFilter" onchange="filterData()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-900">
+              <option value="">🌐 Todos (Com & Sem Site)</option>
+              <option value="WITH_SITE">✅ Com Site Oficial</option>
+              <option value="NO_SITE">🔒 Sem Site (Rastreio CNPJ)</option>
+            </select>
+          </div>
+
+          <div class="w-full md:w-48">
+            <select id="stateFilter" onchange="filterData()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-900">
+              <option value="">📍 Todos os Estados</option>
+              <option value="SP">🔵 São Paulo (SP)</option>
+              <option value="MG">🟡 Minas Gerais (MG)</option>
+              <option value="PR">🟢 Paraná (PR)</option>
+              <option value="SC">🟣 Santa Catarina (SC)</option>
+              <option value="MS">🟣 Mato Grosso do Sul (MS)</option>
+              <option value="GO">🟢 Goiás (GO)</option>
+            </select>
+          </div>
+          
+          <button onclick="resetSearch()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition border border-slate-200 whitespace-nowrap">
+            <i class="fa-solid fa-rotate-left mr-1"></i> Limpar
           </button>
         </div>
 
       </div>
 
-      <!-- FILTROS DO CRM -->
-      <div class="flex flex-col md:flex-row gap-3 pt-2 border-t border-slate-100 items-center justify-between">
-        <div class="relative flex-1 w-full">
-          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-xs"></i>
-          <input type="text" id="crmSearchInput" oninput="renderCrmPipeline()" placeholder="Buscar oportunidades no CRM por empresa, sócio, patrimônio, estrutura corporativa ou notas..." class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2 text-xs font-semibold text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:bg-white transition">
-        </div>
-        
-        <div class="w-full md:w-64">
-          <select id="crmSegmentFilter" onchange="renderCrmPipeline()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-900">
-            <option value="">🌐 Todos os Segmentos</option>
-            <option value="YELLOW">🟡 Fábricas & Indústrias</option>
-            <option value="GREEN">🟢 Agronegócio</option>
-            <option value="SPECIAL_MED">🌸 Médicos PJ</option>
-            <option value="SPECIAL_MKT">🟣 Marketing & Mídia</option>
-            <option value="SPECIAL_AERO">✈️ Pilotos PJ</option>
-            <option value="SPECIAL_ART">🎭 Artistas PJ</option>
-            <option value="SPECIAL_CONS">💼 Consultorias</option>
-            <option value="SPECIAL_LOG">🚚 Logística</option>
-            <option value="SPECIAL_POL">🟢 Políticos</option>
-            <option value="RED">🔴 Exportadoras</option>
-            <option value="SPECIAL_CONC">🟣 Concursados</option>
-            <option value="SPECIAL_PHARM">🟢 Farmácias</option>
-            <option value="SPECIAL_FOOD">🔴 Restaurantes & Mercados</option>
-            <option value="SPECIAL_WHOLESALE">🔵 Atacados</option>
-            <option value="SPECIAL_CONST">🏗️ Construção & Incorporação</option>
-            <option value="SPECIAL_LAW">⚖️ Advocacia & Jurídico</option>
-            <option value="SPECIAL_TECH">💻 Tecnologia & Software</option>
-            <option value="SPECIAL_ENERGY">⚡ Energia & Solar</option>
-            <option value="SPECIAL_AUTO">🚗 Concessionárias & Auto</option>
-            <option value="SPECIAL_EDU">🎓 Educação & Faculdades</option>
-            <option value="SPECIAL_ACC">🟢 Contabilidade & Auditoria</option>
-          </select>
+      <!-- TABELA MASTER COM TODAS AS COLUNAS DO PROMPT -->
+      <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse min-w-[1900px]">
+            <thead class="bg-slate-100 text-slate-700 uppercase text-[11px] font-extrabold tracking-wider border-b border-slate-200 sticky top-0 z-10">
+              <tr>
+                <th class="py-3.5 px-3 text-center w-12 text-slate-500">#</th>
+                <th class="py-3.5 px-3 text-center w-24">CRM</th>
+                <th class="py-3.5 px-4 min-w-[220px]">Empresa / CNPJ / Fundação</th>
+                <th class="py-3.5 px-4 min-w-[170px]">Segmento ICP</th>
+                <th class="py-3.5 px-4 min-w-[220px]">Resumo da Atividade</th>
+                <th class="py-3.5 px-4 min-w-[200px] bg-slate-50/70 border-x border-slate-200">Site & LinkedIn Empresa</th>
+                <th class="py-3.5 px-4 min-w-[200px]">CNAEs & Cadeia</th>
+                <th class="py-3.5 px-4 min-w-[260px]">Decisores QSA & LinkedIn</th>
+                <th class="py-3.5 px-4 min-w-[150px]">Canais Gerais</th>
+                <th class="py-3.5 px-4 min-w-[290px] bg-slate-50/90 border-x border-slate-200">Contato (Tentativas Pessoal & Empresa)</th>
+                <th class="py-3.5 px-4 min-w-[310px] bg-amber-50/40 border-l border-slate-200 text-center">Mensagens Prontas (1 Clique)</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody" class="divide-y divide-slate-100 font-sans text-slate-700">
+              <!-- Linhas geradas dinamicamente via JavaScript -->
+            </tbody>
+          </table>
         </div>
       </div>
-    </div>
 
-    <!-- KANBAN BOARD DAS 6 ETAPAS OFICIAIS HIGH-TICKET -->
-    <div class="overflow-x-auto pb-4">
-      <div class="flex items-start gap-4 min-w-[1900px]">
+    </main>
 
-        <!-- 1. PROSPECÇÃO -->
-        <div class="kanban-col bg-slate-100/90 rounded-2xl border border-slate-200 p-3 flex flex-col gap-2">
-          <div class="flex items-center justify-between px-1 pb-2 border-b border-slate-200">
-            <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-slate-500"></span>
-              <h3 class="text-xs font-extrabold text-slate-800">1. Prospecção</h3>
-            </div>
-            <span id="col-count-prospeccao" class="text-[11px] font-extrabold font-mono bg-white text-slate-700 px-2 py-0.5 rounded-md border border-slate-200">0</span>
+    <!-- ========================================== -->
+    <!-- SEÇÃO 2: ABA DE PIPELINE CRM HIGH TICKET (6 ETAPAS) -->
+    <!-- ========================================== -->
+    <main id="crmTabContent" style="display: none;" class="max-w-[1950px] w-full mx-auto px-4 sm:px-6 py-5 flex-1 flex flex-col gap-4">
+      
+      <!-- BARRA DE CONTROLES E MÉTRICAS DO CRM -->
+      <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm flex flex-col gap-3">
+        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+          
+          <div>
+            <h2 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
+              <i class="fa-solid fa-chart-kanban text-amber-500"></i> Pipeline CRM High-Ticket (Multi-Family Office & M&A)
+            </h2>
+            <p class="text-xs text-slate-500">Funil automatizado por agente BDR com regras de qualificação de patrimônio, estrutura corporativa e score ICP.</p>
           </div>
-          <div class="text-[10px] text-slate-400 font-medium px-1">Entrada bruta do agente BDR</div>
-          <div id="col-items-prospeccao" class="flex flex-col gap-2 min-h-[450px]"></div>
+
+          <!-- CARDS DE RESUMO DO CRM -->
+          <div class="flex items-center gap-2 flex-wrap">
+            <div class="bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl text-xs font-bold text-slate-700">
+              <span>Oportunidades:</span> <b id="crmTotalDeals" class="text-slate-900 font-mono">0</b>
+            </div>
+            <div class="bg-blue-50 border border-blue-200 px-3 py-1.5 rounded-xl text-xs font-bold text-blue-800">
+              <span>🔍 Qualificados:</span> <b id="crmQualifiedCount" class="text-blue-900 font-mono">0</b>
+            </div>
+            <div class="bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-xl text-xs font-bold text-amber-800">
+              <span>💬 Interessados:</span> <b id="crmMeetingsCount" class="text-amber-900 font-mono">0</b>
+            </div>
+            <div class="bg-purple-50 border border-purple-200 px-3 py-1.5 rounded-xl text-xs font-bold text-purple-800">
+              <span>💼 Propostas/Neg:</span> <b id="crmProposalsCount" class="text-purple-900 font-mono">0</b>
+            </div>
+            <div class="bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl text-xs font-bold text-emerald-800">
+              <span>💰 Pipeline Estimado:</span> <b id="crmTotalValue" class="text-emerald-900 font-mono">R$ 0</b>
+            </div>
+          </div>
+
+          <!-- AÇÕES DO CRM -->
+          <div class="flex items-center gap-2">
+            <button onclick="openNewDealModal()" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5 shadow-sm">
+              <i class="fa-solid fa-plus text-[10px]"></i> Novo Lead
+            </button>
+            <button onclick="exportCrmJson()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition border border-slate-200" title="Exportar Backup do CRM em JSON">
+              <i class="fa-solid fa-download mr-1"></i> Backup
+            </button>
+            <button onclick="exportCrmCsv()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition border border-slate-200" title="Exportar Relatório do CRM em CSV">
+              <i class="fa-solid fa-file-csv mr-1"></i> CSV CRM
+            </button>
+          </div>
+
         </div>
 
-        <!-- 2. QUALIFICAÇÃO -->
-        <div class="kanban-col bg-blue-50/70 rounded-2xl border border-blue-200 p-3 flex flex-col gap-2">
-          <div class="flex items-center justify-between px-1 pb-2 border-b border-blue-200">
-            <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
-              <h3 class="text-xs font-extrabold text-blue-900">2. Qualificação</h3>
-            </div>
-            <span id="col-count-qualificacao" class="text-[11px] font-extrabold font-mono bg-white text-blue-800 px-2 py-0.5 rounded-md border border-blue-200">0</span>
+        <!-- FILTROS DO CRM -->
+        <div class="flex flex-col md:flex-row gap-3 pt-2 border-t border-slate-100 items-center justify-between">
+          <div class="relative flex-1 w-full">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-xs"></i>
+            <input type="text" id="crmSearchInput" oninput="renderCrmPipeline()" placeholder="Buscar oportunidades no CRM por empresa, sócio, patrimônio, estrutura corporativa ou notas..." class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2 text-xs font-semibold text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:bg-white transition">
           </div>
-          <div class="text-[10px] text-blue-500 font-medium px-1">Filtro de perfil ideal (Score BDR)</div>
-          <div id="col-items-qualificacao" class="flex flex-col gap-2 min-h-[450px]"></div>
-        </div>
-
-        <!-- 3. INTERESSADO -->
-        <div class="kanban-col bg-indigo-50/70 rounded-2xl border border-indigo-200 p-3 flex flex-col gap-2">
-          <div class="flex items-center justify-between px-1 pb-2 border-b border-indigo-200">
-            <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
-              <h3 class="text-xs font-extrabold text-indigo-900">3. Interessado</h3>
-            </div>
-            <span id="col-count-interessado" class="text-[11px] font-extrabold font-mono bg-white text-indigo-800 px-2 py-0.5 rounded-md border border-indigo-200">0</span>
+          
+          <div class="w-full md:w-64">
+            <select id="crmSegmentFilter" onchange="renderCrmPipeline()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-900">
+              <option value="">🌐 Todos os Segmentos</option>
+              <option value="YELLOW">🟡 Fábricas & Indústrias</option>
+              <option value="GREEN">🟢 Agronegócio</option>
+              <option value="SPECIAL_MED">🌸 Médicos PJ</option>
+              <option value="SPECIAL_MKT">🟣 Marketing & Mídia</option>
+              <option value="SPECIAL_AERO">✈️ Pilotos PJ</option>
+              <option value="SPECIAL_ART">🎭 Artistas PJ</option>
+              <option value="SPECIAL_CONS">💼 Consultorias</option>
+              <option value="SPECIAL_LOG">🚚 Logística</option>
+              <option value="SPECIAL_POL">🟢 Políticos</option>
+              <option value="RED">🔴 Exportadoras</option>
+              <option value="SPECIAL_CONC">🟣 Concursados</option>
+              <option value="SPECIAL_PHARM">🟢 Farmácias</option>
+              <option value="SPECIAL_FOOD">🔴 Restaurantes & Mercados</option>
+              <option value="SPECIAL_WHOLESALE">🔵 Atacados</option>
+              <option value="SPECIAL_CONST">🏗️ Construção & Incorporação</option>
+              <option value="SPECIAL_LAW">⚖️ Advocacia & Jurídico</option>
+              <option value="SPECIAL_TECH">💻 Tecnologia & Software</option>
+              <option value="SPECIAL_ENERGY">⚡ Energia & Solar</option>
+              <option value="SPECIAL_AUTO">🚗 Concessionárias & Auto</option>
+              <option value="SPECIAL_EDU">🎓 Educação & Faculdades</option>
+              <option value="SPECIAL_ACC">🟢 Contabilidade & Auditoria</option>
+            </select>
           </div>
-          <div class="text-[10px] text-indigo-500 font-medium px-1">Engajamento / Reunião agendada</div>
-          <div id="col-items-interessado" class="flex flex-col gap-2 min-h-[450px]"></div>
         </div>
-
-        <!-- 4. PROPOSTA -->
-        <div class="kanban-col bg-amber-50/80 rounded-2xl border border-amber-200 p-3 flex flex-col gap-2">
-          <div class="flex items-center justify-between px-1 pb-2 border-b border-amber-200">
-            <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-              <h3 class="text-xs font-extrabold text-amber-900">4. Proposta</h3>
-            </div>
-            <span id="col-count-proposta" class="text-[11px] font-extrabold font-mono bg-white text-amber-800 px-2 py-0.5 rounded-md border border-amber-200">0</span>
-          </div>
-          <div class="text-[10px] text-amber-600 font-medium px-1">Teses de MFO, Holdings & Tributário</div>
-          <div id="col-items-proposta" class="flex flex-col gap-2 min-h-[450px]"></div>
-        </div>
-
-        <!-- 5. NEGOCIAÇÃO -->
-        <div class="kanban-col bg-purple-50/70 rounded-2xl border border-purple-200 p-3 flex flex-col gap-2">
-          <div class="flex items-center justify-between px-1 pb-2 border-b border-purple-200">
-            <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
-              <h3 class="text-xs font-extrabold text-purple-900">5. Negociação</h3>
-            </div>
-            <span id="col-count-negociacao" class="text-[11px] font-extrabold font-mono bg-white text-purple-800 px-2 py-0.5 rounded-md border border-purple-200">0</span>
-          </div>
-          <div class="text-[10px] text-purple-500 font-medium px-1">Taxas, escopo e jurídico</div>
-          <div id="col-items-negociacao" class="flex flex-col gap-2 min-h-[450px]"></div>
-        </div>
-
-        <!-- 6. FECHAMENTO -->
-        <div class="kanban-col bg-emerald-50/80 rounded-2xl border border-emerald-200 p-3 flex flex-col gap-2">
-          <div class="flex items-center justify-between px-1 pb-2 border-b border-emerald-200">
-            <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-              <h3 class="text-xs font-extrabold text-emerald-900">6. Fechamento</h3>
-            </div>
-            <span id="col-count-fechamento" class="text-[11px] font-extrabold font-mono bg-white text-emerald-800 px-2 py-0.5 rounded-md border border-emerald-200">0</span>
-          </div>
-          <div class="text-[10px] text-emerald-600 font-medium px-1">Contrato assinado & Onboarding</div>
-          <div id="col-items-fechamento" class="flex flex-col gap-2 min-h-[450px]"></div>
-        </div>
-
       </div>
-    </div>
 
-  </main>
+      <!-- KANBAN BOARD DAS 6 ETAPAS OFICIAIS HIGH-TICKET -->
+      <div class="overflow-x-auto pb-4">
+        <div class="flex items-start gap-4 min-w-[1900px]">
+
+          <!-- 1. PROSPECÇÃO -->
+          <div class="kanban-col bg-slate-100/90 rounded-2xl border border-slate-200 p-3 flex flex-col gap-2">
+            <div class="flex items-center justify-between px-1 pb-2 border-b border-slate-200">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-slate-500"></span>
+                <h3 class="text-xs font-extrabold text-slate-800">1. Prospecção</h3>
+              </div>
+              <span id="col-count-prospeccao" class="text-[11px] font-extrabold font-mono bg-white text-slate-700 px-2 py-0.5 rounded-md border border-slate-200">0</span>
+            </div>
+            <div class="text-[10px] text-slate-400 font-medium px-1">Entrada bruta do agente BDR</div>
+            <div id="col-items-prospeccao" class="flex flex-col gap-2 min-h-[450px]"></div>
+          </div>
+
+          <!-- 2. QUALIFICAÇÃO -->
+          <div class="kanban-col bg-blue-50/70 rounded-2xl border border-blue-200 p-3 flex flex-col gap-2">
+            <div class="flex items-center justify-between px-1 pb-2 border-b border-blue-200">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                <h3 class="text-xs font-extrabold text-blue-900">2. Qualificação</h3>
+              </div>
+              <span id="col-count-qualificacao" class="text-[11px] font-extrabold font-mono bg-white text-blue-800 px-2 py-0.5 rounded-md border border-blue-200">0</span>
+            </div>
+            <div class="text-[10px] text-blue-500 font-medium px-1">Filtro de perfil ideal (Score BDR)</div>
+            <div id="col-items-qualificacao" class="flex flex-col gap-2 min-h-[450px]"></div>
+          </div>
+
+          <!-- 3. INTERESSADO -->
+          <div class="kanban-col bg-indigo-50/70 rounded-2xl border border-indigo-200 p-3 flex flex-col gap-2">
+            <div class="flex items-center justify-between px-1 pb-2 border-b border-indigo-200">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+                <h3 class="text-xs font-extrabold text-indigo-900">3. Interessado</h3>
+              </div>
+              <span id="col-count-interessado" class="text-[11px] font-extrabold font-mono bg-white text-indigo-800 px-2 py-0.5 rounded-md border border-indigo-200">0</span>
+            </div>
+            <div class="text-[10px] text-indigo-500 font-medium px-1">Engajamento / Reunião agendada</div>
+            <div id="col-items-interessado" class="flex flex-col gap-2 min-h-[450px]"></div>
+          </div>
+
+          <!-- 4. PROPOSTA -->
+          <div class="kanban-col bg-amber-50/80 rounded-2xl border border-amber-200 p-3 flex flex-col gap-2">
+            <div class="flex items-center justify-between px-1 pb-2 border-b border-amber-200">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                <h3 class="text-xs font-extrabold text-amber-900">4. Proposta</h3>
+              </div>
+              <span id="col-count-proposta" class="text-[11px] font-extrabold font-mono bg-white text-amber-800 px-2 py-0.5 rounded-md border border-amber-200">0</span>
+            </div>
+            <div class="text-[10px] text-amber-600 font-medium px-1">Teses de MFO, Holdings & Tributário</div>
+            <div id="col-items-proposta" class="flex flex-col gap-2 min-h-[450px]"></div>
+          </div>
+
+          <!-- 5. NEGOCIAÇÃO -->
+          <div class="kanban-col bg-purple-50/70 rounded-2xl border border-purple-200 p-3 flex flex-col gap-2">
+            <div class="flex items-center justify-between px-1 pb-2 border-b border-purple-200">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+                <h3 class="text-xs font-extrabold text-purple-900">5. Negociação</h3>
+              </div>
+              <span id="col-count-negociacao" class="text-[11px] font-extrabold font-mono bg-white text-purple-800 px-2 py-0.5 rounded-md border border-purple-200">0</span>
+            </div>
+            <div class="text-[10px] text-purple-500 font-medium px-1">Taxas, escopo e jurídico</div>
+            <div id="col-items-negociacao" class="flex flex-col gap-2 min-h-[450px]"></div>
+          </div>
+
+          <!-- 6. FECHAMENTO -->
+          <div class="kanban-col bg-emerald-50/80 rounded-2xl border border-emerald-200 p-3 flex flex-col gap-2">
+            <div class="flex items-center justify-between px-1 pb-2 border-b border-emerald-200">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                <h3 class="text-xs font-extrabold text-emerald-900">6. Fechamento</h3>
+              </div>
+              <span id="col-count-fechamento" class="text-[11px] font-extrabold font-mono bg-white text-emerald-800 px-2 py-0.5 rounded-md border border-emerald-200">0</span>
+            </div>
+            <div class="text-[10px] text-emerald-600 font-medium px-1">Contrato assinado & Onboarding</div>
+            <div id="col-items-fechamento" class="flex flex-col gap-2 min-h-[450px]"></div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+  </div>
 
   <!-- MODAL DE DETALHES E NOTAS DO LEAD NO CRM HIGH-TICKET -->
   <div id="crmDealModal" style="display: none;" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
@@ -220740,6 +220795,95 @@
     var currentActiveMainTab = 'prospects';
     var activeModalDealId = null;
 
+    // ----------------------------------------------------
+    // SISTEMA DE AUTENTICAÇÃO E CONTROLE DE ACESSO
+    // ----------------------------------------------------
+    const AUTH_CONFIG = {
+      allowedEmail: "danielzanoncontato@gmail.com",
+      passHash: "95e698b87e5a2242e6fc3665ea0bae71f6cc031fbb7160e49fa60fbca7d9a56b"
+    };
+
+    async function computeSha256(str) {
+      try {
+        if (window.crypto && crypto.subtle) {
+          var buffer = new TextEncoder().encode(str);
+          var hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
+          var hashArray = Array.from(new Uint8Array(hashBuffer));
+          return hashArray.map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+        }
+      } catch (e) {}
+      return "";
+    }
+
+    async function handleAuthLogin(event) {
+      if (event) event.preventDefault();
+      var emailInput = document.getElementById('authEmailInput');
+      var passInput = document.getElementById('authPasswordInput');
+      var errorMsg = document.getElementById('authErrorMsg');
+
+      var email = (emailInput ? emailInput.value : '').trim().toLowerCase();
+      var pass = (passInput ? passInput.value : '').trim();
+
+      var hash = await computeSha256(pass);
+
+      // Validação das credenciais autorizadas
+      var isValid = (email === AUTH_CONFIG.allowedEmail) && (pass === "200301Dani!?" || hash === AUTH_CONFIG.passHash);
+
+      if (isValid) {
+        localStorage.setItem("prx_bdr_auth_session", JSON.stringify({
+          email: email,
+          timestamp: Date.now(),
+          token: "PRX_AUTH_OK"
+        }));
+        if (errorMsg) errorMsg.style.display = 'none';
+        unlockApp();
+        showCopyToast("Acesso autorizado! Bem-vindo, Daniel Zanon.");
+      } else {
+        if (errorMsg) {
+          errorMsg.style.display = 'block';
+          errorMsg.innerText = "Credenciais inválidas. Verifique o e-mail e a senha digitados.";
+        }
+      }
+    }
+
+    function checkAuthSession() {
+      try {
+        var raw = localStorage.getItem("prx_bdr_auth_session");
+        if (raw) {
+          var session = JSON.parse(raw);
+          if (session && session.email === AUTH_CONFIG.allowedEmail && session.token === "PRX_AUTH_OK") {
+            unlockApp();
+            return;
+          }
+        }
+      } catch (e) {}
+      lockApp();
+    }
+
+    function unlockApp() {
+      var gate = document.getElementById('authGateModal');
+      var app = document.getElementById('mainAppWrapper');
+      if (gate) gate.style.display = 'none';
+      if (app) app.style.display = 'flex';
+      filterData();
+      updateCrmHeaderBadge();
+    }
+
+    function lockApp() {
+      var gate = document.getElementById('authGateModal');
+      var app = document.getElementById('mainAppWrapper');
+      if (gate) gate.style.display = 'flex';
+      if (app) app.style.display = 'none';
+    }
+
+    function handleLogout() {
+      if (confirm("Deseja realmente sair e bloquear o acesso ao painel?")) {
+        localStorage.removeItem("prx_bdr_auth_session");
+        lockApp();
+        showCopyToast("Sessão encerrada com sucesso.");
+      }
+    }
+
     // GERENCIAMENTO DE ABAS PRINCIPAIS
     function switchMainTab(tab) {
       currentActiveMainTab = tab;
@@ -221035,7 +221179,7 @@
     // AUTOMAÇÃO E QUALIFICAÇÃO INTELIGENTE (BDR -> CRM)
     // ----------------------------------------------------
     function calculateBdrScore(item) {
-      var score = 60; // Base score
+      var score = 60;
       if (item.corSegmento === 'SPECIAL_MED' || item.corSegmento === 'SPECIAL_CONC' || item.corSegmento === 'SPECIAL_AERO') score += 15;
       if (item.corSegmento === 'YELLOW' || item.corSegmento === 'SPECIAL_CONST' || item.corSegmento === 'GREEN') score += 20;
       if (item.hasSite) score += 10;
@@ -221044,7 +221188,6 @@
     }
 
     function estimatePatrimonio(item) {
-      // Estimativa baseada no porte do segmento e idade
       var base = 5000000;
       if (item.corSegmento === 'YELLOW' || item.corSegmento === 'SPECIAL_CONST' || item.corSegmento === 'GREEN') base = 25000000;
       if (item.corSegmento === 'SPECIAL_WHOLESALE' || item.corSegmento === 'SPECIAL_LOG' || item.corSegmento === 'RED') base = 20000000;
@@ -221075,8 +221218,6 @@
       var estPatrimonio = estimatePatrimonio(item);
       var estrutura = getCorporateStructure(item);
 
-      // REGRA DE AUTOMAÇÃO REQUERIDA:
-      // Se patrimônio >= 5M ou Score >= 75 ou Estrutura de Holding, move automaticamente para "qualificacao"
       var initialStage = "prospeccao";
       var autoQualMsg = "Lead minerado e inserido na etapa Prospecção.";
       if (estPatrimonio >= 5000000 || score >= 75 || estrutura.indexOf('Holding') !== -1) {
@@ -221099,7 +221240,7 @@
         decisorLinkedin: d1.linkedin,
         fone: item.fone,
         email: item.email,
-        stage: initialStage, // prospeccao, qualificacao, interessado, proposta, negociacao, fechamento
+        stage: initialStage,
         patrimonio: estPatrimonio,
         estruturaCorporativa: estrutura,
         scoreBdr: score,
@@ -221342,14 +221483,12 @@
         if (stg === 'proposta' || stg === 'negociacao') proposalsCount++;
       });
 
-      // Atualiza cards de métricas do topo do CRM
       if (document.getElementById('crmTotalDeals')) document.getElementById('crmTotalDeals').innerText = deals.length;
       if (document.getElementById('crmQualifiedCount')) document.getElementById('crmQualifiedCount').innerText = qualifiedCount;
       if (document.getElementById('crmMeetingsCount')) document.getElementById('crmMeetingsCount').innerText = interestedCount;
       if (document.getElementById('crmProposalsCount')) document.getElementById('crmProposalsCount').innerText = proposalsCount;
       if (document.getElementById('crmTotalValue')) document.getElementById('crmTotalValue').innerText = 'R$ ' + totalPatrimonio.toLocaleString('pt-BR');
 
-      // Renderiza as 6 colunas do Kanban
       stages.forEach(function(stg) {
         var colContainer = document.getElementById('col-items-' + stg);
         var countBadge = document.getElementById('col-count-' + stg);
@@ -221366,7 +221505,6 @@
           var formattedPatrimonio = d.patrimonio ? ('R$ ' + (d.patrimonio >= 1000000 ? (d.patrimonio/1000000).toFixed(1) + 'M' : d.patrimonio.toLocaleString('pt-BR'))) : 'Não informado';
           var score = d.scoreBdr || 75;
           var scoreColor = score >= 85 ? 'bg-emerald-100 text-emerald-900 border-emerald-300' : (score >= 70 ? 'bg-blue-100 text-blue-900 border-blue-300' : 'bg-amber-100 text-amber-900 border-amber-300');
-          var notesCount = (d.notes || []).length;
           var latestNote = (d.notes && d.notes.length > 0) ? d.notes[0].text : 'Sem histórico';
           
           var nextFollowupHtml = '';
@@ -221455,7 +221593,6 @@
         var inStyle = { border: 'border-blue-200', text: 'text-blue-900', countText: 'text-blue-700', btnBg: 'bg-blue-50', btnHover: 'hover:bg-blue-100', btnText: 'text-blue-800', btnBorder: 'border-blue-300' };
         var mailStyle = { border: 'border-indigo-200', text: 'text-indigo-900', countText: 'text-indigo-700', btnBg: 'bg-indigo-50', btnHover: 'hover:bg-indigo-100', btnText: 'text-indigo-800', btnBorder: 'border-indigo-300' };
 
-        // BOTÃO OU BADGE DO CRM
         var dealInCrm = crmDeals.find(function(d) { return d.prospectId === item.id; });
         var crmActionHtml = '';
         if (dealInCrm) {
@@ -221477,15 +221614,8 @@
         }
 
         html += '<tr class="hover:bg-slate-50/80 transition-colors">' +
-          // 1. ID
           '<td class="py-3.5 px-3 text-center font-mono font-bold text-slate-400">#' + item.id + '</td>' +
-          
-          // 2. Ação CRM
-          '<td class="py-3.5 px-3 text-center">' +
-            crmActionHtml +
-          '</td>' +
-
-          // 3. Empresa / CNPJ / Fundação / Localização com Bola Colorida
+          '<td class="py-3.5 px-3 text-center">' + crmActionHtml + '</td>' +
           '<td class="py-3.5 px-4">' +
             '<div class="font-bold text-slate-900 leading-snug text-xs">' + item.company + '</div>' +
             '<div class="flex items-center gap-1.5 mt-0.5">' +
@@ -221494,32 +221624,22 @@
             '</div>' +
             getLocationBadgeHtml(item.uf, item.city) +
           '</td>' +
-
-          // 4. Segmento ICP com Bola Colorida e Ícone
           '<td class="py-3.5 px-4">' +
             getSegmentBadgeHtml(item.corSegmento, item.segmentoNome) +
             '<div class="text-[10px] text-slate-600 mt-1.5 font-medium leading-tight">' + (item.setor || '') + '</div>' +
           '</td>' +
-
-          // 5. Resumo da Atividade
           '<td class="py-3.5 px-4 max-w-[220px]">' +
             '<div class="text-slate-700 text-[11px] leading-relaxed line-clamp-3" title="' + (item.desc || '') + '">' +
               (item.desc || 'Atividade empresarial mapeada no segmento ' + item.segmentoNome) +
             '</div>' +
           '</td>' +
-
-          // 6. Site & LinkedIn Empresa (Status Explícito)
           '<td class="py-3.5 px-4 bg-slate-50/70 border-x border-slate-200 min-w-[200px]">' +
             siteColumnHtml +
           '</td>' +
-
-          // 7. CNAEs & Cadeia
           '<td class="py-3.5 px-4">' +
             '<div class="font-bold text-slate-800 text-[11px] font-mono leading-tight">' + item.cnaePrincipal + '</div>' +
             (item.cnaeSecundarios ? '<div class="text-[10px] text-slate-500 mt-1 line-clamp-2" title="' + item.cnaeSecundarios + '">' + item.cnaeSecundarios + '</div>' : '') +
           '</td>' +
-
-          // 8. Decisores QSA & LinkedIn dos Sócios
           '<td class="py-3.5 px-4">' +
             '<div class="font-semibold text-slate-800 flex items-center gap-1 text-xs">' +
               d1.nome +
@@ -221531,18 +221651,12 @@
               '<a href="' + d2.linkedin + '" target="_blank" class="text-blue-600 hover:text-blue-800 text-[11px]" title="Pesquisar sócio no LinkedIn"><i class="fa-brands fa-linkedin"></i></a>' +
             '</div>' : '') +
           '</td>' +
-
-          // 9. Canais Gerais
           '<td class="py-3.5 px-4">' +
             '<div class="text-slate-800 font-semibold text-[11px] flex items-center gap-1"><i class="fa-solid fa-phone text-slate-400 text-[10px]"></i> ' + item.fone + '</div>' +
             '<div class="text-slate-500 text-[10px] truncate max-w-[180px] mt-0.5" title="' + item.email + '"><i class="fa-regular fa-envelope text-slate-400 text-[10px]"></i> ' + item.email + '</div>' +
           '</td>' +
-
-          // 10. CONTATO (TENTATIVAS PESSOAL & EMPRESA EM CUBOS ALINHADOS)
           '<td class="py-3 px-3 bg-slate-50/90 border-x border-slate-200 min-w-[290px]">' +
             '<div class="space-y-2">' +
-              
-              // SEÇÃO 1: PESSOAL (SÓCIO QSA / DECISOR)
               '<div class="bg-slate-100/80 p-1.5 rounded-xl border border-slate-200">' +
                 '<div class="flex items-center justify-between px-1 mb-1">' +
                   '<span class="text-[10px] font-extrabold text-slate-800 flex items-center gap-1">' +
@@ -221556,8 +221670,6 @@
                   getAttemptBoxHtml(item.id, 'pessoal', 'email', 'E-mail', 'fa-regular fa-envelope text-indigo-600', mailStyle, state.pessoal.email||0) +
                 '</div>' +
               '</div>' +
-
-              // SEÇÃO 2: EMPRESA (CORPORATIVO / INSTITUCIONAL)
               '<div class="bg-slate-100/80 p-1.5 rounded-xl border border-slate-200">' +
                 '<div class="flex items-center justify-between px-1 mb-1">' +
                   '<span class="text-[10px] font-extrabold text-slate-800 flex items-center gap-1">' +
@@ -221571,11 +221683,8 @@
                   getAttemptBoxHtml(item.id, 'empresa', 'email', 'E-mail', 'fa-regular fa-envelope text-indigo-600', mailStyle, state.empresa.email||0) +
                 '</div>' +
               '</div>' +
-
             '</div>' +
           '</td>' +
-
-          // 11. Mensagens Prontas (1 Clique)
           '<td class="py-3.5 px-4 bg-amber-50/30 border-l border-slate-200 text-center">' +
             '<div class="flex flex-col gap-1.5">' +
               '<div class="flex items-center justify-center gap-1">' +
@@ -221640,9 +221749,8 @@
       renderTable(filtered);
     }
 
-    // Inicialização imediata
-    filterData();
-    updateCrmHeaderBadge();
+    // Inicialização protegida por autenticação
+    checkAuthSession();
   </script>
 </body>
 </html>
