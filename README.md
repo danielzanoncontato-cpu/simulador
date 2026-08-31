@@ -1,4 +1,4 @@
-# ðŸ›ï¸ PRX Capital - BDR ProspecÃ§Ã£o & Pipeline CRM High-Ticket
+﻿# ðŸ›ï¸ PRX Capital - BDR ProspecÃ§Ã£o & Pipeline CRM High-Ticket
 
 Plataforma unificada de inteligÃªncia comercial e CRM para operaÃ§Ãµes de **Multi-Family Office, M&A e Consultoria EconÃ´mica**.
 
