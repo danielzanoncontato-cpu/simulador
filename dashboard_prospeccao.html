@@ -395,14 +395,33 @@
                 <div class="font-mono text-emerald-600 font-bold text-xs">${item.contatoPessoal || item.fone}</div>
                 <div class="text-[10px] text-slate-400 mt-0.5">Disponível para contato</div>
               </td>
-              <td class="py-3 px-4 bg-indigo-50/30 border-l border-slate-200 text-center">
-                <div class="flex items-center justify-center gap-1.5">
-                  <button onclick="copyLeadPitch(${item.id}, 'wpp')" class="px-2.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-lg text-[10px] font-bold flex items-center gap-1 shadow-xs cursor-pointer">
-                    <i class="fa-brands fa-whatsapp"></i> Wpp Pitch
+              <td class="py-3 px-3 bg-indigo-50/40 border-l border-slate-200 text-center">
+                <div class="flex flex-col gap-1.5 w-full min-w-[280px]">
+                  <button onclick="openLeadMessagesModal(${item.id})" class="w-full py-1.5 px-2 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white rounded-lg text-[10px] font-extrabold flex items-center justify-center gap-1 shadow-xs cursor-pointer">
+                    <i class="fa-solid fa-comments text-[11px]"></i> 💬 Abrir 6 Mensagens Prontas
                   </button>
-                  <button onclick="copyLeadPitch(${item.id}, 'linkedin')" class="px-2.5 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-300 rounded-lg text-[10px] font-bold flex items-center gap-1 shadow-xs cursor-pointer">
-                    <i class="fa-brands fa-linkedin"></i> In Pitch
-                  </button>
+                  <div class="grid grid-cols-3 gap-1">
+                    <button onclick="copyLeadChannel(${item.id}, 'wpp_socio')" title="Copiar WhatsApp para Sócio/Diretor" class="py-1 px-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 rounded text-[9px] font-bold flex items-center justify-center gap-1 cursor-pointer">
+                      <i class="fa-brands fa-whatsapp text-emerald-600"></i> Wpp Sócio
+                    </button>
+                    <button onclick="copyLeadChannel(${item.id}, 'email_socio')" title="Copiar E-mail para Sócio/Diretor" class="py-1 px-1 bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-300 rounded text-[9px] font-bold flex items-center justify-center gap-1 cursor-pointer">
+                      <i class="fa-solid fa-envelope text-sky-600"></i> Email Sócio
+                    </button>
+                    <button onclick="copyLeadChannel(${item.id}, 'linkedin_socio')" title="Copiar LinkedIn para Sócio/Diretor" class="py-1 px-1 bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-300 rounded text-[9px] font-bold flex items-center justify-center gap-1 cursor-pointer">
+                      <i class="fa-brands fa-linkedin text-blue-600"></i> In Sócio
+                    </button>
+                  </div>
+                  <div class="grid grid-cols-3 gap-1">
+                    <button onclick="copyLeadChannel(${item.id}, 'wpp_empresa')" title="Copiar WhatsApp Geral da Empresa" class="py-1 px-1 bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-300 rounded text-[9px] font-bold flex items-center justify-center gap-1 cursor-pointer">
+                      <i class="fa-brands fa-whatsapp text-teal-600"></i> Wpp Empresa
+                    </button>
+                    <button onclick="copyLeadChannel(${item.id}, 'email_empresa')" title="Copiar E-mail Institucional Empresa" class="py-1 px-1 bg-violet-50 hover:bg-violet-100 text-violet-800 border border-violet-300 rounded text-[9px] font-bold flex items-center justify-center gap-1 cursor-pointer">
+                      <i class="fa-solid fa-building text-violet-600"></i> Email Empresa
+                    </button>
+                    <button onclick="copyLeadChannel(${item.id}, 'linkedin_empresa')" title="Copiar LinkedIn Empresa" class="py-1 px-1 bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-300 rounded text-[9px] font-bold flex items-center justify-center gap-1 cursor-pointer">
+                      <i class="fa-solid fa-globe text-indigo-600"></i> In Empresa
+                    </button>
+                  </div>
                 </div>
               </td>
             </tr>
@@ -442,21 +461,169 @@
       filterData();
     }
 
-    function copyLeadPitch(leadId, type) {
+    function getLeadMessages(lead) {
+      if (!lead) return {};
+      const d1 = (lead.decisores && lead.decisores.length > 0) ? lead.decisores[0] : { nome: 'Sócio / Diretor', cargo: 'Diretor Geral', linkedin: '', contato: '' };
+      const d1Nome = d1.nome || 'Sócio / Diretor';
+      const d1Cargo = d1.cargo || 'Diretor Geral';
+      const d1Linkedin = d1.linkedin || '';
+      const d1Contato = lead.contatoPessoal || d1.contato || lead.fone || '';
+      const empresa = lead.company || 'Empresa';
+      const cidade = lead.city || 'São Paulo';
+      const uf = lead.uf || 'SP';
+      const segmento = lead.segmentoNome || 'Segmento B2B';
+      const cnpj = lead.cnpj || '';
+      const emailEmpresa = lead.email || '';
+      const foneEmpresa = lead.fone || '';
+
+      return {
+        d1Nome,
+        d1Cargo,
+        d1Linkedin,
+        d1Contato,
+        empresa,
+        cidade,
+        uf,
+        segmento,
+        cnpj,
+        emailEmpresa,
+        foneEmpresa,
+        wppSocio: `Olá, ${d1Nome}! Tudo bem?\n\nAcompanho a sua liderança à frente da ${empresa} em ${cidade}-${uf}.\n\nIdentifiquei a forte atuação de vocês no segmento de ${segmento}. A BDR - Lead AI atua com inteligência estratégica B2B e estruturação comercial de alta performance para empresas consolidadas do seu porte.\n\nGostaria de agendar uma breve conversa de 10 minutos nesta semana para apresentar oportunidades exclusivas que mapeamos para a ${empresa}.\n\nQual o melhor dia e horário para você?`,
+        
+        emailSocioAssunto: `Oportunidades estratégicas para a ${empresa} | A/C ${d1Nome} (${d1Cargo})`,
+        emailSocioCorpo: `Prezado(a) ${d1Nome},\n\nAcompanho a sua atuação como ${d1Cargo} na ${empresa} e o papel de destaque que vocês desempenham no setor de ${segmento} em ${cidade}-${uf}.\n\nAtravés da inteligência da BDR - Lead AI, estruturamos diagnósticos estratégicos e soluções comerciais para potencializar resultados em organizações de alta relevância (CNPJ: ${cnpj}).\n\nGostaria de solicitar uma breve reunião de 15 minutos com você nesta semana para apresentar insights e oportunidades específicas que compilamos para a ${empresa}.\n\nVocê teria disponibilidade nesta quinta ou sexta-feira pela manhã?\n\nAtenciosamente,\nBDR - Lead AI | Inteligência Comercial B2B`,
+        
+        linkedinSocio: `Olá, ${d1Nome}, um prazer conectar com você!\n\nAcompanho a sua liderança como ${d1Cargo} na ${empresa} e a expressiva presença de vocês no mercado de ${segmento}.\n\nEstruturamos análises de inteligência comercial e oportunidades estratégicas voltadas para empresas do seu perfil em ${cidade}-${uf}.\n\nSeria uma honra compartilhar esses insights em uma rápida conversa de 10 minutos. Como está sua agenda nesta semana?\n\nUm abraço!`,
+        
+        wppEmpresa: `Olá, equipe da ${empresa}! Tudo bem?\n\nEstou entrando em contato através da BDR - Lead AI.\n\nRealizamos um estudo de inteligência de mercado no setor de ${segmento} e preparamos um material estratégico com oportunidades exclusivas voltadas para a diretoria da ${empresa}.\n\nPor gentileza, com quem do time do(a) ${d1Nome} (${d1Cargo}) ou da Diretoria Comercial podemos agendar uma rápida apresentação desse mapeamento?\n\nAgradeço pela atenção!`,
+        
+        emailEmpresaAssunto: `Apresentação Estratégica & Mapeamento de Oportunidades | A/C Diretoria da ${empresa}`,
+        emailEmpresaCorpo: `Prezada Equipe da ${empresa},\n\nMeu nome é da equipe BDR - Lead AI e estamos entrando em contato para encaminhar um estudo estratégico de inteligência comercial e expansão B2B desenvolvido para a ${empresa} no setor de ${segmento}.\n\nGostaríamos de agendar uma apresentação de 15 minutos com o(a) ${d1Nome} (${d1Cargo}) ou com a diretoria executiva para apresentar os apontamentos levantados.\n\nPoderiam, por gentileza, direcionar este contato ao setor responsável ou nos informar o canal direto para envio do convite de agenda?\n\nAgradecemos pela atenção e colaboração.\n\nAtenciosamente,\nBDR - Lead AI | Inteligência Comercial B2B`,
+        
+        linkedinEmpresa: `Olá time da ${empresa},\n\nParabéns pelo excelente posicionamento e crescimento no setor de ${segmento}.\n\nEstamos entrando em contato para apresentar um mapeamento estratégico de oportunidades B2B estruturado pela BDR - Lead AI especialmente para a ${empresa}.\n\nGostaríamos de conectar com a diretoria executiva ou com o(a) ${d1Nome} (${d1Cargo}) para compartilhar essa síntese executiva.\n\nUm abraço e muito sucesso!`
+      };
+    }
+
+    function copyLeadChannel(leadId, channel) {
       const item = prospects.find(p => p.id === leadId);
       if (!item) return;
 
-      const d1Name = (item.decisores && item.decisores[0]) ? item.decisores[0].nome : 'Decisor';
-      let pitch = '';
+      const msgs = getLeadMessages(item);
+      let textToCopy = '';
+      let toastMsg = '';
 
-      if (type === 'wpp') {
-        pitch = `Olá, ${d1Name}! Tudo bem?\n\nAcompanho a atuação da ${item.company} no segmento de ${item.segmentoNome}.\n\nAtuamos com inteligência B2B, eficiência comercial e estruturação estratégica voltada para empresas do seu porte em ${item.city}-${item.uf}.\n\nGostaria de agendar 10 minutos nesta semana para compartilhar oportunidades exclusivas do seu setor. Qual o melhor dia?`;
-      } else {
-        pitch = `Olá, ${d1Name}, prazer em conectar.\n\nIdentifiquei a liderança da ${item.company} em ${item.segmentoNome}. Estruturamos inteligência comercial e parcerias estratégicas para empresas desse perfil.\n\nSeria uma honra trocar algumas ideias e compartilhar insights de mercado. Um abraço!`;
+      if (channel === 'wpp_socio') {
+        textToCopy = msgs.wppSocio;
+        toastMsg = `✅ WhatsApp para ${msgs.d1Nome} (${msgs.empresa}) copiado!`;
+      } else if (channel === 'email_socio') {
+        textToCopy = `Assunto: ${msgs.emailSocioAssunto}\n\n${msgs.emailSocioCorpo}`;
+        toastMsg = `✅ E-mail para ${msgs.d1Nome} (${msgs.empresa}) copiado!`;
+      } else if (channel === 'linkedin_socio') {
+        textToCopy = msgs.linkedinSocio;
+        toastMsg = `✅ Pitch LinkedIn para ${msgs.d1Nome} (${msgs.empresa}) copiado!`;
+      } else if (channel === 'wpp_empresa') {
+        textToCopy = msgs.wppEmpresa;
+        toastMsg = `✅ WhatsApp Comercial (${msgs.empresa}) copiado!`;
+      } else if (channel === 'email_empresa') {
+        textToCopy = `Assunto: ${msgs.emailEmpresaAssunto}\n\n${msgs.emailEmpresaCorpo}`;
+        toastMsg = `✅ E-mail Corporativo (${msgs.empresa}) copiado!`;
+      } else if (channel === 'linkedin_empresa') {
+        textToCopy = msgs.linkedinEmpresa;
+        toastMsg = `✅ Mensagem Corporativa LinkedIn (${msgs.empresa}) copiada!`;
       }
 
-      navigator.clipboard.writeText(pitch);
-      showToast(`Pitch para ${d1Name} (${item.company}) copiado com sucesso!`);
+      if (textToCopy) {
+        navigator.clipboard.writeText(textToCopy);
+        showToast(toastMsg);
+      }
+    }
+
+    let activeModalLead = null;
+
+    function openLeadMessagesModal(leadId) {
+      const item = prospects.find(p => p.id === leadId);
+      if (!item) return;
+      activeModalLead = item;
+
+      const msgs = getLeadMessages(item);
+
+      document.getElementById('modalLeadId').innerText = `#${item.id}`;
+      document.getElementById('modalCompanyName').innerText = item.company;
+      document.getElementById('modalLeadSub').innerText = `${item.cnpj} • ${item.city}-${item.uf} • ${item.segmentoNome} • Sócio/Decisor: ${msgs.d1Nome} (${msgs.d1Cargo})`;
+
+      // Sócio
+      document.getElementById('modalSocioPhoneBadge').innerText = msgs.d1Contato || item.fone || 'Telefone QSA';
+      document.getElementById('modalSocioEmailBadge').innerText = item.email ? item.email.split('/')[0].trim() : 'Email QSA';
+      document.getElementById('modalSocioLinkedinBadge').innerText = msgs.d1Linkedin ? 'Perfil Verificado' : 'LinkedIn Busca';
+
+      document.getElementById('modalWppSocioText').value = msgs.wppSocio;
+      const cleanPhoneSocio = (msgs.d1Contato || item.fone || '').replace(/\D/g, '');
+      const wppSocioLink = cleanPhoneSocio ? `https://api.whatsapp.com/send?phone=55${cleanPhoneSocio.replace(/^55/, '')}&text=${encodeURIComponent(msgs.wppSocio)}` : `https://api.whatsapp.com/send?text=${encodeURIComponent(msgs.wppSocio)}`;
+      document.getElementById('modalWppSocioLink').href = wppSocioLink;
+
+      document.getElementById('modalEmailSocioSubject').value = msgs.emailSocioAssunto;
+      document.getElementById('modalEmailSocioBody').value = msgs.emailSocioCorpo;
+      const socioEmailAddr = item.email ? item.email.split('/')[0].trim() : '';
+      document.getElementById('modalEmailSocioLink').href = `mailto:${socioEmailAddr}?subject=${encodeURIComponent(msgs.emailSocioAssunto)}&body=${encodeURIComponent(msgs.emailSocioCorpo)}`;
+
+      document.getElementById('modalLinkedinSocioText').value = msgs.linkedinSocio;
+      document.getElementById('modalLinkedinSocioLink').href = msgs.d1Linkedin || `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(msgs.d1Nome + ' ' + item.company)}`;
+
+      // Empresa
+      document.getElementById('modalEmpresaPhoneBadge').innerText = item.fone || 'Telefone Geral';
+      document.getElementById('modalEmpresaEmailBadge').innerText = item.email || 'Email Geral';
+
+      document.getElementById('modalWppEmpresaText').value = msgs.wppEmpresa;
+      const cleanPhoneEmpresa = (item.fone || '').replace(/\D/g, '');
+      const wppEmpresaLink = cleanPhoneEmpresa ? `https://api.whatsapp.com/send?phone=55${cleanPhoneEmpresa.replace(/^55/, '')}&text=${encodeURIComponent(msgs.wppEmpresa)}` : `https://api.whatsapp.com/send?text=${encodeURIComponent(msgs.wppEmpresa)}`;
+      document.getElementById('modalWppEmpresaLink').href = wppEmpresaLink;
+
+      document.getElementById('modalEmailEmpresaSubject').value = msgs.emailEmpresaAssunto;
+      document.getElementById('modalEmailEmpresaBody').value = msgs.emailEmpresaCorpo;
+      document.getElementById('modalEmailEmpresaLink').href = `mailto:${socioEmailAddr}?subject=${encodeURIComponent(msgs.emailEmpresaAssunto)}&body=${encodeURIComponent(msgs.emailEmpresaCorpo)}`;
+
+      document.getElementById('modalLinkedinEmpresaText').value = msgs.linkedinEmpresa;
+      document.getElementById('modalLinkedinEmpresaLink').href = `https://www.linkedin.com/search/results/companies/?keywords=${encodeURIComponent(item.company)}`;
+
+      switchModalTab('socio');
+      const modal = document.getElementById('messagesModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeMessagesModal() {
+      const modal = document.getElementById('messagesModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function switchModalTab(tab) {
+      if (tab === 'socio') {
+        document.getElementById('modalTabSocioContent').classList.remove('hidden');
+        document.getElementById('modalTabEmpresaContent').classList.add('hidden');
+        document.getElementById('modalTabSocioBtn').className = "px-4 py-2 text-xs font-extrabold border-b-2 border-indigo-600 text-indigo-600 flex items-center gap-1.5 cursor-pointer";
+        document.getElementById('modalTabEmpresaBtn').className = "px-4 py-2 text-xs font-extrabold border-b-2 border-transparent text-slate-500 hover:text-slate-800 flex items-center gap-1.5 cursor-pointer";
+      } else {
+        document.getElementById('modalTabSocioContent').classList.add('hidden');
+        document.getElementById('modalTabEmpresaContent').classList.remove('hidden');
+        document.getElementById('modalTabEmpresaBtn').className = "px-4 py-2 text-xs font-extrabold border-b-2 border-indigo-600 text-indigo-600 flex items-center gap-1.5 cursor-pointer";
+        document.getElementById('modalTabSocioBtn').className = "px-4 py-2 text-xs font-extrabold border-b-2 border-transparent text-slate-500 hover:text-slate-800 flex items-center gap-1.5 cursor-pointer";
+      }
+    }
+
+    function copyModalField(elementId, successMsg) {
+      const el = document.getElementById(elementId);
+      if (el) {
+        navigator.clipboard.writeText(el.value);
+        showToast(successMsg);
+      }
+    }
+
+    function copyModalEmail(subjId, bodyId, successMsg) {
+      const s = document.getElementById(subjId).value;
+      const b = document.getElementById(bodyId).value;
+      navigator.clipboard.writeText(`Assunto: ${s}\n\n${b}`);
+      showToast(successMsg);
     }
 
     function showToast(msg) {
@@ -489,5 +656,168 @@
     updateDynamicCounts();
     filterData();
   </script>
+
+  <!-- MODAL DE MENSAGENS PRONTAS PERSONALIZADAS POR LEAD -->
+  <div id="messagesModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden animate-in fade-in duration-200">
+      <!-- Header do Modal -->
+      <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs bg-indigo-500 text-white font-mono px-2 py-0.5 rounded font-bold" id="modalLeadId">#1</span>
+            <h3 class="text-base font-extrabold" id="modalCompanyName">Nome da Empresa</h3>
+          </div>
+          <p class="text-xs text-slate-300 mt-0.5" id="modalLeadSub">CNPJ • Cidade/UF • Decisor: Nome (Cargo)</p>
+        </div>
+        <button onclick="closeMessagesModal()" class="text-slate-400 hover:text-white text-lg font-bold p-1 rounded-lg hover:bg-slate-800 transition cursor-pointer">✕</button>
+      </div>
+
+      <!-- Navegação de Abas do Modal -->
+      <div class="flex border-b border-slate-200 bg-slate-50 px-6 pt-2">
+        <button onclick="switchModalTab('socio')" id="modalTabSocioBtn" class="px-4 py-2 text-xs font-extrabold border-b-2 border-indigo-600 text-indigo-600 flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-user-tie"></i> 1. Contato Pessoal (Sócios & Diretores)
+        </button>
+        <button onclick="switchModalTab('empresa')" id="modalTabEmpresaBtn" class="px-4 py-2 text-xs font-extrabold border-b-2 border-transparent text-slate-500 hover:text-slate-800 flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-building"></i> 2. Contato Empresa (Institucional & Comercial)
+        </button>
+      </div>
+
+      <!-- Conteúdo do Modal -->
+      <div class="p-6 overflow-y-auto flex-1 space-y-4">
+        
+        <!-- ABA SÓCIO / DIRETORES -->
+        <div id="modalTabSocioContent" class="space-y-4">
+          <!-- Card 1: WhatsApp Sócio -->
+          <div class="bg-emerald-50/50 border border-emerald-200 rounded-xl p-4 space-y-2">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="p-1.5 bg-emerald-600 text-white rounded-lg text-xs"><i class="fa-brands fa-whatsapp"></i></span>
+                <span class="text-xs font-extrabold text-emerald-950">WhatsApp Direto ao Sócio / Diretor</span>
+                <span id="modalSocioPhoneBadge" class="text-[10px] font-mono font-bold bg-white text-emerald-700 px-2 py-0.5 rounded border border-emerald-300"></span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button onclick="copyModalField('modalWppSocioText', '✅ WhatsApp Sócio copiado!')" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1">
+                  <i class="fa-solid fa-copy"></i> Copiar
+                </button>
+                <a id="modalWppSocioLink" href="#" target="_blank" class="px-3 py-1 bg-white hover:bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-lg text-xs font-bold shadow-xs flex items-center gap-1">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir no WhatsApp
+                </a>
+              </div>
+            </div>
+            <textarea id="modalWppSocioText" rows="4" class="w-full bg-white border border-emerald-200 rounded-lg p-3 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-emerald-500 font-sans leading-relaxed"></textarea>
+          </div>
+
+          <!-- Card 2: Email Sócio -->
+          <div class="bg-sky-50/50 border border-sky-200 rounded-xl p-4 space-y-2">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="p-1.5 bg-sky-600 text-white rounded-lg text-xs"><i class="fa-solid fa-envelope"></i></span>
+                <span class="text-xs font-extrabold text-sky-950">E-mail Direto ao Sócio / C-Level</span>
+                <span id="modalSocioEmailBadge" class="text-[10px] font-mono font-bold bg-white text-sky-700 px-2 py-0.5 rounded border border-sky-300"></span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button onclick="copyModalEmail('modalEmailSocioSubject', 'modalEmailSocioBody', '✅ E-mail completo do Sócio copiado!')" class="px-3 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded-lg text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1">
+                  <i class="fa-solid fa-copy"></i> Copiar E-mail Completo
+                </button>
+                <a id="modalEmailSocioLink" href="#" class="px-3 py-1 bg-white hover:bg-sky-100 text-sky-800 border border-sky-300 rounded-lg text-xs font-bold shadow-xs flex items-center gap-1">
+                  <i class="fa-solid fa-paper-plane"></i> Enviar E-mail
+                </a>
+              </div>
+            </div>
+            <div class="space-y-1.5">
+              <input type="text" id="modalEmailSocioSubject" class="w-full bg-white border border-sky-200 rounded-lg px-3 py-1.5 text-xs font-bold text-slate-800" readonly>
+              <textarea id="modalEmailSocioBody" rows="5" class="w-full bg-white border border-sky-200 rounded-lg p-3 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans leading-relaxed"></textarea>
+            </div>
+          </div>
+
+          <!-- Card 3: LinkedIn Sócio -->
+          <div class="bg-blue-50/50 border border-blue-200 rounded-xl p-4 space-y-2">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="p-1.5 bg-blue-600 text-white rounded-lg text-xs"><i class="fa-brands fa-linkedin"></i></span>
+                <span class="text-xs font-extrabold text-blue-950">LinkedIn InMail / Conexão Sócio</span>
+                <span id="modalSocioLinkedinBadge" class="text-[10px] font-mono font-bold bg-white text-blue-700 px-2 py-0.5 rounded border border-blue-300"></span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button onclick="copyModalField('modalLinkedinSocioText', '✅ Pitch de LinkedIn do Sócio copiado!')" class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1">
+                  <i class="fa-solid fa-copy"></i> Copiar Mensagem
+                </button>
+                <a id="modalLinkedinSocioLink" href="#" target="_blank" class="px-3 py-1 bg-white hover:bg-blue-100 text-blue-800 border border-blue-300 rounded-lg text-xs font-bold shadow-xs flex items-center gap-1">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir Perfil do Sócio
+                </a>
+              </div>
+            </div>
+            <textarea id="modalLinkedinSocioText" rows="4" class="w-full bg-white border border-blue-200 rounded-lg p-3 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-blue-500 font-sans leading-relaxed"></textarea>
+          </div>
+        </div>
+
+        <!-- ABA EMPRESA / INSTITUCIONAL -->
+        <div id="modalTabEmpresaContent" class="space-y-4 hidden">
+          <!-- Card 4: WhatsApp Empresa -->
+          <div class="bg-teal-50/50 border border-teal-200 rounded-xl p-4 space-y-2">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="p-1.5 bg-teal-600 text-white rounded-lg text-xs"><i class="fa-brands fa-whatsapp"></i></span>
+                <span class="text-xs font-extrabold text-teal-950">WhatsApp Comercial / Geral da Empresa</span>
+                <span id="modalEmpresaPhoneBadge" class="text-[10px] font-mono font-bold bg-white text-teal-700 px-2 py-0.5 rounded border border-teal-300"></span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button onclick="copyModalField('modalWppEmpresaText', '✅ WhatsApp Comercial da Empresa copiado!')" class="px-3 py-1 bg-teal-600 hover:bg-teal-700 text-white rounded-lg text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1">
+                  <i class="fa-solid fa-copy"></i> Copiar
+                </button>
+                <a id="modalWppEmpresaLink" href="#" target="_blank" class="px-3 py-1 bg-white hover:bg-teal-100 text-teal-800 border border-teal-300 rounded-lg text-xs font-bold shadow-xs flex items-center gap-1">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir no WhatsApp
+                </a>
+              </div>
+            </div>
+            <textarea id="modalWppEmpresaText" rows="4" class="w-full bg-white border border-teal-200 rounded-lg p-3 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-teal-500 font-sans leading-relaxed"></textarea>
+          </div>
+
+          <!-- Card 5: Email Corporativo -->
+          <div class="bg-violet-50/50 border border-violet-200 rounded-xl p-4 space-y-2">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="p-1.5 bg-violet-600 text-white rounded-lg text-xs"><i class="fa-solid fa-building"></i></span>
+                <span class="text-xs font-extrabold text-violet-950">E-mail Institucional / Diretoria</span>
+                <span id="modalEmpresaEmailBadge" class="text-[10px] font-mono font-bold bg-white text-violet-700 px-2 py-0.5 rounded border border-violet-300"></span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button onclick="copyModalEmail('modalEmailEmpresaSubject', 'modalEmailEmpresaBody', '✅ E-mail institucional copiado!')" class="px-3 py-1 bg-violet-600 hover:bg-violet-700 text-white rounded-lg text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1">
+                  <i class="fa-solid fa-copy"></i> Copiar E-mail Completo
+                </button>
+                <a id="modalEmailEmpresaLink" href="#" class="px-3 py-1 bg-white hover:bg-violet-100 text-violet-800 border border-violet-300 rounded-lg text-xs font-bold shadow-xs flex items-center gap-1">
+                  <i class="fa-solid fa-paper-plane"></i> Enviar E-mail
+                </a>
+              </div>
+            </div>
+            <div class="space-y-1.5">
+              <input type="text" id="modalEmailEmpresaSubject" class="w-full bg-white border border-violet-200 rounded-lg px-3 py-1.5 text-xs font-bold text-slate-800" readonly>
+              <textarea id="modalEmailEmpresaBody" rows="5" class="w-full bg-white border border-violet-200 rounded-lg p-3 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-violet-500 font-sans leading-relaxed"></textarea>
+            </div>
+          </div>
+
+          <!-- Card 6: LinkedIn Empresa -->
+          <div class="bg-indigo-50/50 border border-indigo-200 rounded-xl p-4 space-y-2">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="p-1.5 bg-indigo-600 text-white rounded-lg text-xs"><i class="fa-brands fa-linkedin"></i></span>
+                <span class="text-xs font-extrabold text-indigo-950">LinkedIn Corporativo (Página da Empresa)</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button onclick="copyModalField('modalLinkedinEmpresaText', '✅ Mensagem Corporativa LinkedIn copiada!')" class="px-3 py-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1">
+                  <i class="fa-solid fa-copy"></i> Copiar Mensagem
+                </button>
+                <a id="modalLinkedinEmpresaLink" href="#" target="_blank" class="px-3 py-1 bg-white hover:bg-indigo-100 text-indigo-800 border border-indigo-300 rounded-lg text-xs font-bold shadow-xs flex items-center gap-1">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir Página da Empresa
+                </a>
+              </div>
+            </div>
+            <textarea id="modalLinkedinEmpresaText" rows="4" class="w-full bg-white border border-indigo-200 rounded-lg p-3 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 font-sans leading-relaxed"></textarea>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </body>
 </html>
