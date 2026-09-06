@@ -100,18 +100,7 @@
           </select>
         </div>
 
-        <!-- 5. LEADS POR PÁGINA (ROLAGEM LONGA OU PÁGINA ÚNICA) -->
-        <div class="w-full sm:w-auto min-w-[155px]">
-          <select id="editorPerPageFilter" onchange="changeEditorPerPage()" class="w-full h-9 bg-indigo-500/10 text-indigo-300 border border-indigo-500/30 rounded-xl px-2.5 text-xs font-bold focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer">
-            <option value="1000" selected>📜 1.000 Leads (Rolagem)</option>
-            <option value="ALL">♾️ Todos (Página Única)</option>
-            <option value="500">📄 500 Leads</option>
-            <option value="100">📄 100 Leads</option>
-            <option value="50">📄 50 Leads</option>
-          </select>
-        </div>
-
-        <!-- 6. LIMPAR -->
+        <!-- 5. LIMPAR -->
         <button onclick="resetSearch()" class="h-9 px-3 bg-[var(--card)] hover:bg-[var(--border)] text-[var(--foreground)] text-xs font-bold rounded-xl transition border border-[var(--border)] whitespace-nowrap cursor-pointer flex items-center gap-1">
           Limpar
         </button>
@@ -134,9 +123,21 @@
         </table>
       </div>
 
-      <!-- PAGINAÇÃO -->
-      <div class="flex flex-col sm:flex-row items-center justify-between text-[11px] text-[var(--muted-foreground)] pt-1 gap-2">
+      <!-- PAGINAÇÃO E CONTROLES NO FIM DA PÁGINA -->
+      <div class="flex flex-col sm:flex-row items-center justify-between text-[11px] text-[var(--muted-foreground)] pt-2 gap-2 border-t border-[var(--border)]">
         <span id="tableResultsCount">Mostrando leads...</span>
+        
+        <div class="flex items-center gap-1.5">
+          <label for="editorPerPageFilter" class="text-[10px] font-bold text-[var(--muted-foreground)]">Leads:</label>
+          <select id="editorPerPageFilter" onchange="changeEditorPerPage()" class="h-7 bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] rounded-lg px-2 text-[10px] font-bold cursor-pointer">
+            <option value="1000" selected>📜 1.000 Leads</option>
+            <option value="ALL">♾️ Todos (3.000)</option>
+            <option value="500">📄 500 Leads</option>
+            <option value="100">📄 100 Leads</option>
+            <option value="50">📄 50 Leads</option>
+          </select>
+        </div>
+
         <div id="editorPaginationControls" class="flex items-center gap-1">
           <button onclick="changePage(-1)" class="px-2.5 py-1 rounded bg-[var(--background)] border border-[var(--border)] hover:bg-[var(--card)] font-bold cursor-pointer">Anterior</button>
           <span id="pageIndicator" class="px-2 font-bold text-[var(--foreground)]">1 / 1</span>
