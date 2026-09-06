@@ -1,0 +1,65 @@
+﻿================================================================================
+           PRX CAPITAL - BASE DE PROSPECÇÃO BDR & PIPELINE CRM HIGH-TICKET
+================================================================================
+Especialista / BDR Responsável: Daniel Zanon
+Escopo da Base Ativa: 2.100 Leads Qualificados nos 7 Segmentos de Maior Retorno
+================================================================================
+
+📁 COMO ACESSAR NO SEU COMPUTADOR (ACESSO OFFLINE INSTANTÂNEO):
+--------------------------------------------------------------------------------
+1. Dê 2 cliques no arquivo 'Abrir Dashboard PRX.bat' (ou abra 'index.html').
+   -> O painel executivo abrirá instantaneamente no seu navegador padrão
+      (Chrome, Edge, etc.) sem necessitar de conexão com a internet.
+2. Dê 2 cliques no arquivo 'Abrir CRM PRX.bat' (ou abra 'crm_prx.html').
+   -> O Pipeline Kanban Comercial dedicado abrirá instantaneamente para gestão
+      de contatos, movimentação de cards e controle de reuniões agendadas.
+
+🌐 COMO ACESSAR DE QUALQUER LUGAR PELA INTERNET (CELULAR, NOTEBOOK, TABLET):
+--------------------------------------------------------------------------------
+• 📊 Dashboard Master Online:
+  https://danielzanoncontato-cpu.github.io/simulador/
+
+• 💼 Pipeline CRM High-Ticket Online:
+  https://danielzanoncontato-cpu.github.io/simulador/crm_prx.html
+
+• 📁 Repositório de Arquivos no GitHub:
+  https://github.com/danielzanoncontato-cpu/simulador
+
+================================================================================
+📋 ESTRUTURA DOS ARQUIVOS DESTA PASTA:
+================================================================================
+1. DASHBOARDS & APLICAÇÕES INTERATIVAS:
+   • Abrir Dashboard PRX.bat       -> Atalho de 1 clique para o Dashboard Master
+   • Abrir CRM PRX.bat             -> Atalho de 1 clique para o Funil de CRM
+   • index.html                    -> Dashboard Master com 2.100 leads + CRM integrado
+   • dashboard_prospeccao.html     -> Painel focado em mineração e filtros rápidos
+   • crm_prx.html                  -> Pipeline Kanban comercial com 6 etapas
+
+2. PLANILHAS MASTER E BANCO DE DADOS (Excel / CSV / JSON):
+   • base_prospeccao_prx.csv       -> Planilha Master com os 2.100 leads e 24 colunas (UTF-8 BOM)
+   • base_prospeccao_12000_leads.csv -> Base histórica completa com 12.000 empresas
+   • prospects_database.json       -> Banco de dados estruturado em JSON (2.100 leads)
+   • prospects_12000_database.json -> Banco de dados estruturado em JSON (12.000 leads)
+   • tabela_76_profissoes_icp.csv  -> Mapeamento completo de CNAEs e 76 profissões ICP
+
+3. PASTA 'segmentos_icp' (7 PLANILHAS SEPARADAS POR NICHO - 300 LEADS CADA):
+   • 1_Fabricas_e_Industrias.csv       -> 300 Fábricas, Alimentos, Bebidas e Indústrias
+   • 2_Agronegocio.csv                 -> 300 Holdings Rurais, Insumos e Grãos
+   • 3_Medicos_e_Clinicas_PJ.csv       -> 300 Médicos PJ, Clínicas e Hospitais Dia
+   • 4_Logistica_e_Transportes.csv     -> 300 Transportadoras e Operadores Logísticos
+   • 5_Exportadoras_e_Importadoras.csv -> 300 Tradings e Empresas de Comércio Exterior
+   • 6_Advocacia_e_Juridico.csv        -> 300 Sociedades de Advogados e Bancas Jurídicas
+   • 7_Contabilidade_e_Auditoria.csv   -> 300 Escritórios de Contabilidade e Auditoria
+
+4. PROTOCOLOS OPERACIONAIS E SCRIPTS COMERCIAIS:
+   • bdr_prx_protocol.md           -> Protocolo BDR (Mineração QSA, Enquadramento Tributário, LGPD)
+   • sdr_prx_protocol.md           -> Protocolo SDR (Scripts WhatsApp/LinkedIn, Quebra de Objeções)
+   • README.md                     -> Manual técnico completo do projeto
+
+================================================================================
+💡 DICAS DE OPERAÇÃO:
+• Todas as planilhas estão no formato UTF-8 com BOM, prontas para abrir perfeitamente
+  no Microsoft Excel, Google Planilhas, LibreOffice ou Numbers sem caracteres estranhos.
+• Os botões de WhatsApp e LinkedIn abrem conversas e perfis diretamente com 1 clique.
+• No CRM, você pode arrastar cards entre as 6 etapas do funil para acompanhar o fluxo.
+================================================================================
