@@ -109,7 +109,7 @@
           <button id="tab-prospects-btn" onclick="switchMainTab('prospects')" class="tab-btn active-tab px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 text-slate-700 hover:text-slate-900">
             <i class="fa-solid fa-list-check text-amber-500"></i>
             <span>1. Base de Prospecção</span>
-            <span id="tabProspectsBadge" class="px-1.5 py-0.5 rounded-md text-[10px] bg-slate-200 text-slate-800 font-mono font-bold">2100</span>
+            <span id="tabProspectsBadge" class="px-1.5 py-0.5 rounded-md text-[10px] bg-slate-200 text-slate-800 font-mono font-bold">3000</span>
           </button>
 
           <button id="tab-crm-btn" onclick="switchMainTab('crm')" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 text-slate-700 hover:text-slate-900">
@@ -537,6 +537,10 @@
       var badgeHeader = document.getElementById('compHeaderCount');
       if (badgeHeader) {
         badgeHeader.innerText = totalLeads.toLocaleString('pt-BR');
+      }
+      var tabBadge = document.getElementById('tabProspectsBadge');
+      if (tabBadge) {
+        tabBadge.innerText = totalLeads.toLocaleString('pt-BR');
       }
 
       // Atualizar opções do Select de Segmentos dinamicamente
