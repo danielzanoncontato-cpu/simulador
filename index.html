@@ -149,21 +149,10 @@
               <option value="MS">MS - Mato Grosso do Sul</option>
             </select>
           </div>
-
-          <!-- 5. RETÂNGULO DE LEADS POR PÁGINA (ROLAGEM LONGA OU PÁGINA ÚNICA) -->
-          <div class="w-full sm:w-auto min-w-[210px]">
-            <select id="perPageFilter" onchange="changePerPage()" class="w-full h-10 bg-indigo-50/70 border border-indigo-200 rounded-xl px-3 text-xs font-bold text-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-600 cursor-pointer shadow-2xs">
-              <option value="1000" selected>📜 1.000 Leads (Rolagem Longa)</option>
-              <option value="ALL">♾️ Todos (3.000 em Página Única)</option>
-              <option value="500">📄 500 Leads por Página</option>
-              <option value="100">📄 100 Leads por Página</option>
-              <option value="50">📄 50 Leads por Página</option>
-            </select>
-          </div>
           
-          <!-- 6. RETÂNGULO DE LIMPAR FILTROS -->
-          <button onclick="resetSearch()" class="h-10 px-3.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition border border-slate-200 whitespace-nowrap cursor-pointer flex items-center gap-1.5 shadow-2xs">
-            <i class="fa-solid fa-rotate-left text-[11px]"></i> Limpar
+          <!-- 5. RETÂNGULO DE LIMPAR FILTROS -->
+          <button onclick="resetSearch()" class="h-10 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition border border-slate-200 whitespace-nowrap cursor-pointer flex items-center gap-1.5 shadow-2xs">
+            <i class="fa-solid fa-rotate-left text-[11px]"></i> Limpar Filtros
           </button>
         </div>
       </div>
@@ -192,11 +181,29 @@
           </table>
         </div>
 
-        <!-- CONTROLES DE PAGINAÇÃO DA TABELA -->
-        <div class="p-4 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-          <div id="paginationInfo" class="font-semibold text-slate-600">
+        <!-- CONTROLES DE PAGINAÇÃO E VISUALIZAÇÃO NO FIM DA PÁGINA -->
+        <div class="p-4 bg-slate-50 border-t border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+          
+          <!-- CONTADOR DE LEADS -->
+          <div id="paginationInfo" class="font-semibold text-slate-600 flex items-center gap-2">
             Mostrando leads...
           </div>
+
+          <!-- SELETOR DE LEADS POR PÁGINA / ROLAGEM NO FIM DA PÁGINA -->
+          <div class="flex items-center gap-2">
+            <label for="perPageFilter" class="text-xs font-bold text-slate-600 whitespace-nowrap flex items-center gap-1.5">
+              <i class="fa-solid fa-list-ol text-indigo-600"></i> Leads por página:
+            </label>
+            <select id="perPageFilter" onchange="changePerPage()" class="h-9 bg-white border border-slate-300 rounded-xl px-3 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-600 cursor-pointer shadow-2xs">
+              <option value="1000" selected>📜 1.000 Leads (Rolagem Longa)</option>
+              <option value="ALL">♾️ Todos (3.000 em Página Única)</option>
+              <option value="500">📄 500 Leads por Página</option>
+              <option value="100">📄 100 Leads por Página</option>
+              <option value="50">📄 50 Leads por Página</option>
+            </select>
+          </div>
+
+          <!-- BOTÕES DE NAVEGAÇÃO -->
           <div id="paginationControls" class="flex items-center gap-2">
             <button onclick="goToPrevPage()" id="btnPrevPage" class="px-3.5 py-1.5 bg-white border border-slate-300 rounded-lg font-bold hover:bg-slate-100 disabled:opacity-50 cursor-pointer">◀ Anterior</button>
             <span class="font-mono font-bold px-2 text-slate-800">Página <span id="currentPageDisplay">1</span> / <span id="totalPagesDisplay">1</span></span>
