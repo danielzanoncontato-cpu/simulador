@@ -469,13 +469,15 @@
               </td>
               <td class="py-2.5 px-3 text-right">
                 <div class="flex flex-col items-end gap-1">
-                  <button onclick="openEditorMessagesModal(${lead.id})" class="px-2.5 py-1 bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded font-bold text-[10px] shadow cursor-pointer flex items-center gap-1">
-                    💬 6 Mensagens
-                  </button>
                   <div class="flex items-center gap-1">
-                    <button onclick="copyLeadChannel(${lead.id}, 'wpp_socio')" title="Copiar WhatsApp Sócio" class="px-1.5 py-0.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 rounded text-[9px] font-bold cursor-pointer">Wpp Sócio</button>
-                    <button onclick="copyLeadChannel(${lead.id}, 'email_socio')" title="Copiar E-mail Sócio" class="px-1.5 py-0.5 bg-sky-500/10 text-sky-400 border border-sky-500/20 hover:bg-sky-500/20 rounded text-[9px] font-bold cursor-pointer">Email Sócio</button>
-                    <button onclick="copyLeadChannel(${lead.id}, 'linkedin_socio')" title="Copiar LinkedIn Sócio" class="px-1.5 py-0.5 bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-500/20 rounded text-[9px] font-bold cursor-pointer">In Sócio</button>
+                    <button onclick="copyLeadChannel(${lead.id}, 'wpp_socio')" title="Copiar WhatsApp Sócio" class="px-2 py-1 bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/25 rounded text-[9px] font-bold cursor-pointer">Wpp Sócio</button>
+                    <button onclick="copyLeadChannel(${lead.id}, 'email_socio')" title="Copiar E-mail Sócio" class="px-2 py-1 bg-sky-500/15 text-sky-400 border border-sky-500/30 hover:bg-sky-500/25 rounded text-[9px] font-bold cursor-pointer">Email Sócio</button>
+                    <button onclick="copyLeadChannel(${lead.id}, 'linkedin_socio')" title="Copiar LinkedIn Sócio" class="px-2 py-1 bg-blue-500/15 text-blue-400 border border-blue-500/30 hover:bg-blue-500/25 rounded text-[9px] font-bold cursor-pointer">In Sócio</button>
+                  </div>
+                  <div class="flex items-center gap-1">
+                    <button onclick="copyLeadChannel(${lead.id}, 'wpp_empresa')" title="Copiar WhatsApp Empresa" class="px-2 py-1 bg-teal-500/15 text-teal-400 border border-teal-500/30 hover:bg-teal-500/25 rounded text-[9px] font-bold cursor-pointer">Wpp Empresa</button>
+                    <button onclick="copyLeadChannel(${lead.id}, 'email_empresa')" title="Copiar E-mail Empresa" class="px-2 py-1 bg-violet-500/15 text-violet-400 border border-violet-500/30 hover:bg-violet-500/25 rounded text-[9px] font-bold cursor-pointer">Email Empresa</button>
+                    <button onclick="copyLeadChannel(${lead.id}, 'linkedin_empresa')" title="Copiar LinkedIn Empresa" class="px-2 py-1 bg-indigo-500/15 text-indigo-400 border border-indigo-500/30 hover:bg-indigo-500/25 rounded text-[9px] font-bold cursor-pointer">In Empresa</button>
                   </div>
                 </div>
               </td>
