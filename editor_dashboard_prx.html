@@ -195,39 +195,111 @@
     </div>
 
     <!-- ======================================================== -->
-    <!-- ABA 3: SCRIPTS E PITCHES                                 -->
+    <!-- ABA 3: SCRIPTS E MENSAGENS PRONTAS (6 CANAIS)            -->
     <!-- ======================================================== -->
-    <div id="tabContentPitches" class="hidden space-y-3">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <div class="bg-[var(--background)] p-3 rounded-xl border border-[var(--border)] space-y-2">
-          <div class="flex items-center justify-between">
-            <span class="font-extrabold text-xs text-[var(--foreground)]">💬 Script WhatsApp (Direto ao Decisor)</span>
-            <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded font-bold">Alta Conversão</span>
+    <div id="tabContentPitches" class="hidden space-y-4">
+      <!-- SELETOR DE LEAD PARA PRÉ-VISUALIZAÇÃO DINÂMICA -->
+      <div class="bg-[var(--background)] p-3 rounded-xl border border-[var(--border)] flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-[var(--foreground)]">🎯 Pré-visualizar com dados de um Lead:</span>
+        </div>
+        <div class="w-full sm:w-80">
+          <select id="pitchLeadSelector" onchange="updatePitchPreview()" class="w-full bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] rounded-lg p-2 text-xs font-semibold cursor-pointer">
+            <option value="DEFAULT">📋 Template Geral (Variáveis)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- SEÇÃO 1: CONTATO PESSOAL (SÓCIO / DIRETORES) -->
+      <div class="space-y-2">
+        <h4 class="text-xs font-extrabold text-[var(--foreground)] flex items-center gap-1.5">
+          <span>👤</span> 1. Contato Pessoal (Sócios & Diretores)
+        </h4>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <!-- WhatsApp Sócio -->
+          <div class="bg-[var(--background)] p-3 rounded-xl border border-emerald-500/30 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-extrabold text-xs text-emerald-400 flex items-center gap-1">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp Sócio
+              </span>
+              <button onclick="copyPitchFromId('scriptWppSocio', 'WhatsApp Sócio copiado!')" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded font-bold text-[10px] cursor-pointer shadow-xs">
+                📋 Copiar
+              </button>
+            </div>
+            <textarea id="scriptWppSocio" rows="5" class="w-full bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] rounded-lg p-2.5 text-[11px] leading-relaxed focus:outline-none"></textarea>
           </div>
-          <textarea id="scriptWhatsapp" rows="5" class="w-full bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] rounded-lg p-2.5 text-xs focus:outline-none">Olá, {Decisor}! Tudo bem?
 
-Acompanho o crescimento da {Empresa} em {Cidade} no segmento de {Segmento}.
+          <!-- Email Sócio -->
+          <div class="bg-[var(--background)] p-3 rounded-xl border border-sky-500/30 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-extrabold text-xs text-sky-400 flex items-center gap-1">
+                <i class="fa-solid fa-envelope"></i> E-mail Direto Sócio
+              </span>
+              <button onclick="copyPitchFromId('scriptEmailSocio', 'E-mail Sócio copiado!')" class="px-2.5 py-1 bg-sky-600 hover:bg-sky-500 text-white rounded font-bold text-[10px] cursor-pointer shadow-xs">
+                📋 Copiar
+              </button>
+            </div>
+            <textarea id="scriptEmailSocio" rows="5" class="w-full bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] rounded-lg p-2.5 text-[11px] leading-relaxed focus:outline-none"></textarea>
+          </div>
 
-Atuamos com inteligência de mercado, otimização estratégica e expansão comercial voltadas para empresas do seu porte.
-
-Gostaria de agendar uma breve conversa de 10 minutos nesta semana para apresentar oportunidades exclusivas do seu setor. Qual o melhor dia para conversarmos?</textarea>
-          <div class="flex justify-end">
-            <button onclick="showToast('Script de WhatsApp atualizado!')" class="px-3 py-1 bg-[var(--card)] border border-[var(--border)] hover:bg-[var(--border)] rounded-lg font-bold text-[10px] cursor-pointer">Salvar Template</button>
+          <!-- LinkedIn Sócio -->
+          <div class="bg-[var(--background)] p-3 rounded-xl border border-blue-500/30 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-extrabold text-xs text-blue-400 flex items-center gap-1">
+                <i class="fa-brands fa-linkedin"></i> LinkedIn Sócio
+              </span>
+              <button onclick="copyPitchFromId('scriptLinkedinSocio', 'Pitch LinkedIn Sócio copiado!')" class="px-2.5 py-1 bg-blue-600 hover:bg-blue-500 text-white rounded font-bold text-[10px] cursor-pointer shadow-xs">
+                📋 Copiar
+              </button>
+            </div>
+            <textarea id="scriptLinkedinSocio" rows="5" class="w-full bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] rounded-lg p-2.5 text-[11px] leading-relaxed focus:outline-none"></textarea>
           </div>
         </div>
+      </div>
 
-        <div class="bg-[var(--background)] p-3 rounded-xl border border-[var(--border)] space-y-2">
-          <div class="flex items-center justify-between">
-            <span class="font-extrabold text-xs text-[var(--foreground)]">👔 Script LinkedIn (Abordagem Executiva)</span>
-            <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded font-bold">Conexão C-Level</span>
+      <!-- SEÇÃO 2: CONTATO EMPRESA (INSTITUCIONAL & COMERCIAL) -->
+      <div class="space-y-2 pt-2">
+        <h4 class="text-xs font-extrabold text-[var(--foreground)] flex items-center gap-1.5">
+          <span>🏢</span> 2. Contato Empresa (Institucional & Comercial)
+        </h4>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <!-- WhatsApp Empresa -->
+          <div class="bg-[var(--background)] p-3 rounded-xl border border-teal-500/30 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-extrabold text-xs text-teal-400 flex items-center gap-1">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp Empresa
+              </span>
+              <button onclick="copyPitchFromId('scriptWppEmpresa', 'WhatsApp Empresa copiado!')" class="px-2.5 py-1 bg-teal-600 hover:bg-teal-500 text-white rounded font-bold text-[10px] cursor-pointer shadow-xs">
+                📋 Copiar
+              </button>
+            </div>
+            <textarea id="scriptWppEmpresa" rows="5" class="w-full bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] rounded-lg p-2.5 text-[11px] leading-relaxed focus:outline-none"></textarea>
           </div>
-          <textarea id="scriptLinkedIn" rows="5" class="w-full bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] rounded-lg p-2.5 text-xs focus:outline-none">Olá, {Decisor}, prazer em conectar.
 
-Identifiquei a liderança da {Empresa} no setor de {Segmento}. Estruturamos inteligência comercial e parcerias estratégicas para empresas com esse perfil.
+          <!-- Email Empresa -->
+          <div class="bg-[var(--background)] p-3 rounded-xl border border-violet-500/30 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-extrabold text-xs text-violet-400 flex items-center gap-1">
+                <i class="fa-solid fa-building"></i> E-mail Empresa
+              </span>
+              <button onclick="copyPitchFromId('scriptEmailEmpresa', 'E-mail Empresa copiado!')" class="px-2.5 py-1 bg-violet-600 hover:bg-violet-500 text-white rounded font-bold text-[10px] cursor-pointer shadow-xs">
+                📋 Copiar
+              </button>
+            </div>
+            <textarea id="scriptEmailEmpresa" rows="5" class="w-full bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] rounded-lg p-2.5 text-[11px] leading-relaxed focus:outline-none"></textarea>
+          </div>
 
-Seria uma honra trocar algumas ideias e compartilhar benchmarks de mercado. Um abraço!</textarea>
-          <div class="flex justify-end">
-            <button onclick="showToast('Script de LinkedIn atualizado!')" class="px-3 py-1 bg-[var(--card)] border border-[var(--border)] hover:bg-[var(--border)] rounded-lg font-bold text-[10px] cursor-pointer">Salvar Template</button>
+          <!-- LinkedIn Empresa -->
+          <div class="bg-[var(--background)] p-3 rounded-xl border border-indigo-500/30 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="font-extrabold text-xs text-indigo-400 flex items-center gap-1">
+                <i class="fa-solid fa-globe"></i> LinkedIn Empresa
+              </span>
+              <button onclick="copyPitchFromId('scriptLinkedinEmpresa', 'LinkedIn Corporativo copiado!')" class="px-2.5 py-1 bg-indigo-600 hover:bg-indigo-500 text-white rounded font-bold text-[10px] cursor-pointer shadow-xs">
+                📋 Copiar
+              </button>
+            </div>
+            <textarea id="scriptLinkedinEmpresa" rows="5" class="w-full bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] rounded-lg p-2.5 text-[11px] leading-relaxed focus:outline-none"></textarea>
           </div>
         </div>
       </div>
@@ -242,7 +314,16 @@ Seria uma honra trocar algumas ideias e compartilhar benchmarks de mercado. Um a
     const leadsPerPage = 10;
 
     function init() {
+      populateLeadSelector();
       filterLeads();
+      updatePitchPreview();
+    }
+
+    function populateLeadSelector() {
+      const sel = document.getElementById('pitchLeadSelector');
+      if (!sel) return;
+      sel.innerHTML = '<option value="DEFAULT">📋 Template Geral (Variáveis)</option>' +
+        prospects.slice(0, 100).map(p => `<option value="${p.id}">#${p.id} - ${p.company} (${p.city}-${p.uf})</option>`).join('');
     }
 
     function switchTab(tabId) {
@@ -286,8 +367,8 @@ Seria uma honra trocar algumas ideias e compartilhar benchmarks de mercado. Um a
           }
         }
 
-        if (siteVal === 'WITH_SITE' && !p.hasWebsite) return false;
-        if (siteVal === 'NO_SITE' && p.hasWebsite) return false;
+        if (siteVal === 'WITH_SITE' && !p.hasSite) return false;
+        if (siteVal === 'NO_SITE' && p.hasSite) return false;
 
         if (stateVal && p.uf !== stateVal) return false;
 
@@ -310,6 +391,49 @@ Seria uma honra trocar algumas ideias e compartilhar benchmarks de mercado. Um a
       renderTable();
     }
 
+    function getLeadMessages(lead) {
+      if (!lead) return {};
+      const d1 = (lead.decisores && lead.decisores.length > 0) ? lead.decisores[0] : { nome: 'Sócio / Diretor', cargo: 'Diretor Geral', linkedin: '', contato: '' };
+      const d1Nome = d1.nome || 'Sócio / Diretor';
+      const d1Cargo = d1.cargo || 'Diretor Geral';
+      const d1Linkedin = d1.linkedin || '';
+      const d1Contato = lead.contatoPessoal || d1.contato || lead.fone || '';
+      const empresa = lead.company || 'Empresa';
+      const cidade = lead.city || 'São Paulo';
+      const uf = lead.uf || 'SP';
+      const segmento = lead.segmentoNome || 'Segmento B2B';
+      const cnpj = lead.cnpj || '';
+      const emailEmpresa = lead.email || '';
+      const foneEmpresa = lead.fone || '';
+
+      return {
+        d1Nome,
+        d1Cargo,
+        d1Linkedin,
+        d1Contato,
+        empresa,
+        cidade,
+        uf,
+        segmento,
+        cnpj,
+        emailEmpresa,
+        foneEmpresa,
+        wppSocio: `Olá, ${d1Nome}! Tudo bem?\n\nAcompanho a sua liderança à frente da ${empresa} em ${cidade}-${uf}.\n\nIdentifiquei a forte atuação de vocês no segmento de ${segmento}. A BDR - Lead AI atua com inteligência estratégica B2B e estruturação comercial de alta performance para empresas consolidadas do seu porte.\n\nGostaria de agendar uma breve conversa de 10 minutos nesta semana para apresentar oportunidades exclusivas que mapeamos para a ${empresa}.\n\nQual o melhor dia e horário para você?`,
+        
+        emailSocioAssunto: `Oportunidades estratégicas para a ${empresa} | A/C ${d1Nome} (${d1Cargo})`,
+        emailSocioCorpo: `Prezado(a) ${d1Nome},\n\nAcompanho a sua atuação como ${d1Cargo} na ${empresa} e o papel de destaque que vocês desempenham no setor de ${segmento} em ${cidade}-${uf}.\n\nAtravés da inteligência da BDR - Lead AI, estruturamos diagnósticos estratégicos e soluções comerciais para potencializar resultados em organizações de alta relevância (CNPJ: ${cnpj}).\n\nGostaria de solicitar uma breve reunião de 15 minutos com você nesta semana para apresentar insights e oportunidades específicas que compilamos para a ${empresa}.\n\nVocê teria disponibilidade nesta quinta ou sexta-feira pela manhã?\n\nAtenciosamente,\nBDR - Lead AI | Inteligência Comercial B2B`,
+        
+        linkedinSocio: `Olá, ${d1Nome}, um prazer conectar com você!\n\nAcompanho a sua liderança como ${d1Cargo} na ${empresa} e a expressiva presença de vocês no mercado de ${segmento}.\n\nEstruturamos análises de inteligência comercial e oportunidades estratégicas voltadas para empresas do seu perfil em ${cidade}-${uf}.\n\nSeria uma honra compartilhar esses insights em uma rápida conversa de 10 minutos. Como está sua agenda nesta semana?\n\nUm abraço!`,
+        
+        wppEmpresa: `Olá, equipe da ${empresa}! Tudo bem?\n\nEstou entrando em contato através da BDR - Lead AI.\n\nRealizamos um estudo de inteligência de mercado no setor de ${segmento} e preparamos um material estratégico com oportunidades exclusivas voltadas para a diretoria da ${empresa}.\n\nPor gentileza, com quem do time do(a) ${d1Nome} (${d1Cargo}) ou da Diretoria Comercial podemos agendar uma rápida apresentação desse mapeamento?\n\nAgradeço pela atenção!`,
+        
+        emailEmpresaAssunto: `Apresentação Estratégica & Mapeamento de Oportunidades | A/C Diretoria da ${empresa}`,
+        emailEmpresaCorpo: `Prezada Equipe da ${empresa},\n\nMeu nome é da equipe BDR - Lead AI e estamos entrando em contato para encaminhar um estudo estratégico de inteligência comercial e expansão B2B desenvolvido para a ${empresa} no setor de ${segmento}.\n\nGostaríamos de agendar uma apresentação de 15 minutos com o(a) ${d1Nome} (${d1Cargo}) ou com a diretoria executiva para apresentar os apontamentos levantados.\n\nPoderiam, por gentileza, direcionar este contato ao setor responsável ou nos informar o canal direto para envio do convite de agenda?\n\nAgradecemos pela atenção e colaboração.\n\nAtenciosamente,\nBDR - Lead AI | Inteligência Comercial B2B`,
+        
+        linkedinEmpresa: `Olá time da ${empresa},\n\nParabéns pelo excelente posicionamento e crescimento no setor de ${segmento}.\n\nEstamos entrando em contato para apresentar um mapeamento estratégico de oportunidades B2B estruturado pela BDR - Lead AI especialmente para a ${empresa}.\n\nGostaríamos de conectar com a diretoria executiva ou com o(a) ${d1Nome} (${d1Cargo}) para compartilhar essa síntese executiva.\n\nUm abraço e muito sucesso!`
+      };
+    }
+
     function renderTable() {
       const tbody = document.getElementById('leadsTableBody');
       const totalPages = Math.max(1, Math.ceil(filteredList.length / leadsPerPage));
@@ -326,7 +450,7 @@ Seria uma honra trocar algumas ideias e compartilhar benchmarks de mercado. Um a
           const contato = lead.contatoPessoal || lead.fone || '+55 (11) 9999-9999';
 
           return `
-            <tr class="hover:bg-[var(--card)] transition">
+            <tr class="hover:bg-[var(--card)] transition border-b border-[var(--border)]">
               <td class="py-2.5 px-3">
                 <div class="font-extrabold text-[var(--foreground)]">${lead.company}</div>
                 <div class="text-[10px] text-[var(--muted-foreground)] font-mono">${lead.cnpj} • ${lead.city}-${lead.uf}</div>
@@ -344,7 +468,16 @@ Seria uma honra trocar algumas ideias e compartilhar benchmarks de mercado. Um a
                 <div class="text-[9px] text-[var(--muted-foreground)] truncate max-w-[130px]">${d1.linkedin || 'LinkedIn'}</div>
               </td>
               <td class="py-2.5 px-3 text-right">
-                <button onclick="copyPitch(${start + idx})" class="px-2.5 py-1 bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded font-bold text-[10px] shadow cursor-pointer">📋 Copiar Pitch</button>
+                <div class="flex flex-col items-end gap-1">
+                  <button onclick="openEditorMessagesModal(${lead.id})" class="px-2.5 py-1 bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded font-bold text-[10px] shadow cursor-pointer flex items-center gap-1">
+                    💬 6 Mensagens
+                  </button>
+                  <div class="flex items-center gap-1">
+                    <button onclick="copyLeadChannel(${lead.id}, 'wpp_socio')" title="Copiar WhatsApp Sócio" class="px-1.5 py-0.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 rounded text-[9px] font-bold cursor-pointer">Wpp Sócio</button>
+                    <button onclick="copyLeadChannel(${lead.id}, 'email_socio')" title="Copiar E-mail Sócio" class="px-1.5 py-0.5 bg-sky-500/10 text-sky-400 border border-sky-500/20 hover:bg-sky-500/20 rounded text-[9px] font-bold cursor-pointer">Email Sócio</button>
+                    <button onclick="copyLeadChannel(${lead.id}, 'linkedin_socio')" title="Copiar LinkedIn Sócio" class="px-1.5 py-0.5 bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-500/20 rounded text-[9px] font-bold cursor-pointer">In Sócio</button>
+                  </div>
+                </div>
               </td>
             </tr>
           `;
@@ -364,20 +497,90 @@ Seria uma honra trocar algumas ideias e compartilhar benchmarks de mercado. Um a
       }
     }
 
-    function copyPitch(index) {
-      const lead = filteredList[index];
-      if (!lead) return;
+    function copyLeadChannel(leadId, channel) {
+      const item = prospects.find(p => p.id === leadId);
+      if (!item) return;
 
-      const d1 = (lead.decisores && lead.decisores[0]) ? lead.decisores[0].nome : 'Decisor';
-      const template = document.getElementById('scriptWhatsapp').value;
-      const pitch = template
-        .replace(/{Empresa}/g, lead.company)
-        .replace(/{Decisor}/g, d1)
-        .replace(/{Cidade}/g, lead.city)
-        .replace(/{Segmento}/g, lead.segmentoNome);
+      const msgs = getLeadMessages(item);
+      let textToCopy = '';
+      let toastMsg = '';
 
-      navigator.clipboard.writeText(pitch);
-      showToast(`Pitch para ${d1} (${lead.company}) copiado!`);
+      if (channel === 'wpp_socio') {
+        textToCopy = msgs.wppSocio;
+        toastMsg = `✅ WhatsApp para ${msgs.d1Nome} copiado!`;
+      } else if (channel === 'email_socio') {
+        textToCopy = `Assunto: ${msgs.emailSocioAssunto}\n\n${msgs.emailSocioCorpo}`;
+        toastMsg = `✅ E-mail para ${msgs.d1Nome} copiado!`;
+      } else if (channel === 'linkedin_socio') {
+        textToCopy = msgs.linkedinSocio;
+        toastMsg = `✅ Pitch LinkedIn para ${msgs.d1Nome} copiado!`;
+      } else if (channel === 'wpp_empresa') {
+        textToCopy = msgs.wppEmpresa;
+        toastMsg = `✅ WhatsApp Comercial (${msgs.empresa}) copiado!`;
+      } else if (channel === 'email_empresa') {
+        textToCopy = `Assunto: ${msgs.emailEmpresaAssunto}\n\n${msgs.emailEmpresaCorpo}`;
+        toastMsg = `✅ E-mail Corporativo (${msgs.empresa}) copiado!`;
+      } else if (channel === 'linkedin_empresa') {
+        textToCopy = msgs.linkedinEmpresa;
+        toastMsg = `✅ LinkedIn Corporativo (${msgs.empresa}) copiado!`;
+      }
+
+      if (textToCopy) {
+        navigator.clipboard.writeText(textToCopy);
+        showToast(toastMsg);
+      }
+    }
+
+    function updatePitchPreview() {
+      const val = document.getElementById('pitchLeadSelector') ? document.getElementById('pitchLeadSelector').value : 'DEFAULT';
+      let msgs;
+
+      if (val === 'DEFAULT') {
+        msgs = {
+          wppSocio: `Olá, {Decisor}! Tudo bem?\n\nAcompanho a sua liderança à frente da {Empresa} em {Cidade}-{UF}.\n\nIdentifiquei a forte atuação de vocês no segmento de {Segmento}. A BDR - Lead AI atua com inteligência estratégica B2B e estruturação comercial de alta performance para empresas consolidadas do seu porte.\n\nGostaria de agendar uma breve conversa de 10 minutos nesta semana para apresentar oportunidades exclusivas que mapeamos para a {Empresa}.\n\nQual o melhor dia e horário para você?`,
+          emailSocio: `Assunto: Oportunidades estratégicas para a {Empresa} | A/C {Decisor} ({Cargo})\n\nPrezado(a) {Decisor},\n\nAcompanho a sua atuação como {Cargo} na {Empresa} e o papel de destaque que vocês desempenham no setor de {Segmento} em {Cidade}-{UF}.\n\nAtravés da inteligência da BDR - Lead AI, estruturamos diagnósticos estratégicos e soluções comerciais para potencializar resultados em organizações de alta relevância.\n\nGostaria de solicitar uma breve reunião de 15 minutos com você nesta semana para apresentar insights específicos para a {Empresa}.\n\nVocê teria disponibilidade nesta quinta ou sexta-feira pela manhã?\n\nAtenciosamente,\nBDR - Lead AI`,
+          linkedinSocio: `Olá, {Decisor}, um prazer conectar com você!\n\nAcompanho a sua liderança como {Cargo} na {Empresa} e a expressiva presença de vocês em {Segmento}.\n\nEstruturamos análises comerciais voltadas para empresas do seu perfil em {Cidade}-{UF}.\n\nSeria uma honra compartilhar esses insights em uma rápida conversa de 10 minutos. Como está sua agenda nesta semana?\n\nUm abraço!`,
+          wppEmpresa: `Olá, equipe da {Empresa}! Tudo bem?\n\nEstou entrando em contato através da BDR - Lead AI.\n\nRealizamos um estudo de inteligência no setor de {Segmento} com oportunidades exclusivas voltadas para a diretoria da {Empresa}.\n\nPor gentileza, com quem do time do(a) {Decisor} ({Cargo}) ou da Diretoria Comercial podemos agendar uma rápida apresentação desse mapeamento?\n\nAgradeço pela atenção!`,
+          emailEmpresa: `Assunto: Apresentação Estratégica & Mapeamento de Oportunidades | A/C Diretoria da {Empresa}\n\nPrezada Equipe da {Empresa},\n\nMeu nome é da equipe BDR - Lead AI e estamos entrando em contato para encaminhar um estudo estratégico de expansão B2B desenvolvido para a {Empresa} no setor de {Segmento}.\n\nGostaríamos de agendar uma apresentação de 15 minutos com o(a) {Decisor} ({Cargo}) ou com a diretoria executiva.\n\nPoderiam direcionar este contato ao setor responsável?\n\nAtenciosamente,\nBDR - Lead AI`,
+          linkedinEmpresa: `Olá time da {Empresa},\n\nParabéns pelo excelente posicionamento no setor de {Segmento}.\n\nEstamos entrando em contato para apresentar um mapeamento estratégico B2B estruturado pela BDR - Lead AI especialmente para a {Empresa}.\n\nGostaríamos de conectar com a diretoria executiva ou com o(a) {Decisor} ({Cargo}) para compartilhar essa síntese.\n\nUm abraço e muito sucesso!`
+        };
+      } else {
+        const item = prospects.find(p => p.id === parseInt(val));
+        const leadMsgs = getLeadMessages(item);
+        msgs = {
+          wppSocio: leadMsgs.wppSocio,
+          emailSocio: `Assunto: ${leadMsgs.emailSocioAssunto}\n\n${leadMsgs.emailSocioCorpo}`,
+          linkedinSocio: leadMsgs.linkedinSocio,
+          wppEmpresa: leadMsgs.wppEmpresa,
+          emailEmpresa: `Assunto: ${leadMsgs.emailEmpresaAssunto}\n\n${leadMsgs.emailEmpresaCorpo}`,
+          linkedinEmpresa: leadMsgs.linkedinEmpresa
+        };
+      }
+
+      if (document.getElementById('scriptWppSocio')) document.getElementById('scriptWppSocio').value = msgs.wppSocio;
+      if (document.getElementById('scriptEmailSocio')) document.getElementById('scriptEmailSocio').value = msgs.emailSocio;
+      if (document.getElementById('scriptLinkedinSocio')) document.getElementById('scriptLinkedinSocio').value = msgs.linkedinSocio;
+      if (document.getElementById('scriptWppEmpresa')) document.getElementById('scriptWppEmpresa').value = msgs.wppEmpresa;
+      if (document.getElementById('scriptEmailEmpresa')) document.getElementById('scriptEmailEmpresa').value = msgs.emailEmpresa;
+      if (document.getElementById('scriptLinkedinEmpresa')) document.getElementById('scriptLinkedinEmpresa').value = msgs.linkedinEmpresa;
+    }
+
+    function copyPitchFromId(elemId, toastMsg) {
+      const el = document.getElementById(elemId);
+      if (el) {
+        navigator.clipboard.writeText(el.value);
+        showToast(toastMsg || 'Mensagem copiada com sucesso!');
+      }
+    }
+
+    function openEditorMessagesModal(leadId) {
+      const sel = document.getElementById('pitchLeadSelector');
+      if (sel) {
+        sel.value = leadId;
+        updatePitchPreview();
+      }
+      switchTab('pitches');
+      showToast(`Carregando 6 mensagens personalizadas do Lead #${leadId}...`);
     }
 
     function saveNewLead() {
@@ -434,8 +637,7 @@ Seria uma honra trocar algumas ideias e compartilhar benchmarks de mercado. Um a
       };
 
       prospects.unshift(newObj);
-      const segSelect = document.getElementById('segmentFilter');
-      if (segSelect) segSelect.value = segmentoKey;
+      populateLeadSelector();
       filterLeads();
       switchTab('leads');
       showToast(`Lead #${newId} (${empresa}) cadastrado com sucesso!`);
