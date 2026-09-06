@@ -55,26 +55,55 @@
     <!-- ======================================================== -->
     <div id="tabContentLeads" class="space-y-3">
       
-      <!-- BARRA UNIFICADA DE BUSCA E SELETOR ÚNICO DE SEGMENTO -->
-      <div class="flex flex-col sm:flex-row items-center gap-2">
-        <div class="relative flex-1 w-full">
+      <!-- BARRA UNIFICADA DE FILTROS LADO A LADO -->
+      <div class="flex flex-wrap lg:flex-nowrap items-center gap-2">
+        <!-- 1. BUSCA GERAL -->
+        <div class="relative flex-1 min-w-[200px]">
           <input type="text" id="searchInput" oninput="filterLeads()" placeholder="Buscar por Empresa, CNPJ, Cidade, UF, Sócio QSA ou CNAE..." 
-            class="w-full bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)] rounded-xl px-3 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500">
+            class="w-full h-9 bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)] rounded-xl px-3 text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500">
         </div>
         
-        <!-- SELETOR ÚNICO DE SEGMENTO -->
-        <div class="w-full sm:w-64">
-          <select id="segmentFilter" onchange="filterLeads()" class="w-full bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)] rounded-xl px-3 py-2 text-xs font-bold focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer">
-            <option value="ALL">🌐 Todos os Segmentos (3.000)</option>
-            <option value="YELLOW">🟡 Fábricas & Indústrias (600)</option>
-            <option value="RED">🔴 Exportadoras & Importadoras (900)</option>
-            <option value="GREEN">🟢 Agronegócio (300)</option>
-            <option value="SPECIAL_MED">🌸 Médicos PJ (300)</option>
-            <option value="SPECIAL_LOG">🚚 Logística & Transportes (300)</option>
-            <option value="SPECIAL_LAW">⚖️ Advocacia & Jurídico (300)</option>
-            <option value="SPECIAL_ACC">🟢 Contabilidade & Auditoria (300)</option>
+        <!-- 2. SEGMENTO ICP -->
+        <div class="w-full sm:w-auto min-w-[190px]">
+          <select id="segmentFilter" onchange="filterLeads()" class="w-full h-9 bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)] rounded-xl px-2.5 text-xs font-bold focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer">
+            <option value="ALL">🌐 Todos os Segmentos</option>
+            <option value="YELLOW">🟡 Fábricas & Indústrias</option>
+            <option value="RED">🔴 Exportadoras & Importadoras</option>
+            <option value="GREEN">🟢 Agronegócio</option>
+            <option value="SPECIAL_MED">🌸 Médicos PJ</option>
+            <option value="SPECIAL_LOG">🚚 Logística & Transportes</option>
+            <option value="SPECIAL_LAW">⚖️ Advocacia & Jurídico</option>
+            <option value="SPECIAL_ACC">🟢 Contabilidade & Auditoria</option>
           </select>
         </div>
+
+        <!-- 3. COM / SEM SITE -->
+        <div class="w-full sm:w-auto min-w-[140px]">
+          <select id="siteFilter" onchange="filterLeads()" class="w-full h-9 bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)] rounded-xl px-2.5 text-xs font-bold focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer">
+            <option value="">🌐 Todos os Sites</option>
+            <option value="WITH_SITE">✅ Com Site</option>
+            <option value="NO_SITE">🔒 Sem Site</option>
+          </select>
+        </div>
+
+        <!-- 4. ESTADOS -->
+        <div class="w-full sm:w-auto min-w-[130px]">
+          <select id="stateFilter" onchange="filterLeads()" class="w-full h-9 bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)] rounded-xl px-2.5 text-xs font-bold focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer">
+            <option value="">📍 Todos Estados</option>
+            <option value="SP">SP - São Paulo</option>
+            <option value="MG">MG - Minas Gerais</option>
+            <option value="PR">PR - Paraná</option>
+            <option value="SC">SC - Santa Catarina</option>
+            <option value="RS">RS - Rio Grande do Sul</option>
+            <option value="GO">GO - Goiás</option>
+            <option value="MS">MS - Mato Grosso do Sul</option>
+          </select>
+        </div>
+
+        <!-- 5. LIMPAR -->
+        <button onclick="resetSearch()" class="h-9 px-3 bg-[var(--card)] hover:bg-[var(--border)] text-[var(--foreground)] text-xs font-bold rounded-xl transition border border-[var(--border)] whitespace-nowrap cursor-pointer flex items-center gap-1">
+          Limpar
+        </button>
       </div>
 
       <!-- TABELA DE LEADS -->
@@ -234,9 +263,19 @@ Seria uma honra trocar algumas ideias e compartilhar benchmarks de mercado. Um a
       }
     }
 
+    function resetSearch() {
+      if (document.getElementById('searchInput')) document.getElementById('searchInput').value = '';
+      if (document.getElementById('segmentFilter')) document.getElementById('segmentFilter').value = 'ALL';
+      if (document.getElementById('siteFilter')) document.getElementById('siteFilter').value = '';
+      if (document.getElementById('stateFilter')) document.getElementById('stateFilter').value = '';
+      filterLeads();
+    }
+
     function filterLeads() {
       const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
       const segmentVal = document.getElementById('segmentFilter') ? document.getElementById('segmentFilter').value : 'ALL';
+      const siteVal = document.getElementById('siteFilter') ? document.getElementById('siteFilter').value : '';
+      const stateVal = document.getElementById('stateFilter') ? document.getElementById('stateFilter').value : '';
 
       filteredList = prospects.filter(p => {
         if (segmentVal !== 'ALL') {
@@ -246,6 +285,11 @@ Seria uma honra trocar algumas ideias e compartilhar benchmarks de mercado. Um a
             if (p.corSegmento !== segmentVal) return false;
           }
         }
+
+        if (siteVal === 'WITH_SITE' && !p.hasWebsite) return false;
+        if (siteVal === 'NO_SITE' && p.hasWebsite) return false;
+
+        if (stateVal && p.uf !== stateVal) return false;
 
         if (!query) return true;
 
