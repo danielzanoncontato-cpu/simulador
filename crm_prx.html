@@ -68,7 +68,7 @@
             <span>💰 Pipeline:</span> <b id="crmTotalValue" class="text-emerald-900 font-mono">R$ 0</b>
           </div>
           <a href="index.html" class="px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5">
-            <i class="fa-solid fa-table-list"></i> Ver Base Master (6.300)
+            <i class="fa-solid fa-table-list"></i> Ver Base Master (2.100)
           </a>
           
         </div>
@@ -87,29 +87,15 @@
         </div>
 
         <div class="w-full md:w-64">
-          <select id="crmSegmentFilter" onchange="renderCrmPipeline()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 focus:ring-2 focus:ring-slate-900">
-            <option value="">🌐 Todos os Segmentos</option>
-            <option value="YELLOW">🟡 Fábricas & Indústrias</option>
-            <option value="GREEN">🟢 Agronegócio</option>
-            <option value="SPECIAL_MED">🌸 Médicos PJ</option>
-            <option value="SPECIAL_MKT">🟣 Marketing & Mídia</option>
-            <option value="SPECIAL_AERO">✈️ Pilotos PJ</option>
-            <option value="SPECIAL_ART">🎭 Artistas PJ</option>
-            <option value="SPECIAL_CONS">💼 Consultorias</option>
-            <option value="SPECIAL_LOG">🚚 Logística</option>
-            <option value="SPECIAL_POL">🟢 Políticos</option>
-            <option value="RED">🔴 Exportadoras</option>
-            <option value="SPECIAL_CONC">🟣 Concursados</option>
-            <option value="SPECIAL_PHARM">🟢 Farmácias</option>
-            <option value="SPECIAL_FOOD">🔴 Restaurantes & Mercados</option>
-            <option value="SPECIAL_WHOLESALE">🔵 Atacados</option>
-            <option value="SPECIAL_CONST">🏗️ Construção & Incorporação</option>
-            <option value="SPECIAL_LAW">⚖️ Advocacia & Jurídico</option>
-            <option value="SPECIAL_TECH">💻 Tecnologia & Software</option>
-            <option value="SPECIAL_ENERGY">⚡ Energia & Solar</option>
-            <option value="SPECIAL_AUTO">🚗 Concessionárias & Auto</option>
-            <option value="SPECIAL_EDU">🎓 Educação & Faculdades</option>
-            <option value="SPECIAL_ACC">🟢 Contabilidade & Auditoria</option>
+          <select id="crmSegmentFilter" onchange="renderCrmPipeline()" class="bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-900">
+            <option value="ALL">🌐 Todos os Segmentos (2.100)</option>
+            <option value="YELLOW">🟡 Fábricas & Indústrias (300)</option>
+            <option value="GREEN">🟢 Agronegócio (300)</option>
+            <option value="SPECIAL_MED">🌸 Médicos PJ (300)</option>
+            <option value="SPECIAL_LOG">🚚 Logística (300)</option>
+            <option value="RED">🔴 Exportadoras (300)</option>
+            <option value="SPECIAL_LAW">⚖️ Advocacia & Jurídico (300)</option>
+            <option value="SPECIAL_ACC">🟢 Contabilidade & Auditoria (300)</option>
           </select>
         </div>
 
