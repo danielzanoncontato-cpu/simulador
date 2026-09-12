@@ -15,12 +15,12 @@
 </head>
 <body class="bg-transparent text-[var(--foreground)] antialiased p-2 sm:p-4 font-sans text-xs">
 
-  <div class="bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] rounded-2xl p-4 sm:p-5 shadow-2xl max-w-5xl mx-auto space-y-4">
+  <div class="bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] rounded-3xl p-4 sm:p-6 shadow-2xl max-w-5xl mx-auto space-y-4">
     
     <!-- HEADER DO MOTOR BDR - LEAD AI -->
-    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border)] pb-3">
+    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border)] pb-4">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 via-blue-600 to-cyan-500 text-white font-black text-lg flex items-center justify-center shadow-lg shadow-indigo-500/25">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-indigo-600 via-blue-600 to-cyan-500 text-white font-black text-lg flex items-center justify-center shadow-lg shadow-indigo-500/25">
           AI
         </div>
         <div class="flex items-center gap-2">
@@ -31,22 +31,20 @@
         </div>
       </div>
 
-      <!-- NAVEGAÇÃO DE ABAS INTERNAS & CONFIGURAR -->
-      <div class="flex flex-wrap items-center gap-2">
-        <button onclick="openIntegrationsModal()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-[11px] rounded-xl transition shadow-xs flex items-center gap-1 cursor-pointer">
-          <i class="fa-solid fa-bolt"></i> ⚙️ Conectar WhatsApp & E-mail
+      <!-- NAVEGAÇÃO DAS 4 ABAS INTERNAS -->
+      <div class="flex flex-wrap gap-1.5 bg-[var(--background)] p-1 rounded-2xl border border-[var(--border)]">
+        <button onclick="switchTab('leads')" id="tabBtnLeads" class="px-3 py-1.5 rounded-xl font-bold text-[11px] bg-[var(--card)] text-[var(--foreground)] shadow-sm border border-[var(--border)] transition">
+          📋 Base de Leads
         </button>
-        <div class="flex flex-wrap gap-1.5 bg-[var(--background)] p-1 rounded-xl border border-[var(--border)]">
-          <button onclick="switchTab('leads')" id="tabBtnLeads" class="px-3 py-1.5 rounded-lg font-bold text-[11px] bg-[var(--card)] text-[var(--foreground)] shadow-sm border border-[var(--border)] transition">
-            📋 Base de Leads
-          </button>
-          <button onclick="switchTab('add')" id="tabBtnAdd" class="px-3 py-1.5 rounded-lg font-bold text-[11px] text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition">
-            ➕ Novo Lead
-          </button>
-          <button onclick="switchTab('pitches')" id="tabBtnPitches" class="px-3 py-1.5 rounded-lg font-bold text-[11px] text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition">
-            💬 Disparos & Pitch
-          </button>
-        </div>
+        <button onclick="switchTab('connect')" id="tabBtnConnect" class="px-3 py-1.5 rounded-xl font-extrabold text-[11px] text-emerald-400 hover:text-emerald-300 transition flex items-center gap-1">
+          <i class="fa-solid fa-bolt"></i> 📱 Conectar WhatsApp & E-mail
+        </button>
+        <button onclick="switchTab('add')" id="tabBtnAdd" class="px-3 py-1.5 rounded-xl font-bold text-[11px] text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition">
+          ➕ Novo Lead
+        </button>
+        <button onclick="switchTab('pitches')" id="tabBtnPitches" class="px-3 py-1.5 rounded-xl font-bold text-[11px] text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition">
+          💬 Scripts & Pitch
+        </button>
       </div>
     </div>
 
@@ -133,7 +131,74 @@
       </div>
     </div>
 
-    <!-- ABA 2: NOVO LEAD -->
+    <!-- ======================================================== -->
+    <!-- ABA 2: DEDICADA DE CONEXÃO WHATSAPP & E-MAIL             -->
+    <!-- ======================================================== -->
+    <div id="tabContentConnect" class="space-y-4 hidden">
+      <div class="p-5 bg-[var(--background)]/60 rounded-2xl border border-[var(--border)] space-y-4">
+        <div class="flex items-center gap-2.5 pb-2 border-b border-[var(--border)]">
+          <span class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-sm"><i class="fa-solid fa-bolt"></i></span>
+          <div>
+            <h3 class="font-extrabold text-sm text-[var(--foreground)]">Central de Conexão WhatsApp & E-mail</h3>
+            <p class="text-[11px] text-[var(--muted-foreground)]">Cadastre seus dados e selecione o modo de abertura dos disparos.</p>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="text-[11px] font-bold text-[var(--foreground)]">Seu Nome Completo:</label>
+            <input type="text" id="editorExecName" class="w-full mt-1 bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] rounded-xl px-3 py-2 text-xs font-bold" value="Daniel Zanon">
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-[var(--foreground)]">Seu Cargo / Título:</label>
+            <input type="text" id="editorExecRole" class="w-full mt-1 bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] rounded-xl px-3 py-2 text-xs font-bold" value="Executivo">
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-[var(--foreground)]">Seu E-mail Profissional:</label>
+            <input type="email" id="editorExecEmail" class="w-full mt-1 bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] rounded-xl px-3 py-2 text-xs font-bold" value="daniel@prxcapital.com.br">
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-[var(--foreground)]">Seu WhatsApp / Celular:</label>
+            <input type="text" id="editorExecPhone" class="w-full mt-1 bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] rounded-xl px-3 py-2 text-xs font-bold" value="(11) 98000-0000">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+          <div class="p-3 bg-[var(--card)] rounded-xl border border-[var(--border)] space-y-2">
+            <div class="text-xs font-bold text-emerald-400">📱 Modo do WhatsApp</div>
+            <label class="flex items-center gap-2 cursor-pointer text-[11px]">
+              <input type="radio" name="editorWppMode" value="web" id="editorWppModeWeb" checked> WhatsApp Web / Desktop (PC)
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer text-[11px]">
+              <input type="radio" name="editorWppMode" value="app" id="editorWppModeApp"> WhatsApp App Direto (Celular)
+            </label>
+          </div>
+          <div class="p-3 bg-[var(--card)] rounded-xl border border-[var(--border)] space-y-2">
+            <div class="text-xs font-bold text-sky-400">✉️ Provedor de E-mail</div>
+            <label class="flex items-center gap-2 cursor-pointer text-[11px]">
+              <input type="radio" name="editorEmailProvider" value="gmail" id="editorProviderGmail" checked> Gmail Web
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer text-[11px]">
+              <input type="radio" name="editorEmailProvider" value="outlook" id="editorProviderOutlook"> Outlook Web
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer text-[11px]">
+              <input type="radio" name="editorEmailProvider" value="mailto" id="editorProviderMailto"> App Celular / Mailto
+            </label>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-2">
+          <button onclick="testEditorWpp()" class="px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+            <i class="fa-solid fa-paper-plane"></i> Testar WhatsApp
+          </button>
+          <button onclick="saveEditorPreferences()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-extrabold transition shadow-md flex items-center gap-1.5">
+            <i class="fa-solid fa-floppy-disk"></i> 💾 Salvar Meus Dados & Conectar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA 3: NOVO LEAD -->
     <div id="tabContentAdd" class="space-y-3 hidden">
       <div class="p-4 bg-[var(--background)]/50 rounded-xl border border-[var(--border)] space-y-3">
         <h3 class="font-extrabold text-sm text-[var(--foreground)]">Cadastrar Novo Prospect na Base Master</h3>
@@ -149,7 +214,7 @@
       </div>
     </div>
 
-    <!-- ABA 3: PITCHES & SCRIPTS -->
+    <!-- ABA 4: PITCHES & SCRIPTS -->
     <div id="tabContentPitches" class="space-y-3 hidden">
       <div class="p-4 bg-[var(--background)]/50 rounded-xl border border-[var(--border)] space-y-3">
         <h3 class="font-extrabold text-sm text-[var(--foreground)]">Pitch de Abordagem Consultiva (PRX Capital)</h3>
@@ -163,73 +228,6 @@
       </div>
     </div>
 
-  </div>
-
-  <!-- MODAL DE CONFIGURAÇÕES DE INTEGRAÇÃO (WHATSAPP & EMAIL NO EDITOR) -->
-  <div id="integrationsModal" style="display: none;" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 items-center justify-center p-4">
-    <div class="bg-white text-slate-900 border border-slate-200 rounded-3xl shadow-2xl max-w-2xl w-full overflow-hidden">
-      <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-sm">
-            <i class="fa-solid fa-bolt"></i>
-          </div>
-          <h3 class="text-sm font-extrabold">Central de Conexão: WhatsApp, E-mail & Seus Dados</h3>
-        </div>
-        <button onclick="closeIntegrationsModal()" class="text-slate-400 hover:text-white text-lg font-bold p-1 rounded-lg hover:bg-slate-800 transition cursor-pointer">✕</button>
-      </div>
-      <div class="p-6 space-y-4 max-h-[80vh] overflow-y-auto">
-        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-3">
-          <h4 class="text-xs font-extrabold text-slate-900">1. Seus Dados de Remetente (Assinatura Oficial)</h4>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label class="text-[11px] font-bold text-slate-700">Seu Nome Completo:</label>
-              <input type="text" id="userExecName" class="w-full mt-1 bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800" value="Daniel Zanon">
-            </div>
-            <div>
-              <label class="text-[11px] font-bold text-slate-700">Seu Cargo / Título:</label>
-              <input type="text" id="userExecRole" class="w-full mt-1 bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800" value="Executivo">
-            </div>
-            <div>
-              <label class="text-[11px] font-bold text-slate-700">Seu E-mail Profissional:</label>
-              <input type="email" id="userExecEmail" class="w-full mt-1 bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800" value="daniel@prxcapital.com.br">
-            </div>
-            <div>
-              <label class="text-[11px] font-bold text-slate-700">Seu WhatsApp / Celular:</label>
-              <input type="text" id="userExecPhone" class="w-full mt-1 bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800" value="(11) 98000-0000">
-            </div>
-          </div>
-        </div>
-        <div class="bg-emerald-50/60 border border-emerald-200 rounded-2xl p-4 space-y-2">
-          <h4 class="text-xs font-extrabold text-emerald-950">2. Modo de Abertura do WhatsApp</h4>
-          <div class="grid grid-cols-2 gap-2">
-            <label class="flex items-center gap-2 bg-white p-2 rounded-xl border border-emerald-200 text-xs font-bold cursor-pointer">
-              <input type="radio" name="wppMode" value="web" id="wppModeWeb" checked> WhatsApp Web/PC
-            </label>
-            <label class="flex items-center gap-2 bg-white p-2 rounded-xl border border-emerald-200 text-xs font-bold cursor-pointer">
-              <input type="radio" name="wppMode" value="app" id="wppModeApp"> WhatsApp App Celular
-            </label>
-          </div>
-        </div>
-        <div class="bg-sky-50/60 border border-sky-200 rounded-2xl p-4 space-y-2">
-          <h4 class="text-xs font-extrabold text-sky-950">3. Provedor Padrão de E-mail</h4>
-          <div class="grid grid-cols-3 gap-2">
-            <label class="flex items-center gap-2 bg-white p-2 rounded-xl border border-sky-200 text-xs font-bold cursor-pointer">
-              <input type="radio" name="emailProvider" value="gmail" id="providerGmail" checked> Gmail Web
-            </label>
-            <label class="flex items-center gap-2 bg-white p-2 rounded-xl border border-sky-200 text-xs font-bold cursor-pointer">
-              <input type="radio" name="emailProvider" value="outlook" id="providerOutlook"> Outlook Web
-            </label>
-            <label class="flex items-center gap-2 bg-white p-2 rounded-xl border border-sky-200 text-xs font-bold cursor-pointer">
-              <input type="radio" name="emailProvider" value="mailto" id="providerMailto"> App Celular
-            </label>
-          </div>
-        </div>
-      </div>
-      <div class="px-6 py-4 bg-slate-100 border-t border-slate-200 flex items-center justify-end gap-2">
-        <button onclick="closeIntegrationsModal()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold rounded-xl">Fechar</button>
-        <button onclick="saveIntegrationPreferences()" class="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-extrabold rounded-xl">💾 Salvar Meus Dados & Conectar</button>
-      </div>
-    </div>
   </div>
 
   <script>
@@ -1152,44 +1150,39 @@
       };
     }
 
-    function openIntegrationsModal() {
-      const modal = document.getElementById('integrationsModal');
-      if (!modal) return;
+    function syncEditorForm() {
       const cfg = getIntegrationSettings();
-      if (document.getElementById('userExecName')) document.getElementById('userExecName').value = cfg.execName || 'Daniel Zanon';
-      if (document.getElementById('userExecRole')) document.getElementById('userExecRole').value = cfg.execRole || 'Executivo';
-      if (document.getElementById('userExecEmail')) document.getElementById('userExecEmail').value = cfg.execEmail || 'daniel@prxcapital.com.br';
-      if (document.getElementById('userExecPhone')) document.getElementById('userExecPhone').value = cfg.execPhone || '(11) 98000-0000';
-      if (document.getElementById('wppModeWeb')) document.getElementById('wppModeWeb').checked = (cfg.wppMode === 'web');
-      if (document.getElementById('wppModeApp')) document.getElementById('wppModeApp').checked = (cfg.wppMode === 'app');
-      if (document.getElementById('providerGmail')) document.getElementById('providerGmail').checked = (cfg.emailProvider === 'gmail');
-      if (document.getElementById('providerOutlook')) document.getElementById('providerOutlook').checked = (cfg.emailProvider === 'outlook');
-      if (document.getElementById('providerMailto')) document.getElementById('providerMailto').checked = (cfg.emailProvider === 'mailto');
-      modal.classList.remove('hidden');
-      modal.style.display = 'flex';
+      if (document.getElementById('editorExecName')) document.getElementById('editorExecName').value = cfg.execName || 'Daniel Zanon';
+      if (document.getElementById('editorExecRole')) document.getElementById('editorExecRole').value = cfg.execRole || 'Executivo';
+      if (document.getElementById('editorExecEmail')) document.getElementById('editorExecEmail').value = cfg.execEmail || 'daniel@prxcapital.com.br';
+      if (document.getElementById('editorExecPhone')) document.getElementById('editorExecPhone').value = cfg.execPhone || '(11) 98000-0000';
+      if (document.getElementById('editorWppModeWeb')) document.getElementById('editorWppModeWeb').checked = (cfg.wppMode === 'web');
+      if (document.getElementById('editorWppModeApp')) document.getElementById('editorWppModeApp').checked = (cfg.wppMode === 'app');
+      if (document.getElementById('editorProviderGmail')) document.getElementById('editorProviderGmail').checked = (cfg.emailProvider === 'gmail');
+      if (document.getElementById('editorProviderOutlook')) document.getElementById('editorProviderOutlook').checked = (cfg.emailProvider === 'outlook');
+      if (document.getElementById('editorProviderMailto')) document.getElementById('editorProviderMailto').checked = (cfg.emailProvider === 'mailto');
     }
 
-    function closeIntegrationsModal() {
-      const modal = document.getElementById('integrationsModal');
-      if (!modal) return;
-      modal.classList.add('hidden');
-      modal.style.display = 'none';
-    }
-
-    function saveIntegrationPreferences() {
-      const execName = document.getElementById('userExecName')?.value.trim() || 'Daniel Zanon';
-      const execRole = document.getElementById('userExecRole')?.value.trim() || 'Executivo';
-      const execEmail = document.getElementById('userExecEmail')?.value.trim() || 'daniel@prxcapital.com.br';
-      const execPhone = document.getElementById('userExecPhone')?.value.trim() || '(11) 98000-0000';
-      const wppMode = document.querySelector('input[name="wppMode"]:checked')?.value || 'web';
-      const emailProvider = document.querySelector('input[name="emailProvider"]:checked')?.value || 'gmail';
+    function saveEditorPreferences() {
+      const execName = document.getElementById('editorExecName')?.value.trim() || 'Daniel Zanon';
+      const execRole = document.getElementById('editorExecRole')?.value.trim() || 'Executivo';
+      const execEmail = document.getElementById('editorExecEmail')?.value.trim() || 'daniel@prxcapital.com.br';
+      const execPhone = document.getElementById('editorExecPhone')?.value.trim() || '(11) 98000-0000';
+      const wppMode = document.querySelector('input[name="editorWppMode"]:checked')?.value || 'web';
+      const emailProvider = document.querySelector('input[name="editorEmailProvider"]:checked')?.value || 'gmail';
       const cfg = { execName, execRole, execEmail, execPhone, wppMode, emailProvider };
       localStorage.setItem('prx_integration_settings', JSON.stringify(cfg));
-      closeIntegrationsModal();
       const toast = document.getElementById('inlineToast');
-      document.getElementById('inlineToastMsg').innerText = '✅ Dados executivos e preferências salvos com sucesso!';
+      document.getElementById('inlineToastMsg').innerText = '✅ Seus dados executivos e preferências de WhatsApp e E-mail foram salvos com sucesso!';
       toast.classList.remove('hidden');
       setTimeout(() => { toast.classList.add('hidden'); }, 3500);
+    }
+
+    function testEditorWpp() {
+      const cfg = getIntegrationSettings();
+      const testMsg = `Olá! Teste de integração BDR - Lead AI.\n\nRemetente: ${cfg.execName || 'Daniel Zanon'} (${cfg.execEmail || 'daniel@prxcapital.com.br'})`;
+      const url = cfg.wppMode === 'app' ? `whatsapp://send?text=${encodeURIComponent(testMsg)}` : `https://api.whatsapp.com/send?text=${encodeURIComponent(testMsg)}`;
+      window.open(url, '_blank');
     }
 
     function updateDynamicCounts() {
@@ -1204,12 +1197,16 @@
 
     function switchTab(tab) {
       document.getElementById('tabContentLeads').classList.toggle('hidden', tab !== 'leads');
+      document.getElementById('tabContentConnect').classList.toggle('hidden', tab !== 'connect');
       document.getElementById('tabContentAdd').classList.toggle('hidden', tab !== 'add');
       document.getElementById('tabContentPitches').classList.toggle('hidden', tab !== 'pitches');
 
-      document.getElementById('tabBtnLeads').className = (tab === 'leads') ? 'px-3 py-1.5 rounded-lg font-bold text-[11px] bg-[var(--card)] text-[var(--foreground)] shadow-sm border border-[var(--border)] transition' : 'px-3 py-1.5 rounded-lg font-bold text-[11px] text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition';
-      document.getElementById('tabBtnAdd').className = (tab === 'add') ? 'px-3 py-1.5 rounded-lg font-bold text-[11px] bg-[var(--card)] text-[var(--foreground)] shadow-sm border border-[var(--border)] transition' : 'px-3 py-1.5 rounded-lg font-bold text-[11px] text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition';
-      document.getElementById('tabBtnPitches').className = (tab === 'pitches') ? 'px-3 py-1.5 rounded-lg font-bold text-[11px] bg-[var(--card)] text-[var(--foreground)] shadow-sm border border-[var(--border)] transition' : 'px-3 py-1.5 rounded-lg font-bold text-[11px] text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition';
+      document.getElementById('tabBtnLeads').className = (tab === 'leads') ? 'px-3 py-1.5 rounded-xl font-bold text-[11px] bg-[var(--card)] text-[var(--foreground)] shadow-sm border border-[var(--border)] transition' : 'px-3 py-1.5 rounded-xl font-bold text-[11px] text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition';
+      document.getElementById('tabBtnConnect').className = (tab === 'connect') ? 'px-3 py-1.5 rounded-xl font-extrabold text-[11px] bg-emerald-600 text-white shadow-sm transition' : 'px-3 py-1.5 rounded-xl font-extrabold text-[11px] text-emerald-400 hover:text-emerald-300 transition flex items-center gap-1';
+      document.getElementById('tabBtnAdd').className = (tab === 'add') ? 'px-3 py-1.5 rounded-xl font-bold text-[11px] bg-[var(--card)] text-[var(--foreground)] shadow-sm border border-[var(--border)] transition' : 'px-3 py-1.5 rounded-xl font-bold text-[11px] text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition';
+      document.getElementById('tabBtnPitches').className = (tab === 'pitches') ? 'px-3 py-1.5 rounded-xl font-bold text-[11px] bg-[var(--card)] text-[var(--foreground)] shadow-sm border border-[var(--border)] transition' : 'px-3 py-1.5 rounded-xl font-bold text-[11px] text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition';
+
+      if (tab === 'connect') syncEditorForm();
     }
 
     function filterLeads() {
@@ -1325,6 +1322,7 @@
 
     updateDynamicCounts();
     filterLeads();
+    syncEditorForm();
   </script>
 </body>
 </html>
