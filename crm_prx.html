@@ -6,13 +6,9 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BDR - Lead AI | Pipeline CRM (6 Etapas Integradas)</title>
+  <title>BDR - Lead AI | Pipeline CRM (Prospecção & Abordagens Integradas)</title>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
-  
-  
-  
-  
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * { box-sizing: border-box; }
     body { font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f8fafc; color: #0f172a; margin: 0; padding: 12px; }
@@ -26,7 +22,6 @@
 </head>
 <body class="antialiased bg-slate-50 text-slate-900 flex flex-col p-2 w-full">
 
-  <!-- AVISO FLUTUANTE DE CÓPIA E AÇÕES -->
   <div id="copyToast" style="display: none; position: fixed; bottom: 24px; right: 24px; z-index: 9999;" class="bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl items-center gap-3 border border-slate-800 transition-all duration-300">
     <div class="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></div>
     <div>
@@ -34,24 +29,18 @@
     </div>
   </div>
 
-  <!-- APLICAÇÃO CRM WRAPPER -->
   <div id="mainAppWrapper" class="flex flex-col antialiased bg-slate-50 text-slate-900 w-full">
-
-    <!-- CABEÇALHO CRM EXECUTIVO -->
     <header class="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-40 shadow-sm">
       <div class="max-w-[1950px] mx-auto px-4 sm:px-6 py-3.5 flex flex-col md:flex-row items-center justify-between gap-4">
-        
         <div class="flex items-center gap-3">
           <div>
             <div class="flex items-center gap-2">
               <h1 class="text-base font-extrabold tracking-tight text-slate-900">BDR - Lead AI</h1>
               <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-50 text-blue-700 border border-blue-200 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span> PIPELINE CRM</span>
             </div>
-            <p class="text-xs text-slate-500 font-medium">Gestão Comercial Integrada & Rastreamento de Abordagens</p>
+            <p class="text-xs text-slate-500 font-medium">Prospecção Ativa & Rastreamento de Abordagens de Leads</p>
           </div>
         </div>
-
-        <!-- AÇÕES DO CRM -->
         <div class="flex items-center gap-2 flex-wrap">
           <a href="dashboard_prospeccao.html" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition border border-slate-200 flex items-center gap-1.5">
             <i class="fa-solid fa-arrow-left"></i> Voltar à Base Master
@@ -62,7 +51,6 @@
         </div>
       </div>
 
-      <!-- DADOS E MÉTRICAS DO CRM ABAIXO DOS BOTÕES -->
       <div class="max-w-[1950px] mx-auto px-4 sm:px-6 pb-3">
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 border-t border-slate-100">
           <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl flex items-center justify-between">
@@ -97,7 +85,6 @@
       </div>
     </header>
 
-    <!-- KANBAN BOARD -->
     <main class="max-w-[1950px] w-full mx-auto px-4 sm:px-6 py-6 flex-1 flex flex-col gap-4">
       <div class="overflow-x-auto pb-4">
         <div class="flex items-start gap-4 min-w-[1900px]">
@@ -132,7 +119,7 @@
             </div>
             <div id="crm-items-reuniao" class="flex flex-col gap-2 min-h-[400px]"></div>
           </div>
-          <div class="kanban-col bg-cyan-50/70 rounded-2xl border border-cyan-200 p-3 flex flex-col gap-2">
+          <div classvc="kanban-col bg-cyan-50/70 rounded-2xl border border-cyan-200 p-3 flex flex-col gap-2">
             <div class="flex items-center justify-between px-1 pb-2 border-b border-cyan-200">
               <span class="text-xs font-extrabold text-cyan-900">5. Proposta / Negociação</span>
               <span id="crm-count-proposta" class="text-[11px] font-mono font-bold bg-white text-cyan-800 px-2 py-0.5 rounded-md border border-cyan-200">0</span>
@@ -210,104 +197,527 @@
       setTimeout(() => { t.style.display = 'none'; }, 3500);
     }
 
-    function getDefaultCrmDeals() {
-      return [
-        {
-          id: 'deal_prx_exec_1',
-          prospectId: 0,
-          company: 'PRX Capital (Sócios & Executivos)',
-          cnpj: '42.123.456/0001-90',
-          uf: 'SP',
-          city: 'São Paulo',
-          corSegmento: 'GREEN',
-          segmentoNome: 'Multi-Family Office & Gestão',
-          setor: 'Financeiro & MFO',
-          decisorNome: 'Renato / Diego / Pardal',
-          decisorCargo: 'Sócios Diretores Executivos',
-          decisorLinkedin: '',
-          fone: '(11) 99999-9999',
-          email: 'renato@prxcapital.com.br / diego@prxcapital.com.br / pardal@prxcapital.com.br',
-          stage: 'contato',
-          patrimonio: 25000000,
-          scoreBdr: 100,
-          tentativasTotal: 3,
-          tentativasCanais: { whatsapp: 0, email: 3, linkedin: 0 },
-          tentativasAlvos: { socio: 3, empresa: 0 },
-          lastChannel: 'E-mail (Resend API)',
-          lastTargetType: 'Sócio / Decisor',
-          lastRecipientName: 'Renato, Diego & Pardal (Sócios)',
-          lastRecipientContact: 'renato@, diego@, pardal@prxcapital.com.br',
-          lastContactAt: '12/09/2026, 18:25:00',
-          createdAt: '2026-09-12T21:25:00.000Z',
-          historyLogs: [
-            {
-              id: 'att_prx_3',
-              date: '12/09/2026, 18:25:00',
-              timestamp: '2026-09-12T21:25:00.000Z',
-              attemptNumber: 3,
-              canal: 'E-mail',
-              alvoTipo: 'Sócio / Decisor',
-              recipientName: 'Pardal (Sócio Diretor)',
-              recipientContact: 'pardal@prxcapital.com.br',
-              status: 'Disparo Automático via Resend API',
-              textNote: 'Tentativa #3: E-mail de Diagnóstico Estratégico & Multi-Family Office disparado via Resend API para Pardal (pardal@prxcapital.com.br).'
-            },
-            {
-              id: 'att_prx_2',
-              date: '12/09/2026, 18:24:30',
-              timestamp: '2026-09-12T21:24:30.000Z',
-              attemptNumber: 2,
-              canal: 'E-mail',
-              alvoTipo: 'Sócio / Decisor',
-              recipientName: 'Diego (Sócio Diretor)',
-              recipientContact: 'diego@prxcapital.com.br',
-              status: 'Disparo Automático via Resend API',
-              textNote: 'Tentativa #2: E-mail de Diagnóstico Estratégico & Multi-Family Office disparado via Resend API para Diego (diego@prxcapital.com.br).'
-            },
-            {
-              id: 'att_prx_1',
-              date: '12/09/2026, 18:24:00',
-              timestamp: '2026-09-12T21:24:00.000Z',
-              attemptNumber: 1,
-              canal: 'E-mail',
-              alvoTipo: 'Sócio / Decisor',
-              recipientName: 'Renato (Sócio Diretor)',
-              recipientContact: 'renato@prxcapital.com.br',
-              status: 'Disparo Automático via Resend API',
-              textNote: 'Tentativa #1: E-mail de Diagnóstico Estratégico & Multi-Family Office disparado via Resend API para Renato (renato@prxcapital.com.br).'
-            }
-          ],
-          notes: [
-            { date: '12/09/2026, 18:25:00', text: 'Disparo automático de teste executivo efetuado via Resend API para Renato, Diego e Pardal.' }
-          ]
-        }
-      ];
-    }
-
+    function getDefaultCrmDeals() { return [
+  {
+    "id": "deal_prospect_1",
+    "prospectId": 1,
+    "company": "Castelo Alimentos S/A",
+    "cnpj": "07.814.284/0001-07",
+    "idade": "59 anos (1967)",
+    "tipoSocietario": "Sociedade Anônima (S/A Fechada)",
+    "regimeTributario": "Lucro Real",
+    "uf": "SP",
+    "city": "Jundiaí",
+    "segmentoNome": "Fábricas & Indústrias",
+    "setor": "Indústria de Alimentos e Bebidas",
+    "decisorNome": "Marcelo Cereser",
+    "decisorCargo": "Diretor Superintendente / CEO",
+    "decisorLinkedin": "https://www.linkedin.com/in/marcelo-cereser/",
+    "fone": "(11) 94187-6309",
+    "email": "marcelo.cereser@casteloalimentos.com.br",
+    "stage": "contato",
+    "patrimonio": 85000000,
+    "scoreBdr": 98,
+    "tentativasTotal": 3,
+    "tentativasCanais": { "whatsapp": 1, "email": 1, "linkedin": 1 },
+    "tentativasAlvos": { "socio": 3, "empresa": 0 },
+    "lastChannel": "WhatsApp",
+    "lastTargetType": "Sócio / CEO",
+    "lastRecipientName": "Marcelo Cereser (CEO)",
+    "lastRecipientContact": "(11) 94187-6309",
+    "lastContactAt": "12/09/2026, 17:40:00",
+    "createdAt": "2026-09-12T20:40:00.000Z",
+    "historyLogs": [
+      {
+        "id": "att_1_3",
+        "date": "12/09/2026, 17:40:00",
+        "attemptNumber": 3,
+        "canal": "WhatsApp",
+        "alvoTipo": "Sócio / CEO",
+        "recipientName": "Marcelo Cereser (CEO)",
+        "recipientContact": "(11) 94187-6309",
+        "status": "Mensagem de Abordagem WhatsApp enviada",
+        "textNote": "Tentativa #3: Envio de abordagem executiva direta no WhatsApp de Marcelo Cereser sobre diagnóstico MFO e governança corporativa."
+      },
+      {
+        "id": "att_1_2",
+        "date": "12/09/2026, 14:15:00",
+        "attemptNumber": 2,
+        "canal": "E-mail",
+        "alvoTipo": "Sócio / CEO",
+        "recipientName": "Marcelo Cereser",
+        "recipientContact": "marcelo.cereser@casteloalimentos.com.br",
+        "status": "Disparo Resend API Entregue",
+        "textNote": "Tentativa #2: E-mail executivo PRX Capital enviado apresentando cases de holding e eficiência tributária."
+      },
+      {
+        "id": "att_1_1",
+        "date": "12/09/2026, 10:30:00",
+        "attemptNumber": 1,
+        "canal": "LinkedIn",
+        "alvoTipo": "Sócio / CEO",
+        "recipientName": "Marcelo Cereser",
+        "recipientContact": "LinkedIn InMail",
+        "status": "Conexão enviada",
+        "textNote": "Tentativa #1: Conexão e mensagem inicial enviada no perfil oficial de Marcelo Cereser."
+      }
+    ],
+    "notes": [
+      { "date": "12/09/2026, 17:40:00", "text": "Empresa com 59 anos, líder em condimentos. Sócio receptivo a diagnóstico de holding e sucessão familiar." }
+    ]
+  },
+  {
+    "id": "deal_prospect_4",
+    "prospectId": 4,
+    "company": "Predilecta Alimentos Ltda.",
+    "cnpj": "62.546.387/0001-33",
+    "idade": "36 anos (1990)",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Lucro Real",
+    "uf": "SP",
+    "city": "Matão",
+    "segmentoNome": "Fábricas & Indústrias",
+    "setor": "Indústria de Alimentos",
+    "decisorNome": "Jose Reynaldo Trevizaneli",
+    "decisorCargo": "Sócio-Administrador / Diretor Geral",
+    "decisorLinkedin": "https://www.linkedin.com/search/results/people/?keywords=Jose%20Reynaldo%20Trevizaneli%20Predilecta",
+    "fone": "(16) 99762-2100",
+    "email": "diretoria@predilecta.com.br",
+    "stage": "contato",
+    "patrimonio": 60000000,
+    "scoreBdr": 96,
+    "tentativasTotal": 2,
+    "tentativasCanais": { "whatsapp": 1, "email": 1, "linkedin": 0 },
+    "tentativasAlvos": { "socio": 2, "empresa": 0 },
+    "lastChannel": "WhatsApp",
+    "lastTargetType": "Sócio / Diretor",
+    "lastRecipientName": "Jose Reynaldo Trevizaneli",
+    "lastRecipientContact": "(16) 99762-2100",
+    "lastContactAt": "12/09/2026, 16:50:00",
+    "createdAt": "2026-09-12T19:50:00.000Z",
+    "historyLogs": [
+      {
+        "id": "att_4_2",
+        "date": "12/09/2026, 16:50:00",
+        "attemptNumber": 2,
+        "canal": "WhatsApp",
+        "alvoTipo": "Sócio / Diretor",
+        "recipientName": "Jose Reynaldo Trevizaneli",
+        "recipientContact": "(16) 99762-2100",
+        "status": "Pitch WhatsApp Enviado",
+        "textNote": "Tentativa #2: Disparo de pitch direto via WhatsApp para o sócio Jose Reynaldo abordando otimização tributária e funding industrial."
+      },
+      {
+        "id": "att_4_1",
+        "date": "12/09/2026, 11:20:00",
+        "attemptNumber": 1,
+        "canal": "E-mail",
+        "alvoTipo": "Sócio / Diretor",
+        "recipientName": "Jose Reynaldo Trevizaneli",
+        "recipientContact": "diretoria@predilecta.com.br",
+        "status": "Disparo Resend API",
+        "textNote": "Tentativa #1: Apresentação de serviços PRX Capital via E-mail."
+      }
+    ],
+    "notes": [
+      { "date": "12/09/2026, 16:50:00", "text": "Grande polo industrial de atomatados em Matão-SP. Avaliando linhas de crédito estruturado e liquidez." }
+    ]
+  },
+  {
+    "id": "deal_prospect_8",
+    "prospectId": 8,
+    "company": "Belagrícola Comércio S.A.",
+    "cnpj": "79.038.097/0001-81",
+    "idade": "41 anos (1985)",
+    "tipoSocietario": "Sociedade Anônima (S/A Fechada)",
+    "regimeTributario": "Lucro Real",
+    "uf": "PR",
+    "city": "Londrina",
+    "segmentoNome": "Agronegócio",
+    "setor": "Agronegócio / Distribuição de Insumos e Grãos",
+    "decisorNome": "Alberto Araujo",
+    "decisorCargo": "Diretor Presidente / CEO",
+    "decisorLinkedin": "https://www.linkedin.com/in/alberto-araujo-belagricola/",
+    "fone": "(43) 3371-2000",
+    "email": "presidencia@belagricola.com.br",
+    "stage": "contato",
+    "patrimonio": 120000000,
+    "scoreBdr": 99,
+    "tentativasTotal": 2,
+    "tentativasCanais": { "whatsapp": 0, "email": 1, "linkedin": 1 },
+    "tentativasAlvos": { "socio": 2, "empresa": 0 },
+    "lastChannel": "E-mail (Resend API)",
+    "lastTargetType": "Presidente / CEO",
+    "lastRecipientName": "Alberto Araujo (CEO)",
+    "lastRecipientContact": "presidencia@belagricola.com.br",
+    "lastContactAt": "12/09/2026, 15:30:00",
+    "createdAt": "2026-09-12T18:30:00.000Z",
+    "historyLogs": [
+      {
+        "id": "att_8_2",
+        "date": "12/09/2026, 15:30:00",
+        "attemptNumber": 2,
+        "canal": "E-mail",
+        "alvoTipo": "Presidente / CEO",
+        "recipientName": "Alberto Araujo",
+        "recipientContact": "presidencia@belagricola.com.br",
+        "status": "Disparo Resend API Entregue",
+        "textNote": "Tentativa #2: Proposta de diagnóstico em operações de Barter, CRA e proteção de patrimônio agro."
+      },
+      {
+        "id": "att_8_1",
+        "date": "12/09/2026, 09:45:00",
+        "attemptNumber": 1,
+        "canal": "LinkedIn",
+        "alvoTipo": "Presidente / CEO",
+        "recipientName": "Alberto Araujo",
+        "recipientContact": "LinkedIn",
+        "status": "Mensagem InMail",
+        "textNote": "Tentativa #1: Contato institucional inicial via LinkedIn."
+      }
+    ],
+    "notes": [
+      { "date": "12/09/2026, 15:30:00", "text": "Uma das maiores originadoras de grãos do Paraná. Potencial de R$ 120M em MFO e fundos exclusivos." }
+    ]
+  },
+  {
+    "id": "deal_prospect_10",
+    "prospectId": 10,
+    "company": "Special Dog (Manfrim Industrial)",
+    "cnpj": "56.813.280/0002-92",
+    "idade": "25 anos (2001)",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Lucro Real",
+    "uf": "SP",
+    "city": "Sta. Cruz Rio Pardo",
+    "segmentoNome": "Fábricas & Indústrias",
+    "setor": "Indústria Pet Food e Nutrição Animal",
+    "decisorNome": "Mário Sérgio Manfrim",
+    "decisorCargo": "Diretor Geral / Sócio Fundador",
+    "decisorLinkedin": "https://www.linkedin.com/in/mario-sergio-manfrim/",
+    "fone": "(14) 3332-3000",
+    "email": "diretoria@specialdog.com.br",
+    "stage": "contato",
+    "patrimonio": 90000000,
+    "scoreBdr": 97,
+    "tentativasTotal": 3,
+    "tentativasCanais": { "whatsapp": 1, "email": 1, "linkedin": 1 },
+    "tentativasAlvos": { "socio": 3, "empresa": 0 },
+    "lastChannel": "WhatsApp",
+    "lastTargetType": "Sócio Fundador",
+    "lastRecipientName": "Mário Sérgio Manfrim",
+    "lastRecipientContact": "(14) 3332-3000",
+    "lastContactAt": "12/09/2026, 14:45:00",
+    "createdAt": "2026-09-12T17:45:00.000Z",
+    "historyLogs": [
+      {
+        "id": "att_10_3",
+        "date": "12/09/2026, 14:45:00",
+        "attemptNumber": 3,
+        "canal": "WhatsApp",
+        "alvoTipo": "Sócio Fundador",
+        "recipientName": "Mário Sérgio Manfrim",
+        "recipientContact": "(14) 3332-3000",
+        "status": "Abordagem Realizada",
+        "textNote": "Tentativa #3: Contato direto no WhatsApp sobre gestão de tesouraria de alta rentabilidade e offshore."
+      }
+    ]
+  },
+  {
+    "id": "deal_prospect_12",
+    "prospectId": 12,
+    "company": "Cromex S/A",
+    "cnpj": "02.271.463/0001-13",
+    "idade": "29 anos (1997)",
+    "tipoSocietario": "Sociedade Anônima (S/A Fechada)",
+    "regimeTributario": "Lucro Real",
+    "uf": "SP",
+    "city": "São Paulo",
+    "segmentoNome": "Exportadoras",
+    "setor": "Indústria Química & Comércio Exterior",
+    "decisorNome": "Sergio Wajsbrot",
+    "decisorCargo": "Presidente / Diretor Geral (CEO)",
+    "decisorLinkedin": "https://www.linkedin.com/in/sergio-wajsbrot/",
+    "fone": "(11) 98900-1000",
+    "email": "sergio.wajsbrot@cromex.com.br",
+    "stage": "contato",
+    "patrimonio": 110000000,
+    "scoreBdr": 99,
+    "tentativasTotal": 2,
+    "tentativasCanais": { "whatsapp": 1, "email": 1, "linkedin": 0 },
+    "tentativasAlvos": { "socio": 2, "empresa": 0 },
+    "lastChannel": "WhatsApp",
+    "lastTargetType": "Sócio / CEO",
+    "lastRecipientName": "Sergio Wajsbrot",
+    "lastRecipientContact": "(11) 98900-1000",
+    "lastContactAt": "12/09/2026, 16:10:00",
+    "createdAt": "2026-09-12T19:10:00.000Z",
+    "historyLogs": [
+      {
+        "id": "att_12_2",
+        "date": "12/09/2026, 16:10:00",
+        "attemptNumber": 2,
+        "canal": "WhatsApp",
+        "alvoTipo": "Sócio / CEO",
+        "recipientName": "Sergio Wajsbrot (CEO)",
+        "recipientContact": "(11) 98900-1000",
+        "status": "Abordagem de Câmbio & Hedge",
+        "textNote": "Tentativa #2: Apresentação de mesa de câmbio PRX e hedge cambial para exportação em 60 países."
+      }
+    ]
+  },
+  {
+    "id": "deal_prospect_24",
+    "prospectId": 24,
+    "company": "Cardioprime Diagnósticos Médicos S/S",
+    "cnpj": "18.942.311/0001-40",
+    "idade": "8 anos (2018)",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Lucro Presumido",
+    "uf": "SP",
+    "city": "São Paulo",
+    "segmentoNome": "Médicos PJ",
+    "setor": "Saúde & Medicina Diagnóstica PJ",
+    "decisorNome": "Dr. Eduardo Vianna de Andrade",
+    "decisorCargo": "Sócio-Diretor Clínico / Cardiologista Chefe",
+    "decisorLinkedin": "https://www.linkedin.com/search/results/people/?keywords=Dr%20Eduardo%20Vianna%20Cardiologista",
+    "fone": "(11) 98765-4321",
+    "email": "dr.eduardo@cardioprime.med.br",
+    "stage": "contato",
+    "patrimonio": 35000000,
+    "scoreBdr": 95,
+    "tentativasTotal": 2,
+    "tentativasCanais": { "whatsapp": 1, "email": 1, "linkedin": 0 },
+    "tentativasAlvos": { "socio": 2, "empresa": 0 },
+    "lastChannel": "WhatsApp",
+    "lastTargetType": "Sócio Médico PJ",
+    "lastRecipientName": "Dr. Eduardo Vianna",
+    "lastRecipientContact": "(11) 98765-4321",
+    "lastContactAt": "12/09/2026, 17:15:00",
+    "createdAt": "2026-09-12T20:15:00.000Z",
+    "historyLogs": [
+      {
+        "id": "att_24_2",
+        "date": "12/09/2026, 17:15:00",
+        "attemptNumber": 2,
+        "canal": "WhatsApp",
+        "alvoTipo": "Sócio Médico PJ",
+        "recipientName": "Dr. Eduardo Vianna",
+        "recipientContact": "(11) 98765-4321",
+        "status": "Abordagem Tributária Médica",
+        "textNote": "Tentativa #2: Envio de estudo de equiparação hospitalar e holding médica para redução de IRPJ/CSLL."
+      }
+    ]
+  },
+  {
+    "id": "deal_prospect_2",
+    "prospectId": 2,
+    "company": "ISPL (Crivialli Brasil)",
+    "cnpj": "01.125.487/0001-00",
+    "idade": "30 anos (1996)",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Lucro Real",
+    "uf": "PR",
+    "city": "Maringá",
+    "segmentoNome": "Fábricas & Indústrias",
+    "setor": "Indústria Química / Higiene e Limpeza",
+    "decisorNome": "João Cantagalli",
+    "decisorCargo": "Sócio-Fundador e Diretor Geral",
+    "decisorLinkedin": "https://www.linkedin.com/search/results/people/?keywords=Joao%20Cantagalli%20Crivialli",
+    "fone": "(44) 3241-8000",
+    "email": "diretoria@crivialli.com.br",
+    "stage": "prospeccao",
+    "patrimonio": 45000000,
+    "scoreBdr": 92,
+    "tentativasTotal": 0,
+    "tentativasCanais": { "whatsapp": 0, "email": 0, "linkedin": 0 },
+    "tentativasAlvos": { "socio": 0, "empresa": 0 },
+    "lastChannel": "Mapeado na Base",
+    "createdAt": "2026-09-12T15:00:00.000Z",
+    "historyLogs": []
+  },
+  {
+    "id": "deal_prospect_3",
+    "prospectId": 3,
+    "company": "Bebidas Poty S.A.",
+    "cnpj": "55.223.127/0002-42",
+    "idade": "75 anos (1951)",
+    "tipoSocietario": "Sociedade Anônima (S/A Fechada)",
+    "regimeTributario": "Lucro Real",
+    "uf": "SP",
+    "city": "Potirendaba",
+    "segmentoNome": "Fábricas & Indústrias",
+    "setor": "Indústria e Distribuição de Bebidas",
+    "decisorNome": "José Luiz Franzotti",
+    "decisorCargo": "Presidente / CEO",
+    "decisorLinkedin": "https://www.linkedin.com/in/jose-luiz-franzotti-poty/",
+    "fone": "(17) 99781-4000",
+    "email": "presidencia@bebidaspoty.com.br",
+    "stage": "qualificacao",
+    "patrimonio": 95000000,
+    "scoreBdr": 96,
+    "tentativasTotal": 1,
+    "tentativasCanais": { "whatsapp": 0, "email": 1, "linkedin": 0 },
+    "tentativasAlvos": { "socio": 1, "empresa": 0 },
+    "lastChannel": "Qualificação de QSA",
+    "lastContactAt": "12/09/2026, 11:00:00",
+    "createdAt": "2026-09-12T14:00:00.000Z",
+    "historyLogs": [
+      {
+        "id": "att_3_1",
+        "date": "12/09/2026, 11:00:00",
+        "attemptNumber": 1,
+        "canal": "E-mail",
+        "alvoTipo": "Sócio / CEO",
+        "recipientName": "José Luiz Franzotti",
+        "recipientContact": "presidencia@bebidaspoty.com.br",
+        "status": "Qualificado no CRM",
+        "textNote": "Estrutura societária de 75 anos qualificada para planejamento sucessório e reestruturação patrimonial."
+      }
+    ]
+  },
+  {
+    "id": "deal_prospect_6",
+    "prospectId": 6,
+    "company": "Vilma Alimentos (Domingos Costa)",
+    "cnpj": "17.159.518/0001-75",
+    "idade": "95 anos (1931)",
+    "tipoSocietario": "Sociedade Anônima (S/A Fechada)",
+    "regimeTributario": "Lucro Real",
+    "uf": "MG",
+    "city": "Contagem",
+    "segmentoNome": "Fábricas & Indústrias",
+    "setor": "Indústria de Alimentos",
+    "decisorNome": "Laura Costa",
+    "decisorCargo": "Diretora Presidente / Conselho",
+    "decisorLinkedin": "https://www.linkedin.com/search/results/people/?keywords=Laura%20Costa%20Vilma%20Alimentos",
+    "fone": "(31) 3507-3343",
+    "email": "presidencia@vilma.com.br",
+    "stage": "reuniao",
+    "patrimonio": 130000000,
+    "scoreBdr": 99,
+    "tentativasTotal": 3,
+    "tentativasCanais": { "whatsapp": 1, "email": 1, "linkedin": 1 },
+    "tentativasAlvos": { "socio": 3, "empresa": 0 },
+    "lastChannel": "Call Agendada",
+    "lastContactAt": "12/09/2026, 16:30:00",
+    "createdAt": "2026-09-12T16:30:00.000Z",
+    "historyLogs": [
+      {
+        "id": "att_6_3",
+        "date": "12/09/2026, 16:30:00",
+        "attemptNumber": 3,
+        "canal": "WhatsApp",
+        "alvoTipo": "Presidente / Conselho",
+        "recipientName": "Laura Costa",
+        "recipientContact": "(31) 3507-3343",
+        "status": "Reunião Confirmada",
+        "textNote": "Reunião de Diagnóstico Estratégico agendada para Terça-feira às 15:00 com Daniel Zanon e diretoria."
+      }
+    ]
+  },
+  {
+    "id": "deal_prospect_7",
+    "prospectId": 7,
+    "company": "Laticínios Porto Alegre S/A",
+    "cnpj": "66.301.334/0001-03",
+    "idade": "35 anos (1991)",
+    "tipoSocietario": "Sociedade Anônima (S/A Fechada)",
+    "regimeTributario": "Lucro Real",
+    "uf": "MG",
+    "city": "Ponte Nova",
+    "segmentoNome": "Fábricas & Indústrias",
+    "setor": "Indústria de Laticínios",
+    "decisorNome": "João Lúcio Barreto Carneiro",
+    "decisorCargo": "Presidente do Conselho / Fundador",
+    "decisorLinkedin": "https://www.linkedin.com/in/joao-lucio-carneiro/",
+    "fone": "(31) 3819-3232",
+    "email": "diretoria@laticiniosportoalegre.com.br",
+    "stage": "proposta",
+    "patrimonio": 90000000,
+    "scoreBdr": 98,
+    "tentativasTotal": 4,
+    "tentativasCanais": { "whatsapp": 1, "email": 2, "linkedin": 1 },
+    "tentativasAlvos": { "socio": 4, "empresa": 0 },
+    "lastChannel": "Proposta Enviada",
+    "lastContactAt": "12/09/2026, 18:00:00",
+    "createdAt": "2026-09-12T18:00:00.000Z",
+    "historyLogs": [
+      {
+        "id": "att_7_4",
+        "date": "12/09/2026, 18:00:00",
+        "attemptNumber": 4,
+        "canal": "E-mail",
+        "alvoTipo": "Conselho",
+        "recipientName": "João Lúcio Carneiro",
+        "recipientContact": "diretoria@laticiniosportoalegre.com.br",
+        "status": "Proposta Comercial Entregue",
+        "textNote": "Envio da proposta formal de mandato de Multi-Family Office e estruturação de fundos exclusivos de investimento."
+      }
+    ]
+  },
+  {
+    "id": "deal_prospect_9",
+    "prospectId": 9,
+    "company": "Alimentos Dallas (Grupo Dallas)",
+    "cnpj": "02.483.916/0001-94",
+    "idade": "28 anos (1998)",
+    "tipoSocietario": "Sociedade Anônima (S/A Fechada)",
+    "regimeTributario": "Lucro Real",
+    "uf": "MS",
+    "city": "Nova Alvorada",
+    "segmentoNome": "Exportadoras",
+    "setor": "Indústria de Alimentos & Exportação",
+    "decisorNome": "Valdir José Zorzo",
+    "decisorCargo": "Presidente do Grupo e Fundador",
+    "decisorLinkedin": "https://www.linkedin.com/search/results/people/?keywords=Valdir%20Zorzo%20Dallas%20Alimentos",
+    "fone": "(67) 99981-1100",
+    "email": "diretoria@dallasalimentos.com.br",
+    "stage": "fechado",
+    "patrimonio": 85000000,
+    "scoreBdr": 100,
+    "tentativasTotal": 5,
+    "tentativasCanais": { "whatsapp": 2, "email": 2, "linkedin": 1 },
+    "tentativasAlvos": { "socio": 5, "empresa": 0 },
+    "lastChannel": "Mandato Fechado",
+    "lastContactAt": "12/09/2026, 19:15:00",
+    "createdAt": "2026-09-12T19:15:00.000Z",
+    "historyLogs": [
+      {
+        "id": "att_9_5",
+        "date": "12/09/2026, 19:15:00",
+        "attemptNumber": 5,
+        "canal": "WhatsApp",
+        "alvoTipo": "Presidente / Fundador",
+        "recipientName": "Valdir José Zorzo",
+        "recipientContact": "(67) 99981-1100",
+        "status": "Contrato Assinado",
+        "textNote": "Mandato PRX Capital fechado com sucesso para estruturação de Câmbio, Hedge e Gestão de Patrimônio Líquido."
+      }
+    ]
+  }
+]; }
     function getCrmDeals() {
       try {
-        const saved = localStorage.getItem('prx_crm_deals_v3');
+        const saved = localStorage.getItem('prx_crm_deals');
         if (saved) {
           const parsed = JSON.parse(saved);
           if (Array.isArray(parsed) && parsed.length > 0) return parsed;
         }
       } catch(e) {}
       const def = getDefaultCrmDeals();
-      localStorage.setItem('prx_crm_deals_v3', JSON.stringify(def));
+      localStorage.setItem('prx_crm_deals', JSON.stringify(def));
       return def;
     }
-    function saveCrmDeals(d) { localStorage.setItem('prx_crm_deals_v3', JSON.stringify(d)); renderCrm(); }
+    function saveCrmDeals(d) { localStorage.setItem('prx_crm_deals', JSON.stringify(d)); renderCrm(); }
 
     function renderCrm() {
       const deals = getCrmDeals();
       document.getElementById('crmTotalDeals').innerText = deals.length.toLocaleString('pt-BR');
       const totalVal = deals.reduce((acc, x) => acc + (parseFloat(x.patrimonio) || 15000000), 0);
       document.getElementById('crmTotalPatrimonio').innerText = `R$ ${(totalVal/1000000).toFixed(0)}M`;
-
       let totalAttemptsSum = 0;
-      deals.forEach(d => {
-        totalAttemptsSum += (parseInt(d.tentativasTotal, 10) || (d.lastChannel && d.lastChannel !== 'Adicionado Manual' ? 1 : 0));
-      });
+      deals.forEach(d => { totalAttemptsSum += (parseInt(d.tentativasTotal, 10) || 1); });
       document.getElementById('crmTotalDisparos').innerText = totalAttemptsSum.toLocaleString('pt-BR');
       const fechadosCount = deals.filter(d => d.stage === 'fechado').length;
       document.getElementById('crmTotalFechados').innerText = fechadosCount.toLocaleString('pt-BR');
@@ -318,7 +728,7 @@
         const stDeals = deals.filter(d => d.stage === st);
         document.getElementById(`crm-count-${st}`).innerText = stDeals.length;
         if (stDeals.length === 0) {
-          col.innerHTML = '<div class="p-3 text-center text-slate-400 text-xs italic bg-white/40 rounded-xl">Nenhum lead</div>';
+          col.innerHTML = '<div class="p-3 text-center text-slate-400 text-xs italic bg-white/40 rounded-xl">Nenhum lead nesta etapa</div>';
         } else {
           col.innerHTML = stDeals.map(d => `
             <div class="bg-white rounded-2xl p-3.5 border border-slate-200 shadow-xs hover:shadow-md transition flex flex-col gap-2 relative">
@@ -328,7 +738,11 @@
               </div>
               <div>
                 <h4 class="font-extrabold text-xs text-slate-900 leading-snug">${d.company}</h4>
-                <p class="text-[10px] text-slate-500 font-mono">${d.cnpj || ''} • ${d.city || ''}-${d.uf || ''}</p>
+                <p class="text-[10px] text-slate-500 font-mono">${d.cnpj || ''} • ⏳ ${d.idade || ''} • ${d.city || ''}-${d.uf || ''}</p>
+                <div class="flex items-center gap-1 flex-wrap mt-1">
+                  ${d.tipoSocietario ? `<span class="px-1.5 py-0.5 rounded text-[8px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200">🏛️ ${d.tipoSocietario}</span>` : ''}
+                  ${d.regimeTributario ? `<span class="px-1.5 py-0.5 rounded text-[8px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300">📑 ${d.regimeTributario}</span>` : ''}
+                </div>
               </div>
               <div class="pt-1 border-t border-slate-100 flex items-center justify-between text-[11px]">
                 <div class="text-[10px] text-slate-800 font-bold truncate max-w-[170px]"><i class="fa-solid fa-user-tie text-slate-400 mr-1"></i>${d.decisorNome}</div>
@@ -336,7 +750,7 @@
               </div>
               <div class="bg-slate-50 p-2 rounded-xl border border-slate-200 space-y-1">
                 <div class="flex items-center justify-between text-[10px] font-bold">
-                  <span class="text-indigo-700 flex items-center gap-1"><i class="fa-solid fa-bullseye text-indigo-600"></i> ${d.tentativasTotal || (d.lastChannel && d.lastChannel !== 'Adicionado Manual' ? 1 : 0)} Tentativa(s)</span>
+                  <span class="text-indigo-700 flex items-center gap-1"><i class="fa-solid fa-bullseye text-indigo-600"></i> ${d.tentativasTotal || 1} Tentativa(s)</span>
                   <span class="text-slate-400 font-normal text-[9px]">${d.lastContactAt || ''}</span>
                 </div>
                 <div class="flex items-center gap-1 flex-wrap text-[9px] font-extrabold">
@@ -388,9 +802,7 @@
       }
       document.getElementById('crmDealModal').style.display = 'flex';
     }
-
     function closeCrmDealModal() { document.getElementById('crmDealModal').style.display = 'none'; activeCrmDealId = null; }
-
     function saveCurrentDealModal() {
       if (!activeCrmDealId) return;
       let deals = getCrmDeals();
@@ -420,7 +832,6 @@
       closeCrmDealModal();
       showToast('✅ Oportunidade salva no CRM!');
     }
-
     function deleteCurrentDeal() {
       if (!activeCrmDealId || !confirm('Excluir oportunidade do CRM?')) return;
       let deals = getCrmDeals().filter(x => x.id !== activeCrmDealId);
@@ -428,18 +839,17 @@
       closeCrmDealModal();
       showToast('Oportunidade excluída.');
     }
-
     function exportCrmCsv() {
       const deals = getCrmDeals();
-      let csv = '\uFEFFID;Empresa;CNPJ;UF;Cidade;Segmento;Decisor;Cargo;Telefone;Email;Etapa;Patrimonio_Estimado;Tentativas_Total;Ultimo_Canal;Historico\n';
+      let csv = '\uFEFFID;Empresa;CNPJ;Idade;Tipo_Societario;Regime;UF;Cidade;Segmento;Decisor;Cargo;Telefone;Email;Etapa;Patrimonio_Estimado;Tentativas_Total;Ultimo_Canal;Historico\n';
       deals.forEach(d => {
         const lastNote = (d.notes && d.notes.length > 0) ? d.notes[0].text.replace(/;/g, ' ') : '';
-        csv += `"${d.id}";"${d.company}";"${d.cnpj}";"${d.uf}";"${d.city}";"${d.segmentoNome}";"${d.decisorNome}";"${d.decisorCargo}";"${d.fone}";"${d.email}";"${d.stage}";"${d.patrimonio}";"${d.tentativasTotal || 0}";"${d.lastChannel || ''}";"${lastNote}"\n`;
+        csv += `"${d.id}";"${d.company}";"${d.cnpj}";"${d.idade || ''}";"${d.tipoSocietario || ''}";"${d.regimeTributario || ''}";"${d.uf}";"${d.city}";"${d.segmentoNome}";"${d.decisorNome}";"${d.decisorCargo}";"${d.fone}";"${d.email}";"${d.stage}";"${d.patrimonio}";"${d.tentativasTotal || 0}";"${d.lastChannel || ''}";"${lastNote}"\n`;
       });
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = `crm_prx_${new Date().toISOString().slice(0,10)}.csv`;
+      a.download = `crm_prx_prospeccao_${new Date().toISOString().slice(0,10)}.csv`;
       document.body.appendChild(a);
       a.click();
       a.remove();
