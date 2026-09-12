@@ -83,7 +83,7 @@
 
       <div class="bg-[var(--card)] rounded-2xl border border-[var(--border)] overflow-hidden">
         <div class="overflow-x-auto max-h-[65vh] overflow-y-auto">
-          <table class="w-full text-left text-xs min-w-[1200px]">
+          <table class="w-full text-left text-xs min-w-[1450px]">
             <thead class="bg-[var(--border)]/60 text-[var(--muted-foreground)] font-bold text-[11px] sticky top-0 z-10">
               <tr>
                 <th class="p-3 text-center w-12">ID</th>
@@ -91,7 +91,7 @@
                 <th class="p-3 w-40">Segmento</th>
                 <th class="p-3 w-48">Decisor QSA</th>
                 <th class="p-3 w-40">Contato Sócio</th>
-                <th class="p-3 w-36 text-center">Ação Rápida</th>
+                <th class="p-3 w-[460px] min-w-[440px] text-center">Disparo Direto & Copiar Mensagens</th>
               </tr>
             </thead>
             <tbody id="leadsTableBody" class="divide-y divide-[var(--border)]">
@@ -1266,12 +1266,18 @@
               `}
             </td>
             <td class="p-2.5 text-center">
-              <div class="flex items-center justify-center gap-1.5">
-                <button onclick="dispatchFast(${p.id}, 'wpp')" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-[10px] flex items-center gap-1 cursor-pointer shadow-xs transition">
-                  <i class="fa-brands fa-whatsapp"></i> 👤 Wpp
+              <div class="flex items-center justify-center gap-1">
+                <button onclick="dispatchFast(${p.id}, 'wpp')" title="Disparar WhatsApp Sócio" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-lg text-[10px] flex items-center gap-1 cursor-pointer shadow-xs transition whitespace-nowrap">
+                  <i class="fa-brands fa-whatsapp"></i> 📲 Wpp
                 </button>
-                <button onclick="dispatchFast(${p.id}, 'email')" class="px-2.5 py-1 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-lg text-[10px] flex items-center gap-1 cursor-pointer shadow-xs transition">
-                  <i class="fa-solid fa-paper-plane"></i> 👤 Mail
+                <button onclick="copyFast(${p.id}, 'wpp')" title="Copiar mensagem WhatsApp Sócio para colar" class="px-2 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-extrabold rounded-lg text-[10px] flex items-center gap-1 cursor-pointer transition whitespace-nowrap">
+                  <i class="fa-regular fa-copy"></i> 📋 Copiar Wpp
+                </button>
+                <button onclick="dispatchFast(${p.id}, 'email')" title="Disparar E-mail Sócio" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white font-extrabold rounded-lg text-[10px] flex items-center gap-1 cursor-pointer shadow-xs transition whitespace-nowrap">
+                  <i class="fa-solid fa-paper-plane"></i> ✉️ Mail
+                </button>
+                <button onclick="copyFast(${p.id}, 'email')" title="Copiar Assunto e E-mail Sócio para colar" class="px-2 py-1 bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-300 font-extrabold rounded-lg text-[10px] flex items-center gap-1 cursor-pointer transition whitespace-nowrap">
+                  <i class="fa-regular fa-copy"></i> 📋 Copiar Email
                 </button>
               </div>
             </td>
@@ -1279,6 +1285,34 @@
         `;
       });
       tbody.innerHTML = html;
+    }
+
+    function copyFast(id, type) {
+      const p = prospects.find(x => x.id === id);
+      if (!p) return;
+      const cfg = getIntegrationSettings();
+      const myName = cfg.execName || 'Daniel Zanon';
+      const d1Nome = (p.decisores && p.decisores[0]) ? p.decisores[0].nome : 'Sócio / Diretor';
+
+      const msgWpp = `Olá, ${d1Nome}! Tudo bem?\n\nSou o ${myName}, da *PRX Capital* (prxcapital.com.br).\n\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas.\n\nNossas frentes de atuação abrangem:\n\n* Gestão de carteiras e investimentos\n* Operações de câmbio e derivativos\n* Seguros patrimoniais\n* Créditos e financiamentos (capital de giro e antecipação de recebíveis)\n* Pesquisa e análise econômica (valuation e viabilidade financeira)\n* Revisão e planejamento patrimonial, tributário e sucessório\n\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez de seu patrimônio.\n\nGostaria de agendar um diagnóstico inicial gratuito para melhorar a eficiência da sua estrutura empresarial ou familiar? (a conversa leva 15 minutos e pode ser ajustada nesta semana ou na próxima)\n\nUm abraço,\n\n*${myName}* | PRX Capital`;
+      const emailSubj = `Diagnóstico Estratégico & Multi-Family Office | A/C ${d1Nome} (${p.company})`;
+      const emailBody = `Olá, ${d1Nome}! Tudo bem?\n\nSou o ${myName}, da PRX Capital (prxcapital.com.br).\n\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas.\n\nNossas frentes de atuação abrangem:\n\n* Gestão de carteiras e investimentos\n* Operações de câmbio e derivativos\n* Seguros patrimoniais\n* Créditos e financiamentos (capital de giro e antecipação de recebíveis)\n* Pesquisa e análise econômica (valuation e viabilidade financeira)\n* Revisão e planejamento patrimonial, tributário e sucessório\n\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez de seu patrimônio.\n\nGostaria de agendar um diagnóstico inicial gratuito para melhorar a eficiência da sua estrutura empresarial ou familiar? (a conversa leva 15 minutos e pode ser ajustada nesta semana ou na próxima)\n\nUm abraço,\n\n${myName} | PRX Capital`;
+
+      const toast = document.getElementById('inlineToast');
+      if (type === 'wpp') {
+        navigator.clipboard.writeText(msgWpp).then(() => {
+          document.getElementById('inlineToastMsg').innerText = `📋 Mensagem de WhatsApp para ${d1Nome} copiada para colar!`;
+          toast.classList.remove('hidden');
+          setTimeout(() => { toast.classList.add('hidden'); }, 3000);
+        });
+      } else {
+        const fullEmail = `Assunto: ${emailSubj}\n\n${emailBody}`;
+        navigator.clipboard.writeText(fullEmail).then(() => {
+          document.getElementById('inlineToastMsg').innerText = `📋 Assunto e E-mail para ${d1Nome} copiados para colar!`;
+          toast.classList.remove('hidden');
+          setTimeout(() => { toast.classList.add('hidden'); }, 3000);
+        });
+      }
     }
 
     function dispatchFast(id, type) {
