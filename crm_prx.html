@@ -340,9 +340,9 @@
                   <span class="text-slate-400 font-normal text-[9px]">${d.lastContactAt || ''}</span>
                 </div>
                 <div class="flex items-center gap-1 flex-wrap text-[9px] font-extrabold">
-                  ${d.tentativasCanais?.whatsapp ? `<span class="px-1.5 py-0.5 bg-emerald-100 text-emerald-800 rounded border border-emerald-300 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> ${d.tentativasCanais.whatsapp} Wpp</span>` : ''}
-                  ${d.tentativasCanais?.email ? `<span class="px-1.5 py-0.5 bg-sky-100 text-sky-800 rounded border border-sky-300 flex items-center gap-1"><i class="fa-solid fa-envelope"></i> ${d.tentativasCanais.email} Mail</span>` : ''}
-                  ${d.tentativasCanais?.linkedin ? `<span class="px-1.5 py-0.5 bg-blue-100 text-blue-800 rounded border border-blue-300 flex items-center gap-1"><i class="fa-brands fa-linkedin"></i> ${d.tentativasCanais.linkedin} In</span>` : ''}
+                  ${(d.tentativasCanais && d.tentativasCanais.whatsapp) ? `<span class="px-1.5 py-0.5 bg-emerald-100 text-emerald-800 rounded border border-emerald-300 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> ${d.tentativasCanais.whatsapp} Wpp</span>` : ''}
+                  ${(d.tentativasCanais && d.tentativasCanais.email) ? `<span class="px-1.5 py-0.5 bg-sky-100 text-sky-800 rounded border border-sky-300 flex items-center gap-1"><i class="fa-solid fa-envelope"></i> ${d.tentativasCanais.email} Mail</span>` : ''}
+                  ${(d.tentativasCanais && d.tentativasCanais.linkedin) ? `<span class="px-1.5 py-0.5 bg-blue-100 text-blue-800 rounded border border-blue-300 flex items-center gap-1"><i class="fa-brands fa-linkedin"></i> ${d.tentativasCanais.linkedin} In</span>` : ''}
                   ${d.lastTargetType ? `<span class="px-1.5 py-0.5 bg-slate-200 text-slate-800 rounded text-[9px]">${d.lastTargetType}</span>` : ''}
                 </div>
               </div>
