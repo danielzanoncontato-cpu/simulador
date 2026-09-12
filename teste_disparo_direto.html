@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Teste de Disparo Direto - Daniel Zanon (PRX Capital)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-900 text-white min-h-screen flex items-center justify-center p-6 font-sans">
+  <div class="max-w-2xl w-full bg-slate-800 border border-slate-700 rounded-3xl p-8 shadow-2xl space-y-6">
+    <div class="flex items-center gap-4 border-b border-slate-700 pb-4">
+      <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl">
+        <i class="fa-solid fa-paper-plane"></i>
+      </div>
+      <div>
+        <h1 class="text-xl font-black">Teste Imediato de Disparo</h1>
+        <p class="text-xs text-slate-400">Destinatário: Daniel | WhatsApp: (11) 91588-7182 | E-mail: danielzanoncontato@gmail.com</p>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-700">
+        <h2 class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2"><i class="fa-brands fa-whatsapp"></i> WhatsApp Pronto (Padrão Oficial PRX):</h2>
+        <a id="btnWpp" href="#" target="_blank" class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm rounded-xl transition shadow-lg shadow-emerald-900/40">
+          <i class="fa-brands fa-whatsapp text-lg"></i> Abrir WhatsApp para (11) 91588-7182 e Enviar
+        </a>
+      </div>
+
+      <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-700">
+        <h2 class="text-xs font-bold text-sky-400 uppercase tracking-wider mb-2"><i class="fa-solid fa-envelope"></i> E-mail (Gmail) Pronto (Padrão Oficial PRX):</h2>
+        <a id="btnGmail" href="#" target="_blank" class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 bg-sky-600 hover:bg-sky-500 text-white font-extrabold text-sm rounded-xl transition shadow-lg shadow-sky-900/40">
+          <i class="fa-solid fa-envelope text-lg"></i> Abrir Gmail para danielzanoncontato@gmail.com e Enviar
+        </a>
+      </div>
+    </div>
+
+    <div class="text-center pt-2">
+      <a href="index.html" class="text-xs text-slate-400 hover:text-slate-200 underline">Voltar para o Dashboard Master</a>
+    </div>
+  </div>
+
+  <script>
+    const wppMsg = `Olá, Daniel! Tudo bem?\n\nSou o Daniel Zanon, da *PRX Capital* (prxcapital.com.br).\n\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas.\n\nNossas frentes de atuação abrangem:\n\n* Gestão de carteiras e investimentos\n* Operações de câmbio e derivativos\n* Seguros patrimoniais\n* Créditos e financiamentos (capital de giro e antecipação de recebíveis)\n* Pesquisa e análise econômica (valuation e viabilidade financeira)\n* Revisão e planejamento patrimonial, tributário e sucessório\n\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez de seu patrimônio.\n\nGostaria de agendar um diagnóstico inicial gratuito para melhorar a eficiência da sua estrutura empresarial ou familiar? (a conversa leva 15 minutos e pode ser ajustada nesta semana ou na próxima)\n\nUm abraço, *Daniel Zanon* | PRX Capital`;
+
+    const emailSubj = `Diagnóstico Estratégico & Multi-Family Office | A/C Daniel`;
+    const emailBody = `Olá, Daniel! Tudo bem?\n\nSou o Daniel Zanon, da PRX Capital (prxcapital.com.br).\n\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas.\n\nNossas frentes de atuação abrangem:\n\n* Gestão de carteiras e investimentos\n* Operações de câmbio e derivativos\n* Seguros patrimoniais\n* Créditos e financiamentos (capital de giro e antecipação de recebíveis)\n* Pesquisa e análise econômica (valuation e viabilidade financeira)\n* Revisão e planejamento patrimonial, tributário e sucessório\n\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez de seu patrimônio.\n\nGostaria de agendar um diagnóstico inicial gratuito para melhorar a eficiência da sua estrutura empresarial ou familiar? (a conversa leva 15 minutos e pode ser ajustada nesta semana ou na próxima)\n\nUm abraço,\nDaniel Zanon | PRX Capital\nprxcapital.com.br`;
+
+    document.getElementById('btnWpp').href = "https://api.whatsapp.com/send?phone=5511915887182&text=" + encodeURIComponent(wppMsg);
+    document.getElementById('btnGmail').href = "https://mail.google.com/mail/?view=cm&fs=1&to=danielzanoncontato@gmail.com&su=" + encodeURIComponent(emailSubj) + "&body=" + encodeURIComponent(emailBody);
+  </script>
+</body>
+</html>
