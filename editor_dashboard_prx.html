@@ -1218,9 +1218,14 @@
                (p.uf && p.uf.toLowerCase().indexOf(query) !== -1) ||
                (p.segmentoNome && p.segmentoNome.toLowerCase().indexOf(query) !== -1) ||
                d1.indexOf(query) !== -1;
-      });
-
       renderTableBody(filtered.slice(0, 500));
+    }
+
+    // CLASSIFICAÇÃO RIGOROSA DE CONTATOS (CELULAR/WHATSAPP VS FONE/PABX EMPRESA)
+    function isMobilePhone(phoneStr) {
+      if (!phoneStr || phoneStr.indexOf('Sem Telefone') !== -1 || phoneStr.indexOf('Não informado') !== -1) return false;
+      const digits = phoneStr.replace(/\D/g, '').replace(/^55/, '');
+      return (digits.length === 11 && digits[2] === '9') || (digits.length === 9 && digits[0] === '9');
     }
 
     function renderTableBody(data) {
@@ -1233,6 +1238,12 @@
       let html = '';
       data.forEach(p => {
         const d1 = (p.decisores && p.decisores[0]) ? p.decisores[0] : { nome: 'Decisor QSA', cargo: 'Sócio-Diretor' };
+        let socioMobile = '';
+        if (isMobilePhone(p.contatoPessoal)) socioMobile = p.contatoPessoal;
+        else if (d1.contato && isMobilePhone(d1.contato)) socioMobile = d1.contato;
+        else if (isMobilePhone(p.fone)) socioMobile = p.fone;
+        const hasSocioMobile = !!socioMobile;
+
         html += `
           <tr class="hover:bg-[var(--card)]/50 transition border-b border-[var(--border)]/50">
             <td class="p-2.5 text-center font-mono font-bold text-[var(--muted-foreground)]">${p.id}</td>
@@ -1246,8 +1257,13 @@
               <div class="text-[10px] text-[var(--muted-foreground)]">${d1.cargo}</div>
             </td>
             <td class="p-2.5 font-mono text-emerald-400 font-bold">
-              <div>${p.contatoPessoal || p.fone || '-'}</div>
-              <span class="text-[9px] text-emerald-500 font-bold">👤 Sócio Direto</span>
+              ${hasSocioMobile ? `
+                <div class="text-emerald-400 font-bold text-xs">${socioMobile}</div>
+                <span class="text-[9px] text-emerald-500 font-bold">👤 WhatsApp Celular</span>
+              ` : `
+                <div class="text-[11px] text-slate-400 font-normal">Sem Celular Direto</div>
+                <span class="text-[9px] text-slate-500 font-bold">🏢 Fixo Empresa: ${p.fone || '-'}</span>
+              `}
             </td>
             <td class="p-2.5 text-center">
               <div class="flex items-center justify-center gap-1.5">
@@ -1271,7 +1287,19 @@
       const cfg = getIntegrationSettings();
       const myName = cfg.execName || 'Daniel Zanon';
       const d1Nome = (p.decisores && p.decisores[0]) ? p.decisores[0].nome : 'Sócio / Diretor';
-      const phone = (p.contatoPessoal || p.fone || '').replace(/\D/g, '');
+      
+      let phone = '';
+      if (isMobilePhone(p.contatoPessoal)) phone = p.contatoPessoal;
+      else if (p.decisores && p.decisores[0] && isMobilePhone(p.decisores[0].contato)) phone = p.decisores[0].contato;
+      else if (isMobilePhone(p.fone)) phone = p.fone;
+
+      if (type === 'wpp' && !phone) {
+        const toast = document.getElementById('inlineToast');
+        document.getElementById('inlineToastMsg').innerText = `⚠️ ${p.company}: Sócio sem celular direto (apenas fone fixo da empresa).`;
+        toast.classList.remove('hidden');
+        setTimeout(() => { toast.classList.add('hidden'); }, 4000);
+        return;
+      }
       const email = p.email ? p.email.split('/')[0].trim() : '';
 
       const msgWpp = `Olá, ${d1Nome}! Tudo bem?\n\nSou o ${myName}, da *PRX Capital* (prxcapital.com.br).\n\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas.\n\nNossas frentes de atuação abrangem:\n\n* Gestão de carteiras e investimentos\n* Operações de câmbio e derivativos\n* Seguros patrimoniais\n* Créditos e financiamentos (capital de giro e antecipação de recebíveis)\n* Pesquisa e análise econômica (valuation e viabilidade financeira)\n* Revisão e planejamento patrimonial, tributário e sucessório\n\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez de seu patrimônio.\n\nGostaria de agendar um diagnóstico inicial gratuito para melhorar a eficiência da sua estrutura empresarial ou familiar? (a conversa leva 15 minutos e pode ser ajustada nesta semana ou na próxima)\n\nUm abraço,\n\n*${myName}* | PRX Capital`;
@@ -1279,7 +1307,8 @@
       const emailBody = `Olá, ${d1Nome}! Tudo bem?\n\nSou o ${myName}, da PRX Capital (prxcapital.com.br).\n\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas.\n\nNossas frentes de atuação abrangem:\n\n* Gestão de carteiras e investimentos\n* Operações de câmbio e derivativos\n* Seguros patrimoniais\n* Créditos e financiamentos (capital de giro e antecipação de recebíveis)\n* Pesquisa e análise econômica (valuation e viabilidade financeira)\n* Revisão e planejamento patrimonial, tributário e sucessório\n\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez de seu patrimônio.\n\nGostaria de agendar um diagnóstico inicial gratuito para melhorar a eficiência da sua estrutura empresarial ou familiar? (a conversa leva 15 minutos e pode ser ajustada nesta semana ou na próxima)\n\nUm abraço,\n\n${myName} | PRX Capital`;
 
       if (type === 'wpp') {
-        const phoneParam = phone ? `55${phone.replace(/^55/,'')}` : '';
+        const cleanPhone = phone.replace(/\D/g, '');
+        const phoneParam = cleanPhone ? `55${cleanPhone.replace(/^55/,'')}` : '';
         const url = (cfg.wppMode === 'app') ? (phoneParam ? `whatsapp://send?phone=${phoneParam}&text=${encodeURIComponent(msgWpp)}` : `whatsapp://send?text=${encodeURIComponent(msgWpp)}`) : (phoneParam ? `https://api.whatsapp.com/send?phone=${phoneParam}&text=${encodeURIComponent(msgWpp)}` : `https://api.whatsapp.com/send?text=${encodeURIComponent(msgWpp)}`);
         window.open(url, '_blank');
       } else {
