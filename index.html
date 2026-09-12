@@ -6,7 +6,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BDR - Lead AI | Plataforma de Inteligência & CRM</title>
+  <title>BDR - Lead AI | Plataforma de Inteligência, Disparo & CRM</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,25 +19,10 @@
     ::-webkit-scrollbar-track { background: #f1f5f9; }
     ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-    
-    #copyToast { display: none; }
-
-    .tab-btn {
-      transition: all 0.2s ease;
-      cursor: pointer;
-    }
-    .tab-btn.active-tab {
-      background-color: #0f172a !important;
-      color: #ffffff !important;
-      border-color: #0f172a !important;
-      font-weight: 800 !important;
-      box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.2);
-    }
-
-    .kanban-col {
-      min-width: 300px;
-      max-width: 330px;
-    }
+    .tab-btn { transition: all 0.2s ease; cursor: pointer; }
+    .tab-btn.active-tab { background-color: #0f172a !important; color: #ffffff !important; border-color: #0f172a !important; font-weight: 800 !important; box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.2); }
+    .kanban-col { min-width: 300px; max-width: 330px; }
+    .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased bg-slate-50 text-slate-900">
@@ -47,7 +32,7 @@
     <div class="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></div>
     <div>
       <p id="copyToastText" class="text-xs font-bold text-slate-100">Ação realizada com sucesso!</p>
-      <p class="text-[10px] text-slate-400">Dados integrados e salvos no ecossistema.</p>
+      <p class="text-[10px] text-slate-400">Dados integrados e sincronizados no CRM.</p>
     </div>
   </div>
 
@@ -57,14 +42,14 @@
     <header class="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-40 shadow-sm">
       <div class="max-w-[1950px] mx-auto px-4 sm:px-6 py-3.5 flex flex-col md:flex-row items-center justify-between gap-4">
         
-        <!-- LOGO & BRAND (LIMPO) -->
+        <!-- LOGO & BRAND -->
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-indigo-600 via-blue-600 to-cyan-500 flex items-center justify-center font-black text-white text-base shadow-md shadow-indigo-500/25 font-mono">
             AI
           </div>
           <div class="flex items-center gap-2">
             <h1 class="text-base font-extrabold tracking-tight text-slate-900">BDR - Lead AI</h1>
-            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-indigo-50 text-indigo-700 border border-indigo-200 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span> MOTOR DE INTELIGÊNCIA BDR</span>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-indigo-50 text-indigo-700 border border-indigo-200 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></span> MOTOR DE INTELIGÊNCIA & DISPARO</span>
           </div>
         </div>
 
@@ -73,7 +58,7 @@
           <button id="tab-prospects-btn" onclick="switchMainTab('prospects')" class="tab-btn active-tab px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 text-slate-700 hover:text-slate-900">
             <i class="fa-solid fa-list-check text-indigo-500"></i>
             <span>1. Base de Prospecção</span>
-            <span id="tabProspectsBadge" class="px-1.5 py-0.5 rounded-md text-[10px] bg-slate-200 text-slate-800 font-mono font-bold">3000</span>
+            <span id="tabProspectsBadge" class="px-1.5 py-0.5 rounded-md text-[10px] bg-slate-200 text-slate-800 font-mono font-bold">0</span>
           </button>
 
           <button id="tab-crm-btn" onclick="switchMainTab('crm')" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 text-slate-700 hover:text-slate-900">
@@ -83,13 +68,17 @@
           </button>
         </div>
 
-        <!-- CARDS DE MÉTRICAS -->
-        <div class="flex items-center gap-3">
-          <div class="bg-slate-100 border border-slate-200 px-3.5 py-1.5 rounded-xl flex items-center gap-2 text-xs font-bold text-slate-700 shadow-sm">
+        <!-- CARDS DE MÉTRICAS & BOTÃO DE INTEGRAÇÕES -->
+        <div class="flex items-center gap-2.5 flex-wrap">
+          <button onclick="openIntegrationsModal()" class="bg-gradient-to-r from-emerald-50 to-teal-50 hover:from-emerald-100 hover:to-teal-100 border border-emerald-300 text-emerald-800 px-3.5 py-1.5 rounded-xl flex items-center gap-2 text-xs font-extrabold shadow-sm transition cursor-pointer">
+            <i class="fa-solid fa-bolt text-emerald-600 animate-bounce"></i>
+            <span>⚙️ Conectar WhatsApp & E-mail</span>
+          </button>
+          <div class="bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-xl flex items-center gap-2 text-xs font-bold text-slate-700 shadow-sm">
             <i class="fa-solid fa-building text-indigo-600"></i>
-            <span><b id="compHeaderCount" class="text-slate-900">3.000</b> Mineradas</span>
+            <span><b id="compHeaderCount" class="text-slate-900">0</b> Mineradas</span>
           </div>
-          <div class="bg-emerald-50 border border-emerald-200 px-3.5 py-1.5 rounded-xl flex items-center gap-2 text-xs font-bold text-emerald-700 shadow-sm">
+          <div class="bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl flex items-center gap-2 text-xs font-bold text-emerald-700 shadow-sm">
             <i class="fa-solid fa-phone-volume text-emerald-600"></i>
             <span><b id="contactedHeaderCount" class="text-emerald-900">0</b> Abordadas</span>
           </div>
@@ -99,7 +88,7 @@
     </header>
 
     <!-- ======================================================== -->
-    <!-- SEÇÃO 1: ABA DE PROSPECÇÃO ATIVA (3.000)                -->
+    <!-- SEÇÃO 1: ABA DE PROSPECÇÃO ATIVA                         -->
     <!-- ======================================================== -->
     <main id="prospectsTabContent" class="max-w-[1950px] w-full mx-auto px-4 sm:px-6 py-5 flex-1 flex flex-col gap-4">
       
@@ -107,27 +96,27 @@
       <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm">
         <div class="flex flex-wrap lg:flex-nowrap items-center gap-2.5 w-full">
           
-          <!-- 1. RETÂNGULO DE BUSCA GERAL -->
+          <!-- 1. BUSCA GERAL -->
           <div class="relative flex-1 min-w-[260px]">
             <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-2.5 text-slate-400 text-xs"></i>
             <input type="text" id="searchInput" oninput="filterData()" placeholder="Buscar por empresa, CNPJ, sócio QSA, cidade ou CNAE..." class="w-full h-10 bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3 text-xs font-semibold text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:bg-white transition">
           </div>
           
-          <!-- 2. RETÂNGULO DE SEGMENTO ICP -->
+          <!-- 2. SEGMENTO ICP -->
           <div class="w-full sm:w-auto min-w-[220px]">
             <select id="segmentFilter" onchange="filterData()" class="w-full h-10 bg-slate-50 border border-slate-200 rounded-xl px-3.5 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-600 cursor-pointer shadow-2xs">
-              <option value="ALL">🌐 Todos os Segmentos (3.000)</option>
-              <option value="YELLOW">🟡 Fábricas & Indústrias (600)</option>
-              <option value="RED">🔴 Exportadoras & Importadoras (900)</option>
-              <option value="GREEN">🟢 Agronegócio (300)</option>
-              <option value="SPECIAL_MED">🌸 Médicos PJ (300)</option>
-              <option value="SPECIAL_LOG">🚚 Logística & Transportes (300)</option>
-              <option value="SPECIAL_LAW">⚖️ Advocacia & Jurídico (300)</option>
-              <option value="SPECIAL_ACC">🟢 Contabilidade & Auditoria (300)</option>
+              <option value="ALL">🌐 Todos os Segmentos</option>
+              <option value="YELLOW">🟡 Fábricas & Indústrias</option>
+              <option value="RED">🔴 Exportadoras & Importadoras</option>
+              <option value="GREEN">🟢 Agronegócio</option>
+              <option value="SPECIAL_MED">🌸 Médicos PJ</option>
+              <option value="SPECIAL_LOG">🚚 Logística & Transportes</option>
+              <option value="SPECIAL_LAW">⚖️ Advocacia & Jurídico</option>
+              <option value="SPECIAL_ACC">🟢 Contabilidade & Auditoria</option>
             </select>
           </div>
 
-          <!-- 3. RETÂNGULO DE COM / SEM SITE -->
+          <!-- 3. COM / SEM SITE -->
           <div class="w-full sm:w-auto min-w-[170px]">
             <select id="siteFilter" onchange="filterData()" class="w-full h-10 bg-slate-50 border border-slate-200 rounded-xl px-3.5 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 cursor-pointer shadow-2xs">
               <option value="">🌐 Todos os Sites</option>
@@ -136,7 +125,7 @@
             </select>
           </div>
 
-          <!-- 4. RETÂNGULO DE ESTADOS -->
+          <!-- 4. ESTADOS -->
           <div class="w-full sm:w-auto min-w-[150px]">
             <select id="stateFilter" onchange="filterData()" class="w-full h-10 bg-slate-50 border border-slate-200 rounded-xl px-3.5 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 cursor-pointer shadow-2xs">
               <option value="">📍 Todos Estados</option>
@@ -150,30 +139,30 @@
             </select>
           </div>
           
-          <!-- 5. RETÂNGULO DE LIMPAR FILTROS -->
+          <!-- 5. LIMPAR FILTROS -->
           <button onclick="resetSearch()" class="h-10 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition border border-slate-200 whitespace-nowrap cursor-pointer flex items-center gap-1.5 shadow-2xs">
             <i class="fa-solid fa-rotate-left text-[11px]"></i> Limpar Filtros
           </button>
         </div>
       </div>
 
-      <!-- TABELA MASTER COM TODAS AS COLUNAS E ROLAGEM CONTÍNUA -->
+      <!-- TABELA MASTER COM TODAS AS COLUNAS -->
       <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
         <div class="overflow-x-auto max-h-[78vh] overflow-y-auto">
-          <table class="w-full text-left text-xs border-collapse min-w-[1900px]">
+          <table class="w-full text-left text-xs border-collapse min-w-[2000px]">
             <thead class="bg-slate-100 text-slate-700 uppercase text-[11px] font-extrabold tracking-wider border-b border-slate-200 sticky top-0 z-10 shadow-xs">
               <tr>
                 <th class="py-3.5 px-3 text-center w-12 text-slate-500">#</th>
                 <th class="py-3.5 px-3 text-center w-24">CRM</th>
-                <th class="py-3.5 px-4 min-w-[220px]">Empresa / CNPJ / Fundação</th>
+                <th class="py-3.5 px-4 min-w-[220px]">Empresa / CNPJ / Sede</th>
                 <th class="py-3.5 px-4 min-w-[170px]">Segmento ICP</th>
                 <th class="py-3.5 px-4 min-w-[220px]">Resumo da Atividade</th>
                 <th class="py-3.5 px-4 min-w-[200px] bg-slate-50/70 border-x border-slate-200">Site & LinkedIn Empresa</th>
                 <th class="py-3.5 px-4 min-w-[200px]">CNAEs & Cadeia</th>
                 <th class="py-3.5 px-4 min-w-[260px]">Decisores QSA & LinkedIn</th>
                 <th class="py-3.5 px-4 min-w-[150px]">Canais Gerais</th>
-                <th class="py-3.5 px-4 min-w-[290px] bg-slate-50/90 border-x border-slate-200">Contato (Tentativas)</th>
-                <th class="py-3.5 px-4 min-w-[310px] bg-indigo-50/40 border-l border-slate-200 text-center">Mensagens Prontas (1 Clique)</th>
+                <th class="py-3.5 px-4 min-w-[260px] bg-slate-50/90 border-x border-slate-200">Contato Decisor</th>
+                <th class="py-3.5 px-4 min-w-[340px] bg-indigo-50/40 border-l border-slate-200 text-center">⚡ Disparo Direto (WhatsApp & E-mail)</th>
               </tr>
             </thead>
             <tbody id="tableBody" class="divide-y divide-slate-100 font-sans text-slate-700">
@@ -196,7 +185,7 @@
             </label>
             <select id="perPageFilter" onchange="changePerPage()" class="h-9 bg-white border border-slate-300 rounded-xl px-3 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-600 cursor-pointer shadow-2xs">
               <option value="1000" selected>📜 1.000 Leads (Rolagem Longa)</option>
-              <option value="ALL">♾️ Todos (3.000 em Página Única)</option>
+              <option value="ALL">♾️ Todos em Página Única</option>
               <option value="500">📄 500 Leads por Página</option>
               <option value="100">📄 100 Leads por Página</option>
               <option value="50">📄 50 Leads por Página</option>
@@ -221,19 +210,27 @@
       <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
         <div>
           <h2 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
-            <i class="fa-solid fa-chart-kanban text-indigo-500"></i> Pipeline CRM (6 Etapas Comerciais)
+            <i class="fa-solid fa-chart-kanban text-indigo-500"></i> Pipeline CRM (6 Etapas Comerciais Integradas)
           </h2>
-          <p class="text-xs text-slate-500">Gestão do funil de prospecção, qualificação, reuniões e fechamento de contratos.</p>
+          <p class="text-xs text-slate-500">Todas as abordagens disparadas via WhatsApp ou E-mail são automaticamente registradas na etapa <b>3. Abordagem / Contato</b>.</p>
         </div>
-        <div class="flex items-center gap-2">
-          <button onclick="exportCrmCsv()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition border border-slate-200 cursor-pointer">
-            <i class="fa-solid fa-file-csv mr-1"></i> Exportar CSV do CRM
+        <div class="flex items-center gap-2 flex-wrap">
+          <button onclick="openIntegrationsModal()" class="px-3.5 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-bold rounded-xl transition cursor-pointer flex items-center gap-1.5">
+            <i class="fa-solid fa-gear text-emerald-600"></i> Configurar Disparo
+          </button>
+          <button onclick="exportCrmCsv()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition border border-slate-200 cursor-pointer flex items-center gap-1.5">
+            <i class="fa-solid fa-file-csv text-slate-600"></i> Exportar CSV do CRM
+          </button>
+          <button onclick="exportCrmJson()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition border border-slate-200 cursor-pointer flex items-center gap-1.5">
+            <i class="fa-solid fa-download text-slate-600"></i> Backup JSON
           </button>
         </div>
       </div>
 
+      <!-- KANBAN BOARD DAS 6 ETAPAS -->
       <div class="overflow-x-auto pb-4">
         <div class="flex items-start gap-4 min-w-[1900px]">
+          <!-- 1. Prospecção -->
           <div class="kanban-col bg-slate-100/90 rounded-2xl border border-slate-200 p-3 flex flex-col gap-2">
             <div class="flex items-center justify-between px-1 pb-2 border-b border-slate-200">
               <span class="text-xs font-extrabold text-slate-800">1. Prospecção</span>
@@ -241,6 +238,7 @@
             </div>
             <div id="col-items-prospeccao" class="flex flex-col gap-2 min-h-[400px]"></div>
           </div>
+          <!-- 2. Qualificação -->
           <div class="kanban-col bg-blue-50/70 rounded-2xl border border-blue-200 p-3 flex flex-col gap-2">
             <div class="flex items-center justify-between px-1 pb-2 border-b border-blue-200">
               <span class="text-xs font-extrabold text-blue-900">2. Qualificação</span>
@@ -248,13 +246,18 @@
             </div>
             <div id="col-items-qualificacao" class="flex flex-col gap-2 min-h-[400px]"></div>
           </div>
-          <div class="kanban-col bg-amber-50/70 rounded-2xl border border-amber-200 p-3 flex flex-col gap-2">
-            <div class="flex items-center justify-between px-1 pb-2 border-b border-amber-200">
-              <span class="text-xs font-extrabold text-amber-900">3. Abordagem / Contato</span>
-              <span id="col-count-contato" class="text-[11px] font-mono font-bold bg-white text-amber-800 px-2 py-0.5 rounded-md border border-amber-200">0</span>
+          <!-- 3. Abordagem / Contato (AUTOMÁTICO) -->
+          <div class="kanban-col bg-amber-50/70 rounded-2xl border border-amber-300 p-3 flex flex-col gap-2 shadow-xs">
+            <div class="flex items-center justify-between px-1 pb-2 border-b border-amber-300">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                <span class="text-xs font-extrabold text-amber-950">3. Abordagem / Contato</span>
+              </div>
+              <span id="col-count-contato" class="text-[11px] font-mono font-black bg-amber-100 text-amber-900 px-2 py-0.5 rounded-md border border-amber-400">0</span>
             </div>
             <div id="col-items-contato" class="flex flex-col gap-2 min-h-[400px]"></div>
           </div>
+          <!-- 4. Reunião Agendada -->
           <div class="kanban-col bg-purple-50/70 rounded-2xl border border-purple-200 p-3 flex flex-col gap-2">
             <div class="flex items-center justify-between px-1 pb-2 border-b border-purple-200">
               <span class="text-xs font-extrabold text-purple-900">4. Reunião Agendada</span>
@@ -262,6 +265,7 @@
             </div>
             <div id="col-items-reuniao" class="flex flex-col gap-2 min-h-[400px]"></div>
           </div>
+          <!-- 5. Proposta / Negociação -->
           <div class="kanban-col bg-cyan-50/70 rounded-2xl border border-cyan-200 p-3 flex flex-col gap-2">
             <div class="flex items-center justify-between px-1 pb-2 border-b border-cyan-200">
               <span class="text-xs font-extrabold text-cyan-900">5. Proposta / Negociação</span>
@@ -269,6 +273,7 @@
             </div>
             <div id="col-items-proposta" class="flex flex-col gap-2 min-h-[400px]"></div>
           </div>
+          <!-- 6. Ganho / Fechado -->
           <div class="kanban-col bg-emerald-50/70 rounded-2xl border border-emerald-200 p-3 flex flex-col gap-2">
             <div class="flex items-center justify-between px-1 pb-2 border-b border-emerald-200">
               <span class="text-xs font-extrabold text-emerald-900">6. Ganho / Fechado</span>
@@ -280,6 +285,346 @@
       </div>
     </main>
 
+  </div>
+
+  <!-- MODAL DE CONFIGURAÇÕES DE INTEGRAÇÃO (WHATSAPP & EMAIL) -->
+  <div id="integrationsModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-3xl shadow-2xl max-w-2xl w-full overflow-hidden animate-in fade-in duration-200">
+      <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-sm">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-extrabold">Central de Integração & Disparo Direto</h3>
+            <p class="text-[11px] text-slate-300">Configure como o sistema abre seu WhatsApp e E-mail no celular ou computador.</p>
+          </div>
+        </div>
+        <button onclick="closeIntegrationsModal()" class="text-slate-400 hover:text-white text-lg font-bold p-1 rounded-lg hover:bg-slate-800 transition cursor-pointer">✕</button>
+      </div>
+
+      <div class="p-6 space-y-5 max-h-[80vh] overflow-y-auto">
+        
+        <!-- SEÇÃO WHATSAPP -->
+        <div class="bg-emerald-50/60 border border-emerald-200 rounded-2xl p-4 space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="p-1.5 bg-emerald-600 text-white rounded-lg text-xs"><i class="fa-brands fa-whatsapp"></i></span>
+              <span class="text-xs font-extrabold text-emerald-950">Disparo WhatsApp (Celular & Web/Desktop)</span>
+            </div>
+            <span class="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full border border-emerald-300">Zero Setup</span>
+          </div>
+          <p class="text-[11px] text-slate-600 leading-relaxed">O BDR Lead AI conecta diretamente com o seu WhatsApp do celular e com o WhatsApp Web no navegador. Ao clicar em <b>Disparar</b>, a conversa abre com o telefone e a mensagem de alto padrão já preenchida.</p>
+          
+          <div class="space-y-2 pt-1">
+            <label class="text-xs font-bold text-slate-700">Modo de Abertura do WhatsApp:</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <label class="flex items-center gap-2 bg-white p-2.5 rounded-xl border border-emerald-200 cursor-pointer hover:border-emerald-400 transition">
+                <input type="radio" name="wppMode" value="web" id="wppModeWeb" checked class="text-emerald-600 focus:ring-emerald-500">
+                <div>
+                  <div class="text-xs font-bold text-slate-800">WhatsApp Web / Desktop</div>
+                  <div class="text-[10px] text-slate-500">Universal para PC e Navegador</div>
+                </div>
+              </label>
+              <label class="flex items-center gap-2 bg-white p-2.5 rounded-xl border border-emerald-200 cursor-pointer hover:border-emerald-400 transition">
+                <input type="radio" name="wppMode" value="app" id="wppModeApp" class="text-emerald-600 focus:ring-emerald-500">
+                <div>
+                  <div class="text-xs font-bold text-slate-800">WhatsApp App Direto</div>
+                  <div class="text-[10px] text-slate-500">Abre direto no app do celular</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="pt-1 flex items-center gap-2">
+            <button onclick="testWppDispatch()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-xs cursor-pointer">
+              <i class="fa-solid fa-paper-plane"></i> Testar Disparo no WhatsApp
+            </button>
+            <span class="text-[10px] text-slate-500">Testa a abertura imediata do seu WhatsApp</span>
+          </div>
+        </div>
+
+        <!-- SEÇÃO E-MAIL -->
+        <div class="bg-sky-50/60 border border-sky-200 rounded-2xl p-4 space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="p-1.5 bg-sky-600 text-white rounded-lg text-xs"><i class="fa-solid fa-envelope"></i></span>
+              <span class="text-xs font-extrabold text-sky-950">Disparo de E-mail (Gmail, Outlook & App do Celular)</span>
+            </div>
+            <span class="text-[10px] font-bold bg-sky-100 text-sky-800 px-2 py-0.5 rounded-full border border-sky-300">Multi-Provedor</span>
+          </div>
+          <p class="text-[11px] text-slate-600 leading-relaxed">Escolha seu cliente de e-mail preferido. Ao clicar em <b>Enviar E-mail</b>, uma nova tela de composição abre com o destinatário, assunto estratégico e corpo consultivo prontos para envio.</p>
+          
+          <div class="space-y-2 pt-1">
+            <label class="text-xs font-bold text-slate-700">Provedor Padrão de E-mail:</label>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <label class="flex items-center gap-2 bg-white p-2.5 rounded-xl border border-sky-200 cursor-pointer hover:border-sky-400 transition">
+                <input type="radio" name="emailProvider" value="gmail" id="providerGmail" checked class="text-sky-600 focus:ring-sky-500">
+                <div>
+                  <div class="text-xs font-bold text-slate-800">Gmail Web</div>
+                  <div class="text-[10px] text-slate-500">Google Workspace</div>
+                </div>
+              </label>
+              <label class="flex items-center gap-2 bg-white p-2.5 rounded-xl border border-sky-200 cursor-pointer hover:border-sky-400 transition">
+                <input type="radio" name="emailProvider" value="outlook" id="providerOutlook" class="text-sky-600 focus:ring-sky-500">
+                <div>
+                  <div class="text-xs font-bold text-slate-800">Outlook Web</div>
+                  <div class="text-[10px] text-slate-500">Office 365</div>
+                </div>
+              </label>
+              <label class="flex items-center gap-2 bg-white p-2.5 rounded-xl border border-sky-200 cursor-pointer hover:border-sky-400 transition">
+                <input type="radio" name="emailProvider" value="mailto" id="providerMailto" class="text-sky-600 focus:ring-sky-500">
+                <div>
+                  <div class="text-xs font-bold text-slate-800">App Padrão</div>
+                  <div class="text-[10px] text-slate-500">Celular / Mailto:</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="pt-1 flex items-center gap-2">
+            <button onclick="testEmailDispatch()" class="px-3 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-xs cursor-pointer">
+              <i class="fa-solid fa-paper-plane"></i> Testar Disparo de E-mail
+            </button>
+            <span class="text-[10px] text-slate-500">Abre a tela de teste no provedor selecionado</span>
+          </div>
+        </div>
+
+        <!-- SEÇÃO AUTOMAÇÃO DE CRM -->
+        <div class="bg-indigo-50/60 border border-indigo-200 rounded-2xl p-4 space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="p-1.5 bg-indigo-600 text-white rounded-lg text-xs"><i class="fa-solid fa-robot"></i></span>
+            <span class="text-xs font-extrabold text-indigo-950">Automação com Pipeline CRM</span>
+          </div>
+          <div class="space-y-2">
+            <label class="flex items-start gap-2 cursor-pointer">
+              <input type="checkbox" id="autoCrmMove" checked class="mt-0.5 rounded text-indigo-600 focus:ring-indigo-500">
+              <span class="text-xs text-slate-700 font-medium">Mover lead <b>automaticamente</b> para a etapa <b>3. Abordagem / Contato</b> no CRM ao realizar qualquer disparo via WhatsApp ou E-mail.</span>
+            </label>
+            <label class="flex items-start gap-2 cursor-pointer">
+              <input type="checkbox" id="autoCrmLog" checked class="mt-0.5 rounded text-indigo-600 focus:ring-indigo-500">
+              <span class="text-xs text-slate-700 font-medium">Gravar histórico detalhado com data, hora, canal e dados do decisor abordado.</span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="px-6 py-4 bg-slate-100 border-t border-slate-200 flex items-center justify-end gap-2">
+        <button onclick="closeIntegrationsModal()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold rounded-xl transition cursor-pointer">Fechar</button>
+        <button onclick="saveIntegrationPreferences()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition shadow-md cursor-pointer">💾 Salvar Preferências</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE MENSAGENS PRONTAS PERSONALIZADAS POR LEAD -->
+  <div id="messagesModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-3xl shadow-2xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden animate-in fade-in duration-200">
+      <!-- Header do Modal -->
+      <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs bg-indigo-500 text-white font-mono px-2 py-0.5 rounded font-bold" id="modalLeadId">#1</span>
+            <h3 class="text-base font-extrabold" id="modalCompanyName">Nome da Empresa</h3>
+          </div>
+          <p class="text-xs text-slate-300 mt-0.5" id="modalLeadSub">CNPJ • Cidade/UF • Decisor: Nome (Cargo)</p>
+        </div>
+        <button onclick="closeMessagesModal()" class="text-slate-400 hover:text-white text-lg font-bold p-1 rounded-lg hover:bg-slate-800 transition cursor-pointer">✕</button>
+      </div>
+
+      <!-- Navegação de Abas do Modal -->
+      <div class="flex border-b border-slate-200 bg-slate-50 px-6 pt-2">
+        <button onclick="switchModalTab('socio')" id="modalTabSocioBtn" class="px-4 py-2 text-xs font-extrabold border-b-2 border-indigo-600 text-indigo-600 flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-user-tie"></i> 1. Contato Pessoal (Sócios & Diretores)
+        </button>
+        <button onclick="switchModalTab('empresa')" id="modalTabEmpresaBtn" class="px-4 py-2 text-xs font-extrabold border-b-2 border-transparent text-slate-500 hover:text-slate-800 flex items-center gap-1.5 cursor-pointer">
+          <i class="fa-solid fa-building"></i> 2. Contato Empresa (Institucional & Comercial)
+        </button>
+      </div>
+
+      <!-- Conteúdo do Modal -->
+      <div class="p-6 overflow-y-auto flex-1 space-y-4">
+        
+        <!-- ABA SÓCIO / DIRETORES -->
+        <div id="modalTabSocioContent" class="space-y-4">
+          <!-- Card 1: WhatsApp Sócio -->
+          <div class="bg-emerald-50/50 border border-emerald-200 rounded-2xl p-4 space-y-2.5 shadow-2xs">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="p-1.5 bg-emerald-600 text-white rounded-lg text-xs"><i class="fa-brands fa-whatsapp"></i></span>
+                <span class="text-xs font-extrabold text-emerald-950">WhatsApp Direto ao Sócio / Diretor</span>
+                <span id="modalSocioPhoneBadge" class="text-[10px] font-mono font-bold bg-white text-emerald-700 px-2 py-0.5 rounded border border-emerald-300"></span>
+              </div>
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <button onclick="triggerModalDispatch('wpp_socio')" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1.5 transition">
+                  <i class="fa-brands fa-whatsapp"></i> 🚀 Disparar WhatsApp (+CRM)
+                </button>
+                <button onclick="copyModalField('modalWppSocioText', '✅ WhatsApp Sócio copiado!')" class="px-3 py-1.5 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded-xl text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1">
+                  <i class="fa-solid fa-copy"></i> Copiar
+                </button>
+              </div>
+            </div>
+            <textarea id="modalWppSocioText" rows="4" class="w-full bg-white border border-emerald-200 rounded-xl p-3 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-sans leading-relaxed shadow-inner"></textarea>
+          </div>
+
+          <!-- Card 2: Email Sócio -->
+          <div class="bg-sky-50/50 border border-sky-200 rounded-2xl p-4 space-y-2.5 shadow-2xs">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="p-1.5 bg-sky-600 text-white rounded-lg text-xs"><i class="fa-solid fa-envelope"></i></span>
+                <span class="text-xs font-extrabold text-sky-950">E-mail Direto ao Sócio / C-Level</span>
+                <span id="modalSocioEmailBadge" class="text-[10px] font-mono font-bold bg-white text-sky-700 px-2 py-0.5 rounded border border-sky-300"></span>
+              </div>
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <button onclick="triggerModalDispatch('email_socio')" class="px-3.5 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1.5 transition">
+                  <i class="fa-solid fa-paper-plane"></i> ✉️ Enviar E-mail (+CRM)
+                </button>
+                <button onclick="copyModalEmail('modalEmailSocioSubject', 'modalEmailSocioBody', '✅ E-mail completo do Sócio copiado!')" class="px-3 py-1.5 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded-xl text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1">
+                  <i class="fa-solid fa-copy"></i> Copiar
+                </button>
+              </div>
+            </div>
+            <div class="space-y-1.5">
+              <input type="text" id="modalEmailSocioSubject" class="w-full bg-white border border-sky-200 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-800" readonly>
+              <textarea id="modalEmailSocioBody" rows="5" class="w-full bg-white border border-sky-200 rounded-xl p-3 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-500 font-sans leading-relaxed shadow-inner"></textarea>
+            </div>
+          </div>
+
+          <!-- Card 3: LinkedIn Sócio -->
+          <div class="bg-blue-50/50 border border-blue-200 rounded-2xl p-4 space-y-2.5 shadow-2xs">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="p-1.5 bg-blue-600 text-white rounded-lg text-xs"><i class="fa-brands fa-linkedin"></i></span>
+                <span class="text-xs font-extrabold text-blue-950">LinkedIn InMail / Conexão Sócio</span>
+                <span id="modalSocioLinkedinBadge" class="text-[10px] font-mono font-bold bg-white text-blue-700 px-2 py-0.5 rounded border border-blue-300"></span>
+              </div>
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <button onclick="triggerModalDispatch('linkedin_socio')" class="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1.5 transition">
+                  <i class="fa-brands fa-linkedin"></i> Abrir Perfil (+CRM)
+                </button>
+                <button onclick="copyModalField('modalLinkedinSocioText', '✅ Pitch de LinkedIn do Sócio copiado!')" class="px-3 py-1.5 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded-xl text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1">
+                  <i class="fa-solid fa-copy"></i> Copiar Mensagem
+                </button>
+              </div>
+            </div>
+            <textarea id="modalLinkedinSocioText" rows="4" class="w-full bg-white border border-blue-200 rounded-xl p-3 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 font-sans leading-relaxed shadow-inner"></textarea>
+          </div>
+        </div>
+
+        <!-- ABA EMPRESA / INSTITUCIONAL -->
+        <div id="modalTabEmpresaContent" class="space-y-4 hidden">
+          <!-- Card 4: WhatsApp Empresa -->
+          <div class="bg-teal-50/50 border border-teal-200 rounded-2xl p-4 space-y-2.5 shadow-2xs">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="p-1.5 bg-teal-600 text-white rounded-lg text-xs"><i class="fa-brands fa-whatsapp"></i></span>
+                <span class="text-xs font-extrabold text-teal-950">WhatsApp Comercial / Geral da Empresa</span>
+                <span id="modalEmpresaPhoneBadge" class="text-[10px] font-mono font-bold bg-white text-teal-700 px-2 py-0.5 rounded border border-teal-300"></span>
+              </div>
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <button onclick="triggerModalDispatch('wpp_empresa')" class="px-3.5 py-1.5 bg-teal-600 hover:bg-teal-700 text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1.5 transition">
+                  <i class="fa-brands fa-whatsapp"></i> 🚀 Disparar WhatsApp (+CRM)
+                </button>
+                <button onclick="copyModalField('modalWppEmpresaText', '✅ WhatsApp Comercial copiado!')" class="px-3 py-1.5 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded-xl text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1">
+                  <i class="fa-solid fa-copy"></i> Copiar
+                </button>
+              </div>
+            </div>
+            <textarea id="modalWppEmpresaText" rows="4" class="w-full bg-white border border-teal-200 rounded-xl p-3 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500 font-sans leading-relaxed shadow-inner"></textarea>
+          </div>
+
+          <!-- Card 5: Email Corporativo -->
+          <div class="bg-violet-50/50 border border-violet-200 rounded-2xl p-4 space-y-2.5 shadow-2xs">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="p-1.5 bg-violet-600 text-white rounded-lg text-xs"><i class="fa-solid fa-building"></i></span>
+                <span class="text-xs font-extrabold text-violet-950">E-mail Institucional / Diretoria</span>
+                <span id="modalEmpresaEmailBadge" class="text-[10px] font-mono font-bold bg-white text-violet-700 px-2 py-0.5 rounded border border-violet-300"></span>
+              </div>
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <button onclick="triggerModalDispatch('email_empresa')" class="px-3.5 py-1.5 bg-violet-600 hover:bg-violet-700 text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1.5 transition">
+                  <i class="fa-solid fa-paper-plane"></i> ✉️ Enviar E-mail (+CRM)
+                </button>
+                <button onclick="copyModalEmail('modalEmailEmpresaSubject', 'modalEmailEmpresaBody', '✅ E-mail institucional copiado!')" class="px-3 py-1.5 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded-xl text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1">
+                  <i class="fa-solid fa-copy"></i> Copiar
+                </button>
+              </div>
+            </div>
+            <div class="space-y-1.5">
+              <input type="text" id="modalEmailEmpresaSubject" class="w-full bg-white border border-violet-200 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-800" readonly>
+              <textarea id="modalEmailEmpresaBody" rows="5" class="w-full bg-white border border-violet-200 rounded-xl p-3 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-violet-500 font-sans leading-relaxed shadow-inner"></textarea>
+            </div>
+          </div>
+
+          <!-- Card 6: LinkedIn Empresa -->
+          <div class="bg-indigo-50/50 border border-indigo-200 rounded-2xl p-4 space-y-2.5 shadow-2xs">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span class="p-1.5 bg-indigo-600 text-white rounded-lg text-xs"><i class="fa-brands fa-linkedin"></i></span>
+                <span class="text-xs font-extrabold text-indigo-950">LinkedIn Corporativo (Página da Empresa)</span>
+              </div>
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <button onclick="triggerModalDispatch('linkedin_empresa')" class="px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1.5 transition">
+                  <i class="fa-brands fa-linkedin"></i> Abrir Página (+CRM)
+                </button>
+                <button onclick="copyModalField('modalLinkedinEmpresaText', '✅ Mensagem Corporativa copiada!')" class="px-3 py-1.5 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded-xl text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1">
+                  <i class="fa-solid fa-copy"></i> Copiar Mensagem
+                </button>
+              </div>
+            </div>
+            <textarea id="modalLinkedinEmpresaText" rows="4" class="w-full bg-white border border-indigo-200 rounded-xl p-3 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-sans leading-relaxed shadow-inner"></textarea>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE DETALHES DO DEAL NO CRM -->
+  <div id="crmDealModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-3xl shadow-2xl max-w-2xl w-full overflow-hidden animate-in fade-in duration-200">
+      <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between">
+        <div>
+          <h3 class="text-sm font-extrabold" id="crmModalTitle">Oportunidade CRM</h3>
+          <p class="text-[11px] text-slate-300" id="crmModalSubtitle">Gerencie o estágio comercial e histórico de contatos.</p>
+        </div>
+        <button onclick="closeCrmDealModal()" class="text-slate-400 hover:text-white text-lg font-bold p-1 rounded-lg hover:bg-slate-800 transition cursor-pointer">✕</button>
+      </div>
+      <div class="p-6 space-y-4 max-h-[80vh] overflow-y-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="text-xs font-bold text-slate-700">Etapa do Pipeline:</label>
+            <select id="crmModalStage" class="w-full mt-1 bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+              <option value="prospeccao">1. Prospecção</option>
+              <option value="qualificacao">2. Qualificação</option>
+              <option value="contato">3. Abordagem / Contato</option>
+              <option value="reuniao">4. Reunião Agendada</option>
+              <option value="proposta">5. Proposta / Negociação</option>
+              <option value="fechado">6. Ganho / Fechado</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-xs font-bold text-slate-700">Patrimônio / Volume Estimado (R$):</label>
+            <input type="number" id="crmModalPatrimonio" class="w-full mt-1 bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800" placeholder="10000000">
+          </div>
+        </div>
+        <div>
+          <label class="text-xs font-bold text-slate-700">Nova Nota de Follow-up / Histórico:</label>
+          <textarea id="crmModalNewNote" rows="2" class="w-full mt-1 bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs text-slate-800" placeholder="Ex: Decisor demonstrou interesse em estruturação tributária..."></textarea>
+        </div>
+        <div>
+          <label class="text-xs font-bold text-slate-700">Histórico de Atividades & Disparos:</label>
+          <div id="crmModalNotesList" class="mt-1 space-y-2 max-h-40 overflow-y-auto p-2 bg-slate-50 rounded-xl border border-slate-200"></div>
+        </div>
+      </div>
+      <div class="px-6 py-4 bg-slate-100 border-t border-slate-200 flex items-center justify-between">
+        <button onclick="deleteCurrentDeal()" class="px-3 py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-bold rounded-xl transition border border-rose-200 cursor-pointer">Excluir do CRM</button>
+        <div class="flex items-center gap-2">
+          <button onclick="closeCrmDealModal()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold rounded-xl transition cursor-pointer">Cancelar</button>
+          <button onclick="saveCurrentDealModal()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition shadow-md cursor-pointer">Salvar Oportunidade</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -1190,20 +1535,412 @@
     let currentPage = 1;
     let itemsPerPage = 1000;
     let filteredDataList = [];
+    let activeModalLead = null;
+    let activeCrmDealId = null;
 
-    function changePerPage() {
-      const sel = document.getElementById('perPageFilter');
-      if (!sel) return;
-      const val = sel.value;
-      if (val === 'ALL') {
-        itemsPerPage = 999999;
-      } else {
-        itemsPerPage = parseInt(val, 10);
-      }
-      currentPage = 1;
-      renderTable();
+    // ========================================================
+    // GESTÃO DE PREFERÊNCIAS DE INTEGRAÇÃO
+    // ========================================================
+    function getIntegrationSettings() {
+      try {
+        const saved = localStorage.getItem('prx_integration_settings');
+        if (saved) return JSON.parse(saved);
+      } catch(e) {}
+      return { wppMode: 'web', emailProvider: 'gmail', autoCrmMove: true, autoCrmLog: true };
     }
 
+    function openIntegrationsModal() {
+      const cfg = getIntegrationSettings();
+      if (document.getElementById('wppModeWeb')) document.getElementById('wppModeWeb').checked = (cfg.wppMode === 'web');
+      if (document.getElementById('wppModeApp')) document.getElementById('wppModeApp').checked = (cfg.wppMode === 'app');
+      if (document.getElementById('providerGmail')) document.getElementById('providerGmail').checked = (cfg.emailProvider === 'gmail');
+      if (document.getElementById('providerOutlook')) document.getElementById('providerOutlook').checked = (cfg.emailProvider === 'outlook');
+      if (document.getElementById('providerMailto')) document.getElementById('providerMailto').checked = (cfg.emailProvider === 'mailto');
+      if (document.getElementById('autoCrmMove')) document.getElementById('autoCrmMove').checked = (cfg.autoCrmMove !== false);
+      if (document.getElementById('autoCrmLog')) document.getElementById('autoCrmLog').checked = (cfg.autoCrmLog !== false);
+      document.getElementById('integrationsModal').classList.remove('hidden');
+      document.getElementById('integrationsModal').classList.add('flex');
+    }
+
+    function closeIntegrationsModal() {
+      document.getElementById('integrationsModal').classList.add('hidden');
+      document.getElementById('integrationsModal').classList.remove('flex');
+    }
+
+    function saveIntegrationPreferences() {
+      const wppMode = document.querySelector('input[name="wppMode"]:checked')?.value || 'web';
+      const emailProvider = document.querySelector('input[name="emailProvider"]:checked')?.value || 'gmail';
+      const autoCrmMove = document.getElementById('autoCrmMove')?.checked ?? true;
+      const autoCrmLog = document.getElementById('autoCrmLog')?.checked ?? true;
+      const cfg = { wppMode, emailProvider, autoCrmMove, autoCrmLog };
+      localStorage.setItem('prx_integration_settings', JSON.stringify(cfg));
+      closeIntegrationsModal();
+      showToast('✅ Preferências de integração salvas com sucesso!');
+    }
+
+    function testWppDispatch() {
+      const cfg = getIntegrationSettings();
+      const testMsg = 'Olá! Teste de integração do motor BDR - Lead AI da PRX Capital.';
+      const url = cfg.wppMode === 'app' ? `whatsapp://send?text=${encodeURIComponent(testMsg)}` : `https://api.whatsapp.com/send?text=${encodeURIComponent(testMsg)}`;
+      window.open(url, '_blank');
+      showToast('📲 Disparo de teste do WhatsApp iniciado!');
+    }
+
+    function testEmailDispatch() {
+      const cfg = getIntegrationSettings();
+      const to = 'contato@prxcapital.com.br';
+      const su = 'Teste de Integração de E-mail | PRX Capital';
+      const body = 'Prezado(a),\n\nEste é um teste de disparo do BDR Lead AI da PRX Capital.\n\nAtenciosamente,\nDaniel Zanon | PRX Capital';
+      let url = `mailto:${to}?subject=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
+      if (cfg.emailProvider === 'gmail') {
+        url = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
+      } else if (cfg.emailProvider === 'outlook') {
+        url = `https://outlook.office.com/mail/deeplink/compose?to=${encodeURIComponent(to)}&subject=${encodeURIComponent(su)}&body=${encodeURIComponent(body)}`;
+      }
+      window.open(url, '_blank');
+      showToast('✉️ Disparo de teste de E-mail iniciado!');
+    }
+
+    // ========================================================
+    // GESTÃO DE SCRIPTS E MENSAGENS PERSONALIZADAS (PERSONA)
+    // ========================================================
+    function getLeadMessages(lead) {
+      if (!lead) return {};
+      const d1 = (lead.decisores && lead.decisores.length > 0) ? lead.decisores[0] : { nome: 'Sócio / Diretor', cargo: 'Diretor Geral', linkedin: '', contato: '' };
+      const d1Nome = d1.nome || 'Sócio / Diretor';
+      const d1Cargo = d1.cargo || 'Diretor Geral';
+      const d1Linkedin = d1.linkedin || '';
+      const d1Contato = lead.contatoPessoal || d1.contato || lead.fone || '';
+      const empresa = lead.company || 'Empresa';
+      const cidade = lead.city || 'São Paulo';
+      const uf = lead.uf || 'SP';
+      const segmento = lead.segmentoNome || 'Segmento B2B';
+      const cnpj = lead.cnpj || '';
+      const emailEmpresa = lead.email || '';
+      const foneEmpresa = lead.fone || '';
+
+      return {
+        d1Nome,
+        d1Cargo,
+        d1Linkedin,
+        d1Contato,
+        empresa,
+        cidade,
+        uf,
+        segmento,
+        cnpj,
+        emailEmpresa,
+        foneEmpresa,
+        wppSocio: `Olá, ${d1Nome}! Tudo bem?\n\nAqui é o Daniel Zanon, executivo da PRX Capital (prxcapital.com.br).\n\nLocalizei seu contato por vias públicas e profissionais ao acompanhar a expressiva atuação da ${empresa} em ${cidade}-${uf}.\n\nA PRX atua como multi-family office e boutique financeira, assessorando empresários e famílias com patrimônio imobiliário, empresas e liquidez financeira em corretoras.\n\nNossas frentes centrais abrangem:\n• Estruturação e revisão tributária e sucessória;\n• Gestão e assessoria de investimentos e câmbio;\n• Soluções de crédito estruturado, funding e antecipação de recebíveis;\n• Proteção patrimonial e gestão de liquidez.\n\nNosso propósito é reduzir fricções tributárias/bancárias, viabilizar liquidez e proteger o patrimônio construído.\n\nTeria disponibilidade para um breve alinhamento de 15 minutos nesta semana?\n\nUm abraço,\nDaniel Zanon | PRX Capital`,
+        emailSocioAssunto: `Alinhamento estratégico & multi-family office | A/C ${d1Nome} (${empresa})`,
+        emailSocioCorpo: `Prezado(a) ${d1Nome},\n\nMeu nome é Daniel Zanon, sou executivo da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira. Localizei seu contato por vias públicas e profissionais ao analisar a trajetória de destaque da ${empresa} em ${cidade}-${uf}.\n\nA PRX desenvolve uma atuação consultiva e exclusiva voltada para famílias e empresários com patrimônio imobiliário, empresas e liquidez financeira em corretoras.\n\nNossas frentes de atuação abrangem:\n1. Estruturação e revisão tributária/sucessória;\n2. Gestão e assessoria de investimentos e operações de câmbio;\n3. Soluções de crédito, funding e antecipação de recebíveis;\n4. Proteção patrimonial e gestão de liquidez.\n\nO benefício central do nosso trabalho é reduzir fricção tributária/bancária, viabilizar liquidez eficiente e proteger o patrimônio empresarial e familiar (CNPJ: ${cnpj}).\n\nGostaria de propor um alinhamento inicial de 15 minutos nesta semana para apresentar nossas soluções.\n\nVocê teria disponibilidade nesta quinta ou sexta-feira pela manhã?\n\nAtenciosamente,\n\nDaniel Zanon\nExecutivo | PRX Capital\nprxcapital.com.br`,
+        linkedinSocio: `Olá, ${d1Nome}, um prazer conectar!\n\nAcompanho a sua liderança à frente da ${empresa} em ${cidade}-${uf}.\n\nSou executivo na PRX Capital (prxcapital.com.br), multi-family office e boutique financeira. Apoiamos empresários e famílias com empresas, patrimônio imobiliário e liquidez na estruturação tributária/sucessória, investimentos, câmbio e crédito estruturado.\n\nO propósito é reduzir fricções bancárias e fiscais e blindar o patrimônio.\n\nSeria uma honra trocar uma ideia de 15 minutos nesta semana. Como está sua agenda?\n\nUm abraço,\nDaniel Zanon`,
+        wppEmpresa: `Olá, equipe da ${empresa}! Tudo bem?\n\nAqui é o Daniel Zanon, da PRX Capital (prxcapital.com.br), boutique financeira e multi-family office.\n\nLocalizamos o contato da empresa por canais públicos em virtude da relevância de vocês no setor de ${segmento} em ${cidade}-${uf}.\n\nAtuamos diretamente com empresários e diretorias em estruturação tributária, crédito estruturado/funding, câmbio e gestão patrimonial de controladores.\n\nGostaríamos de apresentar um breve alinhamento estratégico de 15 minutos ao(à) ${d1Nome} (${d1Cargo}) ou à Diretoria Financeira.\n\nCom quem do time podemos agendar ou enviar o convite?\n\nAgradeço pela atenção!\nDaniel Zanon | PRX Capital`,
+        emailEmpresaAssunto: `Apresentação Consultiva & Multi-Family Office | A/C Diretoria da ${empresa}`,
+        emailEmpresaCorpo: `Prezada Equipe da ${empresa},\n\nMeu nome é Daniel Zanon, sou executivo da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira especializada no atendimento a empresários, indústrias e grupos econômicos consolidados.\n\nIdentificamos a relevante atuação da ${empresa} no segmento de ${segmento} em ${cidade}-${uf} através de registros públicos e corporativos.\n\nApoiamos empresas e seus controladores em:\n• Revisão e estruturação tributária/sucessória de sócios;\n• Soluções de crédito, funding e antecipação de recebíveis;\n• Assessoria em câmbio comercial e gestão de investimentos;\n• Proteção patrimonial e governança de liquidez.\n\nGostaríamos de solicitar um breve alinhamento de 15 minutos com o(a) ${d1Nome} (${d1Cargo}) ou com a Diretoria Financeira para apresentar nossas soluções estratégicas.\n\nPoderiam, por gentileza, direcionar esta mensagem ao responsável ou informar o canal de agenda executiva?\n\nAtenciosamente,\n\nDaniel Zanon\nExecutivo | PRX Capital\nprxcapital.com.br`,
+        linkedinEmpresa: `Olá, equipe da ${empresa}!\n\nParabéns pelo excelente posicionamento e relevância no mercado de ${segmento}.\n\nSou Daniel Zanon, executivo da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira. Assessoramos diretorias e controladores em soluções de crédito estruturado, câmbio comercial, eficiência tributária e gestão patrimonial.\n\nGostaríamos de solicitar um contato com o(a) ${d1Nome} (${d1Cargo}) ou com a Diretoria Financeira para um alinhamento inicial de 15 minutos.\n\nMuito obrigado e excelente semana a toda a equipe!`
+      };
+    }
+
+    // ========================================================
+    // MOTOR DE DISPARO DIRETO E AUTO-ANEXO NO CRM
+    // ========================================================
+    function executeLeadDispatch(leadId, channel) {
+      const item = prospects.find(p => p.id === leadId);
+      if (!item) return;
+
+      const msgs = getLeadMessages(item);
+      const cfg = getIntegrationSettings();
+      let channelName = '';
+      let contactTarget = '';
+
+      if (channel === 'wpp_socio') {
+        channelName = 'WhatsApp Sócio';
+        contactTarget = msgs.d1Contato || item.fone || '';
+        const cleanPhone = contactTarget.replace(/\D/g, '');
+        const phoneParam = cleanPhone ? `55${cleanPhone.replace(/^55/, '')}` : '';
+        const url = (cfg.wppMode === 'app')
+          ? (phoneParam ? `whatsapp://send?phone=${phoneParam}&text=${encodeURIComponent(msgs.wppSocio)}` : `whatsapp://send?text=${encodeURIComponent(msgs.wppSocio)}`)
+          : (phoneParam ? `https://api.whatsapp.com/send?phone=${phoneParam}&text=${encodeURIComponent(msgs.wppSocio)}` : `https://api.whatsapp.com/send?text=${encodeURIComponent(msgs.wppSocio)}`);
+        window.open(url, '_blank');
+      } else if (channel === 'wpp_empresa') {
+        channelName = 'WhatsApp Empresa';
+        contactTarget = item.fone || '';
+        const cleanPhone = contactTarget.replace(/\D/g, '');
+        const phoneParam = cleanPhone ? `55${cleanPhone.replace(/^55/, '')}` : '';
+        const url = (cfg.wppMode === 'app')
+          ? (phoneParam ? `whatsapp://send?phone=${phoneParam}&text=${encodeURIComponent(msgs.wppEmpresa)}` : `whatsapp://send?text=${encodeURIComponent(msgs.wppEmpresa)}`)
+          : (phoneParam ? `https://api.whatsapp.com/send?phone=${phoneParam}&text=${encodeURIComponent(msgs.wppEmpresa)}` : `https://api.whatsapp.com/send?text=${encodeURIComponent(msgs.wppEmpresa)}`);
+        window.open(url, '_blank');
+      } else if (channel === 'email_socio') {
+        channelName = 'E-mail Sócio';
+        contactTarget = item.email ? item.email.split('/')[0].trim() : '';
+        let url = `mailto:${contactTarget}?subject=${encodeURIComponent(msgs.emailSocioAssunto)}&body=${encodeURIComponent(msgs.emailSocioCorpo)}`;
+        if (cfg.emailProvider === 'gmail') {
+          url = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(contactTarget)}&su=${encodeURIComponent(msgs.emailSocioAssunto)}&body=${encodeURIComponent(msgs.emailSocioCorpo)}`;
+        } else if (cfg.emailProvider === 'outlook') {
+          url = `https://outlook.office.com/mail/deeplink/compose?to=${encodeURIComponent(contactTarget)}&subject=${encodeURIComponent(msgs.emailSocioAssunto)}&body=${encodeURIComponent(msgs.emailSocioCorpo)}`;
+        }
+        window.open(url, '_blank');
+      } else if (channel === 'email_empresa') {
+        channelName = 'E-mail Empresa';
+        contactTarget = item.email ? item.email.split('/')[0].trim() : '';
+        let url = `mailto:${contactTarget}?subject=${encodeURIComponent(msgs.emailEmpresaAssunto)}&body=${encodeURIComponent(msgs.emailEmpresaCorpo)}`;
+        if (cfg.emailProvider === 'gmail') {
+          url = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(contactTarget)}&su=${encodeURIComponent(msgs.emailEmpresaAssunto)}&body=${encodeURIComponent(msgs.emailEmpresaCorpo)}`;
+        } else if (cfg.emailProvider === 'outlook') {
+          url = `https://outlook.office.com/mail/deeplink/compose?to=${encodeURIComponent(contactTarget)}&subject=${encodeURIComponent(msgs.emailEmpresaAssunto)}&body=${encodeURIComponent(msgs.emailEmpresaCorpo)}`;
+        }
+        window.open(url, '_blank');
+      } else if (channel === 'linkedin_socio') {
+        channelName = 'LinkedIn Sócio';
+        contactTarget = msgs.d1Linkedin || msgs.d1Nome;
+        const url = msgs.d1Linkedin || `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(msgs.d1Nome + ' ' + item.company)}`;
+        window.open(url, '_blank');
+      } else if (channel === 'linkedin_empresa') {
+        channelName = 'LinkedIn Empresa';
+        contactTarget = item.company;
+        const url = `https://www.linkedin.com/search/results/companies/?keywords=${encodeURIComponent(item.company)}`;
+        window.open(url, '_blank');
+      }
+
+      // Auto-anexo no CRM na etapa 3. Abordagem / Contato
+      if (cfg.autoCrmMove) {
+        autoAttachLeadToCrm(item, channelName, contactTarget);
+      }
+
+      showToast(`🚀 Disparo [${channelName}] iniciado! Lead #${item.id} (${item.company}) anexado ao CRM.`);
+    }
+
+    function triggerModalDispatch(channel) {
+      if (!activeModalLead) return;
+      executeLeadDispatch(activeModalLead.id, channel);
+    }
+
+    // ========================================================
+    // MOTOR DO PIPELINE CRM & PERSISTÊNCIA
+    // ========================================================
+    function getCrmDeals() {
+      try {
+        const saved = localStorage.getItem('prx_crm_deals_v2');
+        if (saved) return JSON.parse(saved);
+      } catch(e) {}
+      return [];
+    }
+
+    function saveCrmDeals(deals) {
+      localStorage.setItem('prx_crm_deals_v2', JSON.stringify(deals));
+      updateCrmCounters();
+    }
+
+    function autoAttachLeadToCrm(item, channelName, contactTarget) {
+      let deals = getCrmDeals();
+      let existing = deals.find(d => d.prospectId === item.id || (d.company && d.company.toLowerCase() === item.company.toLowerCase()));
+      const nowStr = new Date().toLocaleString('pt-BR');
+      const logNote = `Disparo [${channelName}] realizado em ${nowStr} para ${item.decisores?.[0]?.nome || 'Decisor'} (${contactTarget}).`;
+
+      if (!existing) {
+        const newDeal = {
+          id: 'deal_' + item.id + '_' + Date.now(),
+          prospectId: item.id,
+          company: item.company,
+          cnpj: item.cnpj,
+          uf: item.uf,
+          city: item.city,
+          corSegmento: item.corSegmento,
+          segmentoNome: item.segmentoNome,
+          setor: item.setor || '',
+          decisorNome: item.decisores?.[0]?.nome || 'Sócio / Diretor',
+          decisorCargo: item.decisores?.[0]?.cargo || 'Diretor Geral',
+          decisorLinkedin: item.decisores?.[0]?.linkedin || '',
+          fone: item.contatoPessoal || item.fone || '',
+          email: item.email || '',
+          stage: 'contato',
+          patrimonio: 15000000,
+          scoreBdr: item.scorePrx || 85,
+          lastChannel: channelName,
+          lastContactAt: nowStr,
+          createdAt: new Date().toISOString(),
+          notes: [{ date: nowStr, text: logNote }]
+        };
+        deals.unshift(newDeal);
+      } else {
+        if (existing.stage === 'prospeccao' || existing.stage === 'qualificacao') {
+          existing.stage = 'contato';
+        }
+        existing.lastChannel = channelName;
+        existing.lastContactAt = nowStr;
+        if (!existing.notes) existing.notes = [];
+        existing.notes.unshift({ date: nowStr, text: logNote });
+      }
+
+      saveCrmDeals(deals);
+      renderCrmPipeline();
+    }
+
+    function addToCrm(id) {
+      const item = prospects.find(p => p.id === id);
+      if (!item) return;
+      autoAttachLeadToCrm(item, 'Inclusão Manual', item.fone);
+      showToast(`Lead #${id} adicionado ao Pipeline CRM!`);
+    }
+
+    function updateCrmCounters() {
+      const deals = getCrmDeals();
+      const contactedCount = deals.filter(d => d.stage !== 'prospeccao').length;
+      const badge = document.getElementById('tabCrmBadge');
+      if (badge) badge.innerText = deals.length.toLocaleString('pt-BR');
+      const contactedHeader = document.getElementById('contactedHeaderCount');
+      if (contactedHeader) contactedHeader.innerText = contactedCount.toLocaleString('pt-BR');
+    }
+
+    function renderCrmPipeline() {
+      const deals = getCrmDeals();
+      const stages = ['prospeccao', 'qualificacao', 'contato', 'reuniao', 'proposta', 'fechado'];
+      const stageMap = { prospeccao: [], qualificacao: [], contato: [], reuniao: [], proposta: [], fechado: [] };
+
+      deals.forEach(d => {
+        const stg = d.stage || 'prospeccao';
+        if (stageMap[stg]) stageMap[stg].push(d);
+        else stageMap['prospeccao'].push(d);
+      });
+
+      stages.forEach(stg => {
+        const col = document.getElementById('col-items-' + stg);
+        const badge = document.getElementById('col-count-' + stg);
+        if (badge) badge.innerText = stageMap[stg].length;
+        if (!col) return;
+
+        if (stageMap[stg].length === 0) {
+          col.innerHTML = '<div class="h-32 border-2 border-dashed border-slate-200 rounded-xl flex items-center justify-center text-slate-400 text-[11px] font-medium">Nenhum lead nesta etapa</div>';
+          return;
+        }
+
+        let html = '';
+        stageMap[stg].forEach(d => {
+          const lastNote = (d.notes && d.notes.length > 0) ? d.notes[0].text : 'Sem histórico';
+          const lastChannelBadge = d.lastChannel ? `<span class="text-[9px] font-bold bg-amber-100 text-amber-900 border border-amber-300 px-1.5 py-0.5 rounded">⚡ ${d.lastChannel}</span>` : '';
+          html += `
+            <div onclick="openDealDetailsModal('${d.id}')" class="bg-white rounded-2xl border border-slate-200 p-3 shadow-2xs hover:shadow-md transition cursor-pointer flex flex-col gap-2 group">
+              <div class="flex items-start justify-between gap-1">
+                <span class="text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-slate-100 text-slate-800">${d.segmentoNome || 'B2B'}</span>
+                ${lastChannelBadge}
+              </div>
+              <div>
+                <h4 class="font-extrabold text-slate-900 text-xs leading-snug group-hover:text-indigo-600 transition">${d.company}</h4>
+                <div class="text-[11px] text-slate-600 font-medium mt-0.5"><i class="fa-solid fa-user-tie text-slate-400 text-[10px]"></i> ${d.decisorNome} (${d.decisorCargo})</div>
+                <div class="text-[10px] text-slate-400">${d.city} - ${d.uf}</div>
+              </div>
+              <div class="text-[10px] text-slate-500 italic bg-slate-50 p-2 rounded-xl border border-slate-100 line-clamp-2">
+                "${lastNote}"
+              </div>
+              <div class="flex items-center justify-between pt-1 border-t border-slate-100 text-[10px]">
+                <span class="font-bold text-emerald-700">R$ ${((d.patrimonio || 15000000) / 1000000).toFixed(1)}M</span>
+                <span class="text-indigo-600 font-bold group-hover:underline">Ver Detalhes ▶</span>
+              </div>
+            </div>
+          `;
+        });
+        col.innerHTML = html;
+      });
+
+      updateCrmCounters();
+    }
+
+    function openDealDetailsModal(dealId) {
+      const deals = getCrmDeals();
+      const d = deals.find(x => x.id === dealId);
+      if (!d) return;
+      activeCrmDealId = dealId;
+      document.getElementById('crmModalTitle').innerText = `${d.company} (Lead #${d.prospectId || ''})`;
+      document.getElementById('crmModalSubtitle').innerText = `${d.cnpj} • ${d.city}-${d.uf} • Decisor: ${d.decisorNome} (${d.decisorCargo})`;
+      document.getElementById('crmModalStage').value = d.stage || 'contato';
+      document.getElementById('crmModalPatrimonio').value = d.patrimonio || 15000000;
+      document.getElementById('crmModalNewNote').value = '';
+
+      const list = document.getElementById('crmModalNotesList');
+      if (d.notes && d.notes.length > 0) {
+        list.innerHTML = d.notes.map(n => `<div class="text-[11px] p-2 bg-white rounded-lg border border-slate-200"><span class="font-bold text-slate-800">${n.date}:</span> <span class="text-slate-600">${n.text}</span></div>`).join('');
+      } else {
+        list.innerHTML = '<div class="text-[11px] text-slate-400 italic p-1">Nenhum registro histórico.</div>';
+      }
+
+      document.getElementById('crmDealModal').classList.remove('hidden');
+      document.getElementById('crmDealModal').classList.add('flex');
+    }
+
+    function closeCrmDealModal() {
+      document.getElementById('crmDealModal').classList.add('hidden');
+      document.getElementById('crmDealModal').classList.remove('flex');
+      activeCrmDealId = null;
+    }
+
+    function saveCurrentDealModal() {
+      if (!activeCrmDealId) return;
+      let deals = getCrmDeals();
+      let d = deals.find(x => x.id === activeCrmDealId);
+      if (!d) return;
+
+      const newStage = document.getElementById('crmModalStage').value;
+      const newPatrimonio = parseFloat(document.getElementById('crmModalPatrimonio').value) || 15000000;
+      const noteText = document.getElementById('crmModalNewNote').value.trim();
+
+      d.stage = newStage;
+      d.patrimonio = newPatrimonio;
+      if (noteText) {
+        if (!d.notes) d.notes = [];
+        d.notes.unshift({ date: new Date().toLocaleString('pt-BR'), text: noteText });
+      }
+
+      saveCrmDeals(deals);
+      closeCrmDealModal();
+      renderCrmPipeline();
+      showToast('✅ Oportunidade atualizada no CRM!');
+    }
+
+    function deleteCurrentDeal() {
+      if (!activeCrmDealId) return;
+      if (!confirm('Deseja realmente remover esta oportunidade do seu CRM?')) return;
+      let deals = getCrmDeals().filter(x => x.id !== activeCrmDealId);
+      saveCrmDeals(deals);
+      closeCrmDealModal();
+      renderCrmPipeline();
+      showToast('Oportunidade removida do CRM.');
+    }
+
+    function exportCrmCsv() {
+      const deals = getCrmDeals();
+      let csv = '\uFEFFID;Empresa;CNPJ;UF;Cidade;Segmento;Decisor;Cargo;Telefone;Email;Etapa;Patrimonio_Estimado;Ultimo_Canal;Historico\n';
+      deals.forEach(d => {
+        const lastNote = (d.notes && d.notes.length > 0) ? d.notes[0].text.replace(/;/g, ' ') : '';
+        csv += `"${d.id}";"${d.company}";"${d.cnpj}";"${d.uf}";"${d.city}";"${d.segmentoNome}";"${d.decisorNome}";"${d.decisorCargo}";"${d.fone}";"${d.email}";"${d.stage}";"${d.patrimonio}";"${d.lastChannel || ''}";"${lastNote}"\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `prx_capital_crm_relatorio_${new Date().toISOString().slice(0,10)}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      showToast('Relatório CSV do CRM exportado!');
+    }
+
+    function exportCrmJson() {
+      const deals = getCrmDeals();
+      const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(deals, null, 2));
+      const a = document.createElement('a');
+      a.href = dataStr;
+      a.download = `prx_capital_crm_backup_${new Date().toISOString().slice(0,10)}.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      showToast('Backup JSON do CRM exportado!');
+    }
+
+    // ========================================================
+    // NAVEGAÇÃO ENTRE ABAS PRINCIPAIS
+    // ========================================================
     function switchMainTab(tab) {
       if (tab === 'prospects') {
         document.getElementById('prospectsTabContent').style.display = 'flex';
@@ -1215,9 +1952,13 @@
         document.getElementById('crmTabContent').style.display = 'flex';
         document.getElementById('tab-crm-btn').className = 'tab-btn active-tab px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2';
         document.getElementById('tab-prospects-btn').className = 'tab-btn px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 text-slate-700 hover:text-slate-900';
+        renderCrmPipeline();
       }
     }
 
+    // ========================================================
+    // FILTRAGEM E RENDERIZAÇÃO DA TABELA MASTER
+    // ========================================================
     function filterData() {
       const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
       const segmentVal = document.getElementById('segmentFilter') ? document.getElementById('segmentFilter').value : 'ALL';
@@ -1330,27 +2071,21 @@
                 <div class="text-[10px] text-slate-400 mt-0.5">Disponível para contato</div>
               </td>
               <td class="py-3 px-3 bg-indigo-50/40 border-l border-slate-200 text-center">
-                <div class="flex flex-col gap-1 w-full min-w-[260px]">
-                  <div class="grid grid-cols-3 gap-1">
-                    <button onclick="copyLeadChannel(${item.id}, 'wpp_socio')" title="Copiar WhatsApp para Sócio/Diretor" class="py-1 px-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 rounded text-[9px] font-bold flex items-center justify-center gap-1 cursor-pointer">
-                      <i class="fa-brands fa-whatsapp text-emerald-600"></i> Wpp Sócio
+                <div class="flex flex-col gap-1.5 w-full min-w-[280px]">
+                  <div class="grid grid-cols-2 gap-1.5">
+                    <button onclick="executeLeadDispatch(${item.id}, 'wpp_socio')" title="Disparar WhatsApp diretamente para o Sócio (+ Anexo CRM)" class="py-1.5 px-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-[10px] font-extrabold flex items-center justify-center gap-1 shadow-xs cursor-pointer transition">
+                      <i class="fa-brands fa-whatsapp"></i> Wpp Sócio
                     </button>
-                    <button onclick="copyLeadChannel(${item.id}, 'email_socio')" title="Copiar E-mail para Sócio/Diretor" class="py-1 px-1 bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-300 rounded text-[9px] font-bold flex items-center justify-center gap-1 cursor-pointer">
-                      <i class="fa-solid fa-envelope text-sky-600"></i> Email Sócio
-                    </button>
-                    <button onclick="copyLeadChannel(${item.id}, 'linkedin_socio')" title="Copiar LinkedIn para Sócio/Diretor" class="py-1 px-1 bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-300 rounded text-[9px] font-bold flex items-center justify-center gap-1 cursor-pointer">
-                      <i class="fa-brands fa-linkedin text-blue-600"></i> In Sócio
+                    <button onclick="executeLeadDispatch(${item.id}, 'email_socio')" title="Enviar E-mail diretamente para o Sócio (+ Anexo CRM)" class="py-1.5 px-2 bg-sky-600 hover:bg-sky-700 text-white rounded-lg text-[10px] font-extrabold flex items-center justify-center gap-1 shadow-xs cursor-pointer transition">
+                      <i class="fa-solid fa-paper-plane"></i> Email Sócio
                     </button>
                   </div>
-                  <div class="grid grid-cols-3 gap-1">
-                    <button onclick="copyLeadChannel(${item.id}, 'wpp_empresa')" title="Copiar WhatsApp Geral da Empresa" class="py-1 px-1 bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-300 rounded text-[9px] font-bold flex items-center justify-center gap-1 cursor-pointer">
-                      <i class="fa-brands fa-whatsapp text-teal-600"></i> Wpp Empresa
+                  <div class="grid grid-cols-2 gap-1.5">
+                    <button onclick="executeLeadDispatch(${item.id}, 'wpp_empresa')" title="Disparar WhatsApp Comercial da Empresa (+ Anexo CRM)" class="py-1.5 px-2 bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-300 rounded-lg text-[10px] font-bold flex items-center justify-center gap-1 cursor-pointer transition">
+                      <i class="fa-brands fa-whatsapp text-teal-600"></i> Wpp Geral
                     </button>
-                    <button onclick="copyLeadChannel(${item.id}, 'email_empresa')" title="Copiar E-mail Institucional Empresa" class="py-1 px-1 bg-violet-50 hover:bg-violet-100 text-violet-800 border border-violet-300 rounded text-[9px] font-bold flex items-center justify-center gap-1 cursor-pointer">
-                      <i class="fa-solid fa-building text-violet-600"></i> Email Empresa
-                    </button>
-                    <button onclick="copyLeadChannel(${item.id}, 'linkedin_empresa')" title="Copiar LinkedIn Empresa" class="py-1 px-1 bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-300 rounded text-[9px] font-bold flex items-center justify-center gap-1 cursor-pointer">
-                      <i class="fa-solid fa-globe text-indigo-600"></i> In Empresa
+                    <button onclick="openLeadMessagesModal(${item.id})" title="Ver e personalizar todos os 6 canais de mensagens" class="py-1.5 px-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-300 rounded-lg text-[10px] font-bold flex items-center justify-center gap-1 cursor-pointer transition">
+                      <i class="fa-solid fa-message text-indigo-600"></i> 6 Canais
                     </button>
                   </div>
                 </div>
@@ -1390,6 +2125,15 @@
       }
     }
 
+    function changePerPage() {
+      const sel = document.getElementById('perPageFilter');
+      if (!sel) return;
+      const val = sel.value;
+      itemsPerPage = (val === 'ALL') ? 999999 : parseInt(val, 10);
+      currentPage = 1;
+      renderTable();
+    }
+
     function resetSearch() {
       document.getElementById('searchInput').value = '';
       document.getElementById('segmentFilter').value = 'ALL';
@@ -1398,85 +2142,6 @@
       currentPage = 1;
       filterData();
     }
-
-    function getLeadMessages(lead) {
-      if (!lead) return {};
-      const d1 = (lead.decisores && lead.decisores.length > 0) ? lead.decisores[0] : { nome: 'Sócio / Diretor', cargo: 'Diretor Geral', linkedin: '', contato: '' };
-      const d1Nome = d1.nome || 'Sócio / Diretor';
-      const d1Cargo = d1.cargo || 'Diretor Geral';
-      const d1Linkedin = d1.linkedin || '';
-      const d1Contato = lead.contatoPessoal || d1.contato || lead.fone || '';
-      const empresa = lead.company || 'Empresa';
-      const cidade = lead.city || 'São Paulo';
-      const uf = lead.uf || 'SP';
-      const segmento = lead.segmentoNome || 'Segmento B2B';
-      const cnpj = lead.cnpj || '';
-      const emailEmpresa = lead.email || '';
-      const foneEmpresa = lead.fone || '';
-
-      return {
-        d1Nome,
-        d1Cargo,
-        d1Linkedin,
-        d1Contato,
-        empresa,
-        cidade,
-        uf,
-        segmento,
-        cnpj,
-        emailEmpresa,
-        foneEmpresa,
-        wppSocio: `Olá, ${d1Nome}! Tudo bem?\n\nAqui é o Daniel Zanon, executivo da PRX Capital (prxcapital.com.br).\n\nLocalizei seu contato por vias públicas e profissionais ao acompanhar a expressiva atuação da ${empresa} em ${cidade}-${uf}.\n\nA PRX atua como multi-family office e boutique financeira, assessorando empresários e famílias com patrimônio imobiliário, empresas e liquidez financeira em corretoras.\n\nNossas frentes centrais abrangem:\n• Estruturação e revisão tributária e sucessória;\n• Gestão e assessoria de investimentos e câmbio;\n• Soluções de crédito estruturado, funding e antecipação de recebíveis;\n• Proteção patrimonial e gestão de liquidez.\n\nNosso propósito é reduzir fricções tributárias/bancárias, viabilizar liquidez e proteger o patrimônio construído.\n\nTeria disponibilidade para um breve alinhamento de 15 minutos nesta semana?\n\nUm abraço,\nDaniel Zanon | PRX Capital`,
-        
-        emailSocioAssunto: `Alinhamento estratégico & multi-family office | A/C ${d1Nome} (${empresa})`,
-        emailSocioCorpo: `Prezado(a) ${d1Nome},\n\nMeu nome é Daniel Zanon, sou executivo da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira. Localizei seu contato por vias públicas e profissionais ao analisar a trajetória de destaque da ${empresa} em ${cidade}-${uf}.\n\nA PRX desenvolve uma atuação consultiva e exclusiva voltada para famílias e empresários com patrimônio imobiliário, empresas e liquidez financeira em corretoras.\n\nNossas frentes de atuação abrangem:\n1. Estruturação e revisão tributária/sucessória;\n2. Gestão e assessoria de investimentos e operações de câmbio;\n3. Soluções de crédito, funding e antecipação de recebíveis;\n4. Proteção patrimonial e gestão de liquidez.\n\nO benefício central do nosso trabalho é reduzir fricção tributária/bancária, viabilizar liquidez eficiente e proteger o patrimônio empresarial e familiar (CNPJ: ${cnpj}).\n\nGostaria de propor um alinhamento inicial de 15 minutos nesta semana para apresentar nossas soluções.\n\nVocê teria disponibilidade nesta quinta ou sexta-feira pela manhã?\n\nAtenciosamente,\n\nDaniel Zanon\nExecutivo | PRX Capital\nprxcapital.com.br`,
-        
-        linkedinSocio: `Olá, ${d1Nome}, um prazer conectar!\n\nAcompanho a sua liderança à frente da ${empresa} em ${cidade}-${uf}.\n\nSou executivo na PRX Capital (prxcapital.com.br), multi-family office e boutique financeira. Apoiamos empresários e famílias com empresas, patrimônio imobiliário e liquidez na estruturação tributária/sucessória, investimentos, câmbio e crédito estruturado.\n\nO propósito é reduzir fricções bancárias e fiscais e blindar o patrimônio.\n\nSeria uma honra trocar uma ideia de 15 minutos nesta semana. Como está sua agenda?\n\nUm abraço,\nDaniel Zanon`,
-        
-        wppEmpresa: `Olá, equipe da ${empresa}! Tudo bem?\n\nAqui é o Daniel Zanon, da PRX Capital (prxcapital.com.br), boutique financeira e multi-family office.\n\nLocalizamos o contato da empresa por canais públicos em virtude da relevância de vocês no setor de ${segmento} em ${cidade}-${uf}.\n\nAtuamos diretamente com empresários e diretorias em estruturação tributária, crédito estruturado/funding, câmbio e gestão patrimonial de controladores.\n\nGostaríamos de apresentar um breve alinhamento estratégico de 15 minutos ao(à) ${d1Nome} (${d1Cargo}) ou à Diretoria Financeira.\n\nCom quem do time podemos agendar ou enviar o convite?\n\nAgradeço pela atenção!\nDaniel Zanon | PRX Capital`,
-        
-        emailEmpresaAssunto: `Apresentação Consultiva & Multi-Family Office | A/C Diretoria da ${empresa}`,
-        emailEmpresaCorpo: `Prezada Equipe da ${empresa},\n\nMeu nome é Daniel Zanon, sou executivo da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira especializada no atendimento a empresários, indústrias e grupos econômicos consolidados.\n\nIdentificamos a relevante atuação da ${empresa} no segmento de ${segmento} em ${cidade}-${uf} através de registros públicos e corporativos.\n\nApoiamos empresas e seus controladores em:\n• Revisão e estruturação tributária/sucessória de sócios;\n• Soluções de crédito, funding e antecipação de recebíveis;\n• Assessoria em câmbio comercial e gestão de investimentos;\n• Proteção patrimonial e governança de liquidez.\n\nGostaríamos de solicitar um breve alinhamento de 15 minutos com o(a) ${d1Nome} (${d1Cargo}) ou com a Diretoria Financeira para apresentar nossas soluções estratégicas.\n\nPoderiam, por gentileza, direcionar esta mensagem ao responsável ou informar o canal de agenda executiva?\n\nAtenciosamente,\n\nDaniel Zanon\nExecutivo | PRX Capital\nprxcapital.com.br`,
-        
-        linkedinEmpresa: `Olá, equipe da ${empresa}!\n\nParabéns pelo excelente posicionamento e relevância no mercado de ${segmento}.\n\nSou Daniel Zanon, executivo da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira. Assessoramos diretorias e controladores em soluções de crédito estruturado, câmbio comercial, eficiência tributária e gestão patrimonial.\n\nGostaríamos de solicitar um contato com o(a) ${d1Nome} (${d1Cargo}) ou com a Diretoria Financeira para um alinhamento inicial de 15 minutos.\n\nMuito obrigado e excelente semana a toda a equipe!`
-      };
-    }
-
-    function copyLeadChannel(leadId, channel) {
-      const item = prospects.find(p => p.id === leadId);
-      if (!item) return;
-
-      const msgs = getLeadMessages(item);
-      let textToCopy = '';
-      let toastMsg = '';
-
-      if (channel === 'wpp_socio') {
-        textToCopy = msgs.wppSocio;
-        toastMsg = `✅ WhatsApp para ${msgs.d1Nome} (${msgs.empresa}) copiado!`;
-      } else if (channel === 'email_socio') {
-        textToCopy = `Assunto: ${msgs.emailSocioAssunto}\n\n${msgs.emailSocioCorpo}`;
-        toastMsg = `✅ E-mail para ${msgs.d1Nome} (${msgs.empresa}) copiado!`;
-      } else if (channel === 'linkedin_socio') {
-        textToCopy = msgs.linkedinSocio;
-        toastMsg = `✅ Pitch LinkedIn para ${msgs.d1Nome} (${msgs.empresa}) copiado!`;
-      } else if (channel === 'wpp_empresa') {
-        textToCopy = msgs.wppEmpresa;
-        toastMsg = `✅ WhatsApp Comercial (${msgs.empresa}) copiado!`;
-      } else if (channel === 'email_empresa') {
-        textToCopy = `Assunto: ${msgs.emailEmpresaAssunto}\n\n${msgs.emailEmpresaCorpo}`;
-        toastMsg = `✅ E-mail Corporativo (${msgs.empresa}) copiado!`;
-      } else if (channel === 'linkedin_empresa') {
-        textToCopy = msgs.linkedinEmpresa;
-        toastMsg = `✅ Mensagem Corporativa LinkedIn (${msgs.empresa}) copiada!`;
-      }
-
-      if (textToCopy) {
-        navigator.clipboard.writeText(textToCopy);
-        showToast(toastMsg);
-      }
-    }
-
-    let activeModalLead = null;
 
     function openLeadMessagesModal(leadId) {
       const item = prospects.find(p => p.id === leadId);
@@ -1495,33 +2160,18 @@
       document.getElementById('modalSocioLinkedinBadge').innerText = msgs.d1Linkedin ? 'Perfil Verificado' : 'LinkedIn Busca';
 
       document.getElementById('modalWppSocioText').value = msgs.wppSocio;
-      const cleanPhoneSocio = (msgs.d1Contato || item.fone || '').replace(/\D/g, '');
-      const wppSocioLink = cleanPhoneSocio ? `https://api.whatsapp.com/send?phone=55${cleanPhoneSocio.replace(/^55/, '')}&text=${encodeURIComponent(msgs.wppSocio)}` : `https://api.whatsapp.com/send?text=${encodeURIComponent(msgs.wppSocio)}`;
-      document.getElementById('modalWppSocioLink').href = wppSocioLink;
-
       document.getElementById('modalEmailSocioSubject').value = msgs.emailSocioAssunto;
       document.getElementById('modalEmailSocioBody').value = msgs.emailSocioCorpo;
-      const socioEmailAddr = item.email ? item.email.split('/')[0].trim() : '';
-      document.getElementById('modalEmailSocioLink').href = `mailto:${socioEmailAddr}?subject=${encodeURIComponent(msgs.emailSocioAssunto)}&body=${encodeURIComponent(msgs.emailSocioCorpo)}`;
-
       document.getElementById('modalLinkedinSocioText').value = msgs.linkedinSocio;
-      document.getElementById('modalLinkedinSocioLink').href = msgs.d1Linkedin || `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(msgs.d1Nome + ' ' + item.company)}`;
 
       // Empresa
       document.getElementById('modalEmpresaPhoneBadge').innerText = item.fone || 'Telefone Geral';
       document.getElementById('modalEmpresaEmailBadge').innerText = item.email || 'Email Geral';
 
       document.getElementById('modalWppEmpresaText').value = msgs.wppEmpresa;
-      const cleanPhoneEmpresa = (item.fone || '').replace(/\D/g, '');
-      const wppEmpresaLink = cleanPhoneEmpresa ? `https://api.whatsapp.com/send?phone=55${cleanPhoneEmpresa.replace(/^55/, '')}&text=${encodeURIComponent(msgs.wppEmpresa)}` : `https://api.whatsapp.com/send?text=${encodeURIComponent(msgs.wppEmpresa)}`;
-      document.getElementById('modalWppEmpresaLink').href = wppEmpresaLink;
-
       document.getElementById('modalEmailEmpresaSubject').value = msgs.emailEmpresaAssunto;
       document.getElementById('modalEmailEmpresaBody').value = msgs.emailEmpresaCorpo;
-      document.getElementById('modalEmailEmpresaLink').href = `mailto:${socioEmailAddr}?subject=${encodeURIComponent(msgs.emailEmpresaAssunto)}&body=${encodeURIComponent(msgs.emailEmpresaCorpo)}`;
-
       document.getElementById('modalLinkedinEmpresaText').value = msgs.linkedinEmpresa;
-      document.getElementById('modalLinkedinEmpresaLink').href = `https://www.linkedin.com/search/results/companies/?keywords=${encodeURIComponent(item.company)}`;
 
       switchModalTab('socio');
       const modal = document.getElementById('messagesModal');
@@ -1606,181 +2256,13 @@
       if (perPage && perPage.options.length >= 2) {
         perPage.options[1].text = `♾️ Todos (${total.toLocaleString('pt-BR')} em Página Única)`;
       }
-    }
 
-    function addToCrm(id) {
-      showToast(`Lead #${id} adicionado ao Pipeline CRM!`);
-    }
-
-    function exportCrmCsv() {
-      showToast('Exportando relatório do CRM...');
+      updateCrmCounters();
     }
 
     updateDynamicCounts();
     filterData();
+    renderCrmPipeline();
   </script>
-
-  <!-- MODAL DE MENSAGENS PRONTAS PERSONALIZADAS POR LEAD -->
-  <div id="messagesModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
-    <div class="bg-white border border-slate-200 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden animate-in fade-in duration-200">
-      <!-- Header do Modal -->
-      <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between">
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="text-xs bg-indigo-500 text-white font-mono px-2 py-0.5 rounded font-bold" id="modalLeadId">#1</span>
-            <h3 class="text-base font-extrabold" id="modalCompanyName">Nome da Empresa</h3>
-          </div>
-          <p class="text-xs text-slate-300 mt-0.5" id="modalLeadSub">CNPJ • Cidade/UF • Decisor: Nome (Cargo)</p>
-        </div>
-        <button onclick="closeMessagesModal()" class="text-slate-400 hover:text-white text-lg font-bold p-1 rounded-lg hover:bg-slate-800 transition cursor-pointer">✕</button>
-      </div>
-
-      <!-- Navegação de Abas do Modal -->
-      <div class="flex border-b border-slate-200 bg-slate-50 px-6 pt-2">
-        <button onclick="switchModalTab('socio')" id="modalTabSocioBtn" class="px-4 py-2 text-xs font-extrabold border-b-2 border-indigo-600 text-indigo-600 flex items-center gap-1.5 cursor-pointer">
-          <i class="fa-solid fa-user-tie"></i> 1. Contato Pessoal (Sócios & Diretores)
-        </button>
-        <button onclick="switchModalTab('empresa')" id="modalTabEmpresaBtn" class="px-4 py-2 text-xs font-extrabold border-b-2 border-transparent text-slate-500 hover:text-slate-800 flex items-center gap-1.5 cursor-pointer">
-          <i class="fa-solid fa-building"></i> 2. Contato Empresa (Institucional & Comercial)
-        </button>
-      </div>
-
-      <!-- Conteúdo do Modal -->
-      <div class="p-6 overflow-y-auto flex-1 space-y-4">
-        
-        <!-- ABA SÓCIO / DIRETORES -->
-        <div id="modalTabSocioContent" class="space-y-4">
-          <!-- Card 1: WhatsApp Sócio -->
-          <div class="bg-emerald-50/50 border border-emerald-200 rounded-xl p-4 space-y-2">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <div class="flex items-center gap-2">
-                <span class="p-1.5 bg-emerald-600 text-white rounded-lg text-xs"><i class="fa-brands fa-whatsapp"></i></span>
-                <span class="text-xs font-extrabold text-emerald-950">WhatsApp Direto ao Sócio / Diretor</span>
-                <span id="modalSocioPhoneBadge" class="text-[10px] font-mono font-bold bg-white text-emerald-700 px-2 py-0.5 rounded border border-emerald-300"></span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <button onclick="copyModalField('modalWppSocioText', '✅ WhatsApp Sócio copiado!')" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1">
-                  <i class="fa-solid fa-copy"></i> Copiar
-                </button>
-                <a id="modalWppSocioLink" href="#" target="_blank" class="px-3 py-1 bg-white hover:bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-lg text-xs font-bold shadow-xs flex items-center gap-1">
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir no WhatsApp
-                </a>
-              </div>
-            </div>
-            <textarea id="modalWppSocioText" rows="4" class="w-full bg-white border border-emerald-200 rounded-lg p-3 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-emerald-500 font-sans leading-relaxed"></textarea>
-          </div>
-
-          <!-- Card 2: Email Sócio -->
-          <div class="bg-sky-50/50 border border-sky-200 rounded-xl p-4 space-y-2">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <div class="flex items-center gap-2">
-                <span class="p-1.5 bg-sky-600 text-white rounded-lg text-xs"><i class="fa-solid fa-envelope"></i></span>
-                <span class="text-xs font-extrabold text-sky-950">E-mail Direto ao Sócio / C-Level</span>
-                <span id="modalSocioEmailBadge" class="text-[10px] font-mono font-bold bg-white text-sky-700 px-2 py-0.5 rounded border border-sky-300"></span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <button onclick="copyModalEmail('modalEmailSocioSubject', 'modalEmailSocioBody', '✅ E-mail completo do Sócio copiado!')" class="px-3 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded-lg text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1">
-                  <i class="fa-solid fa-copy"></i> Copiar E-mail Completo
-                </button>
-                <a id="modalEmailSocioLink" href="#" class="px-3 py-1 bg-white hover:bg-sky-100 text-sky-800 border border-sky-300 rounded-lg text-xs font-bold shadow-xs flex items-center gap-1">
-                  <i class="fa-solid fa-paper-plane"></i> Enviar E-mail
-                </a>
-              </div>
-            </div>
-            <div class="space-y-1.5">
-              <input type="text" id="modalEmailSocioSubject" class="w-full bg-white border border-sky-200 rounded-lg px-3 py-1.5 text-xs font-bold text-slate-800" readonly>
-              <textarea id="modalEmailSocioBody" rows="5" class="w-full bg-white border border-sky-200 rounded-lg p-3 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans leading-relaxed"></textarea>
-            </div>
-          </div>
-
-          <!-- Card 3: LinkedIn Sócio -->
-          <div class="bg-blue-50/50 border border-blue-200 rounded-xl p-4 space-y-2">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <div class="flex items-center gap-2">
-                <span class="p-1.5 bg-blue-600 text-white rounded-lg text-xs"><i class="fa-brands fa-linkedin"></i></span>
-                <span class="text-xs font-extrabold text-blue-950">LinkedIn InMail / Conexão Sócio</span>
-                <span id="modalSocioLinkedinBadge" class="text-[10px] font-mono font-bold bg-white text-blue-700 px-2 py-0.5 rounded border border-blue-300"></span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <button onclick="copyModalField('modalLinkedinSocioText', '✅ Pitch de LinkedIn do Sócio copiado!')" class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1">
-                  <i class="fa-solid fa-copy"></i> Copiar Mensagem
-                </button>
-                <a id="modalLinkedinSocioLink" href="#" target="_blank" class="px-3 py-1 bg-white hover:bg-blue-100 text-blue-800 border border-blue-300 rounded-lg text-xs font-bold shadow-xs flex items-center gap-1">
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir Perfil do Sócio
-                </a>
-              </div>
-            </div>
-            <textarea id="modalLinkedinSocioText" rows="4" class="w-full bg-white border border-blue-200 rounded-lg p-3 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-blue-500 font-sans leading-relaxed"></textarea>
-          </div>
-        </div>
-
-        <!-- ABA EMPRESA / INSTITUCIONAL -->
-        <div id="modalTabEmpresaContent" class="space-y-4 hidden">
-          <!-- Card 4: WhatsApp Empresa -->
-          <div class="bg-teal-50/50 border border-teal-200 rounded-xl p-4 space-y-2">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <div class="flex items-center gap-2">
-                <span class="p-1.5 bg-teal-600 text-white rounded-lg text-xs"><i class="fa-brands fa-whatsapp"></i></span>
-                <span class="text-xs font-extrabold text-teal-950">WhatsApp Comercial / Geral da Empresa</span>
-                <span id="modalEmpresaPhoneBadge" class="text-[10px] font-mono font-bold bg-white text-teal-700 px-2 py-0.5 rounded border border-teal-300"></span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <button onclick="copyModalField('modalWppEmpresaText', '✅ WhatsApp Comercial da Empresa copiado!')" class="px-3 py-1 bg-teal-600 hover:bg-teal-700 text-white rounded-lg text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1">
-                  <i class="fa-solid fa-copy"></i> Copiar
-                </button>
-                <a id="modalWppEmpresaLink" href="#" target="_blank" class="px-3 py-1 bg-white hover:bg-teal-100 text-teal-800 border border-teal-300 rounded-lg text-xs font-bold shadow-xs flex items-center gap-1">
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir no WhatsApp
-                </a>
-              </div>
-            </div>
-            <textarea id="modalWppEmpresaText" rows="4" class="w-full bg-white border border-teal-200 rounded-lg p-3 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-teal-500 font-sans leading-relaxed"></textarea>
-          </div>
-
-          <!-- Card 5: Email Corporativo -->
-          <div class="bg-violet-50/50 border border-violet-200 rounded-xl p-4 space-y-2">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <div class="flex items-center gap-2">
-                <span class="p-1.5 bg-violet-600 text-white rounded-lg text-xs"><i class="fa-solid fa-building"></i></span>
-                <span class="text-xs font-extrabold text-violet-950">E-mail Institucional / Diretoria</span>
-                <span id="modalEmpresaEmailBadge" class="text-[10px] font-mono font-bold bg-white text-violet-700 px-2 py-0.5 rounded border border-violet-300"></span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <button onclick="copyModalEmail('modalEmailEmpresaSubject', 'modalEmailEmpresaBody', '✅ E-mail institucional copiado!')" class="px-3 py-1 bg-violet-600 hover:bg-violet-700 text-white rounded-lg text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1">
-                  <i class="fa-solid fa-copy"></i> Copiar E-mail Completo
-                </button>
-                <a id="modalEmailEmpresaLink" href="#" class="px-3 py-1 bg-white hover:bg-violet-100 text-violet-800 border border-violet-300 rounded-lg text-xs font-bold shadow-xs flex items-center gap-1">
-                  <i class="fa-solid fa-paper-plane"></i> Enviar E-mail
-                </a>
-              </div>
-            </div>
-            <div class="space-y-1.5">
-              <input type="text" id="modalEmailEmpresaSubject" class="w-full bg-white border border-violet-200 rounded-lg px-3 py-1.5 text-xs font-bold text-slate-800" readonly>
-              <textarea id="modalEmailEmpresaBody" rows="5" class="w-full bg-white border border-violet-200 rounded-lg p-3 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-violet-500 font-sans leading-relaxed"></textarea>
-            </div>
-          </div>
-
-          <!-- Card 6: LinkedIn Empresa -->
-          <div class="bg-indigo-50/50 border border-indigo-200 rounded-xl p-4 space-y-2">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <div class="flex items-center gap-2">
-                <span class="p-1.5 bg-indigo-600 text-white rounded-lg text-xs"><i class="fa-brands fa-linkedin"></i></span>
-                <span class="text-xs font-extrabold text-indigo-950">LinkedIn Corporativo (Página da Empresa)</span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <button onclick="copyModalField('modalLinkedinEmpresaText', '✅ Mensagem Corporativa LinkedIn copiada!')" class="px-3 py-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-bold shadow-xs cursor-pointer flex items-center gap-1">
-                  <i class="fa-solid fa-copy"></i> Copiar Mensagem
-                </button>
-                <a id="modalLinkedinEmpresaLink" href="#" target="_blank" class="px-3 py-1 bg-white hover:bg-indigo-100 text-indigo-800 border border-indigo-300 rounded-lg text-xs font-bold shadow-xs flex items-center gap-1">
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Abrir Página da Empresa
-                </a>
-              </div>
-            </div>
-            <textarea id="modalLinkedinEmpresaText" rows="4" class="w-full bg-white border border-indigo-200 rounded-lg p-3 text-xs text-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 font-sans leading-relaxed"></textarea>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
 </body>
 </html>
