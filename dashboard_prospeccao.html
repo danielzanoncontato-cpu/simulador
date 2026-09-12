@@ -123,7 +123,7 @@
       <!-- TABELA MASTER DE PROSPECTOS COM ROLAGEM CONTÍNUA -->
       <div class="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden flex-1 flex flex-col">
         <div class="overflow-x-auto flex-1 max-h-[72vh] overflow-y-auto">
-          <table class="w-full text-left border-collapse min-w-[1850px]">
+          <table class="w-full text-left border-collapse min-w-[2150px]">
             <thead class="bg-slate-900 text-white text-[11px] uppercase tracking-wider font-extrabold sticky top-0 z-20 shadow-sm">
               <tr>
                 <th class="py-3.5 px-3 text-center w-14">ID</th>
@@ -136,7 +136,7 @@
                 <th class="py-3.5 px-4 w-56">Sócios / Decisores (QSA)</th>
                 <th class="py-3.5 px-4 w-56">🏢 Contato Empresa (Geral)</th>
                 <th class="py-3.5 px-4 w-56 bg-emerald-950/40">👤 Contato Sócio / Decisor</th>
-                <th class="py-3.5 px-4 text-center w-[410px] min-w-[390px] bg-slate-800">Disparo Direto & Ações</th>
+                <th class="py-3.5 px-4 text-center w-[680px] min-w-[660px] bg-slate-800">Disparo Direto & Copiar Mensagens (Scripts)</th>
               </tr>
             </thead>
             <tbody id="tableBody" class="divide-y divide-slate-100 text-xs">
@@ -1895,6 +1895,56 @@
       showToast(`🚀 Disparo [${channelName}] iniciado! Lead #${item.id} (${item.company}) anexado ao CRM.`);
     }
 
+    function copyTextToClipboard(text, successMsg) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function() {
+          showToast(successMsg);
+        }).catch(function() {
+          fallbackCopyText(text, successMsg);
+        });
+      } else {
+        fallbackCopyText(text, successMsg);
+      }
+    }
+
+    function fallbackCopyText(text, successMsg) {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      textArea.style.top = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        showToast(successMsg);
+      } catch (err) {
+        prompt('Copie o texto manualmente (Ctrl+C):', text);
+      }
+      document.body.removeChild(textArea);
+    }
+
+    function copyLeadMessage(leadId, channel) {
+      const item = prospects.find(function(p) { return p.id === leadId; });
+      if (!item) return;
+      const msgs = getLeadMessages(item);
+
+      if (channel === 'wpp_socio') {
+        copyTextToClipboard(msgs.wppSocio, `📋 Mensagem de WhatsApp para ${msgs.d1Nome} copiada para colar!`);
+      } else if (channel === 'email_socio') {
+        const fullEmail = `Assunto: ${msgs.emailSocioAssunto}\n\n${msgs.emailSocioCorpo}`;
+        copyTextToClipboard(fullEmail, `📋 Assunto e E-mail para ${msgs.d1Nome} copiados para colar!`);
+      } else if (channel === 'wpp_empresa') {
+        copyTextToClipboard(msgs.wppEmpresa, `📋 Mensagem de WhatsApp da ${msgs.empresa} copiada para colar!`);
+      } else if (channel === 'email_empresa') {
+        const fullEmail = `Assunto: ${msgs.emailEmpresaAssunto}\n\n${msgs.emailEmpresaCorpo}`;
+        copyTextToClipboard(fullEmail, `📋 Assunto e E-mail da ${msgs.empresa} copiados para colar!`);
+      } else if (channel === 'linkedin_socio') {
+        copyTextToClipboard(msgs.linkedinSocio, `📋 Pitch do LinkedIn para ${msgs.d1Nome} copiado para colar!`);
+      }
+    }
+
     function triggerModalDispatch(channel) {
       if (!activeModalLead) return;
       executeLeadDispatch(activeModalLead.id, channel);
@@ -2321,17 +2371,26 @@
                 ${d1.linkedin ? `<div class="mt-1"><a href="${d1.linkedin}" target="_blank" class="text-blue-600 hover:text-blue-800 text-[10px] font-bold flex items-center gap-1"><i class="fa-brands fa-linkedin"></i> LinkedIn Sócio</a></div>` : ''}
               </td>
               <td class="py-3 px-3 bg-indigo-50/40 border-l border-slate-200 text-center">
-                <div class="flex items-center justify-center gap-1.5 w-full min-w-[390px]">
-                  <button onclick="executeLeadDispatch(${item.id}, 'wpp_socio')" title="Disparar WhatsApp diretamente para o Sócio (+ Anexo CRM)" class="flex-1 py-1.5 px-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-[10px] font-extrabold flex items-center justify-center gap-1 shadow-xs cursor-pointer transition whitespace-nowrap">
-                    <i class="fa-brands fa-whatsapp"></i> 👤 Wpp Sócio
+                <div class="flex items-center justify-center gap-1 w-full min-w-[660px]">
+                  <button onclick="executeLeadDispatch(${item.id}, 'wpp_socio')" title="Disparar WhatsApp diretamente para o Sócio (+ Anexo CRM)" class="py-1.5 px-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-[10px] font-extrabold flex items-center justify-center gap-1 shadow-xs cursor-pointer transition whitespace-nowrap">
+                    <i class="fa-brands fa-whatsapp"></i> 📲 Wpp Sócio
                   </button>
-                  <button onclick="executeLeadDispatch(${item.id}, 'email_socio')" title="Enviar E-mail diretamente para o Sócio (+ Anexo CRM)" class="flex-1 py-1.5 px-2 bg-sky-600 hover:bg-sky-700 text-white rounded-lg text-[10px] font-extrabold flex items-center justify-center gap-1 shadow-xs cursor-pointer transition whitespace-nowrap">
-                    <i class="fa-solid fa-paper-plane"></i> 👤 Email Sócio
+                  <button onclick="copyLeadMessage(${item.id}, 'wpp_socio')" title="Copiar texto pronto do WhatsApp do Sócio para colar" class="py-1.5 px-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-lg text-[10px] font-extrabold flex items-center justify-center gap-1 cursor-pointer transition whitespace-nowrap">
+                    <i class="fa-regular fa-copy"></i> 📋 Copiar Wpp
                   </button>
-                  <button onclick="executeLeadDispatch(${item.id}, 'wpp_empresa')" title="Disparar WhatsApp Comercial da Empresa (+ Anexo CRM)" class="flex-1 py-1.5 px-2 bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-300 rounded-lg text-[10px] font-bold flex items-center justify-center gap-1 cursor-pointer transition whitespace-nowrap">
-                    <i class="fa-brands fa-whatsapp text-teal-600"></i> 🏢 Wpp Empresa
+                  <button onclick="executeLeadDispatch(${item.id}, 'email_socio')" title="Enviar E-mail diretamente para o Sócio (+ Anexo CRM)" class="py-1.5 px-2.5 bg-sky-600 hover:bg-sky-700 text-white rounded-lg text-[10px] font-extrabold flex items-center justify-center gap-1 shadow-xs cursor-pointer transition whitespace-nowrap">
+                    <i class="fa-solid fa-paper-plane"></i> ✉️ Email Sócio
                   </button>
-                  <button onclick="openLeadMessagesModal(${item.id})" title="Ver e personalizar todos os 6 canais de mensagens" class="flex-1 py-1.5 px-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-300 rounded-lg text-[10px] font-bold flex items-center justify-center gap-1 cursor-pointer transition whitespace-nowrap">
+                  <button onclick="copyLeadMessage(${item.id}, 'email_socio')" title="Copiar Assunto + Corpo do E-mail do Sócio para colar" class="py-1.5 px-2 bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-300 rounded-lg text-[10px] font-extrabold flex items-center justify-center gap-1 cursor-pointer transition whitespace-nowrap">
+                    <i class="fa-regular fa-copy"></i> 📋 Copiar Email
+                  </button>
+                  <button onclick="executeLeadDispatch(${item.id}, 'wpp_empresa')" title="Disparar WhatsApp Comercial da Empresa (+ Anexo CRM)" class="py-1.5 px-2 bg-teal-50 hover:bg-teal-100 text-teal-800 border border-teal-300 rounded-lg text-[10px] font-bold flex items-center justify-center gap-1 cursor-pointer transition whitespace-nowrap">
+                    <i class="fa-brands fa-whatsapp text-teal-600"></i> 🏢 Wpp Emp
+                  </button>
+                  <button onclick="copyLeadMessage(${item.id}, 'wpp_empresa')" title="Copiar texto do WhatsApp da Empresa para colar" class="py-1.5 px-2 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 rounded-lg text-[10px] font-bold flex items-center justify-center gap-1 cursor-pointer transition whitespace-nowrap">
+                    <i class="fa-regular fa-copy"></i> 📋 Copiar
+                  </button>
+                  <button onclick="openLeadMessagesModal(${item.id})" title="Ver e personalizar todos os 6 canais de mensagens" class="py-1.5 px-2.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-300 rounded-lg text-[10px] font-bold flex items-center justify-center gap-1 cursor-pointer transition whitespace-nowrap">
                     <i class="fa-solid fa-message text-indigo-600"></i> 📑 6 Canais
                   </button>
                 </div>
