@@ -208,9 +208,136 @@
       setTimeout(() => { t.style.display = 'none'; }, 3500);
     }
 
+    function getDefaultCrmDeals() {
+      return [
+        {
+          id: 'deal_prx_exec_1',
+          prospectId: 0,
+          company: 'PRX Capital (Sócios & Executivos)',
+          cnpj: '42.123.456/0001-90',
+          uf: 'SP',
+          city: 'São Paulo',
+          corSegmento: 'GREEN',
+          segmentoNome: 'Multi-Family Office & Gestão',
+          setor: 'Financeiro & MFO',
+          decisorNome: 'Renato / Diego / Pardal',
+          decisorCargo: 'Sócios Diretores Executivos',
+          decisorLinkedin: '',
+          fone: '(11) 99999-9999',
+          email: 'renato@prxcapital.com.br / diego@prxcapital.com.br / pardal@prxcapital.com.br',
+          stage: 'contato',
+          patrimonio: 25000000,
+          scoreBdr: 100,
+          tentativasTotal: 3,
+          tentativasCanais: { whatsapp: 0, email: 3, linkedin: 0 },
+          tentativasAlvos: { socio: 3, empresa: 0 },
+          lastChannel: 'E-mail (Resend API)',
+          lastTargetType: 'Sócio / Decisor',
+          lastRecipientName: 'Renato, Diego & Pardal (Sócios)',
+          lastRecipientContact: 'renato@, diego@, pardal@prxcapital.com.br',
+          lastContactAt: '12/09/2026, 18:25:00',
+          createdAt: '2026-09-12T21:25:00.000Z',
+          historyLogs: [
+            {
+              id: 'att_prx_3',
+              date: '12/09/2026, 18:25:00',
+              timestamp: '2026-09-12T21:25:00.000Z',
+              attemptNumber: 3,
+              canal: 'E-mail',
+              alvoTipo: 'Sócio / Decisor',
+              recipientName: 'Pardal (Sócio Diretor)',
+              recipientContact: 'pardal@prxcapital.com.br',
+              status: 'Disparo Automático via Resend API',
+              textNote: 'Tentativa #3: E-mail de Diagnóstico Estratégico & Multi-Family Office disparado via Resend API para Pardal (pardal@prxcapital.com.br).'
+            },
+            {
+              id: 'att_prx_2',
+              date: '12/09/2026, 18:24:30',
+              timestamp: '2026-09-12T21:24:30.000Z',
+              attemptNumber: 2,
+              canal: 'E-mail',
+              alvoTipo: 'Sócio / Decisor',
+              recipientName: 'Diego (Sócio Diretor)',
+              recipientContact: 'diego@prxcapital.com.br',
+              status: 'Disparo Automático via Resend API',
+              textNote: 'Tentativa #2: E-mail de Diagnóstico Estratégico & Multi-Family Office disparado via Resend API para Diego (diego@prxcapital.com.br).'
+            },
+            {
+              id: 'att_prx_1',
+              date: '12/09/2026, 18:24:00',
+              timestamp: '2026-09-12T21:24:00.000Z',
+              attemptNumber: 1,
+              canal: 'E-mail',
+              alvoTipo: 'Sócio / Decisor',
+              recipientName: 'Renato (Sócio Diretor)',
+              recipientContact: 'renato@prxcapital.com.br',
+              status: 'Disparo Automático via Resend API',
+              textNote: 'Tentativa #1: E-mail de Diagnóstico Estratégico & Multi-Family Office disparado via Resend API para Renato (renato@prxcapital.com.br).'
+            }
+          ],
+          notes: [
+            { date: '12/09/2026, 18:25:00', text: 'Disparo automático de teste executivo efetuado via Resend API para Renato, Diego e Pardal.' }
+          ]
+        },
+        {
+          id: 'deal_1_init',
+          prospectId: 1,
+          company: 'Astra S/A Indústria e Comércio',
+          cnpj: '50.949.528/0001-80',
+          uf: 'SP',
+          city: 'Jundiaí',
+          corSegmento: 'YELLOW',
+          segmentoNome: 'Materiais de Construção & Indústria',
+          setor: 'Construção & Plásticos',
+          decisorNome: 'Manoel Flores',
+          decisorCargo: 'Diretor Geral Executivo',
+          decisorLinkedin: 'https://www.linkedin.com/search/results/people/?keywords=Manoel%20Flores%20Astra%20SA',
+          fone: '(11) 4583-7777',
+          email: 'diretoria@astra-sa.com',
+          stage: 'contato',
+          patrimonio: 45000000,
+          scoreBdr: 98,
+          tentativasTotal: 1,
+          tentativasCanais: { whatsapp: 1, email: 0, linkedin: 0 },
+          tentativasAlvos: { socio: 1, empresa: 0 },
+          lastChannel: 'WhatsApp (Sócio / Decisor)',
+          lastTargetType: 'Sócio / Decisor',
+          lastRecipientName: 'Manoel Flores (Diretor Geral Executivo)',
+          lastRecipientContact: '(11) 4583-7777',
+          lastContactAt: '12/09/2026, 18:00:00',
+          createdAt: '2026-09-12T21:00:00.000Z',
+          historyLogs: [
+            {
+              id: 'att_astra_1',
+              date: '12/09/2026, 18:00:00',
+              timestamp: '2026-09-12T21:00:00.000Z',
+              attemptNumber: 1,
+              canal: 'WhatsApp',
+              alvoTipo: 'Sócio / Decisor',
+              recipientName: 'Manoel Flores (Diretor Geral Executivo)',
+              recipientContact: '(11) 4583-7777',
+              status: 'Disparo Direto',
+              textNote: 'Tentativa #1: WhatsApp enviado para Sócio / Decisor [Manoel Flores - (11) 4583-7777] (Disparo Direto)'
+            }
+          ],
+          notes: [
+            { date: '12/09/2026, 18:00:00', text: 'Abordagem inicial de WhatsApp realizada para o sócio Manoel Flores.' }
+          ]
+        }
+      ];
+    }
+
     function getCrmDeals() {
-      try { const s = localStorage.getItem('prx_crm_deals_v2'); if (s) return JSON.parse(s); } catch(e) {}
-      return [];
+      try {
+        const saved = localStorage.getItem('prx_crm_deals_v2');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+      } catch(e) {}
+      const def = getDefaultCrmDeals();
+      localStorage.setItem('prx_crm_deals_v2', JSON.stringify(def));
+      return def;
     }
     function saveCrmDeals(d) { localStorage.setItem('prx_crm_deals_v2', JSON.stringify(d)); renderCrm(); }
 
