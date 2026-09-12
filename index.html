@@ -1869,14 +1869,14 @@
     }
 
     function saveTabIntegrationPreferences() {
-      const execName = document.getElementById('tabUserExecName')?.value.trim() || 'Daniel Zanon';
-      const execRole = document.getElementById('tabUserExecRole')?.value.trim() || 'Executivo';
-      const execEmail = document.getElementById('tabUserExecEmail')?.value.trim() || 'daniel@prxcapital.com.br';
-      const execPhone = document.getElementById('tabUserExecPhone')?.value.trim() || '(11) 91588-7182';
-      const wppMode = document.querySelector('input[name="tabWppMode"]:checked')?.value || 'web';
-      const emailProvider = document.querySelector('input[name="tabEmailProvider"]:checked')?.value || 'resend';
-      const resendApiKey = document.getElementById('tabResendApiKey')?.value.trim() || _getDefResendKey();
-      const resendSender = document.getElementById('tabResendSender')?.value.trim() || 'PRX Capital <onboarding@resend.dev>';
+      const execName = (document.getElementById('tabUserExecName') ? document.getElementById('tabUserExecName').value : '').trim() || 'Daniel Zanon';
+      const execRole = (document.getElementById('tabUserExecRole') ? document.getElementById('tabUserExecRole').value : '').trim() || 'Executivo';
+      const execEmail = (document.getElementById('tabUserExecEmail') ? document.getElementById('tabUserExecEmail').value : '').trim() || 'daniel@prxcapital.com.br';
+      const execPhone = (document.getElementById('tabUserExecPhone') ? document.getElementById('tabUserExecPhone').value : '').trim() || '(11) 91588-7182';
+      const wppMode = (document.querySelector('input[name="tabWppMode"]:checked') ? document.querySelector('input[name="tabWppMode"]:checked').value : '') || 'web';
+      const emailProvider = (document.querySelector('input[name="tabEmailProvider"]:checked') ? document.querySelector('input[name="tabEmailProvider"]:checked').value : '') || 'resend';
+      const resendApiKey = (document.getElementById('tabResendApiKey') ? document.getElementById('tabResendApiKey').value : '').trim() || _getDefResendKey();
+      const resendSender = (document.getElementById('tabResendSender') ? document.getElementById('tabResendSender').value : '').trim() || 'PRX Capital <onboarding@resend.dev>';
       const cfg = { execName, execRole, execEmail, execPhone, wppMode, emailProvider, resendApiKey, resendSender, autoCrmMove: true, autoCrmLog: true };
       localStorage.setItem('prx_integration_settings', JSON.stringify(cfg));
       updateTestPreviews();
@@ -1886,7 +1886,7 @@
     function updateTestPreviews() {
       const cfg = getIntegrationSettings();
       const myName = cfg.execName || 'Daniel Zanon';
-      const targetName = document.getElementById('testTargetName')?.value.trim() || 'Daniel';
+      const targetName = (document.getElementById('testTargetName') ? document.getElementById('testTargetName').value : '').trim() || 'Daniel';
 
       const wppText = `Olá, ${targetName}! Tudo bem?\n\nSou o ${myName}, da *PRX Capital* (prxcapital.com.br).\n\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas.\n\nNossas frentes de atuação abrangem:\n\n* Gestão de carteiras e investimentos\n* Operações de câmbio e derivativos\n* Seguros patrimoniais\n* Créditos e financiamentos (capital de giro e antecipação de recebíveis)\n* Pesquisa e análise econômica (valuation e viabilidade financeira)\n* Revisão e planejamento patrimonial, tributário e sucessório\n\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez de seu patrimônio.\n\nGostaria de agendar um diagnóstico inicial gratuito para melhorar a eficiência da sua estrutura empresarial ou familiar? (a conversa leva 15 minutos e pode ser ajustada nesta semana ou na próxima)\n\nUm abraço,\n\n*${myName}* | PRX Capital`;
 
@@ -1934,9 +1934,9 @@
     function triggerDirectTest(type) {
       updateTestPreviews();
       const cfg = getIntegrationSettings();
-      const targetPhone = (document.getElementById('testTargetPhone')?.value.trim() || '11 91588-7182').replace(/\D/g, '');
-      const targetEmail = document.getElementById('testTargetEmail')?.value.trim() || 'daniel@prxcapital.com.br';
-      const targetName = document.getElementById('testTargetName')?.value.trim() || 'Daniel';
+      const targetPhone = ((document.getElementById('testTargetPhone') ? document.getElementById('testTargetPhone').value : '').trim() || '11 91588-7182').replace(/\D/g, '');
+      const targetEmail = (document.getElementById('testTargetEmail') ? document.getElementById('testTargetEmail').value : '').trim() || 'daniel@prxcapital.com.br';
+      const targetName = (document.getElementById('testTargetName') ? document.getElementById('testTargetName').value : '').trim() || 'Daniel';
       const myName = cfg.execName || 'Daniel Zanon';
 
       const msgWpp = `Olá, ${targetName}! Tudo bem?\n\nSou o ${myName}, da *PRX Capital* (prxcapital.com.br).\n\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas.\n\nNossas frentes de atuação abrangem:\n\n* Gestão de carteiras e investimentos\n* Operações de câmbio e derivativos\n* Seguros patrimoniais\n* Créditos e financiamentos (capital de giro e antecipação de recebíveis)\n* Pesquisa e análise econômica (valuation e viabilidade financeira)\n* Revisão e planejamento patrimonial, tributário e sucessório\n\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez de seu patrimônio.\n\nGostaria de agendar um diagnóstico inicial gratuito para melhorar a eficiência da sua estrutura empresarial ou familiar? (a conversa leva 15 minutos e pode ser ajustada nesta semana ou na próxima)\n\nUm abraço,\n\n*${myName}* | PRX Capital`;
@@ -1970,11 +1970,11 @@
     function copyTestText(type) {
       updateTestPreviews();
       if (type === 'wpp') {
-        const text = document.getElementById('testWppPreview')?.value;
+        const text = (document.getElementById('testWppPreview') ? document.getElementById('testWppPreview').value : '');
         navigator.clipboard.writeText(text);
         showToast('✅ Texto do WhatsApp copiado!');
       } else {
-        const text = document.getElementById('testEmailPreview')?.value;
+        const text = (document.getElementById('testEmailPreview') ? document.getElementById('testEmailPreview').value : '');
         navigator.clipboard.writeText(text);
         showToast('✅ Assunto e Corpo de E-mail copiados!');
       }
@@ -2372,9 +2372,9 @@
         corSegmento: item.corSegmento,
         segmentoNome: item.segmentoNome,
         setor: item.setor || '',
-        decisorNome: item.decisores?.[0]?.nome || 'Sócio / Diretor',
-        decisorCargo: item.decisores?.[0]?.cargo || 'Diretor Geral',
-        decisorLinkedin: item.decisores?.[0]?.linkedin || '',
+        decisorNome: ((item.decisores && item.decisores[0]) ? item.decisores[0].nome : '') || 'Sócio / Diretor',
+        decisorCargo: ((item.decisores && item.decisores[0]) ? item.decisores[0].cargo : '') || 'Diretor Geral',
+        decisorLinkedin: ((item.decisores && item.decisores[0]) ? item.decisores[0].linkedin : '') || '',
         fone: item.contatoPessoal || item.fone || '',
         email: item.email || '',
         stage: 'prospeccao',
@@ -2465,9 +2465,9 @@
                   <span class="text-slate-500 font-normal text-[9px]">${d.lastContactAt || ''}</span>
                 </div>
                 <div class="flex items-center gap-1 flex-wrap text-[9px] font-extrabold">
-                  ${d.tentativasCanais?.whatsapp ? `<span class="px-1.5 py-0.5 bg-emerald-100 text-emerald-800 rounded border border-emerald-300 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> ${d.tentativasCanais.whatsapp} Wpp</span>` : ''}
-                  ${d.tentativasCanais?.email ? `<span class="px-1.5 py-0.5 bg-sky-100 text-sky-800 rounded border border-sky-300 flex items-center gap-1"><i class="fa-solid fa-envelope"></i> ${d.tentativasCanais.email} Mail</span>` : ''}
-                  ${d.tentativasCanais?.linkedin ? `<span class="px-1.5 py-0.5 bg-blue-100 text-blue-800 rounded border border-blue-300 flex items-center gap-1"><i class="fa-brands fa-linkedin"></i> ${d.tentativasCanais.linkedin} In</span>` : ''}
+                  ${(d.tentativasCanais && d.tentativasCanais.whatsapp) ? `<span class="px-1.5 py-0.5 bg-emerald-100 text-emerald-800 rounded border border-emerald-300 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> ${d.tentativasCanais.whatsapp} Wpp</span>` : ''}
+                  ${(d.tentativasCanais && d.tentativasCanais.email) ? `<span class="px-1.5 py-0.5 bg-sky-100 text-sky-800 rounded border border-sky-300 flex items-center gap-1"><i class="fa-solid fa-envelope"></i> ${d.tentativasCanais.email} Mail</span>` : ''}
+                  ${(d.tentativasCanais && d.tentativasCanais.linkedin) ? `<span class="px-1.5 py-0.5 bg-blue-100 text-blue-800 rounded border border-blue-300 flex items-center gap-1"><i class="fa-brands fa-linkedin"></i> ${d.tentativasCanais.linkedin} In</span>` : ''}
                   ${d.lastTargetType ? `<span class="px-1.5 py-0.5 bg-slate-200 text-slate-800 rounded text-[9px]">${d.lastTargetType}</span>` : ''}
                 </div>
               </div>
