@@ -1,59 +1,133 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Teste de Disparo Direto - Daniel Zanon (PRX Capital)</title>
+  <title>Central de Teste de Disparo & Cópia de Scripts - Daniel Zanon (PRX Capital)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
 </head>
-<body class="bg-slate-900 text-white min-h-screen flex items-center justify-center p-6 font-sans">
-  <div class="max-w-3xl w-full bg-slate-800 border border-slate-700 rounded-3xl p-8 shadow-2xl space-y-6">
-    <div class="flex items-center gap-4 border-b border-slate-700 pb-4">
-      <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl">
+<body class="bg-slate-900 text-white min-h-screen flex items-center justify-center p-6 font-sans antialiased">
+
+  <!-- AVISO FLUTUANTE DE CÓPIA -->
+  <div id="copyToast" style="display: none; position: fixed; bottom: 24px; right: 24px; z-index: 9999;" class="bg-slate-950 text-white px-5 py-3.5 rounded-2xl shadow-2xl items-center gap-3 border border-slate-700">
+    <div class="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></div>
+    <div>
+      <p id="copyToastText" class="text-xs font-bold text-slate-100">Texto copiado com sucesso!</p>
+      <p class="text-[10px] text-slate-400">Pronto para colar.</p>
+    </div>
+  </div>
+
+  <div class="max-w-4xl w-full bg-slate-800/90 backdrop-blur border border-slate-700 rounded-3xl p-8 shadow-2xl space-y-6">
+    <div class="flex items-center gap-4 border-b border-slate-700 pb-5">
+      <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl border border-emerald-500/30">
         <i class="fa-solid fa-paper-plane"></i>
       </div>
       <div>
-        <h1 class="text-xl font-black">Teste Imediato de Disparo</h1>
-        <p class="text-xs text-slate-400">Destinatário: Daniel | WhatsApp: (11) 91588-7182 | E-mail: danielzanoncontato@gmail.com</p>
+        <h1 class="text-xl font-extrabold tracking-tight text-white">Central de Teste de Disparo & Cópia de Scripts</h1>
+        <p class="text-xs text-slate-400 mt-0.5">Destinatário: <b class="text-slate-200">Daniel Zanon</b> • WhatsApp: <b class="text-emerald-400 font-mono">(11) 91588-7182</b> • E-mail: <b class="text-sky-400 font-mono">danielzanoncontato@gmail.com</b></p>
       </div>
     </div>
 
-    <!-- BOTÕES DE DISPARO LADO A LADO -->
+    <!-- BOTÕES DE DISPARO E CÓPIA SEPARADOS LADO A LADO -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-700 flex flex-col justify-between space-y-3">
+      
+      <!-- CARD WHATSAPP -->
+      <div class="bg-slate-900/90 p-5 rounded-2xl border border-slate-700 flex flex-col justify-between space-y-4">
         <div>
-          <h2 class="text-xs font-bold text-emerald-400 uppercase tracking-wider"><i class="fa-brands fa-whatsapp"></i> WhatsApp Pronto:</h2>
-          <p class="text-[11px] text-slate-400 mt-1">Disparo direto ao (11) 91588-7182 com copy PRX.</p>
+          <div class="flex items-center justify-between">
+            <h2 class="text-xs font-extrabold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+              <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp Sócio
+            </h2>
+            <span class="text-[10px] text-emerald-300 font-mono font-bold bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-800">(11) 91588-7182</span>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1">Dispare diretamente no WhatsApp Web/App ou copie o texto para colar.</p>
         </div>
-        <a id="btnWpp" href="#" target="_blank" class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm rounded-xl transition shadow-lg shadow-emerald-900/40">
-          <i class="fa-brands fa-whatsapp text-lg"></i> Disparar WhatsApp
-        </a>
+        <div class="flex items-center gap-2 pt-1">
+          <a id="btnWpp" href="#" target="_blank" class="flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 px-3 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs rounded-xl transition shadow-lg shadow-emerald-900/40 cursor-pointer">
+            <i class="fa-brands fa-whatsapp text-sm"></i> 📲 Disparar WhatsApp
+          </a>
+          <button onclick="copyTestDirect('wpp')" class="py-2.5 px-3.5 bg-emerald-950/70 hover:bg-emerald-900 text-emerald-300 border border-emerald-600/40 font-extrabold text-xs rounded-xl transition cursor-pointer flex items-center gap-1.5">
+            <i class="fa-regular fa-copy"></i> 📋 Copiar Texto
+          </button>
+        </div>
       </div>
 
-      <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-700 flex flex-col justify-between space-y-3">
+      <!-- CARD EMAIL -->
+      <div class="bg-slate-900/90 p-5 rounded-2xl border border-slate-700 flex flex-col justify-between space-y-4">
         <div>
-          <h2 class="text-xs font-bold text-sky-400 uppercase tracking-wider"><i class="fa-solid fa-envelope"></i> E-mail (Gmail) Pronto:</h2>
-          <p class="text-[11px] text-slate-400 mt-1">Disparo direto para danielzanoncontato@gmail.com.</p>
+          <div class="flex items-center justify-between">
+            <h2 class="text-xs font-extrabold text-sky-400 uppercase tracking-wider flex items-center gap-1.5">
+              <i class="fa-solid fa-envelope text-sm"></i> E-mail (Gmail)
+            </h2>
+            <span class="text-[10px] text-sky-300 font-mono font-bold bg-sky-950/80 px-2 py-0.5 rounded border border-sky-800">danielzanoncontato@gmail.com</span>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1">Abra diretamente no Gmail com Assunto e Corpo ou copie tudo para colar.</p>
         </div>
-        <a id="btnGmail" href="#" target="_blank" class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 bg-sky-600 hover:bg-sky-500 text-white font-extrabold text-sm rounded-xl transition shadow-lg shadow-sky-900/40">
-          <i class="fa-solid fa-envelope text-lg"></i> Disparar E-mail
-        </a>
+        <div class="flex items-center gap-2 pt-1">
+          <a id="btnGmail" href="#" target="_blank" class="flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 px-3 bg-sky-600 hover:bg-sky-500 text-white font-extrabold text-xs rounded-xl transition shadow-lg shadow-sky-900/40 cursor-pointer">
+            <i class="fa-solid fa-envelope text-sm"></i> ✉️ Disparar E-mail
+          </a>
+          <button onclick="copyTestDirect('email')" class="py-2.5 px-3.5 bg-sky-950/70 hover:bg-sky-900 text-sky-300 border border-sky-600/40 font-extrabold text-xs rounded-xl transition cursor-pointer flex items-center gap-1.5">
+            <i class="fa-regular fa-copy"></i> 📋 Copiar E-mail
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PREVIEWS DOS TEXTOS PRONTOS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+      <div class="bg-black/40 p-4 rounded-2xl border border-slate-700/80 space-y-2">
+        <div class="flex items-center justify-between text-xs font-bold text-emerald-400">
+          <span><i class="fa-brands fa-whatsapp"></i> Script Completo: WhatsApp Sócio</span>
+          <button onclick="copyTestDirect('wpp')" class="text-[10px] text-slate-400 hover:text-white underline"><i class="fa-regular fa-copy"></i> Copiar</button>
+        </div>
+        <textarea id="previewWpp" rows="6" class="w-full bg-black/30 border border-slate-700/60 rounded-xl p-3 text-[11px] text-slate-300 font-sans leading-relaxed focus:outline-none" readonly></textarea>
+      </div>
+      <div class="bg-black/40 p-4 rounded-2xl border border-slate-700/80 space-y-2">
+        <div class="flex items-center justify-between text-xs font-bold text-sky-400">
+          <span><i class="fa-solid fa-envelope"></i> Script Completo: Assunto + E-mail Sócio</span>
+          <button onclick="copyTestDirect('email')" class="text-[10px] text-slate-400 hover:text-white underline"><i class="fa-regular fa-copy"></i> Copiar</button>
+        </div>
+        <textarea id="previewEmail" rows="6" class="w-full bg-black/30 border border-slate-700/60 rounded-xl p-3 text-[11px] text-slate-300 font-sans leading-relaxed focus:outline-none" readonly></textarea>
       </div>
     </div>
 
     <div class="text-center pt-2">
-      <a href="index.html" class="text-xs text-slate-400 hover:text-slate-200 underline">Voltar para o Dashboard Master</a>
+      <a href="index.html" class="text-xs text-slate-400 hover:text-slate-200 underline font-medium">Voltar para a Base Master de Prospecção</a>
     </div>
   </div>
 
   <script>
-    const wppMsg = `Olá, Daniel! Tudo bem?\n\nSou o Daniel Zanon, da *PRX Capital* (prxcapital.com.br).\n\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas.\n\nNossas frentes de atuação abrangem:\n\n* Gestão de carteiras e investimentos\n* Operações de câmbio e derivativos\n* Seguros patrimoniais\n* Créditos e financiamentos (capital de giro e antecipação de recebíveis)\n* Pesquisa e análise econômica (valuation e viabilidade financeira)\n* Revisão e planejamento patrimonial, tributário e sucessório\n\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez de seu patrimônio.\n\nGostaria de agendar um diagnóstico inicial gratuito para melhorar a eficiência da sua estrutura empresarial ou familiar? (a conversa leva 15 minutos e pode ser ajustada nesta semana ou na próxima)\n\nUm abraço, *Daniel Zanon* | PRX Capital`;
+    const wppMsg = `Olá, Daniel! Tudo bem?\n\nSou o Daniel Zanon, da *PRX Capital* (prxcapital.com.br).\n\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas.\n\nNossas frentes de atuação abrangem:\n\n* Gestão de carteiras e investimentos\n* Operações de câmbio e derivativos\n* Seguros patrimoniais\n* Créditos e financiamentos (capital de giro e antecipação de recebíveis)\n* Pesquisa e análise econômica (valuation e viabilidade financeira)\n* Revisão e planejamento patrimonial, tributário e sucessório\n\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez de seu patrimônio.\n\nGostaria de agendar um diagnóstico inicial gratuito para melhorar a eficiência da sua estrutura empresarial ou familiar? (a conversa leva 15 minutos e pode ser ajustada nesta semana ou na próxima)\n\nUm abraço,\n\n*Daniel Zanon* | PRX Capital`;
 
     const emailSubj = `Diagnóstico Estratégico & Multi-Family Office | A/C Daniel`;
-    const emailBody = `Olá, Daniel! Tudo bem?\n\nSou o Daniel Zanon, da PRX Capital (prxcapital.com.br).\n\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas.\n\nNossas frentes de atuação abrangem:\n\n* Gestão de carteiras e investimentos\n* Operações de câmbio e derivativos\n* Seguros patrimoniais\n* Créditos e financiamentos (capital de giro e antecipação de recebíveis)\n* Pesquisa e análise econômica (valuation e viabilidade financeira)\n* Revisão e planejamento patrimonial, tributário e sucessório\n\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez de seu patrimônio.\n\nGostaria de agendar um diagnóstico inicial gratuito para melhorar a eficiência da sua estrutura empresarial ou familiar? (a conversa leva 15 minutos e pode ser ajustada nesta semana ou na próxima)\n\nUm abraço,\nDaniel Zanon | PRX Capital\nprxcapital.com.br`;
+    const emailBody = `Olá, Daniel! Tudo bem?\n\nSou o Daniel Zanon, da PRX Capital (prxcapital.com.br).\n\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas.\n\nNossas frentes de atuação abrangem:\n\n* Gestão de carteiras e investimentos\n* Operações de câmbio e derivativos\n* Seguros patrimoniais\n* Créditos e financiamentos (capital de giro e antecipação de recebíveis)\n* Pesquisa e análise econômica (valuation e viabilidade financeira)\n* Revisão e planejamento patrimonial, tributário e sucessório\n\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez de seu patrimônio.\n\nGostaria de agendar um diagnóstico inicial gratuito para melhorar a eficiência da sua estrutura empresarial ou familiar? (a conversa leva 15 minutos e pode ser ajustada nesta semana ou na próxima)\n\nUm abraço,\n\nDaniel Zanon | PRX Capital\nprxcapital.com.br`;
 
     document.getElementById('btnWpp').href = "https://api.whatsapp.com/send?phone=5511915887182&text=" + encodeURIComponent(wppMsg);
     document.getElementById('btnGmail').href = "https://mail.google.com/mail/?view=cm&fs=1&to=danielzanoncontato@gmail.com&su=" + encodeURIComponent(emailSubj) + "&body=" + encodeURIComponent(emailBody);
+    document.getElementById('previewWpp').value = wppMsg;
+    document.getElementById('previewEmail').value = `Assunto: ${emailSubj}\n\n${emailBody}`;
+
+    function showToast(msg) {
+      const toast = document.getElementById('copyToast');
+      document.getElementById('copyToastText').innerText = msg;
+      toast.style.display = 'flex';
+      setTimeout(() => { toast.style.display = 'none'; }, 3000);
+    }
+
+    function copyTestDirect(type) {
+      if (type === 'wpp') {
+        navigator.clipboard.writeText(wppMsg).then(() => showToast('📋 Mensagem de WhatsApp copiada para colar!'));
+      } else {
+        const full = `Assunto: ${emailSubj}\n\n${emailBody}`;
+        navigator.clipboard.writeText(full).then(() => showToast('📋 Assunto e E-mail copiados para colar!'));
+      }
+    }
   </script>
 </body>
 </html>
