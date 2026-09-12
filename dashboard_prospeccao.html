@@ -1579,18 +1579,26 @@
     let activeModalLead = null;
     let activeCrmDealId = null;
 
-    // CLASSIFICAÇÃO INTELIGENTE DE CONTATOS (SÓCIO VS EMPRESA)
-    function classifyPhone(phoneStr, isSocioContext) {
-      if (!phoneStr || phoneStr.indexOf('Sem Telefone') !== -1) return { text: 'Não informado', isMobile: false, isSocio: isSocioContext };
-      const digits = phoneStr.replace(/\D/g, '');
-      const localDigits = digits.replace(/^55/, '');
-      const isMobile = (localDigits.length >= 10 && localDigits.substring(2, 3) === '9') || (localDigits.length === 9 && localDigits[0] === '9');
+    // CLASSIFICAÇÃO RIGOROSA DE CONTATOS (CELULAR/WHATSAPP VS FONE/PABX EMPRESA)
+    function isMobilePhone(phoneStr) {
+      if (!phoneStr || phoneStr.indexOf('Sem Telefone') !== -1 || phoneStr.indexOf('Não informado') !== -1) return false;
+      const digits = phoneStr.replace(/\D/g, '').replace(/^55/, '');
+      // Regra obrigatória: DDD (2 dígitos) + 9 (celular) + 8 dígitos = 11 dígitos, ou 9 dígitos iniciando com 9
+      return (digits.length === 11 && digits[2] === '9') || (digits.length === 9 && digits[0] === '9');
+    }
+
+    function classifyPhone(phoneStr) {
+      if (!phoneStr || phoneStr.indexOf('Sem Telefone') !== -1 || phoneStr.indexOf('Não informado') !== -1) {
+        return { text: 'Não informado', clean: '', isMobile: false, isLandline: false, badge: 'Não informado' };
+      }
+      const digits = phoneStr.replace(/\D/g, '').replace(/^55/, '');
+      const isMobile = (digits.length === 11 && digits[2] === '9') || (digits.length === 9 && digits[0] === '9');
       return {
         text: phoneStr,
         clean: digits,
         isMobile: isMobile,
-        isSocio: isSocioContext || isMobile,
-        badge: (isSocioContext || isMobile) ? '👤 WhatsApp Sócio' : '🏢 PABX Empresa'
+        isLandline: !isMobile,
+        badge: isMobile ? '👤 WhatsApp Sócio' : '🏢 Fone / PABX Empresa'
       };
     }
 
@@ -1779,7 +1787,10 @@
       const d1Nome = d1.nome || 'Sócio / Diretor';
       const d1Cargo = d1.cargo || 'Diretor Geral';
       const d1Linkedin = d1.linkedin || '';
-      const d1Contato = lead.contatoPessoal || d1.contato || lead.fone || '';
+      let d1Contato = '';
+      if (isMobilePhone(lead.contatoPessoal)) d1Contato = lead.contatoPessoal;
+      else if (lead.decisores && lead.decisores[0] && isMobilePhone(lead.decisores[0].contato)) d1Contato = lead.decisores[0].contato;
+      else if (isMobilePhone(lead.fone)) d1Contato = lead.fone;
       const empresa = lead.company || 'Empresa';
       const cidade = lead.city || 'São Paulo';
       const uf = lead.uf || 'SP';
@@ -1822,12 +1833,22 @@
 
       if (channel === 'wpp_socio') {
         channelName = 'WhatsApp Sócio';
-        contactTarget = msgs.d1Contato || item.fone || '';
-        const cleanPhone = contactTarget.replace(/\D/g, '');
+        let targetMobile = '';
+        if (isMobilePhone(item.contatoPessoal)) targetMobile = item.contatoPessoal;
+        else if (item.decisores && item.decisores[0] && isMobilePhone(item.decisores[0].contato)) targetMobile = item.decisores[0].contato;
+        else if (isMobilePhone(item.fone)) targetMobile = item.fone;
+
+        if (!targetMobile) {
+          showToast(`⚠️ Sócio #${item.id} (${item.company}) sem celular direto (apenas fone fixo da empresa). Abrindo opções de E-mail / LinkedIn.`);
+          openLeadMessagesModal(item.id);
+          return;
+        }
+        contactTarget = targetMobile;
+        const cleanPhone = targetMobile.replace(/\D/g, '');
         const phoneParam = cleanPhone ? `55${cleanPhone.replace(/^55/, '')}` : '';
         const url = (cfg.wppMode === 'app')
-          ? (phoneParam ? `whatsapp://send?phone=${phoneParam}&text=${encodeURIComponent(msgs.wppSocio)}` : `whatsapp://send?text=${encodeURIComponent(msgs.wppSocio)}`)
-          : (phoneParam ? `https://api.whatsapp.com/send?phone=${phoneParam}&text=${encodeURIComponent(msgs.wppSocio)}` : `https://api.whatsapp.com/send?text=${encodeURIComponent(msgs.wppSocio)}`);
+          ? `whatsapp://send?phone=${phoneParam}&text=${encodeURIComponent(msgs.wppSocio)}`
+          : `https://api.whatsapp.com/send?phone=${phoneParam}&text=${encodeURIComponent(msgs.wppSocio)}`;
         window.open(url, '_blank');
       } else if (channel === 'wpp_empresa') {
         channelName = 'WhatsApp Empresa';
@@ -2228,9 +2249,14 @@
           const d1 = (item.decisores && item.decisores.length > 0) ? item.decisores[0] : { nome: 'Decisor QSA', cargo: 'Sócio-Diretor', linkedin: '' };
           const d2 = (item.decisores && item.decisores.length > 1) ? item.decisores[1] : null;
 
-          const foneEmpresaInfo = classifyPhone(item.fone, false);
+          const foneEmpresaInfo = classifyPhone(item.fone);
           const emailEmpresaInfo = classifyEmail(item.email, d1.nome);
-          const foneSocioInfo = classifyPhone(item.contatoPessoal || d1.contato || item.fone, true);
+
+          let socioMobile = '';
+          if (isMobilePhone(item.contatoPessoal)) socioMobile = item.contatoPessoal;
+          else if (d1.contato && isMobilePhone(d1.contato)) socioMobile = d1.contato;
+          else if (isMobilePhone(item.fone)) socioMobile = item.fone;
+          const hasSocioMobile = !!socioMobile;
 
           const inCrm = crmDealsList.find(x => x.prospectId === item.id || (x.company && x.company.toLowerCase() === item.company.toLowerCase()));
           let crmBtnHtml = '';
@@ -2276,14 +2302,23 @@
                 ${d2 ? `<div class="mt-1 pt-1 border-t border-slate-100 text-[10px] font-bold text-slate-700">${d2.nome} <span class="text-[9px] font-normal text-slate-400">(${d2.cargo})</span></div>` : ''}
               </td>
               <td class="py-3 px-4 bg-slate-50/50">
-                <div class="flex items-center gap-1 text-[10px] font-bold text-slate-600"><i class="fa-solid fa-phone text-slate-400"></i> ${foneEmpresaInfo.text}</div>
-                <div class="flex items-center gap-1 text-[10px] text-slate-500 mt-1 truncate max-w-[170px]"><i class="fa-solid fa-building text-slate-400"></i> ${emailEmpresaInfo.text}</div>
+                <div class="flex items-center gap-1 text-[10px] font-bold text-slate-700"><i class="fa-solid fa-phone text-slate-400"></i> ${foneEmpresaInfo.text}</div>
+                <span class="inline-block mt-0.5 text-[9px] font-bold px-1.5 py-0.5 rounded ${foneEmpresaInfo.isMobile ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-700'}">${foneEmpresaInfo.badge}</span>
+                <div class="flex items-center gap-1 text-[10px] text-slate-500 mt-1 truncate max-w-[170px]" title="${emailEmpresaInfo.text}"><i class="fa-solid fa-building text-slate-400"></i> ${emailEmpresaInfo.text}</div>
               </td>
-              <td class="py-3 px-3 bg-emerald-50/50 border-x border-emerald-100">
-                <div class="flex items-center gap-1 font-mono text-emerald-700 font-bold text-xs">
-                  <i class="fa-brands fa-whatsapp text-emerald-600"></i> ${foneSocioInfo.text}
-                </div>
-                <span class="inline-block mt-1 text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-200">${foneSocioInfo.badge}</span>
+              <td class="py-3 px-3 bg-emerald-50/40 border-x border-emerald-100">
+                ${hasSocioMobile ? `
+                  <div class="flex items-center gap-1 font-mono text-emerald-700 font-bold text-xs">
+                    <i class="fa-brands fa-whatsapp text-emerald-600"></i> ${socioMobile}
+                  </div>
+                  <span class="inline-block mt-0.5 text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300">👤 Celular / WhatsApp</span>
+                ` : `
+                  <div class="text-[11px] text-slate-500 font-semibold flex items-center gap-1">
+                    <i class="fa-solid fa-phone-slash text-slate-400 text-[10px]"></i> Sem Celular Direto
+                  </div>
+                  <span class="inline-block mt-0.5 text-[9px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200">🏢 Fixo da Empresa</span>
+                `}
+                ${d1.linkedin ? `<div class="mt-1"><a href="${d1.linkedin}" target="_blank" class="text-blue-600 hover:text-blue-800 text-[10px] font-bold flex items-center gap-1"><i class="fa-brands fa-linkedin"></i> LinkedIn Sócio</a></div>` : ''}
               </td>
               <td class="py-3 px-3 bg-indigo-50/40 border-l border-slate-200 text-center">
                 <div class="flex items-center justify-center gap-1.5 w-full min-w-[390px]">
@@ -2335,13 +2370,17 @@
       document.getElementById('modalCompanyName').innerText = lead.company;
       document.getElementById('modalLeadSub').innerText = `${lead.cnpj} • ${lead.city}-${lead.uf} • Decisor: ${msgs.d1Nome} (${msgs.d1Cargo})`;
 
-      document.getElementById('modalSocioPhoneBadge').innerText = msgs.d1Contato || 'Não informado';
+      let socioMobile = '';
+      if (isMobilePhone(lead.contatoPessoal)) socioMobile = lead.contatoPessoal;
+      else if (lead.decisores && lead.decisores[0] && isMobilePhone(lead.decisores[0].contato)) socioMobile = lead.decisores[0].contato;
+      else if (isMobilePhone(lead.fone)) socioMobile = lead.fone;
+
+      document.getElementById('modalSocioPhoneBadge').innerText = socioMobile ? `${socioMobile} (WhatsApp Celular)` : `Sem Celular Direto (Fixo Empresa: ${lead.fone || 'Não informado'})`;
       document.getElementById('modalSocioEmailBadge').innerText = lead.email ? lead.email.split('/')[0].trim() : 'Não informado';
       document.getElementById('modalSocioLinkedinBadge').innerText = msgs.d1Linkedin ? 'Perfil Verificado' : 'Busca Automática';
 
-      document.getElementById('modalEmpresaPhoneBadge').innerText = msgs.foneEmpresa || 'Não informado';
+      document.getElementById('modalEmpresaPhoneBadge').innerText = lead.fone ? `${lead.fone} (${classifyPhone(lead.fone).badge})` : 'Não informado';
       document.getElementById('modalEmpresaEmailBadge').innerText = msgs.emailEmpresa || 'Não informado';
-
       document.getElementById('modalWppSocioText').value = msgs.wppSocio;
       document.getElementById('modalEmailSocioSubject').value = msgs.emailSocioAssunto;
       document.getElementById('modalEmailSocioBody').value = msgs.emailSocioCorpo;
