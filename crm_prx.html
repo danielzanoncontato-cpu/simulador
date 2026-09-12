@@ -278,68 +278,23 @@
           notes: [
             { date: '12/09/2026, 18:25:00', text: 'Disparo automático de teste executivo efetuado via Resend API para Renato, Diego e Pardal.' }
           ]
-        },
-        {
-          id: 'deal_1_init',
-          prospectId: 1,
-          company: 'Astra S/A Indústria e Comércio',
-          cnpj: '50.949.528/0001-80',
-          uf: 'SP',
-          city: 'Jundiaí',
-          corSegmento: 'YELLOW',
-          segmentoNome: 'Materiais de Construção & Indústria',
-          setor: 'Construção & Plásticos',
-          decisorNome: 'Manoel Flores',
-          decisorCargo: 'Diretor Geral Executivo',
-          decisorLinkedin: 'https://www.linkedin.com/search/results/people/?keywords=Manoel%20Flores%20Astra%20SA',
-          fone: '(11) 4583-7777',
-          email: 'diretoria@astra-sa.com',
-          stage: 'contato',
-          patrimonio: 45000000,
-          scoreBdr: 98,
-          tentativasTotal: 1,
-          tentativasCanais: { whatsapp: 1, email: 0, linkedin: 0 },
-          tentativasAlvos: { socio: 1, empresa: 0 },
-          lastChannel: 'WhatsApp (Sócio / Decisor)',
-          lastTargetType: 'Sócio / Decisor',
-          lastRecipientName: 'Manoel Flores (Diretor Geral Executivo)',
-          lastRecipientContact: '(11) 4583-7777',
-          lastContactAt: '12/09/2026, 18:00:00',
-          createdAt: '2026-09-12T21:00:00.000Z',
-          historyLogs: [
-            {
-              id: 'att_astra_1',
-              date: '12/09/2026, 18:00:00',
-              timestamp: '2026-09-12T21:00:00.000Z',
-              attemptNumber: 1,
-              canal: 'WhatsApp',
-              alvoTipo: 'Sócio / Decisor',
-              recipientName: 'Manoel Flores (Diretor Geral Executivo)',
-              recipientContact: '(11) 4583-7777',
-              status: 'Disparo Direto',
-              textNote: 'Tentativa #1: WhatsApp enviado para Sócio / Decisor [Manoel Flores - (11) 4583-7777] (Disparo Direto)'
-            }
-          ],
-          notes: [
-            { date: '12/09/2026, 18:00:00', text: 'Abordagem inicial de WhatsApp realizada para o sócio Manoel Flores.' }
-          ]
         }
       ];
     }
 
     function getCrmDeals() {
       try {
-        const saved = localStorage.getItem('prx_crm_deals_v2');
+        const saved = localStorage.getItem('prx_crm_deals_v3');
         if (saved) {
           const parsed = JSON.parse(saved);
           if (Array.isArray(parsed) && parsed.length > 0) return parsed;
         }
       } catch(e) {}
       const def = getDefaultCrmDeals();
-      localStorage.setItem('prx_crm_deals_v2', JSON.stringify(def));
+      localStorage.setItem('prx_crm_deals_v3', JSON.stringify(def));
       return def;
     }
-    function saveCrmDeals(d) { localStorage.setItem('prx_crm_deals_v2', JSON.stringify(d)); renderCrm(); }
+    function saveCrmDeals(d) { localStorage.setItem('prx_crm_deals_v3', JSON.stringify(d)); renderCrm(); }
 
     function renderCrm() {
       const deals = getCrmDeals();
