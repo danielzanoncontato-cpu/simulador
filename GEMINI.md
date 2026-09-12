@@ -1,4 +1,4 @@
-﻿# DIRETRIZES E REGRAS MANDATÓRIAS: BDR - LEAD AI
+# DIRETRIZES E REGRAS MANDATÓRIAS: BDR - LEAD AI
 
 ## 🚨 REGRAS DE OURO INVIOLÁVEIS DO PROJETO
 
@@ -42,3 +42,12 @@
    - Colunas obrigatórias: `ID, Empresa, CNPJ, Idade, UF, Cidade, Segmento, Cor_Segmento, Fonte_Dados, Setor, Tem_Site, Site, Descricao, CNAE_Principal, CNAE_Secundarios, Decisor_1_Nome, Decisor_1_Cargo, Decisor_1_LinkedIn, Decisor_1_Contato, Decisor_2_Nome, Decisor_2_Cargo, Decisor_2_LinkedIn, Decisor_2_Contato, Score_PRX`.
    - Codificação: UTF-8 com BOM para abertura sem falhas no Microsoft Excel.
    - Acesso 100% livre de senhas ou telas de login.
+
+8. **MOTOR DE DISPARO AUTOMATIZADO EXCLUSIVO VIA RESEND (NUNCA GOOGLE/GMAIL):**
+   - O sistema, dashboards e robôs DEVEM operar exclusivamente via integração **Resend API** (Chave de API ativa do projeto).
+   - NUNCA perguntar, propor, sugerir ou solicitar senhas de aplicativo Google ou redirecionar a infraestrutura de disparo para fora do Resend. Todo disparo automatizado é processado pelo motor Resend.
+
+9. **HISTÓRICO PERMANENTE E OBRIGATÓRIO DE ABORDAGENS NO CRM:**
+   - Todo e qualquer disparo, envio teste ou abordagem executada (WhatsApp, E-mail/Resend ou LinkedIn) DEVE ser registrado de forma indelével e persistente no CRM na etapa **`3. Abordagem / Contato`**.
+   - Cada registro no CRM deve conter: contador incremental de tentativas (`tentativasTotal`), discriminação por canal (`tentativasCanais`: whatsapp, email, linkedin), definição explícita do alvo (`Sócio / Decisor` vs `Empresa / Diretoria Geral`), nome do destinatário, canal de contato exato e histórico cronológico detalhado (`historyLogs`).
+   - Leads já abordados ou disparados DEVEM aparecer imediatamente na interface visual do Pipeline Kanban e nas métricas consolidadas.
