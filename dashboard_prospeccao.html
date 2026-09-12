@@ -1763,7 +1763,7 @@
       if (document.getElementById('testEmailPreview')) document.getElementById('testEmailPreview').value = `Assunto: ${emailSubject}\n\n${emailBody}`;
     }
 
-    function sendResendEmail(apiKey, fromSender, toRecipient, subject, bodyText, itemCallback) {
+    function sendResendEmail(apiKey, fromSender, toRecipient, subject, bodyText, itemCallback, targetType, targetName) {
       showToast(`⏳ Enviando via Resend para ${toRecipient}...`);
       fetch('https://api.resend.com/emails', {
         method: 'POST',
@@ -1780,16 +1780,18 @@
       }).then(function(res) {
         return res.json().then(function(data) {
           if (res.ok && data.id) {
-            if (itemCallback) autoAttachLeadToCrm(itemCallback, 'Resend API (100% Automático)', toRecipient);
-            showToast(`🚀 E-mail entregue com sucesso via Resend (ID: ${data.id})!`);
+            if (itemCallback) recordContactAttempt(itemCallback, 'E-mail', targetType || 'Sócio / Decisor', targetName || 'Decisor', toRecipient, 'Entregue via Resend API', bodyText);
+            showToast(`🚀 E-mail entregue com sucesso via Resend (ID: ${data.id})! Registrado no CRM.`);
           } else {
             showToast(`⚠️ Resend: ${data.message || 'Verifique o domínio'} (Abrindo Gmail como alternativa)`);
+            if (itemCallback) recordContactAttempt(itemCallback, 'E-mail', targetType || 'Sócio / Decisor', targetName || 'Decisor', toRecipient, 'Aberto no Gmail (Fallback)', bodyText);
             const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(toRecipient)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
             window.open(gmailUrl, '_blank');
           }
         });
       }).catch(function(err) {
         showToast(`⚠️ Resend direto bloqueado pelo navegador. Abrindo Gmail...`);
+        if (itemCallback) recordContactAttempt(itemCallback, 'E-mail', targetType || 'Sócio / Decisor', targetName || 'Decisor', toRecipient, 'Aberto no Gmail (Fallback)', bodyText);
         const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(toRecipient)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
         window.open(gmailUrl, '_blank');
       });
@@ -1889,6 +1891,91 @@
       };
     }
 
+    function recordContactAttempt(leadIdOrObj, canal, alvoTipo, recipientName, recipientContact, statusInfo, extraDetails) {
+      let item = typeof leadIdOrObj === 'object' ? leadIdOrObj : prospects.find(p => p.id === leadIdOrObj);
+      if (!item) return 0;
+
+      let deals = getCrmDeals();
+      let deal = deals.find(d => d.prospectId === item.id || (d.company && d.company.toLowerCase() === item.company.toLowerCase()));
+      const now = new Date();
+      const nowStr = now.toLocaleString('pt-BR');
+      const timeIso = now.toISOString();
+
+      if (!deal) {
+        deal = {
+          id: 'deal_' + item.id + '_' + Date.now(),
+          prospectId: item.id,
+          company: item.company,
+          cnpj: item.cnpj,
+          uf: item.uf,
+          city: item.city,
+          corSegmento: item.corSegmento,
+          segmentoNome: item.segmentoNome,
+          setor: item.setor || '',
+          decisorNome: (item.decisores && item.decisores[0]) ? item.decisores[0].nome : 'Sócio / Diretor',
+          decisorCargo: (item.decisores && item.decisores[0]) ? item.decisores[0].cargo : 'Diretor Geral',
+          decisorLinkedin: (item.decisores && item.decisores[0]) ? item.decisores[0].linkedin : '',
+          fone: item.contatoPessoal || item.fone || '',
+          email: item.email || '',
+          stage: 'contato',
+          patrimonio: 15000000,
+          scoreBdr: item.scorePrx || 85,
+          tentativasTotal: 0,
+          tentativasCanais: { whatsapp: 0, email: 0, linkedin: 0 },
+          tentativasAlvos: { socio: 0, empresa: 0 },
+          historyLogs: [],
+          notes: []
+        };
+        deals.unshift(deal);
+      } else {
+        if (deal.stage === 'prospeccao' || deal.stage === 'qualificacao') {
+          deal.stage = 'contato';
+        }
+      }
+
+      deal.tentativasTotal = (deal.tentativasTotal || 0) + 1;
+      deal.tentativasCanais = deal.tentativasCanais || { whatsapp: 0, email: 0, linkedin: 0 };
+      deal.tentativasAlvos = deal.tentativasAlvos || { socio: 0, empresa: 0 };
+      deal.historyLogs = deal.historyLogs || [];
+      deal.notes = deal.notes || [];
+
+      const cLower = (canal || '').toLowerCase();
+      if (cLower.indexOf('whatsapp') !== -1 || cLower.indexOf('wpp') !== -1) deal.tentativasCanais.whatsapp++;
+      else if (cLower.indexOf('email') !== -1 || cLower.indexOf('e-mail') !== -1 || cLower.indexOf('mail') !== -1) deal.tentativasCanais.email++;
+      else if (cLower.indexOf('linkedin') !== -1) deal.tentativasCanais.linkedin++;
+
+      const aLower = (alvoTipo || '').toLowerCase();
+      if (aLower.indexOf('sócio') !== -1 || aLower.indexOf('socio') !== -1 || aLower.indexOf('decisor') !== -1) deal.tentativasAlvos.socio++;
+      else deal.tentativasAlvos.empresa++;
+
+      deal.lastChannel = `${canal} (${alvoTipo})`;
+      deal.lastContactAt = nowStr;
+      deal.lastTargetType = alvoTipo;
+      deal.lastRecipientName = recipientName;
+      deal.lastRecipientContact = recipientContact;
+
+      const logEntry = {
+        id: 'att_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
+        date: nowStr,
+        timestamp: timeIso,
+        attemptNumber: deal.tentativasTotal,
+        canal: canal,
+        alvoTipo: alvoTipo,
+        recipientName: recipientName,
+        recipientContact: recipientContact,
+        status: statusInfo || 'Disparado',
+        textNote: `Tentativa #${deal.tentativasTotal}: ${canal} enviado para ${alvoTipo} [${recipientName} - ${recipientContact}] (${statusInfo || 'Disparo'})`
+      };
+
+      deal.historyLogs.unshift(logEntry);
+      deal.notes.unshift({ date: nowStr, text: logEntry.textNote });
+
+      saveCrmDeals(deals);
+      renderCrmPipeline();
+      renderTable();
+      return deal.tentativasTotal;
+    }
+
     function executeLeadDispatch(leadId, channel) {
       const item = prospects.find(p => p.id === leadId);
       if (!item) return;
@@ -1906,7 +1993,7 @@
         else if (isMobilePhone(item.fone)) targetMobile = item.fone;
 
         if (!targetMobile) {
-          showToast(`⚠️ Sócio #${item.id} (${item.company}) sem celular direto (apenas fone fixo da empresa). Abrindo opções de E-mail / LinkedIn.`);
+          showToast(`⚠️ Sócio #${item.id} (${item.company}) sem celular direto (apenas fixo da empresa).`);
           openLeadMessagesModal(item.id);
           return;
         }
@@ -1917,6 +2004,8 @@
           ? `whatsapp://send?phone=${phoneParam}&text=${encodeURIComponent(msgs.wppSocio)}`
           : `https://api.whatsapp.com/send?phone=${phoneParam}&text=${encodeURIComponent(msgs.wppSocio)}`;
         window.open(url, '_blank');
+        const n = recordContactAttempt(item, 'WhatsApp', 'Sócio / Decisor', msgs.d1Nome + ' (' + msgs.d1Cargo + ')', targetMobile, 'Disparo Direto', msgs.wppSocio);
+        showToast(`📲 WhatsApp disparado para o Sócio ${msgs.d1Nome}! Anotado no CRM (Tentativa #${n}).`);
       } else if (channel === 'wpp_empresa') {
         channelName = 'WhatsApp Empresa';
         contactTarget = item.fone || '';
@@ -1926,11 +2015,13 @@
           ? (phoneParam ? `whatsapp://send?phone=${phoneParam}&text=${encodeURIComponent(msgs.wppEmpresa)}` : `whatsapp://send?text=${encodeURIComponent(msgs.wppEmpresa)}`)
           : (phoneParam ? `https://api.whatsapp.com/send?phone=${phoneParam}&text=${encodeURIComponent(msgs.wppEmpresa)}` : `https://api.whatsapp.com/send?text=${encodeURIComponent(msgs.wppEmpresa)}`);
         window.open(url, '_blank');
+        const n = recordContactAttempt(item, 'WhatsApp', 'Empresa / Diretoria Geral', item.company, contactTarget, 'Disparo Direto', msgs.wppEmpresa);
+        showToast(`🏢 WhatsApp disparado para a Empresa ${item.company}! Anotado no CRM (Tentativa #${n}).`);
       } else if (channel === 'email_socio') {
         channelName = 'E-mail Sócio';
         contactTarget = item.email ? item.email.split('/')[0].trim() : '';
         if (cfg.emailProvider === 'resend' && cfg.resendApiKey) {
-          sendResendEmail(cfg.resendApiKey, cfg.resendSender, contactTarget || 'daniel@prxcapital.com.br', msgs.emailSocioAssunto, msgs.emailSocioCorpo, item);
+          sendResendEmail(cfg.resendApiKey, cfg.resendSender, contactTarget || 'daniel@prxcapital.com.br', msgs.emailSocioAssunto, msgs.emailSocioCorpo, item, 'Sócio / Decisor', msgs.d1Nome);
           return;
         }
         let url = `mailto:${contactTarget}?subject=${encodeURIComponent(msgs.emailSocioAssunto)}&body=${encodeURIComponent(msgs.emailSocioCorpo)}`;
@@ -1940,11 +2031,13 @@
           url = `https://outlook.office.com/mail/deeplink/compose?to=${encodeURIComponent(contactTarget)}&subject=${encodeURIComponent(msgs.emailSocioAssunto)}&body=${encodeURIComponent(msgs.emailSocioCorpo)}`;
         }
         window.open(url, '_blank');
+        const n = recordContactAttempt(item, 'E-mail', 'Sócio / Decisor', msgs.d1Nome + ' (' + msgs.d1Cargo + ')', contactTarget, 'Disparo via ' + cfg.emailProvider.toUpperCase(), msgs.emailSocioCorpo);
+        showToast(`✉️ E-mail disparado para o Sócio ${msgs.d1Nome}! Anotado no CRM (Tentativa #${n}).`);
       } else if (channel === 'email_empresa') {
         channelName = 'E-mail Empresa';
         contactTarget = item.email ? item.email.split('/')[0].trim() : '';
         if (cfg.emailProvider === 'resend' && cfg.resendApiKey) {
-          sendResendEmail(cfg.resendApiKey, cfg.resendSender, contactTarget || 'daniel@prxcapital.com.br', msgs.emailEmpresaAssunto, msgs.emailEmpresaCorpo, item);
+          sendResendEmail(cfg.resendApiKey, cfg.resendSender, contactTarget || 'daniel@prxcapital.com.br', msgs.emailEmpresaAssunto, msgs.emailEmpresaCorpo, item, 'Empresa / Diretoria Geral', item.company);
           return;
         }
         let url = `mailto:${contactTarget}?subject=${encodeURIComponent(msgs.emailEmpresaAssunto)}&body=${encodeURIComponent(msgs.emailEmpresaCorpo)}`;
@@ -1954,20 +2047,23 @@
           url = `https://outlook.office.com/mail/deeplink/compose?to=${encodeURIComponent(contactTarget)}&subject=${encodeURIComponent(msgs.emailEmpresaAssunto)}&body=${encodeURIComponent(msgs.emailEmpresaCorpo)}`;
         }
         window.open(url, '_blank');
+        const n = recordContactAttempt(item, 'E-mail', 'Empresa / Diretoria Geral', item.company, contactTarget, 'Disparo via ' + cfg.emailProvider.toUpperCase(), msgs.emailEmpresaCorpo);
+        showToast(`✉️ E-mail institucional disparado para ${item.company}! Anotado no CRM (Tentativa #${n}).`);
       } else if (channel === 'linkedin_socio') {
         channelName = 'LinkedIn Sócio';
         contactTarget = msgs.d1Linkedin || msgs.d1Nome;
         const url = msgs.d1Linkedin || `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(msgs.d1Nome + ' ' + item.company)}`;
         window.open(url, '_blank');
+        const n = recordContactAttempt(item, 'LinkedIn', 'Sócio / Decisor', msgs.d1Nome + ' (' + msgs.d1Cargo + ')', contactTarget, 'Perfil Aberto', msgs.linkedinSocio);
+        showToast(`💼 LinkedIn do Sócio ${msgs.d1Nome} aberto! Anotado no CRM (Tentativa #${n}).`);
       } else if (channel === 'linkedin_empresa') {
         channelName = 'LinkedIn Empresa';
         contactTarget = item.company;
         const url = `https://www.linkedin.com/search/results/companies/?keywords=${encodeURIComponent(item.company)}`;
         window.open(url, '_blank');
+        const n = recordContactAttempt(item, 'LinkedIn', 'Empresa / Diretoria Geral', item.company, item.company, 'Página Corporativa Aberta', msgs.linkedinEmpresa);
+        showToast(`💼 LinkedIn da Empresa ${item.company} aberto! Anotado no CRM (Tentativa #${n}).`);
       }
-
-      autoAttachLeadToCrm(item, channelName, contactTarget);
-      showToast(`🚀 Disparo [${channelName}] iniciado! Lead #${item.id} (${item.company}) anexado ao CRM.`);
     }
 
     function copyTextToClipboard(text, successMsg) {
@@ -2006,17 +2102,22 @@
       const msgs = getLeadMessages(item);
 
       if (channel === 'wpp_socio') {
-        copyTextToClipboard(msgs.wppSocio, `📋 Mensagem de WhatsApp para ${msgs.d1Nome} copiada para colar!`);
+        copyTextToClipboard(msgs.wppSocio, `📋 Mensagem de WhatsApp para o Sócio ${msgs.d1Nome} copiada para colar (+CRM)!`);
+        recordContactAttempt(item, 'WhatsApp', 'Sócio / Decisor', msgs.d1Nome, msgs.d1Contato || item.fone, 'Cópia de Script para Envio', msgs.wppSocio);
       } else if (channel === 'email_socio') {
         const fullEmail = `Assunto: ${msgs.emailSocioAssunto}\n\n${msgs.emailSocioCorpo}`;
-        copyTextToClipboard(fullEmail, `📋 Assunto e E-mail para ${msgs.d1Nome} copiados para colar!`);
+        copyTextToClipboard(fullEmail, `📋 Assunto e E-mail para o Sócio ${msgs.d1Nome} copiados para colar (+CRM)!`);
+        recordContactAttempt(item, 'E-mail', 'Sócio / Decisor', msgs.d1Nome, item.email, 'Cópia de Script para Envio', fullEmail);
       } else if (channel === 'wpp_empresa') {
-        copyTextToClipboard(msgs.wppEmpresa, `📋 Mensagem de WhatsApp da ${msgs.empresa} copiada para colar!`);
+        copyTextToClipboard(msgs.wppEmpresa, `📋 WhatsApp da Empresa ${msgs.empresa} copiado para colar (+CRM)!`);
+        recordContactAttempt(item, 'WhatsApp', 'Empresa / Diretoria Geral', msgs.empresa, item.fone, 'Cópia de Script para Envio', msgs.wppEmpresa);
       } else if (channel === 'email_empresa') {
         const fullEmail = `Assunto: ${msgs.emailEmpresaAssunto}\n\n${msgs.emailEmpresaCorpo}`;
-        copyTextToClipboard(fullEmail, `📋 Assunto e E-mail da ${msgs.empresa} copiados para colar!`);
+        copyTextToClipboard(fullEmail, `📋 E-mail institucional da Empresa ${msgs.empresa} copiado para colar (+CRM)!`);
+        recordContactAttempt(item, 'E-mail', 'Empresa / Diretoria Geral', msgs.empresa, item.email, 'Cópia de Script para Envio', fullEmail);
       } else if (channel === 'linkedin_socio') {
-        copyTextToClipboard(msgs.linkedinSocio, `📋 Pitch do LinkedIn para ${msgs.d1Nome} copiado para colar!`);
+        copyTextToClipboard(msgs.linkedinSocio, `📋 Pitch do LinkedIn para ${msgs.d1Nome} copiado para colar (+CRM)!`);
+        recordContactAttempt(item, 'LinkedIn', 'Sócio / Decisor', msgs.d1Nome, msgs.d1Linkedin || msgs.d1Nome, 'Cópia de Pitch', msgs.linkedinSocio);
       }
     }
 
@@ -2036,51 +2137,6 @@
     function saveCrmDeals(deals) {
       localStorage.setItem('prx_crm_deals_v2', JSON.stringify(deals));
       updateCrmCounters();
-    }
-
-    function autoAttachLeadToCrm(item, channelName, contactTarget) {
-      let deals = getCrmDeals();
-      let existing = deals.find(d => d.prospectId === item.id || (d.company && d.company.toLowerCase() === item.company.toLowerCase()));
-      const nowStr = new Date().toLocaleString('pt-BR');
-      const logNote = `Disparo [${channelName}] realizado em ${nowStr} para ${item.decisores?.[0]?.nome || 'Decisor'} (${contactTarget}).`;
-
-      if (!existing) {
-        const newDeal = {
-          id: 'deal_' + item.id + '_' + Date.now(),
-          prospectId: item.id,
-          company: item.company,
-          cnpj: item.cnpj,
-          uf: item.uf,
-          city: item.city,
-          corSegmento: item.corSegmento,
-          segmentoNome: item.segmentoNome,
-          setor: item.setor || '',
-          decisorNome: item.decisores?.[0]?.nome || 'Sócio / Diretor',
-          decisorCargo: item.decisores?.[0]?.cargo || 'Diretor Geral',
-          decisorLinkedin: item.decisores?.[0]?.linkedin || '',
-          fone: item.contatoPessoal || item.fone || '',
-          email: item.email || '',
-          stage: 'contato',
-          patrimonio: 15000000,
-          scoreBdr: item.scorePrx || 85,
-          lastChannel: channelName,
-          lastContactAt: nowStr,
-          createdAt: new Date().toISOString(),
-          notes: [{ date: nowStr, text: logNote }]
-        };
-        deals.unshift(newDeal);
-      } else {
-        if (existing.stage === 'prospeccao' || existing.stage === 'qualificacao') {
-          existing.stage = 'contato';
-        }
-        existing.lastChannel = channelName;
-        existing.lastContactAt = nowStr;
-        if (!existing.notes) existing.notes = [];
-        existing.notes.unshift({ date: nowStr, text: logNote });
-      }
-      saveCrmDeals(deals);
-      renderCrmPipeline();
-      renderTable();
     }
 
     function addToCrm(leadId) {
@@ -2111,9 +2167,13 @@
         stage: 'prospeccao',
         patrimonio: 15000000,
         scoreBdr: item.scorePrx || 85,
+        tentativasTotal: 0,
+        tentativasCanais: { whatsapp: 0, email: 0, linkedin: 0 },
+        tentativasAlvos: { socio: 0, empresa: 0 },
         lastChannel: 'Adicionado Manual',
         lastContactAt: nowStr,
         createdAt: new Date().toISOString(),
+        historyLogs: [],
         notes: [{ date: nowStr, text: `Lead #${item.id} adicionado ao CRM em Prospecção.` }]
       };
       deals.unshift(newDeal);
@@ -2132,14 +2192,18 @@
       if (totalDealsEl) totalDealsEl.innerText = deals.length.toLocaleString('pt-BR');
 
       let totalPatrimonio = 0;
-      deals.forEach(d => { totalPatrimonio += (parseFloat(d.patrimonio) || 0); });
+      let totalAttemptsSum = 0;
+      deals.forEach(d => {
+        totalPatrimonio += (parseFloat(d.patrimonio) || 0);
+        totalAttemptsSum += (parseInt(d.tentativasTotal, 10) || (d.lastChannel && d.lastChannel !== 'Adicionado Manual' ? 1 : 0));
+      });
+
       const totalPatEl = document.getElementById('crmTotalPatrimonio');
       if (totalPatEl) totalPatEl.innerText = 'R$ ' + (totalPatrimonio / 1000000).toFixed(0) + 'M';
 
       const totalDisparosEl = document.getElementById('crmTotalDisparos');
       if (totalDisparosEl) {
-        const disparosCount = deals.filter(d => d.lastChannel && d.lastChannel !== 'Adicionado Manual').length;
-        totalDisparosEl.innerText = disparosCount.toLocaleString('pt-BR');
+        totalDisparosEl.innerText = totalAttemptsSum.toLocaleString('pt-BR');
       }
 
       const totalFechadosEl = document.getElementById('crmTotalFechados');
@@ -2182,7 +2246,18 @@
                 <div class="font-bold text-slate-800"><i class="fa-solid fa-user-tie text-slate-400 mr-1"></i>${d.decisorNome}</div>
                 <span class="text-[10px] text-emerald-600 font-mono font-bold">R$ ${(d.patrimonio/1000000).toFixed(0)}M</span>
               </div>
-              ${d.lastChannel ? `<div class="text-[9px] text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200 font-bold truncate">🚀 ${d.lastChannel} (${d.lastContactAt || ''})</div>` : ''}
+              <div class="bg-slate-50 p-2 rounded-xl border border-slate-200 space-y-1">
+                <div class="flex items-center justify-between text-[10px] font-bold">
+                  <span class="text-indigo-700 flex items-center gap-1"><i class="fa-solid fa-bullseye text-indigo-600"></i> ${d.tentativasTotal || (d.lastChannel && d.lastChannel !== 'Adicionado Manual' ? 1 : 0)} Tentativa(s)</span>
+                  <span class="text-slate-500 font-normal text-[9px]">${d.lastContactAt || ''}</span>
+                </div>
+                <div class="flex items-center gap-1 flex-wrap text-[9px] font-extrabold">
+                  ${d.tentativasCanais?.whatsapp ? `<span class="px-1.5 py-0.5 bg-emerald-100 text-emerald-800 rounded border border-emerald-300 flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> ${d.tentativasCanais.whatsapp} Wpp</span>` : ''}
+                  ${d.tentativasCanais?.email ? `<span class="px-1.5 py-0.5 bg-sky-100 text-sky-800 rounded border border-sky-300 flex items-center gap-1"><i class="fa-solid fa-envelope"></i> ${d.tentativasCanais.email} Mail</span>` : ''}
+                  ${d.tentativasCanais?.linkedin ? `<span class="px-1.5 py-0.5 bg-blue-100 text-blue-800 rounded border border-blue-300 flex items-center gap-1"><i class="fa-brands fa-linkedin"></i> ${d.tentativasCanais.linkedin} In</span>` : ''}
+                  ${d.lastTargetType ? `<span class="px-1.5 py-0.5 bg-slate-200 text-slate-800 rounded text-[9px]">${d.lastTargetType}</span>` : ''}
+                </div>
+              </div>
               <div class="grid grid-cols-3 gap-1 pt-1">
                 <button onclick="executeLeadDispatch(${d.prospectId}, 'wpp_socio')" class="py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-300 rounded-lg text-[10px] font-bold flex items-center justify-center gap-1 cursor-pointer">
                   <i class="fa-brands fa-whatsapp"></i> Wpp
@@ -2191,7 +2266,7 @@
                   <i class="fa-solid fa-paper-plane"></i> Mail
                 </button>
                 <button onclick="openCrmDealModal('${d.id}')" class="py-1 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-[10px] font-bold flex items-center justify-center gap-1 cursor-pointer">
-                  <i class="fa-solid fa-pen"></i> Editar
+                  <i class="fa-solid fa-pen"></i> Detalhes
                 </button>
               </div>
             </div>
@@ -2207,16 +2282,33 @@
       if (!d) return;
 
       document.getElementById('crmModalTitle').innerText = d.company;
-      document.getElementById('crmModalSubtitle').innerText = `${d.cnpj} • ${d.city}-${d.uf} • ${d.decisorNome} (${d.decisorCargo})`;
+      document.getElementById('crmModalSubtitle').innerText = `${d.cnpj} • ${d.city}-${d.uf} • Decisor: ${d.decisorNome} (${d.decisorCargo})`;
       document.getElementById('crmModalStage').value = d.stage;
       document.getElementById('crmModalPatrimonio').value = d.patrimonio || 15000000;
       document.getElementById('crmModalNewNote').value = '';
 
       const list = document.getElementById('crmModalHistoryList');
-      if (d.notes && d.notes.length > 0) {
+      if (d.historyLogs && d.historyLogs.length > 0) {
+        list.innerHTML = d.historyLogs.map(n => {
+          const cClass = (n.canal === 'WhatsApp') ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : ((n.canal === 'E-mail') ? 'bg-sky-100 text-sky-800 border-sky-300' : 'bg-blue-100 text-blue-800 border-blue-300');
+          const tClass = (n.alvoTipo && n.alvoTipo.indexOf('Sócio') !== -1) ? 'bg-indigo-100 text-indigo-800 border-indigo-300' : 'bg-slate-200 text-slate-700 border-slate-300';
+          return `<div class="text-[11px] p-2.5 bg-white rounded-xl border border-slate-200 shadow-2xs space-y-1">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <span class="px-2 py-0.5 rounded text-[9px] font-extrabold border ${cClass}">${n.canal}</span>
+                <span class="px-2 py-0.5 rounded text-[9px] font-extrabold border ${tClass}">${n.alvoTipo || 'Alvo'}</span>
+                <span class="text-[9px] font-mono text-slate-400 font-bold">#${n.attemptNumber || ''}</span>
+              </div>
+              <span class="text-[10px] text-slate-400 font-mono">${n.date}</span>
+            </div>
+            <div class="text-slate-800 font-bold"><i class="fa-solid fa-user-check text-slate-400 mr-1"></i>${n.recipientName} <span class="text-[10px] font-mono text-slate-500 font-normal">(${n.recipientContact})</span></div>
+            <div class="text-[10px] text-slate-600 bg-slate-50 p-1.5 rounded-lg border border-slate-100">${n.textNote}</div>
+          </div>`;
+        }).join('');
+      } else if (d.notes && d.notes.length > 0) {
         list.innerHTML = d.notes.map(n => `<div class="text-[11px] p-2 bg-white rounded-lg border border-slate-200"><span class="font-bold text-slate-800">${n.date}:</span> <span class="text-slate-600">${n.text}</span></div>`).join('');
       } else {
-        list.innerHTML = '<div class="text-[11px] text-slate-400 italic p-1">Nenhum registro histórico.</div>';
+        list.innerHTML = '<div class="text-[11px] text-slate-400 italic p-2 text-center">Nenhum registro de contato efetuado ainda.</div>';
       }
 
       const modal = document.getElementById('crmDealModal');
@@ -2245,12 +2337,26 @@
       d.patrimonio = newPatrimonio;
       if (noteText) {
         if (!d.notes) d.notes = [];
-        d.notes.unshift({ date: new Date().toLocaleString('pt-BR'), text: noteText });
+        if (!d.historyLogs) d.historyLogs = [];
+        const nowStr = new Date().toLocaleString('pt-BR');
+        d.notes.unshift({ date: nowStr, text: noteText });
+        d.historyLogs.unshift({
+          id: 'manual_' + Date.now(),
+          date: nowStr,
+          timestamp: new Date().toISOString(),
+          canal: 'Nota CRM',
+          alvoTipo: 'Manual',
+          recipientName: d.decisorNome,
+          recipientContact: d.fone || d.email,
+          status: 'Anotação Manual',
+          textNote: noteText
+        });
       }
 
       saveCrmDeals(deals);
       closeCrmDealModal();
       renderCrmPipeline();
+      renderTable();
       showToast('✅ Oportunidade atualizada no CRM!');
     }
 
@@ -2261,15 +2367,16 @@
       saveCrmDeals(deals);
       closeCrmDealModal();
       renderCrmPipeline();
+      renderTable();
       showToast('Oportunidade removida do CRM.');
     }
 
     function exportCrmCsv() {
       const deals = getCrmDeals();
-      let csv = '\uFEFFID;Empresa;CNPJ;UF;Cidade;Segmento;Decisor;Cargo;Telefone;Email;Etapa;Patrimonio_Estimado;Ultimo_Canal;Historico\n';
+      let csv = '\uFEFFID;Empresa;CNPJ;UF;Cidade;Segmento;Decisor;Cargo;Telefone;Email;Etapa;Patrimonio_Estimado;Tentativas_Total;Ultimo_Canal;Historico\n';
       deals.forEach(d => {
         const lastNote = (d.notes && d.notes.length > 0) ? d.notes[0].text.replace(/;/g, ' ') : '';
-        csv += `"${d.id}";"${d.company}";"${d.cnpj}";"${d.uf}";"${d.city}";"${d.segmentoNome}";"${d.decisorNome}";"${d.decisorCargo}";"${d.fone}";"${d.email}";"${d.stage}";"${d.patrimonio}";"${d.lastChannel || ''}";"${lastNote}"\n`;
+        csv += `"${d.id}";"${d.company}";"${d.cnpj}";"${d.uf}";"${d.city}";"${d.segmentoNome}";"${d.decisorNome}";"${d.decisorCargo}";"${d.fone}";"${d.email}";"${d.stage}";"${d.patrimonio}";"${d.tentativasTotal || 0}";"${d.lastChannel || ''}";"${lastNote}"\n`;
       });
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
