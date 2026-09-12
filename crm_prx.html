@@ -2,11 +2,11 @@
 <html lang="pt-BR" class="h-full bg-slate-50">
 <head>
   <meta charset="UTF-8">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BDR - Lead AI | Pipeline CRM (6 Etapas)</title>
+  <title>BDR - Lead AI | Pipeline CRM (6 Etapas Integradas)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,7 +48,7 @@
               <h1 class="text-base font-extrabold tracking-tight text-slate-900">BDR - Lead AI</h1>
               <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-50 text-blue-700 border border-blue-200 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span> PIPELINE CRM</span>
             </div>
-            <p class="text-xs text-slate-500 font-medium">Gestão Comercial & Pipeline Automatizado de Oportunidades B2B</p>
+            <p class="text-xs text-slate-500 font-medium">Gestão Comercial Integrada & Disparos Diretos</p>
           </div>
         </div>
 
@@ -57,22 +57,15 @@
           <div class="bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-xl text-xs font-bold text-slate-700">
             <span>Oportunidades:</span> <b id="crmTotalDeals" class="text-slate-900 font-mono">0</b>
           </div>
-          <div class="bg-blue-50 border border-blue-200 px-3 py-1.5 rounded-xl text-xs font-bold text-blue-800">
-            <span>🔍 Qualificados:</span> <b id="crmQualifiedCount" class="text-blue-900 font-mono">0</b>
-          </div>
           <div class="bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-xl text-xs font-bold text-amber-800">
-            <span>💬 Interessados:</span> <b id="crmMeetingsCount" class="text-amber-900 font-mono">0</b>
-          </div>
-          <div class="bg-purple-50 border border-purple-200 px-3 py-1.5 rounded-xl text-xs font-bold text-purple-800">
-            <span>💼 Propostas:</span> <b id="crmProposalsCount" class="text-purple-900 font-mono">0</b>
+            <span>⚡ Abordadas:</span> <b id="crmContactedCount" class="text-amber-900 font-mono">0</b>
           </div>
           <div class="bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl text-xs font-bold text-emerald-800">
             <span>💰 Pipeline:</span> <b id="crmTotalValue" class="text-emerald-900 font-mono">R$ 0</b>
           </div>
           <a href="index.html" class="px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5">
-            <i class="fa-solid fa-table-list"></i> Ver Base Master (3.000)
+            <i class="fa-solid fa-table-list"></i> Ver Base Master (3.900)
           </a>
-          
         </div>
 
       </div>
@@ -80,35 +73,17 @@
 
     <!-- PAINEL PRINCIPAL DO CRM -->
     <main class="max-w-[1950px] w-full mx-auto px-4 sm:px-6 py-5 flex-1 flex flex-col gap-4">
-      
       <!-- BARRA DE PESQUISA E AÇÕES -->
       <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm flex flex-col md:flex-row items-center justify-between gap-3">
         <div class="relative flex-1 w-full">
           <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-xs"></i>
-          <input type="text" id="crmSearchInput" oninput="renderCrmPipeline()" placeholder="Buscar oportunidades no CRM por empresa, sócio, patrimônio, estrutura corporativa ou notas..." class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2 text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-slate-900 focus:bg-white transition">
+          <input type="text" id="crmSearchInput" oninput="renderCrmPipeline()" placeholder="Buscar no CRM por empresa, sócio, cidade ou notas..." class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-4 py-2 text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-slate-900 focus:bg-white transition">
         </div>
-
-        <div class="w-full md:w-64">
-          <select id="crmSegmentFilter" onchange="renderCrmPipeline()" class="bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-900">
-            <option value="ALL">🌐 Todos os Segmentos (3.000)</option>
-            <option value="YELLOW">🟡 Fábricas & Indústrias (300)</option>
-            <option value="GREEN">🟢 Agronegócio (300)</option>
-            <option value="SPECIAL_MED">🌸 Médicos PJ (300)</option>
-            <option value="SPECIAL_LOG">🚚 Logística (300)</option>
-            <option value="RED">🔴 Exportadoras (300)</option>
-            <option value="SPECIAL_LAW">⚖️ Advocacia & Jurídico (300)</option>
-            <option value="SPECIAL_ACC">🟢 Contabilidade & Auditoria (300)</option>
-          </select>
-        </div>
-
         <div class="flex items-center gap-2 w-full md:w-auto">
-          <button onclick="openNewDealModal()" class="flex-1 md:flex-initial px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-sm">
+          <button onclick="openNewDealModal()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
             <i class="fa-solid fa-plus text-[10px]"></i> Novo Lead
           </button>
-          <button onclick="exportCrmJson()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition border border-slate-200" title="Exportar Backup do CRM">
-            <i class="fa-solid fa-download mr-1"></i> Backup
-          </button>
-          <button onclick="exportCrmCsv()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition border border-slate-200" title="Exportar Relatório CSV">
+          <button onclick="exportCrmCsv()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition border border-slate-200">
             <i class="fa-solid fa-file-csv mr-1"></i> CSV
           </button>
         </div>
@@ -117,534 +92,176 @@
       <!-- KANBAN BOARD 6 ETAPAS -->
       <div class="overflow-x-auto pb-4">
         <div class="flex items-start gap-4 min-w-[1900px]">
-
-          <!-- 1. PROSPECÇÃO -->
+          <!-- 1. Prospecção -->
           <div class="kanban-col bg-slate-100/90 rounded-2xl border border-slate-200 p-3 flex flex-col gap-2">
             <div class="flex items-center justify-between px-1 pb-2 border-b border-slate-200">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-slate-500"></span>
-                <h3 class="text-xs font-extrabold text-slate-800">1. Prospecção</h3>
-              </div>
-              <span id="col-count-prospeccao" class="text-[11px] font-extrabold font-mono bg-white text-slate-700 px-2 py-0.5 rounded-md border border-slate-200">0</span>
+              <span class="text-xs font-extrabold text-slate-800">1. Prospecção</span>
+              <span id="col-count-prospeccao" class="text-[11px] font-mono font-bold bg-white text-slate-700 px-2 py-0.5 rounded-md border border-slate-200">0</span>
             </div>
-            <div class="text-[10px] text-slate-400 font-medium px-1">Entrada bruta do agente BDR</div>
             <div id="col-items-prospeccao" class="flex flex-col gap-2 min-h-[450px]"></div>
           </div>
-
-          <!-- 2. QUALIFICAÇÃO -->
+          <!-- 2. Qualificação -->
           <div class="kanban-col bg-blue-50/70 rounded-2xl border border-blue-200 p-3 flex flex-col gap-2">
             <div class="flex items-center justify-between px-1 pb-2 border-b border-blue-200">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
-                <h3 class="text-xs font-extrabold text-blue-900">2. Qualificação</h3>
-              </div>
-              <span id="col-count-qualificacao" class="text-[11px] font-extrabold font-mono bg-white text-blue-800 px-2 py-0.5 rounded-md border border-blue-200">0</span>
+              <span class="text-xs font-extrabold text-blue-900">2. Qualificação</span>
+              <span id="col-count-qualificacao" class="text-[11px] font-mono font-bold bg-white text-blue-800 px-2 py-0.5 rounded-md border border-blue-200">0</span>
             </div>
-            <div class="text-[10px] text-blue-500 font-medium px-1">Filtro de perfil ideal (Score BDR)</div>
             <div id="col-items-qualificacao" class="flex flex-col gap-2 min-h-[450px]"></div>
           </div>
-
-          <!-- 3. INTERESSADO -->
-          <div class="kanban-col bg-indigo-50/70 rounded-2xl border border-indigo-200 p-3 flex flex-col gap-2">
-            <div class="flex items-center justify-between px-1 pb-2 border-b border-indigo-200">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
-                <h3 class="text-xs font-extrabold text-indigo-900">3. Interessado</h3>
-              </div>
-              <span id="col-count-interessado" class="text-[11px] font-extrabold font-mono bg-white text-indigo-800 px-2 py-0.5 rounded-md border border-indigo-200">0</span>
+          <!-- 3. Abordagem / Contato -->
+          <div class="kanban-col bg-amber-50/70 rounded-2xl border border-amber-300 p-3 flex flex-col gap-2 shadow-xs">
+            <div class="flex items-center justify-between px-1 pb-2 border-b border-amber-300">
+              <span class="text-xs font-extrabold text-amber-950">3. Abordagem / Contato</span>
+              <span id="col-count-contato" class="text-[11px] font-mono font-black bg-amber-100 text-amber-900 px-2 py-0.5 rounded-md border border-amber-400">0</span>
             </div>
-            <div class="text-[10px] text-indigo-500 font-medium px-1">Engajamento / Reunião agendada</div>
-            <div id="col-items-interessado" class="flex flex-col gap-2 min-h-[450px]"></div>
+            <div id="col-items-contato" class="flex flex-col gap-2 min-h-[450px]"></div>
           </div>
-
-          <!-- 4. PROPOSTA -->
-          <div class="kanban-col bg-amber-50/80 rounded-2xl border border-amber-200 p-3 flex flex-col gap-2">
-            <div class="flex items-center justify-between px-1 pb-2 border-b border-amber-200">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-                <h3 class="text-xs font-extrabold text-amber-900">4. Proposta</h3>
-              </div>
-              <span id="col-count-proposta" class="text-[11px] font-extrabold font-mono bg-white text-amber-800 px-2 py-0.5 rounded-md border border-amber-200">0</span>
-            </div>
-            <div class="text-[10px] text-amber-600 font-medium px-1">Teses de MFO, Holdings & Tributário</div>
-            <div id="col-items-proposta" class="flex flex-col gap-2 min-h-[450px]"></div>
-          </div>
-
-          <!-- 5. NEGOCIAÇÃO -->
+          <!-- 4. Reunião Agendada -->
           <div class="kanban-col bg-purple-50/70 rounded-2xl border border-purple-200 p-3 flex flex-col gap-2">
             <div class="flex items-center justify-between px-1 pb-2 border-b border-purple-200">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
-                <h3 class="text-xs font-extrabold text-purple-900">5. Negociação</h3>
-              </div>
-              <span id="col-count-negociacao" class="text-[11px] font-extrabold font-mono bg-white text-purple-800 px-2 py-0.5 rounded-md border border-purple-200">0</span>
+              <span class="text-xs font-extrabold text-purple-900">4. Reunião Agendada</span>
+              <span id="col-count-reuniao" class="text-[11px] font-mono font-bold bg-white text-purple-800 px-2 py-0.5 rounded-md border border-purple-200">0</span>
             </div>
-            <div class="text-[10px] text-purple-500 font-medium px-1">Taxas, escopo e jurídico</div>
-            <div id="col-items-negociacao" class="flex flex-col gap-2 min-h-[450px]"></div>
+            <div id="col-items-reuniao" class="flex flex-col gap-2 min-h-[450px]"></div>
           </div>
-
-          <!-- 6. FECHAMENTO -->
-          <div class="kanban-col bg-emerald-50/80 rounded-2xl border border-emerald-200 p-3 flex flex-col gap-2">
+          <!-- 5. Proposta / Negociação -->
+          <div class="kanban-col bg-cyan-50/70 rounded-2xl border border-cyan-200 p-3 flex flex-col gap-2">
+            <div class="flex items-center justify-between px-1 pb-2 border-b border-cyan-200">
+              <span class="text-xs font-extrabold text-cyan-900">5. Proposta / Negociação</span>
+              <span id="col-count-proposta" class="text-[11px] font-mono font-bold bg-white text-cyan-800 px-2 py-0.5 rounded-md border border-cyan-200">0</span>
+            </div>
+            <div id="col-items-proposta" class="flex flex-col gap-2 min-h-[450px]"></div>
+          </div>
+          <!-- 6. Ganho / Fechado -->
+          <div class="kanban-col bg-emerald-50/70 rounded-2xl border border-emerald-200 p-3 flex flex-col gap-2">
             <div class="flex items-center justify-between px-1 pb-2 border-b border-emerald-200">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                <h3 class="text-xs font-extrabold text-emerald-900">6. Fechamento</h3>
-              </div>
-              <span id="col-count-fechamento" class="text-[11px] font-extrabold font-mono bg-white text-emerald-800 px-2 py-0.5 rounded-md border border-emerald-200">0</span>
+              <span class="text-xs font-extrabold text-emerald-900">6. Ganho / Fechado</span>
+              <span id="col-count-fechado" class="text-[11px] font-mono font-bold bg-white text-emerald-800 px-2 py-0.5 rounded-md border border-emerald-200">0</span>
             </div>
-            <div class="text-[10px] text-emerald-600 font-medium px-1">Contrato assinado & Onboarding</div>
-            <div id="col-items-fechamento" class="flex flex-col gap-2 min-h-[450px]"></div>
+            <div id="col-items-fechado" class="flex flex-col gap-2 min-h-[450px]"></div>
           </div>
-
         </div>
       </div>
-
     </main>
 
   </div>
 
-  <!-- MODAL DE DETALHES DO LEAD -->
-  <div id="crmDealModal" style="display: none;" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-200 p-6 flex flex-col gap-4">
-      
-      <div class="flex items-start justify-between pb-3 border-b border-slate-100">
-        <div>
-          <div class="flex items-center gap-2">
-            <span id="modalSegmentBadge"></span>
-            <span id="modalScoreBadge" class="text-[10px] font-mono font-extrabold px-2 py-0.5 rounded-md bg-amber-100 text-amber-900 border border-amber-300">Score BDR: 85</span>
-          </div>
-          <h3 id="modalCompanyName" class="text-base font-extrabold text-slate-900 mt-1">Nome da Empresa</h3>
-          <p id="modalDecisorInfo" class="text-xs text-slate-500">Decisor QSA</p>
-        </div>
-        <button onclick="closeDealModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-sm">✕</button>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-        <div>
-          <label class="font-bold text-slate-700 block mb-1">Etapa do Pipeline:</label>
-          <select id="modalDealStage" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-bold text-slate-800 focus:ring-2 focus:ring-slate-900">
-            <option value="prospeccao">1. Prospecção (Entrada Bruta)</option>
-            <option value="qualificacao">2. Qualificação (ICP Validado)</option>
-            <option value="interessado">3. Interessado (Engajamento / Call)</option>
-            <option value="proposta">4. Proposta (Tese Estruturada)</option>
-            <option value="negociacao">5. Negociação (Taxas & Jurídico)</option>
-            <option value="fechamento">6. Fechamento (Contrato Assinado)</option>
-          </select>
-        </div>
-
-        <div>
-          <label class="font-bold text-slate-700 block mb-1">Patrimônio / Faturamento Estimado (R$):</label>
-          <input type="number" id="modalDealPatrimonio" placeholder="Ex: 15000000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-bold text-slate-800 focus:ring-2 focus:ring-slate-900">
-        </div>
-
-        <div>
-          <label class="font-bold text-slate-700 block mb-1">Estrutura Corporativa Atual:</label>
-          <select id="modalDealStructure" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:ring-2 focus:ring-slate-900">
-            <option value="PJ Operacional Pura">PJ Operacional Pura</option>
-            <option value="Pessoa Física (PF Alta Renda)">Pessoa Física (PF Alta Renda)</option>
-            <option value="Holding Patrimonial / Familiar">Holding Patrimonial / Familiar</option>
-            <option value="Holding + Operacionais (Grupo)">Holding + Operacionais (Grupo)</option>
-            <option value="Estrutura Offshore / Internacional">Estrutura Offshore / Internacional</option>
-            <option value="Fundo Exclusivo / FIP / FII">Fundo Exclusivo / FIP / FII</option>
-          </select>
-        </div>
-
-        <div>
-          <label class="font-bold text-slate-700 block mb-1">Score de Qualificação BDR (0 a 100):</label>
-          <input type="number" id="modalDealScore" min="0" max="100" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-bold text-slate-800 focus:ring-2 focus:ring-slate-900">
-        </div>
-
-        <div>
-          <label class="font-bold text-slate-700 block mb-1">Próximo Follow-up / Reunião:</label>
-          <input type="datetime-local" id="modalDealFollowup" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:ring-2 focus:ring-slate-900">
-        </div>
-
-        <div>
-          <label class="font-bold text-slate-700 block mb-1">Tese / Solução Principal:</label>
-          <select id="modalDealProduct" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800 focus:ring-2 focus:ring-slate-900">
-            <option value="Multi-Family Office Completo">Multi-Family Office Completo</option>
-            <option value="Holding & Planejamento Sucessório">Holding & Planejamento Sucessório</option>
-            <option value="Eficiência & Revisão Tributária">Eficiência & Revisão Tributária (Êxito)</option>
-            <option value="Gestão de Carteiras PJ/PF">Gestão de Carteiras PJ/PF</option>
-            <option value="Crédito Estruturado & Recebíveis">Crédito Estruturado & Recebíveis</option>
-            <option value="Câmbio Institucional & Hedge">Câmbio Institucional & Hedge</option>
-            <option value="M&A e Valuation">Assessoria em M&A e Valuation</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="pt-2 border-t border-slate-100 flex flex-col gap-2">
-        <label class="font-bold text-slate-800 text-xs flex items-center gap-1.5">
-          <i class="fa-solid fa-clipboard-list text-amber-500"></i> Registrar Nova Interação / Anotação:
-        </label>
-        <div class="flex gap-2">
-          <input type="text" id="newNoteInput" placeholder="Ex: Sócio interessado na tese de Holding Familiar e Gestão de Carteira PJ..." class="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-800 focus:ring-2 focus:ring-slate-900">
-          <button onclick="addDealNote()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition">Adicionar</button>
-        </div>
-        <div class="mt-2 flex flex-col gap-2 max-h-48 overflow-y-auto pr-1" id="modalNotesTimeline"></div>
-      </div>
-
-      <div class="flex items-center justify-between pt-3 border-t border-slate-100">
-        <button onclick="deleteCurrentDeal()" class="text-rose-600 hover:text-rose-800 text-xs font-bold flex items-center gap-1">
-          <i class="fa-solid fa-trash-can"></i> Remover do CRM
-        </button>
-        <div class="flex gap-2">
-          <button onclick="closeDealModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition">Cancelar</button>
-          <button onclick="saveDealModal()" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition shadow-sm">Salvar Alterações</button>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
   <script>
-    var activeModalDealId = null;
-
-    
-
-    function showCopyToast(msg) {
-      var toast = document.getElementById("copyToast");
-      var text = document.getElementById("copyToastText");
-      if (!toast || !text) return;
-      text.innerText = msg;
-      toast.style.display = "flex";
-      setTimeout(function() { toast.style.display = "none"; }, 2500);
-    }
-
     function getCrmDeals() {
       try {
-        var raw = localStorage.getItem("prx_bdr_crm_deals");
-        if (raw) return JSON.parse(raw);
-      } catch (e) {}
+        const saved = localStorage.getItem('prx_crm_deals_v2');
+        if (saved) return JSON.parse(saved);
+      } catch(e) {}
       return [];
     }
 
     function saveCrmDeals(deals) {
-      try {
-        localStorage.setItem("prx_bdr_crm_deals", JSON.stringify(deals));
-      } catch (e) {}
-    }
-
-    function getSegmentBadgeHtml(cor, nome) {
-      var segmentConfig = {
-        'SPECIAL_MED': { dot: '#e11d48', glow: '#ffe4e6', icon: 'fa-user-doctor', iconColor: '#e11d48' },
-        'SPECIAL_AERO': { dot: '#06b6d4', glow: '#cffafe', icon: 'fa-plane', iconColor: '#0891b2' },
-        'SPECIAL_MKT': { dot: '#c026d3', glow: '#fdf4ff', icon: 'fa-bullhorn', iconColor: '#c026d3' },
-        'SPECIAL_ART': { dot: '#ea580c', glow: '#ffedd5', icon: 'fa-masks-theater', iconColor: '#ea580c' },
-        'SPECIAL_CONS': { dot: '#6366f1', glow: '#e0e7ff', icon: 'fa-briefcase', iconColor: '#4f46e5' },
-        'YELLOW': { dot: '#d97706', glow: '#fef3c7', icon: 'fa-industry', iconColor: '#d97706' },
-        'SPECIAL_CONC': { dot: '#7c3aed', glow: '#ede9fe', icon: 'fa-landmark', iconColor: '#7c3aed' },
-        'SPECIAL_POL': { dot: '#0f766e', glow: '#ccfbf1', icon: 'fa-building-columns', iconColor: '#0f766e' },
-        'SPECIAL_PHARM': { dot: '#059669', glow: '#d1fae5', icon: 'fa-prescription-bottle-medical', iconColor: '#059669' },
-        'SPECIAL_FOOD': { dot: '#e11d48', glow: '#ffe4e6', icon: 'fa-utensils', iconColor: '#e11d48' },
-        'SPECIAL_WHOLESALE': { dot: '#0284c7', glow: '#e0f2fe', icon: 'fa-boxes-stacked', iconColor: '#0284c7' },
-        'SPECIAL_LOG': { dot: '#2563eb', glow: '#dbeafe', icon: 'fa-truck-fast', iconColor: '#2563eb' },
-        'GREEN': { dot: '#16a34a', glow: '#dcfce7', icon: 'fa-wheat-awn', iconColor: '#16a34a' },
-        'RED': { dot: '#dc2626', glow: '#fee2e2', icon: 'fa-ship', iconColor: '#dc2626' },
-        'SPECIAL_CONST': { dot: '#ca8a04', glow: '#fef9c3', icon: 'fa-helmet-safety', iconColor: '#ca8a04' },
-        'SPECIAL_LAW': { dot: '#475569', glow: '#f1f5f9', icon: 'fa-scale-balanced', iconColor: '#475569' },
-        'SPECIAL_TECH': { dot: '#0284c7', glow: '#e0f2fe', icon: 'fa-laptop-code', iconColor: '#0284c7' },
-        'SPECIAL_ENERGY': { dot: '#eab308', glow: '#fef08a', icon: 'fa-solar-panel', iconColor: '#eab308' },
-        'SPECIAL_AUTO': { dot: '#2563eb', glow: '#dbeafe', icon: 'fa-car', iconColor: '#2563eb' },
-        'SPECIAL_EDU': { dot: '#4338ca', glow: '#e0e7ff', icon: 'fa-graduation-cap', iconColor: '#4338ca' },
-        'SPECIAL_ACC': { dot: '#0d9488', glow: '#ccfbf1', icon: 'fa-file-invoice-dollar', iconColor: '#0d9488' }
-      };
-
-      var conf = segmentConfig[cor] || { dot: '#64748b', glow: '#f1f5f9', icon: 'fa-tag', iconColor: '#64748b' };
-
-      return '<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-lg text-[10px] font-bold bg-white text-slate-800 border border-slate-200 shadow-2xs">' +
-               '<span style="background-color: ' + conf.dot + '; width: 8px; height: 8px; border-radius: 50%; display: inline-block; box-shadow: 0 0 0 2px ' + conf.glow + ';"></span>' +
-               '<i class="fa-solid ' + conf.icon + '" style="color: ' + conf.iconColor + ';"></i>' +
-               '<span>' + nome + '</span>' +
-             '</span>';
-    }
-
-    function openDealDetails(dealId) {
-      var deals = getCrmDeals();
-      var deal = deals.find(function(d) { return d.id === dealId; });
-      if (!deal) return;
-
-      activeModalDealId = deal.id;
-      document.getElementById('modalCompanyName').innerText = deal.company;
-      document.getElementById('modalDecisorInfo').innerText = deal.decisorNome + " (" + deal.decisorCargo + ") • " + deal.city + "/" + deal.uf + " • " + (deal.fone || 'Sem Tel');
-      document.getElementById('modalSegmentBadge').innerHTML = getSegmentBadgeHtml(deal.corSegmento, deal.segmentoNome);
-      
-      var scoreBadge = document.getElementById('modalScoreBadge');
-      if (scoreBadge) scoreBadge.innerText = "Score BDR: " + (deal.scoreBdr || 75) + " / 100";
-
-      document.getElementById('modalDealStage').value = deal.stage || 'prospeccao';
-      document.getElementById('modalDealPatrimonio').value = deal.patrimonio || '';
-      document.getElementById('modalDealStructure').value = deal.estruturaCorporativa || 'PJ Operacional Pura';
-      document.getElementById('modalDealScore').value = deal.scoreBdr || 75;
-      document.getElementById('modalDealFollowup').value = deal.followupDate || '';
-      document.getElementById('modalDealProduct').value = deal.product || 'Multi-Family Office Completo';
-      document.getElementById('newNoteInput').value = '';
-
-      renderNotesTimeline(deal.notes || []);
-      document.getElementById('crmDealModal').style.display = 'flex';
-    }
-
-    function renderNotesTimeline(notes) {
-      var container = document.getElementById('modalNotesTimeline');
-      if (!container) return;
-      if (!notes || notes.length === 0) {
-        container.innerHTML = '<div class="text-[11px] text-slate-400 italic">Nenhuma anotação registrada ainda.</div>';
-        return;
-      }
-      var html = '';
-      notes.forEach(function(n) {
-        html += '<div class="p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs flex flex-col gap-1">' +
-          '<div class="flex items-center justify-between text-[10px] font-bold text-slate-500">' +
-            '<span><i class="fa-regular fa-clock text-amber-500 mr-1"></i> ' + n.date + '</span>' +
-          '</div>' +
-          '<div class="text-slate-800 font-medium text-[11px] leading-relaxed">' + n.text + '</div>' +
-        '</div>';
-      });
-      container.innerHTML = html;
-    }
-
-    function addDealNote() {
-      var input = document.getElementById('newNoteInput');
-      if (!input || !input.value.trim() || !activeModalDealId) return;
-
-      var text = input.value.trim();
-      var deals = getCrmDeals();
-      var deal = deals.find(function(d) { return d.id === activeModalDealId; });
-      if (!deal) return;
-
-      if (!deal.notes) deal.notes = [];
-      deal.notes.unshift({
-        date: new Date().toLocaleString('pt-BR'),
-        text: text
-      });
-
-      saveCrmDeals(deals);
-      input.value = '';
-      renderNotesTimeline(deal.notes);
-      showCopyToast("Anotação registrada com sucesso!");
-    }
-
-    function saveDealModal() {
-      if (!activeModalDealId) return;
-      var deals = getCrmDeals();
-      var deal = deals.find(function(d) { return d.id === activeModalDealId; });
-      if (!deal) return;
-
-      var oldStage = deal.stage;
-      var newStage = document.getElementById('modalDealStage').value;
-
-      deal.stage = newStage;
-      deal.patrimonio = parseFloat(document.getElementById('modalDealPatrimonio').value) || 0;
-      deal.estruturaCorporativa = document.getElementById('modalDealStructure').value;
-      deal.scoreBdr = parseInt(document.getElementById('modalDealScore').value) || 75;
-      deal.followupDate = document.getElementById('modalDealFollowup').value;
-      deal.product = document.getElementById('modalDealProduct').value;
-
-      if (oldStage !== newStage) {
-        var stageNames = {
-          prospeccao: '1. Prospecção',
-          qualificacao: '2. Qualificação',
-          interessado: '3. Interessado',
-          proposta: '4. Proposta',
-          negociacao: '5. Negociação',
-          fechamento: '6. Fechamento'
-        };
-        if (!deal.notes) deal.notes = [];
-        deal.notes.unshift({
-          date: new Date().toLocaleString('pt-BR'),
-          text: "Etapa alterada manualmente de [" + (stageNames[oldStage] || oldStage) + "] para [" + (stageNames[newStage] || newStage) + "]."
-        });
-      }
-
-      saveCrmDeals(deals);
-      closeDealModal();
-      showCopyToast("Oportunidade High-Ticket salva!");
-      renderCrmPipeline();
-    }
-
-    function deleteCurrentDeal() {
-      if (!activeModalDealId) return;
-      if (!confirm("Deseja realmente remover esta oportunidade do seu CRM?")) return;
-
-      var deals = getCrmDeals().filter(function(d) { return d.id !== activeModalDealId; });
-      saveCrmDeals(deals);
-      closeDealModal();
-      showCopyToast("Oportunidade removida do CRM.");
-      renderCrmPipeline();
-    }
-
-    function closeDealModal() {
-      document.getElementById('crmDealModal').style.display = 'none';
-      activeModalDealId = null;
-    }
-
-    function openNewDealModal() {
-      var comp = prompt("Digite a Razão Social ou Nome do Prospect High-Ticket:");
-      if (!comp || !comp.trim()) return;
-
-      var newDeal = {
-        id: "deal_" + Date.now(),
-        prospectId: null,
-        company: comp.trim(),
-        cnpj: "00.000.000/0001-00",
-        uf: "SP",
-        city: "São Paulo",
-        corSegmento: "SPECIAL_CONS",
-        segmentoNome: "Consultorias",
-        setor: "Holding & Gestão de Patrimônio",
-        decisorNome: "Sócio Executivo",
-        decisorCargo: "Diretor Geral / Acionista",
-        decisorLinkedin: "",
-        fone: "(11) 98000-0000",
-        email: "contato@empresa.com.br",
-        stage: "prospeccao",
-        patrimonio: 15000000,
-        estruturaCorporativa: "Holding Patrimonial / Familiar",
-        scoreBdr: 85,
-        product: "Multi-Family Office Completo",
-        followupDate: "",
-        createdAt: new Date().toISOString(),
-        notes: [
-          { date: new Date().toLocaleString('pt-BR'), text: "Oportunidade High-Ticket cadastrada manualmente no CRM." }
-        ]
-      };
-
-      var deals = getCrmDeals();
-      deals.unshift(newDeal);
-      saveCrmDeals(deals);
-      openDealDetails(newDeal.id);
-    }
-
-    function exportCrmJson() {
-      var deals = getCrmDeals();
-      var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(deals, null, 2));
-      var a = document.createElement('a');
-      a.href = dataStr;
-      a.download = "prx_capital_crm_highticket_backup_" + new Date().toISOString().slice(0,10) + ".json";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-    }
-
-    function exportCrmCsv() {
-      var deals = getCrmDeals();
-      var csv = "\uFEFFID;Empresa;CNPJ;UF;Cidade;Segmento;Decisor;Cargo;Telefone;Email;Etapa;Patrimonio_Estimado;Estrutura_Corporativa;Score_BDR;Tese_Produto;Proximo_Followup;Data_Criacao\n";
-      deals.forEach(function(d) {
-        csv += '"' + d.id + '";"' + (d.company||'') + '";"' + (d.cnpj||'') + '";"' + (d.uf||'') + '";"' + (d.city||'') + '";"' + (d.segmentoNome||'') + '";"' + (d.decisorNome||'') + '";"' + (d.decisorCargo||'') + '";"' + (d.fone||'') + '";"' + (d.email||'') + '";"' + (d.stage||'') + '";"' + (d.patrimonio||0) + '";"' + (d.estruturaCorporativa||'') + '";"' + (d.scoreBdr||0) + '";"' + (d.product||'') + '";"' + (d.followupDate||'') + '";"' + (d.createdAt||'') + '"\n';
-      });
-      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement('a');
-      a.href = url;
-      a.download = "prx_capital_crm_highticket_relatorio_" + new Date().toISOString().slice(0,10) + ".csv";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
+      localStorage.setItem('prx_crm_deals_v2', JSON.stringify(deals));
     }
 
     function renderCrmPipeline() {
-      var deals = getCrmDeals();
-      var query = (document.getElementById('crmSearchInput') ? document.getElementById('crmSearchInput').value : '').toLowerCase().trim();
-      var segFilter = document.getElementById('crmSegmentFilter') ? document.getElementById('crmSegmentFilter').value : '';
+      const deals = getCrmDeals();
+      const query = (document.getElementById('crmSearchInput')?.value || '').toLowerCase().trim();
+      const stages = ['prospeccao', 'qualificacao', 'contato', 'reuniao', 'proposta', 'fechado'];
+      const stageMap = { prospeccao: [], qualificacao: [], contato: [], reuniao: [], proposta: [], fechado: [] };
+      let totalPatrimonio = 0;
+      let contactedCount = 0;
 
-      var stages = ['prospeccao', 'qualificacao', 'interessado', 'proposta', 'negociacao', 'fechamento'];
-      var stageItems = { prospeccao: [], qualificacao: [], interessado: [], proposta: [], negociacao: [], fechamento: [] };
-
-      var totalPatrimonio = 0;
-      var qualifiedCount = 0;
-      var interestedCount = 0;
-      var proposalsCount = 0;
-
-      deals.forEach(function(deal) {
-        if (segFilter && deal.corSegmento !== segFilter) return;
+      deals.forEach(d => {
         if (query) {
-          var matchComp = (deal.company||'').toLowerCase().indexOf(query) !== -1;
-          var matchDec = (deal.decisorNome||'').toLowerCase().indexOf(query) !== -1;
-          var matchCity = (deal.city||'').toLowerCase().indexOf(query) !== -1;
-          var matchSeg = (deal.segmentoNome||'').toLowerCase().indexOf(query) !== -1;
-          var matchEstr = (deal.estruturaCorporativa||'').toLowerCase().indexOf(query) !== -1;
-          var matchNotes = (deal.notes||[]).some(function(n) { return (n.text||'').toLowerCase().indexOf(query) !== -1; });
-          if (!matchComp && !matchDec && !matchCity && !matchSeg && !matchEstr && !matchNotes) return;
+          const matchComp = (d.company||'').toLowerCase().indexOf(query) !== -1;
+          const matchDec = (d.decisorNome||'').toLowerCase().indexOf(query) !== -1;
+          const matchCity = (d.city||'').toLowerCase().indexOf(query) !== -1;
+          if (!matchComp && !matchDec && !matchCity) return;
         }
 
-        var stg = deal.stage || 'prospeccao';
-        if (!stageItems[stg]) stageItems[stg] = [];
-        stageItems[stg].push(deal);
+        const stg = d.stage || 'prospeccao';
+        if (stageMap[stg]) stageMap[stg].push(d);
+        else stageMap['prospeccao'].push(d);
 
-        totalPatrimonio += (deal.patrimonio || 0);
-        if (stg === 'qualificacao') qualifiedCount++;
-        if (stg === 'interessado') interestedCount++;
-        if (stg === 'proposta' || stg === 'negociacao') proposalsCount++;
+        totalPatrimonio += (d.patrimonio || 15000000);
+        if (stg !== 'prospeccao') contactedCount++;
       });
 
       document.getElementById('crmTotalDeals').innerText = deals.length;
-      document.getElementById('crmQualifiedCount').innerText = qualifiedCount;
-      document.getElementById('crmMeetingsCount').innerText = interestedCount;
-      document.getElementById('crmProposalsCount').innerText = proposalsCount;
-      document.getElementById('crmTotalValue').innerText = 'R$ ' + totalPatrimonio.toLocaleString('pt-BR');
+      document.getElementById('crmContactedCount').innerText = contactedCount;
+      document.getElementById('crmTotalValue').innerText = 'R$ ' + (totalPatrimonio >= 1000000 ? (totalPatrimonio/1000000).toFixed(1) + 'M' : totalPatrimonio.toLocaleString('pt-BR'));
 
-      stages.forEach(function(stg) {
-        var colContainer = document.getElementById('col-items-' + stg);
-        var countBadge = document.getElementById('col-count-' + stg);
-        if (countBadge) countBadge.innerText = stageItems[stg].length;
-        if (!colContainer) return;
+      stages.forEach(stg => {
+        const col = document.getElementById('col-items-' + stg);
+        const badge = document.getElementById('col-count-' + stg);
+        if (badge) badge.innerText = stageMap[stg].length;
+        if (!col) return;
 
-        if (stageItems[stg].length === 0) {
-          colContainer.innerHTML = '<div class="h-28 border-2 border-dashed border-slate-200 rounded-xl flex items-center justify-center text-slate-400 text-[11px] font-medium">Nenhum lead nesta etapa</div>';
+        if (stageMap[stg].length === 0) {
+          col.innerHTML = '<div class="h-32 border-2 border-dashed border-slate-200 rounded-xl flex items-center justify-center text-slate-400 text-[11px] font-medium">Nenhum lead nesta etapa</div>';
           return;
         }
 
-        var colHtml = '';
-        stageItems[stg].forEach(function(d) {
-          var formattedPatrimonio = d.patrimonio ? ('R$ ' + (d.patrimonio >= 1000000 ? (d.patrimonio/1000000).toFixed(1) + 'M' : d.patrimonio.toLocaleString('pt-BR'))) : 'Não informado';
-          var score = d.scoreBdr || 75;
-          var scoreColor = score >= 85 ? 'bg-emerald-100 text-emerald-900 border-emerald-300' : (score >= 70 ? 'bg-blue-100 text-blue-900 border-blue-300' : 'bg-amber-100 text-amber-900 border-amber-300');
-          var latestNote = (d.notes && d.notes.length > 0) ? d.notes[0].text : 'Sem histórico';
-          
-          var nextFollowupHtml = '';
-          if (d.followupDate) {
-            nextFollowupHtml = '<div class="mt-1.5 text-[10px] font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200 flex items-center gap-1.5"><i class="fa-regular fa-calendar-check"></i> ' + d.followupDate.replace('T', ' às ') + '</div>';
-          }
-
-          colHtml += '<div onclick="openDealDetails(\'' + d.id + '\')" class="bg-white rounded-2xl border border-slate-200 p-3 shadow-2xs hover:shadow-md transition-all cursor-pointer flex flex-col gap-2 group">' +
-            '<div class="flex items-start justify-between gap-1">' +
-              getSegmentBadgeHtml(d.corSegmento, d.segmentoNome) +
-              '<span class="text-[9px] font-mono font-black px-1.5 py-0.5 rounded border ' + scoreColor + '">Score ' + score + '</span>' +
-            '</div>' +
-
-            '<div>' +
-              '<h4 class="font-extrabold text-slate-900 text-xs leading-snug group-hover:text-blue-600 transition">' + d.company + '</h4>' +
-              '<div class="text-[11px] text-slate-600 font-medium flex items-center gap-1 mt-0.5">' +
-                '<i class="fa-solid fa-user-tie text-slate-400 text-[10px]"></i> ' + d.decisorNome +
-                (d.decisorLinkedin ? ('<a href="' + d.decisorLinkedin + '" target="_blank" onclick="event.stopPropagation()" class="text-blue-600 hover:text-blue-800 text-xs ml-1"><i class="fa-brands fa-linkedin"></i></a>') : '') +
-              '</div>' +
-              '<div class="text-[10px] text-slate-400">' + d.city + ' - ' + d.uf + '</div>' +
-            '</div>' +
-
-            '<div class="p-2 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-1 text-[10px]">' +
-              '<div class="flex items-center justify-between">' +
-                '<span class="text-slate-500 font-semibold">Patrimônio / Fat:</span>' +
-                '<span class="font-mono font-bold text-emerald-800 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200">' + formattedPatrimonio + '</span>' +
-              '</div>' +
-              '<div class="flex items-center justify-between">' +
-                '<span class="text-slate-500 font-semibold">Estrutura:</span>' +
-                '<span class="font-bold text-slate-700 truncate max-w-[130px]">' + (d.estruturaCorporativa || 'PJ') + '</span>' +
-              '</div>' +
-            '</div>' +
-
-            '<div class="text-[10px] text-slate-500 line-clamp-1 italic bg-white p-1.5 rounded-lg border border-slate-100" title="' + latestNote + '">' +
-              '"' + latestNote + '"' +
-            '</div>' +
-
-            nextFollowupHtml +
-          '</div>';
+        let html = '';
+        stageMap[stg].forEach(d => {
+          const lastNote = (d.notes && d.notes.length > 0) ? d.notes[0].text : 'Sem histórico';
+          const lastChannelBadge = d.lastChannel ? `<span class="text-[9px] font-bold bg-amber-100 text-amber-900 border border-amber-300 px-1.5 py-0.5 rounded">⚡ ${d.lastChannel}</span>` : '';
+          html += `
+            <div class="bg-white rounded-2xl border border-slate-200 p-3 shadow-2xs hover:shadow-md transition flex flex-col gap-2 group">
+              <div class="flex items-start justify-between gap-1">
+                <span class="text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-slate-100 text-slate-800">${d.segmentoNome || 'B2B'}</span>
+                ${lastChannelBadge}
+              </div>
+              <div>
+                <h4 class="font-extrabold text-slate-900 text-xs leading-snug">${d.company}</h4>
+                <div class="text-[11px] text-slate-600 font-medium mt-0.5"><i class="fa-solid fa-user-tie text-slate-400 text-[10px]"></i> ${d.decisorNome} (${d.decisorCargo})</div>
+                <div class="text-[10px] text-slate-400">${d.city} - ${d.uf}</div>
+              </div>
+              <div class="text-[10px] text-slate-500 italic bg-slate-50 p-2 rounded-xl border border-slate-100 line-clamp-2">
+                "${lastNote}"
+              </div>
+            </div>
+          `;
         });
-
-        colContainer.innerHTML = colHtml;
+        col.innerHTML = html;
       });
     }
 
-    // Inicialização direta do pipeline
+    function openNewDealModal() {
+      const comp = prompt('Digite a Razão Social ou Nome da Empresa:');
+      if (!comp || !comp.trim()) return;
+      const newDeal = {
+        id: 'deal_' + Date.now(),
+        company: comp.trim(),
+        cnpj: '00.000.000/0001-00',
+        uf: 'SP',
+        city: 'São Paulo',
+        segmentoNome: 'Consultoria High-Ticket',
+        decisorNome: 'Sócio Executivo',
+        decisorCargo: 'Diretor Geral',
+        stage: 'prospeccao',
+        patrimonio: 15000000,
+        notes: [{ date: new Date().toLocaleString('pt-BR'), text: 'Lead cadastrado manualmente no CRM.' }]
+      };
+      let deals = getCrmDeals();
+      deals.unshift(newDeal);
+      saveCrmDeals(deals);
+      renderCrmPipeline();
+    }
+
+    function exportCrmCsv() {
+      const deals = getCrmDeals();
+      let csv = '\uFEFFID;Empresa;CNPJ;UF;Cidade;Segmento;Decisor;Cargo;Etapa;Patrimonio_Estimado;Historico\n';
+      deals.forEach(d => {
+        const lastNote = (d.notes && d.notes.length > 0) ? d.notes[0].text.replace(/;/g, ' ') : '';
+        csv += `"${d.id}";"${d.company}";"${d.cnpj}";"${d.uf}";"${d.city}";"${d.segmentoNome}";"${d.decisorNome}";"${d.decisorCargo}";"${d.stage}";"${d.patrimonio}";"${lastNote}"\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `prx_capital_crm_relatorio_${new Date().toISOString().slice(0,10)}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+
     renderCrmPipeline();
   </script>
 </body>
