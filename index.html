@@ -43,15 +43,11 @@
       <div class="max-w-[1950px] mx-auto px-4 sm:px-6 py-3.5 flex flex-col md:flex-row items-center justify-between gap-4">
         
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-indigo-600 via-blue-600 to-cyan-500 flex items-center justify-center font-black text-white text-base shadow-md shadow-indigo-500/25 font-mono">
-            AI
-          </div>
           <div>
             <div class="flex items-center gap-2">
               <h1 class="text-base font-extrabold tracking-tight text-slate-900">BDR - Lead AI</h1>
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-indigo-50 text-indigo-700 border border-indigo-200">PRX CAPITAL</span>
             </div>
-            <p class="text-xs text-slate-500 font-medium">Multi-Family Office & Boutique Financeira • Prospecção & CRM</p>
+            <p class="text-xs text-slate-500 font-medium">Prospecção & CRM</p>
           </div>
         </div>
 
@@ -66,19 +62,6 @@
           <button onclick="switchMainTab('connect')" id="tab-connect-btn" class="tab-btn px-4 py-2 rounded-xl text-xs font-extrabold flex items-center gap-2 text-emerald-800 hover:text-emerald-950 bg-emerald-50/70 border border-emerald-300">
             <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> 3. Conectar WhatsApp & E-mail
           </button>
-        </div>
-
-        <!-- BOTÕES DE AÇÃO DO TOPO -->
-        <div class="flex items-center gap-2.5 flex-wrap">
-          <button onclick="switchMainTab('connect')" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold rounded-xl transition shadow-md shadow-emerald-600/20 flex items-center gap-2 cursor-pointer animate-pulse">
-            <i class="fa-brands fa-whatsapp text-sm"></i> <span>📲 Conectar WhatsApp / E-mail</span>
-          </button>
-          <a href="crm_prx.html" target="_blank" class="px-3.5 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition shadow-sm flex items-center gap-1.5">
-            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> CRM Standalone
-          </a>
-          <a href="editor_dashboard_prx.html" target="_blank" class="px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-bold rounded-xl transition border border-indigo-200 flex items-center gap-1.5">
-            <i class="fa-solid fa-code"></i> Editor / Minerador
-          </a>
         </div>
       </div>
     </header>
@@ -195,6 +178,38 @@
           <button onclick="exportCrmJson()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition border border-slate-200 cursor-pointer flex items-center gap-1.5">
             <i class="fa-solid fa-download text-slate-600"></i> Backup JSON
           </button>
+        </div>
+      </div>
+
+      <!-- DADOS E MÉTRICAS DO CRM ABAIXO DOS BOTÕES -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-xs flex items-center justify-between">
+          <div>
+            <div class="text-[11px] font-bold text-slate-500">Total no Funil</div>
+            <div class="text-lg font-black text-slate-900 font-mono" id="crmTotalDeals">0</div>
+          </div>
+          <div class="w-9 h-9 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center text-sm border border-slate-200"><i class="fa-solid fa-folder-open"></i></div>
+        </div>
+        <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-xs flex items-center justify-between">
+          <div>
+            <div class="text-[11px] font-bold text-emerald-700">Volume MFO Estimado</div>
+            <div class="text-lg font-black text-emerald-950 font-mono" id="crmTotalPatrimonio">R$ 0M</div>
+          </div>
+          <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-sm border border-slate-200"><i class="fa-solid fa-vault"></i></div>
+        </div>
+        <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-xs flex items-center justify-between">
+          <div>
+            <div class="text-[11px] font-bold text-amber-800">Abordagens Realizadas</div>
+            <div class="text-lg font-black text-amber-950 font-mono" id="crmTotalDisparos">0</div>
+          </div>
+          <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-sm border border-amber-200"><i class="fa-solid fa-paper-plane"></i></div>
+        </div>
+        <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-xs flex items-center justify-between">
+          <div>
+            <div class="text-[11px] font-bold text-indigo-700">Ganhos / Fechados</div>
+            <div class="text-lg font-black text-indigo-950 font-mono" id="crmTotalFechados">0</div>
+          </div>
+          <div class="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-800 flex items-center justify-center text-sm border border-slate-200"><i class="fa-solid fa-trophy"></i></div>
         </div>
       </div>
 
@@ -1698,13 +1713,12 @@
     function updateTestPreviews() {
       const cfg = getIntegrationSettings();
       const myName = cfg.execName || 'Daniel Zanon';
-      const myRole = cfg.execRole || 'Executivo';
       const targetName = document.getElementById('testTargetName')?.value.trim() || 'Daniel';
 
-      const wppText = `Olá, ${targetName}! Tudo bem?\n\nAqui é o ${myName}, ${myRole} da PRX Capital (prxcapital.com.br).\n\nLocalizei seu contato por vias públicas e profissionais ao acompanhar a expressiva atuação da sua empresa no mercado.\n\nA PRX atua como multi-family office e boutique financeira, assessorando empresários e famílias com patrimônio imobiliário, empresas e liquidez financeira em corretoras.\n\nNossas frentes centrais abrangem:\n• Estruturação e revisão tributária e sucessória;\n• Gestão e assessoria de investimentos e câmbio;\n• Soluções de crédito estruturado, funding e antecipação de recebíveis;\n• Proteção patrimonial e gestão de liquidez.\n\nNosso propósito é reduzir fricções tributárias/bancárias, viabilizar liquidez e proteger o patrimônio construído.\n\nTeria disponibilidade para um breve alinhamento de 15 minutos nesta semana?\n\nUm abraço,\n${myName} | PRX Capital`;
+      const wppText = `Olá, ${targetName}! Tudo bem?\n\nSou o ${myName}, da *PRX Capital* (prxcapital.com.br).\n\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas.\n\nNossas frentes de atuação abrangem:\n\n* Gestão de carteiras e investimentos\n* Operações de câmbio e derivativos\n* Seguros patrimoniais\n* Créditos e financiamentos (capital de giro e antecipação de recebíveis)\n* Pesquisa e análise econômica (valuation e viabilidade financeira)\n* Revisão e planejamento patrimonial, tributário e sucessório\n\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez de seu patrimônio.\n\nGostaria de agendar um diagnóstico inicial gratuito para melhorar a eficiência da sua estrutura empresarial ou familiar? (a conversa leva 15 minutos e pode ser ajustada nesta semana ou na próxima)\n\nUm abraço,\n\n*${myName}* | PRX Capital`;
 
-      const emailSubject = `Alinhamento estratégico & multi-family office | A/C ${targetName}`;
-      const emailBody = `Prezado ${targetName},\n\nMeu nome é ${myName}, sou ${myRole} da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira. Localizei seu contato por vias públicas e profissionais ao analisar a trajetória de destaque da sua empresa no mercado.\n\nA PRX desenvolve uma atuação consultiva e exclusiva voltada para famílias e empresários com patrimônio imobiliário, empresas e liquidez financeira em corretoras.\n\nNossas frentes de atuação abrangem:\n1. Estruturação e revisão tributária/sucessória;\n2. Gestão e assessoria de investimentos e operações de câmbio;\n3. Soluções de crédito, funding e antecipação de recebíveis;\n4. Proteção patrimonial e gestão de liquidez.\n\nO benefício central do nosso trabalho é reduzir fricção tributária/bancária, viabilizar liquidez eficiente e proteger o patrimônio empresarial e familiar.\n\nGostaria de propor um alinhamento inicial de 15 minutos nesta semana para apresentar nossas soluções e trocar impressões.\n\nVocê teria disponibilidade nesta quinta ou sexta-feira pela manhã?\n\nAtenciosamente,\n\n${myName}\n${myRole} | PRX Capital\nprxcapital.com.br`;
+      const emailSubject = `Diagnóstico Estratégico & Multi-Family Office | A/C ${targetName}`;
+      const emailBody = `Olá, ${targetName}! Tudo bem?\n\nSou o ${myName}, da PRX Capital (prxcapital.com.br).\n\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas.\n\nNossas frentes de atuação abrangem:\n\n* Gestão de carteiras e investimentos\n* Operações de câmbio e derivativos\n* Seguros patrimoniais\n* Créditos e financiamentos (capital de giro e antecipação de recebíveis)\n* Pesquisa e análise econômica (valuation e viabilidade financeira)\n* Revisão e planejamento patrimonial, tributário e sucessório\n\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez de seu patrimônio.\n\nGostaria de agendar um diagnóstico inicial gratuito para melhorar a eficiência da sua estrutura empresarial ou familiar? (a conversa leva 15 minutos e pode ser ajustada nesta semana ou na próxima)\n\nUm abraço,\n\n${myName} | PRX Capital`;
 
       if (document.getElementById('testWppPreview')) document.getElementById('testWppPreview').value = wppText;
       if (document.getElementById('testEmailPreview')) document.getElementById('testEmailPreview').value = `Assunto: ${emailSubject}\n\n${emailBody}`;
@@ -1717,12 +1731,11 @@
       const targetEmail = document.getElementById('testTargetEmail')?.value.trim() || 'danielzanoncontato@gmail.com';
       const targetName = document.getElementById('testTargetName')?.value.trim() || 'Daniel';
       const myName = cfg.execName || 'Daniel Zanon';
-      const myRole = cfg.execRole || 'Executivo';
 
-      const msgWpp = `Olá, ${targetName}! Tudo bem?\n\nAqui é o ${myName}, ${myRole} da PRX Capital (prxcapital.com.br).\n\nLocalizei seu contato por vias públicas e profissionais ao acompanhar a expressiva atuação da sua empresa no mercado.\n\nA PRX atua como multi-family office e boutique financeira, assessorando empresários e famílias com patrimônio imobiliário, empresas e liquidez financeira em corretoras.\n\nNossas frentes centrais abrangem:\n• Estruturação e revisão tributária e sucessória;\n• Gestão e assessoria de investimentos e câmbio;\n• Soluções de crédito estruturado, funding e antecipação de recebíveis;\n• Proteção patrimonial e gestão de liquidez.\n\nNosso propósito é reduzir fricções tributárias/bancárias, viabilizar liquidez e proteger o patrimônio construído.\n\nTeria disponibilidade para um breve alinhamento de 15 minutos nesta semana?\n\nUm abraço,\n${myName} | PRX Capital`;
+      const msgWpp = `Olá, ${targetName}! Tudo bem?\n\nSou o ${myName}, da *PRX Capital* (prxcapital.com.br).\n\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas.\n\nNossas frentes de atuação abrangem:\n\n* Gestão de carteiras e investimentos\n* Operações de câmbio e derivativos\n* Seguros patrimoniais\n* Créditos e financiamentos (capital de giro e antecipação de recebíveis)\n* Pesquisa e análise econômica (valuation e viabilidade financeira)\n* Revisão e planejamento patrimonial, tributário e sucessório\n\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez de seu patrimônio.\n\nGostaria de agendar um diagnóstico inicial gratuito para melhorar a eficiência da sua estrutura empresarial ou familiar? (a conversa leva 15 minutos e pode ser ajustada nesta semana ou na próxima)\n\nUm abraço,\n\n*${myName}* | PRX Capital`;
 
-      const emailSubject = `Alinhamento estratégico & multi-family office | A/C ${targetName}`;
-      const emailBody = `Prezado ${targetName},\n\nMeu nome é ${myName}, sou ${myRole} da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira. Localizei seu contato por vias públicas e profissionais ao analisar a trajetória de destaque da sua empresa no mercado.\n\nA PRX desenvolve uma atuação consultiva e exclusiva voltada para famílias e empresários com patrimônio imobiliário, empresas e liquidez financeira em corretoras.\n\nNossas frentes de atuação abrangem:\n1. Estruturação e revisão tributária/sucessória;\n2. Gestão e assessoria de investimentos e operações de câmbio;\n3. Soluções de crédito, funding e antecipação de recebíveis;\n4. Proteção patrimonial e gestão de liquidez.\n\nO benefício central do nosso trabalho é reduzir fricção tributária/bancária, viabilizar liquidez eficiente e proteger o patrimônio empresarial e familiar.\n\nGostaria de propor um alinhamento inicial de 15 minutos nesta semana para apresentar nossas soluções e trocar impressões.\n\nVocê teria disponibilidade nesta quinta ou sexta-feira pela manhã?\n\nAtenciosamente,\n\n${myName}\n${myRole} | PRX Capital\nprxcapital.com.br`;
+      const emailSubject = `Diagnóstico Estratégico & Multi-Family Office | A/C ${targetName}`;
+      const emailBody = `Olá, ${targetName}! Tudo bem?\n\nSou o ${myName}, da PRX Capital (prxcapital.com.br).\n\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas.\n\nNossas frentes de atuação abrangem:\n\n* Gestão de carteiras e investimentos\n* Operações de câmbio e derivativos\n* Seguros patrimoniais\n* Créditos e financiamentos (capital de giro e antecipação de recebíveis)\n* Pesquisa e análise econômica (valuation e viabilidade financeira)\n* Revisão e planejamento patrimonial, tributário e sucessório\n\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez de seu patrimônio.\n\nGostaria de agendar um diagnóstico inicial gratuito para melhorar a eficiência da sua estrutura empresarial ou familiar? (a conversa leva 15 minutos e pode ser ajustada nesta semana ou na próxima)\n\nUm abraço,\n\n${myName} | PRX Capital`;
 
       if (type === 'wpp_socio') {
         const phoneParam = targetPhone ? `55${targetPhone.replace(/^55/, '')}` : '5511915887182';
@@ -1787,14 +1800,14 @@
         cnpj,
         emailEmpresa,
         foneEmpresa,
-        wppSocio: `Olá, ${d1Nome}! Tudo bem?\n\nAqui é o ${myName}, ${myRole} da PRX Capital (prxcapital.com.br).\n\nLocalizei seu contato por vias públicas e profissionais ao acompanhar a expressiva atuação da ${empresa} em ${cidade}-${uf}.\n\nA PRX atua como multi-family office e boutique financeira, assessorando empresários e famílias com patrimônio imobiliário, empresas e liquidez financeira em corretoras.\n\nNossas frentes centrais abrangem:\n• Estruturação e revisão tributária e sucessória;\n• Gestão e assessoria de investimentos e câmbio;\n• Soluções de crédito estruturado, funding e antecipação de recebíveis;\n• Proteção patrimonial e gestão de liquidez.\n\nNosso propósito é reduzir fricções tributárias/bancárias, viabilizar liquidez e proteger o patrimônio construído.\n\nTeria disponibilidade para um breve alinhamento de 15 minutos nesta semana?\n\nUm abraço,\n${myName} | PRX Capital`,
-        emailSocioAssunto: `Alinhamento estratégico & multi-family office | A/C ${d1Nome} (${empresa})`,
-        emailSocioCorpo: `Prezado(a) ${d1Nome},\n\nMeu nome é ${myName}, sou ${myRole} da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira. Localizei seu contato por vias públicas e profissionais ao analisar a trajetória de destaque da ${empresa} em ${cidade}-${uf}.\n\nA PRX desenvolve uma atuação consultiva e exclusiva voltada para famílias e empresários com patrimônio imobiliário, empresas e liquidez financeira em corretoras.\n\nNossas frentes de atuação abrangem:\n1. Estruturação e revisão tributária/sucessória;\n2. Gestão e assessoria de investimentos e operações de câmbio;\n3. Soluções de crédito, funding e antecipação de recebíveis;\n4. Proteção patrimonial e gestão de liquidez.\n\nO benefício central do nosso trabalho é reduzir fricção tributária/bancária, viabilizar liquidez eficiente e proteger o patrimônio empresarial e familiar (CNPJ: ${cnpj}).\n\nGostaria de propor um alinhamento inicial de 15 minutos nesta semana para apresentar nossas soluções.\n\nVocê teria disponibilidade nesta quinta ou sexta-feira pela manhã?\n\nAtenciosamente,\n\n${myName}\n${myRole} | PRX Capital\nprxcapital.com.br`,
-        linkedinSocio: `Olá, ${d1Nome}, um prazer conectar!\n\nAcompanho a sua liderança à frente da ${empresa} em ${cidade}-${uf}.\n\nSou ${myRole} na PRX Capital (prxcapital.com.br), multi-family office e boutique financeira. Apoiamos empresários e famílias com empresas, patrimônio imobiliário e liquidez na estruturação tributária/sucessória, investimentos, câmbio e crédito estruturado.\n\nO propósito é reduzir fricções bancárias e fiscais e blindar o patrimônio.\n\nSeria uma honra trocar uma ideia de 15 minutos nesta semana. Como está sua agenda?\n\nUm abraço,\n${myName}`,
-        wppEmpresa: `Olá, equipe da ${empresa}! Tudo bem?\n\nAqui é o ${myName}, da PRX Capital (prxcapital.com.br), boutique financeira e multi-family office.\n\nLocalizamos o contato da empresa por canais públicos em virtude da relevância de vocês no setor de ${segmento} em ${cidade}-${uf}.\n\nAtuamos diretamente com empresários e diretorias em estruturação tributária, crédito estruturado/funding, câmbio e gestão patrimonial de controladores.\n\nGostaríamos de apresentar um breve alinhamento estratégico de 15 minutos ao(à) ${d1Nome} (${d1Cargo}) ou à Diretoria Financeira.\n\nCom quem do time podemos agendar ou enviar o convite?\n\nAgradeço pela atenção!\n${myName} | PRX Capital`,
-        emailEmpresaAssunto: `Apresentação Consultiva & Multi-Family Office | A/C Diretoria da ${empresa}`,
-        emailEmpresaCorpo: `Prezada Equipe da ${empresa},\n\nMeu nome é ${myName}, sou ${myRole} da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira especializada no atendimento a empresários, indústrias e grupos econômicos consolidados.\n\nIdentificamos a relevante atuação da ${empresa} no segmento de ${segmento} em ${cidade}-${uf} através de registros públicos e corporativos.\n\nApoiamos empresas e seus controladores em:\n• Revisão e estruturação tributária/sucessória de sócios;\n• Soluções de crédito, funding e antecipação de recebíveis;\n• Assessoria em câmbio comercial e gestão de investimentos;\n• Proteção patrimonial e governança de liquidez.\n\nGostaríamos de solicitar um breve alinhamento de 15 minutos com o(a) ${d1Nome} (${d1Cargo}) ou com a Diretoria Financeira para apresentar nossas soluções estratégicas.\n\nPoderiam, por gentileza, direcionar esta mensagem ao responsável ou informar o canal de agenda executiva?\n\nAtenciosamente,\n\n${myName}\n${myRole} | PRX Capital\nprxcapital.com.br`,
-        linkedinEmpresa: `Olá, equipe da ${empresa}!\n\nParabéns pelo excelente posicionamento e relevância no mercado de ${segmento}.\n\nSou ${myName}, ${myRole} da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira. Assessoramos diretorias e controladores em soluções de crédito estruturado, câmbio comercial, eficiência tributária e gestão patrimonial.\n\nGostaríamos de solicitar um contato com o(a) ${d1Nome} (${d1Cargo}) ou com a Diretoria Financeira para um alinhamento inicial de 15 minutos.\n\nMuito obrigado e excelente semana a toda a equipe!`
+        wppSocio: `Olá, ${d1Nome}! Tudo bem?\n\nSou o ${myName}, da *PRX Capital* (prxcapital.com.br).\n\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas.\n\nNossas frentes de atuação abrangem:\n\n* Gestão de carteiras e investimentos\n* Operações de câmbio e derivativos\n* Seguros patrimoniais\n* Créditos e financiamentos (capital de giro e antecipação de recebíveis)\n* Pesquisa e análise econômica (valuation e viabilidade financeira)\n* Revisão e planejamento patrimonial, tributário e sucessório\n\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez de seu patrimônio.\n\nGostaria de agendar um diagnóstico inicial gratuito para melhorar a eficiência da sua estrutura empresarial ou familiar? (a conversa leva 15 minutos e pode ser ajustada nesta semana ou na próxima)\n\nUm abraço,\n\n*${myName}* | PRX Capital`,
+        emailSocioAssunto: `Diagnóstico Estratégico & Multi-Family Office | A/C ${d1Nome} (${empresa})`,
+        emailSocioCorpo: `Olá, ${d1Nome}! Tudo bem?\n\nSou o ${myName}, da PRX Capital (prxcapital.com.br).\n\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas.\n\nNossas frentes de atuação abrangem:\n\n* Gestão de carteiras e investimentos\n* Operações de câmbio e derivativos\n* Seguros patrimoniais\n* Créditos e financiamentos (capital de giro e antecipação de recebíveis)\n* Pesquisa e análise econômica (valuation e viabilidade financeira)\n* Revisão e planejamento patrimonial, tributário e sucessório\n\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez de seu patrimônio.\n\nGostaria de agendar um diagnóstico inicial gratuito para melhorar a eficiência da sua estrutura empresarial ou familiar? (a conversa leva 15 minutos e pode ser ajustada nesta semana ou na próxima)\n\nUm abraço,\n\n${myName} | PRX Capital`,
+        linkedinSocio: `Olá, ${d1Nome}, um prazer conectar!\n\nSou o ${myName}, da PRX Capital (prxcapital.com.br).\n\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas (investimentos, câmbio, crédito, seguros e planejamento tributário/sucessório).\n\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez do patrimônio.\n\nGostaria de agendar um diagnóstico inicial gratuito de 15 minutos para avaliarmos a eficiência da sua estrutura empresarial ou familiar?\n\nUm abraço,\n${myName} | PRX Capital`,
+        wppEmpresa: `Olá, equipe da ${empresa}! Tudo bem?\n\nSou o ${myName}, da *PRX Capital* (prxcapital.com.br).\n\nAtuamos como multi-family office e boutique financeira, assessorando empresários e diretorias na gestão completa de suas estruturas físicas e jurídicas (crédito, câmbio, seguros, valuation e eficiência tributária).\n\nGostaríamos de agendar um diagnóstico inicial gratuito de 15 minutos com o(a) ${d1Nome} (${d1Cargo}) ou com a Diretoria Financeira.\n\nCom quem do time podemos alinhar este convite?\n\nUm abraço,\n*${myName}* | PRX Capital`,
+        emailEmpresaAssunto: `Diagnóstico Estratégico & Multi-Family Office | A/C Diretoria da ${empresa}`,
+        emailEmpresaCorpo: `Prezada Equipe da ${empresa},\n\nSou o ${myName}, da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira.\n\nAtuamos assessorando empresários, diretorias e controladores na gestão completa de suas estruturas físicas e jurídicas.\n\nNossas frentes de atuação abrangem:\n\n* Gestão de carteiras e investimentos\n* Operações de câmbio e derivativos\n* Seguros patrimoniais\n* Créditos e financiamentos (capital de giro e antecipação de recebíveis)\n* Pesquisa e análise econômica (valuation e viabilidade financeira)\n* Revisão e planejamento patrimonial, tributário e sucessório\n\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez do grupo econômico e de seus sócios.\n\nGostaríamos de agendar um diagnóstico inicial gratuito de 15 minutos com o(a) ${d1Nome} (${d1Cargo}) ou com a Diretoria Financeira para apresentar nossas frentes estratégicas.\n\nPoderiam, por gentileza, direcionar esta mensagem ao responsável ou informar o canal de agenda executiva?\n\nAtenciosamente,\n\n${myName} | PRX Capital\nprxcapital.com.br`,
+        linkedinEmpresa: `Olá, equipe da ${empresa}!\n\nSou o ${myName}, da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira.\n\nAssessoramos diretorias e controladores em investimentos, operações de câmbio, crédito estruturado, seguros e planejamento tributário/sucessório.\n\nGostaríamos de agendar um diagnóstico inicial gratuito de 15 minutos com o(a) ${d1Nome} (${d1Cargo}) ou com a Diretoria Financeira.\n\nMuito obrigado e excelente semana a toda a equipe!`
       };
     }
 
@@ -1920,6 +1933,8 @@
         existing.notes.unshift({ date: nowStr, text: logNote });
       }
       saveCrmDeals(deals);
+      renderCrmPipeline();
+      renderTable();
     }
 
     function addToCrm(leadId) {
@@ -1957,12 +1972,35 @@
       };
       deals.unshift(newDeal);
       saveCrmDeals(deals);
+      renderCrmPipeline();
+      renderTable();
       showToast(`✅ Lead #${item.id} (${item.company}) adicionado ao CRM!`);
     }
 
     function updateCrmCounters() {
       const deals = getCrmDeals();
-      document.getElementById('tabCrmBadge').innerText = deals.length.toLocaleString('pt-BR');
+      const badge = document.getElementById('tabCrmBadge');
+      if (badge) badge.innerText = deals.length.toLocaleString('pt-BR');
+
+      const totalDealsEl = document.getElementById('crmTotalDeals');
+      if (totalDealsEl) totalDealsEl.innerText = deals.length.toLocaleString('pt-BR');
+
+      let totalPatrimonio = 0;
+      deals.forEach(d => { totalPatrimonio += (parseFloat(d.patrimonio) || 0); });
+      const totalPatEl = document.getElementById('crmTotalPatrimonio');
+      if (totalPatEl) totalPatEl.innerText = 'R$ ' + (totalPatrimonio / 1000000).toFixed(0) + 'M';
+
+      const totalDisparosEl = document.getElementById('crmTotalDisparos');
+      if (totalDisparosEl) {
+        const disparosCount = deals.filter(d => d.lastChannel && d.lastChannel !== 'Adicionado Manual').length;
+        totalDisparosEl.innerText = disparosCount.toLocaleString('pt-BR');
+      }
+
+      const totalFechadosEl = document.getElementById('crmTotalFechados');
+      if (totalFechadosEl) {
+        const fechadosCount = deals.filter(d => d.stage === 'fechado').length;
+        totalFechadosEl.innerText = fechadosCount.toLocaleString('pt-BR');
+      }
 
       const stages = ['prospeccao', 'qualificacao', 'contato', 'reuniao', 'proposta', 'fechado'];
       stages.forEach(st => {
@@ -2172,11 +2210,11 @@
 
       const startIndex = (currentPage - 1) * itemsPerPage;
       const pageItems = itemsPerPage >= 999999 ? filteredDataList : filteredDataList.slice(startIndex, startIndex + itemsPerPage);
-
       if (pageItems.length === 0) {
         tbody.innerHTML = '<tr><td colspan="11" class="py-12 text-center text-slate-400 font-bold text-sm">Nenhum lead encontrado com os filtros selecionados.</td></tr>';
       } else {
         let html = '';
+        const crmDealsList = getCrmDeals();
         pageItems.forEach(item => {
           let segClass = 'bg-slate-100 text-slate-800 border-slate-300';
           if (item.corSegmento === 'YELLOW') segClass = 'bg-amber-100 text-amber-900 border-amber-300';
@@ -2194,13 +2232,20 @@
           const emailEmpresaInfo = classifyEmail(item.email, d1.nome);
           const foneSocioInfo = classifyPhone(item.contatoPessoal || d1.contato || item.fone, true);
 
+          const inCrm = crmDealsList.find(x => x.prospectId === item.id || (x.company && x.company.toLowerCase() === item.company.toLowerCase()));
+          let crmBtnHtml = '';
+          if (inCrm) {
+            const stageLabels = { 'prospeccao': '1. Prosp', 'qualificacao': '2. Qualif', 'contato': '3. Contato', 'reuniao': '4. Reunião', 'proposta': '5. Proposta', 'fechado': '6. Fechado' };
+            crmBtnHtml = `<button onclick="openCrmDealModal('${inCrm.id}')" title="Etapa atual: ${inCrm.stage} (Clique para editar no CRM)" class="w-full py-1.5 px-2 bg-emerald-100 hover:bg-emerald-200 text-emerald-900 border border-emerald-300 rounded-lg text-[10px] font-extrabold flex items-center justify-center gap-1 shadow-2xs cursor-pointer transition"><i class="fa-solid fa-check text-emerald-700"></i> ${stageLabels[inCrm.stage] || 'No CRM'}</button>`;
+          } else {
+            crmBtnHtml = `<button onclick="addToCrm(${item.id})" title="Adicionar ao CRM" class="w-full py-1.5 px-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-[10px] font-extrabold flex items-center justify-center gap-1 shadow-xs cursor-pointer transition"><i class="fa-solid fa-plus text-[9px]"></i> CRM</button>`;
+          }
+
           html += `
             <tr class="hover:bg-slate-50 transition border-b border-slate-100">
               <td class="py-3 px-3 text-center font-mono font-bold text-slate-400 text-[11px]">${item.id}</td>
               <td class="py-3 px-3 text-center">
-                <button onclick="addToCrm(${item.id})" class="w-full py-1.5 px-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-[10px] font-extrabold flex items-center justify-center gap-1 shadow-xs cursor-pointer">
-                  <i class="fa-solid fa-plus text-[9px]"></i> CRM
-                </button>
+                ${crmBtnHtml}
               </td>
               <td class="py-3 px-4">
                 <div class="font-extrabold text-slate-900 text-xs">${item.company}</div>
