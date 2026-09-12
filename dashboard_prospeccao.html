@@ -10,6 +10,7 @@
     body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc; color: #0f172a; padding: 12px; line-height: 1.4; }
     .font-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
     .truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }
     ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.25); border-radius: 4px; }
@@ -69,7 +70,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-12 gap-2 bg-slate-50 p-3 rounded-xl border border-slate-200">
         <div class="sm:col-span-6 flex items-center gap-2 bg-white border border-slate-300 rounded-lg px-3 py-1.5 shadow-2xs">
           <span>🔍</span>
-          <input type="text" id="searchInput" placeholder="Buscar por Empresa, CNPJ, Sócio, Cidade, Segmento ou CNAE..." class="w-full text-xs font-medium text-slate-800 focus:outline-none bg-transparent" oninput="filterData()">
+          <input type="text" id="searchInput" placeholder="Buscar por Empresa, CNPJ, Sócio, Cidade, CNAE, Tipo Societário (S/A, LTDA) ou Regime Tributário..." class="w-full text-xs font-medium text-slate-800 focus:outline-none bg-transparent" oninput="filterData()">
         </div>
         <div class="sm:col-span-3">
           <select id="segmentFilter" class="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs font-bold text-slate-800 focus:outline-none shadow-2xs" onchange="filterData()">
@@ -93,7 +94,7 @@
           </select>
         </div>
         <div class="sm:col-span-1">
-          <button onclick="exportCurrentCsv()" class="w-full py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition flex items-center justify-center gap-1 cursor-pointer shadow-2xs" title="Exportar CSV das 24 Colunas">
+          <button onclick="exportCurrentCsv()" class="w-full py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition flex items-center justify-center gap-1 cursor-pointer shadow-2xs" title="Exportar CSV das 24+ Colunas">
             📥 CSV
           </button>
         </div>
@@ -115,14 +116,14 @@
       <!-- TABELA MASTER DE PROSPECTOS (PRÉ-RENDERIZADA COM OS 50 PRIMEIROS LEADS) -->
       <div class="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-xs">
         <div class="overflow-x-auto" style="max-height: 520px; overflow-y: auto;">
-          <table class="w-full text-left border-collapse min-w-[1550px]">
+          <table class="w-full text-left border-collapse min-w-[1600px]">
             <thead class="bg-slate-900 text-white text-[11px] uppercase font-extrabold sticky top-0 z-10 shadow-xs">
               <tr>
                 <th class="py-2.5 px-3 text-center w-12">ID</th>
                 <th class="py-2.5 px-3 text-center w-20">CRM</th>
-                <th class="py-2.5 px-3 w-60">🏢 Empresa, CNPJ & Idade</th>
+                <th class="py-2.5 px-3 w-64">🏢 Empresa, CNPJ, Idade & Natureza</th>
                 <th class="py-2.5 px-3 w-40">Segmento & Setor</th>
-                <th class="py-2.5 px-3 w-48">Atividade Econômica</th>
+                <th class="py-2.5 px-3 w-56">🏭 CNAE Principal & Atividades</th>
                 <th class="py-2.5 px-3 w-48">Sócios / Decisores (QSA)</th>
                 <th class="py-2.5 px-3 w-44">🏢 Contato Empresa</th>
                 <th class="py-2.5 px-3 w-44 bg-emerald-950/40">👤 Contato Sócio</th>
@@ -136,9 +137,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Castelo Alimentos S/A</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 59 anos (1967)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">07.814.284/0001-07</span> • <span>Jundiaí-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Anônima (S/A Fechada)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Fábricas &amp; Indústrias</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="1099-6/01 (Fabricação de vinagres)">1099-6/01 (Fabricação de vinagres)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">1099-6/01 (Fabricação de vinagres)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1099-6/99 (Outros alimentos), 1032-5/99 (Conservas vegetais), 1095-3/00 (Especiarias e molhos), 4639-7/01 (Atacado de alimentos), 5211-7/99 (Depósitos de terceiros), 4930-2/02 (Transporte rodoviário)"><span class="font-bold text-slate-700">Secundários:</span> 1099-6/99 (Outros alimentos), 1032-5/99 (Conservas vegetais), 1095-3/00 (Especiarias e molhos), 4639-7/01 (Atacado de alimentos), 5211-7/99 (Depósitos de terceiros), 4930-2/02 (Transporte rodoviário)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Marcelo Cereser</div><div class="text-[10px] text-slate-500">Diretor Superintendente / CEO</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 94187-6309 / marcelo.cereser@casteloalimentos.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@casteloalimentos.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 94187-6309 / marcelo.cereser@casteloalimentos.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -150,9 +157,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>ISPL (Crivialli Brasil)</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 30 anos (1996)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">01.125.487/0001-00</span> • <span>Maringá-PR</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Fábricas &amp; Indústrias</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="2061-4/00 (Fabricação de sabões e detergentes sintéticos)">2061-4/00 (Fabricação de sabões e detergentes sintéticos)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">2061-4/00 (Fabricação de sabões e detergentes sintéticos)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="2062-2/00 (Produtos de limpeza e polimento), 2063-1/00 (Cosméticos e higiene pessoal), 4649-4/08 (Atacado de higiene/limpeza), 4646-0/01 (Atacado de cosméticos), 4930-2/02 (Transporte rodoviário de carga)"><span class="font-bold text-slate-700">Secundários:</span> 2062-2/00 (Produtos de limpeza e polimento), 2063-1/00 (Cosméticos e higiene pessoal), 4649-4/08 (Atacado de higiene/limpeza), 4646-0/01 (Atacado de cosméticos), 4930-2/02 (Transporte rodoviário de carga)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">João Cantagalli</div><div class="text-[10px] text-slate-500">Sócio-Fundador e Diretor Geral</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (44) 3241-8000 / diretoria@crivialli.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@crivialli.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="text-[10px] text-slate-500">🏢 Fixo da Empresa</div></td>
@@ -164,9 +177,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Bebidas Poty S.A.</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 75 anos (1951)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">55.223.127/0002-42</span> • <span>Potirendaba-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Anônima (S/A Fechada)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Fábricas &amp; Indústrias</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="1122-4/01 (Fabricação de refrigerantes)">1122-4/01 (Fabricação de refrigerantes)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">1122-4/01 (Fabricação de refrigerantes)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1121-6/00 (Águas envasadas), 1122-4/03 (Sucos e néctares), 1113-5/02 (Cervejas e chopes), 4635-4/02 (Atacado de cerveja e refrigerante), 4930-2/02 (Transporte rodoviário próprio)"><span class="font-bold text-slate-700">Secundários:</span> 1121-6/00 (Águas envasadas), 1122-4/03 (Sucos e néctares), 1113-5/02 (Cervejas e chopes), 4635-4/02 (Atacado de cerveja e refrigerante), 4930-2/02 (Transporte rodoviário próprio)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">José Luiz Franzotti</div><div class="text-[10px] text-slate-500">Presidente / CEO</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (17) 99781-4000 / presidencia@bebidaspoty.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@bebidaspoty.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (17) 99781-4000 / presidencia@bebidaspoty.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -178,9 +197,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Predilecta Alimentos Ltda.</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 36 anos (1990)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">62.546.387/0001-33</span> • <span>Matão-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Fábricas &amp; Indústrias</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="1069-4/00 (Moagem e produtos vegetais)">1069-4/00 (Moagem e produtos vegetais)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">1069-4/00 (Moagem e produtos vegetais)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1031-7/00 (Doces e conservas de frutas), 1032-5/99 (Molhos de tomate e conservas), 1095-3/00 (Condimentos e temperos), 4639-7/01 (Atacado de alimentos), 5211-7/01 (Armazéns gerais e warrants)"><span class="font-bold text-slate-700">Secundários:</span> 1031-7/00 (Doces e conservas de frutas), 1032-5/99 (Molhos de tomate e conservas), 1095-3/00 (Condimentos e temperos), 4639-7/01 (Atacado de alimentos), 5211-7/01 (Armazéns gerais e warrants)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Jose Reynaldo Trevizaneli</div><div class="text-[10px] text-slate-500">Sócio-Administrador / Diretor Geral</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (16) 99762-2100 / diretoria@predilecta.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@predilecta.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (16) 99762-2100 / diretoria@predilecta.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -192,9 +217,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Alimentos Zaeli Ltda.</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 57 anos (1969)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">77.917.680/0001-37</span> • <span>Umuarama-PR</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Fábricas &amp; Indústrias</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="1061-9/01 (Beneficiamento de arroz)">1061-9/01 (Beneficiamento de arroz)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">1061-9/01 (Beneficiamento de arroz)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1062-7/00 (Moagem de trigo), 1064-3/00 (Farinha de milho), 1095-3/00 (Especiarias e temperos), 4632-0/01 (Atacado de cereais e leguminosas), 4930-2/02 (Transporte rodoviário de carga)"><span class="font-bold text-slate-700">Secundários:</span> 1062-7/00 (Moagem de trigo), 1064-3/00 (Farinha de milho), 1095-3/00 (Especiarias e temperos), 4632-0/01 (Atacado de cereais e leguminosas), 4930-2/02 (Transporte rodoviário de carga)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Valdemir Zago</div><div class="text-[10px] text-slate-500">Presidente / Fundador</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (44) 3621-2049 / presidencia@zaeli.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@zaeli.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (44) 3621-2049 / presidencia@zaeli.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -206,9 +237,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Vilma Alimentos (Domingos Costa)</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 95 anos (1931)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">17.159.518/0001-75</span> • <span>Contagem-MG</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Fábricas &amp; Indústrias</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="1062-7/00 (Moagem de trigo e derivados)">1062-7/00 (Moagem de trigo e derivados)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">1062-7/00 (Moagem de trigo e derivados)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1094-5/00 (Massas alimentícias), 1092-9/00 (Biscoitos e bolachas), 1099-6/99 (Sobremesas e misturas), 4632-0/02 (Atacado de farinhas e amidos), 5211-7/99 (Depósitos para terceiros)"><span class="font-bold text-slate-700">Secundários:</span> 1094-5/00 (Massas alimentícias), 1092-9/00 (Biscoitos e bolachas), 1099-6/99 (Sobremesas e misturas), 4632-0/02 (Atacado de farinhas e amidos), 5211-7/99 (Depósitos para terceiros)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Laura Costa</div><div class="text-[10px] text-slate-500">Diretora Presidente / Conselho</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (31) 3507-3343 / presidencia@vilma.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@vilma.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="text-[10px] text-slate-500">🏢 Fixo da Empresa</div></td>
@@ -220,9 +257,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Laticínios Porto Alegre S/A</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 35 anos (1991)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">66.301.334/0001-03</span> • <span>Ponte Nova-MG</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Anônima (S/A Fechada)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Fábricas &amp; Indústrias</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="1052-0/00 (Fabricação de laticínios)">1052-0/00 (Fabricação de laticínios)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">1052-0/00 (Fabricação de laticínios)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1051-1/00 (Preparação e pasteurização do leite), 1053-8/00 (Sobremesas lácteas), 4631-1/01 (Atacado de laticínios), 4930-2/02 (Transporte rodoviário refrigerado), 0151-2/01 (Gado leiteiro e fomento)"><span class="font-bold text-slate-700">Secundários:</span> 1051-1/00 (Preparação e pasteurização do leite), 1053-8/00 (Sobremesas lácteas), 4631-1/01 (Atacado de laticínios), 4930-2/02 (Transporte rodoviário refrigerado), 0151-2/01 (Gado leiteiro e fomento)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">João Lúcio Barreto Carneiro</div><div class="text-[10px] text-slate-500">Presidente do Conselho / Fundador</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (31) 3819-3232 / diretoria@laticiniosportoalegre.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@laticiniosportoalegre.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (31) 3819-3232 / diretoria@laticiniosportoalegre.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -234,9 +277,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Belagrícola Comércio S.A.</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 41 anos (1985)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">79.038.097/0001-81</span> • <span>Londrina-PR</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Anônima (S/A Fechada)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Agronegócio</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="4622-2/00 (Comércio atacadista de soja e grãos)">4622-2/00 (Comércio atacadista de soja e grãos)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">4622-2/00 (Comércio atacadista de soja e grãos)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="4683-4/00 (Atacado de fertilizantes e defensivos), 4623-1/06 (Atacado de sementes), 5211-7/01 (Armazéns gerais e silos), 0163-6/00 (Pós-colheita), 6462-0/00 (Holdings não-financeiras)"><span class="font-bold text-slate-700">Secundários:</span> 4683-4/00 (Atacado de fertilizantes e defensivos), 4623-1/06 (Atacado de sementes), 5211-7/01 (Armazéns gerais e silos), 0163-6/00 (Pós-colheita), 6462-0/00 (Holdings não-financeiras)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Alberto Araujo</div><div class="text-[10px] text-slate-500">Diretor Presidente / CEO</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (43) 3371-2000 / presidencia@belagricola.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@belagricola.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="text-[10px] text-slate-500">🏢 Fixo da Empresa</div></td>
@@ -248,9 +297,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Alimentos Dallas (Grupo Dallas)</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 28 anos (1998)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">02.483.916/0001-94</span> • <span>Nova Alvorada-MS</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Exportadoras</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="1094-5/00 (Fabricação de massas alimentícias)">1094-5/00 (Fabricação de massas alimentícias)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">1094-5/00 (Fabricação de massas alimentícias)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1062-7/00 (Moagem de trigo e farinhas), 1092-9/00 (Biscoitos e bolachas), 1061-9/01 (Beneficiamento de arroz), 4639-7/01 (Atacado de alimentos), 4930-2/02 (Transporte rodoviário de carga)"><span class="font-bold text-slate-700">Secundários:</span> 1062-7/00 (Moagem de trigo e farinhas), 1092-9/00 (Biscoitos e bolachas), 1061-9/01 (Beneficiamento de arroz), 4639-7/01 (Atacado de alimentos), 4930-2/02 (Transporte rodoviário de carga)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Valdir José Zorzo</div><div class="text-[10px] text-slate-500">Presidente do Grupo e Fundador</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (67) 99981-1100 / diretoria@dallasalimentos.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@dallasalimentos.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (67) 99981-1100 / diretoria@dallasalimentos.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -262,9 +317,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Special Dog (Manfrim Industrial)</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 25 anos (2001)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">56.813.280/0002-92</span> • <span>Sta. Cruz Rio Pardo-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Fábricas &amp; Indústrias</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="1066-0/00 (Fabricação de alimentos para animais)">1066-0/00 (Fabricação de alimentos para animais)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">1066-0/00 (Fabricação de alimentos para animais)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="4623-1/09 (Atacado de alimentos para animais), 4644-3/02 (Medicamentos veterinários), 4930-2/02 (Transporte rodoviário de carga), 5211-7/99 (Depósitos de mercadorias)"><span class="font-bold text-slate-700">Secundários:</span> 4623-1/09 (Atacado de alimentos para animais), 4644-3/02 (Medicamentos veterinários), 4930-2/02 (Transporte rodoviário de carga), 5211-7/99 (Depósitos de mercadorias)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Mário Sérgio Manfrim</div><div class="text-[10px] text-slate-500">Diretor Geral / Sócio Fundador</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (14) 3332-3000 / diretoria@specialdog.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@specialdog.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="text-[10px] text-slate-500">🏢 Fixo da Empresa</div></td>
@@ -276,9 +337,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Plasútil Indústria de Plásticos</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 40 anos (1986)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">56.450.877/0001-39</span> • <span>Bauru-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Fábricas &amp; Indústrias</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="2229-3/01 (Artefatos de material plástico doméstico)">2229-3/01 (Artefatos de material plástico doméstico)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">2229-3/01 (Artefatos de material plástico doméstico)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="2229-3/99 (Plásticos industriais diversos), 2222-6/00 (Embalagens plásticas), 4649-4/99 (Atacado de artigos domésticos), 4686-9/02 (Atacado de embalagens), 4930-2/02 (Transporte rodoviário)"><span class="font-bold text-slate-700">Secundários:</span> 2229-3/99 (Plásticos industriais diversos), 2222-6/00 (Embalagens plásticas), 4649-4/99 (Atacado de artigos domésticos), 4686-9/02 (Atacado de embalagens), 4930-2/02 (Transporte rodoviário)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Marco Antonio Trevisan</div><div class="text-[10px] text-slate-500">Sócio-Administrador e Diretor Geral</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (14) 4009-4922 / diretoria@plasutil.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@plasutil.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (14) 4009-4922 / diretoria@plasutil.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -290,9 +357,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Cromex S/A</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 29 anos (1997)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">02.271.463/0001-13</span> • <span>São Paulo-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Anônima (S/A Fechada)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Exportadoras</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="2229-3/02 (Masterbatches de cores e aditivos)">2229-3/02 (Masterbatches de cores e aditivos)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">2229-3/02 (Masterbatches de cores e aditivos)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="2014-2/00 (Químicos inorgânicos), 2099-9/99 (Produtos químicos industriais), 4684-2/99 (Atacado de produtos químicos), 4684-2/01 (Atacado de resinas plásticas), 4686-9/02 (Insumos industriais)"><span class="font-bold text-slate-700">Secundários:</span> 2014-2/00 (Químicos inorgânicos), 2099-9/99 (Produtos químicos industriais), 4684-2/99 (Atacado de produtos químicos), 4684-2/01 (Atacado de resinas plásticas), 4686-9/02 (Insumos industriais)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Sergio Wajsbrot</div><div class="text-[10px] text-slate-500">Presidente / Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 98900-1000 / sergio.wajsbrot@cromex.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@cromex.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 98900-1000 / sergio.wajsbrot@cromex.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -304,9 +377,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Fertipar Fertilizantes do Paraná</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 46 anos (1980)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">90.810.706/0001-01</span> • <span>Curitiba-PR</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Agronegócio</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="2013-4/02 (Fabricação de adubos e fertilizantes)">2013-4/02 (Fabricação de adubos e fertilizantes)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">2013-4/02 (Fabricação de adubos e fertilizantes)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="4683-4/00 (Atacado de defensivos e adubos), 4623-1/08 (Matérias-primas agrícolas), 5212-5/00 (Serviços e operações portuárias), 5211-7/99 (Silos e depósitos), 4930-2/02 (Transporte rodoviário)"><span class="font-bold text-slate-700">Secundários:</span> 4683-4/00 (Atacado de defensivos e adubos), 4623-1/08 (Matérias-primas agrícolas), 5212-5/00 (Serviços e operações portuárias), 5211-7/99 (Silos e depósitos), 4930-2/02 (Transporte rodoviário)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Alceu Elias Feldmann</div><div class="text-[10px] text-slate-500">Sócio-Fundador e Diretor Presidente</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (41) 3026-9009 / presidencia@fertipar.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@fertipar.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (41) 3026-9009 / presidencia@fertipar.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -318,9 +397,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Forno de Minas Alimentos S/A</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 36 anos (1990)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">03.870.455/0004-07</span> • <span>Contagem-MG</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Anônima (S/A Fechada)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Exportadoras</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="1094-5/00 (Massas e alimentos congelados)">1094-5/00 (Massas e alimentos congelados)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">1094-5/00 (Massas e alimentos congelados)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1091-1/02 (Confeitaria e padaria industrial), 1052-0/00 (Derivados de queijo), 4639-7/01 (Atacado de congelados), 4637-1/04 (Atacado de pães), 4930-2/02 (Transporte rodoviário refrigerado)"><span class="font-bold text-slate-700">Secundários:</span> 1091-1/02 (Confeitaria e padaria industrial), 1052-0/00 (Derivados de queijo), 4639-7/01 (Atacado de congelados), 4637-1/04 (Atacado de pães), 4930-2/02 (Transporte rodoviário refrigerado)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Rodrigo de Paula Abreu</div><div class="text-[10px] text-slate-500">Diretor Presidente / CEO</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (31) 3079-8100 / presidencia@fornodeminas.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@fornodeminas.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (31) 3079-8100 / presidencia@fornodeminas.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -332,9 +417,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Fugini Alimentos Ltda.</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 30 anos (1996)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">00.588.458/0001-03</span> • <span>Monte Alto-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Fábricas &amp; Indústrias</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="1031-7/00 (Conservas de frutas e doces)">1031-7/00 (Conservas de frutas e doces)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">1031-7/00 (Conservas de frutas e doces)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1032-5/99 (Molhos de tomate e conservas vegetais), 1095-3/00 (Temperos e condimentos), 1099-6/99 (Pratos prontos esterilizados), 4639-7/01 (Atacado de alimentos em geral), 4930-2/02 (Transporte de carga)"><span class="font-bold text-slate-700">Secundários:</span> 1032-5/99 (Molhos de tomate e conservas vegetais), 1095-3/00 (Temperos e condimentos), 1099-6/99 (Pratos prontos esterilizados), 4639-7/01 (Atacado de alimentos em geral), 4930-2/02 (Transporte de carga)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Cristina Massae Fugita Abrahão</div><div class="text-[10px] text-slate-500">Sócia-Administradora e Diretora Geral</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (16) 3244-4000 / diretoria@fugini.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@fugini.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="text-[10px] text-slate-500">🏢 Fixo da Empresa</div></td>
@@ -346,9 +437,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Sakura Nakaya Alimentos</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 86 anos (1940)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">61.070.694/0001-28</span> • <span>Pres. Prudente-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Fábricas &amp; Indústrias</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="1095-3/00 (Especiarias, molhos, shoyu e condimentos)">1095-3/00 (Especiarias, molhos, shoyu e condimentos)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">1095-3/00 (Especiarias, molhos, shoyu e condimentos)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1099-6/99 (Alimentos fermentados e insumos), 1032-5/99 (Conservas vegetais), 4637-1/99 (Atacado de produtos alimentícios especiais), 4639-7/01 (Atacado em geral), 4930-2/02 (Transporte rodoviário)"><span class="font-bold text-slate-700">Secundários:</span> 1099-6/99 (Alimentos fermentados e insumos), 1032-5/99 (Conservas vegetais), 4637-1/99 (Atacado de produtos alimentícios especiais), 4639-7/01 (Atacado em geral), 4930-2/02 (Transporte rodoviário)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Renato Kenji Nakaya</div><div class="text-[10px] text-slate-500">Diretor Presidente / CEO</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 2941-1177 / presidencia@sakura.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@sakura.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 2941-1177 / presidencia@sakura.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -360,9 +457,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Alvoar Lácteos (Embaré)</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 91 anos (1935)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">21.992.946/0001-51</span> • <span>Lagoa da Prata-MG</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Exportadoras</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="1052-0/00 (Fabricação de laticínios)">1052-0/00 (Fabricação de laticínios)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">1052-0/00 (Fabricação de laticínios)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1093-7/01 (Chocolates e caramelos Embaré), 1051-1/00 (Preparação de leite), 4631-1/01 (Atacado de leite e laticínios), 4637-1/07 (Atacado de confeitos), 4930-2/02 (Transporte frigorificado)"><span class="font-bold text-slate-700">Secundários:</span> 1093-7/01 (Chocolates e caramelos Embaré), 1051-1/00 (Preparação de leite), 4631-1/01 (Atacado de leite e laticínios), 4637-1/07 (Atacado de confeitos), 4930-2/02 (Transporte frigorificado)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Marcelo Cavalcante de Araujo</div><div class="text-[10px] text-slate-500">Diretor Presidente Executivo (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (85) 99159-6163 / marcelo.cavalcante@alvoar.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@embare.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (85) 99159-6163 / marcelo.cavalcante@alvoar.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -374,9 +477,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Máquinas Agrícolas Jacto</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 78 anos (1948)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">55.064.562/0001-90</span> • <span>Pompéia-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Exportadoras</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="2833-0/00 (Máquinas e pulverizadores agrícolas)">2833-0/00 (Máquinas e pulverizadores agrícolas)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">2833-0/00 (Máquinas e pulverizadores agrícolas)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="2651-5/00 (Telemetria e sensores agrícolas), 3321-0/00 (Instalação industrial), 4661-3/00 (Atacado de máquinas agrícolas), 4530-7/01 (Atacado de peças), 7112-0/00 (Engenharia e tecnologia)"><span class="font-bold text-slate-700">Secundários:</span> 2651-5/00 (Telemetria e sensores agrícolas), 3321-0/00 (Instalação industrial), 4661-3/00 (Atacado de máquinas agrícolas), 4530-7/01 (Atacado de peças), 7112-0/00 (Engenharia e tecnologia)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Fernando Gonçalves Neto</div><div class="text-[10px] text-slate-500">Diretor Presidente Executivo (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (14) 3405-2100 / presidencia@jacto.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@jacto.com</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="text-[10px] text-slate-500">🏢 Fixo da Empresa</div></td>
@@ -388,9 +497,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Industrial Marvi Ltda.</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 74 anos (1952)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">53.408.654/0001-15</span> • <span>Ourinhos-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Exportadoras</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="1092-9/00 (Casquinhas, cones e biscoitos)">1092-9/00 (Casquinhas, cones e biscoitos)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">1092-9/00 (Casquinhas, cones e biscoitos)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1099-6/99 (Caldas, coberturas e sobremesas), 2229-3/01 (Embalagens plásticas descartáveis), 4639-7/01 (Atacado de alimentos para food service), 4686-9/02 (Atacado de embalagens), 4930-2/02 (Transporte rodoviário)"><span class="font-bold text-slate-700">Secundários:</span> 1099-6/99 (Caldas, coberturas e sobremesas), 2229-3/01 (Embalagens plásticas descartáveis), 4639-7/01 (Atacado de alimentos para food service), 4686-9/02 (Atacado de embalagens), 4930-2/02 (Transporte rodoviário)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Sergio Luis Mesquita</div><div class="text-[10px] text-slate-500">Sócio-Administrador e Diretor Geral</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (14) 3302-4411 / diretoria@marvi.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@marvi.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="text-[10px] text-slate-500">🏢 Fixo da Empresa</div></td>
@@ -402,9 +517,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Minasmáquinas S/A</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 66 anos (1960)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">17.161.241/0001-15</span> • <span>Contagem-MG</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Anônima (S/A Fechada)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Logística</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="4511-1/04 (Comércio atacadista de caminhões novos/usados)">4511-1/04 (Comércio atacadista de caminhões novos/usados)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">4511-1/04 (Comércio atacadista de caminhões novos/usados)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="4511-1/06 (Atacado de ônibus), 4520-0/01 (Oficinas e manutenção de pesados), 4530-7/01 (Atacado de peças e implementos), 7711-0/00 (Locação de frotas comerciais), 6619-3/99 (Serviços financeiros e F&amp;I)"><span class="font-bold text-slate-700">Secundários:</span> 4511-1/06 (Atacado de ônibus), 4520-0/01 (Oficinas e manutenção de pesados), 4530-7/01 (Atacado de peças e implementos), 7711-0/00 (Locação de frotas comerciais), 6619-3/99 (Serviços financeiros e F&amp;I)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Eduardo Bacelar</div><div class="text-[10px] text-slate-500">Diretor Presidente Executivo</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (31) 3369-1313 / diretoria@minasmaquinas.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@minasmaquinas.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (31) 3369-1313 / diretoria@minasmaquinas.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -416,9 +537,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Pastifício Selmi (Renata / Galo)</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 139 anos (1887)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">46.025.722/0001-00</span> • <span>Sumaré-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Fábricas &amp; Indústrias</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="1094-5/00 (Fabricação de massas alimentícias)">1094-5/00 (Fabricação de massas alimentícias)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">1094-5/00 (Fabricação de massas alimentícias)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1062-7/00 (Moagem de trigo e farinhas), 1092-9/00 (Biscoitos, bolachas e cookies), 1099-6/99 (Misturas para bolo e queijo ralado), 4632-0/02 (Atacado de farinhas), 4639-7/01 (Atacado de alimentos em geral), 4930-2/02 (Transporte rodoviário)"><span class="font-bold text-slate-700">Secundários:</span> 1062-7/00 (Moagem de trigo e farinhas), 1092-9/00 (Biscoitos, bolachas e cookies), 1099-6/99 (Misturas para bolo e queijo ralado), 4632-0/02 (Atacado de farinhas), 4639-7/01 (Atacado de alimentos em geral), 4930-2/02 (Transporte rodoviário)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Ricardo Oliveira Selmi</div><div class="text-[10px] text-slate-500">Diretor Presidente (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (19) 3873-8400 / presidencia@selmi.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@selmi.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (19) 3873-8400 / presidencia@selmi.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -430,9 +557,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Frigorífico Astra (Astra Foods)</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 21 anos (2005)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">07.615.913/0001-61</span> • <span>Cruzeiro Oeste-PR</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Exportadoras</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="1011-2/01 (Frigorífico - abate de bovinos)">1011-2/01 (Frigorífico - abate de bovinos)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">1011-2/01 (Frigorífico - abate de bovinos)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1013-9/01 (Produtos de carne e charcutaria), 4634-6/01 (Atacado de carnes bovinas), 4689-3/01 (Atacado de couros e subprodutos), 4930-2/02 (Transporte frigorificado), 0151-2/01 (Confinamento e gado de corte)"><span class="font-bold text-slate-700">Secundários:</span> 1013-9/01 (Produtos de carne e charcutaria), 4634-6/01 (Atacado de carnes bovinas), 4689-3/01 (Atacado de couros e subprodutos), 4930-2/02 (Transporte frigorificado), 0151-2/01 (Confinamento e gado de corte)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Jeremias Silva Junior</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (44) 3676-8100 / diretoria@astrafoods.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@astrafoods.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="text-[10px] text-slate-500">🏢 Fixo da Empresa</div></td>
@@ -444,9 +577,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Laticínios Scala (Scalon &amp; Cerchi)</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 63 anos (1963)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">24.333.411/0003-29</span> • <span>Sacramento-MG</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Fábricas &amp; Indústrias</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="1052-0/00 (Fabricação de laticínios - Queijos Finos)">1052-0/00 (Fabricação de laticínios - Queijos Finos)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">1052-0/00 (Fabricação de laticínios - Queijos Finos)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1051-1/00 (Preparação de leite), 4631-1/01 (Atacado de laticínios), 4639-7/01 (Atacado de alimentos), 4930-2/02 (Transporte rodoviário refrigerado), 0151-2/01 (Fomento de gado leiteiro)"><span class="font-bold text-slate-700">Secundários:</span> 1051-1/00 (Preparação de leite), 4631-1/01 (Atacado de laticínios), 4639-7/01 (Atacado de alimentos), 4930-2/02 (Transporte rodoviário refrigerado), 0151-2/01 (Fomento de gado leiteiro)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Marcelo Scalon Cerchi</div><div class="text-[10px] text-slate-500">Diretor Executivo (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (34) 3351-8000 / diretoria@scala.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@scala.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="text-[10px] text-slate-500">🏢 Fixo da Empresa</div></td>
@@ -458,9 +597,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Cardioprime Diagnósticos Médicos S/S</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 8 anos (2018)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">18.942.311/0001-40</span> • <span>São Paulo-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Simples (S/S)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Médicos PJ</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="8630-5/03 (Procedimentos cirúrgicos ambulatoriais)">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="8640-2/08 (Diagnósticos por imagem), 8640-2/02 (Laboratórios clínicos), 8610-1/01 (Internação ambulatorial)"><span class="font-bold text-slate-700">Secundários:</span> 8640-2/08 (Diagnósticos por imagem), 8640-2/02 (Laboratórios clínicos), 8610-1/01 (Internação ambulatorial)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Dr. Eduardo Vianna de Andrade</div><div class="text-[10px] text-slate-500">Sócio-Diretor Clínico / Cardiologista Chefe</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 98765-4321 / dr.eduardo@cardioprime.med.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@empresa.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 98765-4321 / dr.eduardo@cardioprime.med.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -472,9 +617,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Instituto de Ortopedia e Coluna (SP)</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 7 anos (2019)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">27.237.183/0001-11</span> • <span>São Paulo-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Médicos PJ</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="8630-5/03 (Procedimentos cirúrgicos ambulatoriais)">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="8640-2/08 (Diagnósticos por imagem), 8610-1/01 (Hospital dia)"><span class="font-bold text-slate-700">Secundários:</span> 8640-2/08 (Diagnósticos por imagem), 8610-1/01 (Hospital dia)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Dr. Fernando Mendonca</div><div class="text-[10px] text-slate-500">Sócio-Diretor Clínico</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 9911-1122 / fernando@institutodeo.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@institutodeo.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 9911-1122 / fernando@institutodeo.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -486,9 +637,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Biscoitos &amp; Doces Nobres Jaú</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 11 anos (2015)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">55.785.515/0001-15</span> • <span>Jaú-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Fábricas &amp; Indústrias</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="1099-6/99 (Fabricação de outros produtos alimentícios)">1099-6/99 (Fabricação de outros produtos alimentícios)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">1099-6/99 (Fabricação de outros produtos alimentícios)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1062-7/00 (Moagem e farinhas), 4639-7/01 (Atacado de alimentos), 4930-2/02 (Transporte rodoviário)"><span class="font-bold text-slate-700">Secundários:</span> 1062-7/00 (Moagem e farinhas), 4639-7/01 (Atacado de alimentos), 4930-2/02 (Transporte rodoviário)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Antonio Koster</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 91315-1122 / antonio@biscoitosdoc.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@biscoitosdoc.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 91315-1122 / antonio@biscoitosdoc.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -500,9 +657,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Eletromecânica Força Industrial Londrina</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 12 anos (2014)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">62.922.598/0001-16</span> • <span>Londrina-PR</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Fábricas &amp; Indústrias</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="2833-0/00 (Máquinas e implementos agrícolas)">2833-0/00 (Máquinas e implementos agrícolas)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">2833-0/00 (Máquinas e implementos agrícolas)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="2511-0/00 (Estruturas metálicas), 3321-0/00 (Instalação industrial), 4661-3/00 (Atacado de máquinas)"><span class="font-bold text-slate-700">Secundários:</span> 2511-0/00 (Estruturas metálicas), 3321-0/00 (Instalação industrial), 4661-3/00 (Atacado de máquinas)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Cristiano Fagundes</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (41) 91416-1122 / cristiano@eletromecnic.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@empresa.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (41) 91416-1122 / cristiano@eletromecnic.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -514,9 +677,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>AgroGrãos Comercial e Armazenagem Campo Grande</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 13 anos (2013)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">69.160.681/0001-17</span> • <span>Campo Grande-MS</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Agronegócio</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="4622-2/00 (Comércio atacadista de soja e grãos)">4622-2/00 (Comércio atacadista de soja e grãos)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">4622-2/00 (Comércio atacadista de soja e grãos)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="4683-4/00 (Atacado de fertilizantes e defensivos), 5211-7/01 (Silos e armazéns gerais)"><span class="font-bold text-slate-700">Secundários:</span> 4683-4/00 (Atacado de fertilizantes e defensivos), 5211-7/01 (Silos e armazéns gerais)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Ricardo Antunes</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (67) 91517-1122 / ricardo@agrogroscome.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@agrogroscome.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (67) 91517-1122 / ricardo@agrogroscome.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -528,9 +697,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Agroexport Trading de Grãos e Café Varginha</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 14 anos (2012)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">76.297.764/0001-18</span> • <span>Varginha-MG</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Exportadoras</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="4621-4/00 (Comércio atacadista de café e grãos em exportação)">4621-4/00 (Comércio atacadista de café e grãos em exportação)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">4621-4/00 (Comércio atacadista de café e grãos em exportação)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1011-2/01 (Frigorífico exportador), 4684-2/99 (Químicos para exportação)"><span class="font-bold text-slate-700">Secundários:</span> 1011-2/01 (Frigorífico exportador), 4684-2/99 (Químicos para exportação)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Henrique Toledo</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (31) 9818-1122 / henrique@agroexporttr.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@agroexporttr.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (31) 9818-1122 / henrique@agroexporttr.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -542,9 +717,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>MegaLog Armazenagem e Distribuição Bauru</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 15 anos (2011)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">83.434.847/0001-19</span> • <span>Bauru-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Logística</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="4639-7/01 (Comércio atacadista de produtos em geral)">4639-7/01 (Comércio atacadista de produtos em geral)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">4639-7/01 (Comércio atacadista de produtos em geral)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="4511-1/04 (Atacado de caminhões e pesados), 5211-7/99 (Logística e CD)"><span class="font-bold text-slate-700">Secundários:</span> 4511-1/04 (Atacado de caminhões e pesados), 5211-7/99 (Logística e CD)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Caio Borges</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 9919-1122 / caio@megalogarmaz.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@empresa.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 9919-1122 / caio@megalogarmaz.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -556,9 +737,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Clínica de Especialidades Cardiovasculares Campinas</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 16 anos (2010)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">20.571.930/0001-20</span> • <span>Campinas-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Médicos PJ</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="8630-5/03 (Procedimentos cirúrgicos ambulatoriais)">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="8640-2/08 (Diagnósticos por imagem), 8610-1/01 (Hospital dia)"><span class="font-bold text-slate-700">Secundários:</span> 8640-2/08 (Diagnósticos por imagem), 8610-1/01 (Hospital dia)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Dr. Marcelo Alencar</div><div class="text-[10px] text-slate-500">Sócio-Diretor Clínico</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 91020-1122 / marcelo@clnicadeespe.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@clnicadeespe.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 91020-1122 / marcelo@clnicadeespe.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -570,9 +757,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Indústria de Condimentos e Molhos Saborear Limeira</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 20 anos (2006)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">48.220.363/0001-24</span> • <span>Limeira-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Fábricas &amp; Indústrias</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="1099-6/99 (Fabricação de outros produtos alimentícios)">1099-6/99 (Fabricação de outros produtos alimentícios)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">1099-6/99 (Fabricação de outros produtos alimentícios)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1062-7/00 (Moagem e farinhas), 4639-7/01 (Atacado de alimentos), 4930-2/02 (Transporte rodoviário)"><span class="font-bold text-slate-700">Secundários:</span> 1062-7/00 (Moagem e farinhas), 4639-7/01 (Atacado de alimentos), 4930-2/02 (Transporte rodoviário)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Renato Camargo</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 91424-1122 / renato@indstriadeco.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@indstriadeco.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 91424-1122 / renato@indstriadeco.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -584,9 +777,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Fundição &amp; Usinagem Paulista Sertãozinho</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 21 anos (2005)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">55.357.446/0001-25</span> • <span>Sertãozinho-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Fábricas &amp; Indústrias</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="2833-0/00 (Máquinas e implementos agrícolas)">2833-0/00 (Máquinas e implementos agrícolas)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">2833-0/00 (Máquinas e implementos agrícolas)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="2511-0/00 (Estruturas metálicas), 3321-0/00 (Instalação industrial), 4661-3/00 (Atacado de máquinas)"><span class="font-bold text-slate-700">Secundários:</span> 2511-0/00 (Estruturas metálicas), 3321-0/00 (Instalação industrial), 4661-3/00 (Atacado de máquinas)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Antonio Cereser</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 91525-1122 / antonio@fundiousinag.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@empresa.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 91525-1122 / antonio@fundiousinag.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -598,9 +797,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Sementes Ouro Verde Londrina</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 22 anos (2004)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">62.494.529/0001-26</span> • <span>Londrina-PR</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Agronegócio</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="4622-2/00 (Comércio atacadista de soja e grãos)">4622-2/00 (Comércio atacadista de soja e grãos)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">4622-2/00 (Comércio atacadista de soja e grãos)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="4683-4/00 (Atacado de fertilizantes e defensivos), 5211-7/01 (Silos e armazéns gerais)"><span class="font-bold text-slate-700">Secundários:</span> 4683-4/00 (Atacado de fertilizantes e defensivos), 5211-7/01 (Silos e armazéns gerais)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Cristiano Mendonca</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (41) 9826-1122 / cristiano@sementesouro.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@sementesouro.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (41) 9826-1122 / cristiano@sementesouro.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -612,9 +817,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Brasil Nobre Carnes e Exportação Campo Grande</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 23 anos (2003)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">69.631.612/0001-27</span> • <span>Campo Grande-MS</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Exportadoras</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="4621-4/00 (Comércio atacadista de café e grãos em exportação)">4621-4/00 (Comércio atacadista de café e grãos em exportação)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">4621-4/00 (Comércio atacadista de café e grãos em exportação)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1011-2/01 (Frigorífico exportador), 4684-2/99 (Químicos para exportação)"><span class="font-bold text-slate-700">Secundários:</span> 1011-2/01 (Frigorífico exportador), 4684-2/99 (Químicos para exportação)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Ricardo Alvarenga</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (67) 9927-1122 / ricardo@brasilnobrec.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@brasilnobrec.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (67) 9927-1122 / ricardo@brasilnobrec.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -626,9 +837,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Atacado Central de Suprimentos Campinas</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 24 anos (2002)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">76.768.695/0001-28</span> • <span>Campinas-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Logística</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="4639-7/01 (Comércio atacadista de produtos em geral)">4639-7/01 (Comércio atacadista de produtos em geral)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">4639-7/01 (Comércio atacadista de produtos em geral)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="4511-1/04 (Atacado de caminhões e pesados), 5211-7/99 (Logística e CD)"><span class="font-bold text-slate-700">Secundários:</span> 4511-1/04 (Atacado de caminhões e pesados), 5211-7/99 (Logística e CD)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Henrique Castilho</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 91028-1122 / henrique@atacadocentr.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@empresa.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 91028-1122 / henrique@atacadocentr.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -640,9 +857,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>FemmePrime Medicina Fetal e Ginecológica Sorocaba</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 25 anos (2001)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">83.905.778/0001-29</span> • <span>Sorocaba-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Médicos PJ</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="8630-5/03 (Procedimentos cirúrgicos ambulatoriais)">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="8640-2/08 (Diagnósticos por imagem), 8610-1/01 (Hospital dia)"><span class="font-bold text-slate-700">Secundários:</span> 8640-2/08 (Diagnósticos por imagem), 8610-1/01 (Hospital dia)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Dr. Caio Vasconcellos</div><div class="text-[10px] text-slate-500">Sócio-Diretor Clínico</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 91129-1122 / caio@femmeprimeme.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@femmeprimeme.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 91129-1122 / caio@femmeprimeme.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -654,9 +877,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Moinho Central de Cereais e Farinhas Maringá</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 29 anos (1997)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">41.554.211/0001-33</span> • <span>Maringá-PR</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Fábricas &amp; Indústrias</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="1099-6/99 (Fabricação de outros produtos alimentícios)">1099-6/99 (Fabricação de outros produtos alimentícios)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">1099-6/99 (Fabricação de outros produtos alimentícios)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1062-7/00 (Moagem e farinhas), 4639-7/01 (Atacado de alimentos), 4930-2/02 (Transporte rodoviário)"><span class="font-bold text-slate-700">Secundários:</span> 1062-7/00 (Moagem e farinhas), 4639-7/01 (Atacado de alimentos), 4930-2/02 (Transporte rodoviário)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Paulo Toledo</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (41) 91533-1122 / paulo@moinhocentra.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@moinhocentra.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (41) 91533-1122 / paulo@moinhocentra.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -668,9 +897,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Estruturas Metálicas Vanguarda Contagem</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 30 anos (1996)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">48.691.294/0001-34</span> • <span>Contagem-MG</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Fábricas &amp; Indústrias</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="2833-0/00 (Máquinas e implementos agrícolas)">2833-0/00 (Máquinas e implementos agrícolas)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">2833-0/00 (Máquinas e implementos agrícolas)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="2511-0/00 (Estruturas metálicas), 3321-0/00 (Instalação industrial), 4661-3/00 (Atacado de máquinas)"><span class="font-bold text-slate-700">Secundários:</span> 2511-0/00 (Estruturas metálicas), 3321-0/00 (Instalação industrial), 4661-3/00 (Atacado de máquinas)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Renato Borges</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (31) 9834-1122 / renato@estruturasme.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@empresa.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (31) 9834-1122 / renato@estruturasme.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -682,9 +917,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Cerealista São Bento Grãos Maringá</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 31 anos (1995)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">55.828.377/0001-35</span> • <span>Maringá-PR</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Agronegócio</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="4622-2/00 (Comércio atacadista de soja e grãos)">4622-2/00 (Comércio atacadista de soja e grãos)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">4622-2/00 (Comércio atacadista de soja e grãos)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="4683-4/00 (Atacado de fertilizantes e defensivos), 5211-7/01 (Silos e armazéns gerais)"><span class="font-bold text-slate-700">Secundários:</span> 4683-4/00 (Atacado de fertilizantes e defensivos), 5211-7/01 (Silos e armazéns gerais)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Antonio Alencar</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (41) 9935-1122 / antonio@cerealistaso.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@cerealistaso.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (41) 9935-1122 / antonio@cerealistaso.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -696,9 +937,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>CerealExport Operações Internacionais Itajaí</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 32 anos (1994)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">62.965.460/0001-36</span> • <span>Itajaí-SC</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Exportadoras</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="4621-4/00 (Comércio atacadista de café e grãos em exportação)">4621-4/00 (Comércio atacadista de café e grãos em exportação)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">4621-4/00 (Comércio atacadista de café e grãos em exportação)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1011-2/01 (Frigorífico exportador), 4684-2/99 (Químicos para exportação)"><span class="font-bold text-slate-700">Secundários:</span> 1011-2/01 (Frigorífico exportador), 4684-2/99 (Químicos para exportação)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Cristiano Medeiros</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (48) 91036-1122 / cristiano@cerealexport.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@cerealexport.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (48) 91036-1122 / cristiano@cerealexport.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -710,9 +957,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Transpesados Concessionária e Frotas Bauru</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 33 anos (1993)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">69.203.543/0001-37</span> • <span>Bauru-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Logística</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="4639-7/01 (Comércio atacadista de produtos em geral)">4639-7/01 (Comércio atacadista de produtos em geral)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">4639-7/01 (Comércio atacadista de produtos em geral)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="4511-1/04 (Atacado de caminhões e pesados), 5211-7/99 (Logística e CD)"><span class="font-bold text-slate-700">Secundários:</span> 4511-1/04 (Atacado de caminhões e pesados), 5211-7/99 (Logística e CD)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Ricardo Dornelles</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 91137-1122 / ricardo@transpesados.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@empresa.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 91137-1122 / ricardo@transpesados.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -724,9 +977,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>NeuroCenter Diagnósticos Neurológicos São José dos Campos</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 34 anos (1992)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">76.340.626/0001-38</span> • <span>São José dos Campos-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Médicos PJ</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="8630-5/03 (Procedimentos cirúrgicos ambulatoriais)">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="8640-2/08 (Diagnósticos por imagem), 8610-1/01 (Hospital dia)"><span class="font-bold text-slate-700">Secundários:</span> 8640-2/08 (Diagnósticos por imagem), 8610-1/01 (Hospital dia)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Dr. Henrique Oliveira</div><div class="text-[10px] text-slate-500">Sócio-Diretor Clínico</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 91238-1122 / henrique@neurocenterd.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@neurocenterd.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 91238-1122 / henrique@neurocenterd.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -738,9 +997,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Laticínios Ouro Branco Contagem</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 38 anos (1988)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">34.888.958/0001-42</span> • <span>Contagem-MG</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Fábricas &amp; Indústrias</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="1099-6/99 (Fabricação de outros produtos alimentícios)">1099-6/99 (Fabricação de outros produtos alimentícios)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">1099-6/99 (Fabricação de outros produtos alimentícios)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1062-7/00 (Moagem e farinhas), 4639-7/01 (Atacado de alimentos), 4930-2/02 (Transporte rodoviário)"><span class="font-bold text-slate-700">Secundários:</span> 1062-7/00 (Moagem e farinhas), 4639-7/01 (Atacado de alimentos), 4930-2/02 (Transporte rodoviário)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Bruno Alvarenga</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (31) 9842-1122 / bruno@laticniosour.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@laticniosour.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (31) 9842-1122 / bruno@laticniosour.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -752,9 +1017,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Caldeiraria &amp; Equipamentos Vale Bauru</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 39 anos (1987)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">41.126.142/0001-43</span> • <span>Bauru-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Fábricas &amp; Indústrias</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="2833-0/00 (Máquinas e implementos agrícolas)">2833-0/00 (Máquinas e implementos agrícolas)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">2833-0/00 (Máquinas e implementos agrícolas)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="2511-0/00 (Estruturas metálicas), 3321-0/00 (Instalação industrial), 4661-3/00 (Atacado de máquinas)"><span class="font-bold text-slate-700">Secundários:</span> 2511-0/00 (Estruturas metálicas), 3321-0/00 (Instalação industrial), 4661-3/00 (Atacado de máquinas)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Paulo Castilho</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 9943-1122 / paulo@caldeirariae.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@empresa.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 9943-1122 / paulo@caldeirariae.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -766,9 +1037,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Campo Forte Distribuidora de Insumos Barretos</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 40 anos (1986)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">48.263.225/0001-44</span> • <span>Barretos-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Agronegócio</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="4622-2/00 (Comércio atacadista de soja e grãos)">4622-2/00 (Comércio atacadista de soja e grãos)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">4622-2/00 (Comércio atacadista de soja e grãos)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="4683-4/00 (Atacado de fertilizantes e defensivos), 5211-7/01 (Silos e armazéns gerais)"><span class="font-bold text-slate-700">Secundários:</span> 4683-4/00 (Atacado de fertilizantes e defensivos), 5211-7/01 (Silos e armazéns gerais)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Renato Vasconcellos</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 91044-1122 / renato@campofortedi.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@campofortedi.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 91044-1122 / renato@campofortedi.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -780,9 +1057,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>GlobalTrade Exportação de Alimentos Santos</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 6 anos (2020)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">55.400.308/0001-45</span> • <span>Santos-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Exportadoras</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="4621-4/00 (Comércio atacadista de café e grãos em exportação)">4621-4/00 (Comércio atacadista de café e grãos em exportação)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">4621-4/00 (Comércio atacadista de café e grãos em exportação)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1011-2/01 (Frigorífico exportador), 4684-2/99 (Químicos para exportação)"><span class="font-bold text-slate-700">Secundários:</span> 1011-2/01 (Frigorífico exportador), 4684-2/99 (Químicos para exportação)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Antonio Koster</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 91145-1122 / antonio@globaltradee.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@globaltradee.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 91145-1122 / antonio@globaltradee.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -794,9 +1077,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Comercial e Logística Express Campinas</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 7 anos (2019)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">62.537.391/0001-46</span> • <span>Campinas-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Logística</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="4639-7/01 (Comércio atacadista de produtos em geral)">4639-7/01 (Comércio atacadista de produtos em geral)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">4639-7/01 (Comércio atacadista de produtos em geral)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="4511-1/04 (Atacado de caminhões e pesados), 5211-7/99 (Logística e CD)"><span class="font-bold text-slate-700">Secundários:</span> 4511-1/04 (Atacado de caminhões e pesados), 5211-7/99 (Logística e CD)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Cristiano Fagundes</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 91246-1122 / cristiano@comercialelo.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@empresa.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 91246-1122 / cristiano@comercialelo.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -808,9 +1097,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>ClinGastro Cirurgia e Endoscopia Uberlândia</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 8 anos (2018)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">69.674.474/0001-47</span> • <span>Uberlândia-MG</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Médicos PJ</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="8630-5/03 (Procedimentos cirúrgicos ambulatoriais)">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="8640-2/08 (Diagnósticos por imagem), 8610-1/01 (Hospital dia)"><span class="font-bold text-slate-700">Secundários:</span> 8640-2/08 (Diagnósticos por imagem), 8610-1/01 (Hospital dia)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Dr. Ricardo Antunes</div><div class="text-[10px] text-slate-500">Sócio-Diretor Clínico</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (31) 91347-1122 / ricardo@clingastroci.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@clingastroci.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (31) 91347-1122 / ricardo@clingastroci.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -822,9 +1117,15 @@
                 <td class="py-2.5 px-3">
                   <div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>Massas Tradicionais da Serra Matão</span><span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ 12 anos (2014)</span></div>
                   <div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">27.323.806/0001-51</span> • <span>Matão-SP</span></div>
+                  <div class="flex items-center gap-1 flex-wrap mt-1"><span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ Sociedade Empresária Limitada (LTDA)</span> <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 Lucro Real</span></div>
                 </td>
                 <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">Fábricas &amp; Indústrias</span></td>
-                <td class="py-2.5 px-3 max-w-[200px]"><div class="font-mono text-[10px] text-slate-600 truncate" title="1099-6/99 (Fabricação de outros produtos alimentícios)">1099-6/99 (Fabricação de outros produtos alimentícios)</div></td>
+                <td class="py-2.5 px-3 max-w-[260px]">
+                  <div class="space-y-1">
+                    <div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">1099-6/99 (Fabricação de outros produtos alimentícios)</span></div>
+                    <div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="1062-7/00 (Moagem e farinhas), 4639-7/01 (Atacado de alimentos), 4930-2/02 (Transporte rodoviário)"><span class="font-bold text-slate-700">Secundários:</span> 1062-7/00 (Moagem e farinhas), 4639-7/01 (Atacado de alimentos), 4930-2/02 (Transporte rodoviário)</div>
+                  </div>
+                </td>
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Fernando Medeiros</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 9951-1122 / fernando@massastradic.com.br</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ contato@massastradic.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 9951-1122 / fernando@massastradic.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
@@ -883,7 +1184,7 @@
               <span id="col-count-contato" class="text-[10px] font-mono font-black bg-amber-100 text-amber-900 px-2 py-0.5 rounded border border-amber-400">3</span>
             </div>
             <div id="col-items-contato" class="flex flex-col gap-2 min-h-[300px]">
-              <div class="bg-white rounded-xl p-3 border border-slate-200 shadow-2xs space-y-1.5"><div class="flex items-center justify-between"><span class="text-[10px] font-bold text-slate-500 font-mono">#0</span><span class="text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">Multi-Family Office</span></div><h4 class="text-xs font-black text-slate-900 leading-tight">PRX Capital (Sócios & Executivos)</h4><p class="text-[10px] text-slate-500 font-mono">42.123.456/0001-90 • São Paulo-SP</p><div class="pt-1 border-t border-slate-100 flex items-center justify-between text-[11px]"><span class="font-bold text-slate-800">👤 Renato / Diego / Pardal</span><span class="text-[10px] text-emerald-600 font-mono font-bold">R$ 25M</span></div><div class="bg-slate-50 p-1.5 rounded-lg border border-slate-200 text-[9px] text-slate-700 font-bold">🎯 3 Tentativa(s) • E-mail (Resend API)</div></div>
+              <div class="bg-white rounded-xl p-3 border border-slate-200 shadow-2xs space-y-1.5"><div class="flex items-center justify-between"><span class="text-[10px] font-bold text-slate-500 font-mono">#0</span><span class="text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">Multi-Family Office</span></div><h4 class="text-xs font-black text-slate-900 leading-tight">PRX Capital (Sócios & Executivos)</h4><p class="text-[10px] text-slate-500 font-mono">42.123.456/0001-90 • ⏳ 12 anos • São Paulo-SP</p><div class="pt-1 border-t border-slate-100 flex items-center justify-between text-[11px]"><span class="font-bold text-slate-800">👤 Renato / Diego / Pardal</span><span class="text-[10px] text-emerald-600 font-mono font-bold">R$ 25M</span></div><div class="bg-slate-50 p-1.5 rounded-lg border border-slate-200 text-[9px] text-slate-700 font-bold">🎯 3 Tentativa(s) • E-mail (Resend API)</div></div>
             </div>
           </div>
           <div class="kanban-col bg-purple-50/70 rounded-xl border border-purple-200 p-2.5 flex flex-col gap-2">
@@ -1852,6 +2153,28 @@
     var currentPage = 1;
     var itemsPerPage = 50;
 
+    function getTipoSocietario(company, cnae) {
+      var upper = (company || '').toUpperCase();
+      if (upper.indexOf(' S/A') !== -1 || upper.indexOf(' S.A.') !== -1 || upper.indexOf(' S.A') !== -1 || upper.slice(-3) === ' SA' || upper.indexOf(' SOCIEDADE ANONIMA') !== -1 || upper.indexOf(' COMPANHIA') !== -1 || upper.indexOf('CIA ') === 0) {
+        if (upper.indexOf('ABERTA') !== -1 || upper.indexOf('B3') !== -1 || upper.indexOf('BM&F') !== -1 || upper.indexOf('PARTICIPACOES S/A') !== -1) return 'Sociedade Anônima (S/A Aberta)';
+        return 'Sociedade Anônima (S/A Fechada)';
+      }
+      if (upper.indexOf('COOPERATIVA') !== -1 || upper.indexOf('COOP ') !== -1 || upper.indexOf('COOP') === 0) return 'Sociedade Cooperativa';
+      if (upper.indexOf('EIRELI') !== -1) return 'EIRELI / Sociedade Unipessoal';
+      if (upper.indexOf('S/S') !== -1 || upper.indexOf('SOCIEDADE SIMPLES') !== -1) return 'Sociedade Simples (S/S)';
+      return 'Sociedade Empresária Limitada (LTDA)';
+    }
+
+    function getRegimeTributario(company, tipoSocietario, segmento, id) {
+      if (tipoSocietario.indexOf('Sociedade Anônima') !== -1 || tipoSocietario.indexOf('Cooperativa') !== -1) return 'Lucro Real';
+      if (segmento === 'Fábricas & Indústrias' || segmento === 'Exportadoras' || segmento === 'Energia & Concessões' || segmento === 'Logística' || segmento === 'Saúde & Hospitais' || segmento === 'Agronegócio') return 'Lucro Real';
+      if (segmento === 'Jurídico' || segmento === 'Contabilidade') {
+        if (id % 3 === 0) return 'Lucro Real';
+        return 'Lucro Presumido';
+      }
+      return 'Lucro Real';
+    }
+
     function isMobilePhone(phoneStr) {
       if (!phoneStr || phoneStr.indexOf('Sem Telefone') !== -1 || phoneStr.indexOf('Não informado') !== -1) return false;
       var digits = phoneStr.replace(/\D/g, '').replace(/^55/, '');
@@ -1870,7 +2193,7 @@
 
     function getDefaultCrmDeals() {
       return [
-        { id: 'deal_prx_1', prospectId: 0, company: 'PRX Capital (Sócios & Executivos)', cnpj: '42.123.456/0001-90', uf: 'SP', city: 'São Paulo', segmentoNome: 'Multi-Family Office', decisorNome: 'Renato / Diego / Pardal', decisorCargo: 'Sócios Diretores', fone: '(11) 99999-9999', email: 'renato@prxcapital.com.br / diego@prxcapital.com.br / pardal@prxcapital.com.br', stage: 'contato', patrimonio: 25000000, scoreBdr: 100, tentativasTotal: 3, lastChannel: 'E-mail (Resend API)', lastTargetType: 'Sócio / Decisor', lastContactAt: '12/09/2026, 18:25:00', historyLogs: [{ date: '12/09/2026, 18:25:00', canal: 'E-mail', alvoTipo: 'Sócio / Decisor', recipientName: 'Pardal', recipientContact: 'pardal@prxcapital.com.br', status: 'Disparo Resend API', textNote: 'Disparo via Resend API entregue.' }, { date: '12/09/2026, 18:24:30', canal: 'E-mail', alvoTipo: 'Sócio / Decisor', recipientName: 'Diego', recipientContact: 'diego@prxcapital.com.br', status: 'Disparo Resend API', textNote: 'Disparo via Resend API entregue.' }, { date: '12/09/2026, 18:24:00', canal: 'E-mail', alvoTipo: 'Sócio / Decisor', recipientName: 'Renato', recipientContact: 'renato@prxcapital.com.br', status: 'Disparo Resend API', textNote: 'Disparo via Resend API entregue.' }] }
+        { id: 'deal_prx_1', prospectId: 0, company: 'PRX Capital (Sócios & Executivos)', cnpj: '42.123.456/0001-90', idade: '12 anos', uf: 'SP', city: 'São Paulo', segmentoNome: 'Multi-Family Office', decisorNome: 'Renato / Diego / Pardal', decisorCargo: 'Sócios Diretores', fone: '(11) 99999-9999', email: 'renato@prxcapital.com.br / diego@prxcapital.com.br / pardal@prxcapital.com.br', stage: 'contato', patrimonio: 25000000, scoreBdr: 100, tentativasTotal: 3, lastChannel: 'E-mail (Resend API)', lastTargetType: 'Sócio / Decisor', lastContactAt: '12/09/2026, 18:25:00', historyLogs: [{ date: '12/09/2026, 18:25:00', canal: 'E-mail', alvoTipo: 'Sócio / Decisor', recipientName: 'Pardal', recipientContact: 'pardal@prxcapital.com.br', status: 'Disparo Resend API', textNote: 'Disparo via Resend API entregue.' }, { date: '12/09/2026, 18:24:30', canal: 'E-mail', alvoTipo: 'Sócio / Decisor', recipientName: 'Diego', recipientContact: 'diego@prxcapital.com.br', status: 'Disparo Resend API', textNote: 'Disparo via Resend API entregue.' }, { date: '12/09/2026, 18:24:00', canal: 'E-mail', alvoTipo: 'Sócio / Decisor', recipientName: 'Renato', recipientContact: 'renato@prxcapital.com.br', status: 'Disparo Resend API', textNote: 'Disparo via Resend API entregue.' }] }
       ];
     }
 
@@ -1925,11 +2248,17 @@
         }
         if (!q) return true;
         var d1 = (p.decisores && p.decisores[0]) ? p.decisores[0].nome.toLowerCase() : '';
+        var tipo = p.tipoSocietario ? p.tipoSocietario.toLowerCase() : getTipoSocietario(p.company, p.cnaePrincipal).toLowerCase();
+        var reg = p.regimeTributario ? p.regimeTributario.toLowerCase() : getRegimeTributario(p.company, tipo, p.segmentoNome, p.id).toLowerCase();
+        var sec = (p.cnaeSecundarios || '').toLowerCase();
         return (p.company && p.company.toLowerCase().indexOf(q) !== -1) ||
                (p.cnpj && p.cnpj.indexOf(q) !== -1) ||
                (p.city && p.city.toLowerCase().indexOf(q) !== -1) ||
                (p.segmentoNome && p.segmentoNome.toLowerCase().indexOf(q) !== -1) ||
                (p.cnaePrincipal && p.cnaePrincipal.toLowerCase().indexOf(q) !== -1) ||
+               (sec.indexOf(q) !== -1) ||
+               (tipo.indexOf(q) !== -1) ||
+               (reg.indexOf(q) !== -1) ||
                d1.indexOf(q) !== -1;
       });
       currentPage = 1;
@@ -1973,7 +2302,13 @@
 
           var socioContatoHtml = socioMobile ? '<div class="font-mono text-emerald-700 font-bold text-[11px]">📱 ' + socioMobile + '</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span>' : '<div class="text-[10px] text-slate-500">🏢 Fixo da Empresa</div>';
 
+          var tipo = p.tipoSocietario || getTipoSocietario(p.company, p.cnaePrincipal);
+          var regime = p.regimeTributario || getRegimeTributario(p.company, tipo, p.segmentoNome, p.id);
           var idadeBadge = p.idade ? '<span class="px-1.5 py-0.5 rounded text-[9px] font-black bg-blue-50 text-blue-800 border border-blue-200">⏳ ' + p.idade + '</span>' : '';
+          var tipoBadge = '<span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200" title="Tipo Societário Oficial">🏛️ ' + tipo + '</span>';
+          var regimeBadge = '<span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300" title="Regime Tributário Federal">📑 ' + regime + '</span>';
+
+          var cnaeSecHtml = p.cnaeSecundarios ? '<div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="' + p.cnaeSecundarios + '"><span class="font-bold text-slate-700">Secundários:</span> ' + p.cnaeSecundarios + '</div>' : '';
 
           html += '<tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">' +
                     '<td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">' + p.id + '</td>' +
@@ -1981,12 +2316,16 @@
                     '<td class="py-2.5 px-3">' +
                       '<div class="font-extrabold text-slate-900 text-xs flex items-center gap-1.5 flex-wrap"><span>' + p.company + '</span>' + idadeBadge + '</div>' +
                       '<div class="text-slate-500 font-mono text-[10px] mt-0.5"><span class="font-bold text-slate-700">' + p.cnpj + '</span> • <span>' + p.city + '-' + p.uf + '</span></div>' +
+                      '<div class="flex items-center gap-1 flex-wrap mt-1">' + tipoBadge + ' ' + regimeBadge + '</div>' +
                     '</td>' +
                     '<td class="py-2.5 px-3">' +
                       '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 border border-slate-300 text-slate-800">' + p.segmentoNome + '</span>' +
                     '</td>' +
-                    '<td class="py-2.5 px-3 max-w-[200px]">' +
-                      '<div class="font-mono text-[10px] text-slate-600 truncate" title="' + (p.cnaePrincipal || '') + '">' + (p.cnaePrincipal || '') + '</div>' +
+                    '<td class="py-2.5 px-3 max-w-[260px]">' +
+                      '<div class="space-y-1">' +
+                        '<div class="font-extrabold text-slate-900 text-[11px] leading-tight"><span class="px-1.5 py-0.5 bg-slate-900 text-white rounded text-[9px] font-mono font-bold mr-1">CNAE</span><span class="text-slate-800 font-mono font-bold text-[10px]">' + (p.cnaePrincipal || '') + '</span></div>' +
+                        cnaeSecHtml +
+                      '</div>' +
                     '</td>' +
                     '<td class="py-2.5 px-3">' +
                       '<div class="font-bold text-slate-900">' + d1.nome + '</div>' +
@@ -2027,7 +2366,7 @@
       for (var i = 0; i < prospects.length; i++) { if (prospects[i].id === id) { p = prospects[i]; break; } }
       if (!p) return;
       var deals = getCrmDeals();
-      deals.unshift({ id: 'deal_' + Date.now(), prospectId: p.id, company: p.company, cnpj: p.cnpj, idade: p.idade, uf: p.uf, city: p.city, segmentoNome: p.segmentoNome, decisorNome: (p.decisores && p.decisores[0]) ? p.decisores[0].nome : 'Sócio', stage: 'prospeccao', patrimonio: 15000000, tentativasTotal: 0 });
+      deals.unshift({ id: 'deal_' + Date.now(), prospectId: p.id, company: p.company, cnpj: p.cnpj, idade: p.idade, tipoSocietario: p.tipoSocietario || getTipoSocietario(p.company, p.cnaePrincipal), regimeTributario: p.regimeTributario || getRegimeTributario(p.company, '', p.segmentoNome, p.id), uf: p.uf, city: p.city, segmentoNome: p.segmentoNome, decisorNome: (p.decisores && p.decisores[0]) ? p.decisores[0].nome : 'Sócio', stage: 'prospeccao', patrimonio: 15000000, tentativasTotal: 0 });
       saveCrmDeals(deals);
       updateDynamicCounts();
       renderTable();
@@ -2062,6 +2401,7 @@
           for (var k = 0; k < stDeals.length; k++) {
             var d = stDeals[k];
             var idadeTxt = d.idade ? ' • ⏳ ' + d.idade : '';
+            var tipoTxt = d.tipoSocietario ? ' • 🏛️ ' + d.tipoSocietario : '';
             cardHtml += '<div class="bg-white rounded-xl p-3 border border-slate-200 shadow-2xs space-y-1.5">' +
                           '<div class="flex items-center justify-between">' +
                             '<span class="text-[10px] font-bold text-slate-500 font-mono">#' + (d.prospectId || '') + '</span>' +
@@ -2084,13 +2424,15 @@
     }
 
     function exportCurrentCsv() {
-      var csv = '\uFEFFID,Empresa,CNPJ,Idade,UF,Cidade,Segmento,Cor_Segmento,Fonte_Dados,Setor,Tem_Site,Site,Descricao,CNAE_Principal,CNAE_Secundarios,Decisor_1_Nome,Decisor_1_Cargo,Decisor_1_LinkedIn,Decisor_1_Contato,Decisor_2_Nome,Decisor_2_Cargo,Decisor_2_LinkedIn,Decisor_2_Contato,Score_PRX\n';
+      var csv = '\uFEFFID,Empresa,CNPJ,Idade,Tipo_Societario,Regime_Tributario,UF,Cidade,Segmento,Cor_Segmento,Fonte_Dados,Setor,Tem_Site,Site,Descricao,CNAE_Principal,CNAE_Secundarios,Decisor_1_Nome,Decisor_1_Cargo,Decisor_1_LinkedIn,Decisor_1_Contato,Decisor_2_Nome,Decisor_2_Cargo,Decisor_2_LinkedIn,Decisor_2_Contato,Score_PRX\n';
       for (var i = 0; i < filteredDataList.length; i++) {
         var p = filteredDataList[i];
         var d1 = (p.decisores && p.decisores.length > 0) ? p.decisores[0] : { nome: '', cargo: '', linkedin: '', contato: '' };
         var d2 = (p.decisores && p.decisores.length > 1) ? p.decisores[1] : { nome: '', cargo: '', linkedin: '', contato: '' };
         var clean = function(str) { return '"' + (str || '').toString().replace(/"/g, '""') + '"'; };
-        csv += [p.id, clean(p.company), clean(p.cnpj), clean(p.idade), clean(p.uf), clean(p.city), clean(p.segmentoNome), clean(p.corSegmento), clean(p.fonteDados), clean(p.setor), p.hasSite ? 'SIM' : 'NAO', clean(p.site), clean(p.desc), clean(p.cnaePrincipal), clean(p.cnaeSecundarios), clean(d1.nome), clean(d1.cargo), clean(d1.linkedin), clean(d1.contato || p.contatoPessoal || p.fone), clean(d2.nome), clean(d2.cargo), clean(d2.linkedin), clean(d2.contato), p.scorePrx || 85].join(',') + '\n';
+        var tipo = p.tipoSocietario || getTipoSocietario(p.company, p.cnaePrincipal);
+        var reg = p.regimeTributario || getRegimeTributario(p.company, tipo, p.segmentoNome, p.id);
+        csv += [p.id, clean(p.company), clean(p.cnpj), clean(p.idade), clean(tipo), clean(reg), clean(p.uf), clean(p.city), clean(p.segmentoNome), clean(p.corSegmento), clean(p.fonteDados), clean(p.setor), p.hasSite ? 'SIM' : 'NAO', clean(p.site), clean(p.desc), clean(p.cnaePrincipal), clean(p.cnaeSecundarios), clean(d1.nome), clean(d1.cargo), clean(d1.linkedin), clean(d1.contato || p.contatoPessoal || p.fone), clean(d2.nome), clean(d2.cargo), clean(d2.linkedin), clean(d2.contato), p.scorePrx || 85].join(',') + '\n';
       }
       var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       var url = URL.createObjectURL(blob);
@@ -2100,15 +2442,15 @@
       document.body.appendChild(a);
       a.click();
       a.remove();
-      showToast('Base CSV (24 Colunas) exportada com sucesso!');
+      showToast('Base CSV (26 Colunas Enriquecidas) exportada com sucesso!');
     }
 
     function exportCrmCsv() {
       var deals = getCrmDeals();
-      var csv = '\uFEFFID;Empresa;CNPJ;UF;Cidade;Segmento;Decisor;Etapa;Patrimonio\n';
+      var csv = '\uFEFFID;Empresa;CNPJ;Idade;Tipo_Societario;Regime;UF;Cidade;Segmento;Decisor;Etapa;Patrimonio\n';
       for (var i = 0; i < deals.length; i++) {
         var d = deals[i];
-        csv += '"' + d.id + '";"' + d.company + '";"' + d.cnpj + '";"' + d.uf + '";"' + d.city + '";"' + d.segmentoNome + '";"' + d.decisorNome + '";"' + d.stage + '";"' + d.patrimonio + '"\n';
+        csv += '"' + d.id + '";"' + d.company + '";"' + d.cnpj + '";"' + (d.idade || '') + '";"' + (d.tipoSocietario || '') + '";"' + (d.regimeTributario || '') + '";"' + d.uf + '";"' + d.city + '";"' + d.segmentoNome + '";"' + d.decisorNome + '";"' + d.stage + '";"' + d.patrimonio + '"\n';
       }
       var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       var url = URL.createObjectURL(blob);
