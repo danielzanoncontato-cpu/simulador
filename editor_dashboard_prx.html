@@ -31,17 +31,22 @@
         </div>
       </div>
 
-      <!-- NAVEGAÇÃO DE ABAS INTERNAS -->
-      <div class="flex flex-wrap gap-1.5 bg-[var(--background)] p-1 rounded-xl border border-[var(--border)]">
-        <button onclick="switchTab('leads')" id="tabBtnLeads" class="px-3 py-1.5 rounded-lg font-bold text-[11px] bg-[var(--card)] text-[var(--foreground)] shadow-sm border border-[var(--border)] transition">
-          📋 Base de Leads
+      <!-- NAVEGAÇÃO DE ABAS INTERNAS & CONFIGURAR -->
+      <div class="flex flex-wrap items-center gap-2">
+        <button onclick="openIntegrationsModal()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-[11px] rounded-xl transition shadow-xs flex items-center gap-1 cursor-pointer">
+          <i class="fa-solid fa-bolt"></i> ⚙️ Conectar WhatsApp & E-mail
         </button>
-        <button onclick="switchTab('add')" id="tabBtnAdd" class="px-3 py-1.5 rounded-lg font-bold text-[11px] text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition">
-          ➕ Novo Lead
-        </button>
-        <button onclick="switchTab('pitches')" id="tabBtnPitches" class="px-3 py-1.5 rounded-lg font-bold text-[11px] text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition">
-          💬 Disparos & Pitch
-        </button>
+        <div class="flex flex-wrap gap-1.5 bg-[var(--background)] p-1 rounded-xl border border-[var(--border)]">
+          <button onclick="switchTab('leads')" id="tabBtnLeads" class="px-3 py-1.5 rounded-lg font-bold text-[11px] bg-[var(--card)] text-[var(--foreground)] shadow-sm border border-[var(--border)] transition">
+            📋 Base de Leads
+          </button>
+          <button onclick="switchTab('add')" id="tabBtnAdd" class="px-3 py-1.5 rounded-lg font-bold text-[11px] text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition">
+            ➕ Novo Lead
+          </button>
+          <button onclick="switchTab('pitches')" id="tabBtnPitches" class="px-3 py-1.5 rounded-lg font-bold text-[11px] text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition">
+            💬 Disparos & Pitch
+          </button>
+        </div>
       </div>
     </div>
 
@@ -147,7 +152,7 @@
     <!-- ABA 3: PITCHES & SCRIPTS -->
     <div id="tabContentPitches" class="space-y-3 hidden">
       <div class="p-4 bg-[var(--background)]/50 rounded-xl border border-[var(--border)] space-y-3">
-        <h3 class="font-extrabold text-sm text-[var(--foreground)]">Pitch de Abordagem Consultiva (Daniel Zanon | PRX Capital)</h3>
+        <h3 class="font-extrabold text-sm text-[var(--foreground)]">Pitch de Abordagem Consultiva (PRX Capital)</h3>
         <p class="text-[11px] text-[var(--muted-foreground)]">Scripts personalizados para WhatsApp, E-mail e LinkedIn de alto padrão para executivos e multi-family office.</p>
         <div class="space-y-2">
           <div class="p-3 bg-[var(--card)] rounded-xl border border-[var(--border)] space-y-1.5">
@@ -158,6 +163,73 @@
       </div>
     </div>
 
+  </div>
+
+  <!-- MODAL DE CONFIGURAÇÕES DE INTEGRAÇÃO (WHATSAPP & EMAIL NO EDITOR) -->
+  <div id="integrationsModal" style="display: none;" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 items-center justify-center p-4">
+    <div class="bg-white text-slate-900 border border-slate-200 rounded-3xl shadow-2xl max-w-2xl w-full overflow-hidden">
+      <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-sm">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <h3 class="text-sm font-extrabold">Central de Conexão: WhatsApp, E-mail & Seus Dados</h3>
+        </div>
+        <button onclick="closeIntegrationsModal()" class="text-slate-400 hover:text-white text-lg font-bold p-1 rounded-lg hover:bg-slate-800 transition cursor-pointer">✕</button>
+      </div>
+      <div class="p-6 space-y-4 max-h-[80vh] overflow-y-auto">
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-3">
+          <h4 class="text-xs font-extrabold text-slate-900">1. Seus Dados de Remetente (Assinatura Oficial)</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="text-[11px] font-bold text-slate-700">Seu Nome Completo:</label>
+              <input type="text" id="userExecName" class="w-full mt-1 bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800" value="Daniel Zanon">
+            </div>
+            <div>
+              <label class="text-[11px] font-bold text-slate-700">Seu Cargo / Título:</label>
+              <input type="text" id="userExecRole" class="w-full mt-1 bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800" value="Executivo">
+            </div>
+            <div>
+              <label class="text-[11px] font-bold text-slate-700">Seu E-mail Profissional:</label>
+              <input type="email" id="userExecEmail" class="w-full mt-1 bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800" value="daniel@prxcapital.com.br">
+            </div>
+            <div>
+              <label class="text-[11px] font-bold text-slate-700">Seu WhatsApp / Celular:</label>
+              <input type="text" id="userExecPhone" class="w-full mt-1 bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800" value="(11) 98000-0000">
+            </div>
+          </div>
+        </div>
+        <div class="bg-emerald-50/60 border border-emerald-200 rounded-2xl p-4 space-y-2">
+          <h4 class="text-xs font-extrabold text-emerald-950">2. Modo de Abertura do WhatsApp</h4>
+          <div class="grid grid-cols-2 gap-2">
+            <label class="flex items-center gap-2 bg-white p-2 rounded-xl border border-emerald-200 text-xs font-bold cursor-pointer">
+              <input type="radio" name="wppMode" value="web" id="wppModeWeb" checked> WhatsApp Web/PC
+            </label>
+            <label class="flex items-center gap-2 bg-white p-2 rounded-xl border border-emerald-200 text-xs font-bold cursor-pointer">
+              <input type="radio" name="wppMode" value="app" id="wppModeApp"> WhatsApp App Celular
+            </label>
+          </div>
+        </div>
+        <div class="bg-sky-50/60 border border-sky-200 rounded-2xl p-4 space-y-2">
+          <h4 class="text-xs font-extrabold text-sky-950">3. Provedor Padrão de E-mail</h4>
+          <div class="grid grid-cols-3 gap-2">
+            <label class="flex items-center gap-2 bg-white p-2 rounded-xl border border-sky-200 text-xs font-bold cursor-pointer">
+              <input type="radio" name="emailProvider" value="gmail" id="providerGmail" checked> Gmail Web
+            </label>
+            <label class="flex items-center gap-2 bg-white p-2 rounded-xl border border-sky-200 text-xs font-bold cursor-pointer">
+              <input type="radio" name="emailProvider" value="outlook" id="providerOutlook"> Outlook Web
+            </label>
+            <label class="flex items-center gap-2 bg-white p-2 rounded-xl border border-sky-200 text-xs font-bold cursor-pointer">
+              <input type="radio" name="emailProvider" value="mailto" id="providerMailto"> App Celular
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="px-6 py-4 bg-slate-100 border-t border-slate-200 flex items-center justify-end gap-2">
+        <button onclick="closeIntegrationsModal()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold rounded-xl">Fechar</button>
+        <button onclick="saveIntegrationPreferences()" class="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-extrabold rounded-xl">💾 Salvar Meus Dados & Conectar</button>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -1065,6 +1137,61 @@
 ]
 ;
 
+    function getIntegrationSettings() {
+      try {
+        const saved = localStorage.getItem('prx_integration_settings');
+        if (saved) return JSON.parse(saved);
+      } catch(e) {}
+      return {
+        execName: 'Daniel Zanon',
+        execRole: 'Executivo',
+        execEmail: 'daniel@prxcapital.com.br',
+        execPhone: '(11) 98000-0000',
+        wppMode: 'web',
+        emailProvider: 'gmail'
+      };
+    }
+
+    function openIntegrationsModal() {
+      const modal = document.getElementById('integrationsModal');
+      if (!modal) return;
+      const cfg = getIntegrationSettings();
+      if (document.getElementById('userExecName')) document.getElementById('userExecName').value = cfg.execName || 'Daniel Zanon';
+      if (document.getElementById('userExecRole')) document.getElementById('userExecRole').value = cfg.execRole || 'Executivo';
+      if (document.getElementById('userExecEmail')) document.getElementById('userExecEmail').value = cfg.execEmail || 'daniel@prxcapital.com.br';
+      if (document.getElementById('userExecPhone')) document.getElementById('userExecPhone').value = cfg.execPhone || '(11) 98000-0000';
+      if (document.getElementById('wppModeWeb')) document.getElementById('wppModeWeb').checked = (cfg.wppMode === 'web');
+      if (document.getElementById('wppModeApp')) document.getElementById('wppModeApp').checked = (cfg.wppMode === 'app');
+      if (document.getElementById('providerGmail')) document.getElementById('providerGmail').checked = (cfg.emailProvider === 'gmail');
+      if (document.getElementById('providerOutlook')) document.getElementById('providerOutlook').checked = (cfg.emailProvider === 'outlook');
+      if (document.getElementById('providerMailto')) document.getElementById('providerMailto').checked = (cfg.emailProvider === 'mailto');
+      modal.classList.remove('hidden');
+      modal.style.display = 'flex';
+    }
+
+    function closeIntegrationsModal() {
+      const modal = document.getElementById('integrationsModal');
+      if (!modal) return;
+      modal.classList.add('hidden');
+      modal.style.display = 'none';
+    }
+
+    function saveIntegrationPreferences() {
+      const execName = document.getElementById('userExecName')?.value.trim() || 'Daniel Zanon';
+      const execRole = document.getElementById('userExecRole')?.value.trim() || 'Executivo';
+      const execEmail = document.getElementById('userExecEmail')?.value.trim() || 'daniel@prxcapital.com.br';
+      const execPhone = document.getElementById('userExecPhone')?.value.trim() || '(11) 98000-0000';
+      const wppMode = document.querySelector('input[name="wppMode"]:checked')?.value || 'web';
+      const emailProvider = document.querySelector('input[name="emailProvider"]:checked')?.value || 'gmail';
+      const cfg = { execName, execRole, execEmail, execPhone, wppMode, emailProvider };
+      localStorage.setItem('prx_integration_settings', JSON.stringify(cfg));
+      closeIntegrationsModal();
+      const toast = document.getElementById('inlineToast');
+      document.getElementById('inlineToastMsg').innerText = '✅ Dados executivos e preferências salvos com sucesso!';
+      toast.classList.remove('hidden');
+      setTimeout(() => { toast.classList.add('hidden'); }, 3500);
+    }
+
     function updateDynamicCounts() {
       const total = prospects.length;
       const headerTotal = document.getElementById('headerTotalCount');
@@ -1158,19 +1285,27 @@
     function dispatchFast(id, type) {
       const p = prospects.find(x => x.id === id);
       if (!p) return;
+      const cfg = getIntegrationSettings();
+      const myName = cfg.execName || 'Daniel Zanon';
       const d1Nome = (p.decisores && p.decisores[0]) ? p.decisores[0].nome : 'Sócio / Diretor';
       const phone = (p.contatoPessoal || p.fone || '').replace(/\D/g, '');
       const email = p.email ? p.email.split('/')[0].trim() : '';
 
-      const msgWpp = `Olá, ${d1Nome}! Tudo bem?\n\nAqui é o Daniel Zanon, executivo da PRX Capital (prxcapital.com.br).\n\nLocalizei seu contato ao acompanhar a relevante atuação da ${p.company} em ${p.city}-${p.uf}.\n\nA PRX atua como multi-family office e boutique financeira, assessorando empresários na estruturação tributária/sucessória, investimentos, crédito e proteção patrimonial.\n\nTeria disponibilidade para um breve alinhamento de 15 minutos nesta semana?\n\nUm abraço,\nDaniel Zanon | PRX Capital`;
+      const msgWpp = `Olá, ${d1Nome}! Tudo bem?\n\nAqui é o ${myName}, executivo da PRX Capital (prxcapital.com.br).\n\nLocalizei seu contato ao acompanhar a relevante atuação da ${p.company} em ${p.city}-${p.uf}.\n\nA PRX atua como multi-family office e boutique financeira, assessorando empresários na estruturação tributária/sucessória, investimentos, crédito e proteção patrimonial.\n\nTeria disponibilidade para um breve alinhamento de 15 minutos nesta semana?\n\nUm abraço,\n${myName} | PRX Capital`;
       const emailSubj = `Alinhamento estratégico & multi-family office | A/C ${d1Nome} (${p.company})`;
-      const emailBody = `Prezado(a) ${d1Nome},\n\nMeu nome é Daniel Zanon, sou executivo da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira especializada no atendimento a empresários e famílias com patrimônio imobiliário, empresas e liquidez financeira.\n\nGostaria de propor um breve alinhamento de 15 minutos nesta semana.\n\nAtenciosamente,\nDaniel Zanon | PRX Capital`;
+      const emailBody = `Prezado(a) ${d1Nome},\n\nMeu nome é ${myName}, sou executivo da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira especializada no atendimento a empresários e famílias com patrimônio imobiliário, empresas e liquidez financeira.\n\nGostaria de propor um breve alinhamento de 15 minutos nesta semana.\n\nAtenciosamente,\n${myName}\nExecutivo | PRX Capital\nprxcapital.com.br`;
 
       if (type === 'wpp') {
-        const url = phone ? `https://api.whatsapp.com/send?phone=55${phone.replace(/^55/,'')}&text=${encodeURIComponent(msgWpp)}` : `https://api.whatsapp.com/send?text=${encodeURIComponent(msgWpp)}`;
+        const phoneParam = phone ? `55${phone.replace(/^55/,'')}` : '';
+        const url = (cfg.wppMode === 'app') ? (phoneParam ? `whatsapp://send?phone=${phoneParam}&text=${encodeURIComponent(msgWpp)}` : `whatsapp://send?text=${encodeURIComponent(msgWpp)}`) : (phoneParam ? `https://api.whatsapp.com/send?phone=${phoneParam}&text=${encodeURIComponent(msgWpp)}` : `https://api.whatsapp.com/send?text=${encodeURIComponent(msgWpp)}`);
         window.open(url, '_blank');
       } else {
-        const url = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent(emailSubj)}&body=${encodeURIComponent(emailBody)}`;
+        let url = `mailto:${email}?subject=${encodeURIComponent(emailSubj)}&body=${encodeURIComponent(emailBody)}`;
+        if (cfg.emailProvider === 'gmail') {
+          url = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodeURIComponent(emailSubj)}&body=${encodeURIComponent(emailBody)}`;
+        } else if (cfg.emailProvider === 'outlook') {
+          url = `https://outlook.office.com/mail/deeplink/compose?to=${encodeURIComponent(email)}&subject=${encodeURIComponent(emailSubj)}&body=${encodeURIComponent(emailBody)}`;
+        }
         window.open(url, '_blank');
       }
 
