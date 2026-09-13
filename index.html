@@ -2360,6 +2360,29 @@
     var currentPage = 1;
     var itemsPerPage = 50;
 
+    var _memStorage = {};
+    function safeGetStorage(key) {
+      try {
+        if (typeof window !== 'undefined' && 'localStorage' in window && window.localStorage !== null) {
+          var val = window.localStorage.getItem(key);
+          if (val !== null) return val;
+        }
+      } catch (e) {
+        console.warn('LocalStorage read blocked, falling back to memory:', e);
+      }
+      return _memStorage[key] || null;
+    }
+    function safeSetStorage(key, val) {
+      try {
+        if (typeof window !== 'undefined' && 'localStorage' in window && window.localStorage !== null) {
+          window.localStorage.setItem(key, val);
+        }
+      } catch (e) {
+        console.warn('LocalStorage write blocked, falling back to memory:', e);
+      }
+      _memStorage[key] = val;
+    }
+
     var TEMPLATES = {
       mfo_geral: {
         subject: 'Alinhamento estratégico & multi-family office | Daniel Zanon (PRX Capital)',
@@ -2394,18 +2417,24 @@
     };
 
     function loadSelectedTemplate() {
-      var sel = document.getElementById('testTemplateSelect').value;
-      var t = TEMPLATES[sel] || TEMPLATES.mfo_geral;
-      var targetName = document.getElementById('testTargetName').value || 'Daniel';
-      var targetComp = document.getElementById('testTargetCompany').value || 'PRX Capital';
+      try {
+        var selEl = document.getElementById('testTemplateSelect');
+        var sel = selEl ? selEl.value : 'mfo_geral';
+        var t = TEMPLATES[sel] || TEMPLATES.mfo_geral;
+        var nameEl = document.getElementById('testTargetName');
+        var compEl = document.getElementById('testTargetCompany');
+        var targetName = nameEl ? (nameEl.value || 'Daniel') : 'Daniel';
+        var targetComp = compEl ? (compEl.value || 'PRX Capital') : 'PRX Capital';
 
-      var wppText = t.wpp.replace(/{NOME}/g, targetName).replace(/{EMPRESA}/g, targetComp);
-      var emailText = t.email.replace(/{NOME}/g, targetName).replace(/{EMPRESA}/g, targetComp);
+        var wppText = t.wpp.replace(/{NOME}/g, targetName).replace(/{EMPRESA}/g, targetComp);
+        var emailText = t.email.replace(/{NOME}/g, targetName).replace(/{EMPRESA}/g, targetComp);
 
-      document.getElementById('testWppMessage').value = wppText;
-      document.getElementById('testEmailSubject').value = t.subject;
-      document.getElementById('testEmailBody').value = emailText;
-      showToast('📄 Minuta ' + sel.toUpperCase() + ' carregada no editor!');
+        var wppArea = document.getElementById('testWppMessage'); if (wppArea) wppArea.value = wppText;
+        var emailSubj = document.getElementById('testEmailSubject'); if (emailSubj) emailSubj.value = t.subject;
+        var emailBody = document.getElementById('testEmailBody'); if (emailBody) emailBody.value = emailText;
+      } catch(e) {
+        console.warn('Erro ao carregar template:', e);
+      }
     }
 
     function copyEditorText(elementId) {
@@ -2416,15 +2445,15 @@
     }
 
     function copyEditorEmailFull() {
-      var subj = document.getElementById('testEmailSubject').value;
-      var body = document.getElementById('testEmailBody').value;
+      var subj = document.getElementById('testEmailSubject') ? document.getElementById('testEmailSubject').value : '';
+      var body = document.getElementById('testEmailBody') ? document.getElementById('testEmailBody').value : '';
       var full = 'Assunto: ' + subj + '\\n\\n' + body;
       try { navigator.clipboard.writeText(full); } catch(e) {}
       showToast('📋 Assunto e E-mail copiados com sucesso!');
     }
 
     function openWhatsAppDirect(phoneStr, text) {
-      var digits = (phoneStr || '').replace(/\D/g, '');
+      var digits = (phoneStr || '').replace(/\\D/g, '');
       if (digits.indexOf('55') === 0 && digits.length >= 12) {
         // ja contem 55
       } else if (digits.length >= 10) {
@@ -2445,7 +2474,7 @@
 
     function openEmailDirect(emailStr, subjectStr, bodyStr) {
       var mailUri = 'mailto:' + encodeURIComponent(emailStr) + '?subject=' + encodeURIComponent(subjectStr) + '&body=' + encodeURIComponent(bodyStr);
-      try { navigator.clipboard.writeText('Assunto: ' + subjectStr + '\n\n' + bodyStr); } catch(e) {}
+      try { navigator.clipboard.writeText('Assunto: ' + subjectStr + '\\n\\n' + bodyStr); } catch(e) {}
       var a = document.createElement('a');
       a.href = mailUri;
       a.target = '_self';
@@ -2466,94 +2495,94 @@
     }
 
     function triggerTestWpp() {
-      var wpp = document.getElementById('testTargetWpp').value;
-      var name = document.getElementById('testTargetName').value;
-      var comp = document.getElementById('testTargetCompany').value;
-      var msg = document.getElementById('testWppMessage').value;
+      var wpp = document.getElementById('testTargetWpp') ? document.getElementById('testTargetWpp').value : '';
+      var name = document.getElementById('testTargetName') ? document.getElementById('testTargetName').value : 'Daniel Zanon';
+      var comp = document.getElementById('testTargetCompany') ? document.getElementById('testTargetCompany').value : 'PRX Capital';
+      var msg = document.getElementById('testWppMessage') ? document.getElementById('testWppMessage').value : '';
 
-      // Registrar no CRM etapa 3
       registerTestOutreachInCrm('WhatsApp', name, comp, wpp, msg);
-
       openWhatsAppDirect(wpp, msg);
       showToast('📲 Disparo WhatsApp Teste aberto e registrado no CRM!');
     }
 
     function triggerTestEmail() {
-      var email = document.getElementById('testTargetEmail').value;
-      var name = document.getElementById('testTargetName').value;
-      var comp = document.getElementById('testTargetCompany').value;
-      var subj = document.getElementById('testEmailSubject').value;
-      var body = document.getElementById('testEmailBody').value;
+      var email = document.getElementById('testTargetEmail') ? document.getElementById('testTargetEmail').value : 'daniel@prxcapital.com.br';
+      var name = document.getElementById('testTargetName') ? document.getElementById('testTargetName').value : 'Daniel Zanon';
+      var comp = document.getElementById('testTargetCompany') ? document.getElementById('testTargetCompany').value : 'PRX Capital';
+      var subj = document.getElementById('testEmailSubject') ? document.getElementById('testEmailSubject').value : '';
+      var body = document.getElementById('testEmailBody') ? document.getElementById('testEmailBody').value : '';
 
-      // Registrar no CRM etapa 3
       registerTestOutreachInCrm('E-mail (Resend API)', name, comp, email, 'Assunto: ' + subj + ' | ' + body);
-
       openEmailDirect(email, subj, body);
       showToast('✉️ Disparo E-mail Teste aberto e registrado no CRM!');
     }
 
     function registerTestOutreachInCrm(canal, name, comp, contact, text) {
-      var deals = getCrmDeals();
-      var nowStr = new Date().toLocaleString('pt-BR');
-      var testDeal = deals.find(function(x) { return x.company.indexOf('PRX Capital') !== -1 || x.company.indexOf('Teste') !== -1; });
-      if (!testDeal) {
-        testDeal = {
-          id: 'deal_test_' + Date.now(),
-          prospectId: 0,
-          company: comp || 'Ambiente de Teste PRX',
-          cnpj: '42.123.456/0001-90',
-          idade: '12 anos',
-          tipoSocietario: 'Sociedade Empresária Limitada (LTDA)',
-          regimeTributario: 'Lucro Real',
-          uf: 'SP',
-          city: 'São Paulo',
-          segmentoNome: 'Multi-Family Office',
-          decisorNome: name || 'Daniel Zanon',
-          decisorCargo: 'Sócio / Decisor',
-          fone: contact,
-          email: contact,
-          stage: 'contato',
-          patrimonio: 25000000,
-          scoreBdr: 100,
-          tentativasTotal: 0,
-          tentativasCanais: { whatsapp: 0, email: 0, linkedin: 0 },
-          historyLogs: []
-        };
-        deals.unshift(testDeal);
-      } else {
-        testDeal.stage = 'contato';
+      try {
+        var deals = getCrmDeals();
+        var nowStr = new Date().toLocaleString('pt-BR');
+        var testDeal = deals.find(function(x) { return x.company && (x.company.indexOf('PRX Capital') !== -1 || x.company.indexOf('Teste') !== -1); });
+        if (!testDeal) {
+          testDeal = {
+            id: 'deal_test_' + Date.now(),
+            prospectId: 0,
+            company: comp || 'Ambiente de Teste PRX',
+            cnpj: '42.123.456/0001-90',
+            idade: '12 anos',
+            tipoSocietario: 'Sociedade Empresária Limitada (LTDA)',
+            regimeTributario: 'Lucro Real',
+            uf: 'SP',
+            city: 'São Paulo',
+            segmentoNome: 'Multi-Family Office',
+            decisorNome: name || 'Daniel Zanon',
+            decisorCargo: 'Sócio / Decisor',
+            fone: contact,
+            email: contact,
+            stage: 'contato',
+            patrimonio: 25000000,
+            scoreBdr: 100,
+            tentativasTotal: 0,
+            tentativasCanais: { whatsapp: 0, email: 0, linkedin: 0 },
+            historyLogs: []
+          };
+          deals.unshift(testDeal);
+        } else {
+          testDeal.stage = 'contato';
+        }
+
+        testDeal.tentativasTotal = (testDeal.tentativasTotal || 0) + 1;
+        if (canal.indexOf('WhatsApp') !== -1) {
+          if (!testDeal.tentativasCanais) testDeal.tentativasCanais = { whatsapp: 0, email: 0, linkedin: 0 };
+          testDeal.tentativasCanais.whatsapp = (testDeal.tentativasCanais.whatsapp || 0) + 1;
+        } else {
+          if (!testDeal.tentativasCanais) testDeal.tentativasCanais = { whatsapp: 0, email: 0, linkedin: 0 };
+          testDeal.tentativasCanais.email = (testDeal.tentativasCanais.email || 0) + 1;
+        }
+        testDeal.lastChannel = canal;
+        testDeal.lastTargetType = 'Sócio / Decisor';
+        testDeal.lastRecipientName = name;
+        testDeal.lastRecipientContact = contact;
+        testDeal.lastContactAt = nowStr;
+
+        if (!testDeal.historyLogs) testDeal.historyLogs = [];
+        testDeal.historyLogs.unshift({
+          id: 'att_test_' + Date.now(),
+          date: nowStr,
+          attemptNumber: testDeal.tentativasTotal,
+          canal: canal,
+          alvoTipo: 'Sócio / Decisor',
+          recipientName: name,
+          recipientContact: contact,
+          status: '[TESTE EXECUTIVO] Registrado com sucesso',
+          textNote: 'Tentativa #' + testDeal.tentativasTotal + ': Disparo de teste efetuado via ' + canal + ' para ' + name + ' (' + contact + ').'
+        });
+
+        saveCrmDeals(deals);
+        renderCrmPipeline();
+        updateDynamicCounts();
+      } catch(e) {
+        console.warn('Erro ao registrar teste no CRM:', e);
       }
-
-      testDeal.tentativasTotal = (testDeal.tentativasTotal || 0) + 1;
-      if (canal.indexOf('WhatsApp') !== -1) {
-        if (!testDeal.tentativasCanais) testDeal.tentativasCanais = { whatsapp: 0, email: 0, linkedin: 0 };
-        testDeal.tentativasCanais.whatsapp = (testDeal.tentativasCanais.whatsapp || 0) + 1;
-      } else {
-        if (!testDeal.tentativasCanais) testDeal.tentativasCanais = { whatsapp: 0, email: 0, linkedin: 0 };
-        testDeal.tentativasCanais.email = (testDeal.tentativasCanais.email || 0) + 1;
-      }
-      testDeal.lastChannel = canal;
-      testDeal.lastTargetType = 'Sócio / Decisor';
-      testDeal.lastRecipientName = name;
-      testDeal.lastRecipientContact = contact;
-      testDeal.lastContactAt = nowStr;
-
-      if (!testDeal.historyLogs) testDeal.historyLogs = [];
-      testDeal.historyLogs.unshift({
-        id: 'att_test_' + Date.now(),
-        date: nowStr,
-        attemptNumber: testDeal.tentativasTotal,
-        canal: canal,
-        alvoTipo: 'Sócio / Decisor',
-        recipientName: name,
-        recipientContact: contact,
-        status: '[TESTE EXECUTIVO] Registrado com sucesso',
-        textNote: 'Tentativa #' + testDeal.tentativasTotal + ': Disparo de teste efetuado via ' + canal + ' para ' + name + ' (' + contact + ').'
-      });
-
-      saveCrmDeals(deals);
-      renderCrmPipeline();
-      updateDynamicCounts();
     }
 
     function saveCustomTemplate() {
@@ -2949,105 +2978,105 @@
     "city": "Potirendaba",
     "segmentoNome": "Fábricas & Indústrias",
     "setor": "Indústria e Distribuição de Bebidas",
-    "decisorNome": "José Luiz Franzotti",
-    "decisorCargo": "Presidente / CEO",
-    "decisorLinkedin": "https://www.linkedin.com/in/jose-luiz-franzotti-poty/",
-    "fone": "(17) 99781-4000",
+    "decisorNome": "José Franzotti",
+    "decisorCargo": "Diretor Presidente / Sócio",
+    "decisorLinkedin": "https://www.linkedin.com/in/jose-franzotti-poty/",
+    "fone": "(17) 3827-9000",
     "email": "presidencia@bebidaspoty.com.br",
     "stage": "qualificacao",
-    "patrimonio": 95000000,
-    "scoreBdr": 96,
+    "patrimonio": 75000000,
+    "scoreBdr": 95,
     "tentativasTotal": 1,
     "tentativasCanais": { "whatsapp": 0, "email": 1, "linkedin": 0 },
     "tentativasAlvos": { "socio": 1, "empresa": 0 },
-    "lastChannel": "Qualificação de QSA",
+    "lastChannel": "E-mail (Resend API)",
     "lastContactAt": "12/09/2026, 11:00:00",
-    "createdAt": "2026-09-12T14:00:00.000Z",
+    "createdAt": "2026-09-12T16:00:00.000Z",
     "historyLogs": [
       {
         "id": "att_3_1",
         "date": "12/09/2026, 11:00:00",
         "attemptNumber": 1,
         "canal": "E-mail",
-        "alvoTipo": "Sócio / CEO",
-        "recipientName": "José Luiz Franzotti",
+        "alvoTipo": "Presidente / Sócio",
+        "recipientName": "José Franzotti",
         "recipientContact": "presidencia@bebidaspoty.com.br",
-        "status": "Qualificado no CRM",
-        "textNote": "Estrutura societária de 75 anos qualificada para planejamento sucessório e reestruturação patrimonial."
+        "status": "Disparo Resend API",
+        "textNote": "Envio de apresentação executiva e modelo de governança familiar."
+      }
+    ]
+  },
+  {
+    "id": "deal_prospect_5",
+    "prospectId": 5,
+    "company": "Biscoitos Bela Vista Ltda.",
+    "cnpj": "61.069.340/0001-49",
+    "idade": "111 anos (1915)",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Lucro Real",
+    "uf": "SP",
+    "city": "São Paulo",
+    "segmentoNome": "Fábricas & Indústrias",
+    "setor": "Indústria de Alimentos / Biscoitos",
+    "decisorNome": "Alexandre Morales",
+    "decisorCargo": "Diretor Executivo / CEO",
+    "decisorLinkedin": "https://www.linkedin.com/in/alexandre-morales-belavista/",
+    "fone": "(11) 98111-2233",
+    "email": "alexandre.morales@belavista.com.br",
+    "stage": "reuniao",
+    "patrimonio": 95000000,
+    "scoreBdr": 98,
+    "tentativasTotal": 4,
+    "tentativasCanais": { "whatsapp": 2, "email": 1, "linkedin": 1 },
+    "tentativasAlvos": { "socio": 4, "empresa": 0 },
+    "lastChannel": "WhatsApp",
+    "lastContactAt": "12/09/2026, 18:00:00",
+    "createdAt": "2026-09-12T18:00:00.000Z",
+    "historyLogs": [
+      {
+        "id": "att_5_4",
+        "date": "12/09/2026, 18:00:00",
+        "attemptNumber": 4,
+        "canal": "WhatsApp",
+        "alvoTipo": "CEO",
+        "recipientName": "Alexandre Morales",
+        "recipientContact": "(11) 98111-2233",
+        "status": "Reunião Confirmada",
+        "textNote": "Reunião de alinhamento estratégico agendada para apresentação de mandato de assessoria patrimonial."
       }
     ]
   },
   {
     "id": "deal_prospect_6",
     "prospectId": 6,
-    "company": "Vilma Alimentos (Domingos Costa)",
-    "cnpj": "17.159.518/0001-75",
-    "idade": "95 anos (1931)",
-    "tipoSocietario": "Sociedade Anônima (S/A Fechada)",
-    "regimeTributario": "Lucro Real",
-    "uf": "MG",
-    "city": "Contagem",
-    "segmentoNome": "Fábricas & Indústrias",
-    "setor": "Indústria de Alimentos",
-    "decisorNome": "Laura Costa",
-    "decisorCargo": "Diretora Presidente / Conselho",
-    "decisorLinkedin": "https://www.linkedin.com/search/results/people/?keywords=Laura%20Costa%20Vilma%20Alimentos",
-    "fone": "(31) 3507-3343",
-    "email": "presidencia@vilma.com.br",
-    "stage": "reuniao",
-    "patrimonio": 130000000,
-    "scoreBdr": 99,
-    "tentativasTotal": 3,
-    "tentativasCanais": { "whatsapp": 1, "email": 1, "linkedin": 1 },
-    "tentativasAlvos": { "socio": 3, "empresa": 0 },
-    "lastChannel": "Call Agendada",
-    "lastContactAt": "12/09/2026, 16:30:00",
-    "createdAt": "2026-09-12T16:30:00.000Z",
-    "historyLogs": [
-      {
-        "id": "att_6_3",
-        "date": "12/09/2026, 16:30:00",
-        "attemptNumber": 3,
-        "canal": "WhatsApp",
-        "alvoTipo": "Presidente / Conselho",
-        "recipientName": "Laura Costa",
-        "recipientContact": "(31) 3507-3343",
-        "status": "Reunião Confirmada",
-        "textNote": "Reunião de Diagnóstico Estratégico agendada para Terça-feira às 15:00 com Daniel Zanon e diretoria."
-      }
-    ]
-  },
-  {
-    "id": "deal_prospect_7",
-    "prospectId": 7,
     "company": "Laticínios Porto Alegre S/A",
-    "cnpj": "66.301.334/0001-03",
+    "cnpj": "38.571.217/0001-64",
     "idade": "35 anos (1991)",
     "tipoSocietario": "Sociedade Anônima (S/A Fechada)",
     "regimeTributario": "Lucro Real",
     "uf": "MG",
     "city": "Ponte Nova",
-    "segmentoNome": "Fábricas & Indústrias",
-    "setor": "Indústria de Laticínios",
-    "decisorNome": "João Lúcio Barreto Carneiro",
+    "segmentoNome": "Agronegócio",
+    "setor": "Indústria de Laticínios e Agronegócio",
+    "decisorNome": "João Lúcio Carneiro",
     "decisorCargo": "Presidente do Conselho / Fundador",
-    "decisorLinkedin": "https://www.linkedin.com/in/joao-lucio-carneiro/",
-    "fone": "(31) 3819-3232",
+    "decisorLinkedin": "https://www.linkedin.com/search/results/people/?keywords=Joao%20Lucio%20Carneiro%20Porto%20Alegre",
+    "fone": "(31) 3819-2000",
     "email": "diretoria@laticiniosportoalegre.com.br",
     "stage": "proposta",
-    "patrimonio": 90000000,
-    "scoreBdr": 98,
-    "tentativasTotal": 4,
-    "tentativasCanais": { "whatsapp": 1, "email": 2, "linkedin": 1 },
-    "tentativasAlvos": { "socio": 4, "empresa": 0 },
-    "lastChannel": "Proposta Enviada",
-    "lastContactAt": "12/09/2026, 18:00:00",
-    "createdAt": "2026-09-12T18:00:00.000Z",
+    "patrimonio": 150000000,
+    "scoreBdr": 100,
+    "tentativasTotal": 3,
+    "tentativasCanais": { "whatsapp": 1, "email": 2, "linkedin": 0 },
+    "tentativasAlvos": { "socio": 3, "empresa": 0 },
+    "lastChannel": "E-mail (Resend API)",
+    "lastContactAt": "12/09/2026, 17:00:00",
+    "createdAt": "2026-09-12T17:00:00.000Z",
     "historyLogs": [
       {
-        "id": "att_7_4",
-        "date": "12/09/2026, 18:00:00",
-        "attemptNumber": 4,
+        "id": "att_6_3",
+        "date": "12/09/2026, 17:00:00",
+        "attemptNumber": 3,
         "canal": "E-mail",
         "alvoTipo": "Conselho",
         "recipientName": "João Lúcio Carneiro",
@@ -3100,42 +3129,66 @@
 ]; }
     function getCrmDeals() {
       try {
-        var saved = localStorage.getItem('prx_crm_deals');
+        var saved = safeGetStorage('prx_crm_deals');
         if (saved) {
           var parsed = JSON.parse(saved);
           if (Array.isArray(parsed) && parsed.length > 0) return parsed;
         }
       } catch(e) {}
       var def = getDefaultCrmDeals();
-      saveCrmDeals(def);
+      safeSetStorage('prx_crm_deals', JSON.stringify(def));
       return def;
     }
     function saveCrmDeals(deals) {
-      try { localStorage.setItem('prx_crm_deals', JSON.stringify(deals)); } catch(e) {}
+      try { safeSetStorage('prx_crm_deals', JSON.stringify(deals)); } catch(e) {}
     }
 
     function updateDynamicCounts() {
-      var total = prospects.length;
-      var badge = document.getElementById('tabProspectsBadge');
-      if (badge) badge.innerText = total.toLocaleString('pt-BR');
-      var crmBadge = document.getElementById('tabCrmBadge');
-      if (crmBadge) crmBadge.innerText = getCrmDeals().length;
+      try {
+        var total = prospects.length;
+        var badge = document.getElementById('tabProspectsBadge');
+        if (badge) badge.innerText = total.toLocaleString('pt-BR');
+        var crmBadge = document.getElementById('tabCrmBadge');
+        if (crmBadge) crmBadge.innerText = getCrmDeals().length;
+      } catch(e) {}
     }
 
     function switchMainTab(tab) {
-      var pTab = document.getElementById('prospectsTabContent'); if (pTab) pTab.style.display = (tab === 'prospects') ? 'flex' : 'none';
-      var cTab = document.getElementById('crmTabContent'); if (cTab) cTab.style.display = (tab === 'crm') ? 'flex' : 'none';
-      var tTab = document.getElementById('testTabContent'); if (tTab) tTab.style.display = (tab === 'test') ? 'flex' : 'none';
-      var coTab = document.getElementById('connectTabContent'); if (coTab) coTab.style.display = (tab === 'connect') ? 'flex' : 'none';
+      try {
+        console.log('Alternando para aba:', tab);
+        var tabConfig = [
+          { id: 'prospectsTabContent', name: 'prospects', btnId: 'tab-prospects-btn', activeCls: 'tab-btn active-tab px-3.5 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 cursor-pointer bg-slate-900 text-white shadow-xs', inactiveCls: 'tab-btn px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 text-slate-700 hover:text-slate-900 cursor-pointer bg-white border border-slate-200 shadow-xs' },
+          { id: 'crmTabContent', name: 'crm', btnId: 'tab-crm-btn', activeCls: 'tab-btn active-tab px-3.5 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 cursor-pointer bg-slate-900 text-white shadow-xs', inactiveCls: 'tab-btn px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 text-slate-700 hover:text-slate-900 cursor-pointer bg-white border border-slate-200 shadow-xs' },
+          { id: 'testTabContent', name: 'test', btnId: 'tab-test-btn', activeCls: 'tab-btn active-tab px-3.5 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 bg-emerald-700 text-white shadow-xs cursor-pointer', inactiveCls: 'tab-btn px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 cursor-pointer shadow-xs' },
+          { id: 'connectTabContent', name: 'connect', btnId: 'tab-connect-btn', activeCls: 'tab-btn active-tab px-3.5 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 cursor-pointer bg-slate-900 text-white shadow-xs', inactiveCls: 'tab-btn px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 text-slate-700 hover:text-slate-900 cursor-pointer bg-white border border-slate-200 shadow-xs' }
+        ];
 
-      var btnP = document.getElementById('tab-prospects-btn'); if (btnP) btnP.className = (tab === 'prospects') ? 'tab-btn active-tab px-3.5 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 cursor-pointer bg-slate-900 text-white shadow-xs' : 'tab-btn px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 text-slate-700 hover:text-slate-900 cursor-pointer bg-white border border-slate-200 shadow-xs';
-      var btnC = document.getElementById('tab-crm-btn'); if (btnC) btnC.className = (tab === 'crm') ? 'tab-btn active-tab px-3.5 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 cursor-pointer bg-slate-900 text-white shadow-xs' : 'tab-btn px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 text-slate-700 hover:text-slate-900 cursor-pointer bg-white border border-slate-200 shadow-xs';
-      var btnT = document.getElementById('tab-test-btn'); if (btnT) btnT.className = (tab === 'test') ? 'tab-btn active-tab px-3.5 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 bg-emerald-700 text-white shadow-xs cursor-pointer' : 'tab-btn px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 cursor-pointer shadow-xs';
-      var btnCo = document.getElementById('tab-connect-btn'); if (btnCo) btnCo.className = (tab === 'connect') ? 'tab-btn active-tab px-3.5 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 cursor-pointer bg-slate-900 text-white shadow-xs' : 'tab-btn px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 text-slate-700 hover:text-slate-900 cursor-pointer bg-white border border-slate-200 shadow-xs';
+        tabConfig.forEach(function(t) {
+          var el = document.getElementById(t.id);
+          var btn = document.getElementById(t.btnId);
+          var isTarget = (t.name === tab);
+          if (el) {
+            if (isTarget) {
+              el.style.setProperty('display', 'flex', 'important');
+              el.style.display = 'flex';
+              el.classList.remove('hidden');
+            } else {
+              el.style.setProperty('display', 'none', 'important');
+              el.style.display = 'none';
+              el.classList.add('hidden');
+            }
+          }
+          if (btn) {
+            btn.className = isTarget ? t.activeCls : t.inactiveCls;
+          }
+        });
 
-      if (tab === 'crm') renderCrmPipeline();
-      if (tab === 'test') { loadSelectedTemplate(); }
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (tab === 'crm') { renderCrmPipeline(); }
+        if (tab === 'test') { loadSelectedTemplate(); }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch(err) {
+        console.error('Erro ao alternar aba:', err);
+      }
     }
 
     var currentModalProspect = null;
@@ -3399,7 +3452,7 @@
 
           var cnaeSecHtml = p.cnaeSecundarios ? '<div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="' + p.cnaeSecundarios + '"><span class="font-bold text-slate-700">Secundários:</span> ' + p.cnaeSecundarios + '</div>' : '';
 
-          html += '<tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== \'BUTTON\' && event.target.tagName !== \'A\' && event.target.tagName !== \'INPUT\' && event.target.tagName !== \'SELECT\') openLeadModal(' + p.id + ')">' +
+          html += '<tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== \\'BUTTON\\' && event.target.tagName !== \\'A\\' && event.target.tagName !== \\'INPUT\\' && event.target.tagName !== \\'SELECT\\') openLeadModal(' + p.id + ')">' +
                     '<td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">' + p.id + '</td>' +
                     '<td class="py-2.5 px-3 text-center">' + crmBtn + '</td>' +
                     '<td class="py-2.5 px-3">' +
@@ -3634,43 +3687,47 @@
     }
 
     function renderCrmPipeline() {
-      var deals = getCrmDeals();
-      var stages = ['prospeccao', 'qualificacao', 'contato', 'reuniao', 'proposta', 'fechado'];
-      for (var s = 0; s < stages.length; s++) {
-        var st = stages[s];
-        var col = document.getElementById('col-items-' + st);
-        if (!col) continue;
-        var stDeals = [];
-        for (var i = 0; i < deals.length; i++) { if (deals[i].stage === st) stDeals.push(deals[i]); }
-        var countEl = document.getElementById('col-count-' + st);
-        if (countEl) countEl.innerText = stDeals.length;
-        if (stDeals.length === 0) {
-          col.innerHTML = '<div class="p-3 text-center text-slate-400 text-xs italic bg-white/40 rounded-lg border border-dashed border-slate-200">Nenhum lead nesta etapa.</div>';
-        } else {
-          var cardHtml = '';
-          for (var k = 0; k < stDeals.length; k++) {
-            var d = stDeals[k];
-            var idadeTxt = d.idade ? ' • ⏳ ' + d.idade : '';
-            var tipoTxt = d.tipoSocietario ? ' • 🏛️ ' + d.tipoSocietario : '';
-            cardHtml += '<div class="bg-white rounded-xl p-3 border border-slate-200 shadow-2xs space-y-1.5 cursor-pointer hover:border-slate-400 hover:shadow-sm transition" onclick="openLeadModal(' + (d.prospectId || 1) + ')">' +
-                          '<div class="flex items-center justify-between">' +
-                            '<span class="text-[10px] font-bold text-slate-500 font-mono">#' + (d.prospectId || '') + '</span>' +
-                            '<span class="text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">' + (d.segmentoNome || 'Segmento') + '</span>' +
-                          '</div>' +
-                          '<h4 class="text-xs font-black text-slate-900 leading-tight">' + d.company + '</h4>' +
-                          '<p class="text-[10px] text-slate-500 font-mono">' + (d.cnpj || '') + idadeTxt + ' • ' + (d.city || '') + '-' + (d.uf || '') + '</p>' +
-                          '<div class="pt-1 border-t border-slate-100 flex items-center justify-between text-[11px]">' +
-                            '<span class="font-bold text-slate-800">👤 ' + d.decisorNome + '</span>' +
-                            '<span class="text-[10px] text-emerald-600 font-mono font-bold">R$ ' + ((d.patrimonio || 15000000)/1000000).toFixed(0) + 'M</span>' +
-                          '</div>' +
-                          '<div class="bg-slate-50 p-1.5 rounded-lg border border-slate-200 text-[9px] text-slate-700 font-bold flex items-center justify-between">' +
-                            '<span>🎯 ' + (d.tentativasTotal || 1) + ' Tentativa(s)</span>' +
-                            '<span class="text-slate-500 font-mono">' + (d.lastChannel || 'Disparo Resend API') + '</span>' +
-                          '</div>' +
-                        '</div>';
+      try {
+        var deals = getCrmDeals();
+        var stages = ['prospeccao', 'qualificacao', 'contato', 'reuniao', 'proposta', 'fechado'];
+        for (var s = 0; s < stages.length; s++) {
+          var st = stages[s];
+          var col = document.getElementById('col-items-' + st);
+          if (!col) continue;
+          var stDeals = [];
+          for (var i = 0; i < deals.length; i++) { if (deals[i].stage === st) stDeals.push(deals[i]); }
+          var countEl = document.getElementById('col-count-' + st);
+          if (countEl) countEl.innerText = stDeals.length;
+          if (stDeals.length === 0) {
+            col.innerHTML = '<div class="p-3 text-center text-slate-400 text-xs italic bg-white/40 rounded-lg border border-dashed border-slate-200">Nenhum lead nesta etapa.</div>';
+          } else {
+            var cardHtml = '';
+            for (var k = 0; k < stDeals.length; k++) {
+              var d = stDeals[k];
+              var idadeTxt = d.idade ? ' • ⏳ ' + d.idade : '';
+              var tipoTxt = d.tipoSocietario ? ' • 🏛️ ' + d.tipoSocietario : '';
+              cardHtml += '<div class="bg-white rounded-xl p-3 border border-slate-200 shadow-2xs space-y-1.5 cursor-pointer hover:border-slate-400 hover:shadow-sm transition" onclick="openLeadModal(' + (d.prospectId || 1) + ')">' +
+                            '<div class="flex items-center justify-between">' +
+                              '<span class="text-[10px] font-bold text-slate-500 font-mono">#' + (d.prospectId || '') + '</span>' +
+                              '<span class="text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">' + (d.segmentoNome || 'Segmento') + '</span>' +
+                            '</div>' +
+                            '<h4 class="text-xs font-black text-slate-900 leading-tight">' + d.company + '</h4>' +
+                            '<p class="text-[10px] text-slate-500 font-mono">' + (d.cnpj || '') + idadeTxt + ' • ' + (d.city || '') + '-' + (d.uf || '') + '</p>' +
+                            '<div class="pt-1 border-t border-slate-100 flex items-center justify-between text-[11px]">' +
+                              '<span class="font-bold text-slate-800">👤 ' + d.decisorNome + '</span>' +
+                              '<span class="text-[10px] text-emerald-600 font-mono font-bold">R$ ' + ((d.patrimonio || 15000000)/1000000).toFixed(0) + 'M</span>' +
+                            '</div>' +
+                            '<div class="bg-slate-50 p-1.5 rounded-lg border border-slate-200 text-[9px] text-slate-700 font-bold flex items-center justify-between">' +
+                              '<span>🎯 ' + (d.tentativasTotal || 1) + ' Tentativa(s)</span>' +
+                              '<span class="text-slate-500 font-mono">' + (d.lastChannel || 'Disparo Resend API') + '</span>' +
+                            '</div>' +
+                          '</div>';
+            }
+            col.innerHTML = cardHtml;
           }
-          col.innerHTML = cardHtml;
         }
+      } catch(e) {
+        console.warn('Erro ao renderizar Pipeline CRM:', e);
       }
     }
 
@@ -3714,14 +3771,59 @@
       showToast('Relatório do CRM exportado!');
     }
 
+    function bindAllEvents() {
+      var btnP = document.getElementById('tab-prospects-btn');
+      if (btnP) btnP.onclick = function(e) { if(e) e.preventDefault(); switchMainTab('prospects'); };
+      var btnC = document.getElementById('tab-crm-btn');
+      if (btnC) btnC.onclick = function(e) { if(e) e.preventDefault(); switchMainTab('crm'); };
+      var btnT = document.getElementById('tab-test-btn');
+      if (btnT) btnT.onclick = function(e) { if(e) e.preventDefault(); switchMainTab('test'); };
+      var btnCo = document.getElementById('tab-connect-btn');
+      if (btnCo) btnCo.onclick = function(e) { if(e) e.preventDefault(); switchMainTab('connect'); };
+    }
+
+    window.switchMainTab = switchMainTab;
+    window.openLeadModal = openLeadModal;
+    window.closeLeadModal = closeLeadModal;
+    window.contactViaWpp = contactViaWpp;
+    window.contactViaEmail = contactViaEmail;
+    window.contactViaPitch = contactViaPitch;
+    window.triggerTestWpp = triggerTestWpp;
+    window.triggerTestEmail = triggerTestEmail;
+    window.exportCurrentCsv = exportCurrentCsv;
+    window.exportCrmCsv = exportCrmCsv;
+    window.filterData = filterData;
+    window.goToPrevPage = goToPrevPage;
+    window.goToNextPage = goToNextPage;
+    window.changePerPage = changePerPage;
+    window.addProspectToCrm = addProspectToCrm;
+    window.modalSendWpp = modalSendWpp;
+    window.modalSendEmail = modalSendEmail;
+    window.copyModalWpp = copyModalWpp;
+    window.copyModalEmail = copyModalEmail;
+    window.modalSaveCrmStage = modalSaveCrmStage;
+    window.loadSelectedTemplate = loadSelectedTemplate;
+    window.copyEditorText = copyEditorText;
+    window.copyEditorEmailFull = copyEditorEmailFull;
+    window.saveCustomTemplate = saveCustomTemplate;
+    window.showToast = showToast;
+    window.updateDynamicCounts = updateDynamicCounts;
+    window.renderTable = renderTable;
+    window.renderCrmPipeline = renderCrmPipeline;
+
     function initMasterApp() {
-      if (!Array.isArray(prospects)) return;
-      filteredDataList = prospects.slice();
-      updateDynamicCounts();
-      renderTable();
-      renderCrmPipeline();
-      loadSelectedTemplate();
-      console.log('Master App inicializado com sucesso: ' + prospects.length + ' leads.');
+      try {
+        if (!Array.isArray(prospects)) return;
+        filteredDataList = prospects.slice();
+        bindAllEvents();
+        updateDynamicCounts();
+        renderTable();
+        renderCrmPipeline();
+        loadSelectedTemplate();
+        console.log('Master App inicializado com sucesso: ' + prospects.length + ' leads.');
+      } catch(err) {
+        console.error('Erro na inicializacao:', err);
+      }
     }
 
     initMasterApp();
