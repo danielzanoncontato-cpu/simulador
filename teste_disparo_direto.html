@@ -2,164 +2,188 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Central de Disparo & Modelo Oficial - Daniel Zanon (PRX Capital)</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-  <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Central de Testes de Disparo • PRX Capital BDR</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: #f8fafc; color: #0f172a; padding: 20px; line-height: 1.5; font-size: 13px; }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px; }
+    .header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px; border-bottom: 1px solid #e2e8f0; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+    .title { font-size: 18px; font-weight: 800; color: #0f172a; }
+    .subtitle { font-size: 12px; color: #64748b; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 16px; border-radius: 12px; font-weight: 700; font-size: 12px; text-decoration: none; cursor: pointer; border: none; transition: all 0.15s; }
+    .btn-dark { background: #0f172a; color: #ffffff; }
+    .btn-dark:hover { background: #1e293b; }
+    .btn-green { background: #059669; color: #ffffff; }
+    .btn-green:hover { background: #047857; }
+    .btn-blue { background: #2563eb; color: #ffffff; }
+    .btn-blue:hover { background: #1d4ed8; }
+    .btn-light { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
+    .btn-light:hover { background: #e2e8f0; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media(max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+    .input-box { width: 100%; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 10px; font-size: 12px; color: #0f172a; margin-top: 4px; }
+    .textarea { width: 100%; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 12px; font-size: 12px; color: #0f172a; margin-top: 4px; resize: vertical; line-height: 1.6; }
+    .partner-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 16px; }
+    .partner-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px; cursor: pointer; transition: all 0.15s; }
+    .partner-card:hover { border-color: #2563eb; background: #eff6ff; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 9999px; font-size: 10px; font-weight: 800; }
+    .badge-green { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+    #copyToast { display: none; position: fixed; bottom: 24px; right: 24px; background: #0f172a; color: #ffffff; padding: 14px 20px; border-radius: 14px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); font-weight: 700; font-size: 12px; z-index: 99999; }
+  </style>
 </head>
-<body class="bg-slate-900 text-white min-h-screen flex items-center justify-center p-6 font-sans antialiased">
-
-  <!-- AVISO FLUTUANTE DE CÓPIA -->
-  <div id="copyToast" style="display: none; position: fixed; bottom: 24px; right: 24px; z-index: 9999;" class="bg-slate-950 text-white px-5 py-3.5 rounded-2xl shadow-2xl items-center gap-3 border border-slate-700">
-    <div class="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></div>
-    <div>
-      <p id="copyToastText" class="text-xs font-bold text-slate-100">Texto copiado com sucesso!</p>
-      <p class="text-[10px] text-slate-400">Pronto para colar.</p>
-    </div>
-  </div>
-
-  <div class="max-w-4xl w-full bg-slate-800/95 backdrop-blur border border-slate-700 rounded-3xl p-8 shadow-2xl space-y-6">
-    <div class="flex items-center justify-between border-b border-slate-700 pb-5">
-      <div class="flex items-center gap-4">
-        <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl border border-emerald-500/30">
-          <i class="fa-solid fa-paper-plane"></i>
+<body>
+  <div id="copyToast">Ação realizada com sucesso!</div>
+  <div class="container">
+    <div class="card">
+      <div class="header">
+        <div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <h1 class="title">🧪 Central de Testes de Disparo & Modelos</h1>
+            <span class="badge badge-green">● RESEND API OFICIAL</span>
+          </div>
+          <p class="subtitle">Executivo: Daniel Zanon (daniel@prxcapital.com.br) • PRX Capital Multi-Family Office</p>
         </div>
         <div>
-          <h1 class="text-xl font-extrabold tracking-tight text-white">Central de Disparo Manual & Modelo Padrão Original</h1>
-          <p class="text-xs text-slate-400 mt-0.5">Executivo: <b class="text-slate-200">Daniel Zanon</b> &lt;daniel@prxcapital.com.br&gt;</p>
+          <a href="dashboard_prospeccao.html" class="btn btn-dark">← Voltar à Base Master</a>
         </div>
       </div>
-      <span class="px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-600/50 text-[11px] font-bold text-emerald-400 flex items-center gap-1.5">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Padrão Manual Humano
-      </span>
-    </div>
 
-    <!-- PAINEL DE DISPARO RÁPIDO PARA OS SÓCIOS PRX CAPITAL -->
-    <div class="bg-slate-900/90 p-5 rounded-2xl border border-slate-700 space-y-4">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <i class="fa-solid fa-users text-sky-400 text-base"></i>
-          <h2 class="text-xs font-extrabold text-sky-400 uppercase tracking-wider">Disparo em 1 Clique para Renato, Pardal e Diego</h2>
+      <div style="margin-bottom: 20px;">
+        <label style="font-weight: 700; font-size: 12px;">🎯 Disparo Rápido em 1 Clique para Sócios PRX:</label>
+        <div class="partner-grid" style="margin-top: 8px;">
+          <div class="partner-card" onclick="selectPartner('todos')">
+            <div style="font-weight: 800; color: #2563eb;">👥 Todos os 3 Sócios</div>
+            <div style="font-size: 11px; color: #64748b;">renato, pardal, diego</div>
+          </div>
+          <div class="partner-card" onclick="selectPartner('renato')">
+            <div style="font-weight: 800;">👤 Renato</div>
+            <div style="font-size: 11px; color: #64748b;">renato@prxcapital.com.br</div>
+          </div>
+          <div class="partner-card" onclick="selectPartner('pardal')">
+            <div style="font-weight: 800;">👤 Pardal</div>
+            <div style="font-size: 11px; color: #64748b;">pardal@prxcapital.com.br</div>
+          </div>
+          <div class="partner-card" onclick="selectPartner('diego')">
+            <div style="font-weight: 800;">👤 Diego</div>
+            <div style="font-size: 11px; color: #64748b;">diego@prxcapital.com.br</div>
+          </div>
         </div>
-        <span class="text-[10px] text-slate-400 font-mono">Abre no seu E-mail / WhatsApp</span>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-        <!-- TODOS OS SÓCIOS -->
-        <a id="btnEmailTodos" href="#" target="_blank" class="p-3.5 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-bold transition shadow-lg shadow-sky-900/40 flex flex-col justify-between cursor-pointer border border-sky-400/40">
-          <div class="flex items-center justify-between">
-            <span class="font-black flex items-center gap-1.5 text-sm"><i class="fa-solid fa-paper-plane"></i> Todos os 3 Sócios</span>
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px; padding: 16px; margin-bottom: 20px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+          <div>
+            <label style="font-weight: 700; font-size: 11px; color: #475569;">👤 Nome do Destinatário:</label>
+            <input type="text" id="targetName" value="Daniel Zanon" class="input-box">
           </div>
-          <p class="text-[10px] text-sky-100 font-mono mt-2 truncate">renato, pardal, diego@</p>
-        </a>
-
-        <!-- RENATO -->
-        <a id="btnEmailRenato" href="#" target="_blank" class="p-3.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold transition flex flex-col justify-between cursor-pointer border border-slate-600">
-          <div class="flex items-center justify-between">
-            <span class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-envelope text-sky-400"></i> Renato</span>
-            <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-400"></i>
+          <div>
+            <label style="font-weight: 700; font-size: 11px; color: #475569;">🏢 Empresa Alvo:</label>
+            <input type="text" id="targetCompany" value="PRX Capital / Empresa Teste" class="input-box">
           </div>
-          <p class="text-[10px] text-slate-400 font-mono mt-2 truncate">renato@prxcapital.com.br</p>
-        </a>
-
-        <!-- PARDAL -->
-        <a id="btnEmailPardal" href="#" target="_blank" class="p-3.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold transition flex flex-col justify-between cursor-pointer border border-slate-600">
-          <div class="flex items-center justify-between">
-            <span class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-envelope text-sky-400"></i> Pardal</span>
-            <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-400"></i>
+          <div>
+            <label style="font-weight: 700; font-size: 11px; color: #047857;">📱 WhatsApp de Teste:</label>
+            <input type="text" id="targetWpp" value="(11) 91588-7182" class="input-box">
           </div>
-          <p class="text-[10px] text-slate-400 font-mono mt-2 truncate">pardal@prxcapital.com.br</p>
-        </a>
-
-        <!-- DIEGO -->
-        <a id="btnEmailDiego" href="#" target="_blank" class="p-3.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold transition flex flex-col justify-between cursor-pointer border border-slate-600">
-          <div class="flex items-center justify-between">
-            <span class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-envelope text-sky-400"></i> Diego</span>
-            <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-slate-400"></i>
+          <div>
+            <label style="font-weight: 700; font-size: 11px; color: #1d4ed8;">✉️ E-mail de Teste:</label>
+            <input type="text" id="targetEmail" value="daniel@prxcapital.com.br" class="input-box">
           </div>
-          <p class="text-[10px] text-slate-400 font-mono mt-2 truncate">diego@prxcapital.com.br</p>
-        </a>
-      </div>
-
-      <!-- BOTÃO TESTE WHATSAPP -->
-      <div class="pt-2 flex items-center gap-3">
-        <a id="btnWpp" href="#" target="_blank" class="flex-1 py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs rounded-xl transition shadow-lg shadow-emerald-900/40 flex items-center justify-center gap-2 cursor-pointer">
-          <i class="fa-brands fa-whatsapp text-base"></i> 📲 Disparar Teste WhatsApp ((11) 91588-7182)
-        </a>
-        <button onclick="copyTestDirect('wpp')" class="py-3 px-5 bg-emerald-950/70 hover:bg-emerald-900 text-emerald-300 border border-emerald-600/40 font-extrabold text-xs rounded-xl transition cursor-pointer flex items-center gap-1.5">
-          <i class="fa-regular fa-copy"></i> 📋 Copiar WhatsApp
-        </button>
-      </div>
-    </div>
-
-    <!-- PREVIEWS DOS TEXTOS PRONTOS (PADRÃO MANUAL AUTÊNTICO) -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
-      <div class="bg-black/40 p-4 rounded-2xl border border-slate-700/80 space-y-2">
-        <div class="flex items-center justify-between text-xs font-bold text-emerald-400">
-          <span><i class="fa-brands fa-whatsapp"></i> WhatsApp Manual (Tom Executivo Direto)</span>
-          <button onclick="copyTestDirect('wpp')" class="text-[10px] text-slate-400 hover:text-white underline"><i class="fa-regular fa-copy"></i> Copiar</button>
         </div>
-        <textarea id="previewWpp" rows="9" class="w-full bg-black/30 border border-slate-700/60 rounded-xl p-3 text-[11px] text-slate-300 font-sans leading-relaxed focus:outline-none" readonly></textarea>
       </div>
-      <div class="bg-black/40 p-4 rounded-2xl border border-slate-700/80 space-y-2">
-        <div class="flex items-center justify-between text-xs font-bold text-sky-400">
-          <span><i class="fa-solid fa-envelope"></i> E-mail Manual (Padrão Original do 1º Disparo)</span>
-          <button onclick="copyTestDirect('email')" class="text-[10px] text-slate-400 hover:text-white underline"><i class="fa-regular fa-copy"></i> Copiar</button>
-        </div>
-        <textarea id="previewEmail" rows="9" class="w-full bg-black/30 border border-slate-700/60 rounded-xl p-3 text-[11px] text-slate-300 font-sans leading-relaxed focus:outline-none" readonly></textarea>
-      </div>
-    </div>
 
-    <div class="flex items-center justify-between pt-2 border-t border-slate-700/80 text-xs text-slate-400">
-      <span>💡 Mensagem direta, humana e executiva, sem jargões sintéticos.</span>
-      <div class="flex items-center gap-3">
-        <a href="crm_prx.html" class="text-amber-400 hover:text-amber-300 font-bold underline flex items-center gap-1">
-          <i class="fa-solid fa-table-columns"></i> Pipeline CRM
-        </a>
-        <span>•</span>
-        <a href="dashboard_prospeccao.html" class="text-sky-400 hover:text-sky-300 font-bold underline flex items-center gap-1">
-          <i class="fa-solid fa-gauge"></i> Voltar ao Dashboard
-        </a>
+      <div class="grid-2">
+        <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 16px; padding: 16px; display: flex; flex-col; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-weight: 800; color: #065f46;">📲 Mensagem de WhatsApp</span>
+              <button onclick="copyText('msgWpp')" class="btn btn-light" style="padding: 4px 10px; font-size: 11px;">📋 Copiar</button>
+            </div>
+            <textarea id="msgWpp" rows="9" class="textarea" style="background: #ffffff;">Olá, {NOME}! Tudo bem?&#10;&#10;Sou o Daniel Zanon, da PRX Capital (prxcapital.com.br).&#10;&#10;Atuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão e proteção de suas estruturas patrimoniais, físicas e jurídicas.&#10;&#10;Nossas principais frentes de atuação abrangem:&#10;- Gestão de carteiras, investimentos e câmbio;&#10;- Crédito estruturado, financiamentos e antecipação de recebíveis;&#10;- Revisão e planejamento tributário, sucessório e societário;&#10;- Proteção patrimonial e gestão de liquidez.&#10;&#10;O objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez do patrimônio da {EMPRESA}.&#10;&#10;Gostaria de agendar um diagnóstico inicial gratuito de 15 minutos para avaliar a eficiência da sua estrutura?&#10;&#10;Um abraço,&#10;Daniel Zanon | PRX Capital</textarea>
+          </div>
+          <div style="margin-top: 12px;">
+            <button onclick="dispatchWpp()" class="btn btn-green" style="width: 100%;">📲 Abrir e Disparar WhatsApp</button>
+          </div>
+        </div>
+
+        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 16px; padding: 16px; display: flex; flex-col; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-weight: 800; color: #1e40af;">✉️ Assunto & Minuta de E-mail</span>
+              <button onclick="copyEmailFull()" class="btn btn-light" style="padding: 4px 10px; font-size: 11px;">📋 Copiar Tudo</button>
+            </div>
+            <input type="text" id="emailSubject" value="Alinhamento estratégico & multi-family office | Daniel Zanon (PRX Capital)" class="input-box" style="background: #ffffff; margin-bottom: 8px;">
+            <textarea id="emailBody" rows="7" class="textarea" style="background: #ffffff;">Olá, {NOME}! Tudo bem?&#10;&#10;Meu nome é Daniel Zanon, sou executivo da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira.&#10;&#10;A PRX desenvolve uma assessoria consultiva e exclusiva voltada para empresários e famílias com patrimônio, empresas operacionais e liquidez financeira.&#10;&#10;Nossas frentes de atuação abrangem:&#10;1. Estruturação e revisão tributária, sucessória e societária;&#10;2. Gestão e assessoria de investimentos e operações de câmbio;&#10;3. Soluções de crédito, funding e antecipação de recebíveis;&#10;4. Proteção patrimonial e gestão de liquidez.&#10;&#10;O propósito central é reduzir fricções tributárias e bancárias, viabilizar liquidez eficiente e proteger o patrimônio construído.&#10;&#10;Gostaria de propor um alinhamento inicial de 15 minutos nesta semana para apresentar nossas soluções.&#10;&#10;Você teria disponibilidade nesta semana?&#10;&#10;Atenciosamente,&#10;Daniel Zanon&#10;Executivo de Negócios | PRX Capital&#10;daniel@prxcapital.com.br</textarea>
+          </div>
+          <div style="margin-top: 12px;">
+            <button onclick="dispatchEmail()" class="btn btn-blue" style="width: 100%;">✉️ Abrir e Disparar E-mail</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <script>
-    const wppMsg = `Olá! Tudo bem?\n\nSou o Daniel Zanon, da PRX Capital (prxcapital.com.br).\n\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão e proteção de suas estruturas patrimoniais, físicas e jurídicas.\n\nNossas principais frentes de atuação abrangem:\n\n- Gestão de carteiras, investimentos e câmbio;\n- Crédito estruturado, financiamentos e antecipação de recebíveis;\n- Revisão e planejamento tributário, sucessório e societário;\n- Proteção patrimonial e gestão de liquidez.\n\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez do patrimônio.\n\nGostaria de agendar um diagnóstico inicial gratuito de 15 minutos para avaliar a eficiência da sua estrutura?\n\nUm abraço,\n\nDaniel Zanon | PRX Capital\nprxcapital.com.br`;
-
-    const emailSubj = `Alinhamento estratégico & multi-family office | Daniel Zanon (PRX Capital)`;
-    
-    const emailBody = `Olá! Tudo bem?\n\nMeu nome é Daniel Zanon, sou executivo da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira.\n\nA PRX desenvolve uma assessoria consultiva e exclusiva voltada para empresários e famílias com patrimônio, empresas operacionais e liquidez financeira.\n\nNossas frentes de atuação abrangem:\n\n1. Estruturação e revisão tributária, sucessória e societária;\n2. Gestão e assessoria de investimentos e operações de câmbio;\n3. Soluções de crédito, funding e antecipação de recebíveis;\n4. Proteção patrimonial e gestão de liquidez.\n\nO propósito central é reduzir fricções tributárias e bancárias, viabilizar liquidez eficiente e proteger o patrimônio construído.\n\nGostaria de propor um alinhamento inicial de 15 minutos nesta semana para apresentar nossas soluções.\n\nVocê teria disponibilidade nesta semana?\n\nAtenciosamente,\n\nDaniel Zanon\nExecutivo de Negócios | PRX Capital\ndaniel@prxcapital.com.br\nprxcapital.com.br`;
-
-    document.getElementById('btnWpp').href = "https://api.whatsapp.com/send?phone=5511915887182&text=" + encodeURIComponent(wppMsg);
-    
-    // Links diretos para os sócios com assunto e corpo manuais autênticos
-    document.getElementById('btnEmailTodos').href = "mailto:renato@prxcapital.com.br,pardal@prxcapital.com.br,diego@prxcapital.com.br?subject=" + encodeURIComponent(emailSubj) + "&body=" + encodeURIComponent(emailBody);
-    document.getElementById('btnEmailRenato').href = "mailto:renato@prxcapital.com.br?subject=" + encodeURIComponent(emailSubj) + "&body=" + encodeURIComponent(emailBody);
-    document.getElementById('btnEmailPardal').href = "mailto:pardal@prxcapital.com.br?subject=" + encodeURIComponent(emailSubj) + "&body=" + encodeURIComponent(emailBody);
-    document.getElementById('btnEmailDiego').href = "mailto:diego@prxcapital.com.br?subject=" + encodeURIComponent(emailSubj) + "&body=" + encodeURIComponent(emailBody);
-
-    document.getElementById('previewWpp').value = wppMsg;
-    document.getElementById('previewEmail').value = `Assunto: ${emailSubj}\n\n${emailBody}`;
-
     function showToast(msg) {
-      const toast = document.getElementById('copyToast');
-      document.getElementById('copyToastText').innerText = msg;
-      toast.style.display = 'flex';
-      setTimeout(() => { toast.style.display = 'none'; }, 3000);
+      var t = document.getElementById('copyToast');
+      if (t) {
+        t.innerText = msg;
+        t.style.display = 'block';
+        setTimeout(function() { t.style.display = 'none'; }, 3000);
+      }
     }
 
-    function copyTestDirect(type) {
-      if (type === 'wpp') {
-        navigator.clipboard.writeText(wppMsg).then(() => showToast('📋 Mensagem de WhatsApp copiada para colar!'));
-      } else {
-        const full = `Assunto: ${emailSubj}\n\n${emailBody}`;
-        navigator.clipboard.writeText(full).then(() => showToast('📋 Assunto e E-mail copiados para colar!'));
+    function copyText(id) {
+      var el = document.getElementById(id);
+      if (el) { navigator.clipboard.writeText(el.value); showToast('📋 Texto copiado!'); }
+    }
+
+    function copyEmailFull() {
+      var subj = document.getElementById('emailSubject').value;
+      var body = document.getElementById('emailBody').value;
+      navigator.clipboard.writeText('Assunto: ' + subj + '\\n\\n' + body);
+      showToast('📋 Assunto e E-mail copiados!');
+    }
+
+    function selectPartner(target) {
+      if (target === 'todos') {
+        document.getElementById('targetName').value = 'Renato, Pardal e Diego';
+        document.getElementById('targetEmail').value = 'renato@prxcapital.com.br, pardal@prxcapital.com.br, diego@prxcapital.com.br';
+        showToast('🎯 Selecionado: Todos os 3 Sócios');
+      } else if (target === 'renato') {
+        document.getElementById('targetName').value = 'Renato';
+        document.getElementById('targetEmail').value = 'renato@prxcapital.com.br';
+        showToast('🎯 Selecionado: Renato');
+      } else if (target === 'pardal') {
+        document.getElementById('targetName').value = 'Pardal';
+        document.getElementById('targetEmail').value = 'pardal@prxcapital.com.br';
+        showToast('🎯 Selecionado: Pardal');
+      } else if (target === 'diego') {
+        document.getElementById('targetName').value = 'Diego';
+        document.getElementById('targetEmail').value = 'diego@prxcapital.com.br';
+        showToast('🎯 Selecionado: Diego');
       }
+    }
+
+    function dispatchWpp() {
+      var phone = document.getElementById('targetWpp').value.replace(/\\D/g, '');
+      var name = document.getElementById('targetName').value;
+      var comp = document.getElementById('targetCompany').value;
+      var txt = document.getElementById('msgWpp').value.replace(/{NOME}/g, name).replace(/{EMPRESA}/g, comp);
+      if (phone.length >= 10 && phone.indexOf('55') !== 0) phone = '55' + phone;
+      window.open('https://api.whatsapp.com/send?phone=' + phone + '&text=' + encodeURIComponent(txt), '_blank');
+      showToast('📲 WhatsApp Aberto com sucesso!');
+    }
+
+    function dispatchEmail() {
+      var email = document.getElementById('targetEmail').value;
+      var name = document.getElementById('targetName').value;
+      var comp = document.getElementById('targetCompany').value;
+      var subj = document.getElementById('emailSubject').value.replace(/{NOME}/g, name).replace(/{EMPRESA}/g, comp);
+      var body = document.getElementById('emailBody').value.replace(/{NOME}/g, name).replace(/{EMPRESA}/g, comp);
+      window.open('mailto:' + email + '?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body), '_self');
+      showToast('✉️ E-mail Aberto no seu cliente de correio!');
     }
   </script>
 </body>
