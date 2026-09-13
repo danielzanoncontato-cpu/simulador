@@ -1,223 +1,70 @@
 ﻿<!DOCTYPE html>
-<html lang="pt-BR" class="bg-slate-50">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BDR - Lead AI | Pipeline CRM (Prospecção & Abordagens Integradas)</title>
-  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <title>Pipeline CRM • PRX Capital BDR</title>
   <style>
-    * { box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc; color: #0f172a; margin: 0; padding: 12px; }
-    .font-mono { font-family: monospace; }
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #f1f5f9; }
-    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-    .kanban-col { min-width: 300px; max-width: 330px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: #f8fafc; color: #0f172a; padding: 16px; font-size: 13px; line-height: 1.5; }
+    .header { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 16px; flex-wrap: wrap; gap: 12px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 8px 14px; border-radius: 10px; font-weight: 700; font-size: 12px; text-decoration: none; cursor: pointer; border: none; transition: all 0.15s; }
+    .btn-dark { background: #0f172a; color: #ffffff; }
+    .btn-dark:hover { background: #1e293b; }
+    .btn-light { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
+    .btn-light:hover { background: #e2e8f0; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 9999px; font-size: 10px; font-weight: 800; }
+    .badge-blue { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .stat-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .stat-val { font-size: 20px; font-weight: 900; font-family: monospace; color: #0f172a; margin-top: 4px; }
+    .stat-lbl { font-size: 11px; font-weight: 700; color: #64748b; }
+    .kanban-board { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 16px; align-items: flex-start; }
+    .kanban-col { min-width: 290px; max-width: 320px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 12px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+    .col-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 8px; border-bottom: 1px solid #e2e8f0; font-weight: 800; font-size: 12px; }
+    .col-count { background: #f1f5f9; padding: 2px 8px; border-radius: 6px; font-mono; font-size: 11px; font-weight: 800; color: #334155; }
+    .deal-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px; cursor: pointer; transition: all 0.15s; }
+    .deal-card:hover { border-color: #94a3b8; box-shadow: 0 2px 4px rgba(0,0,0,0.06); background: #ffffff; }
+    .deal-company { font-weight: 800; font-size: 13px; color: #0f172a; margin-bottom: 2px; }
+    .deal-sub { font-size: 10px; color: #64748b; font-family: monospace; margin-bottom: 6px; }
+    .deal-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 6px; font-size: 11px; }
+    #copyToast { display: none; position: fixed; bottom: 24px; right: 24px; background: #0f172a; color: #ffffff; padding: 12px 18px; border-radius: 12px; font-weight: 700; font-size: 12px; z-index: 99999; }
   </style>
 </head>
-<body class="antialiased bg-slate-50 text-slate-900 flex flex-col p-2 w-full">
-
-  <div id="copyToast" style="display: none; position: fixed; bottom: 24px; right: 24px; z-index: 9999;" class="bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl items-center gap-3 border border-slate-800 transition-all duration-300">
-    <div class="w-3 h-3 rounded-full bg-emerald-400 animate-ping"></div>
+<body>
+  <div id="copyToast">Ação realizada com sucesso!</div>
+  <div class="header">
     <div>
-      <p id="copyToastText" class="text-xs font-bold text-slate-100">Ação realizada com sucesso!</p>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <h1 style="font-size: 17px; font-weight: 900;">BDR - Lead AI • Pipeline CRM</h1>
+        <span class="badge badge-blue">● GESTÃO COMERCIAL</span>
+      </div>
+      <p style="font-size: 11px; color: #64748b;">PRX Capital Multi-Family Office • Histórico Permanente de Abordagens</p>
+    </div>
+    <div style="display: flex; gap: 8px;">
+      <a href="dashboard_prospeccao.html" class="btn btn-light">← Voltar à Base Master</a>
+      <button onclick="exportCrmCsv()" class="btn btn-dark">📥 Exportar CSV do CRM</button>
     </div>
   </div>
 
-  <div id="mainAppWrapper" class="flex flex-col antialiased bg-slate-50 text-slate-900 w-full">
-    <header class="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-40 shadow-sm">
-      <div class="max-w-[1950px] mx-auto px-4 sm:px-6 py-3.5 flex flex-col md:flex-row items-center justify-between gap-4">
-        <div class="flex items-center gap-3">
-          <div>
-            <div class="flex items-center gap-2">
-              <h1 class="text-base font-extrabold tracking-tight text-slate-900">BDR - Lead AI</h1>
-              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-blue-50 text-blue-700 border border-blue-200 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span> PIPELINE CRM</span>
-            </div>
-            <p class="text-xs text-slate-500 font-medium">Prospecção Ativa & Rastreamento de Abordagens de Leads</p>
-          </div>
-        </div>
-        <div class="flex items-center gap-2 flex-wrap">
-          <a href="dashboard_prospeccao.html" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition border border-slate-200 flex items-center gap-1.5">
-            ← Voltar à Base Master
-          </a>
-          <button onclick="exportCrmCsv()" class="px-3.5 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition shadow-sm flex items-center gap-1.5 cursor-pointer">
-            📥 Exportar CSV
-          </button>
-        </div>
-      </div>
-
-      <div class="max-w-[1950px] mx-auto px-4 sm:px-6 pb-3">
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 border-t border-slate-100">
-          <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl flex items-center justify-between">
-            <div>
-              <div class="text-[11px] font-bold text-slate-500">Total no Funil</div>
-              <div class="text-base font-black text-slate-900 font-mono" id="crmTotalDeals">0</div>
-            </div>
-            <div class="w-8 h-8 rounded-lg bg-slate-200 text-slate-700 flex items-center justify-center text-xs font-bold">📂</div>
-          </div>
-          <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl flex items-center justify-between">
-            <div>
-              <div class="text-[11px] font-bold text-emerald-700">Volume MFO Estimado</div>
-              <div class="text-base font-black text-emerald-950 font-mono" id="crmTotalPatrimonio">R$ 0M</div>
-            </div>
-            <div class="w-8 h-8 rounded-lg bg-emerald-200 text-emerald-800 flex items-center justify-center text-xs font-bold">💰</div>
-          </div>
-          <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl flex items-center justify-between">
-            <div>
-              <div class="text-[11px] font-bold text-amber-800">Tentativas Realizadas</div>
-              <div class="text-base font-black text-amber-950 font-mono" id="crmTotalDisparos">0</div>
-            </div>
-            <div class="w-8 h-8 rounded-lg bg-amber-200 text-amber-800 flex items-center justify-center text-xs font-bold">🚀</div>
-          </div>
-          <div class="bg-indigo-50 border border-indigo-200 p-3 rounded-xl flex items-center justify-between">
-            <div>
-              <div class="text-[11px] font-bold text-indigo-700">Ganhos / Fechados</div>
-              <div class="text-base font-black text-indigo-950 font-mono" id="crmTotalFechados">0</div>
-            </div>
-            <div class="w-8 h-8 rounded-lg bg-indigo-200 text-indigo-800 flex items-center justify-center text-xs font-bold">🏆</div>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <main class="max-w-[1950px] w-full mx-auto px-4 sm:px-6 py-6 flex-1 flex flex-col gap-4">
-      <div class="overflow-x-auto pb-4">
-        <div class="flex items-start gap-4 min-w-[1900px]">
-          <div class="kanban-col bg-slate-100/90 rounded-2xl border border-slate-200 p-3 flex flex-col gap-2">
-            <div class="flex items-center justify-between px-1 pb-2 border-b border-slate-200">
-              <span class="text-xs font-extrabold text-slate-800">1. Prospecção</span>
-              <span id="crm-count-prospeccao" class="text-[11px] font-mono font-bold bg-white text-slate-700 px-2 py-0.5 rounded-md border border-slate-200">0</span>
-            </div>
-            <div id="crm-items-prospeccao" class="flex flex-col gap-2 min-h-[400px]"></div>
-          </div>
-          <div class="kanban-col bg-blue-50/70 rounded-2xl border border-blue-200 p-3 flex flex-col gap-2">
-            <div class="flex items-center justify-between px-1 pb-2 border-b border-blue-200">
-              <span class="text-xs font-extrabold text-blue-900">2. Qualificação</span>
-              <span id="crm-count-qualificacao" class="text-[11px] font-mono font-bold bg-white text-blue-800 px-2 py-0.5 rounded-md border border-blue-200">0</span>
-            </div>
-            <div id="crm-items-qualificacao" class="flex flex-col gap-2 min-h-[400px]"></div>
-          </div>
-          <div class="kanban-col bg-amber-50/70 rounded-2xl border border-amber-300 p-3 flex flex-col gap-2 shadow-xs">
-            <div class="flex items-center justify-between px-1 pb-2 border-b border-amber-300">
-              <div class="flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
-                <span class="text-xs font-extrabold text-amber-950">3. Abordagem / Contato</span>
-              </div>
-              <span id="crm-count-contato" class="text-[11px] font-mono font-black bg-amber-100 text-amber-900 px-2 py-0.5 rounded-md border border-amber-400">0</span>
-            </div>
-            <div id="crm-items-contato" class="flex flex-col gap-2 min-h-[400px]"></div>
-          </div>
-          <div class="kanban-col bg-purple-50/70 rounded-2xl border border-purple-200 p-3 flex flex-col gap-2">
-            <div class="flex items-center justify-between px-1 pb-2 border-b border-purple-200">
-              <span class="text-xs font-extrabold text-purple-900">4. Reunião Agendada</span>
-              <span id="crm-count-reuniao" class="text-[11px] font-mono font-bold bg-white text-purple-800 px-2 py-0.5 rounded-md border border-purple-200">0</span>
-            </div>
-            <div id="crm-items-reuniao" class="flex flex-col gap-2 min-h-[400px]"></div>
-          </div>
-          <div class="kanban-col bg-cyan-50/70 rounded-2xl border border-cyan-200 p-3 flex flex-col gap-2">
-            <div class="flex items-center justify-between px-1 pb-2 border-b border-cyan-200">
-              <span class="text-xs font-extrabold text-cyan-900">5. Proposta / Negociação</span>
-              <span id="crm-count-proposta" class="text-[11px] font-mono font-bold bg-white text-cyan-800 px-2 py-0.5 rounded-md border border-cyan-200">0</span>
-            </div>
-            <div id="crm-items-proposta" class="flex flex-col gap-2 min-h-[400px]"></div>
-          </div>
-          <div class="kanban-col bg-emerald-50/70 rounded-2xl border border-emerald-200 p-3 flex flex-col gap-2">
-            <div class="flex items-center justify-between px-1 pb-2 border-b border-emerald-200">
-              <span class="text-xs font-extrabold text-emerald-900">6. Ganho / Fechado</span>
-              <span id="crm-count-fechado" class="text-[11px] font-mono font-bold bg-white text-emerald-800 px-2 py-0.5 rounded-md border border-emerald-200">0</span>
-            </div>
-            <div id="crm-items-fechado" class="flex flex-col gap-2 min-h-[400px]"></div>
-          </div>
-        </div>
-      </div>
-    </main>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-lbl">Total no Pipeline</div><div class="stat-val" id="crmTotalDeals">0</div></div>
+    <div class="stat-card"><div class="stat-lbl">Volume MFO Estimado</div><div class="stat-val" style="color: #059669;" id="crmTotalPatrimonio">R$ 0M</div></div>
+    <div class="stat-card"><div class="stat-lbl">Tentativas Realizadas</div><div class="stat-val" style="color: #d97706;" id="crmTotalDisparos">0</div></div>
+    <div class="stat-card"><div class="stat-lbl">Ganhos / Fechados</div><div class="stat-val" style="color: #2563eb;" id="crmTotalFechados">0</div></div>
   </div>
 
-  <!-- MODAL CRM EDIT -->
-  <div id="crmDealModal" style="display: none; position: fixed; inset: 0; z-index: 99999;" class="bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-white border border-slate-200 rounded-3xl shadow-2xl max-w-2xl w-full overflow-hidden">
-      <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between">
-        <div>
-          <h3 class="text-base font-extrabold" id="crmModalTitle">Oportunidade</h3>
-          <p class="text-[11px] text-slate-400 font-mono mt-0.5" id="crmModalSubtitle"></p>
-        </div>
-        <button onclick="closeCrmDealModal()" class="text-slate-400 hover:text-white font-bold cursor-pointer">✕</button>
-      </div>
-      <div class="p-6 space-y-4 max-h-[75vh] overflow-y-auto">
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <label class="text-xs font-bold text-slate-700">Etapa do Funil:</label>
-            <select id="crmModalStage" class="w-full mt-1 bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
-              <option value="prospeccao">1. Prospecção</option>
-              <option value="qualificacao">2. Qualificação</option>
-              <option value="contato">3. Abordagem / Contato</option>
-              <option value="reuniao">4. Reunião Agendada</option>
-              <option value="proposta">5. Proposta / Negociação</option>
-              <option value="fechado">6. Ganho / Fechado</option>
-            </select>
-          </div>
-          <div>
-            <label class="text-xs font-bold text-slate-700">Patrimônio / Volume (R$):</label>
-            <input type="number" id="crmModalPatrimonio" class="w-full mt-1 bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold" value="15000000">
-          </div>
-        </div>
-        <div>
-          <label class="text-xs font-bold text-slate-700">Adicionar Anotação / Atualização:</label>
-          <textarea id="crmModalNewNote" rows="3" placeholder="Escreva aqui o retorno do sócio, detalhes da reunião ou notas estratégicas..." class="w-full mt-1 bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs focus:ring-2 focus:ring-slate-900 focus:outline-none"></textarea>
-        </div>
-        <div>
-          <label class="text-xs font-bold text-slate-700 flex items-center justify-between">
-            <span>Histórico de Abordagens & Tentativas:</span>
-            <span class="text-[10px] text-slate-400 font-normal font-mono">Ordem Cronológica</span>
-          </label>
-          <div id="crmModalHistoryList" class="mt-1 space-y-2 max-h-56 overflow-y-auto bg-slate-50 p-3 rounded-2xl border border-slate-200"></div>
-        </div>
-      </div>
-      <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
-        <button onclick="deleteCurrentDeal()" class="text-rose-600 hover:text-rose-800 font-bold text-xs cursor-pointer">🗑️ Excluir Oportunidade</button>
-        <button onclick="saveCurrentDealModal()" class="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold cursor-pointer">💾 Salvar Alterações</button>
-      </div>
-    </div>
+  <div class="kanban-board">
+    <div class="kanban-col"><div class="col-header"><span>1. Prospecção</span><span class="col-count" id="count-prospeccao">0</span></div><div id="items-prospeccao"></div></div>
+    <div class="kanban-col"><div class="col-header"><span>2. Qualificação</span><span class="col-count" id="count-qualificacao">0</span></div><div id="items-qualificacao"></div></div>
+    <div class="kanban-col" style="border-color: #fcd34d; background: #fffbeb;"><div class="col-header" style="color: #78350f;"><span>3. Abordagem / Contato</span><span class="col-count" id="count-contato" style="background: #fef3c7; color: #92400e;">0</span></div><div id="items-contato"></div></div>
+    <div class="kanban-col"><div class="col-header"><span>4. Reunião Agendada</span><span class="col-count" id="count-reuniao">0</span></div><div id="items-reuniao"></div></div>
+    <div class="kanban-col"><div class="col-header"><span>5. Proposta / Negociação</span><span class="col-count" id="count-proposta">0</span></div><div id="items-proposta"></div></div>
+    <div class="kanban-col" style="border-color: #a7f3d0; background: #f0fdf4;"><div class="col-header" style="color: #065f46;"><span>6. Ganho / Fechado</span><span class="col-count" id="count-fechado" style="background: #dcfce7; color: #166534;">0</span></div><div id="items-fechado"></div></div>
   </div>
 
   <script>
-    let activeCrmDealId = null;
-    var _memStorage = {};
-    function safeGetStorage(key) {
-      try {
-        if (typeof window !== 'undefined' && 'localStorage' in window && window.localStorage !== null) {
-          var val = window.localStorage.getItem(key);
-          if (val !== null) return val;
-        }
-      } catch (e) {
-        console.warn('LocalStorage read blocked, falling back to memory:', e);
-      }
-      return _memStorage[key] || null;
-    }
-    function safeSetStorage(key, val) {
-      try {
-        if (typeof window !== 'undefined' && 'localStorage' in window && window.localStorage !== null) {
-          window.localStorage.setItem(key, val);
-        }
-      } catch (e) {
-        console.warn('LocalStorage write blocked, falling back to memory:', e);
-      }
-      _memStorage[key] = val;
-    }
-
-    function showToast(msg) {
-      const t = document.getElementById('copyToast');
-      const txt = document.getElementById('copyToastText');
-      if (!t || !txt) return;
-      txt.innerText = msg;
-      t.style.display = 'flex';
-      setTimeout(() => { t.style.display = 'none'; }, 3500);
-    }
-
-    function getDefaultCrmDeals() { return [
+    var defaultDeals = [
   {
     "id": "deal_prospect_1",
     "prospectId": 1,
@@ -324,8 +171,8 @@
         "alvoTipo": "Sócio / Diretor",
         "recipientName": "Jose Reynaldo Trevizaneli",
         "recipientContact": "(16) 99762-2100",
-        "status": "Pitch WhatsApp Enviado",
-        "textNote": "Tentativa #2: Disparo de pitch direto via WhatsApp para o sócio Jose Reynaldo abordando otimização tributária e funding industrial."
+        "status": "Abordagem WhatsApp Entregue",
+        "textNote": "Tentativa #2: Envio de mensagem personalizada apresentando soluções de liquidez e gestão de caixa industrial."
       },
       {
         "id": "att_4_1",
@@ -335,8 +182,8 @@
         "alvoTipo": "Sócio / Diretor",
         "recipientName": "Jose Reynaldo Trevizaneli",
         "recipientContact": "diretoria@predilecta.com.br",
-        "status": "Disparo Resend API",
-        "textNote": "Tentativa #1: Apresentação de serviços PRX Capital via E-mail."
+        "status": "Disparo Resend API Enviado",
+        "textNote": "Tentativa #1: Apresentação institucional de assessoria financeira PRX Capital."
       }
     ],
     "notes": [
@@ -424,42 +271,42 @@
     "tentativasCanais": { "whatsapp": 1, "email": 1, "linkedin": 1 },
     "tentativasAlvos": { "socio": 3, "empresa": 0 },
     "lastChannel": "WhatsApp",
-    "lastTargetType": "Sócio Fundador",
+    "lastTargetType": "Diretor / Fundador",
     "lastRecipientName": "Mário Sérgio Manfrim",
     "lastRecipientContact": "(14) 3332-3000",
-    "lastContactAt": "12/09/2026, 14:45:00",
-    "createdAt": "2026-09-12T17:45:00.000Z",
+    "lastContactAt": "12/09/2026, 16:30:00",
+    "createdAt": "2026-09-12T19:30:00.000Z",
     "historyLogs": [
       {
         "id": "att_10_3",
-        "date": "12/09/2026, 14:45:00",
+        "date": "12/09/2026, 16:30:00",
         "attemptNumber": 3,
         "canal": "WhatsApp",
-        "alvoTipo": "Sócio Fundador",
+        "alvoTipo": "Diretor / Fundador",
         "recipientName": "Mário Sérgio Manfrim",
         "recipientContact": "(14) 3332-3000",
-        "status": "Abordagem Realizada",
-        "textNote": "Tentativa #3: Contato direto no WhatsApp sobre gestão de tesouraria de alta rentabilidade e offshore."
+        "status": "Abordagem Direta Realizada",
+        "textNote": "Tentativa #3: Contato direto apresentando soluções de fundos exclusivos de investimento e sucessão familiar."
       }
     ]
   },
   {
     "id": "deal_prospect_12",
     "prospectId": 12,
-    "company": "Cromex S/A",
-    "cnpj": "02.271.463/0001-13",
-    "idade": "29 anos (1997)",
-    "tipoSocietario": "Sociedade Anônima (S/A Fechada)",
+    "company": "BR Footwear Exportadora",
+    "cnpj": "08.992.341/0001-55",
+    "idade": "18 anos (2008)",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
     "regimeTributario": "Lucro Real",
-    "uf": "SP",
-    "city": "São Paulo",
+    "uf": "RS",
+    "city": "Novo Hamburgo",
     "segmentoNome": "Exportadoras",
-    "setor": "Indústria Química & Comércio Exterior",
+    "setor": "Exportação de Calçados e Artefatos",
     "decisorNome": "Sergio Wajsbrot",
-    "decisorCargo": "Presidente / Diretor Geral (CEO)",
-    "decisorLinkedin": "https://www.linkedin.com/in/sergio-wajsbrot/",
+    "decisorCargo": "Diretor Comercial & Câmbio",
+    "decisorLinkedin": "https://www.linkedin.com/search/results/people/?keywords=Sergio%20Wajsbrot%20BR%20Footwear",
     "fone": "(11) 98900-1000",
-    "email": "sergio.wajsbrot@cromex.com.br",
+    "email": "cambio@brfootwear.com.br",
     "stage": "contato",
     "patrimonio": 110000000,
     "scoreBdr": 99,
@@ -541,105 +388,78 @@
     "city": "Maringá",
     "segmentoNome": "Fábricas & Indústrias",
     "setor": "Indústria Química / Higiene e Limpeza",
-    "decisorNome": "João Cantagalli",
-    "decisorCargo": "Sócio-Fundador e Diretor Geral",
-    "decisorLinkedin": "https://www.linkedin.com/search/results/people/?keywords=Joao%20Cantagalli%20Crivialli",
-    "fone": "(44) 3241-8000",
+    "decisorNome": "Reinaldo Crivialli",
+    "decisorCargo": "Sócio Fundador & Presidente",
+    "decisorLinkedin": "https://www.linkedin.com/search/results/people/?keywords=Reinaldo%20Crivialli",
+    "fone": "(44) 3218-4000",
     "email": "diretoria@crivialli.com.br",
-    "stage": "prospeccao",
-    "patrimonio": 45000000,
-    "scoreBdr": 92,
-    "tentativasTotal": 0,
-    "tentativasCanais": { "whatsapp": 0, "email": 0, "linkedin": 0 },
-    "tentativasAlvos": { "socio": 0, "empresa": 0 },
-    "lastChannel": "Mapeado na Base",
-    "createdAt": "2026-09-12T15:00:00.000Z",
-    "historyLogs": []
-  },
-  {
-    "id": "deal_prospect_3",
-    "prospectId": 3,
-    "company": "Bebidas Poty S.A.",
-    "cnpj": "55.223.127/0002-42",
-    "idade": "75 anos (1951)",
-    "tipoSocietario": "Sociedade Anônima (S/A Fechada)",
-    "regimeTributario": "Lucro Real",
-    "uf": "SP",
-    "city": "Potirendaba",
-    "segmentoNome": "Fábricas & Indústrias",
-    "setor": "Indústria e Distribuição de Bebidas",
-    "decisorNome": "José Franzotti",
-    "decisorCargo": "Diretor Presidente / Sócio",
-    "decisorLinkedin": "https://www.linkedin.com/in/jose-franzotti-poty/",
-    "fone": "(17) 3827-9000",
-    "email": "presidencia@bebidaspoty.com.br",
     "stage": "qualificacao",
-    "patrimonio": 75000000,
-    "scoreBdr": 95,
+    "patrimonio": 55000000,
+    "scoreBdr": 94,
     "tentativasTotal": 1,
-    "tentativasCanais": { "whatsapp": 0, "email": 1, "linkedin": 0 },
+    "tentativasCanais": { "whatsapp": 1, "email": 0, "linkedin": 0 },
     "tentativasAlvos": { "socio": 1, "empresa": 0 },
-    "lastChannel": "E-mail (Resend API)",
+    "lastChannel": "WhatsApp",
     "lastContactAt": "12/09/2026, 11:00:00",
-    "createdAt": "2026-09-12T16:00:00.000Z",
+    "createdAt": "2026-09-12T11:00:00.000Z",
     "historyLogs": [
       {
-        "id": "att_3_1",
+        "id": "att_2_1",
         "date": "12/09/2026, 11:00:00",
         "attemptNumber": 1,
-        "canal": "E-mail",
-        "alvoTipo": "Presidente / Sócio",
-        "recipientName": "José Franzotti",
-        "recipientContact": "presidencia@bebidaspoty.com.br",
-        "status": "Disparo Resend API",
-        "textNote": "Envio de apresentação executiva e modelo de governança familiar."
+        "canal": "WhatsApp",
+        "alvoTipo": "Sócio Fundador",
+        "recipientName": "Reinaldo Crivialli",
+        "recipientContact": "(44) 3218-4000",
+        "status": "Qualificação Inicial",
+        "textNote": "Empresa familiar com alta demanda por planejamento patrimonial e proteção jurídica."
       }
     ]
   },
   {
-    "id": "deal_prospect_5",
-    "prospectId": 5,
-    "company": "Biscoitos Bela Vista Ltda.",
-    "cnpj": "61.069.340/0001-49",
-    "idade": "111 anos (1915)",
-    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "id": "deal_prospect_3",
+    "prospectId": 3,
+    "company": "Fertipar Fertilizantes do Paraná",
+    "cnpj": "77.854.743/0001-76",
+    "idade": "46 anos (1980)",
+    "tipoSocietario": "Sociedade Anônima (S/A Fechada)",
     "regimeTributario": "Lucro Real",
-    "uf": "SP",
-    "city": "São Paulo",
-    "segmentoNome": "Fábricas & Indústrias",
-    "setor": "Indústria de Alimentos / Biscoitos",
-    "decisorNome": "Alexandre Morales",
-    "decisorCargo": "Diretor Executivo / CEO",
-    "decisorLinkedin": "https://www.linkedin.com/in/alexandre-morales-belavista/",
-    "fone": "(11) 98111-2233",
-    "email": "alexandre.morales@belavista.com.br",
+    "uf": "PR",
+    "city": "Paranaguá",
+    "segmentoNome": "Agronegócio",
+    "setor": "Indústria de Fertilizantes e Nutrição Vegetal",
+    "decisorNome": "Alceu Elias Feldmann",
+    "decisorCargo": "Diretor Presidente & Fundador",
+    "decisorLinkedin": "https://www.linkedin.com/search/results/people/?keywords=Alceu%20Feldmann%20Fertipar",
+    "fone": "(41) 3420-8000",
+    "email": "presidencia@fertipar.com.br",
     "stage": "reuniao",
-    "patrimonio": 95000000,
-    "scoreBdr": 98,
-    "tentativasTotal": 4,
-    "tentativasCanais": { "whatsapp": 2, "email": 1, "linkedin": 1 },
-    "tentativasAlvos": { "socio": 4, "empresa": 0 },
+    "patrimonio": 350000000,
+    "scoreBdr": 100,
+    "tentativasTotal": 2,
+    "tentativasCanais": { "whatsapp": 1, "email": 1, "linkedin": 0 },
+    "tentativasAlvos": { "socio": 2, "empresa": 0 },
     "lastChannel": "WhatsApp",
-    "lastContactAt": "12/09/2026, 18:00:00",
-    "createdAt": "2026-09-12T18:00:00.000Z",
+    "lastContactAt": "12/09/2026, 14:00:00",
+    "createdAt": "2026-09-12T14:00:00.000Z",
     "historyLogs": [
       {
-        "id": "att_5_4",
-        "date": "12/09/2026, 18:00:00",
-        "attemptNumber": 4,
+        "id": "att_3_2",
+        "date": "12/09/2026, 14:00:00",
+        "attemptNumber": 2,
         "canal": "WhatsApp",
-        "alvoTipo": "CEO",
-        "recipientName": "Alexandre Morales",
-        "recipientContact": "(11) 98111-2233",
+        "alvoTipo": "Presidência",
+        "recipientName": "Alceu Feldmann",
+        "recipientContact": "(41) 3420-8000",
         "status": "Reunião Confirmada",
-        "textNote": "Reunião de alinhamento estratégico agendada para apresentação de mandato de assessoria patrimonial."
+        "textNote": "Reunião de alinhamento estratégico agendada para apresentação do diagnóstico tributário e estrutura de CRA."
       }
     ]
   },
   {
     "id": "deal_prospect_6",
     "prospectId": 6,
-    "company": "Laticínios Porto Alegre S/A",
+    "company": "Laticínios Porto Alegre Indústria e Comércio S/A",
     "cnpj": "38.571.217/0001-64",
     "idade": "35 anos (1991)",
     "tipoSocietario": "Sociedade Anônima (S/A Fechada)",
@@ -716,167 +536,70 @@
       }
     ]
   }
-]; }
-    function getCrmDeals() {
+];
+    function getDeals() {
       try {
-        const saved = safeGetStorage('prx_crm_deals');
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-        }
+        var saved = localStorage.getItem('prx_crm_deals');
+        if (saved) { var p = JSON.parse(saved); if (Array.isArray(p) && p.length > 0) return p; }
       } catch(e) {}
-      const def = getDefaultCrmDeals();
-      safeSetStorage('prx_crm_deals', JSON.stringify(def));
-      return def;
+      return defaultDeals;
     }
-    function saveCrmDeals(d) { safeSetStorage('prx_crm_deals', JSON.stringify(d)); renderCrm(); }
-
+    function saveDeals(d) {
+      try { localStorage.setItem('prx_crm_deals', JSON.stringify(d)); } catch(e) {}
+    }
     function renderCrm() {
-      try {
-        const deals = getCrmDeals();
-        document.getElementById('crmTotalDeals').innerText = deals.length.toLocaleString('pt-BR');
-        const totalVal = deals.reduce((acc, x) => acc + (parseFloat(x.patrimonio) || 15000000), 0);
-        document.getElementById('crmTotalPatrimonio').innerText = `R$ ${(totalVal/1000000).toFixed(0)}M`;
-        let totalAttemptsSum = 0;
-        deals.forEach(d => { totalAttemptsSum += (parseInt(d.tentativasTotal, 10) || 1); });
-        document.getElementById('crmTotalDisparos').innerText = totalAttemptsSum.toLocaleString('pt-BR');
-        const fechadosCount = deals.filter(d => d.stage === 'fechado').length;
-        document.getElementById('crmTotalFechados').innerText = fechadosCount.toLocaleString('pt-BR');
-
-        const stages = ['prospeccao', 'qualificacao', 'contato', 'reuniao', 'proposta', 'fechado'];
-        stages.forEach(st => {
-          const col = document.getElementById(`crm-items-${st}`);
-          const stDeals = deals.filter(d => d.stage === st);
-          document.getElementById(`crm-count-${st}`).innerText = stDeals.length;
+      var deals = getDeals();
+      var stages = ['prospeccao', 'qualificacao', 'contato', 'reuniao', 'proposta', 'fechado'];
+      var totalVol = 0, totalAtt = 0, totalWon = 0;
+      for (var s = 0; s < stages.length; s++) {
+        var st = stages[s];
+        var col = document.getElementById('items-' + st);
+        var cnt = document.getElementById('count-' + st);
+        var stDeals = deals.filter(function(d) { return d.stage === st; });
+        if (cnt) cnt.innerText = stDeals.length;
+        if (col) {
           if (stDeals.length === 0) {
-            col.innerHTML = '<div class="p-3 text-center text-slate-400 text-xs italic bg-white/40 rounded-xl">Nenhum lead nesta etapa</div>';
+            col.innerHTML = '<div style="padding: 16px; text-align: center; color: #94a3b8; font-size: 11px; font-style: italic;">Nenhum lead nesta etapa.</div>';
           } else {
-            col.innerHTML = stDeals.map(d => `
-              <div class="bg-white rounded-2xl p-3.5 border border-slate-200 shadow-xs hover:shadow-md transition flex flex-col gap-2 relative">
-                <div class="flex justify-between items-center">
-                  <span class="text-[9px] font-mono text-slate-400 font-bold">#${d.prospectId || ''}</span>
-                  <span class="text-[9px] font-bold bg-slate-100 px-2 py-0.5 rounded text-slate-700 border border-slate-200 truncate max-w-[120px]">${d.segmentoNome || 'Segmento'}</span>
-                </div>
-                <div>
-                  <h4 class="font-extrabold text-xs text-slate-900 leading-snug">${d.company}</h4>
-                  <p class="text-[10px] text-slate-500 font-mono">${d.cnpj || ''} • ⏳ ${d.idade || ''} • ${d.city || ''}-${d.uf || ''}</p>
-                  <div class="flex items-center gap-1 flex-wrap mt-1">
-                    ${d.tipoSocietario ? `<span class="px-1.5 py-0.5 rounded text-[8px] font-extrabold bg-purple-50 text-purple-800 border border-purple-200">🏛️ ${d.tipoSocietario}</span>` : ''}
-                    ${d.regimeTributario ? `<span class="px-1.5 py-0.5 rounded text-[8px] font-extrabold bg-emerald-50 text-emerald-800 border border-emerald-300">📑 ${d.regimeTributario}</span>` : ''}
-                  </div>
-                </div>
-                <div class="border-t border-slate-100 pt-2 flex items-center justify-between text-xs">
-                  <div class="text-[11px] font-bold text-slate-800 truncate max-w-[140px]">👤 ${d.decisorNome}</div>
-                  <div class="font-mono font-bold text-emerald-700 text-xs">R$ ${((d.patrimonio || 15000000)/1000000).toFixed(0)}M</div>
-                </div>
-                <div class="bg-slate-50 rounded-lg p-2 border border-slate-100 flex items-center justify-between text-[10px] text-slate-600 font-medium">
-                  <span class="flex items-center gap-1 font-bold text-slate-800"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> 🎯 ${d.tentativasTotal || 1} Tentativa(s)</span>
-                  <span class="text-slate-500 font-mono">${d.lastChannel || 'Disparo Resend API'}</span>
-                </div>
-                <div class="pt-1 flex items-center gap-1.5">
-                  <button onclick="openCrmDealModal('${d.id}')" class="flex-1 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1 cursor-pointer">✏️ Histórico & Notas</button>
-                </div>
-              </div>
-            `).join('');
+            var h = '';
+            for (var i = 0; i < stDeals.length; i++) {
+              var d = stDeals[i];
+              totalVol += (d.patrimonio || 15000000);
+              totalAtt += (d.tentativasTotal || 1);
+              if (d.stage === 'fechado') totalWon++;
+              h += '<div class="deal-card">' +
+                     '<div class="deal-company">' + d.company + '</div>' +
+                     '<div class="deal-sub">' + (d.cnpj || '') + ' • ' + (d.city || '') + '-' + (d.uf || '') + '</div>' +
+                     '<div class="deal-footer">' +
+                       '<span style="font-weight: 700;">👤 ' + (d.decisorNome || 'Decisor') + '</span>' +
+                       '<span style="color: #059669; font-weight: 800; font-family: monospace;">R$ ' + ((d.patrimonio || 15000000)/1000000).toFixed(0) + 'M</span>' +
+                     '</div>' +
+                     '<div style="margin-top: 6px; font-size: 10px; background: #ffffff; padding: 4px 8px; border-radius: 6px; border: 1px solid #e2e8f0; display: flex; justify-content: space-between;">' +
+                       '<span>🎯 ' + (d.tentativasTotal || 1) + ' Tentativa(s)</span>' +
+                       '<span style="color: #64748b;">' + (d.lastChannel || 'Resend API') + '</span>' +
+                     '</div>' +
+                   '</div>';
+            }
+            col.innerHTML = h;
           }
-        });
-      } catch(e) {
-        console.error('Erro renderCrm:', e);
+        }
       }
-    }
-
-    function openCrmDealModal(id) {
-      activeCrmDealId = id;
-      const deals = getCrmDeals();
-      const deal = deals.find(x => x.id === id);
-      if (!deal) return;
-      document.getElementById('crmModalTitle').innerText = deal.company;
-      document.getElementById('crmModalSubtitle').innerText = `${deal.cnpj || ''} • ${deal.city || ''}-${deal.uf || ''} • Decisor: ${deal.decisorNome} (${deal.decisorCargo})`;
-      document.getElementById('crmModalStage').value = deal.stage;
-      document.getElementById('crmModalPatrimonio').value = deal.patrimonio || 15000000;
-      document.getElementById('crmModalNewNote').value = '';
-
-      const list = document.getElementById('crmModalHistoryList');
-      let histHtml = '';
-      if (deal.historyLogs && deal.historyLogs.length > 0) {
-        deal.historyLogs.forEach(h => {
-          histHtml += `
-            <div class="p-2.5 bg-white rounded-xl border border-slate-200 space-y-1 text-xs">
-              <div class="flex items-center justify-between text-[10px] text-slate-500 font-mono">
-                <span class="font-bold text-slate-800"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block mr-1"></span> Tentativa #${h.attemptNumber || 1} • Canal: ${h.canal}</span>
-                <span>${h.date}</span>
-              </div>
-              <div class="font-bold text-slate-900">${h.status}</div>
-              <div class="text-slate-600 text-[11px]">${h.textNote}</div>
-              <div class="text-[10px] text-slate-400 font-mono">Destinatário: ${h.recipientName || deal.decisorNome} (${h.recipientContact || deal.fone})</div>
-            </div>
-          `;
-        });
-      } else {
-        histHtml = '<div class="text-slate-400 text-xs italic text-center p-3">Nenhum histórico registrado ainda.</div>';
-      }
-      list.innerHTML = histHtml;
-      document.getElementById('crmDealModal').style.display = 'flex';
-    }
-
-    function closeCrmDealModal() {
-      document.getElementById('crmDealModal').style.display = 'none';
-      activeCrmDealId = null;
-    }
-
-    function saveCurrentDealModal() {
-      if (!activeCrmDealId) return;
-      const deals = getCrmDeals();
-      const deal = deals.find(x => x.id === activeCrmDealId);
-      if (!deal) return;
-      deal.stage = document.getElementById('crmModalStage').value;
-      deal.patrimonio = parseFloat(document.getElementById('crmModalPatrimonio').value) || deal.patrimonio;
-      const newNote = document.getElementById('crmModalNewNote').value.trim();
-      if (newNote) {
-        if (!deal.notes) deal.notes = [];
-        deal.notes.unshift({ date: new Date().toLocaleString('pt-BR'), text: newNote });
-      }
-      saveCrmDeals(deals);
-      closeCrmDealModal();
-      showToast('Oportunidade atualizada com sucesso!');
-    }
-
-    function deleteCurrentDeal() {
-      if (!activeCrmDealId) return;
-      let deals = getCrmDeals();
-      deals = deals.filter(x => x.id !== activeCrmDealId);
-      saveCrmDeals(deals);
-      closeCrmDealModal();
-      showToast('Oportunidade removida do funil!');
+      var elT = document.getElementById('crmTotalDeals'); if (elT) elT.innerText = deals.length;
+      var elV = document.getElementById('crmTotalPatrimonio'); if (elV) elV.innerText = 'R$ ' + (totalVol/1000000).toFixed(0) + 'M';
+      var elA = document.getElementById('crmTotalDisparos'); if (elA) elA.innerText = totalAtt;
+      var elW = document.getElementById('crmTotalFechados'); if (elW) elW.innerText = totalWon;
     }
 
     function exportCrmCsv() {
-      const deals = getCrmDeals();
-      let csv = '\uFEFFID;Empresa;CNPJ;Idade;Tipo_Societario;Regime;UF;Cidade;Segmento;Decisor;Cargo;Telefone;Email;Etapa;Patrimonio_Estimado;Tentativas_Total;Ultimo_Canal;Historico\n';
-      deals.forEach(d => {
-        const lastNote = (d.notes && d.notes.length > 0) ? d.notes[0].text.replace(/;/g, ' ') : '';
-        csv += `"${d.id}";"${d.company}";"${d.cnpj}";"${d.idade || ''}";"${d.tipoSocietario || ''}";"${d.regimeTributario || ''}";"${d.uf}";"${d.city}";"${d.segmentoNome}";"${d.decisorNome}";"${d.decisorCargo}";"${d.fone}";"${d.email}";"${d.stage}";"${d.patrimonio}";"${d.tentativasTotal || 0}";"${d.lastChannel || ''}";"${lastNote}"\n`;
-      });
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = `crm_prx_prospeccao_${new Date().toISOString().slice(0,10)}.csv`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      showToast('CSV do CRM exportado com sucesso!');
+      var deals = getDeals();
+      var csv = '\uFEFFID;Empresa;CNPJ;Idade;Tipo_Societario;Regime;UF;Cidade;Segmento;Decisor;Etapa;Patrimonio\n';
+      for (var i = 0; i < deals.length; i++) {
+        var d = deals[i];
+        csv += '"' + d.id + '";"' + d.company + '";"' + d.cnpj + '";"' + (d.idade || '') + '";"' + (d.tipoSocietario || '') + '";"' + (d.regimeTributario || '') + '";"' + d.uf + '";"' + d.city + '";"' + d.segmentoNome + '";"' + d.decisorNome + '";"' + d.stage + '";"' + d.patrimonio + '"\n';
+      }
+      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'crm_prx_relatorio.csv'; a.click();
     }
-
-    window.showToast = showToast;
-    window.getCrmDeals = getCrmDeals;
-    window.saveCrmDeals = saveCrmDeals;
-    window.renderCrm = renderCrm;
-    window.openCrmDealModal = openCrmDealModal;
-    window.closeCrmDealModal = closeCrmDealModal;
-    window.saveCurrentDealModal = saveCurrentDealModal;
-    window.deleteCurrentDeal = deleteCurrentDeal;
-    window.exportCrmCsv = exportCrmCsv;
-
     renderCrm();
   </script>
 </body>
