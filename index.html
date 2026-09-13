@@ -142,7 +142,7 @@
               </tr>
             </thead>
             <tbody id="tableBody" class="divide-y divide-slate-100 text-xs">
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(1)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">1</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(1, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -160,9 +160,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Marcelo Cereser</div><div class="text-[10px] text-slate-500">Diretor Superintendente / CEO</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 94187-6309</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ marcelo.cereser@casteloalimentos.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 94187-6309 / marcelo.cereser@casteloalimentos.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(1)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(1)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(1)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(1)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(1)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(1)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(1)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(2)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">2</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(2, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -180,9 +180,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">João Cantagalli</div><div class="text-[10px] text-slate-500">Sócio-Fundador e Diretor Geral</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (44) 3241-8000</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ diretoria@crivialli.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="text-[10px] text-slate-500">🏢 Fixo da Empresa</div></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaEmail(2)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(2)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(2)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaEmail(2)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(2)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(3)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">3</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(3, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -200,9 +200,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">José Luiz Franzotti</div><div class="text-[10px] text-slate-500">Presidente / CEO</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (17) 99781-4000</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ presidencia@bebidaspoty.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (17) 99781-4000 / presidencia@bebidaspoty.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(3)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(3)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(3)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(3)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(3)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(3)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(3)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(4)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">4</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(4, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -220,9 +220,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Jose Reynaldo Trevizaneli</div><div class="text-[10px] text-slate-500">Sócio-Administrador / Diretor Geral</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (16) 99762-2100</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ diretoria@predilecta.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (16) 99762-2100 / diretoria@predilecta.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(4)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(4)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(4)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(4)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(4)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(4)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(4)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(5)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">5</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(5, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -240,9 +240,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Valdemir Zago</div><div class="text-[10px] text-slate-500">Presidente / Fundador</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (44) 3621-2049</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ presidencia@zaeli.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (44) 3621-2049 / presidencia@zaeli.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(5)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(5)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(5)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(5)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(5)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(5)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(5)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(6)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">6</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(6, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -260,9 +260,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Laura Costa</div><div class="text-[10px] text-slate-500">Diretora Presidente / Conselho</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (31) 3507-3343</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ presidencia@vilma.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="text-[10px] text-slate-500">🏢 Fixo da Empresa</div></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaEmail(6)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(6)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(6)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaEmail(6)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(6)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(7)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">7</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(7, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -280,9 +280,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">João Lúcio Barreto Carneiro</div><div class="text-[10px] text-slate-500">Presidente do Conselho / Fundador</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (31) 3819-3232</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ diretoria@laticiniosportoalegre.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (31) 3819-3232 / diretoria@laticiniosportoalegre.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(7)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(7)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(7)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(7)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(7)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(7)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(7)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(8)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">8</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(8, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -300,9 +300,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Alberto Araujo</div><div class="text-[10px] text-slate-500">Diretor Presidente / CEO</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (43) 3371-2000</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ presidencia@belagricola.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="text-[10px] text-slate-500">🏢 Fixo da Empresa</div></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaEmail(8)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(8)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(8)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaEmail(8)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(8)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(9)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">9</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(9, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -320,9 +320,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Valdir José Zorzo</div><div class="text-[10px] text-slate-500">Presidente do Grupo e Fundador</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (67) 99981-1100</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ diretoria@dallasalimentos.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (67) 99981-1100 / diretoria@dallasalimentos.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(9)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(9)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(9)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(9)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(9)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(9)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(9)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(10)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">10</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(10, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -340,9 +340,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Mário Sérgio Manfrim</div><div class="text-[10px] text-slate-500">Diretor Geral / Sócio Fundador</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (14) 3332-3000</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ diretoria@specialdog.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="text-[10px] text-slate-500">🏢 Fixo da Empresa</div></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaEmail(10)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(10)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(10)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaEmail(10)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(10)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(11)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">11</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(11, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -360,9 +360,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Marco Antonio Trevisan</div><div class="text-[10px] text-slate-500">Sócio-Administrador e Diretor Geral</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (14) 4009-4922</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ diretoria@plasutil.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (14) 4009-4922 / diretoria@plasutil.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(11)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(11)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(11)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(11)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(11)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(11)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(11)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(12)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">12</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(12, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -380,9 +380,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Sergio Wajsbrot</div><div class="text-[10px] text-slate-500">Presidente / Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 98900-1000</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ sergio.wajsbrot@cromex.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 98900-1000 / sergio.wajsbrot@cromex.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(12)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(12)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(12)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(12)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(12)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(12)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(12)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(13)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">13</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(13, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -400,9 +400,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Alceu Elias Feldmann</div><div class="text-[10px] text-slate-500">Sócio-Fundador e Diretor Presidente</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (41) 3026-9009</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ presidencia@fertipar.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (41) 3026-9009 / presidencia@fertipar.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(13)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(13)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(13)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(13)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(13)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(13)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(13)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(14)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">14</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(14, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -420,9 +420,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Rodrigo de Paula Abreu</div><div class="text-[10px] text-slate-500">Diretor Presidente / CEO</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (31) 3079-8100</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ presidencia@fornodeminas.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (31) 3079-8100 / presidencia@fornodeminas.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(14)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(14)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(14)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(14)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(14)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(14)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(14)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(15)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">15</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(15, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -440,9 +440,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Cristina Massae Fugita Abrahão</div><div class="text-[10px] text-slate-500">Sócia-Administradora e Diretora Geral</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (16) 3244-4000</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ diretoria@fugini.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="text-[10px] text-slate-500">🏢 Fixo da Empresa</div></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaEmail(15)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(15)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(15)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaEmail(15)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(15)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(16)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">16</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(16, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -460,9 +460,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Renato Kenji Nakaya</div><div class="text-[10px] text-slate-500">Diretor Presidente / CEO</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 2941-1177</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ presidencia@sakura.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 2941-1177 / presidencia@sakura.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(16)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(16)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(16)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(16)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(16)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(16)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(16)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(17)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">17</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(17, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -480,9 +480,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Marcelo Cavalcante de Araujo</div><div class="text-[10px] text-slate-500">Diretor Presidente Executivo (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (85) 99159-6163</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ marcelo.cavalcante@alvoar.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (85) 99159-6163 / marcelo.cavalcante@alvoar.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(17)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(17)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(17)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(17)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(17)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(17)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(17)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(18)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">18</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(18, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -500,9 +500,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Fernando Gonçalves Neto</div><div class="text-[10px] text-slate-500">Diretor Presidente Executivo (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (14) 3405-2100</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ presidencia@jacto.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="text-[10px] text-slate-500">🏢 Fixo da Empresa</div></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaEmail(18)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(18)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(18)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaEmail(18)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(18)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(19)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">19</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(19, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -520,9 +520,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Sergio Luis Mesquita</div><div class="text-[10px] text-slate-500">Sócio-Administrador e Diretor Geral</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (14) 3302-4411</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ diretoria@marvi.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="text-[10px] text-slate-500">🏢 Fixo da Empresa</div></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaEmail(19)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(19)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(19)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaEmail(19)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(19)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(20)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">20</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(20, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -540,9 +540,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Eduardo Bacelar</div><div class="text-[10px] text-slate-500">Diretor Presidente Executivo</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (31) 3369-1313</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ diretoria@minasmaquinas.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (31) 3369-1313 / diretoria@minasmaquinas.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(20)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(20)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(20)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(20)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(20)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(20)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(20)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(21)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">21</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(21, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -560,9 +560,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Ricardo Oliveira Selmi</div><div class="text-[10px] text-slate-500">Diretor Presidente (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (19) 3873-8400</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ presidencia@selmi.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (19) 3873-8400 / presidencia@selmi.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(21)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(21)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(21)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(21)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(21)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(21)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(21)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(22)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">22</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(22, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -580,9 +580,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Jeremias Silva Junior</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (44) 3676-8100</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ diretoria@astrafoods.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="text-[10px] text-slate-500">🏢 Fixo da Empresa</div></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaEmail(22)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(22)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(22)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaEmail(22)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(22)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(23)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">23</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(23, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -600,9 +600,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Marcelo Scalon Cerchi</div><div class="text-[10px] text-slate-500">Diretor Executivo (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (34) 3351-8000</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ diretoria@scala.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="text-[10px] text-slate-500">🏢 Fixo da Empresa</div></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaEmail(23)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(23)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(23)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaEmail(23)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(23)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(24)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">24</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(24, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -620,9 +620,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Dr. Eduardo Vianna de Andrade</div><div class="text-[10px] text-slate-500">Sócio-Diretor Clínico / Cardiologista Chefe</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 98765-4321</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ dr.eduardo@cardioprime.med.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 98765-4321 / dr.eduardo@cardioprime.med.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(24)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(24)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(24)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(24)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(24)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(24)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(24)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(25)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">25</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(25, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -640,9 +640,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Dr. Fernando Mendonca</div><div class="text-[10px] text-slate-500">Sócio-Diretor Clínico</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 9911-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ fernando@institutodeo.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 9911-1122 / fernando@institutodeo.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(25)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(25)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(25)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(25)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(25)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(25)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(25)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(26)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">26</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(26, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -660,9 +660,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Antonio Koster</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 91315-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ antonio@biscoitosdoc.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 91315-1122 / antonio@biscoitosdoc.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(26)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(26)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(26)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(26)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(26)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(26)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(26)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(27)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">27</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(27, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -680,9 +680,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Cristiano Fagundes</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (41) 91416-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ cristiano@eletromecnic.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (41) 91416-1122 / cristiano@eletromecnic.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(27)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(27)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(27)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(27)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(27)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(27)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(27)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(28)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">28</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(28, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -700,9 +700,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Ricardo Antunes</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (67) 91517-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ ricardo@agrogroscome.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (67) 91517-1122 / ricardo@agrogroscome.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(28)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(28)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(28)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(28)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(28)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(28)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(28)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(29)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">29</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(29, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -720,9 +720,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Henrique Toledo</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (31) 9818-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ henrique@agroexporttr.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (31) 9818-1122 / henrique@agroexporttr.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(29)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(29)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(29)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(29)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(29)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(29)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(29)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(30)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">30</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(30, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -740,9 +740,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Caio Borges</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 9919-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ caio@megalogarmaz.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 9919-1122 / caio@megalogarmaz.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(30)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(30)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(30)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(30)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(30)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(30)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(30)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(31)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">31</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(31, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -760,9 +760,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Dr. Marcelo Alencar</div><div class="text-[10px] text-slate-500">Sócio-Diretor Clínico</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 91020-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ marcelo@clnicadeespe.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 91020-1122 / marcelo@clnicadeespe.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(31)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(31)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(31)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(31)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(31)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(31)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(31)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(32)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">32</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(32, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -780,9 +780,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Renato Camargo</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 91424-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ renato@indstriadeco.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 91424-1122 / renato@indstriadeco.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(32)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(32)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(32)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(32)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(32)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(32)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(32)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(33)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">33</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(33, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -800,9 +800,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Antonio Cereser</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 91525-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ antonio@fundiousinag.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 91525-1122 / antonio@fundiousinag.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(33)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(33)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(33)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(33)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(33)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(33)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(33)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(34)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">34</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(34, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -820,9 +820,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Cristiano Mendonca</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (41) 9826-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ cristiano@sementesouro.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (41) 9826-1122 / cristiano@sementesouro.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(34)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(34)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(34)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(34)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(34)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(34)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(34)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(35)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">35</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(35, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -840,9 +840,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Ricardo Alvarenga</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (67) 9927-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ ricardo@brasilnobrec.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (67) 9927-1122 / ricardo@brasilnobrec.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(35)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(35)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(35)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(35)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(35)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(35)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(35)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(36)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">36</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(36, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -860,9 +860,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Henrique Castilho</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 91028-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ henrique@atacadocentr.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 91028-1122 / henrique@atacadocentr.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(36)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(36)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(36)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(36)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(36)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(36)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(36)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(37)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">37</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(37, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -880,9 +880,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Dr. Caio Vasconcellos</div><div class="text-[10px] text-slate-500">Sócio-Diretor Clínico</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 91129-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ caio@femmeprimeme.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 91129-1122 / caio@femmeprimeme.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(37)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(37)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(37)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(37)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(37)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(37)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(37)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(38)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">38</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(38, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -900,9 +900,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Paulo Toledo</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (41) 91533-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ paulo@moinhocentra.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (41) 91533-1122 / paulo@moinhocentra.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(38)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(38)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(38)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(38)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(38)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(38)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(38)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(39)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">39</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(39, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -920,9 +920,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Renato Borges</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (31) 9834-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ renato@estruturasme.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (31) 9834-1122 / renato@estruturasme.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(39)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(39)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(39)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(39)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(39)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(39)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(39)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(40)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">40</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(40, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -940,9 +940,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Antonio Alencar</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (41) 9935-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ antonio@cerealistaso.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (41) 9935-1122 / antonio@cerealistaso.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(40)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(40)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(40)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(40)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(40)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(40)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(40)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(41)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">41</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(41, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -960,9 +960,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Cristiano Medeiros</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (48) 91036-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ cristiano@cerealexport.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (48) 91036-1122 / cristiano@cerealexport.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(41)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(41)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(41)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(41)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(41)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(41)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(41)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(42)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">42</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(42, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -980,9 +980,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Ricardo Dornelles</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 91137-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ ricardo@transpesados.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 91137-1122 / ricardo@transpesados.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(42)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(42)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(42)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(42)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(42)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(42)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(42)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(43)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">43</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(43, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -1000,9 +1000,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Dr. Henrique Oliveira</div><div class="text-[10px] text-slate-500">Sócio-Diretor Clínico</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 91238-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ henrique@neurocenterd.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 91238-1122 / henrique@neurocenterd.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(43)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(43)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(43)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(43)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(43)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(43)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(43)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(44)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">44</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(44, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -1020,9 +1020,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Bruno Alvarenga</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (31) 9842-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ bruno@laticniosour.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (31) 9842-1122 / bruno@laticniosour.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(44)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(44)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(44)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(44)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(44)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(44)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(44)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(45)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">45</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(45, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -1040,9 +1040,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Paulo Castilho</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 9943-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ paulo@caldeirariae.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 9943-1122 / paulo@caldeirariae.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(45)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(45)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(45)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(45)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(45)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(45)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(45)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(46)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">46</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(46, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -1060,9 +1060,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Renato Vasconcellos</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 91044-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ renato@campofortedi.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 91044-1122 / renato@campofortedi.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(46)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(46)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(46)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(46)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(46)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(46)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(46)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(47)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">47</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(47, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -1080,9 +1080,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Antonio Koster</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 91145-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ antonio@globaltradee.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 91145-1122 / antonio@globaltradee.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(47)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(47)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(47)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(47)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(47)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(47)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(47)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(48)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">48</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(48, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -1100,9 +1100,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Cristiano Fagundes</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 91246-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ cristiano@comercialelo.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 91246-1122 / cristiano@comercialelo.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(48)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(48)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(48)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(48)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(48)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(48)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(48)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(49)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">49</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(49, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -1120,9 +1120,9 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Dr. Ricardo Antunes</div><div class="text-[10px] text-slate-500">Sócio-Diretor Clínico</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (31) 91347-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ ricardo@clingastroci.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (31) 91347-1122 / ricardo@clingastroci.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(49)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(49)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(49)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(49)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(49)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(49)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(49)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
-              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">
+              <tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A' && event.target.tagName !== 'INPUT' && event.target.tagName !== 'SELECT') openLeadModal(50)">
                 <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">50</td>
                 <td class="py-2.5 px-3 text-center"><button onclick="addProspectToCrm(50, 'prospeccao')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button></td>
                 <td class="py-2.5 px-3">
@@ -1140,7 +1140,7 @@
                 <td class="py-2.5 px-3"><div class="font-bold text-slate-900">Fernando Medeiros</div><div class="text-[10px] text-slate-500">Sócio-Diretor Geral (CEO)</div></td>
                 <td class="py-2.5 px-3 bg-slate-50/50"><div class="text-[10px] font-bold text-slate-700">📞 (11) 9951-1122</div><div class="text-[10px] text-slate-500 truncate max-w-[140px]">✉️ fernando@massastradic.com.br</div></td>
                 <td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100"><div class="font-mono text-emerald-700 font-bold text-[11px]">📱 (11) 9951-1122 / fernando@massastradic.com.br</div><span class="text-[9px] font-bold text-emerald-800">👤 WhatsApp Sócio</span></td>
-                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="contactViaWpp(50)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(50)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(50)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
+                <td class="py-2.5 px-3 text-center bg-indigo-50/30"><div class="flex items-center justify-center gap-1"><button onclick="openLeadModal(50)" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button><button onclick="contactViaWpp(50)" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button><button onclick="contactViaEmail(50)" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button><button onclick="contactViaPitch(50)" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button></div></td>
               </tr>
             </tbody>
           </table>
@@ -1356,6 +1356,116 @@
       </div>
     </div>
 
+  </div>
+
+  <!-- MODAL / DRAWER INTERATIVO DE ABORDAGEM & GESTÃO DO LEAD -->
+  <div id="leadActionModal" style="display: none;" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-white border border-slate-200 rounded-3xl shadow-2xl max-w-4xl w-full overflow-hidden my-auto">
+      
+      <!-- HEADER DO MODAL -->
+      <div class="bg-slate-900 text-white px-6 py-4 flex items-center justify-between">
+        <div class="space-y-1">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span id="modalLeadId" class="text-xs font-mono font-bold bg-slate-800 px-2 py-0.5 rounded text-slate-300">#0</span>
+            <h3 id="modalCompanyName" class="text-base sm:text-lg font-black tracking-tight text-white">Empresa</h3>
+            <span id="modalSegmentBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-900 text-blue-200 border border-blue-700">Segmento</span>
+          </div>
+          <p id="modalSubInfo" class="text-xs text-slate-400 font-mono">CNPJ • Cidade-UF • Idade</p>
+        </div>
+        <button onclick="closeLeadModal()" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center font-bold transition cursor-pointer text-sm">✕</button>
+      </div>
+
+      <!-- CORPO DO MODAL -->
+      <div class="p-6 space-y-4 max-h-[80vh] overflow-y-auto bg-slate-50/50">
+        
+        <!-- CARD DADOS SOCIETÁRIOS & DECISORES -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div>
+            <h4 class="font-bold text-slate-800 uppercase tracking-wider text-[11px] mb-2 flex items-center gap-1.5"><i class="fa-solid fa-building text-slate-500"></i> Estrutura da Empresa</h4>
+            <div class="space-y-1 text-slate-600">
+              <p><b>🏛️ Natureza Jurídica:</b> <span id="modalTipoSocietario" class="font-medium text-slate-900">-</span></p>
+              <p><b>📑 Regime Tributário:</b> <span id="modalRegime" class="font-medium text-slate-900">-</span></p>
+              <p><b>🏭 CNAE Principal:</b> <span id="modalCnaePrincipal" class="font-mono text-slate-900 font-bold">-</span></p>
+              <p><b>🌐 Site Oficial:</b> <span id="modalSite">-</span></p>
+            </div>
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-800 uppercase tracking-wider text-[11px] mb-2 flex items-center gap-1.5"><i class="fa-solid fa-users text-emerald-600"></i> Sócios & Decisores (QSA Oficial)</h4>
+            <div id="modalDecisoresList" class="space-y-2 max-h-36 overflow-y-auto"></div>
+          </div>
+        </div>
+
+        <!-- DUAS COLUNAS: EDITOR WHATSAPP & EDITOR E-MAIL DO LEAD -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          
+          <!-- COLUNA WHATSAPP -->
+          <div class="bg-emerald-50/50 p-4 rounded-2xl border border-emerald-200 space-y-3 flex flex-col justify-between shadow-xs">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-black text-emerald-950 flex items-center gap-1.5">
+                  <i class="fa-brands fa-whatsapp text-emerald-600 text-sm"></i> Abordagem WhatsApp do Lead
+                </span>
+                <span class="text-[10px] text-emerald-800 font-bold font-mono" id="modalWppTargetDisplay">📱 -</span>
+              </div>
+              <textarea id="modalWppTextarea" rows="7" class="w-full bg-white border border-emerald-300 rounded-xl p-3 text-xs font-sans leading-relaxed text-slate-800 focus:ring-2 focus:ring-emerald-500 focus:outline-none"></textarea>
+            </div>
+            <div class="pt-2 flex items-center gap-2">
+              <button onclick="modalSendWpp()" class="flex-1 py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold transition shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
+                <i class="fa-brands fa-whatsapp"></i> 📲 Disparar WhatsApp
+              </button>
+              <button onclick="copyModalWpp()" class="py-2.5 px-3.5 bg-emerald-100 hover:bg-emerald-200 text-emerald-900 border border-emerald-300 rounded-xl text-xs font-bold transition cursor-pointer">
+                📋 Copiar
+              </button>
+            </div>
+          </div>
+
+          <!-- COLUNA E-MAIL -->
+          <div class="bg-sky-50/50 p-4 rounded-2xl border border-sky-200 space-y-3 flex flex-col justify-between shadow-xs">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-black text-sky-950 flex items-center gap-1.5">
+                  <i class="fa-solid fa-envelope text-sky-600 text-sm"></i> E-mail de Abordagem do Lead
+                </span>
+                <span class="text-[10px] text-sky-800 font-bold font-mono truncate max-w-[180px]" id="modalEmailTargetDisplay">✉️ -</span>
+              </div>
+              <div>
+                <label class="text-[10px] font-bold text-slate-600">Assunto:</label>
+                <input type="text" id="modalEmailSubject" class="w-full mt-0.5 bg-white border border-sky-300 rounded-lg p-2 text-xs font-bold text-slate-800 focus:outline-none">
+              </div>
+              <textarea id="modalEmailTextarea" rows="5" class="w-full bg-white border border-sky-300 rounded-xl p-3 text-xs font-sans leading-relaxed text-slate-800 focus:ring-2 focus:ring-sky-500 focus:outline-none"></textarea>
+            </div>
+            <div class="pt-2 flex items-center gap-2">
+              <button onclick="modalSendEmail()" class="flex-1 py-2.5 px-3 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-extrabold transition shadow-xs flex items-center justify-center gap-1.5 cursor-pointer">
+                <i class="fa-solid fa-paper-plane"></i> ✉️ Disparar E-mail
+              </button>
+              <button onclick="copyModalEmail()" class="py-2.5 px-3.5 bg-sky-100 hover:bg-sky-200 text-sky-900 border border-sky-300 rounded-xl text-xs font-bold transition cursor-pointer">
+                📋 Copiar
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- BARRA DE GESTÃO DO CRM -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <label class="text-xs font-bold text-slate-800">📌 Etapa no Pipeline CRM:</label>
+            <select id="modalCrmStageSelect" class="bg-slate-50 border border-slate-300 rounded-xl px-3 py-1.5 text-xs font-extrabold text-slate-900 focus:outline-none">
+              <option value="prospeccao">1. Prospecção</option>
+              <option value="qualificacao">2. Qualificação</option>
+              <option value="contato">3. Abordagem / Contato</option>
+              <option value="reuniao">4. Reunião Agendada</option>
+              <option value="proposta">5. Proposta / Negociação</option>
+              <option value="fechado">6. Ganho / Fechado</option>
+            </select>
+          </div>
+          <button onclick="modalSaveCrmStage()" class="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-black transition shadow-xs cursor-pointer">
+            💾 Atualizar Lead no CRM
+          </button>
+        </div>
+
+      </div>
+    </div>
   </div>
 
   <!-- SCRIPT JAVASCRIPT MASTER COMPLETO -->
@@ -2994,13 +3104,199 @@
       document.getElementById('testTabContent').style.display = (tab === 'test') ? 'flex' : 'none';
       document.getElementById('connectTabContent').style.display = (tab === 'connect') ? 'flex' : 'none';
 
-      document.getElementById('tab-prospects-btn').className = (tab === 'prospects') ? 'tab-btn active-tab px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 cursor-pointer' : 'tab-btn px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 text-slate-700 hover:text-slate-900 cursor-pointer';
-      document.getElementById('tab-crm-btn').className = (tab === 'crm') ? 'tab-btn active-tab px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 cursor-pointer' : 'tab-btn px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 text-slate-700 hover:text-slate-900 cursor-pointer';
-      document.getElementById('tab-test-btn').className = (tab === 'test') ? 'tab-btn active-tab px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 bg-emerald-800 text-white cursor-pointer' : 'tab-btn px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 cursor-pointer';
-      document.getElementById('tab-connect-btn').className = (tab === 'connect') ? 'tab-btn active-tab px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 cursor-pointer' : 'tab-btn px-3.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 text-slate-700 hover:text-slate-900 cursor-pointer';
+      document.getElementById('tab-prospects-btn').className = (tab === 'prospects') ? 'tab-btn active-tab px-4 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 cursor-pointer bg-slate-900 text-white shadow-md' : 'tab-btn px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 text-slate-700 hover:text-slate-900 cursor-pointer bg-white border border-slate-200 shadow-xs';
+      document.getElementById('tab-crm-btn').className = (tab === 'crm') ? 'tab-btn active-tab px-4 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 cursor-pointer bg-blue-900 text-white shadow-md' : 'tab-btn px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 text-slate-700 hover:text-slate-900 cursor-pointer bg-white border border-slate-200 shadow-xs';
+      document.getElementById('tab-test-btn').className = (tab === 'test') ? 'tab-btn active-tab px-4 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 bg-emerald-700 text-white shadow-md cursor-pointer' : 'tab-btn px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 cursor-pointer';
+      document.getElementById('tab-connect-btn').className = (tab === 'connect') ? 'tab-btn active-tab px-4 py-2 rounded-xl text-xs font-black flex items-center gap-1.5 cursor-pointer bg-slate-900 text-white shadow-md' : 'tab-btn px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 text-slate-700 hover:text-slate-900 cursor-pointer bg-white border border-slate-200 shadow-xs';
 
       if (tab === 'crm') renderCrmPipeline();
       if (tab === 'test') { loadSelectedTemplate(); }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    var currentModalProspect = null;
+
+    function openLeadModal(id) {
+      var p = null;
+      for (var i = 0; i < prospects.length; i++) { if (prospects[i].id === id) { p = prospects[i]; break; } }
+      if (!p) return;
+      currentModalProspect = p;
+
+      var d1 = (p.decisores && p.decisores[0]) ? p.decisores[0] : { nome: 'Sócio', cargo: 'Diretor' };
+      var socioMobile = (d1.contato && isMobilePhone(d1.contato)) ? d1.contato : (isMobilePhone(p.fone) ? p.fone : '');
+      var targetEmail = p.email || 'daniel@prxcapital.com.br';
+
+      document.getElementById('modalLeadId').innerText = '#' + p.id;
+      document.getElementById('modalCompanyName').innerText = p.company;
+      document.getElementById('modalSegmentBadge').innerText = p.segmentoNome || 'Segmento';
+
+      var tipo = p.tipoSocietario || getTipoSocietario(p.company, p.cnaePrincipal);
+      var reg = p.regimeTributario || getRegimeTributario(p.company, tipo, p.segmentoNome, p.id);
+
+      document.getElementById('modalSubInfo').innerText = (p.cnpj || '') + ' • ' + (p.city || '') + '-' + (p.uf || '') + ' • ' + (p.idade || '');
+      document.getElementById('modalTipoSocietario').innerText = tipo;
+      document.getElementById('modalRegime').innerText = reg;
+      document.getElementById('modalCnaePrincipal').innerText = p.cnaePrincipal || '-';
+      document.getElementById('modalSite').innerHTML = p.site ? ('<a href="' + p.site + '" target="_blank" class="text-blue-600 hover:underline font-bold">' + p.site + '</a>') : '<span class="text-slate-400">Não informado</span>';
+
+      var decHtml = '';
+      if (p.decisores && p.decisores.length > 0) {
+        for (var dIdx = 0; dIdx < p.decisores.length; dIdx++) {
+          var d = p.decisores[dIdx];
+          var linkin = d.linkedin ? (' • <a href="' + d.linkedin + '" target="_blank" class="text-blue-600 font-bold hover:underline">LinkedIn</a>') : '';
+          var cont = d.contato ? (' • <span class="font-mono text-emerald-700 font-bold">' + d.contato + '</span>') : '';
+          decHtml += '<div class="p-2 bg-slate-50 rounded-xl border border-slate-200">' +
+                     '<p class="font-black text-slate-900 text-xs">' + d.nome + ' <span class="text-[10px] text-slate-500 font-normal">(' + d.cargo + ')</span>' + linkin + '</p>' +
+                     (cont ? ('<p class="text-[11px] text-slate-600 mt-0.5">' + cont + '</p>') : '') +
+                     '</div>';
+        }
+      } else {
+        decHtml = '<p class="text-slate-400 italic">Sócios do QSA listados na Receita Federal.</p>';
+      }
+      document.getElementById('modalDecisoresList').innerHTML = decHtml;
+
+      document.getElementById('modalWppTargetDisplay').innerText = socioMobile ? ('📱 ' + socioMobile + ' (' + d1.nome + ')') : '🏢 Sem WhatsApp direto';
+      var wppCustom = 'Olá, ' + d1.nome + '! Tudo bem?\\n\\nSou o Daniel Zanon, da PRX Capital (prxcapital.com.br).\\n\\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão e proteção de suas estruturas patrimoniais, físicas e jurídicas.\\n\\nNossas principais frentes de atuação abrangem:\\n\\n- Gestão de carteiras, investimentos e câmbio;\\n- Crédito estruturado, financiamentos e antecipação de recebíveis;\\n- Revisão e planejamento tributário, sucessório e societário;\\n- Proteção patrimonial e gestão de liquidez.\\n\\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez do patrimônio da ' + p.company + '.\\n\\nGostaria de agendar um diagnóstico inicial gratuito de 15 minutos para avaliar a eficiência da sua estrutura?\\n\\nUm abraço,\\n\\nDaniel Zanon | PRX Capital';
+      document.getElementById('modalWppTextarea').value = wppCustom;
+
+      document.getElementById('modalEmailTargetDisplay').innerText = '✉️ ' + targetEmail;
+      document.getElementById('modalEmailSubject').value = 'Alinhamento estratégico & multi-family office | A/C ' + d1.nome + ' (' + p.company + ')';
+      var emailCustom = 'Olá, ' + d1.nome + ' (' + p.company + '),\\n\\nMeu nome é Daniel Zanon, sou executivo da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira.\\n\\nA PRX desenvolve uma assessoria consultiva e exclusiva voltada para empresários e famílias com patrimônio, empresas operacionais e liquidez financeira.\\n\\nNossas frentes de atuação abrangem:\\n\\n1. Estruturação e revisão tributária, sucessória e societária;\\n2. Gestão e assessoria de investimentos e operações de câmbio;\\n3. Soluções de crédito, funding e antecipação de recebíveis;\\n4. Proteção patrimonial e gestão de liquidez.\\n\\nO propósito central é reduzir fricções tributárias e bancárias, viabilizar liquidez eficiente e proteger o patrimônio construído.\\n\\nGostaria de propor um alinhamento inicial de 15 minutos nesta semana para apresentar nossas soluções.\\n\\nVocê teria disponibilidade nesta semana?\\n\\nAtenciosamente,\\n\\nDaniel Zanon\\nExecutivo de Negócios | PRX Capital\\ndaniel@prxcapital.com.br\\nprxcapital.com.br';
+      document.getElementById('modalEmailTextarea').value = emailCustom;
+
+      var deals = getCrmDeals();
+      var deal = deals.find(function(x) { return x.prospectId === p.id || (x.company && x.company.toLowerCase() === p.company.toLowerCase()); });
+      document.getElementById('modalCrmStageSelect').value = deal ? deal.stage : 'prospeccao';
+
+      document.getElementById('leadActionModal').style.display = 'flex';
+    }
+
+    function closeLeadModal() {
+      document.getElementById('leadActionModal').style.display = 'none';
+      currentModalProspect = null;
+    }
+
+    function modalSendWpp() {
+      if (!currentModalProspect) return;
+      var p = currentModalProspect;
+      var d1 = (p.decisores && p.decisores[0]) ? p.decisores[0] : { nome: 'Sócio', cargo: 'Diretor' };
+      var socioMobile = (d1.contato && isMobilePhone(d1.contato)) ? d1.contato : (isMobilePhone(p.fone) ? p.fone : '');
+      var digits = socioMobile.replace(/\\D/g, '');
+      var msg = document.getElementById('modalWppTextarea').value;
+
+      var deals = getCrmDeals();
+      var deal = deals.find(function(x) { return x.prospectId === p.id || (x.company && x.company.toLowerCase() === p.company.toLowerCase()); });
+      if (!deal) {
+        deal = addProspectToCrm(p.id, 'contato');
+        deals = getCrmDeals();
+        deal = deals.find(function(x) { return x.prospectId === p.id; });
+      } else {
+        deal.stage = 'contato';
+      }
+      var nowStr = new Date().toLocaleString('pt-BR');
+      deal.tentativasTotal = (deal.tentativasTotal || 0) + 1;
+      if (!deal.tentativasCanais) deal.tentativasCanais = { whatsapp: 0, email: 0, linkedin: 0 };
+      deal.tentativasCanais.whatsapp = (deal.tentativasCanais.whatsapp || 0) + 1;
+      deal.lastChannel = 'WhatsApp';
+      deal.lastTargetType = 'Sócio / Decisor';
+      deal.lastRecipientName = d1.nome;
+      deal.lastRecipientContact = socioMobile;
+      deal.lastContactAt = nowStr;
+      if (!deal.historyLogs) deal.historyLogs = [];
+      deal.historyLogs.unshift({
+        id: 'att_wpp_' + Date.now(),
+        date: nowStr,
+        attemptNumber: deal.tentativasTotal,
+        canal: 'WhatsApp',
+        alvoTipo: 'Sócio / Decisor',
+        recipientName: d1.nome,
+        recipientContact: socioMobile,
+        status: 'Abordagem WhatsApp Enviada',
+        textNote: 'Tentativa #' + deal.tentativasTotal + ': Envio no WhatsApp de ' + d1.nome + ' (' + p.company + ').'
+      });
+      saveCrmDeals(deals);
+      renderTable();
+      renderCrmPipeline();
+
+      window.open('https://api.whatsapp.com/send?phone=55' + digits + '&text=' + encodeURIComponent(msg), '_blank');
+      showToast('📲 WhatsApp aberto e registrado na etapa 3. Abordagem / Contato do CRM!');
+    }
+
+    function modalSendEmail() {
+      if (!currentModalProspect) return;
+      var p = currentModalProspect;
+      var d1 = (p.decisores && p.decisores[0]) ? p.decisores[0] : { nome: 'Sócio', cargo: 'Diretor' };
+      var targetEmail = p.email || 'daniel@prxcapital.com.br';
+      var subj = document.getElementById('modalEmailSubject').value;
+      var body = document.getElementById('modalEmailTextarea').value;
+
+      var deals = getCrmDeals();
+      var deal = deals.find(function(x) { return x.prospectId === p.id || (x.company && x.company.toLowerCase() === p.company.toLowerCase()); });
+      if (!deal) {
+        deal = addProspectToCrm(p.id, 'contato');
+        deals = getCrmDeals();
+        deal = deals.find(function(x) { return x.prospectId === p.id; });
+      } else {
+        deal.stage = 'contato';
+      }
+      var nowStr = new Date().toLocaleString('pt-BR');
+      deal.tentativasTotal = (deal.tentativasTotal || 0) + 1;
+      if (!deal.tentativasCanais) deal.tentativasCanais = { whatsapp: 0, email: 0, linkedin: 0 };
+      deal.tentativasCanais.email = (deal.tentativasCanais.email || 0) + 1;
+      deal.lastChannel = 'E-mail';
+      deal.lastTargetType = 'Sócio / Decisor';
+      deal.lastRecipientName = d1.nome;
+      deal.lastRecipientContact = targetEmail;
+      deal.lastContactAt = nowStr;
+      if (!deal.historyLogs) deal.historyLogs = [];
+      deal.historyLogs.unshift({
+        id: 'att_mail_' + Date.now(),
+        date: nowStr,
+        attemptNumber: deal.tentativasTotal,
+        canal: 'E-mail',
+        alvoTipo: 'Sócio / Decisor',
+        recipientName: d1.nome,
+        recipientContact: targetEmail,
+        status: 'E-mail Enviado',
+        textNote: 'Tentativa #' + deal.tentativasTotal + ': E-mail enviado para ' + d1.nome + ' (' + targetEmail + ').'
+      });
+      saveCrmDeals(deals);
+      renderTable();
+      renderCrmPipeline();
+
+      window.location.href = 'mailto:' + targetEmail + '?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body);
+      showToast('✉️ E-mail aberto e registrado na etapa 3. Abordagem / Contato do CRM!');
+    }
+
+    function copyModalWpp() {
+      var txt = document.getElementById('modalWppTextarea').value;
+      try { navigator.clipboard.writeText(txt); } catch(e) {}
+      showToast('📋 Mensagem de WhatsApp copiada!');
+    }
+
+    function copyModalEmail() {
+      var subj = document.getElementById('modalEmailSubject').value;
+      var body = document.getElementById('modalEmailTextarea').value;
+      try { navigator.clipboard.writeText('Assunto: ' + subj + '\\n\\n' + body); } catch(e) {}
+      showToast('📋 Assunto e Corpo de E-mail copiados!');
+    }
+
+    function modalSaveCrmStage() {
+      if (!currentModalProspect) return;
+      var p = currentModalProspect;
+      var stage = document.getElementById('modalCrmStageSelect').value;
+      var deals = getCrmDeals();
+      var deal = deals.find(function(x) { return x.prospectId === p.id || (x.company && x.company.toLowerCase() === p.company.toLowerCase()); });
+      if (!deal) {
+        deal = addProspectToCrm(p.id, stage);
+      } else {
+        deal.stage = stage;
+        saveCrmDeals(deals);
+      }
+      renderTable();
+      renderCrmPipeline();
+      showToast('💾 Lead #' + p.id + ' atualizado para etapa: ' + stage.toUpperCase());
+      closeLeadModal();
     }
 
     function filterData() {
@@ -3065,6 +3361,7 @@
           var stageLabel = (crmStage === 'contato') ? '3. Contato' : (crmStage === 'qualificacao' ? '2. Qualificado' : (crmStage === 'reuniao' ? '4. Reunião' : (crmStage === 'fechado' ? '6. Fechado' : '1. Prospecção')));
           var crmBtn = inCrm ? '<span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold text-[10px]" title="Etapa: ' + stageLabel + '">✓ CRM (' + stageLabel + ')</span>' : '<button onclick="addProspectToCrm(' + p.id + ', \\'prospeccao\\')" class="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-bold cursor-pointer">+ CRM</button>';
 
+          var viewBtn = '<button onclick="openLeadModal(' + p.id + ')" class="px-2 py-1 bg-slate-900 hover:bg-slate-800 text-white rounded text-[10px] font-black shadow-2xs cursor-pointer">👁️ Ver</button>';
           var wppBtn = socioMobile ? '<button onclick="contactViaWpp(' + p.id + ')" class="px-2 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">📲 Wpp</button>' : '';
           var emailBtn = '<button onclick="contactViaEmail(' + p.id + ')" class="px-2 py-1 bg-sky-600 hover:bg-sky-700 text-white rounded text-[10px] font-extrabold shadow-2xs cursor-pointer">✉️ Email</button>';
           var pitchBtn = '<button onclick="contactViaPitch(' + p.id + ')" class="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded text-[10px] font-bold cursor-pointer">📋 Copiar Pitch</button>';
@@ -3079,7 +3376,7 @@
 
           var cnaeSecHtml = p.cnaeSecundarios ? '<div class="text-[10px] text-slate-500 line-clamp-2 mt-0.5" title="' + p.cnaeSecundarios + '"><span class="font-bold text-slate-700">Secundários:</span> ' + p.cnaeSecundarios + '</div>' : '';
 
-          html += '<tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row">' +
+          html += '<tr class="hover:bg-slate-50 transition border-b border-slate-100 lead-row cursor-pointer" onclick="if(event.target.tagName !== \'BUTTON\' && event.target.tagName !== \'A\' && event.target.tagName !== \'INPUT\' && event.target.tagName !== \'SELECT\') openLeadModal(' + p.id + ')">' +
                     '<td class="py-2.5 px-3 text-center font-mono font-bold text-slate-400">' + p.id + '</td>' +
                     '<td class="py-2.5 px-3 text-center">' + crmBtn + '</td>' +
                     '<td class="py-2.5 px-3">' +
@@ -3106,7 +3403,7 @@
                     '</td>' +
                     '<td class="py-2.5 px-3 bg-emerald-50/40 border-x border-emerald-100">' + socioContatoHtml + '</td>' +
                     '<td class="py-2.5 px-3 text-center bg-indigo-50/30">' +
-                      '<div class="flex items-center justify-center gap-1">' + wppBtn + emailBtn + pitchBtn + '</div>' +
+                      '<div class="flex items-center justify-center gap-1">' + viewBtn + wppBtn + emailBtn + pitchBtn + '</div>' +
                     '</td>' +
                   '</tr>';
         }
@@ -3337,7 +3634,7 @@
             var d = stDeals[k];
             var idadeTxt = d.idade ? ' • ⏳ ' + d.idade : '';
             var tipoTxt = d.tipoSocietario ? ' • 🏛️ ' + d.tipoSocietario : '';
-            cardHtml += '<div class="bg-white rounded-xl p-3 border border-slate-200 shadow-2xs space-y-1.5">' +
+            cardHtml += '<div class="bg-white rounded-xl p-3 border border-slate-200 shadow-2xs space-y-1.5 cursor-pointer hover:border-slate-400 hover:shadow-sm transition" onclick="openLeadModal(' + (d.prospectId || 1) + ')">' +
                           '<div class="flex items-center justify-between">' +
                             '<span class="text-[10px] font-bold text-slate-500 font-mono">#' + (d.prospectId || '') + '</span>' +
                             '<span class="text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200">' + (d.segmentoNome || 'Segmento') + '</span>' +
@@ -3348,8 +3645,9 @@
                             '<span class="font-bold text-slate-800">👤 ' + d.decisorNome + '</span>' +
                             '<span class="text-[10px] text-emerald-600 font-mono font-bold">R$ ' + ((d.patrimonio || 15000000)/1000000).toFixed(0) + 'M</span>' +
                           '</div>' +
-                          '<div class="bg-slate-50 p-1.5 rounded-lg border border-slate-200 text-[9px] text-slate-700 font-bold">' +
-                            '🎯 ' + (d.tentativasTotal || 1) + ' Tentativa(s) • ' + (d.lastChannel || 'Disparo Resend API') +
+                          '<div class="bg-slate-50 p-1.5 rounded-lg border border-slate-200 text-[9px] text-slate-700 font-bold flex items-center justify-between">' +
+                            '<span>🎯 ' + (d.tentativasTotal || 1) + ' Tentativa(s)</span>' +
+                            '<span class="text-slate-500 font-mono">' + (d.lastChannel || 'Disparo Resend API') + '</span>' +
                           '</div>' +
                         '</div>';
           }
