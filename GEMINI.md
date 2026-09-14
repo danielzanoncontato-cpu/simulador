@@ -36,7 +36,7 @@
      2. **Nuvem e Repositório GitHub (GitHub Pages):**
         - Repositório: `https://github.com/danielzanoncontato-cpu.github.io/simulador` -> `https://github.com/danielzanoncontato-cpu/simulador`
         - Dashboard Online: `https://danielzanoncontato-cpu.github.io/simulador/`
-        - CRM Online: `https://danielzanoncontato-cpu.github.io/simulador/crm_prx.html`
+        - Central de Testes: `https://danielzanoncontato-cpu.github.io/simulador/teste_disparo_direto.html`
 
 7. **PADRÃO DAS 24 COLUNAS DE MINERAÇÃO E ENRIQUECIMENTO:**
    - Colunas obrigatórias: `ID, Empresa, CNPJ, Idade, UF, Cidade, Segmento, Cor_Segmento, Fonte_Dados, Setor, Tem_Site, Site, Descricao, CNAE_Principal, CNAE_Secundarios, Decisor_1_Nome, Decisor_1_Cargo, Decisor_1_LinkedIn, Decisor_1_Contato, Decisor_2_Nome, Decisor_2_Cargo, Decisor_2_LinkedIn, Decisor_2_Contato, Score_PRX`.
@@ -47,10 +47,8 @@
    - O sistema, dashboards e robôs DEVEM operar exclusivamente via integração **Resend API** (Chave de API ativa do projeto).
    - NUNCA perguntar, propor, sugerir ou solicitar senhas de aplicativo Google ou redirecionar a infraestrutura de disparo para fora do Resend. Todo disparo automatizado é processado pelo motor Resend.
 
-9. **HISTÓRICO PERMANENTE E OBRIGATÓRIO DE ABORDAGENS NO CRM:**
-   - Todo e qualquer disparo, envio teste ou abordagem executada (WhatsApp, E-mail/Resend ou LinkedIn) DEVE ser registrado de forma indelével e persistente no CRM na etapa **`3. Abordagem / Contato`**.
-   - Cada registro no CRM deve conter: contador incremental de tentativas (`tentativasTotal`), discriminação por canal (`tentativasCanais`: whatsapp, email, linkedin), definição explícita do alvo (`Sócio / Decisor` vs `Empresa / Diretoria Geral`), nome do destinatário, canal de contato exato e histórico cronológico detalhado (`historyLogs`).
-   - Leads já abordados ou disparados DEVEM aparecer imediatamente na interface visual do Pipeline Kanban e nas métricas consolidadas.
+9. **INTEGRAÇÃO TOTAL ENTRE DASHBOARD E CENTRAL DE TESTES:**
+   - Todo disparo direto, teste e cópia de pitch executados pelo operador utilizam a infraestrutura Resend API e os links diretos do WhatsApp Web, sem intermediários ou telas de login.
 
 10. **PADRÃO UNIFICADO E OFICIAL DE ABORDAGEM WHATSAPP E E-MAIL (PRIMEIRO CONTATO):**
     - Todo disparo, botão de envio no dashboard (`📲 WhatsApp`, `📋 Copiar Pitch`, modal de detalhes `openLeadModal`), gerador de scripts e central de testes DEVE utilizar estritamente o modelo de cópia oficial consultiva de alto impacto da PRX Capital, personalizando dinamicamente `{NOME}` (Decisor 1 / Sócio) e `{EMPRESA}`:
