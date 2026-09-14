@@ -114,7 +114,7 @@
               <button onclick="copyEmailFull()" class="btn btn-light" style="padding: 4px 10px; font-size: 11px;">📋 Copiar Tudo</button>
             </div>
             <input type="text" id="emailSubject" value="Alinhamento estratégico & multi-family office | Daniel Zanon (PRX Capital)" class="input-box" style="background: #ffffff; margin-bottom: 8px;">
-            <textarea id="emailBody" rows="7" class="textarea" style="background: #ffffff;">Olá, {NOME}! Tudo bem?&#10;&#10;Meu nome é Daniel Zanon, sou executivo da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira.&#10;&#10;A PRX desenvolve uma assessoria consultiva e exclusiva voltada para empresários e famílias com patrimônio, empresas operacionais e liquidez financeira.&#10;&#10;Nossas frentes de atuação abrangem:&#10;1. Estruturação e revisão tributária, sucessória e societária;&#10;2. Gestão e assessoria de investimentos e operações de câmbio;&#10;3. Soluções de crédito, funding e antecipação de recebíveis;&#10;4. Proteção patrimonial e gestão de liquidez.&#10;&#10;O propósito central é reduzir fricções tributárias e bancárias, viabilizar liquidez eficiente e proteger o patrimônio construído.&#10;&#10;Gostaria de propor um alinhamento inicial de 15 minutos nesta semana para apresentar nossas soluções.&#10;&#10;Você teria disponibilidade nesta semana?&#10;&#10;Atenciosamente,&#10;Daniel Zanon&#10;Executivo de Negócios | PRX Capital&#10;daniel@prxcapital.com.br</textarea>
+            <textarea id="emailBody" rows="7" class="textarea" style="background: #ffffff;">Olá, {NOME}! Tudo bem?&#10;&#10;Meu nome é Daniel Zanon, sou executivo da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira.&#10;&#10;A PRX desenvolve uma assessoria consultiva e exclusiva voltada para empresários e famílias com patrimônio, empresas operacionais e liquidez financeira.&#10;&#10;Nossas frentes de atuação abrangem:&#10;1. Estruturação e revisão tributária, sucessória e societário;&#10;2. Gestão e assessoria de investimentos e operações de câmbio;&#10;3. Soluções de crédito, funding e antecipação de recebíveis;&#10;4. Proteção patrimonial e gestão de liquidez.&#10;&#10;O propósito central é reduzir fricções tributárias e bancárias, viabilizar liquidez eficiente e proteger o patrimônio construído da {EMPRESA}.&#10;&#10;Gostaria de propor um alinhamento inicial de 15 minutos nesta semana para apresentar nossas soluções.&#10;&#10;Você teria disponibilidade nesta semana?&#10;&#10;Atenciosamente,&#10;Daniel Zanon&#10;Executivo de Negócios | PRX Capital&#10;daniel@prxcapital.com.br</textarea>
           </div>
           <div style="margin-top: 12px;">
             <button onclick="dispatchEmail()" class="btn btn-blue" style="width: 100%;">✉️ Abrir e Disparar E-mail</button>
@@ -146,44 +146,60 @@
       showToast('📋 Assunto e E-mail copiados!');
     }
 
-    function selectPartner(target) {
-      if (target === 'todos') {
-        document.getElementById('targetName').value = 'Renato, Pardal e Diego';
-        document.getElementById('targetEmail').value = 'renato@prxcapital.com.br, pardal@prxcapital.com.br, diego@prxcapital.com.br';
-        showToast('🎯 Selecionado: Todos os 3 Sócios');
-      } else if (target === 'renato') {
-        document.getElementById('targetName').value = 'Renato';
-        document.getElementById('targetEmail').value = 'renato@prxcapital.com.br';
-        showToast('🎯 Selecionado: Renato');
-      } else if (target === 'pardal') {
-        document.getElementById('targetName').value = 'Pardal';
-        document.getElementById('targetEmail').value = 'pardal@prxcapital.com.br';
-        showToast('🎯 Selecionado: Pardal');
-      } else if (target === 'diego') {
-        document.getElementById('targetName').value = 'Diego';
-        document.getElementById('targetEmail').value = 'diego@prxcapital.com.br';
-        showToast('🎯 Selecionado: Diego');
+    function selectPartner(who) {
+      var nameInput = document.getElementById('targetName');
+      var emailInput = document.getElementById('targetEmail');
+      var compInput = document.getElementById('targetCompany');
+      if (who === 'todos') {
+        nameInput.value = 'Sócios PRX (Renato, Pardal e Diego)';
+        emailInput.value = 'renato@prxcapital.com.br, pardal@prxcapital.com.br, diego@prxcapital.com.br';
+        compInput.value = 'PRX Capital Multi-Family Office';
+      } else if (who === 'renato') {
+        nameInput.value = 'Renato';
+        emailInput.value = 'renato@prxcapital.com.br';
+        compInput.value = 'PRX Capital';
+      } else if (who === 'pardal') {
+        nameInput.value = 'Pardal';
+        emailInput.value = 'pardal@prxcapital.com.br';
+        compInput.value = 'PRX Capital';
+      } else if (who === 'diego') {
+        nameInput.value = 'Diego';
+        emailInput.value = 'diego@prxcapital.com.br';
+        compInput.value = 'PRX Capital';
       }
+      updateTemplatePlaceholders();
+      showToast('👤 Dados preenchidos para ' + who + '!');
+    }
+
+    function updateTemplatePlaceholders() {
+      var name = document.getElementById('targetName').value || 'Daniel Zanon';
+      var comp = document.getElementById('targetCompany').value || 'PRX Capital';
+      var baseWpp = 'Olá, {NOME}! Tudo bem?\\n\\nSou o Daniel Zanon, da PRX Capital (prxcapital.com.br).\\n\\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão e proteção de suas estruturas patrimoniais, físicas e jurídicas.\\n\\nNossas principais frentes de atuação abrangem:\\n- Gestão de carteiras, investimentos e câmbio;\\n- Crédito estruturado, financiamentos e antecipação de recebíveis;\\n- Revisão e planejamento tributário, sucessório e societário;\\n- Proteção patrimonial e gestão de liquidez.\\n\\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez do patrimônio da {EMPRESA}.\\n\\nGostaria de agendar um diagnóstico inicial gratuito de 15 minutos para avaliar a eficiência da sua estrutura?\\n\\nUm abraço,\\nDaniel Zanon | PRX Capital';
+      var baseEmail = 'Olá, {NOME}! Tudo bem?\\n\\nMeu nome é Daniel Zanon, sou executivo da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira.\\n\\nA PRX desenvolve uma assessoria consultiva e exclusiva voltada para empresários e famílias com patrimônio, empresas operacionais e liquidez financeira.\\n\\nNossas frentes de atuação abrangem:\\n1. Estruturação e revisão tributária, sucessória e societário;\\n2. Gestão e assessoria de investimentos e operações de câmbio;\\n3. Soluções de crédito, funding e antecipação de recebíveis;\\n4. Proteção patrimonial e gestão de liquidez.\\n\\nO propósito central é reduzir fricções tributárias e bancárias, viabilizar liquidez eficiente e proteger o patrimônio construído da {EMPRESA}.\\n\\nGostaria de propor um alinhamento inicial de 15 minutos nesta semana para apresentar nossas soluções.\\n\\nVocê teria disponibilidade nesta semana?\\n\\nAtenciosamente,\\nDaniel Zanon\\nExecutivo de Negócios | PRX Capital\\ndaniel@prxcapital.com.br';
+      document.getElementById('msgWpp').value = baseWpp.replace(/{NOME}/g, name).replace(/{EMPRESA}/g, comp);
+      document.getElementById('emailBody').value = baseEmail.replace(/{NOME}/g, name).replace(/{EMPRESA}/g, comp);
     }
 
     function dispatchWpp() {
-      var phone = document.getElementById('targetWpp').value.replace(/\\D/g, '');
-      var name = document.getElementById('targetName').value;
-      var comp = document.getElementById('targetCompany').value;
-      var txt = document.getElementById('msgWpp').value.replace(/{NOME}/g, name).replace(/{EMPRESA}/g, comp);
-      if (phone.length >= 10 && phone.indexOf('55') !== 0) phone = '55' + phone;
-      window.open('https://api.whatsapp.com/send?phone=' + phone + '&text=' + encodeURIComponent(txt), '_blank');
-      showToast('📲 WhatsApp Aberto com sucesso!');
+      var wpp = document.getElementById('targetWpp').value;
+      var msg = document.getElementById('msgWpp').value;
+      var digits = (wpp || '').replace(/\\D/g, '');
+      if (digits.indexOf('55') === 0 && digits.length >= 12) {}
+      else if (digits.length >= 10) { digits = '55' + digits; }
+      var url = 'https://api.whatsapp.com/send?phone=' + digits + '&text=' + encodeURIComponent(msg);
+      try { navigator.clipboard.writeText(msg); } catch(e) {}
+      window.open(url, '_blank');
+      showToast('📲 WhatsApp Aberto!');
     }
 
     function dispatchEmail() {
       var email = document.getElementById('targetEmail').value;
-      var name = document.getElementById('targetName').value;
-      var comp = document.getElementById('targetCompany').value;
-      var subj = document.getElementById('emailSubject').value.replace(/{NOME}/g, name).replace(/{EMPRESA}/g, comp);
-      var body = document.getElementById('emailBody').value.replace(/{NOME}/g, name).replace(/{EMPRESA}/g, comp);
-      window.open('mailto:' + email + '?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body), '_self');
-      showToast('✉️ E-mail Aberto no seu cliente de correio!');
+      var subj = document.getElementById('emailSubject').value;
+      var body = document.getElementById('emailBody').value;
+      var mailUri = 'mailto:' + encodeURIComponent(email) + '?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(body);
+      try { navigator.clipboard.writeText('Assunto: ' + subj + '\\n\\n' + body); } catch(e) {}
+      window.open(mailUri, '_self');
+      showToast('✉️ E-mail Aberto!');
     }
   </script>
 </body>
