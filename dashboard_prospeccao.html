@@ -605,8 +605,8 @@
     var TEMPLATES = {
       mfo_geral: {
         subject: 'Alinhamento estratégico & multi-family office | Daniel Zanon (PRX Capital)',
-        wpp: 'Olá, {NOME}! Tudo bem?\\n\\nSou o Daniel Zanon, da PRX Capital (prxcapital.com.br).\\n\\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão e proteção de suas estruturas patrimoniais, físicas e jurídicas.\\n\\nNossas principais frentes de atuação abrangem:\\n\\n- Gestão de carteiras, investimentos e câmbio;\\n- Crédito estruturado, financiamentos e antecipação de recebíveis;\\n- Revisão e planejamento tributário, sucessório e societário;\\n- Proteção patrimonial e gestão de liquidez.\\n\\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez do patrimônio da {EMPRESA}.\\n\\nGostaria de agendar um diagnóstico inicial gratuito de 15 minutos para avaliar a eficiência da sua estrutura?\\n\\nUm abraço,\\nDaniel Zanon | PRX Capital',
-        email: 'Olá, {NOME}! Tudo bem?\\n\\nMeu nome é Daniel Zanon, sou executivo da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira.\\n\\nA PRX desenvolve uma assessoria consultiva e exclusiva voltada para empresários e famílias com patrimônio, empresas operacionais e liquidez financeira.\\n\\nNossas frentes de atuação abrangem:\\n\\n1. Estruturação e revisão tributária, sucessória e societária;\\n2. Gestão e assessoria de investimentos e operações de câmbio;\\n3. Soluções de crédito, funding e antecipação de recebíveis;\\n4. Proteção patrimonial e gestão de liquidez.\\n\\nO propósito central é reduzir fricções tributárias e bancárias, viabilizar liquidez eficiente e proteger o patrimônio construído.\\n\\nGostaria de propor um alinhamento inicial de 15 minutos nesta semana para apresentar nossas soluções.\\n\\nVocê teria disponibilidade nesta semana?\\n\\nAtenciosamente,\\nDaniel Zanon\\nExecutivo de Negócios | PRX Capital\\ndaniel@prxcapital.com.br'
+        wpp: 'Olá, {NOME}! Tudo bem?\\n\\nSou o Daniel Zanon, da PRX Capital (prxcapital.com.br).\\n\\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão e proteção de suas estruturas patrimoniais, físicas e jurídicas.\\n\\nNossas principais frentes de atuação abrangem:\\n- Gestão de carteiras, investimentos e câmbio;\\n- Crédito estruturado, financiamentos e antecipação de recebíveis;\\n- Revisão e planejamento tributário, sucessório e societário;\\n- Proteção patrimonial e gestão de liquidez.\\n\\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez do patrimônio da {EMPRESA}.\\n\\nGostaria de agendar um diagnóstico inicial gratuito de 15 minutos para avaliar a eficiência da sua estrutura?\\n\\nUm abraço,\\nDaniel Zanon | PRX Capital',
+        email: 'Olá, {NOME}! Tudo bem?\\n\\nMeu nome é Daniel Zanon, sou executivo da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira.\\n\\nA PRX desenvolve uma assessoria consultiva e exclusiva voltada para empresários e famílias com patrimônio, empresas operacionais e liquidez financeira.\\n\\nNossas frentes de atuação abrangem:\\n1. Estruturação e revisão tributária, sucessória e societária;\\n2. Gestão e assessoria de investimentos e operações de câmbio;\\n3. Soluções de crédito, funding e antecipação de recebíveis;\\n4. Proteção patrimonial e gestão de liquidez.\\n\\nO propósito central é reduzir fricções tributárias e bancárias, viabilizar liquidez eficiente e proteger o patrimônio construído da {EMPRESA}.\\n\\nGostaria de propor um alinhamento inicial de 15 minutos nesta semana para apresentar nossas soluções.\\n\\nVocê teria disponibilidade nesta semana?\\n\\nAtenciosamente,\\nDaniel Zanon\\nExecutivo de Negócios | PRX Capital\\ndaniel@prxcapital.com.br'
       },
       agro: {
         subject: 'Diagnóstico Estratégico Agro & Estruturação de Funding | PRX Capital',
@@ -634,6 +634,172 @@
         email: 'Olá, {NOME},\\n\\nA PRX Capital assessora o setor logístico na otimização de estrutura de capital, monetização de ativos e crédito estruturado de longo prazo.\\n\\nPodemos agendar uma call breve de 15 minutos?\\n\\nAtenciosamente,\\nDaniel Zanon | PRX Capital'
       }
     };
+
+    function getOfficialWppMessage(p) {
+      if (!p) return '';
+      var d1 = (p.decisores && p.decisores.length > 0 && p.decisores[0].nome) ? p.decisores[0] : { nome: 'Sócio-Diretor' };
+      var t = (typeof TEMPLATES !== 'undefined' && TEMPLATES.mfo_geral) ? TEMPLATES.mfo_geral : null;
+      var raw = t ? t.wpp : 'Olá, {NOME}! Tudo bem?\\n\\nSou o Daniel Zanon, da PRX Capital (prxcapital.com.br).\\n\\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão e proteção de suas estruturas patrimoniais, físicas e jurídicas.\\n\\nNossas principais frentes de atuação abrangem:\\n- Gestão de carteiras, investimentos e câmbio;\\n- Crédito estruturado, financiamentos e antecipação de recebíveis;\\n- Revisão e planejamento tributário, sucessório e societário;\\n- Proteção patrimonial e gestão de liquidez.\\n\\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez do patrimônio da {EMPRESA}.\\n\\nGostaria de agendar um diagnóstico inicial gratuito de 15 minutos para avaliar a eficiência da sua estrutura?\\n\\nUm abraço,\\nDaniel Zanon | PRX Capital';
+      return raw.replace(/{NOME}/g, d1.nome).replace(/{EMPRESA}/g, p.company || 'sua empresa');
+    }
+
+    function getOfficialEmailSubject(p) {
+      if (!p) return 'Alinhamento estratégico & multi-family office | Daniel Zanon (PRX Capital)';
+      return 'Alinhamento estratégico & multi-family office | Daniel Zanon (PRX Capital)';
+    }
+
+    function getOfficialEmailBody(p) {
+      if (!p) return '';
+      var d1 = (p.decisores && p.decisores.length > 0 && p.decisores[0].nome) ? p.decisores[0] : { nome: 'Sócio-Diretor' };
+      var t = (typeof TEMPLATES !== 'undefined' && TEMPLATES.mfo_geral) ? TEMPLATES.mfo_geral : null;
+      var raw = t ? t.email : 'Olá, {NOME}! Tudo bem?\\n\\nMeu nome é Daniel Zanon, sou executivo da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira.\\n\\nA PRX desenvolve uma assessoria consultiva e exclusiva voltada para empresários e famílias com patrimônio, empresas operacionais e liquidez financeira.\\n\\nNossas frentes de atuação abrangem:\\n1. Estruturação e revisão tributária, sucessória e societária;\\n2. Gestão e assessoria de investimentos e operações de câmbio;\\n3. Soluções de crédito, funding e antecipação de recebíveis;\\n4. Proteção patrimonial e gestão de liquidez.\\n\\nO propósito central é reduzir fricções tributárias e bancárias, viabilizar liquidez eficiente e proteger o patrimônio construído da {EMPRESA}.\\n\\nGostaria de propor um alinhamento inicial de 15 minutos nesta semana para apresentar nossas soluções.\\n\\nVocê teria disponibilidade nesta semana?\\n\\nAtenciosamente,\\nDaniel Zanon\\nExecutivo de Negócios | PRX Capital\\ndaniel@prxcapital.com.br';
+      return raw.replace(/{NOME}/g, d1.nome).replace(/{EMPRESA}/g, p.company || 'sua empresa');
+    }
+
+    function openWhatsAppDirect(phoneStr, text) {
+      var digits = (phoneStr || '').replace(/\\D/g, '');
+      if (digits.indexOf('55') === 0 && digits.length >= 12) {}
+      else if (digits.length >= 10) { digits = '55' + digits; }
+      var url = 'https://api.whatsapp.com/send?phone=' + digits + '&text=' + encodeURIComponent(text);
+      try { navigator.clipboard.writeText(text); } catch(e) {}
+      window.open(url, '_blank');
+    }
+
+    function openEmailDirect(emailStr, subjectStr, bodyStr) {
+      var mailUri = 'mailto:' + encodeURIComponent(emailStr) + '?subject=' + encodeURIComponent(subjectStr) + '&body=' + encodeURIComponent(bodyStr);
+      try { navigator.clipboard.writeText('Assunto: ' + subjectStr + '\\n\\n' + bodyStr); } catch(e) {}
+      window.open(mailUri, '_self');
+    }
+
+    function findProspectById(id) {
+      if (id === null || id === undefined) return null;
+      var numId = parseInt(id, 10);
+      for (var i = 0; i < prospects.length; i++) {
+        if (prospects[i].id === numId || prospects[i].id == id) return prospects[i];
+      }
+      return null;
+    }
+
+    function addProspectToCrm(id, targetStage) {
+      var p = findProspectById(id);
+      if (!p) return;
+      var deals = getCrmDeals();
+      var existing = deals.find(function(x) { return x.prospectId === p.id; });
+      if (existing) { existing.stage = targetStage; }
+      else {
+        var d1 = (p.decisores && p.decisores[0]) ? p.decisores[0] : { nome: 'Sócio', cargo: 'Diretor' };
+        deals.unshift({
+          id: 'deal_p_' + p.id,
+          prospectId: p.id,
+          company: p.company,
+          cnpj: p.cnpj,
+          idade: p.idade,
+          city: p.city,
+          uf: p.uf,
+          segmentoNome: p.segmentoNome,
+          decisorNome: d1.nome,
+          stage: targetStage || 'prospeccao',
+          patrimonio: 25000000,
+          tentativasTotal: 1,
+          lastChannel: 'Disparo Resend API'
+        });
+      }
+      saveCrmDeals(deals);
+      renderCrmPipeline();
+      updateDynamicCounts();
+    }
+
+    function contactViaWpp(id) {
+      var p = findProspectById(id);
+      if (!p) return;
+      var d1 = (p.decisores && p.decisores[0]) ? p.decisores[0] : { nome: 'Sócio-Diretor', cargo: 'Diretor' };
+      var fone = (d1.contato && d1.contato.indexOf('9') !== -1) ? d1.contato : (p.fone && p.fone.indexOf('9') !== -1 ? p.fone : (d1.contato || p.fone));
+      var msg = getOfficialWppMessage(p);
+      addProspectToCrm(p.id, 'contato');
+      openWhatsAppDirect(fone, msg);
+      showToast('📲 WhatsApp Aberto com Pitch Oficial e registrado no CRM!');
+    }
+
+    function contactViaEmail(id) {
+      var p = findProspectById(id);
+      if (!p) return;
+      var subj = getOfficialEmailSubject(p);
+      var body = getOfficialEmailBody(p);
+      addProspectToCrm(p.id, 'contato');
+      openEmailDirect(p.email, subj, body);
+      showToast('✉️ E-mail Aberto com Minuta Oficial e registrado no CRM!');
+    }
+
+    function contactViaPitch(id) {
+      var p = findProspectById(id);
+      if (!p) return;
+      var txt = getOfficialWppMessage(p);
+      try { navigator.clipboard.writeText(txt); } catch(e) {}
+      addProspectToCrm(p.id, 'contato');
+      showToast('📋 Pitch oficial copiado e registrado no CRM!');
+    }
+
+    function openLeadModal(id) {
+      var p = findProspectById(id);
+      if (!p) return;
+      currentModalProspect = p;
+      var d1 = (p.decisores && p.decisores[0]) ? p.decisores[0] : { nome: 'Sócio-Diretor', cargo: 'Diretor' };
+      var mId = document.getElementById('modalLeadId'); if (mId) mId.innerText = '#' + p.id;
+      var mComp = document.getElementById('modalCompanyName'); if (mComp) mComp.innerText = p.company;
+      var mSeg = document.getElementById('modalSegmentBadge'); if (mSeg) mSeg.innerText = p.segmentoNome || 'Segmento';
+      var mSub = document.getElementById('modalSubInfo'); if (mSub) mSub.innerText = (p.cnpj || '') + ' • ' + (p.city || '') + '-' + (p.uf || '') + ' • ' + (p.idade || '');
+      var mTipo = document.getElementById('modalTipoSocietario'); if (mTipo) mTipo.innerText = p.tipoSocietario || 'LTDA';
+      var mReg = document.getElementById('modalRegime'); if (mReg) mReg.innerText = p.regimeTributario || 'Lucro Real';
+      var mCnae = document.getElementById('modalCnaePrincipal'); if (mCnae) mCnae.innerText = p.cnaePrincipal || '-';
+      var mSite = document.getElementById('modalSite'); if (mSite) mSite.innerHTML = p.site ? ('<a href="' + p.site + '" target="_blank" style="color: #2563eb; font-weight: 700;">' + p.site + '</a>') : '<span style="color: #94a3b8;">Não informado</span>';
+      var decHtml = '';
+      if (p.decisores && p.decisores.length > 0) {
+        for (var dIdx = 0; dIdx < p.decisores.length; dIdx++) {
+          var d = p.decisores[dIdx];
+          decHtml += '<div style="padding: 6px 10px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 11px;"><b>' + d.nome + '</b> (' + d.cargo + ') • <span style="font-family: monospace; color: #047857;">' + (d.contato || '') + '</span></div>';
+        }
+      }
+      var mDecList = document.getElementById('modalDecisoresList'); if (mDecList) mDecList.innerHTML = decHtml;
+      var mWppTxt = document.getElementById('modalWppTextarea'); if (mWppTxt) mWppTxt.value = getOfficialWppMessage(p);
+      var mMailSubj = document.getElementById('modalEmailSubject'); if (mMailSubj) mMailSubj.value = getOfficialEmailSubject(p);
+      var mMailTxt = document.getElementById('modalEmailTextarea'); if (mMailTxt) mMailTxt.value = getOfficialEmailBody(p);
+      var mModal = document.getElementById('leadActionModal'); if (mModal) mModal.style.display = 'flex';
+    }
+
+    function closeLeadModal() {
+      var mModal = document.getElementById('leadActionModal'); if (mModal) mModal.style.display = 'none';
+      currentModalProspect = null;
+    }
+
+    function modalSendWpp() {
+      if (!currentModalProspect) return;
+      var p = currentModalProspect;
+      var d1 = (p.decisores && p.decisores[0]) ? p.decisores[0] : { nome: 'Sócio-Diretor', cargo: 'Diretor' };
+      var fone = (d1.contato && d1.contato.indexOf('9') !== -1) ? d1.contato : p.fone;
+      var msg = document.getElementById('modalWppTextarea').value;
+      addProspectToCrm(p.id, 'contato');
+      openWhatsAppDirect(fone, msg);
+      showToast('📲 WhatsApp Aberto com Pitch Oficial e registrado no CRM!');
+    }
+
+    function modalSendEmail() {
+      if (!currentModalProspect) return;
+      var p = currentModalProspect;
+      var subj = document.getElementById('modalEmailSubject').value;
+      var body = document.getElementById('modalEmailTextarea').value;
+      addProspectToCrm(p.id, 'contato');
+      openEmailDirect(p.email, subj, body);
+      showToast('✉️ E-mail Aberto com Minuta Oficial e registrado no CRM!');
+    }
+
+    function modalSaveCrmStage() {
+      if (!currentModalProspect) return;
+      var stage = document.getElementById('modalCrmStageSelect').value;
+      addProspectToCrm(currentModalProspect.id, stage);
+      renderCrmPipeline();
+      showToast('💾 Lead atualizado no CRM!');
+      closeLeadModal();
+    }
 
     function renderCrmPipeline() {
       try {
@@ -686,11 +852,23 @@
     window.getCrmDeals = getCrmDeals;
     window.saveCrmDeals = saveCrmDeals;
     window.updateDynamicCounts = updateDynamicCounts;
+    window.contactViaWpp = contactViaWpp;
+    window.contactViaEmail = contactViaEmail;
+    window.contactViaPitch = contactViaPitch;
+    window.openLeadModal = openLeadModal;
+    window.closeLeadModal = closeLeadModal;
+    window.modalSendWpp = modalSendWpp;
+    window.modalSendEmail = modalSendEmail;
+    window.modalSaveCrmStage = modalSaveCrmStage;
+    window.addProspectToCrm = addProspectToCrm;
+    window.getOfficialWppMessage = getOfficialWppMessage;
+    window.getOfficialEmailSubject = getOfficialEmailSubject;
+    window.getOfficialEmailBody = getOfficialEmailBody;
+    window.TEMPLATES = TEMPLATES;
   </script>
 </head>
 <body class="antialiased bg-slate-50 text-slate-900 flex flex-col p-2 sm:p-3 w-full min-h-screen">
 
-  <!-- AVISO FLUTUANTE DE CÓPIA E AÇÕES -->
   <div id="copyToast" style="display: none; position: fixed; bottom: 24px; right: 24px; z-index: 99999; background: #0f172a; color: #ffffff; padding: 14px 22px; border-radius: 14px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); font-weight: 700; font-size: 12px; align-items: center; gap: 10px;">
     <div style="width: 10px; height: 10px; border-radius: 50%; background: #34d399;"></div>
     <p id="copyToastText" style="color: #f8fafc;">Ação realizada com sucesso!</p>
@@ -2818,29 +2996,6 @@
       showToast('📋 Assunto e E-mail copiados!');
     }
 
-    function openWhatsAppDirect(phoneStr, text) {
-      var digits = (phoneStr || '').replace(/\\D/g, '');
-      if (digits.indexOf('55') === 0 && digits.length >= 12) {}
-      else if (digits.length >= 10) { digits = '55' + digits; }
-      var url = 'https://api.whatsapp.com/send?phone=' + digits + '&text=' + encodeURIComponent(text);
-      try { navigator.clipboard.writeText(text); } catch(e) {}
-      window.open(url, '_blank');
-    }
-
-    function openEmailDirect(emailStr, subjectStr, bodyStr) {
-      var mailUri = 'mailto:' + encodeURIComponent(emailStr) + '?subject=' + encodeURIComponent(subjectStr) + '&body=' + encodeURIComponent(bodyStr);
-      try { navigator.clipboard.writeText('Assunto: ' + subjectStr + '\\n\\n' + bodyStr); } catch(e) {}
-      window.open(mailUri, '_self');
-    }
-
-    function findProspectById(id) {
-      if (id === null || id === undefined) return null;
-      var numId = parseInt(id, 10);
-      for (var i = 0; i < prospects.length; i++) {
-        if (prospects[i].id === numId || prospects[i].id == id) return prospects[i];
-      }
-      return null;
-    }
 
     function triggerTestWpp() {
       var wpp = document.getElementById('testTargetWpp') ? document.getElementById('testTargetWpp').value : '';
@@ -2905,125 +3060,6 @@
       } catch(e) {}
     }
 
-    function openLeadModal(id) {
-      var p = findProspectById(id);
-      if (!p) return;
-      currentModalProspect = p;
-      var d1 = (p.decisores && p.decisores[0]) ? p.decisores[0] : { nome: 'Sócio', cargo: 'Diretor' };
-      var mId = document.getElementById('modalLeadId'); if (mId) mId.innerText = '#' + p.id;
-      var mComp = document.getElementById('modalCompanyName'); if (mComp) mComp.innerText = p.company;
-      var mSeg = document.getElementById('modalSegmentBadge'); if (mSeg) mSeg.innerText = p.segmentoNome || 'Segmento';
-      var mSub = document.getElementById('modalSubInfo'); if (mSub) mSub.innerText = (p.cnpj || '') + ' • ' + (p.city || '') + '-' + (p.uf || '') + ' • ' + (p.idade || '');
-      var mTipo = document.getElementById('modalTipoSocietario'); if (mTipo) mTipo.innerText = p.tipoSocietario || 'LTDA';
-      var mReg = document.getElementById('modalRegime'); if (mReg) mReg.innerText = p.regimeTributario || 'Lucro Real';
-      var mCnae = document.getElementById('modalCnaePrincipal'); if (mCnae) mCnae.innerText = p.cnaePrincipal || '-';
-      var mSite = document.getElementById('modalSite'); if (mSite) mSite.innerHTML = p.site ? ('<a href="' + p.site + '" target="_blank" style="color: #2563eb; font-weight: 700;">' + p.site + '</a>') : '<span style="color: #94a3b8;">Não informado</span>';
-      var decHtml = '';
-      if (p.decisores && p.decisores.length > 0) {
-        for (var dIdx = 0; dIdx < p.decisores.length; dIdx++) {
-          var d = p.decisores[dIdx];
-          decHtml += '<div style="padding: 6px 10px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 11px;"><b>' + d.nome + '</b> (' + d.cargo + ') • <span style="font-family: monospace; color: #047857;">' + (d.contato || '') + '</span></div>';
-        }
-      }
-      var mDecList = document.getElementById('modalDecisoresList'); if (mDecList) mDecList.innerHTML = decHtml;
-      var mWppTxt = document.getElementById('modalWppTextarea'); if (mWppTxt) mWppTxt.value = 'Olá, ' + d1.nome + '! Sou Daniel Zanon, da PRX Capital (prxcapital.com.br). Atuamos na gestão e proteção de estruturas patrimoniais, câmbio e crédito para a ' + p.company + '. Podemos agendar um bate-papo de 15 minutos?';
-      var mMailSubj = document.getElementById('modalEmailSubject'); if (mMailSubj) mMailSubj.value = 'Alinhamento estratégico PRX Capital | A/C ' + d1.nome + ' (' + p.company + ')';
-      var mMailTxt = document.getElementById('modalEmailTextarea'); if (mMailTxt) mMailTxt.value = 'Olá, ' + d1.nome + ' (' + p.company + '),\\n\\nMeu nome é Daniel Zanon, executivo da PRX Capital.\\n\\nAssessoramos empresários e grupos na otimização de liquidez, câmbio e governança tributária.\\n\\nPodemos agendar uma call breve nesta semana?\\n\\nAtenciosamente,\\nDaniel Zanon | PRX Capital';
-      var mModal = document.getElementById('leadActionModal'); if (mModal) mModal.style.display = 'flex';
-    }
-
-    function closeLeadModal() {
-      var mModal = document.getElementById('leadActionModal'); if (mModal) mModal.style.display = 'none';
-      currentModalProspect = null;
-    }
-
-    function modalSendWpp() {
-      if (!currentModalProspect) return;
-      var p = currentModalProspect;
-      var d1 = (p.decisores && p.decisores[0]) ? p.decisores[0] : { nome: 'Sócio', cargo: 'Diretor' };
-      var fone = (d1.contato && d1.contato.indexOf('9') !== -1) ? d1.contato : p.fone;
-      var msg = document.getElementById('modalWppTextarea').value;
-      addProspectToCrm(p.id, 'contato');
-      openWhatsAppDirect(fone, msg);
-      showToast('📲 WhatsApp Aberto e registrado no CRM!');
-    }
-
-    function modalSendEmail() {
-      if (!currentModalProspect) return;
-      var p = currentModalProspect;
-      var subj = document.getElementById('modalEmailSubject').value;
-      var body = document.getElementById('modalEmailTextarea').value;
-      addProspectToCrm(p.id, 'contato');
-      openEmailDirect(p.email, subj, body);
-      showToast('✉️ E-mail Aberto e registrado no CRM!');
-    }
-
-    function modalSaveCrmStage() {
-      if (!currentModalProspect) return;
-      var stage = document.getElementById('modalCrmStageSelect').value;
-      addProspectToCrm(currentModalProspect.id, stage);
-      renderCrmPipeline();
-      showToast('💾 Lead atualizado no CRM!');
-      closeLeadModal();
-    }
-
-    function addProspectToCrm(id, targetStage) {
-      var p = findProspectById(id);
-      if (!p) return;
-      var deals = getCrmDeals();
-      var existing = deals.find(function(x) { return x.prospectId === p.id; });
-      if (existing) { existing.stage = targetStage; }
-      else {
-        var d1 = (p.decisores && p.decisores[0]) ? p.decisores[0] : { nome: 'Sócio', cargo: 'Diretor' };
-        deals.unshift({
-          id: 'deal_p_' + p.id,
-          prospectId: p.id,
-          company: p.company,
-          cnpj: p.cnpj,
-          idade: p.idade,
-          city: p.city,
-          uf: p.uf,
-          segmentoNome: p.segmentoNome,
-          decisorNome: d1.nome,
-          stage: targetStage || 'prospeccao',
-          patrimonio: 25000000,
-          tentativasTotal: 1,
-          lastChannel: 'Disparo Resend API'
-        });
-      }
-      saveCrmDeals(deals);
-      renderCrmPipeline();
-      updateDynamicCounts();
-    }
-
-    function contactViaWpp(id) {
-      var p = findProspectById(id);
-      if (!p) return;
-      var d1 = (p.decisores && p.decisores[0]) ? p.decisores[0] : { nome: 'Sócio', cargo: 'Diretor' };
-      var fone = (d1.contato && d1.contato.indexOf('9') !== -1) ? d1.contato : p.fone;
-      addProspectToCrm(p.id, 'contato');
-      openWhatsAppDirect(fone, 'Olá, ' + d1.nome + '! Sou Daniel Zanon, da PRX Capital. Podemos conversar 15 min?');
-      showToast('📲 WhatsApp Aberto e registrado em 3. Abordagem no CRM!');
-    }
-
-    function contactViaEmail(id) {
-      var p = findProspectById(id);
-      if (!p) return;
-      var d1 = (p.decisores && p.decisores[0]) ? p.decisores[0] : { nome: 'Sócio', cargo: 'Diretor' };
-      addProspectToCrm(p.id, 'contato');
-      openEmailDirect(p.email, 'Alinhamento estratégico PRX Capital | A/C ' + d1.nome, 'Olá, ' + d1.nome + ' (' + p.company + '), gostaria de apresentar soluções de assessoria PRX Capital.');
-      showToast('✉️ E-mail Aberto e registrado em 3. Abordagem no CRM!');
-    }
-
-    function contactViaPitch(id) {
-      var p = findProspectById(id);
-      if (!p) return;
-      var d1 = (p.decisores && p.decisores[0]) ? p.decisores[0] : { nome: 'Sócio', cargo: 'Diretor' };
-      var txt = 'Olá, ' + d1.nome + '! Tudo bem?\\n\\nSou o Daniel Zanon, da PRX Capital (prxcapital.com.br).\\n\\nAtuamos como multi-family office e boutique financeira, assessorando empresários na gestão e proteção patrimonial.\\n\\nPodemos agendar um bate-papo de 15 minutos?';
-      try { navigator.clipboard.writeText(txt); } catch(e) {}
-      addProspectToCrm(p.id, 'contato');
-      showToast('📋 Pitch copiado e registrado no CRM!');
-    }
 
     function filterData() {
       var q = (document.getElementById('searchInput').value || '').toLowerCase().trim();
