@@ -278,8 +278,8 @@
         <button id="tab-connect-btn" onclick="switchMainTab('connect')" class="tab-btn">
           ⚡ Conexão Resend API
         </button>
-        <button onclick="exportCurrentCsv()" class="btn-export">
-          📥 Exportar CSV
+        <button onclick="exportCurrentCsv()" class="btn-export" title="Baixar arquivo CSV detalhado (Excel) diretamente no computador">
+          📥 Baixar CSV Excel
         </button>
       </div>
     </div>
@@ -293,8 +293,8 @@
 
       <!-- PAINEL DE CONTROLE DE FILTROS & BUSCA -->
       <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-        <div style="display: flex; align-items: center; gap: 8px; flex: 1; min-width: 300px;">
-          <input type="text" id="searchInput" oninput="filterData()" placeholder="🔍 Buscar por Empresa, Sócio, CNPJ, CNAE, Cidade, Tipo Societário..." style="width: 100%; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 8px 14px; font-size: 12px;">
+        <div style="display: flex; align-items: center; gap: 8px; flex: 1; min-width: 300px; flex-wrap: wrap;">
+          <input type="text" id="searchInput" oninput="filterData()" placeholder="🔍 Buscar por Empresa, Sócio, CNPJ, CNAE, Cidade, Tipo Societário..." style="flex: 1; min-width: 240px; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 8px 14px; font-size: 12px;">
           <select id="segmentFilter" onchange="filterData()" style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 8px 12px; font-size: 12px; font-weight: 700; color: #334155;">
             <option value="ALL">Todos os Segmentos</option>
             <option value="GREEN">Agronegócio</option>
@@ -310,6 +310,10 @@
             <option value="200">200 por página</option>
             <option value="999999">Ver Todos (3.900)</option>
           </select>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+          <a href="base_prospeccao_prx_detalhada.csv" download="base_prospeccao_prx_detalhada.csv" style="text-decoration: none; padding: 8px 14px; background: #047857; color: #ffffff; border-radius: 10px; font-size: 12px; font-weight: 800; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">📥 Baixar Base Completa (3.900 Leads)</a>
+          <button onclick="exportCurrentCsv()" style="padding: 8px 14px; background: #0f172a; color: #ffffff; border: none; border-radius: 10px; font-size: 12px; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">📥 Baixar Filtro Atual</button>
         </div>
       </div>
 
@@ -2380,9 +2384,10 @@
     function changePerPage() { var sel = document.getElementById('perPageFilter'); if (sel) { itemsPerPage = parseInt(sel.value, 10); currentPage = 1; renderTable(); } }
 
     function exportCurrentCsv() {
-      var csv = '\uFEFFID,Empresa,CNPJ,Idade,Tipo_Societario,Regime_Tributario,UF,Cidade,Segmento,Cor_Segmento,Fonte_Dados,Setor,Tem_Site,Site,Descricao,CNAE_Principal,CNAE_Secundarios,Telefone_Empresa,Email_Empresa,Decisor_1_Nome,Decisor_1_Cargo,Decisor_1_LinkedIn,Decisor_1_Contato,Decisor_2_Nome,Decisor_2_Cargo,Decisor_2_LinkedIn,Decisor_2_Contato,Score_PRX\n';
-      for (var i = 0; i < filteredDataList.length; i++) {
-        var p = filteredDataList[i];
+      var data = (filteredDataList && filteredDataList.length > 0) ? filteredDataList : prospects;
+      var csv = '\uFEFFID,Empresa,CNPJ,Idade,Tipo_Societario,Regime_Tributario,UF,Cidade,Segmento,Cor_Segmento,Fonte_Dados,Setor,Tem_Site,Site,Descricao,CNAE_Principal,CNAE_Secundarios,Telefone_Empresa,Email_Empresa,Decisor_1_Nome,Decisor_1_Cargo,Decisor_1_LinkedIn,Decisor_1_Contato,Decisor_2_Nome,Decisor_2_Cargo,Decisor_2_LinkedIn,Decisor_2_Contato,Score_PRX\r\n';
+      for (var i = 0; i < data.length; i++) {
+        var p = data[i];
         var d1 = (p.decisores && p.decisores.length > 0) ? p.decisores[0] : { nome: '', cargo: '', linkedin: '', contato: '' };
         var d2 = (p.decisores && p.decisores.length > 1) ? p.decisores[1] : { nome: '', cargo: '', linkedin: '', contato: '' };
         var clean = function(str) { return '"' + (str || '').toString().replace(/"/g, '""') + '"'; };
@@ -2417,18 +2422,25 @@
           clean(d2.linkedin),
           clean(d2Fone),
           clean(p.scorePrx || 'AAA (High-Ticket)')
-        ].join(',') + '\n';
+        ].join(',') + '\r\n';
         csv += row;
       }
       var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement('a');
-      a.href = url;
-      a.download = 'base_prospeccao_prx_detalhada.csv';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      showToast('📥 Base CSV detalhada exportada (' + filteredDataList.length.toLocaleString('pt-BR') + ' empresas)!');
+      if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveOrOpenBlob(blob, 'base_prospeccao_prx_detalhada.csv');
+      } else {
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.setAttribute('download', 'base_prospeccao_prx_detalhada.csv');
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function() {
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);
+        }, 300);
+      }
+      showToast('📥 Download do CSV iniciado diretamente no computador (' + data.length.toLocaleString('pt-BR') + ' empresas)!');
     }
 
     updateDynamicCounts();
