@@ -22,535 +22,17 @@
     .btn-green-tab.active-tab { background: #059669 !important; color: #ffffff !important; border-color: #059669 !important; }
     .btn-export { background: #0f172a; color: #ffffff; border-radius: 12px; font-weight: 700; font-size: 12px; padding: 8px 16px; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
     .btn-export:hover { background: #1e293b; }
-    .kanban-board { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 16px; align-items: flex-start; }
-    .kanban-col { min-width: 290px; max-width: 320px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 12px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
-    .col-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 8px; border-bottom: 1px solid #e2e8f0; font-weight: 800; font-size: 12px; }
-    .col-count { background: #f1f5f9; padding: 2px 8px; border-radius: 6px; font-family: monospace; font-size: 11px; font-weight: 800; color: #334155; }
-    .deal-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px; cursor: pointer; transition: all 0.15s; }
-    .deal-card:hover { border-color: #94a3b8; box-shadow: 0 2px 4px rgba(0,0,0,0.06); background: #ffffff; }
-    .deal-company { font-weight: 800; font-size: 13px; color: #0f172a; margin-bottom: 2px; }
-    .deal-sub { font-size: 10px; color: #64748b; font-family: monospace; margin-bottom: 6px; }
-    .deal-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 6px; font-size: 11px; }
     button { cursor: pointer; user-select: none; }
     input, select, textarea { font-family: inherit; }
   </style>
 
   <!-- CONTROLLER CRÍTICO DEFINIDO NO HEAD (DISPONIBILIDADE IMEDIATA 0MS) -->
   <script>
-    var defaultDeals = [
-  {
-    "id": "deal_prospect_1",
-    "prospectId": 1,
-    "company": "Castelo Alimentos S/A",
-    "cnpj": "07.814.284/0001-07",
-    "idade": "59 anos (1967)",
-    "tipoSocietario": "Sociedade Anônima (S/A Fechada)",
-    "regimeTributario": "Lucro Real",
-    "uf": "SP",
-    "city": "Jundiaí",
-    "segmentoNome": "Fábricas & Indústrias",
-    "setor": "Indústria de Alimentos e Bebidas",
-    "decisorNome": "Marcelo Cereser",
-    "decisorCargo": "Diretor Superintendente / CEO",
-    "decisorLinkedin": "https://www.linkedin.com/in/marcelo-cereser/",
-    "fone": "(11) 94187-6309",
-    "email": "marcelo.cereser@casteloalimentos.com.br",
-    "stage": "contato",
-    "patrimonio": 85000000,
-    "scoreBdr": 98,
-    "tentativasTotal": 3,
-    "tentativasCanais": { "whatsapp": 1, "email": 1, "linkedin": 1 },
-    "tentativasAlvos": { "socio": 3, "empresa": 0 },
-    "lastChannel": "WhatsApp",
-    "lastTargetType": "Sócio / CEO",
-    "lastRecipientName": "Marcelo Cereser (CEO)",
-    "lastRecipientContact": "(11) 94187-6309",
-    "lastContactAt": "12/09/2026, 17:40:00",
-    "createdAt": "2026-09-12T20:40:00.000Z",
-    "historyLogs": [
-      {
-        "id": "att_1_3",
-        "date": "12/09/2026, 17:40:00",
-        "attemptNumber": 3,
-        "canal": "WhatsApp",
-        "alvoTipo": "Sócio / CEO",
-        "recipientName": "Marcelo Cereser (CEO)",
-        "recipientContact": "(11) 94187-6309",
-        "status": "Mensagem de Abordagem WhatsApp enviada",
-        "textNote": "Tentativa #3: Envio de abordagem executiva direta no WhatsApp de Marcelo Cereser sobre diagnóstico MFO e governança corporativa."
-      },
-      {
-        "id": "att_1_2",
-        "date": "12/09/2026, 14:15:00",
-        "attemptNumber": 2,
-        "canal": "E-mail",
-        "alvoTipo": "Sócio / CEO",
-        "recipientName": "Marcelo Cereser",
-        "recipientContact": "marcelo.cereser@casteloalimentos.com.br",
-        "status": "Disparo Resend API Entregue",
-        "textNote": "Tentativa #2: E-mail executivo PRX Capital enviado apresentando cases de holding e eficiência tributária."
-      },
-      {
-        "id": "att_1_1",
-        "date": "12/09/2026, 10:30:00",
-        "attemptNumber": 1,
-        "canal": "LinkedIn",
-        "alvoTipo": "Sócio / CEO",
-        "recipientName": "Marcelo Cereser",
-        "recipientContact": "LinkedIn InMail",
-        "status": "Conexão enviada",
-        "textNote": "Tentativa #1: Conexão e mensagem inicial enviada no perfil oficial de Marcelo Cereser."
-      }
-    ],
-    "notes": [
-      { "date": "12/09/2026, 17:40:00", "text": "Empresa com 59 anos, líder em condimentos. Sócio receptivo a diagnóstico de holding e sucessão familiar." }
-    ]
-  },
-  {
-    "id": "deal_prospect_4",
-    "prospectId": 4,
-    "company": "Predilecta Alimentos Ltda.",
-    "cnpj": "62.546.387/0001-33",
-    "idade": "36 anos (1990)",
-    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
-    "regimeTributario": "Lucro Real",
-    "uf": "SP",
-    "city": "Matão",
-    "segmentoNome": "Fábricas & Indústrias",
-    "setor": "Indústria de Alimentos",
-    "decisorNome": "Jose Reynaldo Trevizaneli",
-    "decisorCargo": "Sócio-Administrador / Diretor Geral",
-    "decisorLinkedin": "https://www.linkedin.com/search/results/people/?keywords=Jose%20Reynaldo%20Trevizaneli%20Predilecta",
-    "fone": "(16) 99762-2100",
-    "email": "diretoria@predilecta.com.br",
-    "stage": "contato",
-    "patrimonio": 60000000,
-    "scoreBdr": 96,
-    "tentativasTotal": 2,
-    "tentativasCanais": { "whatsapp": 1, "email": 1, "linkedin": 0 },
-    "tentativasAlvos": { "socio": 2, "empresa": 0 },
-    "lastChannel": "WhatsApp",
-    "lastTargetType": "Sócio / Diretor",
-    "lastRecipientName": "Jose Reynaldo Trevizaneli",
-    "lastRecipientContact": "(16) 99762-2100",
-    "lastContactAt": "12/09/2026, 16:50:00",
-    "createdAt": "2026-09-12T19:50:00.000Z",
-    "historyLogs": [
-      {
-        "id": "att_4_2",
-        "date": "12/09/2026, 16:50:00",
-        "attemptNumber": 2,
-        "canal": "WhatsApp",
-        "alvoTipo": "Sócio / Diretor",
-        "recipientName": "Jose Reynaldo Trevizaneli",
-        "recipientContact": "(16) 99762-2100",
-        "status": "Abordagem WhatsApp Entregue",
-        "textNote": "Tentativa #2: Envio de mensagem personalizada apresentando soluções de liquidez e gestão de caixa industrial."
-      },
-      {
-        "id": "att_4_1",
-        "date": "12/09/2026, 11:20:00",
-        "attemptNumber": 1,
-        "canal": "E-mail",
-        "alvoTipo": "Sócio / Diretor",
-        "recipientName": "Jose Reynaldo Trevizaneli",
-        "recipientContact": "diretoria@predilecta.com.br",
-        "status": "Disparo Resend API Enviado",
-        "textNote": "Tentativa #1: Apresentação institucional de assessoria financeira PRX Capital."
-      }
-    ],
-    "notes": [
-      { "date": "12/09/2026, 16:50:00", "text": "Grande polo industrial de atomatados em Matão-SP. Avaliando linhas de crédito estruturado e liquidez." }
-    ]
-  },
-  {
-    "id": "deal_prospect_8",
-    "prospectId": 8,
-    "company": "Belagrícola Comércio S.A.",
-    "cnpj": "79.038.097/0001-81",
-    "idade": "41 anos (1985)",
-    "tipoSocietario": "Sociedade Anônima (S/A Fechada)",
-    "regimeTributario": "Lucro Real",
-    "uf": "PR",
-    "city": "Londrina",
-    "segmentoNome": "Agronegócio",
-    "setor": "Agronegócio / Distribuição de Insumos e Grãos",
-    "decisorNome": "Alberto Araujo",
-    "decisorCargo": "Diretor Presidente / CEO",
-    "decisorLinkedin": "https://www.linkedin.com/in/alberto-araujo-belagricola/",
-    "fone": "(43) 3371-2000",
-    "email": "presidencia@belagricola.com.br",
-    "stage": "contato",
-    "patrimonio": 120000000,
-    "scoreBdr": 99,
-    "tentativasTotal": 2,
-    "tentativasCanais": { "whatsapp": 0, "email": 1, "linkedin": 1 },
-    "tentativasAlvos": { "socio": 2, "empresa": 0 },
-    "lastChannel": "E-mail (Resend API)",
-    "lastTargetType": "Presidente / CEO",
-    "lastRecipientName": "Alberto Araujo (CEO)",
-    "lastRecipientContact": "presidencia@belagricola.com.br",
-    "lastContactAt": "12/09/2026, 15:30:00",
-    "createdAt": "2026-09-12T18:30:00.000Z",
-    "historyLogs": [
-      {
-        "id": "att_8_2",
-        "date": "12/09/2026, 15:30:00",
-        "attemptNumber": 2,
-        "canal": "E-mail",
-        "alvoTipo": "Presidente / CEO",
-        "recipientName": "Alberto Araujo",
-        "recipientContact": "presidencia@belagricola.com.br",
-        "status": "Disparo Resend API Entregue",
-        "textNote": "Tentativa #2: Proposta de diagnóstico em operações de Barter, CRA e proteção de patrimônio agro."
-      },
-      {
-        "id": "att_8_1",
-        "date": "12/09/2026, 09:45:00",
-        "attemptNumber": 1,
-        "canal": "LinkedIn",
-        "alvoTipo": "Presidente / CEO",
-        "recipientName": "Alberto Araujo",
-        "recipientContact": "LinkedIn",
-        "status": "Mensagem InMail",
-        "textNote": "Tentativa #1: Contato institucional inicial via LinkedIn."
-      }
-    ],
-    "notes": [
-      { "date": "12/09/2026, 15:30:00", "text": "Uma das maiores originadoras de grãos do Paraná. Potencial de R$ 120M em MFO e fundos exclusivos." }
-    ]
-  },
-  {
-    "id": "deal_prospect_10",
-    "prospectId": 10,
-    "company": "Special Dog (Manfrim Industrial)",
-    "cnpj": "56.813.280/0002-92",
-    "idade": "25 anos (2001)",
-    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
-    "regimeTributario": "Lucro Real",
-    "uf": "SP",
-    "city": "Sta. Cruz Rio Pardo",
-    "segmentoNome": "Fábricas & Indústrias",
-    "setor": "Indústria Pet Food e Nutrição Animal",
-    "decisorNome": "Mário Sérgio Manfrim",
-    "decisorCargo": "Diretor Geral / Sócio Fundador",
-    "decisorLinkedin": "https://www.linkedin.com/in/mario-sergio-manfrim/",
-    "fone": "(14) 3332-3000",
-    "email": "diretoria@specialdog.com.br",
-    "stage": "contato",
-    "patrimonio": 90000000,
-    "scoreBdr": 97,
-    "tentativasTotal": 3,
-    "tentativasCanais": { "whatsapp": 1, "email": 1, "linkedin": 1 },
-    "tentativasAlvos": { "socio": 3, "empresa": 0 },
-    "lastChannel": "WhatsApp",
-    "lastTargetType": "Diretor / Fundador",
-    "lastRecipientName": "Mário Sérgio Manfrim",
-    "lastRecipientContact": "(14) 3332-3000",
-    "lastContactAt": "12/09/2026, 16:30:00",
-    "createdAt": "2026-09-12T19:30:00.000Z",
-    "historyLogs": [
-      {
-        "id": "att_10_3",
-        "date": "12/09/2026, 16:30:00",
-        "attemptNumber": 3,
-        "canal": "WhatsApp",
-        "alvoTipo": "Diretor / Fundador",
-        "recipientName": "Mário Sérgio Manfrim",
-        "recipientContact": "(14) 3332-3000",
-        "status": "Abordagem Direta Realizada",
-        "textNote": "Tentativa #3: Contato direto apresentando soluções de fundos exclusivos de investimento e sucessão familiar."
-      }
-    ]
-  },
-  {
-    "id": "deal_prospect_12",
-    "prospectId": 12,
-    "company": "BR Footwear Exportadora",
-    "cnpj": "08.992.341/0001-55",
-    "idade": "18 anos (2008)",
-    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
-    "regimeTributario": "Lucro Real",
-    "uf": "RS",
-    "city": "Novo Hamburgo",
-    "segmentoNome": "Exportadoras",
-    "setor": "Exportação de Calçados e Artefatos",
-    "decisorNome": "Sergio Wajsbrot",
-    "decisorCargo": "Diretor Comercial & Câmbio",
-    "decisorLinkedin": "https://www.linkedin.com/search/results/people/?keywords=Sergio%20Wajsbrot%20BR%20Footwear",
-    "fone": "(11) 98900-1000",
-    "email": "cambio@brfootwear.com.br",
-    "stage": "contato",
-    "patrimonio": 110000000,
-    "scoreBdr": 99,
-    "tentativasTotal": 2,
-    "tentativasCanais": { "whatsapp": 1, "email": 1, "linkedin": 0 },
-    "tentativasAlvos": { "socio": 2, "empresa": 0 },
-    "lastChannel": "WhatsApp",
-    "lastTargetType": "Sócio / CEO",
-    "lastRecipientName": "Sergio Wajsbrot",
-    "lastRecipientContact": "(11) 98900-1000",
-    "lastContactAt": "12/09/2026, 16:10:00",
-    "createdAt": "2026-09-12T19:10:00.000Z",
-    "historyLogs": [
-      {
-        "id": "att_12_2",
-        "date": "12/09/2026, 16:10:00",
-        "attemptNumber": 2,
-        "canal": "WhatsApp",
-        "alvoTipo": "Sócio / CEO",
-        "recipientName": "Sergio Wajsbrot (CEO)",
-        "recipientContact": "(11) 98900-1000",
-        "status": "Abordagem de Câmbio & Hedge",
-        "textNote": "Tentativa #2: Apresentação de mesa de câmbio PRX e hedge cambial para exportação em 60 países."
-      }
-    ]
-  },
-  {
-    "id": "deal_prospect_24",
-    "prospectId": 24,
-    "company": "Cardioprime Diagnósticos Médicos S/S",
-    "cnpj": "18.942.311/0001-40",
-    "idade": "8 anos (2018)",
-    "tipoSocietario": "Sociedade Simples (S/S)",
-    "regimeTributario": "Lucro Presumido",
-    "uf": "SP",
-    "city": "São Paulo",
-    "segmentoNome": "Médicos PJ",
-    "setor": "Saúde & Medicina Diagnóstica PJ",
-    "decisorNome": "Dr. Eduardo Vianna de Andrade",
-    "decisorCargo": "Sócio-Diretor Clínico / Cardiologista Chefe",
-    "decisorLinkedin": "https://www.linkedin.com/search/results/people/?keywords=Dr%20Eduardo%20Vianna%20Cardiologista",
-    "fone": "(11) 98765-4321",
-    "email": "dr.eduardo@cardioprime.med.br",
-    "stage": "contato",
-    "patrimonio": 35000000,
-    "scoreBdr": 95,
-    "tentativasTotal": 2,
-    "tentativasCanais": { "whatsapp": 1, "email": 1, "linkedin": 0 },
-    "tentativasAlvos": { "socio": 2, "empresa": 0 },
-    "lastChannel": "WhatsApp",
-    "lastTargetType": "Sócio Médico PJ",
-    "lastRecipientName": "Dr. Eduardo Vianna",
-    "lastRecipientContact": "(11) 98765-4321",
-    "lastContactAt": "12/09/2026, 17:15:00",
-    "createdAt": "2026-09-12T20:15:00.000Z",
-    "historyLogs": [
-      {
-        "id": "att_24_2",
-        "date": "12/09/2026, 17:15:00",
-        "attemptNumber": 2,
-        "canal": "WhatsApp",
-        "alvoTipo": "Sócio Médico PJ",
-        "recipientName": "Dr. Eduardo Vianna",
-        "recipientContact": "(11) 98765-4321",
-        "status": "Abordagem Tributária Médica",
-        "textNote": "Tentativa #2: Envio de estudo de equiparação hospitalar e holding médica para redução de IRPJ/CSLL."
-      }
-    ]
-  },
-  {
-    "id": "deal_prospect_2",
-    "prospectId": 2,
-    "company": "ISPL (Crivialli Brasil)",
-    "cnpj": "01.125.487/0001-00",
-    "idade": "30 anos (1996)",
-    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
-    "regimeTributario": "Lucro Real",
-    "uf": "PR",
-    "city": "Maringá",
-    "segmentoNome": "Fábricas & Indústrias",
-    "setor": "Indústria Química / Higiene e Limpeza",
-    "decisorNome": "Reinaldo Crivialli",
-    "decisorCargo": "Sócio Fundador & Presidente",
-    "decisorLinkedin": "https://www.linkedin.com/search/results/people/?keywords=Reinaldo%20Crivialli",
-    "fone": "(44) 3218-4000",
-    "email": "diretoria@crivialli.com.br",
-    "stage": "qualificacao",
-    "patrimonio": 55000000,
-    "scoreBdr": 94,
-    "tentativasTotal": 1,
-    "tentativasCanais": { "whatsapp": 1, "email": 0, "linkedin": 0 },
-    "tentativasAlvos": { "socio": 1, "empresa": 0 },
-    "lastChannel": "WhatsApp",
-    "lastContactAt": "12/09/2026, 11:00:00",
-    "createdAt": "2026-09-12T11:00:00.000Z",
-    "historyLogs": [
-      {
-        "id": "att_2_1",
-        "date": "12/09/2026, 11:00:00",
-        "attemptNumber": 1,
-        "canal": "WhatsApp",
-        "alvoTipo": "Sócio Fundador",
-        "recipientName": "Reinaldo Crivialli",
-        "recipientContact": "(44) 3218-4000",
-        "status": "Qualificação Inicial",
-        "textNote": "Empresa familiar com alta demanda por planejamento patrimonial e proteção jurídica."
-      }
-    ]
-  },
-  {
-    "id": "deal_prospect_3",
-    "prospectId": 3,
-    "company": "Fertipar Fertilizantes do Paraná",
-    "cnpj": "77.854.743/0001-76",
-    "idade": "46 anos (1980)",
-    "tipoSocietario": "Sociedade Anônima (S/A Fechada)",
-    "regimeTributario": "Lucro Real",
-    "uf": "PR",
-    "city": "Paranaguá",
-    "segmentoNome": "Agronegócio",
-    "setor": "Indústria de Fertilizantes e Nutrição Vegetal",
-    "decisorNome": "Alceu Elias Feldmann",
-    "decisorCargo": "Diretor Presidente & Fundador",
-    "decisorLinkedin": "https://www.linkedin.com/search/results/people/?keywords=Alceu%20Feldmann%20Fertipar",
-    "fone": "(41) 3420-8000",
-    "email": "presidencia@fertipar.com.br",
-    "stage": "reuniao",
-    "patrimonio": 350000000,
-    "scoreBdr": 100,
-    "tentativasTotal": 2,
-    "tentativasCanais": { "whatsapp": 1, "email": 1, "linkedin": 0 },
-    "tentativasAlvos": { "socio": 2, "empresa": 0 },
-    "lastChannel": "WhatsApp",
-    "lastContactAt": "12/09/2026, 14:00:00",
-    "createdAt": "2026-09-12T14:00:00.000Z",
-    "historyLogs": [
-      {
-        "id": "att_3_2",
-        "date": "12/09/2026, 14:00:00",
-        "attemptNumber": 2,
-        "canal": "WhatsApp",
-        "alvoTipo": "Presidência",
-        "recipientName": "Alceu Feldmann",
-        "recipientContact": "(41) 3420-8000",
-        "status": "Reunião Confirmada",
-        "textNote": "Reunião de alinhamento estratégico agendada para apresentação do diagnóstico tributário e estrutura de CRA."
-      }
-    ]
-  },
-  {
-    "id": "deal_prospect_6",
-    "prospectId": 6,
-    "company": "Laticínios Porto Alegre Indústria e Comércio S/A",
-    "cnpj": "38.571.217/0001-64",
-    "idade": "35 anos (1991)",
-    "tipoSocietario": "Sociedade Anônima (S/A Fechada)",
-    "regimeTributario": "Lucro Real",
-    "uf": "MG",
-    "city": "Ponte Nova",
-    "segmentoNome": "Agronegócio",
-    "setor": "Indústria de Laticínios e Agronegócio",
-    "decisorNome": "João Lúcio Carneiro",
-    "decisorCargo": "Presidente do Conselho / Fundador",
-    "decisorLinkedin": "https://www.linkedin.com/search/results/people/?keywords=Joao%20Lucio%20Carneiro%20Porto%20Alegre",
-    "fone": "(31) 3819-2000",
-    "email": "diretoria@laticiniosportoalegre.com.br",
-    "stage": "proposta",
-    "patrimonio": 150000000,
-    "scoreBdr": 100,
-    "tentativasTotal": 3,
-    "tentativasCanais": { "whatsapp": 1, "email": 2, "linkedin": 0 },
-    "tentativasAlvos": { "socio": 3, "empresa": 0 },
-    "lastChannel": "E-mail (Resend API)",
-    "lastContactAt": "12/09/2026, 17:00:00",
-    "createdAt": "2026-09-12T17:00:00.000Z",
-    "historyLogs": [
-      {
-        "id": "att_6_3",
-        "date": "12/09/2026, 17:00:00",
-        "attemptNumber": 3,
-        "canal": "E-mail",
-        "alvoTipo": "Conselho",
-        "recipientName": "João Lúcio Carneiro",
-        "recipientContact": "diretoria@laticiniosportoalegre.com.br",
-        "status": "Proposta Comercial Entregue",
-        "textNote": "Envio da proposta formal de mandato de Multi-Family Office e estruturação de fundos exclusivos de investimento."
-      }
-    ]
-  },
-  {
-    "id": "deal_prospect_9",
-    "prospectId": 9,
-    "company": "Alimentos Dallas (Grupo Dallas)",
-    "cnpj": "02.483.916/0001-94",
-    "idade": "28 anos (1998)",
-    "tipoSocietario": "Sociedade Anônima (S/A Fechada)",
-    "regimeTributario": "Lucro Real",
-    "uf": "MS",
-    "city": "Nova Alvorada",
-    "segmentoNome": "Exportadoras",
-    "setor": "Indústria de Alimentos & Exportação",
-    "decisorNome": "Valdir José Zorzo",
-    "decisorCargo": "Presidente do Grupo e Fundador",
-    "decisorLinkedin": "https://www.linkedin.com/search/results/people/?keywords=Valdir%20Zorzo%20Dallas%20Alimentos",
-    "fone": "(67) 99981-1100",
-    "email": "diretoria@dallasalimentos.com.br",
-    "stage": "fechado",
-    "patrimonio": 85000000,
-    "scoreBdr": 100,
-    "tentativasTotal": 5,
-    "tentativasCanais": { "whatsapp": 2, "email": 2, "linkedin": 1 },
-    "tentativasAlvos": { "socio": 5, "empresa": 0 },
-    "lastChannel": "Mandato Fechado",
-    "lastContactAt": "12/09/2026, 19:15:00",
-    "createdAt": "2026-09-12T19:15:00.000Z",
-    "historyLogs": [
-      {
-        "id": "att_9_5",
-        "date": "12/09/2026, 19:15:00",
-        "attemptNumber": 5,
-        "canal": "WhatsApp",
-        "alvoTipo": "Presidente / Fundador",
-        "recipientName": "Valdir José Zorzo",
-        "recipientContact": "(67) 99981-1100",
-        "status": "Contrato Assinado",
-        "textNote": "Mandato PRX Capital fechado com sucesso para estruturação de Câmbio, Hedge e Gestão de Patrimônio Líquido."
-      }
-    ]
-  }
-];
     var prospects = [];
     var filteredDataList = [];
     var currentPage = 1;
     var itemsPerPage = 50;
     var currentModalProspect = null;
-
-    var _memStorage = {};
-    function safeGetStorage(key) {
-      try {
-        if (typeof window !== 'undefined' && 'localStorage' in window && window.localStorage !== null) {
-          var val = window.localStorage.getItem(key);
-          if (val !== null) return val;
-        }
-      } catch (e) {}
-      return _memStorage[key] || null;
-    }
-    function safeSetStorage(key, val) {
-      try {
-        if (typeof window !== 'undefined' && 'localStorage' in window && window.localStorage !== null) {
-          window.localStorage.setItem(key, val);
-        }
-      } catch (e) {}
-      _memStorage[key] = val;
-    }
-
-    function getDefaultCrmDeals() { return defaultDeals; }
-    function getCrmDeals() {
-      try {
-        var saved = safeGetStorage('prx_crm_deals');
-        if (saved) {
-          var parsed = JSON.parse(saved);
-          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-        }
-      } catch (e) {}
-      var def = getDefaultCrmDeals();
-      safeSetStorage('prx_crm_deals', JSON.stringify(def));
-      return def;
-    }
-    function saveCrmDeals(deals) {
-      try { safeSetStorage('prx_crm_deals', JSON.stringify(deals)); } catch (e) {}
-    }
 
     function showToast(msg) {
       var t = document.getElementById('copyToast');
@@ -567,34 +49,27 @@
         var total = Array.isArray(prospects) ? prospects.length : 3900;
         var badge = document.getElementById('tabProspectsBadge');
         if (badge) badge.innerText = total.toLocaleString('pt-BR');
-        var crmBadge = document.getElementById('tabCrmBadge');
-        if (crmBadge) crmBadge.innerText = getCrmDeals().length;
       } catch (e) {}
     }
 
     function switchMainTab(tab) {
       try {
         var pTab = document.getElementById('prospectsTabContent');
-        var cTab = document.getElementById('crmTabContent');
         var tTab = document.getElementById('testTabContent');
         var coTab = document.getElementById('connectTabContent');
 
         if (pTab) pTab.style.display = (tab === 'prospects') ? 'flex' : 'none';
-        if (cTab) cTab.style.display = (tab === 'crm') ? 'flex' : 'none';
         if (tTab) tTab.style.display = (tab === 'test') ? 'flex' : 'none';
         if (coTab) coTab.style.display = (tab === 'connect') ? 'flex' : 'none';
 
         var btnP = document.getElementById('tab-prospects-btn');
-        var btnC = document.getElementById('tab-crm-btn');
         var btnT = document.getElementById('tab-test-btn');
         var btnCo = document.getElementById('tab-connect-btn');
 
         if (btnP) btnP.className = (tab === 'prospects') ? 'tab-btn active-tab' : 'tab-btn';
-        if (btnC) btnC.className = (tab === 'crm') ? 'tab-btn active-tab' : 'tab-btn';
         if (btnT) btnT.className = (tab === 'test') ? 'tab-btn btn-green-tab active-tab' : 'tab-btn btn-green-tab';
         if (btnCo) btnCo.className = (tab === 'connect') ? 'tab-btn active-tab' : 'tab-btn';
 
-        if (tab === 'crm') { renderCrmPipeline(); }
         if (tab === 'test') { loadSelectedTemplate(); }
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } catch (err) {
@@ -680,44 +155,14 @@
       return null;
     }
 
-    function addProspectToCrm(id, targetStage) {
-      var p = findProspectById(id);
-      if (!p) return;
-      var deals = getCrmDeals();
-      var existing = deals.find(function(x) { return x.prospectId === p.id; });
-      if (existing) { existing.stage = targetStage; }
-      else {
-        var d1 = (p.decisores && p.decisores[0]) ? p.decisores[0] : { nome: 'Sócio', cargo: 'Diretor' };
-        deals.unshift({
-          id: 'deal_p_' + p.id,
-          prospectId: p.id,
-          company: p.company,
-          cnpj: p.cnpj,
-          idade: p.idade,
-          city: p.city,
-          uf: p.uf,
-          segmentoNome: p.segmentoNome,
-          decisorNome: d1.nome,
-          stage: targetStage || 'prospeccao',
-          patrimonio: 25000000,
-          tentativasTotal: 1,
-          lastChannel: 'Disparo Resend API'
-        });
-      }
-      saveCrmDeals(deals);
-      renderCrmPipeline();
-      updateDynamicCounts();
-    }
-
     function contactViaWpp(id) {
       var p = findProspectById(id);
       if (!p) return;
       var d1 = (p.decisores && p.decisores[0]) ? p.decisores[0] : { nome: 'Sócio-Diretor', cargo: 'Diretor' };
       var fone = (d1.contato && d1.contato.indexOf('9') !== -1) ? d1.contato : (p.fone && p.fone.indexOf('9') !== -1 ? p.fone : (d1.contato || p.fone));
       var msg = getOfficialWppMessage(p);
-      addProspectToCrm(p.id, 'contato');
       openWhatsAppDirect(fone, msg);
-      showToast('📲 WhatsApp Aberto com Pitch Oficial e registrado no CRM!');
+      showToast('📲 WhatsApp Aberto com Pitch Oficial!');
     }
 
     function contactViaEmail(id) {
@@ -725,9 +170,8 @@
       if (!p) return;
       var subj = getOfficialEmailSubject(p);
       var body = getOfficialEmailBody(p);
-      addProspectToCrm(p.id, 'contato');
       openEmailDirect(p.email, subj, body);
-      showToast('✉️ E-mail Aberto com Minuta Oficial e registrado no CRM!');
+      showToast('✉️ E-mail Aberto com Minuta Oficial!');
     }
 
     function contactViaPitch(id) {
@@ -735,8 +179,7 @@
       if (!p) return;
       var txt = getOfficialWppMessage(p);
       try { navigator.clipboard.writeText(txt); } catch(e) {}
-      addProspectToCrm(p.id, 'contato');
-      showToast('📋 Pitch oficial copiado e registrado no CRM!');
+      showToast('📋 Pitch oficial copiado!');
     }
 
     function openLeadModal(id) {
@@ -777,9 +220,8 @@
       var d1 = (p.decisores && p.decisores[0]) ? p.decisores[0] : { nome: 'Sócio-Diretor', cargo: 'Diretor' };
       var fone = (d1.contato && d1.contato.indexOf('9') !== -1) ? d1.contato : p.fone;
       var msg = document.getElementById('modalWppTextarea').value;
-      addProspectToCrm(p.id, 'contato');
       openWhatsAppDirect(fone, msg);
-      showToast('📲 WhatsApp Aberto com Pitch Oficial e registrado no CRM!');
+      showToast('📲 WhatsApp Aberto com Pitch Oficial!');
     }
 
     function modalSendEmail() {
@@ -787,70 +229,12 @@
       var p = currentModalProspect;
       var subj = document.getElementById('modalEmailSubject').value;
       var body = document.getElementById('modalEmailTextarea').value;
-      addProspectToCrm(p.id, 'contato');
       openEmailDirect(p.email, subj, body);
-      showToast('✉️ E-mail Aberto com Minuta Oficial e registrado no CRM!');
-    }
-
-    function modalSaveCrmStage() {
-      if (!currentModalProspect) return;
-      var stage = document.getElementById('modalCrmStageSelect').value;
-      addProspectToCrm(currentModalProspect.id, stage);
-      renderCrmPipeline();
-      showToast('💾 Lead atualizado no CRM!');
-      closeLeadModal();
-    }
-
-    function renderCrmPipeline() {
-      try {
-        var deals = getCrmDeals();
-        var stages = ['prospeccao', 'qualificacao', 'contato', 'reuniao', 'proposta', 'fechado'];
-        for (var s = 0; s < stages.length; s++) {
-          var st = stages[s];
-          var col = document.getElementById('col-items-' + st);
-          var countEl = document.getElementById('col-count-' + st);
-          var stDeals = [];
-          for (var i = 0; i < deals.length; i++) { if (deals[i].stage === st) stDeals.push(deals[i]); }
-          if (countEl) countEl.innerText = stDeals.length;
-          if (col) {
-            if (stDeals.length === 0) {
-              col.innerHTML = '<div style="padding: 16px; text-align: center; color: #94a3b8; font-size: 11px; font-style: italic; background: #ffffff; border-radius: 10px; border: 1px dashed #e2e8f0;">Nenhum lead nesta etapa.</div>';
-            } else {
-              var cardHtml = '';
-              for (var k = 0; k < stDeals.length; k++) {
-                var d = stDeals[k];
-                var idadeTxt = d.idade ? ' • ⏳ ' + d.idade : '';
-                cardHtml += '<div class="deal-card" onclick="openLeadModal(' + (d.prospectId || 1) + ')">' +
-                              '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">' +
-                                '<span style="font-size: 10px; font-weight: 700; color: #64748b; font-family: monospace;">#' + (d.prospectId || '') + '</span>' +
-                                '<span style="font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 4px; background: #e2e8f0; color: #334155;">' + (d.segmentoNome || 'Segmento') + '</span>' +
-                              '</div>' +
-                              '<div class="deal-company">' + d.company + '</div>' +
-                              '<div class="deal-sub">' + (d.cnpj || '') + idadeTxt + ' • ' + (d.city || '') + '-' + (d.uf || '') + '</div>' +
-                              '<div class="deal-footer">' +
-                                '<span style="font-weight: 700;">👤 ' + d.decisorNome + '</span>' +
-                                '<span style="color: #059669; font-weight: 800; font-family: monospace;">R$ ' + ((d.patrimonio || 15000000)/1000000).toFixed(0) + 'M</span>' +
-                              '</div>' +
-                              '<div style="margin-top: 6px; font-size: 10px; background: #ffffff; padding: 4px 8px; border-radius: 6px; border: 1px solid #e2e8f0; display: flex; justify-content: space-between;">' +
-                                '<span>🎯 ' + (d.tentativasTotal || 1) + ' Tentativa(s)</span>' +
-                                '<span style="color: #64748b;">' + (d.lastChannel || 'Disparo Resend API') + '</span>' +
-                              '</div>' +
-                            '</div>';
-              }
-              col.innerHTML = cardHtml;
-            }
-          }
-        }
-      } catch (e) {
-        console.warn('Erro ao renderizar Pipeline CRM:', e);
-      }
+      showToast('✉️ E-mail Aberto com Minuta Oficial!');
     }
 
     window.switchMainTab = switchMainTab;
-    window.renderCrmPipeline = renderCrmPipeline;
     window.showToast = showToast;
-    window.getCrmDeals = getCrmDeals;
-    window.saveCrmDeals = saveCrmDeals;
     window.updateDynamicCounts = updateDynamicCounts;
     window.contactViaWpp = contactViaWpp;
     window.contactViaEmail = contactViaEmail;
@@ -859,8 +243,6 @@
     window.closeLeadModal = closeLeadModal;
     window.modalSendWpp = modalSendWpp;
     window.modalSendEmail = modalSendEmail;
-    window.modalSaveCrmStage = modalSaveCrmStage;
-    window.addProspectToCrm = addProspectToCrm;
     window.getOfficialWppMessage = getOfficialWppMessage;
     window.getOfficialEmailSubject = getOfficialEmailSubject;
     window.getOfficialEmailBody = getOfficialEmailBody;
@@ -889,9 +271,6 @@
       <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
         <button id="tab-prospects-btn" onclick="switchMainTab('prospects')" class="tab-btn active-tab">
           📋 Base de Prospecção <span id="tabProspectsBadge" style="background: #1e293b; color: #f8fafc; padding: 2px 6px; border-radius: 9999px; font-size: 10px; font-family: monospace;">3.900</span>
-        </button>
-        <button id="tab-crm-btn" onclick="switchMainTab('crm')" class="tab-btn">
-          📊 Pipeline CRM <span id="tabCrmBadge" style="background: #dbeafe; color: #1e40af; padding: 2px 6px; border-radius: 9999px; font-size: 10px; font-family: monospace;">0</span>
         </button>
         <button id="tab-test-btn" onclick="switchMainTab('test')" class="tab-btn btn-green-tab">
           🧪 Central de Testes
@@ -950,12 +329,11 @@
       <!-- TABELA MASTER DE PROSPECTOS -->
       <div style="border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; background: #ffffff; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
         <div style="max-height: 540px; overflow-y: auto; overflow-x: auto;">
-          <table style="width: 100%; border-collapse: collapse; min-width: 1550px; font-size: 12px; text-align: left;">
+          <table style="width: 100%; border-collapse: collapse; min-width: 1480px; font-size: 12px; text-align: left;">
             <thead style="background: #0f172a; color: #ffffff; font-size: 11px; text-transform: uppercase; font-weight: 800; position: sticky; top: 0; z-index: 10;">
               <tr>
                 <th style="padding: 10px 12px; text-align: center; width: 48px;">ID</th>
-                <th style="padding: 10px 12px; text-align: center; width: 80px;">CRM</th>
-                <th style="padding: 10px 12px; width: 280px;">🏢 Empresa, CNPJ, Idade & Natureza</th>
+                <th style="padding: 10px 12px; width: 290px;">🏢 Empresa, CNPJ, Idade & Natureza</th>
                 <th style="padding: 10px 12px; width: 170px;">Segmento & Setor</th>
                 <th style="padding: 10px 12px; width: 250px;">🏭 CNAE Principal & Atividades</th>
                 <th style="padding: 10px 12px; width: 220px;">Sócios / Decisores (QSA)</th>
@@ -967,7 +345,6 @@
             <tbody id="tableBody">
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(1)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">1</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(1, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Castelo Alimentos S/A<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 59 anos (1967)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">07.814.284/0001-07</span> • <span>Jundiaí-SP</span></div>
@@ -985,7 +362,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(2)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">2</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(2, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">ISPL (Crivialli Brasil)<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 30 anos (1996)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">01.125.487/0001-00</span> • <span>Maringá-PR</span></div>
@@ -1003,7 +379,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(3)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">3</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(3, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Bebidas Poty S.A.<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 75 anos (1951)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">55.223.127/0002-42</span> • <span>Potirendaba-SP</span></div>
@@ -1021,7 +396,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(4)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">4</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(4, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Predilecta Alimentos Ltda.<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 36 anos (1990)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">62.546.387/0001-33</span> • <span>Matão-SP</span></div>
@@ -1039,7 +413,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(5)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">5</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(5, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Alimentos Zaeli Ltda.<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 57 anos (1969)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">77.917.680/0001-37</span> • <span>Umuarama-PR</span></div>
@@ -1057,7 +430,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(6)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">6</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(6, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Vilma Alimentos (Domingos Costa)<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 95 anos (1931)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">17.159.518/0001-75</span> • <span>Contagem-MG</span></div>
@@ -1075,7 +447,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(7)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">7</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(7, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Laticínios Porto Alegre S/A<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 35 anos (1991)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">66.301.334/0001-03</span> • <span>Ponte Nova-MG</span></div>
@@ -1093,7 +464,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(8)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">8</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(8, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Belagrícola Comércio S.A.<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 41 anos (1985)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">79.038.097/0001-81</span> • <span>Londrina-PR</span></div>
@@ -1111,7 +481,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(9)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">9</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(9, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Alimentos Dallas (Grupo Dallas)<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 28 anos (1998)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">02.483.916/0001-94</span> • <span>Nova Alvorada-MS</span></div>
@@ -1129,7 +498,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(10)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">10</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(10, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Special Dog (Manfrim Industrial)<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 25 anos (2001)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">56.813.280/0002-92</span> • <span>Sta. Cruz Rio Pardo-SP</span></div>
@@ -1147,7 +515,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(11)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">11</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(11, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Plasútil Indústria de Plásticos<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 40 anos (1986)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">56.450.877/0001-39</span> • <span>Bauru-SP</span></div>
@@ -1165,7 +532,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(12)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">12</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(12, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Cromex S/A<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 29 anos (1997)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">02.271.463/0001-13</span> • <span>São Paulo-SP</span></div>
@@ -1183,7 +549,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(13)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">13</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(13, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Fertipar Fertilizantes do Paraná<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 46 anos (1980)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">90.810.706/0001-01</span> • <span>Curitiba-PR</span></div>
@@ -1201,7 +566,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(14)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">14</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(14, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Forno de Minas Alimentos S/A<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 36 anos (1990)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">03.870.455/0004-07</span> • <span>Contagem-MG</span></div>
@@ -1219,7 +583,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(15)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">15</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(15, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Fugini Alimentos Ltda.<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 30 anos (1996)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">00.588.458/0001-03</span> • <span>Monte Alto-SP</span></div>
@@ -1237,7 +600,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(16)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">16</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(16, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Sakura Nakaya Alimentos<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 86 anos (1940)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">61.070.694/0001-28</span> • <span>Pres. Prudente-SP</span></div>
@@ -1255,7 +617,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(17)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">17</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(17, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Alvoar Lácteos (Embaré)<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 91 anos (1935)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">21.992.946/0001-51</span> • <span>Lagoa da Prata-MG</span></div>
@@ -1273,7 +634,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(18)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">18</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(18, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Máquinas Agrícolas Jacto<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 78 anos (1948)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">55.064.562/0001-90</span> • <span>Pompéia-SP</span></div>
@@ -1291,7 +651,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(19)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">19</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(19, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Industrial Marvi Ltda.<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 74 anos (1952)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">53.408.654/0001-15</span> • <span>Ourinhos-SP</span></div>
@@ -1309,7 +668,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(20)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">20</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(20, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Minasmáquinas S/A<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 66 anos (1960)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">17.161.241/0001-15</span> • <span>Contagem-MG</span></div>
@@ -1327,7 +685,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(21)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">21</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(21, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Pastifício Selmi (Renata / Galo)<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 139 anos (1887)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">46.025.722/0001-00</span> • <span>Sumaré-SP</span></div>
@@ -1345,7 +702,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(22)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">22</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(22, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Frigorífico Astra (Astra Foods)<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 21 anos (2005)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">07.615.913/0001-61</span> • <span>Cruzeiro Oeste-PR</span></div>
@@ -1363,7 +719,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(23)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">23</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(23, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Laticínios Scala (Scalon &amp; Cerchi)<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 63 anos (1963)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">24.333.411/0003-29</span> • <span>Sacramento-MG</span></div>
@@ -1381,7 +736,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(24)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">24</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(24, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Cardioprime Diagnósticos Médicos S/S<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 8 anos (2018)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">18.942.311/0001-40</span> • <span>São Paulo-SP</span></div>
@@ -1399,11 +753,10 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(25)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">25</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(25, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Instituto de Ortopedia e Coluna (SP)<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 7 anos (2019)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">27.237.183/0001-11</span> • <span>São Paulo-SP</span></div>
-                  <div style="margin-top: 4px;"><span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe;">🏛️ Sociedade Empresária Limitada (LTDA)</span><span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; margin-left: 4px;">📑 Lucro Real</span></div>
+                  <div style="margin-top: 4px;"><span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe;">🏛️ Sociedade Empresária Limitada (LTDA)</span><span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; margin-left: 4px;">📑 Lucro Presumido</span></div>
                 </td>
                 <td style="padding: 10px 12px;"><span style="padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1;">Médicos PJ</span></td>
                 <td style="padding: 10px 12px;">
@@ -1417,7 +770,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(26)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">26</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(26, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Biscoitos &amp; Doces Nobres Jaú<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 11 anos (2015)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">55.785.515/0001-15</span> • <span>Jaú-SP</span></div>
@@ -1435,7 +787,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(27)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">27</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(27, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Eletromecânica Força Industrial Londrina<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 12 anos (2014)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">62.922.598/0001-16</span> • <span>Londrina-PR</span></div>
@@ -1453,7 +804,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(28)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">28</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(28, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">AgroGrãos Comercial e Armazenagem Campo Grande<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 13 anos (2013)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">69.160.681/0001-17</span> • <span>Campo Grande-MS</span></div>
@@ -1471,7 +821,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(29)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">29</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(29, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Agroexport Trading de Grãos e Café Varginha<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 14 anos (2012)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">76.297.764/0001-18</span> • <span>Varginha-MG</span></div>
@@ -1489,7 +838,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(30)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">30</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(30, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">MegaLog Armazenagem e Distribuição Bauru<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 15 anos (2011)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">83.434.847/0001-19</span> • <span>Bauru-SP</span></div>
@@ -1507,11 +855,10 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(31)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">31</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(31, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Clínica de Especialidades Cardiovasculares Campinas<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 16 anos (2010)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">20.571.930/0001-20</span> • <span>Campinas-SP</span></div>
-                  <div style="margin-top: 4px;"><span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe;">🏛️ Sociedade Empresária Limitada (LTDA)</span><span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; margin-left: 4px;">📑 Lucro Real</span></div>
+                  <div style="margin-top: 4px;"><span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe;">🏛️ Sociedade Empresária Limitada (LTDA)</span><span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; margin-left: 4px;">📑 Lucro Presumido</span></div>
                 </td>
                 <td style="padding: 10px 12px;"><span style="padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1;">Médicos PJ</span></td>
                 <td style="padding: 10px 12px;">
@@ -1525,7 +872,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(32)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">32</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(32, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Indústria de Condimentos e Molhos Saborear Limeira<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 20 anos (2006)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">48.220.363/0001-24</span> • <span>Limeira-SP</span></div>
@@ -1543,7 +889,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(33)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">33</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(33, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Fundição &amp; Usinagem Paulista Sertãozinho<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 21 anos (2005)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">55.357.446/0001-25</span> • <span>Sertãozinho-SP</span></div>
@@ -1561,7 +906,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(34)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">34</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(34, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Sementes Ouro Verde Londrina<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 22 anos (2004)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">62.494.529/0001-26</span> • <span>Londrina-PR</span></div>
@@ -1579,7 +923,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(35)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">35</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(35, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Brasil Nobre Carnes e Exportação Campo Grande<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 23 anos (2003)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">69.631.612/0001-27</span> • <span>Campo Grande-MS</span></div>
@@ -1597,7 +940,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(36)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">36</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(36, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Atacado Central de Suprimentos Campinas<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 24 anos (2002)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">76.768.695/0001-28</span> • <span>Campinas-SP</span></div>
@@ -1615,11 +957,10 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(37)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">37</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(37, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">FemmePrime Medicina Fetal e Ginecológica Sorocaba<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 25 anos (2001)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">83.905.778/0001-29</span> • <span>Sorocaba-SP</span></div>
-                  <div style="margin-top: 4px;"><span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe;">🏛️ Sociedade Empresária Limitada (LTDA)</span><span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; margin-left: 4px;">📑 Lucro Real</span></div>
+                  <div style="margin-top: 4px;"><span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe;">🏛️ Sociedade Empresária Limitada (LTDA)</span><span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; margin-left: 4px;">📑 Lucro Presumido</span></div>
                 </td>
                 <td style="padding: 10px 12px;"><span style="padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1;">Médicos PJ</span></td>
                 <td style="padding: 10px 12px;">
@@ -1633,7 +974,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(38)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">38</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(38, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Moinho Central de Cereais e Farinhas Maringá<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 29 anos (1997)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">41.554.211/0001-33</span> • <span>Maringá-PR</span></div>
@@ -1651,7 +991,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(39)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">39</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(39, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Estruturas Metálicas Vanguarda Contagem<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 30 anos (1996)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">48.691.294/0001-34</span> • <span>Contagem-MG</span></div>
@@ -1669,7 +1008,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(40)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">40</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(40, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Cerealista São Bento Grãos Maringá<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 31 anos (1995)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">55.828.377/0001-35</span> • <span>Maringá-PR</span></div>
@@ -1687,7 +1025,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(41)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">41</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(41, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">CerealExport Operações Internacionais Itajaí<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 32 anos (1994)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">62.965.460/0001-36</span> • <span>Itajaí-SC</span></div>
@@ -1705,7 +1042,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(42)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">42</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(42, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Transpesados Concessionária e Frotas Bauru<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 33 anos (1993)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">69.203.543/0001-37</span> • <span>Bauru-SP</span></div>
@@ -1723,11 +1059,10 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(43)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">43</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(43, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">NeuroCenter Diagnósticos Neurológicos São José dos Campos<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 34 anos (1992)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">76.340.626/0001-38</span> • <span>São José dos Campos-SP</span></div>
-                  <div style="margin-top: 4px;"><span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe;">🏛️ Sociedade Empresária Limitada (LTDA)</span><span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; margin-left: 4px;">📑 Lucro Real</span></div>
+                  <div style="margin-top: 4px;"><span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe;">🏛️ Sociedade Empresária Limitada (LTDA)</span><span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; margin-left: 4px;">📑 Lucro Presumido</span></div>
                 </td>
                 <td style="padding: 10px 12px;"><span style="padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1;">Médicos PJ</span></td>
                 <td style="padding: 10px 12px;">
@@ -1741,7 +1076,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(44)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">44</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(44, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Laticínios Ouro Branco Contagem<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 38 anos (1988)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">34.888.958/0001-42</span> • <span>Contagem-MG</span></div>
@@ -1759,7 +1093,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(45)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">45</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(45, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Caldeiraria &amp; Equipamentos Vale Bauru<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 39 anos (1987)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">41.126.142/0001-43</span> • <span>Bauru-SP</span></div>
@@ -1777,7 +1110,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(46)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">46</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(46, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Campo Forte Distribuidora de Insumos Barretos<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 40 anos (1986)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">48.263.225/0001-44</span> • <span>Barretos-SP</span></div>
@@ -1795,7 +1127,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(47)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">47</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(47, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">GlobalTrade Exportação de Alimentos Santos<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 6 anos (2020)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">55.400.308/0001-45</span> • <span>Santos-SP</span></div>
@@ -1813,7 +1144,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(48)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">48</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(48, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Comercial e Logística Express Campinas<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 7 anos (2019)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">62.537.391/0001-46</span> • <span>Campinas-SP</span></div>
@@ -1831,11 +1161,10 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(49)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">49</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(49, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">ClinGastro Cirurgia e Endoscopia Uberlândia<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 8 anos (2018)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">69.674.474/0001-47</span> • <span>Uberlândia-MG</span></div>
-                  <div style="margin-top: 4px;"><span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe;">🏛️ Sociedade Empresária Limitada (LTDA)</span><span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; margin-left: 4px;">📑 Lucro Real</span></div>
+                  <div style="margin-top: 4px;"><span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe;">🏛️ Sociedade Empresária Limitada (LTDA)</span><span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; margin-left: 4px;">📑 Lucro Presumido</span></div>
                 </td>
                 <td style="padding: 10px 12px;"><span style="padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1;">Médicos PJ</span></td>
                 <td style="padding: 10px 12px;">
@@ -1849,7 +1178,6 @@
               </tr>
               <tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background=''" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'A') openLeadModal(50)">
                 <td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">50</td>
-                <td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(50, 'prospeccao')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>
                 <td style="padding: 10px 12px;">
                   <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Massas Tradicionais da Serra Matão<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ 12 anos (2014)</span></div>
                   <div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">27.323.806/0001-51</span> • <span>Matão-SP</span></div>
@@ -1881,30 +1209,7 @@
       </div>
     </div>
 
-    <!-- ABA 2: PIPELINE CRM (6 ETAPAS INTEGRADO) -->
-    <div id="crmTabContent" style="display: none; flex-direction: column; gap: 14px;">
-      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
-        <div>
-          <h3 style="font-size: 16px; font-weight: 900; color: #0f172a;">📊 Pipeline CRM • Prospecção & Gestão Comercial</h3>
-          <p style="font-size: 11px; color: #64748b; margin-top: 2px;">Abordagens disparadas (WhatsApp, E-mail/Resend, Pitch) registram histórico permanente em <b>3. Abordagem / Contato</b>.</p>
-        </div>
-        <div>
-          <button onclick="exportCrmCsv()" class="btn-export">📥 Exportar CSV do CRM</button>
-        </div>
-      </div>
-
-      <!-- KANBAN BOARD -->
-      <div class="kanban-board">
-        <div class="kanban-col"><div class="col-header"><span>1. Prospecção</span><span class="col-count" id="col-count-prospeccao">0</span></div><div id="col-items-prospeccao" style="display: flex; flex-direction: column; gap: 8px; min-height: 350px;"></div></div>
-        <div class="kanban-col"><div class="col-header"><span>2. Qualificação</span><span class="col-count" id="col-count-qualificacao">0</span></div><div id="col-items-qualificacao" style="display: flex; flex-direction: column; gap: 8px; min-height: 350px;"></div></div>
-        <div class="kanban-col" style="border-color: #fcd34d; background: #fffbeb;"><div class="col-header" style="color: #78350f;"><span>3. Abordagem / Contato</span><span class="col-count" id="col-count-contato" style="background: #fef3c7; color: #92400e;">0</span></div><div id="col-items-contato" style="display: flex; flex-direction: column; gap: 8px; min-height: 350px;"></div></div>
-        <div class="kanban-col"><div class="col-header"><span>4. Reunião Agendada</span><span class="col-count" id="col-count-reuniao">0</span></div><div id="col-items-reuniao" style="display: flex; flex-direction: column; gap: 8px; min-height: 350px;"></div></div>
-        <div class="kanban-col"><div class="col-header"><span>5. Proposta / Negociação</span><span class="col-count" id="col-count-proposta">0</span></div><div id="col-items-proposta" style="display: flex; flex-direction: column; gap: 8px; min-height: 350px;"></div></div>
-        <div class="kanban-col" style="border-color: #a7f3d0; background: #f0fdf4;"><div class="col-header" style="color: #065f46;"><span>6. Ganho / Fechado</span><span class="col-count" id="col-count-fechado" style="background: #dcfce7; color: #166534;">0</span></div><div id="col-items-fechado" style="display: flex; flex-direction: column; gap: 8px; min-height: 350px;"></div></div>
-      </div>
-    </div>
-
-    <!-- ABA 3: CENTRAL DE TESTES, EDIÇÃO DE MENSAGENS & DISPARO -->
+    <!-- ABA 2: CENTRAL DE TESTES, EDIÇÃO DE MENSAGENS & DISPARO -->
     <div id="testTabContent" style="display: none; flex-direction: column; gap: 14px;">
       <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
@@ -1977,7 +1282,7 @@
       </div>
     </div>
 
-    <!-- ABA 4: CONEXÃO RESEND API & DADOS EXECUTIVOS -->
+    <!-- ABA 3: CONEXÃO RESEND API & DADOS EXECUTIVOS -->
     <div id="connectTabContent" style="display: none; flex-direction: column; gap: 14px;">
       <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
         <h3 style="font-size: 16px; font-weight: 900; color: #0f172a; margin-bottom: 14px;">⚡ Central de Conexão Resend API</h3>
@@ -2025,7 +1330,7 @@
           <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 14px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between;">
             <div>
               <span style="font-size: 11px; font-weight: 800; color: #065f46;">📲 Abordagem WhatsApp</span>
-              <textarea id="modalWppTextarea" rows="5" style="width: 100%; background: #ffffff; border: 1px solid #a7f3d0; border-radius: 8px; padding: 8px; font-size: 11px; margin-top: 6px;"></textarea>
+              <textarea id="modalWppTextarea" rows="6" style="width: 100%; background: #ffffff; border: 1px solid #a7f3d0; border-radius: 8px; padding: 8px; font-size: 11px; margin-top: 6px;"></textarea>
             </div>
             <div style="margin-top: 8px;"><button onclick="modalSendWpp()" style="width: 100%; padding: 8px; background: #059669; color: #ffffff; border: none; border-radius: 8px; font-weight: 800; font-size: 11px;">📲 Disparar WhatsApp</button></div>
           </div>
@@ -2033,24 +1338,10 @@
             <div>
               <span style="font-size: 11px; font-weight: 800; color: #1e40af;">✉️ Abordagem E-mail</span>
               <input type="text" id="modalEmailSubject" style="width: 100%; background: #ffffff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 6px; font-size: 11px; margin-top: 6px; margin-bottom: 6px;">
-              <textarea id="modalEmailTextarea" rows="3" style="width: 100%; background: #ffffff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 8px; font-size: 11px;"></textarea>
+              <textarea id="modalEmailTextarea" rows="4" style="width: 100%; background: #ffffff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 8px; font-size: 11px;"></textarea>
             </div>
             <div style="margin-top: 8px;"><button onclick="modalSendEmail()" style="width: 100%; padding: 8px; background: #2563eb; color: #ffffff; border: none; border-radius: 8px; font-weight: 800; font-size: 11px;">✉️ Disparar E-mail</button></div>
           </div>
-        </div>
-        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <label style="font-size: 12px; font-weight: 800; color: #0f172a;">📌 Etapa CRM:</label>
-            <select id="modalCrmStageSelect" style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 6px 10px; font-size: 12px; font-weight: 800;">
-              <option value="prospeccao">1. Prospecção</option>
-              <option value="qualificacao">2. Qualificação</option>
-              <option value="contato">3. Abordagem / Contato</option>
-              <option value="reuniao">4. Reunião Agendada</option>
-              <option value="proposta">5. Proposta / Negociação</option>
-              <option value="fechado">6. Ganho / Fechado</option>
-            </select>
-          </div>
-          <button onclick="modalSaveCrmStage()" class="btn-export">💾 Atualizar no CRM</button>
         </div>
       </div>
     </div>
@@ -2996,70 +2287,20 @@
       showToast('📋 Assunto e E-mail copiados!');
     }
 
-
     function triggerTestWpp() {
       var wpp = document.getElementById('testTargetWpp') ? document.getElementById('testTargetWpp').value : '';
-      var name = document.getElementById('testTargetName') ? document.getElementById('testTargetName').value : 'Daniel Zanon';
-      var comp = document.getElementById('testTargetCompany') ? document.getElementById('testTargetCompany').value : 'PRX Capital';
       var msg = document.getElementById('testWppMessage') ? document.getElementById('testWppMessage').value : '';
-      registerTestOutreachInCrm('WhatsApp', name, comp, wpp, msg);
       openWhatsAppDirect(wpp, msg);
-      showToast('📲 WhatsApp Aberto e registrado no CRM!');
+      showToast('📲 WhatsApp Aberto!');
     }
 
     function triggerTestEmail() {
       var email = document.getElementById('testTargetEmail') ? document.getElementById('testTargetEmail').value : 'daniel@prxcapital.com.br';
-      var name = document.getElementById('testTargetName') ? document.getElementById('testTargetName').value : 'Daniel Zanon';
-      var comp = document.getElementById('testTargetCompany') ? document.getElementById('testTargetCompany').value : 'PRX Capital';
       var subj = document.getElementById('testEmailSubject') ? document.getElementById('testEmailSubject').value : '';
       var body = document.getElementById('testEmailBody') ? document.getElementById('testEmailBody').value : '';
-      registerTestOutreachInCrm('E-mail (Resend API)', name, comp, email, 'Assunto: ' + subj + ' | ' + body);
       openEmailDirect(email, subj, body);
-      showToast('✉️ E-mail Aberto e registrado no CRM!');
+      showToast('✉️ E-mail Aberto!');
     }
-
-    function registerTestOutreachInCrm(canal, name, comp, contact, text) {
-      try {
-        var deals = getCrmDeals();
-        var nowStr = new Date().toLocaleString('pt-BR');
-        var testDeal = deals.find(function(x) { return x.company && (x.company.indexOf('PRX Capital') !== -1 || x.company.indexOf('Teste') !== -1); });
-        if (!testDeal) {
-          testDeal = {
-            id: 'deal_test_' + Date.now(),
-            prospectId: 0,
-            company: comp || 'Ambiente de Teste PRX',
-            cnpj: '42.123.456/0001-90',
-            idade: '12 anos',
-            tipoSocietario: 'Sociedade Empresária Limitada (LTDA)',
-            regimeTributario: 'Lucro Real',
-            uf: 'SP',
-            city: 'São Paulo',
-            segmentoNome: 'Multi-Family Office',
-            decisorNome: name || 'Daniel Zanon',
-            decisorCargo: 'Sócio / Decisor',
-            fone: contact,
-            email: contact,
-            stage: 'contato',
-            patrimonio: 25000000,
-            scoreBdr: 100,
-            tentativasTotal: 0,
-            tentativasCanais: { whatsapp: 0, email: 0, linkedin: 0 },
-            historyLogs: []
-          };
-          deals.unshift(testDeal);
-        } else {
-          testDeal.stage = 'contato';
-        }
-        testDeal.tentativasTotal = (testDeal.tentativasTotal || 0) + 1;
-        testDeal.lastChannel = canal;
-        testDeal.lastRecipientName = name;
-        testDeal.lastContactAt = nowStr;
-        saveCrmDeals(deals);
-        renderCrmPipeline();
-        updateDynamicCounts();
-      } catch(e) {}
-    }
-
 
     function filterData() {
       var q = (document.getElementById('searchInput').value || '').toLowerCase().trim();
@@ -3092,7 +2333,7 @@
       var pageItems = itemsPerPage >= 999999 ? filteredDataList : filteredDataList.slice(start, start + itemsPerPage);
 
       if (pageItems.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="9" style="padding: 30px; text-align: center; color: #94a3b8; font-weight: 700;">Nenhum lead encontrado com os filtros selecionados.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8" style="padding: 30px; text-align: center; color: #94a3b8; font-weight: 700;">Nenhum lead encontrado com os filtros selecionados.</td></tr>';
       } else {
         var html = '';
         for (var i = 0; i < pageItems.length; i++) {
@@ -3104,19 +2345,22 @@
           var pitchBtn = '<button onclick="contactViaPitch(' + p.id + ')" style="width: 100%; padding: 4px 8px; background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 10px; font-weight: 700; margin-bottom: 3px;">📋 Copiar Pitch</button>';
           var viewBtn = '<button onclick="openLeadModal(' + p.id + ')" style="width: 100%; padding: 4px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 800; margin-bottom: 3px;">👁️ Ver Detalhes</button>';
           var socioContatoHtml = socioMobile ? '<div style="font-family: monospace; color: #047857; font-weight: 800; font-size: 11px;">📱 ' + socioMobile + '</div><span style="font-size: 9px; font-weight: 800; color: #065f46;">👤 WhatsApp Sócio</span>' : '<div style="color: #64748b; font-size: 10px;">🏢 Fixo da Empresa</div>';
+          var idadeTxt = p.idade ? ('<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ ' + p.idade + '</span>') : '';
+          var cnaeSecTxt = p.cnaeSecundarios ? ('<div style="font-size: 10px; color: #64748b; margin-top: 2px; line-height: 1.3;"><span style="font-weight: 700; color: #334155;">Secundários:</span> ' + p.cnaeSecundarios + '</div>') : '';
+          var actionBtnsHtml = '<div style="width: 100%; max-width: 120px; margin: 0 auto;">' + viewBtn + wppBtn + emailBtn + pitchBtn + '</div>';
           html += '<tr style="border-bottom: 1px solid #f1f5f9; cursor: pointer;" onmouseover="this.style.background=\'#f8fafc\'" onmouseout="this.style.background=\'\'" onclick="if(event.target.tagName !== \'BUTTON\' && event.target.tagName !== \'A\') openLeadModal(' + p.id + ')">' +
                     '<td style="padding: 10px 12px; text-align: center; font-family: monospace; font-weight: 700; color: #94a3b8;">' + p.id + '</td>' +
-                    '<td style="padding: 10px 12px; text-align: center;"><button onclick="addProspectToCrm(' + p.id + ', \\\'prospeccao\\\')" style="padding: 3px 8px; background: #0f172a; color: #ffffff; border: none; border-radius: 6px; font-size: 10px; font-weight: 700;">+ CRM</button></td>' +
                     '<td style="padding: 10px 12px;">' +
-                      '<div style="font-weight: 800; font-size: 13px; color: #0f172a;">' + p.company + (p.idade ? ('<span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; margin-left: 4px;">⏳ ' + p.idade + '</span>') : '') + '</div>' +
+                      '<div style="font-weight: 800; font-size: 13px; color: #0f172a;">' + p.company + idadeTxt + '</div>' +
                       '<div style="color: #64748b; font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 700; color: #334155;">' + p.cnpj + '</span> • <span>' + p.city + '-' + p.uf + '</span></div>' +
+                      '<div style="margin-top: 4px;"><span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe;">🏛️ ' + p.tipoSocietario + '</span><span style="padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; margin-left: 4px;">📑 ' + p.regimeTributario + '</span></div>' +
                     '</td>' +
                     '<td style="padding: 10px 12px;"><span style="padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1;">' + p.segmentoNome + '</span></td>' +
-                    '<td style="padding: 10px 12px;"><span style="font-family: monospace; font-weight: 800; color: #0f172a;">' + (p.cnaePrincipal || '') + '</span></td>' +
+                    '<td style="padding: 10px 12px;"><span style="font-family: monospace; font-weight: 800; color: #0f172a;">' + (p.cnaePrincipal || '') + '</span>' + cnaeSecTxt + '</td>' +
                     '<td style="padding: 10px 12px;"><div style="font-weight: 700; color: #0f172a;">' + d1.nome + '</div><div style="font-size: 10px; color: #64748b;">' + d1.cargo + '</div></td>' +
                     '<td style="padding: 10px 12px;"><div style="font-size: 10px; font-weight: 700; color: #334155;">📞 ' + (p.fone || '') + '</div><div style="font-size: 10px; color: #64748b; margin-top: 2px;">✉️ ' + (p.email || '') + '</div></td>' +
                     '<td style="padding: 10px 12px; background: #f0fdf4; border-left: 1px solid #dcfce7; border-right: 1px solid #dcfce7;">' + socioContatoHtml + '</td>' +
-                    '<td style="padding: 10px 12px; text-align: center; background: #f8fafc;"><div style="width: 100%; max-width: 120px; margin: 0 auto;">' + viewBtn + wppBtn + emailBtn + pitchBtn + '</div></td>' +
+                    '<td style="padding: 10px 12px; text-align: center; background: #f8fafc;">' + actionBtnsHtml + '</td>' +
                   '</tr>';
         }
         tbody.innerHTML = html;
@@ -3150,20 +2394,7 @@
       showToast('Base CSV exportada!');
     }
 
-    function exportCrmCsv() {
-      var deals = getCrmDeals();
-      var csv = '\uFEFFID;Empresa;CNPJ;Idade;Tipo_Societario;Regime;UF;Cidade;Segmento;Decisor;Etapa;Patrimonio\n';
-      for (var i = 0; i < deals.length; i++) {
-        var d = deals[i];
-        csv += '"' + d.id + '";"' + d.company + '";"' + d.cnpj + '";"' + (d.idade || '') + '";"' + (d.tipoSocietario || '') + '";"' + (d.regimeTributario || '') + '";"' + d.uf + '";"' + d.city + '";"' + d.segmentoNome + '";"' + d.decisorNome + '";"' + d.stage + '";"' + d.patrimonio + '"\n';
-      }
-      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'crm_prx_relatorio.csv'; a.click();
-      showToast('Relatório do CRM exportado!');
-    }
-
     updateDynamicCounts();
-    renderCrmPipeline();
     loadSelectedTemplate();
   </script>
 </body>
