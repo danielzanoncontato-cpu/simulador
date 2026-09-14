@@ -51,3 +51,30 @@
    - Todo e qualquer disparo, envio teste ou abordagem executada (WhatsApp, E-mail/Resend ou LinkedIn) DEVE ser registrado de forma indelével e persistente no CRM na etapa **`3. Abordagem / Contato`**.
    - Cada registro no CRM deve conter: contador incremental de tentativas (`tentativasTotal`), discriminação por canal (`tentativasCanais`: whatsapp, email, linkedin), definição explícita do alvo (`Sócio / Decisor` vs `Empresa / Diretoria Geral`), nome do destinatário, canal de contato exato e histórico cronológico detalhado (`historyLogs`).
    - Leads já abordados ou disparados DEVEM aparecer imediatamente na interface visual do Pipeline Kanban e nas métricas consolidadas.
+
+10. **PADRÃO UNIFICADO E OFICIAL DE ABORDAGEM WHATSAPP E E-MAIL (PRIMEIRO CONTATO):**
+    - Todo disparo, botão de envio no dashboard (`📲 WhatsApp`, `📋 Copiar Pitch`, modal de detalhes `openLeadModal`), gerador de scripts e central de testes DEVE utilizar estritamente o modelo de cópia oficial consultiva de alto impacto da PRX Capital, personalizando dinamicamente `{NOME}` (Decisor 1 / Sócio) e `{EMPRESA}`:
+      - **WhatsApp Oficial (Primeiro Contato):**
+        ```text
+        Olá, {NOME}! Tudo bem?
+
+        Sou o Daniel Zanon, da PRX Capital (prxcapital.com.br).
+
+        Atuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão e proteção de suas estruturas patrimoniais, físicas e jurídicas.
+
+        Nossas principais frentes de atuação abrangem:
+        - Gestão de carteiras, investimentos e câmbio;
+        - Crédito estruturado, financiamentos e antecipação de recebíveis;
+        - Revisão e planejamento tributário, sucessório e societário;
+        - Proteção patrimonial e gestão de liquidez.
+
+        O objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez do patrimônio da {EMPRESA}.
+
+        Gostaria de agendar um diagnóstico inicial gratuito de 15 minutos para avaliar a eficiência da sua estrutura?
+
+        Um abraço,
+        Daniel Zanon | PRX Capital
+        ```
+      - **E-mail Oficial (Primeiro Contato):**
+        - **Assunto:** `Alinhamento estratégico & multi-family office | Daniel Zanon (PRX Capital)`
+        - **Corpo:** Cópia idêntica de alto impacto com os 4 pilares centrais, chamada de diagnóstico de 15 minutos e assinatura oficial de Daniel Zanon (`Daniel Zanon | Executivo de Negócios | PRX Capital | daniel@prxcapital.com.br`).
