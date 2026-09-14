@@ -6,7 +6,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BDR - Lead AI | Base de Prospecção & Central de Disparos MFO (3.900 Leads)</title>
+  <title>BDR - Lead AI | Base de Prospecção MFO (3.900 Leads)</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { background-color: #f8fafc; color: #0f172a; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; min-height: 100vh; }
@@ -17,9 +17,6 @@
     .tab-btn { transition: all 0.15s ease-in-out; cursor: pointer; user-select: none; border-radius: 12px; font-weight: 700; font-size: 12px; padding: 8px 16px; border: 1px solid #e2e8f0; background: #ffffff; color: #334155; display: inline-flex; align-items: center; gap: 6px; }
     .tab-btn:hover { background: #f1f5f9; color: #0f172a; }
     .tab-btn.active-tab { background-color: #0f172a !important; color: #ffffff !important; border-color: #0f172a !important; font-weight: 900; }
-    .btn-green-tab { background: #ecfdf5; color: #047857; border-color: #a7f3d0; }
-    .btn-green-tab:hover { background: #d1fae5; }
-    .btn-green-tab.active-tab { background: #059669 !important; color: #ffffff !important; border-color: #059669 !important; }
     .btn-export { background: #0f172a; color: #ffffff; border-radius: 12px; font-weight: 700; font-size: 12px; padding: 8px 16px; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
     .btn-export:hover { background: #1e293b; }
     button { cursor: pointer; user-select: none; }
@@ -55,22 +52,17 @@
     function switchMainTab(tab) {
       try {
         var pTab = document.getElementById('prospectsTabContent');
-        var tTab = document.getElementById('testTabContent');
         var coTab = document.getElementById('connectTabContent');
 
         if (pTab) pTab.style.display = (tab === 'prospects') ? 'flex' : 'none';
-        if (tTab) tTab.style.display = (tab === 'test') ? 'flex' : 'none';
         if (coTab) coTab.style.display = (tab === 'connect') ? 'flex' : 'none';
 
         var btnP = document.getElementById('tab-prospects-btn');
-        var btnT = document.getElementById('tab-test-btn');
         var btnCo = document.getElementById('tab-connect-btn');
 
         if (btnP) btnP.className = (tab === 'prospects') ? 'tab-btn active-tab' : 'tab-btn';
-        if (btnT) btnT.className = (tab === 'test') ? 'tab-btn btn-green-tab active-tab' : 'tab-btn btn-green-tab';
         if (btnCo) btnCo.className = (tab === 'connect') ? 'tab-btn active-tab' : 'tab-btn';
 
-        if (tab === 'test') { loadSelectedTemplate(); }
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } catch (err) {
         console.error('Erro ao alternar aba:', err);
@@ -82,52 +74,26 @@
         subject: 'Alinhamento estratégico & multi-family office | Daniel Zanon (PRX Capital)',
         wpp: 'Olá, {NOME}! Tudo bem?\\n\\nSou o Daniel Zanon, da PRX Capital (prxcapital.com.br).\\n\\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão e proteção de suas estruturas patrimoniais, físicas e jurídicas.\\n\\nNossas principais frentes de atuação abrangem:\\n- Gestão de carteiras, investimentos e câmbio;\\n- Crédito estruturado, financiamentos e antecipação de recebíveis;\\n- Revisão e planejamento tributário, sucessório e societário;\\n- Proteção patrimonial e gestão de liquidez.\\n\\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez do patrimônio da {EMPRESA}.\\n\\nGostaria de agendar um diagnóstico inicial gratuito de 15 minutos para avaliar a eficiência da sua estrutura?\\n\\nUm abraço,\\nDaniel Zanon | PRX Capital',
         email: 'Olá, {NOME}! Tudo bem?\\n\\nMeu nome é Daniel Zanon, sou executivo da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira.\\n\\nA PRX desenvolve uma assessoria consultiva e exclusiva voltada para empresários e famílias com patrimônio, empresas operacionais e liquidez financeira.\\n\\nNossas frentes de atuação abrangem:\\n1. Estruturação e revisão tributária, sucessória e societária;\\n2. Gestão e assessoria de investimentos e operações de câmbio;\\n3. Soluções de crédito, funding e antecipação de recebíveis;\\n4. Proteção patrimonial e gestão de liquidez.\\n\\nO propósito central é reduzir fricções tributárias e bancárias, viabilizar liquidez eficiente e proteger o patrimônio construído da {EMPRESA}.\\n\\nGostaria de propor um alinhamento inicial de 15 minutos nesta semana para apresentar nossas soluções.\\n\\nVocê teria disponibilidade nesta semana?\\n\\nAtenciosamente,\\nDaniel Zanon\\nExecutivo de Negócios | PRX Capital\\ndaniel@prxcapital.com.br'
-      },
-      agro: {
-        subject: 'Diagnóstico Estratégico Agro & Estruturação de Funding | PRX Capital',
-        wpp: 'Olá, {NOME}! Tudo bem?\\n\\nSou Daniel Zanon, da PRX Capital (prxcapital.com.br).\\n\\nApoiamos grupos agropecuários e produtores na estruturação de operações de Barter, emissão de CRA, antecipação de recebíveis e constituição de holding rural para planejamento sucessório e proteção de terras.\\n\\nPodemos agendar uma call de 15 minutos para avaliar a eficiência de capital da {EMPRESA}?\\n\\nUm abraço,\\nDaniel Zanon | PRX Capital',
-        email: 'Prezado(a) {NOME},\\n\\nSou Daniel Zanon, da PRX Capital.\\n\\nAssessoramos produtores rurais e cooperativas na estruturação financeira avançada (CRA, CPR, linhas de Barter, fundos exclusivos e governança patrimonial de terras).\\n\\nNosso objetivo é reduzir o custo de funding e blindar o patrimônio familiar contra oscilações de mercado.\\n\\nGostaria de apresentar um estudo preliminar sem compromisso?\\n\\nAtenciosamente,\\nDaniel Zanon | PRX Capital'
-      },
-      industria: {
-        subject: 'Eficiência Tributária & Funding Estruturado para Indústria | PRX Capital',
-        wpp: 'Olá, {NOME}! Tudo bem?\\n\\nSou Daniel Zanon, da PRX Capital.\\n\\nTrabalhamos com grandes indústrias na otimização de fluxo de caixa, recuperação tributária no Lucro Real e captação de crédito estruturado para expansão de plantas industriais.\\n\\nGostaria de verificar oportunidades para a {EMPRESA} em uma call de 15 minutos?\\n\\nAbraço,\\nDaniel Zanon | PRX Capital',
-        email: 'Olá, {NOME},\\n\\nApresentamos a PRX Capital, boutique financeira especializada em empresas industriais de médio e grande porte.\\n\\nAtuamos diretamente com a diretoria na redução de custos de capital de giro, planejamento tributário no Lucro Real e reestruturação societária.\\n\\nPodemos alinhar uma conversa rápida de diagnóstico?\\n\\nCordialmente,\\nDaniel Zanon | PRX Capital'
-      },
-      exportacao: {
-        subject: 'Mesa de Câmbio & Proteção de Margem para Exportação | PRX Capital',
-        wpp: 'Olá, {NOME}! Tudo bem?\\n\\nSou Daniel Zanon, da mesa de câmbio da PRX Capital.\\n\\nAuxiliamos empresas exportadoras na execução de câmbio pronto, hedge cambial (NDF/travas) e ACC/ACE com spreads altamente competitivos frente aos grandes bancos.\\n\\nPodemos fazer um comparativo de taxas para a {EMPRESA}?\\n\\nAbraço,\\nDaniel Zanon | PRX Capital',
-        email: 'Prezado(a) {NOME},\\n\\nNa PRX Capital, assessoramos companhias que operam comércio exterior a maximizar o retorno em operações cambiais e proteger margens contra volatilidade de moedas.\\n\\nOferecemos taxas diretas de balcão e linhas ágeis de antecipação de contratos de exportação.\\n\\nFico à disposição para uma apresentação rápida.\\n\\nAtenciosamente,\\nDaniel Zanon | PRX Capital'
-      },
-      medicos: {
-        subject: 'Holding Médica & Equiparação Hospitalar | PRX Capital (Saúde PJ)',
-        wpp: 'Olá, Dr(a). {NOME}! Tudo bem?\\n\\nSou Daniel Zanon, da PRX Capital.\\n\\nPrestamos assessoria especializada para médicos PJ e clínicas na implementação de Equiparação Hospitalar (redução legal de IRPJ de 32% para 8% e CSLL de 32% para 12%) e criação de holding médica familiar.\\n\\nGostaria de receber uma simulação gratuita de economia fiscal?\\n\\nUm abraço,\\nDaniel Zanon | PRX Capital',
-        email: 'Prezado(a) Dr(a). {NOME},\\n\\nAssessoramos sociedades médicas e clínicas na estruturação tributária e patrimonial de alta performance.\\n\\nComprovadamente, a adequação de equiparação hospitalar gera economias fiscais substanciais, além de conferir segurança jurídica absoluta aos sócios.\\n\\nGostaria de avaliar a viabilidade para a sua sociedade?\\n\\nAtenciosamente,\\nDaniel Zanon | PRX Capital'
-      },
-      logistica: {
-        subject: 'Estruturação de Frotas & Financiamento de Ativos | PRX Capital',
-        wpp: 'Olá, {NOME}! Tudo bem?\\n\\nSou Daniel Zanon, da PRX Capital.\\n\\nApoiamos transportadoras e operadores logísticos na estruturação de financiamentos para aquisição e renovação de frotas pesadas, além de securitização de recebíveis de frete.\\n\\nPodemos conversar sobre as linhas disponíveis para a {EMPRESA}?\\n\\nAbraço,\\nDaniel Zanon | PRX Capital',
-        email: 'Olá, {NOME},\\n\\nA PRX Capital assessora o setor logístico na otimização de estrutura de capital, monetização de ativos e crédito estruturado de longo prazo.\\n\\nPodemos agendar uma call breve de 15 minutos?\\n\\nAtenciosamente,\\nDaniel Zanon | PRX Capital'
       }
     };
 
     function getOfficialWppMessage(p) {
       if (!p) return '';
       var d1 = (p.decisores && p.decisores.length > 0 && p.decisores[0].nome) ? p.decisores[0] : { nome: 'Sócio-Diretor' };
-      var t = (typeof TEMPLATES !== 'undefined' && TEMPLATES.mfo_geral) ? TEMPLATES.mfo_geral : null;
-      var raw = t ? t.wpp : 'Olá, {NOME}! Tudo bem?\\n\\nSou o Daniel Zanon, da PRX Capital (prxcapital.com.br).\\n\\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão e proteção de suas estruturas patrimoniais, físicas e jurídicas.\\n\\nNossas principais frentes de atuação abrangem:\\n- Gestão de carteiras, investimentos e câmbio;\\n- Crédito estruturado, financiamentos e antecipação de recebíveis;\\n- Revisão e planejamento tributário, sucessório e societário;\\n- Proteção patrimonial e gestão de liquidez.\\n\\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez do patrimônio da {EMPRESA}.\\n\\nGostaria de agendar um diagnóstico inicial gratuito de 15 minutos para avaliar a eficiência da sua estrutura?\\n\\nUm abraço,\\nDaniel Zanon | PRX Capital';
+      var t = TEMPLATES.mfo_geral;
+      var raw = t.wpp;
       return raw.replace(/{NOME}/g, d1.nome).replace(/{EMPRESA}/g, p.company || 'sua empresa');
     }
 
     function getOfficialEmailSubject(p) {
-      if (!p) return 'Alinhamento estratégico & multi-family office | Daniel Zanon (PRX Capital)';
       return 'Alinhamento estratégico & multi-family office | Daniel Zanon (PRX Capital)';
     }
 
     function getOfficialEmailBody(p) {
       if (!p) return '';
       var d1 = (p.decisores && p.decisores.length > 0 && p.decisores[0].nome) ? p.decisores[0] : { nome: 'Sócio-Diretor' };
-      var t = (typeof TEMPLATES !== 'undefined' && TEMPLATES.mfo_geral) ? TEMPLATES.mfo_geral : null;
-      var raw = t ? t.email : 'Olá, {NOME}! Tudo bem?\\n\\nMeu nome é Daniel Zanon, sou executivo da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira.\\n\\nA PRX desenvolve uma assessoria consultiva e exclusiva voltada para empresários e famílias com patrimônio, empresas operacionais e liquidez financeira.\\n\\nNossas frentes de atuação abrangem:\\n1. Estruturação e revisão tributária, sucessória e societária;\\n2. Gestão e assessoria de investimentos e operações de câmbio;\\n3. Soluções de crédito, funding e antecipação de recebíveis;\\n4. Proteção patrimonial e gestão de liquidez.\\n\\nO propósito central é reduzir fricções tributárias e bancárias, viabilizar liquidez eficiente e proteger o patrimônio construído da {EMPRESA}.\\n\\nGostaria de propor um alinhamento inicial de 15 minutos nesta semana para apresentar nossas soluções.\\n\\nVocê teria disponibilidade nesta semana?\\n\\nAtenciosamente,\\nDaniel Zanon\\nExecutivo de Negócios | PRX Capital\\ndaniel@prxcapital.com.br';
+      var t = TEMPLATES.mfo_geral;
+      var raw = t.email;
       return raw.replace(/{NOME}/g, d1.nome).replace(/{EMPRESA}/g, p.company || 'sua empresa');
     }
 
@@ -271,9 +237,6 @@
       <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
         <button id="tab-prospects-btn" onclick="switchMainTab('prospects')" class="tab-btn active-tab">
           📋 Base de Prospecção <span id="tabProspectsBadge" style="background: #1e293b; color: #f8fafc; padding: 2px 6px; border-radius: 9999px; font-size: 10px; font-family: monospace;">3.900</span>
-        </button>
-        <button id="tab-test-btn" onclick="switchMainTab('test')" class="tab-btn btn-green-tab">
-          🧪 Central de Testes
         </button>
         <button id="tab-connect-btn" onclick="switchMainTab('connect')" class="tab-btn">
           ⚡ Conexão Resend API
@@ -1213,80 +1176,7 @@
       </div>
     </div>
 
-    <!-- ABA 2: CENTRAL DE TESTES, EDIÇÃO DE MENSAGENS & DISPARO -->
-    <div id="testTabContent" style="display: none; flex-direction: column; gap: 14px;">
-      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
-          <div>
-            <h3 style="font-size: 16px; font-weight: 900; color: #0f172a;">🧪 Central de Testes de Disparo & Editor de Mensagens</h3>
-            <p style="font-size: 11px; color: #64748b;">Edite os textos de abordagem em tempo real, selecione minutas por segmento e realize disparos testes.</p>
-          </div>
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <label style="font-size: 12px; font-weight: 700; color: #334155;">Modelo por Segmento:</label>
-            <select id="testTemplateSelect" onchange="loadSelectedTemplate()" style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 6px 12px; font-size: 12px; font-weight: 700; color: #0f172a;">
-              <option value="mfo_geral">🏛️ Multi-Family Office Geral (Daniel Zanon)</option>
-              <option value="agro">🌾 Agronegócio (CRA, Barter, Holding Rural)</option>
-              <option value="industria">🏭 Indústria & Distribuição (Crédito & Eficiência)</option>
-              <option value="exportacao">🚢 Exportadoras & Trading (Mesa de Câmbio & Hedge)</option>
-              <option value="medicos">🏥 Médicos PJ & Clínicas (Holding & Equiparação)</option>
-              <option value="logistica">🚚 Logística & Frotas (Funding & Ativos)</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- CAMPOS DE DADOS DE TESTE -->
-        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px; padding: 14px; margin-bottom: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
-          <div>
-            <label style="font-size: 11px; font-weight: 700; color: #475569;">👤 Destinatário de Teste:</label>
-            <input type="text" id="testTargetName" value="Daniel Zanon" style="width: 100%; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px; font-size: 12px; font-weight: 700; margin-top: 4px;">
-          </div>
-          <div>
-            <label style="font-size: 11px; font-weight: 700; color: #475569;">🏢 Empresa de Teste:</label>
-            <input type="text" id="testTargetCompany" value="PRX Capital / Empresa Teste" style="width: 100%; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px; font-size: 12px; font-weight: 700; margin-top: 4px;">
-          </div>
-          <div>
-            <label style="font-size: 11px; font-weight: 700; color: #047857;">📱 WhatsApp de Teste:</label>
-            <input type="text" id="testTargetWpp" value="(11) 91588-7182" style="width: 100%; background: #ffffff; border: 1px solid #a7f3d0; border-radius: 8px; padding: 8px; font-size: 12px; font-family: monospace; font-weight: 700; color: #065f46; margin-top: 4px;">
-          </div>
-          <div>
-            <label style="font-size: 11px; font-weight: 700; color: #1d4ed8;">✉️ E-mail de Teste:</label>
-            <input type="text" id="testTargetEmail" value="daniel@prxcapital.com.br" style="width: 100%; background: #ffffff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 8px; font-size: 12px; font-family: monospace; font-weight: 700; color: #1e40af; margin-top: 4px;">
-          </div>
-        </div>
-
-        <!-- DUAS COLUNAS: EDITOR WHATSAPP & EDITOR E-MAIL -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
-          <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                <span style="font-size: 12px; font-weight: 800; color: #065f46;">📲 Mensagem de Abordagem WhatsApp</span>
-                <button onclick="copyEditorText('testWppMessage')" style="background: #ffffff; border: 1px solid #a7f3d0; padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; color: #047857;">📋 Copiar</button>
-              </div>
-              <textarea id="testWppMessage" rows="9" style="width: 100%; background: #ffffff; border: 1px solid #a7f3d0; border-radius: 10px; padding: 10px; font-size: 12px; line-height: 1.5; color: #0f172a;"></textarea>
-            </div>
-            <div style="margin-top: 12px;">
-              <button onclick="triggerTestWpp()" style="width: 100%; padding: 10px; background: #059669; color: #ffffff; border: none; border-radius: 10px; font-weight: 800; font-size: 12px;">📲 Disparar Teste WhatsApp</button>
-            </div>
-          </div>
-
-          <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                <span style="font-size: 12px; font-weight: 800; color: #1e40af;">✉️ Assunto & Minuta de E-mail</span>
-                <button onclick="copyEditorEmailFull()" style="background: #ffffff; border: 1px solid #bfdbfe; padding: 3px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; color: #1d4ed8;">📋 Copiar Tudo</button>
-              </div>
-              <input type="text" id="testEmailSubject" value="Alinhamento estratégico & multi-family office | Daniel Zanon (PRX Capital)" style="width: 100%; background: #ffffff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 8px; font-size: 12px; font-weight: 700; margin-bottom: 8px;">
-              <textarea id="testEmailBody" rows="7" style="width: 100%; background: #ffffff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 10px; font-size: 12px; line-height: 1.5; color: #0f172a;"></textarea>
-            </div>
-            <div style="margin-top: 12px;">
-              <button onclick="triggerTestEmail()" style="width: 100%; padding: 10px; background: #2563eb; color: #ffffff; border: none; border-radius: 10px; font-weight: 800; font-size: 12px;">✉️ Disparar Teste E-mail</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ABA 3: CONEXÃO RESEND API & DADOS EXECUTIVOS -->
+    <!-- ABA 2: CONEXÃO RESEND API & DADOS EXECUTIVOS -->
     <div id="connectTabContent" style="display: none; flex-direction: column; gap: 14px;">
       <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
         <h3 style="font-size: 16px; font-weight: 900; color: #0f172a; margin-bottom: 14px;">⚡ Central de Conexão Resend API</h3>
@@ -2258,54 +2148,6 @@
 ;
     filteredDataList = Array.isArray(prospects) ? prospects.slice() : [];
 
-    function loadSelectedTemplate() {
-      try {
-        var selEl = document.getElementById('testTemplateSelect');
-        var sel = selEl ? selEl.value : 'mfo_geral';
-        var t = TEMPLATES[sel] || TEMPLATES.mfo_geral;
-        var nameEl = document.getElementById('testTargetName');
-        var compEl = document.getElementById('testTargetCompany');
-        var targetName = nameEl ? (nameEl.value || 'Daniel') : 'Daniel';
-        var targetComp = compEl ? (compEl.value || 'PRX Capital') : 'PRX Capital';
-
-        var wppText = t.wpp.replace(/{NOME}/g, targetName).replace(/{EMPRESA}/g, targetComp);
-        var emailText = t.email.replace(/{NOME}/g, targetName).replace(/{EMPRESA}/g, targetComp);
-
-        var wppArea = document.getElementById('testWppMessage'); if (wppArea) wppArea.value = wppText;
-        var emailSubj = document.getElementById('testEmailSubject'); if (emailSubj) emailSubj.value = t.subject;
-        var emailBody = document.getElementById('testEmailBody'); if (emailBody) emailBody.value = emailText;
-      } catch(e) {}
-    }
-
-    function copyEditorText(elementId) {
-      var el = document.getElementById(elementId);
-      if (!el) return;
-      try { navigator.clipboard.writeText(el.value); } catch(e) {}
-      showToast('📋 Texto copiado!');
-    }
-
-    function copyEditorEmailFull() {
-      var subj = document.getElementById('testEmailSubject') ? document.getElementById('testEmailSubject').value : '';
-      var body = document.getElementById('testEmailBody') ? document.getElementById('testEmailBody').value : '';
-      try { navigator.clipboard.writeText('Assunto: ' + subj + '\\n\\n' + body); } catch(e) {}
-      showToast('📋 Assunto e E-mail copiados!');
-    }
-
-    function triggerTestWpp() {
-      var wpp = document.getElementById('testTargetWpp') ? document.getElementById('testTargetWpp').value : '';
-      var msg = document.getElementById('testWppMessage') ? document.getElementById('testWppMessage').value : '';
-      openWhatsAppDirect(wpp, msg);
-      showToast('📲 WhatsApp Aberto!');
-    }
-
-    function triggerTestEmail() {
-      var email = document.getElementById('testTargetEmail') ? document.getElementById('testTargetEmail').value : 'daniel@prxcapital.com.br';
-      var subj = document.getElementById('testEmailSubject') ? document.getElementById('testEmailSubject').value : '';
-      var body = document.getElementById('testEmailBody') ? document.getElementById('testEmailBody').value : '';
-      openEmailDirect(email, subj, body);
-      showToast('✉️ E-mail Aberto!');
-    }
-
     function filterData() {
       var q = (document.getElementById('searchInput').value || '').toLowerCase().trim();
       var seg = document.getElementById('segmentFilter') ? document.getElementById('segmentFilter').value : 'ALL';
@@ -2444,7 +2286,6 @@
     }
 
     updateDynamicCounts();
-    loadSelectedTemplate();
   </script>
 </body>
 </html>
