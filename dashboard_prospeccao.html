@@ -2380,18 +2380,55 @@
     function changePerPage() { var sel = document.getElementById('perPageFilter'); if (sel) { itemsPerPage = parseInt(sel.value, 10); currentPage = 1; renderTable(); } }
 
     function exportCurrentCsv() {
-      var csv = '\uFEFFID,Empresa,CNPJ,Idade,Tipo_Societario,Regime_Tributario,UF,Cidade,Segmento,Cor_Segmento,Fonte_Dados,Setor,Tem_Site,Site,Descricao,CNAE_Principal,CNAE_Secundarios,Decisor_1_Nome,Decisor_1_Cargo,Decisor_1_LinkedIn,Decisor_1_Contato,Decisor_2_Nome,Decisor_2_Cargo,Decisor_2_LinkedIn,Decisor_2_Contato,Score_PRX\n';
+      var csv = '\uFEFFID,Empresa,CNPJ,Idade,Tipo_Societario,Regime_Tributario,UF,Cidade,Segmento,Cor_Segmento,Fonte_Dados,Setor,Tem_Site,Site,Descricao,CNAE_Principal,CNAE_Secundarios,Telefone_Empresa,Email_Empresa,Decisor_1_Nome,Decisor_1_Cargo,Decisor_1_LinkedIn,Decisor_1_Contato,Decisor_2_Nome,Decisor_2_Cargo,Decisor_2_LinkedIn,Decisor_2_Contato,Score_PRX\n';
       for (var i = 0; i < filteredDataList.length; i++) {
         var p = filteredDataList[i];
         var d1 = (p.decisores && p.decisores.length > 0) ? p.decisores[0] : { nome: '', cargo: '', linkedin: '', contato: '' };
         var d2 = (p.decisores && p.decisores.length > 1) ? p.decisores[1] : { nome: '', cargo: '', linkedin: '', contato: '' };
         var clean = function(str) { return '"' + (str || '').toString().replace(/"/g, '""') + '"'; };
-        csv += [p.id, clean(p.company), clean(p.cnpj), clean(p.idade), clean(p.tipoSocietario), clean(p.regimeTributario), clean(p.uf), clean(p.city), clean(p.segmentoNome), clean(p.corSegmento), clean(p.fonteDados), clean(p.setor), p.hasSite ? 'SIM' : 'NAO', clean(p.site), clean(p.desc), clean(p.cnaePrincipal), clean(p.cnaeSecundarios), clean(d1.nome), clean(d1.cargo), clean(d1.linkedin), clean(d1.contato || p.fone), clean(d2.nome), clean(d2.cargo), clean(d2.linkedin), clean(d2.contato), p.scorePrx || 85].join(',') + '\n';
+        var d1Fone = (d1.contato && d1.contato.trim()) ? d1.contato : (p.fone || '');
+        var d2Fone = (d2.contato && d2.contato.trim()) ? d2.contato : '';
+        var row = [
+          p.id,
+          clean(p.company),
+          clean(p.cnpj),
+          clean(p.idade),
+          clean(p.tipoSocietario),
+          clean(p.regimeTributario),
+          clean(p.uf),
+          clean(p.city),
+          clean(p.segmentoNome),
+          clean(p.corSegmento),
+          clean(p.fonteDados),
+          clean(p.setor),
+          p.hasSite ? 'Sim' : 'Não',
+          clean(p.site),
+          clean(p.desc),
+          clean(p.cnaePrincipal),
+          clean(p.cnaeSecundarios),
+          clean(p.fone),
+          clean(p.email),
+          clean(d1.nome),
+          clean(d1.cargo),
+          clean(d1.linkedin),
+          clean(d1Fone),
+          clean(d2.nome),
+          clean(d2.cargo),
+          clean(d2.linkedin),
+          clean(d2Fone),
+          clean(p.scorePrx || 'AAA (High-Ticket)')
+        ].join(',') + '\n';
+        csv += row;
       }
       var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       var url = URL.createObjectURL(blob);
-      var a = document.createElement('a'); a.href = url; a.download = 'base_prospeccao_prx_filtrada.csv'; a.click();
-      showToast('Base CSV exportada!');
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'base_prospeccao_prx_detalhada.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast('📥 Base CSV detalhada exportada (' + filteredDataList.length.toLocaleString('pt-BR') + ' empresas)!');
     }
 
     updateDynamicCounts();
