@@ -73,10 +73,31 @@
     var TEMPLATES = {
       mfo_geral: {
         subject: 'Alinhamento estratégico & multi-family office | Daniel Zanon (PRX Capital)',
-        wpp: 'Olá, {NOME}! Tudo bem?\\n\\nSou o Daniel Zanon, da PRX Capital (prxcapital.com.br).\\n\\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão e proteção de suas estruturas patrimoniais, físicas e jurídicas.\\n\\nNossas principais frentes de atuação abrangem:\\n- Gestão de carteiras, investimentos e câmbio;\\n- Crédito estruturado, financiamentos e antecipação de recebíveis;\\n- Revisão e planejamento tributário, sucessório e societário;\\n- Proteção patrimonial e gestão de liquidez.\\n\\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez do patrimônio da {EMPRESA}.\\n\\nGostaria de agendar um diagnóstico inicial gratuito de 15 minutos para avaliar a eficiência da sua estrutura?\\n\\nUm abraço,\\nDaniel Zanon | PRX Capital',
-        email: 'Olá, {NOME}! Tudo bem?\\n\\nMeu nome é Daniel Zanon, sou executivo da PRX Capital (prxcapital.com.br), multi-family office e boutique financeira.\\n\\nA PRX desenvolve uma assessoria consultiva e exclusiva voltada para empresários e famílias com patrimônio, empresas operacionais e liquidez financeira.\\n\\nNossas frentes de atuação abrangem:\\n1. Estruturação e revisão tributária, sucessória e societária;\\n2. Gestão e assessoria de investimentos e operações de câmbio;\\n3. Soluções de crédito, funding e antecipação de recebíveis;\\n4. Proteção patrimonial e gestão de liquidez.\\n\\nO propósito central é reduzir fricções tributárias e bancárias, viabilizar liquidez eficiente e proteger o patrimônio construído da {EMPRESA}.\\n\\nGostaria de propor um alinhamento inicial de 15 minutos nesta semana para apresentar nossas soluções.\\n\\nVocê teria disponibilidade nesta semana?\\n\\nAtenciosamente,\\nDaniel Zanon\\nExecutivo de Negócios | PRX Capital\\ndaniel@prxcapital.com.br'
+        wpp: 'Olá, {NOME}! Tudo bem?\\n\\nSou o Daniel Zanon, da PRX Capital (prxcapital.com.br).\\n\\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas.\\n\\nNossas frentes de atuação abrangem:\\n* Gestão de carteiras e investimentos\\n* Operações de câmbio e derivativos\\n* Seguros patrimoniais\\n* Créditos e financiamentos (capital de giro e antecipação de recebíveis)\\n* Pesquisa e análise econômica (valuation e viabilidade financeira)\\n* Revisão e planejamento patrimonial, tributário e sucessório\\n\\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez de seu patrimônio.\\n\\nGostaria de agendar um diagnóstico inicial gratuito para melhorar a eficiência da sua estrutura empresarial ou familiar? (a conversa leva 15 minutos e pode ser ajustada nesta semana ou na próxima)\\n\\nUm abraço,\\nDaniel Zanon | PRX Capital\\nprxcapital.com.br',
+        email: 'Olá, {NOME}! Tudo bem?\\n\\nSou o Daniel Zanon, da PRX Capital (prxcapital.com.br).\\n\\nAtuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas.\\n\\nNossas frentes de atuação abrangem:\\n* Gestão de carteiras e investimentos\\n* Operações de câmbio e derivativos\\n* Seguros patrimoniais\\n* Créditos e financiamentos (capital de giro e antecipação de recebíveis)\\n* Pesquisa e análise econômica (valuation e viabilidade financeira)\\n* Revisão e planejamento patrimonial, tributário e sucessório\\n\\nO objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez de seu patrimônio.\\n\\nGostaria de agendar um diagnóstico inicial gratuito para melhorar a eficiência da sua estrutura empresarial ou familiar? (a conversa leva 15 minutos e pode ser ajustada nesta semana ou na próxima)\\n\\nUm abraço,\\nDaniel Zanon | PRX Capital\\nprxcapital.com.br\\ndaniel@prxcapital.com.br'
       }
     };
+
+    function copyToClipboard(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).catch(function() { fallbackCopy(text); });
+      } else {
+        fallbackCopy(text);
+      }
+    }
+
+    function fallbackCopy(text) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      ta.style.top = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try { document.execCommand('copy'); } catch(e) {}
+      document.body.removeChild(ta);
+    }
 
     function getDecisorPhoneJs(d, fallback) {
       if (!d || !d.contato) return fallback || '';
@@ -133,13 +154,13 @@
       if (digits.indexOf('55') === 0 && digits.length >= 12) {}
       else if (digits.length >= 10) { digits = '55' + digits; }
       var url = 'https://api.whatsapp.com/send?phone=' + digits + '&text=' + encodeURIComponent(text);
-      try { navigator.clipboard.writeText(text); } catch(e) {}
+      copyToClipboard(text);
       window.open(url, '_blank');
     }
 
     function openEmailDirect(emailStr, subjectStr, bodyStr) {
       var mailUri = 'mailto:' + encodeURIComponent(emailStr) + '?subject=' + encodeURIComponent(subjectStr) + '&body=' + encodeURIComponent(bodyStr);
-      try { navigator.clipboard.writeText('Assunto: ' + subjectStr + '\\n\\n' + bodyStr); } catch(e) {}
+      copyToClipboard('Assunto: ' + subjectStr + '\\n\\n' + bodyStr);
       window.open(mailUri, '_self');
     }
 
@@ -180,8 +201,8 @@
       if (!p) return;
       var d = (p.decisores && p.decisores.length > 0) ? p.decisores[0] : { nome: 'Sócio-Diretor' };
       var txt = getOfficialWppMessage(p, d);
-      try { navigator.clipboard.writeText(txt); } catch(e) {}
-      showToast('📋 Pitch oficial do Sócio-Administrador copiado!');
+      copyToClipboard(txt);
+      showToast('📋 Pitch oficial copiado com sucesso!');
     }
 
     function openLeadModal(id) {
@@ -272,6 +293,23 @@
     function modalSendEmail() {
       if (!currentModalProspect) return;
       contactViaEmail(currentModalProspect.id, currentSelectedDecisorIndex);
+    }
+
+    function modalCopyWpp() {
+      var mWppTxt = document.getElementById('modalWppTextarea');
+      if (mWppTxt) {
+        copyToClipboard(mWppTxt.value);
+        showToast('📋 Pitch de WhatsApp copiado com sucesso!');
+      }
+    }
+
+    function modalCopyEmail() {
+      var mMailSubj = document.getElementById('modalEmailSubject');
+      var mMailTxt = document.getElementById('modalEmailTextarea');
+      var subj = mMailSubj ? mMailSubj.value : '';
+      var body = mMailTxt ? mMailTxt.value : '';
+      copyToClipboard('Assunto: ' + subj + '\\n\\n' + body);
+      showToast('📋 Minuta de E-mail copiada com sucesso!');
     }
 
     window.switchMainTab = switchMainTab;
@@ -1305,7 +1343,10 @@
                 <span style="font-size: 11px; font-weight: 800; color: #065f46;">📲 Abordagem WhatsApp</span>
                 <textarea id="modalWppTextarea" rows="6" style="width: 100%; background: #ffffff; border: 1px solid #a7f3d0; border-radius: 8px; padding: 8px; font-size: 11px; margin-top: 6px;"></textarea>
               </div>
-              <div style="margin-top: 8px;"><button onclick="modalSendWpp()" style="width: 100%; padding: 8px; background: #059669; color: #ffffff; border: none; border-radius: 8px; font-weight: 800; font-size: 11px;">📲 Disparar WhatsApp para o Sócio Selecionado</button></div>
+              <div style="margin-top: 8px; display: flex; gap: 6px;">
+                <button onclick="modalSendWpp()" style="flex: 1; padding: 8px; background: #059669; color: #ffffff; border: none; border-radius: 8px; font-weight: 800; font-size: 11px;">📲 Disparar WhatsApp</button>
+                <button onclick="modalCopyWpp()" style="padding: 8px 12px; background: #ffffff; color: #065f46; border: 1px solid #a7f3d0; border-radius: 8px; font-weight: 800; font-size: 11px;">📋 Copiar</button>
+              </div>
             </div>
             <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between;">
               <div>
@@ -1313,7 +1354,10 @@
                 <input type="text" id="modalEmailSubject" style="width: 100%; background: #ffffff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 6px; font-size: 11px; margin-top: 6px; margin-bottom: 6px;">
                 <textarea id="modalEmailTextarea" rows="4" style="width: 100%; background: #ffffff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 8px; font-size: 11px;"></textarea>
               </div>
-              <div style="margin-top: 8px;"><button onclick="modalSendEmail()" style="width: 100%; padding: 8px; background: #2563eb; color: #ffffff; border: none; border-radius: 8px; font-weight: 800; font-size: 11px;">✉️ Disparar E-mail para o Sócio Selecionado</button></div>
+              <div style="margin-top: 8px; display: flex; gap: 6px;">
+                <button onclick="modalSendEmail()" style="flex: 1; padding: 8px; background: #2563eb; color: #ffffff; border: none; border-radius: 8px; font-weight: 800; font-size: 11px;">✉️ Disparar E-mail</button>
+                <button onclick="modalCopyEmail()" style="padding: 8px 12px; background: #ffffff; color: #1e40af; border: 1px solid #bfdbfe; border-radius: 8px; font-weight: 800; font-size: 11px;">📋 Copiar</button>
+              </div>
             </div>
           </div>
         </div>
