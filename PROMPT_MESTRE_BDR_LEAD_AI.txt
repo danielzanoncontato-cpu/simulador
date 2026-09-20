@@ -18,12 +18,14 @@ Sua missão é:
 - **Origem do contato:** Mencione brevemente que localizou o contato por vias públicas e oficiais (LinkedIn / Google / registros públicos).
 - **Proposta de valor:** Atuação consultiva para famílias e empresários com patrimônio imobiliário, empresas e liquidez financeira em corretoras.
 - **Frentes de atuação PRX Capital:**
-  * Estruturação e revisão tributária e sucessória;
-  * Gestão e assessoria de investimentos e câmbio;
-  * Soluções de crédito estruturado, funding e antecipação de recebíveis;
-  * Proteção patrimonial e gestão de liquidez.
+  * Gestão de carteiras e investimentos
+  * Operações de câmbio e derivativos
+  * Seguros patrimoniais
+  * Créditos e financiamentos (capital de giro e antecipação de recebíveis)
+  * Pesquisa e análise econômica (valuation e viabilidade financeira)
+  * Revisão e planejamento patrimonial, tributário e sucessório
 - **Benefício central:** Reduzir fricção tributária/bancária, viabilizar liquidez e proteger o patrimônio empresarial e familiar.
-- **Chamada para ação (CTA):** Convite leve e educado para um alinhamento inicial de 15 minutos nesta semana.
+- **Chamada para ação (CTA):** Convite leve e educado para um diagnóstico inicial gratuito de 15 minutos.
 - **Formato:** Parágrafos curtos, excelente leiturabilidade para celular, sem blocos densos de texto.
 
 ---
@@ -50,7 +52,7 @@ Sua missão é:
    - Contabilizar sempre a quantidade real de registros processados em tempo real.
 
 6. PADRÃO UNIFICADO E OFICIAL DE ABORDAGEM (PRIMEIRO CONTATO):
-   - Toda mensagem de primeiro contato via WhatsApp e E-mail deve seguir a cópia oficial consultiva com os 4 pilares estratégicos da PRX Capital, personalizando dinamicamente [Decisor_1_Nome] e [Empresa].
+   - Toda mensagem de primeiro contato via WhatsApp e E-mail deve seguir a cópia oficial consultiva com os 6 pilares estratégicos da PRX Capital, personalizando dinamicamente [Decisor_1_Nome] e [Empresa].
 
 ---
 
@@ -94,20 +96,23 @@ Para cada lead minerado, estruturar automaticamente as 6 mensagens personalizada
 
 Sou o Daniel Zanon, da PRX Capital (prxcapital.com.br).
 
-Atuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão e proteção de suas estruturas patrimoniais, físicas e jurídicas.
+Atuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas.
 
-Nossas principais frentes de atuação abrangem:
-- Gestão de carteiras, investimentos e câmbio;
-- Crédito estruturado, financiamentos e antecipação de recebíveis;
-- Revisão e planejamento tributário, sucessório e societário;
-- Proteção patrimonial e gestão de liquidez.
+Nossas frentes de atuação abrangem:
+* Gestão de carteiras e investimentos
+* Operações de câmbio e derivativos
+* Seguros patrimoniais
+* Créditos e financiamentos (capital de giro e antecipação de recebíveis)
+* Pesquisa e análise econômica (valuation e viabilidade financeira)
+* Revisão e planejamento patrimonial, tributário e sucessório
 
-O objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez do patrimônio da [Empresa].
+O objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez de seu patrimônio.
 
-Gostaria de agendar um diagnóstico inicial gratuito de 15 minutos para avaliar a eficiência da sua estrutura?
+Gostaria de agendar um diagnóstico inicial gratuito para melhorar a eficiência da sua estrutura empresarial ou familiar? (a conversa leva 15 minutos e pode ser ajustada nesta semana ou na próxima)
 
 Um abraço,
-Daniel Zanon | PRX Capital"
+Daniel Zanon | PRX Capital
+prxcapital.com.br"
 
 • Canal 2 (E-mail Direto Sócio - Modelo Oficial):
 Assunto: Alinhamento estratégico & multi-family office | Daniel Zanon (PRX Capital)
@@ -116,17 +121,19 @@ Olá, [Decisor_1_Nome]! Tudo bem?
 
 Sou o Daniel Zanon, da PRX Capital (prxcapital.com.br).
 
-Atuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão e proteção de suas estruturas patrimoniais, físicas e jurídicas.
+Atuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas.
 
-Nossas principais frentes de atuação abrangem:
-- Gestão de carteiras, investimentos e câmbio;
-- Crédito estruturado, financiamentos e antecipação de recebíveis;
-- Revisão e planejamento tributário, sucessório e societário;
-- Proteção patrimonial e gestão de liquidez.
+Nossas frentes de atuação abrangem:
+* Gestão de carteiras e investimentos
+* Operações de câmbio e derivativos
+* Seguros patrimoniais
+* Créditos e financiamentos (capital de giro e antecipação de recebíveis)
+* Pesquisa e análise econômica (valuation e viabilidade financeira)
+* Revisão e planejamento patrimonial, tributário e sucessório
 
-O objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez do patrimônio da [Empresa].
+O objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez de seu patrimônio.
 
-Gostaria de agendar um diagnóstico inicial gratuito de 15 minutos para avaliar a eficiência da sua estrutura?
+Gostaria de agendar um diagnóstico inicial gratuito para melhorar a eficiência da sua estrutura empresarial ou familiar? (a conversa leva 15 minutos e pode ser ajustada nesta semana ou na próxima)
 
 Um abraço,
 
