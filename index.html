@@ -430,8 +430,8 @@
         <button id="tab-connect-btn" onclick="switchMainTab('connect')" class="tab-btn">
           ⚡ Conexão Resend API
         </button>
-        <button onclick="exportCurrentCsv()" class="btn-export" title="Baixar arquivo CSV formatado para disparos (Nome, Empresa, Número +55DDD, E-mail)">
-          📥 Baixar Base Disparo Excel
+        <button onclick="exportCurrentCsv()" class="btn-export" title="Baixar base em CSV formatada para disparos">
+          📥 Baixar Base de Disparo
         </button>
       </div>
     </div>
@@ -464,7 +464,7 @@
           </select>
         </div>
         <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-          <a href="base_disparo_prx.csv" download="base_disparo_prx.csv" style="text-decoration: none; padding: 8px 14px; background: #047857; color: #ffffff; border-radius: 10px; font-size: 12px; font-weight: 800; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">📥 Baixar Base Disparo (+55 DDD)</a>
+          <a href="base_disparo_prx.csv" download="base_disparo_prx.csv" style="text-decoration: none; padding: 8px 14px; background: #047857; color: #ffffff; border-radius: 10px; font-size: 12px; font-weight: 800; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">📥 Baixar Base de Disparo</a>
           <button onclick="exportCurrentCsv()" style="padding: 8px 14px; background: #0f172a; color: #ffffff; border: none; border-radius: 10px; font-size: 12px; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">📥 Baixar Filtro Atual</button>
         </div>
       </div>
@@ -2523,7 +2523,7 @@
           window.URL.revokeObjectURL(url);
         }, 300);
       }
-      showToast('📥 Base para Disparo baixada (' + rowCount.toLocaleString('pt-BR') + ' contatos formatados +55DDD)!');
+      showToast('📥 Base de Disparo baixada com sucesso (' + rowCount.toLocaleString('pt-BR') + ' contatos)!');
     }
 
     updateDynamicCounts();
