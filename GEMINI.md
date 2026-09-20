@@ -50,28 +50,31 @@
    - Todo disparo direto e cópia de pitch executados pelo operador utilizam a infraestrutura Resend API e os links diretos do WhatsApp Web, sem intermediários ou telas de login.
 
 10. **PADRÃO UNIFICADO E OFICIAL DE ABORDAGEM WHATSAPP E E-MAIL (PRIMEIRO CONTATO):**
-    - Todo disparo, botão de envio no dashboard (`📲 WhatsApp`, `📋 Copiar Pitch`, modal de detalhes `openLeadModal`) e gerador de scripts DEVE utilizar estritamente o modelo de cópia oficial consultiva de alto impacto da PRX Capital, personalizando dinamicamente `{NOME}` (Decisor 1 / Sócio) e `{EMPRESA}`:
+    - Todo disparo, botão de envio no dashboard (`📲 WhatsApp`, `📋 Copiar Pitch`, modal de detalhes `openLeadModal`) e gerador de scripts DEVE utilizar estritamente o modelo de cópia oficial consultiva de alto impacto da PRX Capital, personalizando dinamicamente `{NOME}` (Decisor / Sócio):
       - **WhatsApp Oficial (Primeiro Contato):**
         ```text
         Olá, {NOME}! Tudo bem?
 
         Sou o Daniel Zanon, da PRX Capital (prxcapital.com.br).
 
-        Atuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão e proteção de suas estruturas patrimoniais, físicas e jurídicas.
+        Atuamos como multi-family office e boutique financeira, assessorando empresários e famílias na gestão completa de suas estruturas físicas e jurídicas.
 
-        Nossas principais frentes de atuação abrangem:
-        - Gestão de carteiras, investimentos e câmbio;
-        - Crédito estruturado, financiamentos e antecipação de recebíveis;
-        - Revisão e planejamento tributário, sucessório e societário;
-        - Proteção patrimonial e gestão de liquidez.
+        Nossas frentes de atuação abrangem:
+        * Gestão de carteiras e investimentos
+        * Operações de câmbio e derivativos
+        * Seguros patrimoniais
+        * Créditos e financiamentos (capital de giro e antecipação de recebíveis)
+        * Pesquisa e análise econômica (valuation e viabilidade financeira)
+        * Revisão e planejamento patrimonial, tributário e sucessório
 
-        O objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez do patrimônio da {EMPRESA}.
+        O objetivo é blindar o capital, reduzir atritos fiscais e bancários e otimizar a tomada de decisão e a liquidez de seu patrimônio.
 
-        Gostaria de agendar um diagnóstico inicial gratuito de 15 minutos para avaliar a eficiência da sua estrutura?
+        Gostaria de agendar um diagnóstico inicial gratuito para melhorar a eficiência da sua estrutura empresarial ou familiar? (a conversa leva 15 minutos e pode ser ajustada nesta semana ou na próxima)
 
         Um abraço,
         Daniel Zanon | PRX Capital
+        prxcapital.com.br
         ```
       - **E-mail Oficial (Primeiro Contato):**
         - **Assunto:** `Alinhamento estratégico & multi-family office | Daniel Zanon (PRX Capital)`
-        - **Corpo:** Cópia idêntica de alto impacto com os 4 pilares centrais, chamada de diagnóstico de 15 minutos e assinatura oficial de Daniel Zanon (`Daniel Zanon | Executivo de Negócios | PRX Capital | daniel@prxcapital.com.br`).
+        - **Corpo:** Cópia idêntica de alto impacto com os 6 pilares centrais, chamada de diagnóstico e assinatura oficial de Daniel Zanon (`Daniel Zanon | Executivo de Negócios | PRX Capital | daniel@prxcapital.com.br`).
