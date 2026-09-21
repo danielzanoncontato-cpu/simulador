@@ -149597,9 +149597,44 @@
       }
 
       renderMinedTable();
+      // Inserir automaticamente todos os novos leads minerados no topo da Base de Prospecção
+      var existingMap = {};
+      for (var pIdx = 0; pIdx < prospects.length; pIdx++) existingMap[prospects[pIdx].id] = true;
+
+      var newlyAdded = [];
+      for (var k = lastMinedLeads.length - 1; k >= 0; k--) {
+        if (!existingMap[lastMinedLeads[k].id]) {
+          prospects.unshift(lastMinedLeads[k]);
+          newlyAdded.push(lastMinedLeads[k]);
+          existingMap[lastMinedLeads[k].id] = true;
+        }
+      }
+
+      // Persistir no localStorage para manter os leads mesmo após recarregar a página
+      try {
+        var stored = [];
+        try { stored = JSON.parse(localStorage.getItem('prx_mined_leads') || '[]'); } catch(e){}
+        stored = newlyAdded.concat(stored);
+        localStorage.setItem('prx_mined_leads', JSON.stringify(stored));
+      } catch(e){}
+
+      // Atualizar contadores dinâmicos e re-renderizar a Base de Prospecção
+      updateDynamicCounts();
+      filterData();
+
+      // Renderizar também na aba de mineração
+      renderMinedTable();
       var pBox = document.getElementById('minerProgressBox'); if (pBox) pBox.style.display = 'none';
       var rBox = document.getElementById('minerResultsBox'); if (rBox) rBox.style.display = 'flex';
-      showToast('🎯 ' + lastMinedLeads.length + ' empresas mineradas com sucesso!');
+
+      // Alternar automaticamente para a Base de Prospecção para o usuário ver os leads imediatamente
+      setTimeout(function() {
+        switchMainTab('prospects');
+        showToast('🎯 ' + lastMinedLeads.length + ' novos leads minerados e adicionados à Base de Prospecção! (Total: ' + prospects.length.toLocaleString('pt-BR') + ' leads)');
+      }, 700);
+
+      // Sincronizar em segundo plano com o GitHub
+      syncFileToGithub('prospects_database.json', JSON.stringify(prospects, null, 2), '🎯 ' + lastMinedLeads.length + ' novos leads minerados e adicionados à Base Master (' + prospects.length + ' leads)');
     }
 
     function renderMinedTable() {
@@ -149648,30 +149683,41 @@
       var badge = document.getElementById('minedSelectedCountDisplay');
       if (badge) badge.innerText = selectedCount + ' de ' + lastMinedLeads.length + ' selecionados';
       var btn = document.getElementById('btnConnectMinedLeads');
-      if (btn) btn.innerText = '✅ Conectar ' + selectedCount + ' Leads Selecionados à Base Ativa';
+      if (btn) btn.innerText = '✅ ' + selectedCount + ' Leads Conectados à Base de Prospecção';
     }
 
     async function connectMinedLeadsToActiveBase() {
       var toConnect = lastMinedLeads.filter(function(l) { return l.selected; });
       if (toConnect.length === 0) {
-        alert('Selecione ao menos 1 lead para conectar à base ativa.');
+        showToast('⚠️ Selecione ao menos 1 lead para conectar à base ativa.');
         return;
       }
 
+      var existingIds = {};
+      for (var i = 0; i < prospects.length; i++) existingIds[prospects[i].id] = true;
+
+      var addedCount = 0;
       for (var i = 0; i < toConnect.length; i++) {
-        prospects.push(toConnect[i]);
+        if (!existingIds[toConnect[i].id]) {
+          prospects.unshift(toConnect[i]);
+          existingIds[toConnect[i].id] = true;
+          addedCount++;
+        }
       }
+
+      try {
+        var stored = [];
+        try { stored = JSON.parse(localStorage.getItem('prx_mined_leads') || '[]'); } catch(e){}
+        stored = toConnect.concat(stored);
+        localStorage.setItem('prx_mined_leads', JSON.stringify(stored));
+      } catch(e){}
 
       updateDynamicCounts();
       filterData();
-      showToast('🎉 ' + toConnect.length + ' novos leads conectados com sucesso! Base Master atualizada para ' + prospects.length + ' leads.');
-
-      syncFileToGithub('prospects_database.json', JSON.stringify(prospects, null, 2), '✅ Conexão de ' + toConnect.length + ' novos leads minerados (Base Master: ' + prospects.length + ')')
-        .then(function(ok) {
-          if (ok) showToast('🟢 Novos leads sincronizados com sucesso no GitHub!');
-        });
-
       switchMainTab('prospects');
+      showToast('🎉 ' + (addedCount > 0 ? addedCount : toConnect.length) + ' novos leads conectados à Base de Prospecção! (Total: ' + prospects.length.toLocaleString('pt-BR') + ' leads)');
+
+      syncFileToGithub('prospects_database.json', JSON.stringify(prospects, null, 2), '✅ Conexão de ' + toConnect.length + ' novos leads minerados (Base Master: ' + prospects.length + ')');
     }
 
     function exportMinedCsv() {
@@ -149701,7 +149747,27 @@
       showToast('📥 Base Minerada baixada com sucesso (' + count + ' contatos)!');
     }
 
+    function loadStoredMinedLeads() {
+      try {
+        var saved = localStorage.getItem('prx_mined_leads');
+        if (saved) {
+          var arr = JSON.parse(saved);
+          if (Array.isArray(arr) && arr.length > 0) {
+            var existingMap = {};
+            for (var i = 0; i < prospects.length; i++) existingMap[prospects[i].id] = true;
+            for (var j = arr.length - 1; j >= 0; j--) {
+              if (!existingMap[arr[j].id]) {
+                prospects.unshift(arr[j]);
+                existingMap[arr[j].id] = true;
+              }
+            }
+          }
+        }
+      } catch (e) {}
+    }
+
     window.onload = function() {
+      loadStoredMinedLeads();
       loadSearchHistory();
       filterData();
       updateDynamicCounts();
