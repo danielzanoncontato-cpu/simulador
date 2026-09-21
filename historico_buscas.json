@@ -1,12 +1,14 @@
 [
   {
-    "id": "search_init",
-    "data": "21/09/2026 18:00:09",
-    "timestamp": "2026-09-21T21:00:09.6084578Z",
-    "tipo": "sistema_inicializado",
-    "query": "Base Master PRX Conectada (3.900 empresas / 7.867 decisores)",
-    "resultados": 3900,
-    "detalhes": { "status": "online", "ambiente": "GitHub Pages / Antigravity AI" },
-    "status": "sincronizado_github"
+    "id": "search_1790024503838",
+    "data": "21/09/2026, 18:01:43",
+    "timestamp": "2026-09-21T21:01:43.844Z",
+    "tipo": "filtro_segmento",
+    "query": "Filtro de Segmento: Agronegócio",
+    "resultados": 0,
+    "detalhes": {
+      "codSegmento": "GREEN"
+    },
+    "status": "enviado_para_ia"
   }
 ]
