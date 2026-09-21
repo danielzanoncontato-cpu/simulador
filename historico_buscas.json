@@ -1,25 +1,66 @@
 [
   {
-    "id": "search_1790024506286",
-    "data": "21/09/2026, 18:01:46",
-    "timestamp": "2026-09-21T21:01:46.286Z",
+    "id": "search_1790024549245",
+    "data": "21/09/2026, 18:02:29",
+    "timestamp": "2026-09-21T21:02:29.246Z",
     "tipo": "filtro_segmento",
-    "query": "Filtro de Segmento: Todos os Segmentos",
-    "resultados": 0,
+    "query": "Filtro de Segmento: Exportadoras & Trading",
+    "resultados": 1200,
     "detalhes": {
-      "codSegmento": "ALL"
+      "codSegmento": "RED"
     },
     "status": "enviado_para_ia"
   },
   {
-    "id": "search_1790024503838",
-    "data": "21/09/2026, 18:01:43",
-    "timestamp": "2026-09-21T21:01:43.844Z",
+    "id": "search_1790021635204",
+    "data": "21/09/2026, 17:13:55",
+    "timestamp": "2026-09-21T20:13:55.204Z",
+    "tipo": "filtro_segmento",
+    "query": "Filtro de Segmento: Todos os Segmentos",
+    "resultados": 4000,
+    "detalhes": {
+      "codSegmento": "ALL"
+    },
+    "status": "sincronizado_github"
+  },
+  {
+    "id": "search_1790021632570",
+    "data": "21/09/2026, 17:13:52",
+    "timestamp": "2026-09-21T20:13:52.570Z",
     "tipo": "filtro_segmento",
     "query": "Filtro de Segmento: Agronegócio",
-    "resultados": 0,
+    "resultados": 600,
     "detalhes": {
       "codSegmento": "GREEN"
+    },
+    "status": "sincronizado_github"
+  },
+  {
+    "id": "search_1790021593807",
+    "data": "21/09/2026, 17:13:13",
+    "timestamp": "2026-09-21T20:13:13.807Z",
+    "tipo": "mineracao_leads",
+    "query": "Mineração Solicitada: piloto aviao",
+    "resultados": 100,
+    "detalhes": {
+      "tipoSoc": "ALL",
+      "regime": "ALL",
+      "uf": "ALL",
+      "cities": "",
+      "quantidade": 100
+    },
+    "status": "sincronizado_github"
+  },
+  {
+    "id": "search_init",
+    "data": "21/09/2026, 17:12:48",
+    "timestamp": "2026-09-21T20:12:48.839Z",
+    "tipo": "sistema_inicializado",
+    "query": "Base Master PRX Conectada (3.900 empresas / 7.867 decisores)",
+    "resultados": 3900,
+    "detalhes": {
+      "status": "online",
+      "ambiente": "GitHub Pages / Antigravity AI"
     },
     "status": "sincronizado_github"
   }
