@@ -1,12 +1,31 @@
 [
   {
+    "id": "search_1790020550999",
+    "data": "21/09/2026, 16:55:50",
+    "timestamp": "2026-09-21T19:55:50.999Z",
+    "tipo": "mineracao_leads",
+    "query": "Mineração Solicitada: Fábricas & Indústrias",
+    "resultados": 250,
+    "detalhes": {
+      "tipoSoc": "ALL",
+      "regime": "ALL",
+      "uf": "ALL",
+      "cities": "",
+      "quantidade": 250
+    },
+    "status": "enviado_para_ia"
+  },
+  {
     "id": "search_init",
-    "data": "21/09/2026 16:52:59",
-    "timestamp": "2026-09-21T19:52:59.8106691Z",
+    "data": "21/09/2026, 16:54:38",
+    "timestamp": "2026-09-21T19:54:38.768Z",
     "tipo": "sistema_inicializado",
     "query": "Base Master PRX Conectada (3.900 empresas / 7.867 decisores)",
     "resultados": 3900,
-    "detalhes": { "status": "online", "ambiente": "GitHub Pages / Antigravity AI" },
+    "detalhes": {
+      "status": "online",
+      "ambiente": "GitHub Pages / Antigravity AI"
+    },
     "status": "sincronizado_github"
   }
 ]
