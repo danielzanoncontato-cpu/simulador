@@ -53,17 +53,9 @@
     function switchMainTab(tab) {
       try {
         var pTab = document.getElementById('prospectsTabContent');
-        var coTab = document.getElementById('connectTabContent');
-
-        if (pTab) pTab.style.display = (tab === 'prospects') ? 'flex' : 'none';
-        if (coTab) coTab.style.display = (tab === 'connect') ? 'flex' : 'none';
-
+        if (pTab) pTab.style.display = 'flex';
         var btnP = document.getElementById('tab-prospects-btn');
-        var btnCo = document.getElementById('tab-connect-btn');
-
-        if (btnP) btnP.className = (tab === 'prospects') ? 'tab-btn active-tab' : 'tab-btn';
-        if (btnCo) btnCo.className = (tab === 'connect') ? 'tab-btn active-tab' : 'tab-btn';
-
+        if (btnP) btnP.className = 'tab-btn active-tab';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } catch (err) {
         console.error('Erro ao alternar aba:', err);
@@ -426,9 +418,6 @@
       <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
         <button id="tab-prospects-btn" onclick="switchMainTab('prospects')" class="tab-btn active-tab">
           📋 Base de Prospecção <span id="tabProspectsBadge" style="background: #1e293b; color: #f8fafc; padding: 2px 6px; border-radius: 9999px; font-size: 10px; font-family: monospace;">3.900</span>
-        </button>
-        <button id="tab-connect-btn" onclick="switchMainTab('connect')" class="tab-btn">
-          ⚡ Conexão Resend API
         </button>
         <button onclick="exportCurrentCsv()" class="btn-export" title="Baixar base em CSV formatada para disparos">
           📥 Baixar Base de Disparo
@@ -1361,22 +1350,6 @@
             <span style="font-family: monospace; font-weight: 700; padding: 0 6px;">Página <span id="currentPageDisplay">1</span> / <span id="totalPagesDisplay">78</span></span>
             <button onclick="goToNextPage()" id="btnNextPage" style="background: #ffffff; border: 1px solid #cbd5e1; padding: 4px 12px; border-radius: 8px; font-weight: 700; cursor: pointer;">Próxima ▶</button>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ABA 2: CONEXÃO RESEND API & DADOS EXECUTIVOS -->
-    <div id="connectTabContent" style="display: none; flex-direction: column; gap: 14px;">
-      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-        <h3 style="font-size: 16px; font-weight: 900; color: #0f172a; margin-bottom: 14px;">⚡ Central de Conexão Resend API</h3>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
-          <div><label style="font-size: 11px; font-weight: 700; color: #475569;">Nome Executivo:</label><input type="text" value="Daniel Zanon" style="width: 100%; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px; font-size: 12px; font-weight: 700; margin-top: 4px;"></div>
-          <div><label style="font-size: 11px; font-weight: 700; color: #475569;">E-mail Corporativo:</label><input type="text" value="daniel@prxcapital.com.br" style="width: 100%; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px; font-size: 12px; font-weight: 700; margin-top: 4px;"></div>
-          <div><label style="font-size: 11px; font-weight: 700; color: #475569;">Provedor de Disparo:</label><input type="text" value="Resend API (Oficial Ativo)" readonly style="width: 100%; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px; font-size: 12px; font-weight: 800; color: #059669; margin-top: 4px;"></div>
-          <div><label style="font-size: 11px; font-weight: 700; color: #475569;">Remetente Autorizado:</label><input type="text" value="PRX Capital <onboarding@resend.dev>" style="width: 100%; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px; font-size: 12px; font-family: monospace; margin-top: 4px;"></div>
-        </div>
-        <div style="margin-top: 14px;">
-          <button onclick="showToast('✅ Configurações salvas!')" class="btn-export">💾 Salvar Preferências</button>
         </div>
       </div>
     </div>
