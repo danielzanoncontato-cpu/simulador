@@ -1,27 +1,12 @@
 [
   {
-    "id": "search_1790021844454",
-    "data": "21/09/2026, 17:17:24",
-    "timestamp": "2026-09-21T20:17:24.454Z",
-    "tipo": "filtro_segmento",
-    "query": "Filtro de Segmento: Logística & Frotas",
-    "resultados": 600,
-    "detalhes": {
-      "codSegmento": "SPECIAL_LOG"
-    },
-    "status": "enviado_para_ia"
-  },
-  {
     "id": "search_init",
-    "data": "21/09/2026, 17:17:09",
-    "timestamp": "2026-09-21T20:17:09.752Z",
+    "data": "21/09/2026 17:21:16",
+    "timestamp": "2026-09-21T20:21:16.7780509Z",
     "tipo": "sistema_inicializado",
     "query": "Base Master PRX Conectada (3.900 empresas / 7.867 decisores)",
     "resultados": 3900,
-    "detalhes": {
-      "status": "online",
-      "ambiente": "GitHub Pages / Antigravity AI"
-    },
+    "detalhes": { "status": "online", "ambiente": "GitHub Pages / Antigravity AI" },
     "status": "sincronizado_github"
   }
 ]
