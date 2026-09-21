@@ -175,33 +175,19 @@
     function switchMainTab(tabName) {
       var pTab = document.getElementById('prospectsTabContent');
       var mTab = document.getElementById('minerTabContent');
-      var sTab = document.getElementById('searchLogsTabContent');
       var pBtn = document.getElementById('tab-prospects-btn');
       var mBtn = document.getElementById('tab-miner-btn');
-      var sBtn = document.getElementById('tab-search-btn');
 
       if (tabName === 'miner') {
         if (pTab) pTab.style.display = 'none';
         if (mTab) mTab.style.display = 'flex';
-        if (sTab) sTab.style.display = 'none';
         if (pBtn) pBtn.classList.remove('active-tab');
         if (mBtn) mBtn.classList.add('active-tab');
-        if (sBtn) sBtn.classList.remove('active-tab');
-      } else if (tabName === 'search_logs') {
-        if (pTab) pTab.style.display = 'none';
-        if (mTab) mTab.style.display = 'none';
-        if (sTab) sTab.style.display = 'flex';
-        if (pBtn) pBtn.classList.remove('active-tab');
-        if (mBtn) mBtn.classList.remove('active-tab');
-        if (sBtn) sBtn.classList.add('active-tab');
-        renderSearchHistoryTable();
       } else {
         if (pTab) pTab.style.display = 'flex';
         if (mTab) mTab.style.display = 'none';
-        if (sTab) sTab.style.display = 'none';
         if (pBtn) pBtn.classList.add('active-tab');
         if (mBtn) mBtn.classList.remove('active-tab');
-        if (sBtn) sBtn.classList.remove('active-tab');
       }
     }
 
@@ -307,8 +293,6 @@
 
       var badge = document.getElementById('searchCountBadge');
       if (badge) badge.innerText = searchHistory.length;
-
-      showToast('📡 Pesquisa conectada ao GitHub & enviada ao Sistema de Busca AI: "' + cleanQuery + '"');
 
       syncFileToGithub('historico_buscas.json', JSON.stringify(searchHistory, null, 2), '📡 Pesquisa BDR AI: ' + cleanQuery)
         .then(function(ok) {
@@ -149771,22 +149755,16 @@
         </div>
       </div>
 
-      <!-- NAVEGAÇÃO DE ABAS & TOGGLE DE TEMA & SINCRONIZAÇÃO GITHUB -->
+      <!-- NAVEGAÇÃO DE ABAS & TOGGLE DE TEMA -->
       <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
         <button id="themeToggleBtn" onclick="toggleTheme()" class="theme-toggle-btn" title="Alternar entre Modo Claro e Modo Escuro">
           🌙 Modo Escuro
-        </button>
-        <button onclick="syncEntireDashboardToGithub()" class="btn-outline" title="Forçar sincronização de dados e pesquisas com o repositório GitHub">
-          🔄 Sincronizar com GitHub
         </button>
         <button id="tab-prospects-btn" onclick="switchMainTab('prospects')" class="tab-btn active-tab">
           📋 Base de Prospecção <span id="tabProspectsBadge" style="background: var(--btn-sub-bg); color: var(--btn-sub-text); padding: 2px 7px; border-radius: 9999px; font-size: 10px; font-family: monospace; border: 1px solid var(--border-strong);">3.900</span>
         </button>
         <button id="tab-miner-btn" onclick="switchMainTab('miner')" class="tab-btn">
           ⛏️ Minerar Novos Leads
-        </button>
-        <button id="tab-search-btn" onclick="switchMainTab('search_logs')" class="tab-btn">
-          📡 Histórico & Buscas AI <span id="searchCountBadge" style="background: var(--badge-bg); color: var(--badge-text); padding: 2px 7px; border-radius: 9999px; font-size: 10px; font-family: monospace; border: 1px solid var(--badge-border);">1</span>
         </button>
         <button onclick="exportCurrentCsv()" class="btn-main" title="Baixar base em CSV formatada para disparos">
           📥 Baixar Base de Disparo
@@ -151016,40 +150994,6 @@
                 </tr>
               </thead>
               <tbody id="minedTableBody"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ABA 3: HISTÓRICO & CENTRAL DE MENSAGENS DE BUSCA AI (CONECTADA AO GITHUB) -->
-    <div id="searchLogsTabContent" style="display: none; flex-direction: column; gap: 14px; flex: 1;">
-      <div style="background: var(--bg-card); border: 2px solid var(--border-strong); border-radius: 16px; padding: 20px; box-shadow: 0 2px 8px rgba(15,23,42,0.05);">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 12px;">
-          <div>
-            <h2 style="font-size: 17px; font-weight: 900; color: var(--text-main); display: flex; align-items: center; gap: 8px;">📡 Central de Telemetria de Buscas & Mensagens AI (GitHub Sync)</h2>
-            <p style="font-size: 12px; color: var(--text-muted); margin-top: 3px;">Toda pesquisa realizada no dashboard é automaticamente registrada, sincronizada com o GitHub e enviada para a inteligência de busca do BDR Lead AI.</p>
-          </div>
-          <div style="display: flex; gap: 8px;">
-            <button onclick="syncEntireDashboardToGithub()" class="btn-main" style="padding: 8px 14px; font-size: 11px;">🔄 Sincronizar Agora com GitHub</button>
-          </div>
-        </div>
-
-        <!-- TABELA DE HISTÓRICO DE BUSCAS -->
-        <div style="border: 1px solid var(--border-color); border-radius: 14px; overflow: hidden; background: var(--bg-card);">
-          <div style="max-height: 480px; overflow-y: auto; overflow-x: auto;">
-            <table style="width: 100%; border-collapse: collapse; min-width: 900px; font-size: 12px; text-align: left;">
-              <thead style="background: var(--table-header-bg); color: var(--table-header-text); font-size: 11px; text-transform: uppercase; font-weight: 800; position: sticky; top: 0; z-index: 10;">
-                <tr>
-                  <th style="padding: 10px; width: 140px;">Data/Hora</th>
-                  <th style="padding: 10px; width: 340px;">Query / Termo Pesquisado</th>
-                  <th style="padding: 10px; width: 140px;">Tipo de Filtro</th>
-                  <th style="padding: 10px; width: 100px;">Resultados</th>
-                  <th style="padding: 10px; text-align: center; width: 140px;">Status GitHub</th>
-                  <th style="padding: 10px; text-align: center; width: 140px;">Ação</th>
-                </tr>
-              </thead>
-              <tbody id="searchLogsTableBody"></tbody>
             </table>
           </div>
         </div>
