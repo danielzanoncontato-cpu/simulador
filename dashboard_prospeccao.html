@@ -149463,7 +149463,13 @@
     }
 
     function startMiningEngine() {
-      var seg = (document.getElementById('minerSegmentInput').value || 'Agronegócio & Indústrias').trim();
+      var seg = (document.getElementById('minerSegmentInput').value || '').trim();
+      if (!seg) {
+        showToast('⚠️ Por favor, digite o segmento desejado / nicho para minerar.');
+        var inp = document.getElementById('minerSegmentInput');
+        if (inp) inp.focus();
+        return;
+      }
       var tipoSoc = document.getElementById('minerTipoSocietario').value;
       var regime = document.getElementById('minerRegime').value;
       var uf = document.getElementById('minerUf').value;
@@ -150931,20 +150937,13 @@
             <span class="badge-master">⚡ ROBÔ DE MINERAÇÃO AI</span>
           </div>
         </div>
-
         <!-- FORMULÁRIO DE FILTROS PARA MINERAÇÃO -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;">
-          <!-- SEGMENTO / ICP -->
+          <!-- SEGMENTO DESEJADO / NICHO -->
           <div>
-            <label style="font-size: 11px; font-weight: 800; color: var(--text-main); text-transform: uppercase; margin-bottom: 5px; display: block;">🎯 Segmento / Nicho:</label>
-            <input type="text" id="minerSegmentInput" value="Agronegócio & Trading" placeholder="Ex: Indústrias, Logística, Farmacêutica..." style="width: 100%; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 12px; font-size: 12px; font-weight: 700;">
-            <div style="display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px;">
-              <button type="button" class="chip-btn" onclick="setMinerSegmentChip('Agronegócio & Insumos')">Agro</button>
-              <button type="button" class="chip-btn" onclick="setMinerSegmentChip('Fábricas & Indústrias')">Indústria</button>
-              <button type="button" class="chip-btn" onclick="setMinerSegmentChip('Exportadoras & Comex')">Exportadoras</button>
-              <button type="button" class="chip-btn" onclick="setMinerSegmentChip('Logística & Transportes')">Logística</button>
-              <button type="button" class="chip-btn" onclick="setMinerSegmentChip('Médicos & Clínicas PJ')">Saúde PJ</button>
-              <button type="button" class="chip-btn" onclick="setMinerSegmentChip('Holdings & Family Offices')">Holdings</button>
+            <label style="font-size: 11px; font-weight: 800; color: var(--text-main); text-transform: uppercase; margin-bottom: 5px; display: block;">Segmento desejado / nicho</label>
+            <div style="position: relative;">
+              <input type="text" id="minerSegmentInput" value="" placeholder="✏️ Digite o segmento desejado / nicho..." style="width: 100%; background: var(--input-bg); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 14px; font-size: 13px; font-weight: 700;">
             </div>
           </div>
 
