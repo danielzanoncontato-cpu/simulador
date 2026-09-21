@@ -1,12 +1,1 @@
-[
-  {
-    "id": "search_init",
-    "data": "21/09/2026 16:58:33",
-    "timestamp": "2026-09-21T19:58:33.9529134Z",
-    "tipo": "sistema_inicializado",
-    "query": "Base Master PRX Conectada (3.900 empresas / 7.867 decisores)",
-    "resultados": 3900,
-    "detalhes": { "status": "online", "ambiente": "GitHub Pages / Antigravity AI" },
-    "status": "sincronizado_github"
-  }
-]
+[]
