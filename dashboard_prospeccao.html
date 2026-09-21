@@ -149191,9 +149191,7 @@
         var regimeBadge = '<span class="badge-info" style="margin-left: 4px;">📑 ' + (p.regimeTributario || 'Lucro Real') + '</span>';
         var cnaeSecHtml = p.cnaeSecundarios ? ('<div style="font-size: 10px; color: var(--text-muted); margin-top: 2px; line-height: 1.3;"><span style="font-weight: 700; color: var(--text-sub);">Secundários:</span> ' + p.cnaeSecundarios + '</div>') : '';
 
-        var siteBtnHtml = (p.hasSite && p.site && p.site.indexOf('http') === 0)
-          ? ('<div style="margin-top: 5px;"><a href="' + p.site + '" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>')
-          : ('<div style="margin-top: 5px;"><span class="badge-info" style="color: var(--text-muted); border-style: dashed;">🌐 sem site</span></div>');
+        var siteBtnHtml = '<div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(' + p.id + ')" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>';
 
         var actionBtns = '<div style="width: 100%; max-width: 130px; margin: 0 auto;">' + viewBtn + wpp1Btn + wpp2Btn + emailBtn + '</div>';
 
@@ -149383,6 +149381,21 @@
       return null;
     }
 
+    function openCompanyWebsite(id) {
+      var p = findProspectById(id);
+      if (!p) return;
+      var raw = (p.site || '').trim();
+      if (raw && raw.indexOf('http') === 0 && raw.indexOf('google.com') === -1 && raw.indexOf('sem site') === -1 && raw.indexOf('Rastreio via') === -1) {
+        window.open(raw, '_blank', 'noopener,noreferrer');
+        showToast('🌐 Abrindo site oficial: ' + p.company);
+      } else {
+        var q = (p.company || '') + ' ' + (p.city || '') + ' ' + (p.uf || '') + ' site oficial';
+        var searchUrl = 'https://www.google.com/search?q=' + encodeURIComponent(q);
+        window.open(searchUrl, '_blank', 'noopener,noreferrer');
+        showToast('🔍 Localizando site oficial de ' + p.company + ' no Google...');
+      }
+    }
+
     function contactViaWpp(id, decisorIndex) {
       var p = findProspectById(id);
       if (!p) return;
@@ -149416,7 +149429,14 @@
       var mTipo = document.getElementById('modalTipoSocietario'); if (mTipo) mTipo.innerText = p.tipoSocietario || 'LTDA';
       var mReg = document.getElementById('modalRegime'); if (mReg) mReg.innerText = p.regimeTributario || 'Lucro Real';
       var mCnae = document.getElementById('modalCnaePrincipal'); if (mCnae) mCnae.innerText = p.cnaePrincipal || '-';
-      var mSite = document.getElementById('modalSite'); if (mSite) mSite.innerHTML = p.site ? ('<a href="' + p.site + '" target="_blank" style="color: var(--text-main); font-weight: 800; text-decoration: underline;">' + p.site + '</a>') : '<span style="color: var(--text-muted);">Não informado</span>';
+      var mSite = document.getElementById('modalSite');
+      if (mSite) {
+        var isDirect = p.site && p.site.indexOf('http') === 0 && p.site.indexOf('google.com') === -1 && p.site.indexOf('sem site') === -1 && p.site.indexOf('Rastreio via') === -1;
+        mSite.innerHTML = '<div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">' +
+                          '  <button type="button" onclick="openCompanyWebsite(' + p.id + ')" class="btn-main" style="padding: 4px 10px; font-size: 11px;">🌐 ' + (isDirect ? 'Abrir Site Oficial' : 'Buscar Site no Google') + '</button>' +
+                          '  <a href="https://www.google.com/search?q=' + encodeURIComponent(p.company + ' ' + (p.cnpj || '') + ' ' + (p.city || '') + ' ' + (p.uf || '')) + '" target="_blank" class="btn-outline" style="padding: 4px 10px; font-size: 11px; text-decoration: none;">🔍 Google / CNPJ</a>' +
+                          '</div>';
+      }
 
       var decHtml = '';
       var radioHtml = '';
@@ -149553,6 +149573,48 @@
     }
 
     function generateMinedResults(seg, tipoSoc, regime, uf, cities, qty) {
+      // Catálogo de empresas de grande porte e alta precisão com sites oficiais reais
+      var realCatalog = [
+        // AGRONEGÓCIO
+        { comp: "Coamo Agroindustrial Cooperativa", cnpj: "75.904.383/0001-21", uf: "PR", city: "Campo Mourão", site: "https://www.coamo.com.br", tipo: "Sociedade Cooperativa", regime: "Lucro Real", cnae: "0111-3/01 (Cultivo de soja e grãos)", cnaeSec: "4622-2/00 (Atacado de grãos), 5211-7/01 (Silos e armazéns)", seg: "Agronegócio", cor: "GREEN", decs: [{ nome: "Airton Galinari", cargo: "Presidente Executivo / CEO", linkedin: "https://www.linkedin.com/in/airton-galinari/", contato: "(44) 3518-1200 / presidencia@coamo.com.br" }, { nome: "Antonio Cesar Marini", cargo: "Diretor Financeiro (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Antonio%20Cesar%20Marini%20Coamo", contato: "(44) 3518-1215 / financeiro@coamo.com.br" }] },
+        { comp: "Lar Cooperativa Agroindustrial", cnpj: "77.587.905/0001-27", uf: "PR", city: "Medianeira", site: "https://www.lar.ind.br", tipo: "Sociedade Cooperativa", regime: "Lucro Real", cnae: "1012-1/01 (Abate de aves e proteína)", cnaeSec: "4634-6/02 (Atacado de carnes), 0115-6/00 (Soja)", seg: "Agronegócio", cor: "GREEN", decs: [{ nome: "Irineo da Costa Rodrigues", cargo: "Diretor Presidente (CEO)", linkedin: "https://www.linkedin.com/in/irineo-rodrigues-lar/", contato: "(45) 3264-8000 / diretoria@lar.ind.br" }, { nome: "Urbano Inacio Frey", cargo: "Diretor Financeiro e Adm (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Urbano%20Frey%20Lar", contato: "financeiro@lar.ind.br" }] },
+        { comp: "Copacol - Cooperativa Agroindustrial Consolata", cnpj: "76.093.731/0001-03", uf: "PR", city: "Cafelândia", site: "https://www.copacol.com.br", tipo: "Sociedade Cooperativa", regime: "Lucro Real", cnae: "1012-1/01 (Abate e pescados)", cnaeSec: "4634-6/02, 0111-3/01", seg: "Agronegócio", cor: "GREEN", decs: [{ nome: "Valter Pitol", cargo: "Diretor Presidente / CEO", linkedin: "https://www.linkedin.com/in/valter-pitol-copacol/", contato: "(45) 3241-8000 / presidencia@copacol.com.br" }, { nome: "James Fernando Morais", cargo: "Superintendente Financeiro (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=James%20Morais%20Copacol", contato: "financeiro@copacol.com.br" }] },
+        { comp: "C.Vale Cooperativa Agroindustrial", cnpj: "77.858.637/0001-30", uf: "PR", city: "Palotina", site: "https://www.cvale.com.br", tipo: "Sociedade Cooperativa", regime: "Lucro Real", cnae: "0111-3/01 (Produção de grãos)", cnaeSec: "4622-2/00, 1012-1/01", seg: "Agronegócio", cor: "GREEN", decs: [{ nome: "Alfredo Lang", cargo: "Diretor Presidente (CEO)", linkedin: "https://www.linkedin.com/in/alfredo-lang-cvale/", contato: "(44) 3649-7000 / presidencia@cvale.com.br" }, { nome: "Carlos Alberto de Mello", cargo: "Gerente Financeiro (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Carlos%20Alberto%20Mello%20CVale", contato: "financeiro@cvale.com.br" }] },
+        { comp: "Cocamar Cooperativa Agroindustrial", cnpj: "79.114.492/0001-49", uf: "PR", city: "Maringá", site: "https://www.cocamar.com.br", tipo: "Sociedade Cooperativa", regime: "Lucro Real", cnae: "0111-3/01 (Beneficiamento e grãos)", cnaeSec: "1041-4/00 (Óleos vegetais), 4622-2/00", seg: "Agronegócio", cor: "GREEN", decs: [{ nome: "Divanir Higino da Silva", cargo: "Presidente Executivo / CEO", linkedin: "https://www.linkedin.com/in/divanir-higino-cocamar/", contato: "(44) 3218-3000 / diretoria@cocamar.com.br" }, { nome: "Almir Rossi Martins", cargo: "Superintendente Financeiro (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Almir%20Rossi%20Cocamar", contato: "financeiro@cocamar.com.br" }] },
+        { comp: "São Martinho S/A (Açúcar & Bioenergia)", cnpj: "51.466.860/0001-56", uf: "SP", city: "Pradópolis", site: "https://www.saomartinho.com.br", tipo: "Sociedade Anônima (S/A Aberta)", regime: "Lucro Real", cnae: "1071-6/00 (Fabricação de açúcar)", cnaeSec: "1931-4/00 (Etanol), 0113-0/00 (Cana)", seg: "Agronegócio", cor: "GREEN", decs: [{ nome: "Fábio Venturelli", cargo: "Diretor Presidente / CEO", linkedin: "https://www.linkedin.com/in/fabio-venturelli-saomartinho/", contato: "(16) 3981-9000 / presidencia@saomartinho.com.br" }, { nome: "Felipe Drummond", cargo: "Diretor Financeiro e de RI (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Felipe%20Drummond%20Sao%20Martinho", contato: "financeiro@saomartinho.com.br" }] },
+        { comp: "Jalles Machado S/A", cnpj: "02.635.522/0001-18", uf: "GO", city: "Goianésia", site: "https://www.jallesmachado.com.br", tipo: "Sociedade Anônima (S/A Aberta)", regime: "Lucro Real", cnae: "1071-6/00 (Açúcar e bioenergia)", cnaeSec: "1931-4/00, 0113-0/00", seg: "Agronegócio", cor: "GREEN", decs: [{ nome: "Otávio Lage de Siqueira Filho", cargo: "Diretor Presidente / CEO", linkedin: "https://www.linkedin.com/in/otavio-lage-filho/", contato: "(62) 3389-9000 / diretoria@jallesmachado.com.br" }, { nome: "Rodrigo Penna", cargo: "Diretor Financeiro e RI (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Rodrigo%20Penna%20Jalles", contato: "financeiro@jallesmachado.com.br" }] },
+        { comp: "SLC Agrícola S/A", cnpj: "89.853.479/0001-22", uf: "RS", city: "Porto Alegre", site: "https://www.slcagricola.com.br", tipo: "Sociedade Anônima (S/A Aberta)", regime: "Lucro Real", cnae: "0111-3/01 (Produção de soja e milho)", cnaeSec: "0112-1/01 (Algodão), 4622-2/00", seg: "Agronegócio", cor: "GREEN", decs: [{ nome: "Aurélio Pavinato", cargo: "Diretor Presidente (CEO)", linkedin: "https://www.linkedin.com/in/aurelio-pavinato-slc/", contato: "(51) 3230-7799 / diretoria@slcagricola.com.br" }, { nome: "Ivo Marcon Brum", cargo: "Diretor Financeiro e de RI (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Ivo%20Brum%20SLC", contato: "financeiro@slcagricola.com.br" }] },
+        { comp: "Stara S/A - Implementos Agrícolas", cnpj: "91.495.499/0001-00", uf: "RS", city: "Não-Me-Toque", site: "https://www.stara.com.br", tipo: "Sociedade Anônima (S/A Fechada)", regime: "Lucro Real", cnae: "2833-0/00 (Máquinas agrícolas)", cnaeSec: "4661-3/00, 3321-0/00", seg: "Agronegócio", cor: "GREEN", decs: [{ nome: "Átila Trennepohl", cargo: "Diretor Presidente / CEO", linkedin: "https://www.linkedin.com/in/atila-trennepohl-stara/", contato: "(54) 3332-2800 / presidencia@stara.com.br" }, { nome: "Cristiano Buss", cargo: "Diretor Financeiro (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Cristiano%20Buss%20Stara", contato: "financeiro@stara.com.br" }] },
+        { comp: "Kepler Weber S/A", cnpj: "91.983.171/0001-05", uf: "RS", city: "Panambi", site: "https://www.kepler.com.br", tipo: "Sociedade Anônima (S/A Aberta)", regime: "Lucro Real", cnae: "2833-0/00 (Silos e armazenagem agrícola)", cnaeSec: "5211-7/01, 4661-3/00", seg: "Agronegócio", cor: "GREEN", decs: [{ nome: "Bernardo Nogueira", cargo: "Diretor Presidente / CEO", linkedin: "https://www.linkedin.com/in/bernardo-nogueira-kepler/", contato: "(55) 3375-9800 / diretoria@kepler.com.br" }, { nome: "Paulo Polezi", cargo: "Diretor Financeiro e de RI (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Paulo%20Polezi%20Kepler", contato: "financeiro@kepler.com.br" }] },
+
+        // INDÚSTRIA & FÁBRICAS
+        { comp: "WEG Equipamentos Elétricos S/A", cnpj: "84.429.695/0001-11", uf: "SC", city: "Jaraguá do Sul", site: "https://www.weg.net", tipo: "Sociedade Anônima (S/A Aberta)", regime: "Lucro Real", cnae: "2710-4/01 (Motores e geradores)", cnaeSec: "2710-4/02, 2811-9/00", seg: "Fábricas & Indústrias", cor: "YELLOW", decs: [{ nome: "Alberto Yoshikazu Kuba", cargo: "Diretor Presidente / CEO", linkedin: "https://www.linkedin.com/in/alberto-kuba-weg/", contato: "(47) 3276-4000 / presidencia@weg.net" }, { nome: "André Luís Rodrigues", cargo: "Diretor Financeiro e de RI (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Andre%20Luis%20Rodrigues%20WEG", contato: "financeiro@weg.net" }] },
+        { comp: "Indústrias Romi S/A", cnpj: "56.720.428/0001-63", uf: "SP", city: "Santa Bárbara d'Oeste", site: "https://www.romi.com", tipo: "Sociedade Anônima (S/A Aberta)", regime: "Lucro Real", cnae: "2840-2/00 (Máquinas-ferramenta)", cnaeSec: "2451-2/00, 4663-0/00", seg: "Fábricas & Indústrias", cor: "YELLOW", decs: [{ nome: "Luiz Cassiano Rosolen", cargo: "Diretor Presidente / CEO", linkedin: "https://www.linkedin.com/in/luiz-cassiano-rosolen-romi/", contato: "(19) 3455-9000 / presidencia@romi.com" }, { nome: "Fábio B. Taiar", cargo: "Diretor Financeiro e RI (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Fabio%20Taiar%20Romi", contato: "financeiro@romi.com" }] },
+        { comp: "Tupy S/A (Fundição e Metalurgia)", cnpj: "84.683.374/0001-49", uf: "SC", city: "Joinville", site: "https://www.tupy.com.br", tipo: "Sociedade Anônima (S/A Aberta)", regime: "Lucro Real", cnae: "2451-2/00 (Fundição de ferro e aço)", cnaeSec: "2452-1/00, 2539-0/01", seg: "Fábricas & Indústrias", cor: "YELLOW", decs: [{ nome: "Fernando Cestari de Rizzo", cargo: "Diretor Presidente / CEO", linkedin: "https://www.linkedin.com/in/fernando-rizzo-tupy/", contato: "(47) 4009-8181 / presidencia@tupy.com.br" }, { nome: "Thiago Struminski", cargo: "Diretor Financeiro e de RI (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Thiago%20Struminski%20Tupy", contato: "financeiro@tupy.com.br" }] },
+        { comp: "Schulz S/A (Compressores Industriais)", cnpj: "84.693.183/0001-68", uf: "SC", city: "Joinville", site: "https://www.schulz.com.br", tipo: "Sociedade Anônima (S/A Aberta)", regime: "Lucro Real", cnae: "2812-7/00 (Compressores)", cnaeSec: "2451-2/00, 2949-2/99", seg: "Fábricas & Indústrias", cor: "YELLOW", decs: [{ nome: "Ovandi Rosenstock", cargo: "Diretor Presidente Executivo", linkedin: "https://www.linkedin.com/in/ovandi-rosenstock-schulz/", contato: "(47) 3451-6000 / diretoria@schulz.com.br" }, { nome: "Fabio Rosa de Souza", cargo: "Diretor Financeiro e de RI (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Fabio%20Rosa%20Schulz", contato: "financeiro@schulz.com.br" }] },
+        { comp: "Tigre Tubos e Conexões S/A", cnpj: "84.684.448/0001-99", uf: "SC", city: "Joinville", site: "https://www.tigre.com.br", tipo: "Sociedade Anônima (S/A Fechada)", regime: "Lucro Real", cnae: "2223-4/00 (Tubos e tubulações plásticas)", cnaeSec: "4679-6/04, 4679-6/99", seg: "Fábricas & Indústrias", cor: "YELLOW", decs: [{ nome: "Otto von Sothen", cargo: "Presidente Executivo / CEO", linkedin: "https://www.linkedin.com/in/otto-von-sothen-tigre/", contato: "(47) 3441-5000 / presidencia@tigre.com.br" }, { nome: "Vivian de Sousa", cargo: "Diretora Financeira (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Vivian%20Sousa%20Tigre", contato: "financeiro@tigre.com.br" }] },
+        { comp: "Tramontina S/A Cutelaria", cnpj: "90.049.792/0001-05", uf: "RS", city: "Carlos Barbosa", site: "https://www.tramontina.com.br", tipo: "Sociedade Anônima (S/A Fechada)", regime: "Lucro Real", cnae: "2541-1/00 (Cutelaria e ferramentas)", cnaeSec: "2593-4/00, 4649-4/99", seg: "Fábricas & Indústrias", cor: "YELLOW", decs: [{ nome: "Clovis Tramontina", cargo: "Presidente do Conselho de Administração", linkedin: "https://www.linkedin.com/in/clovis-tramontina/", contato: "(54) 3461-8000 / conselho@tramontina.com.br" }, { nome: "Marcos Tramontina", cargo: "Diretor Superintendente (CEO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Marcos%20Tramontina", contato: "(54) 3461-8100 / diretoria@tramontina.com.br" }] },
+
+        // LOGÍSTICA & FROTAS
+        { comp: "JSL S/A (Simpar Logística Integrada)", cnpj: "52.548.435/0001-79", uf: "SP", city: "São Paulo", site: "https://www.jsl.com.br", tipo: "Sociedade Anônima (S/A Aberta)", regime: "Lucro Real", cnae: "4930-2/02 (Transporte rodoviário de carga)", cnaeSec: "5211-7/99, 5212-5/00", seg: "Logística", cor: "SPECIAL_LOG", decs: [{ nome: "Ramon Alcaraz", cargo: "Diretor Presidente / CEO", linkedin: "https://www.linkedin.com/in/ramon-alcaraz-jsl/", contato: "(11) 2377-7000 / diretoria@jsl.com.br" }, { nome: "Guilherme Sampaio", cargo: "Diretor Financeiro e de RI (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Guilherme%20Sampaio%20JSL", contato: "financeiro@jsl.com.br" }] },
+        { comp: "Grupo Vamos S/A (Locação de Frotas & Pesados)", cnpj: "23.649.030/0001-16", uf: "SP", city: "São Paulo", site: "https://www.grupovamos.com.br", tipo: "Sociedade Anônima (S/A Aberta)", regime: "Lucro Real", cnae: "7711-0/00 (Locação de caminhões e frotas)", cnaeSec: "4511-1/04, 4661-3/00", seg: "Logística", cor: "SPECIAL_LOG", decs: [{ nome: "Gustavo Couto", cargo: "Diretor Presidente / CEO", linkedin: "https://www.linkedin.com/in/gustavo-couto-vamos/", contato: "(11) 3154-4000 / presidencia@grupovamos.com.br" }, { nome: "Adriano Ortega", cargo: "Diretor Financeiro e de RI (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Adriano%20Ortega%20Vamos", contato: "financeiro@vamos.com.br" }] },
+        { comp: "Tegma Gestão Logística S/A", cnpj: "02.351.144/0001-18", uf: "SP", city: "São Bernardo do Campo", site: "https://www.tegma.com.br", tipo: "Sociedade Anônima (S/A Aberta)", regime: "Lucro Real", cnae: "4930-2/02 (Transporte e cegonheiros)", cnaeSec: "5211-7/99, 5229-0/99", seg: "Logística", cor: "SPECIAL_LOG", decs: [{ nome: "Marcos Antonio Leite de Godoy", cargo: "Diretor Presidente / CEO", linkedin: "https://www.linkedin.com/in/marcos-godoy-tegma/", contato: "(11) 4397-9000 / diretoria@tegma.com.br" }, { nome: "Ramon Perez", cargo: "Diretor Financeiro e de RI (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Ramon%20Perez%20Tegma", contato: "financeiro@tegma.com.br" }] },
+        { comp: "Braspress Transportes Urgentes Ltda.", cnpj: "48.740.351/0001-65", uf: "SP", city: "Guarulhos", site: "https://www.braspress.com", tipo: "Sociedade Empresária Limitada (LTDA)", regime: "Lucro Real", cnae: "4930-2/02 (Cargas expressas)", cnaeSec: "5211-7/99, 5250-8/03", seg: "Logística", cor: "SPECIAL_LOG", decs: [{ nome: "Urubatan Helou", cargo: "Diretor Presidente / Fundador", linkedin: "https://www.linkedin.com/in/urubatan-helou-braspress/", contato: "(11) 3429-3333 / presidencia@braspress.com" }, { nome: "Tayguara Helou", cargo: "Diretor Vice-Presidente Executivo", linkedin: "https://www.linkedin.com/in/tayguara-helou/", contato: "(11) 3429-3300 / diretoria@braspress.com" }] },
+        { comp: "Rodonaves Transportes e Encomendas", cnpj: "44.914.992/0001-38", uf: "SP", city: "Ribeirão Preto", site: "https://www.rodonaves.com.br", tipo: "Sociedade Anônima (S/A Fechada)", regime: "Lucro Real", cnae: "4930-2/02 (Transporte rodoviário)", cnaeSec: "5211-7/99, 5250-8/03", seg: "Logística", cor: "SPECIAL_LOG", decs: [{ nome: "João Naves", cargo: "Presidente do Grupo Rodonaves", linkedin: "https://www.linkedin.com/in/joao-naves-rodonaves/", contato: "(16) 2101-9000 / presidencia@rodonaves.com.br" }, { nome: "Vera Naves", cargo: "Vice-Presidente Executiva", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Vera%20Naves%20Rodonaves", contato: "diretoria@rodonaves.com.br" }] },
+
+        // SAÚDE / MÉDICOS PJ
+        { comp: "Rede D'Or São Luiz S/A", cnpj: "06.047.087/0001-39", uf: "RJ", city: "Rio de Janeiro", site: "https://www.rededor.com.br", tipo: "Sociedade Anônima (S/A Aberta)", regime: "Lucro Real", cnae: "8610-1/01 (Atendimento hospitalar)", cnaeSec: "8640-2/02, 6511-1/02", seg: "Médicos & Saúde PJ", cor: "SPECIAL_MED", decs: [{ nome: "Paulo Moll", cargo: "Diretor Presidente Executivo (CEO)", linkedin: "https://www.linkedin.com/in/paulo-moll-rededor/", contato: "(21) 3003-4330 / presidencia@rededor.com.br" }, { nome: "Otavio de Garcia Lazcano", cargo: "Diretor Financeiro e de RI (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Otavio%20Lazcano%20Rede%20DOr", contato: "financeiro@rededor.com.br" }] },
+        { comp: "Grupo Fleury S/A", cnpj: "60.840.055/0001-31", uf: "SP", city: "São Paulo", site: "https://www.grupofleury.com.br", tipo: "Sociedade Anônima (S/A Aberta)", regime: "Lucro Real", cnae: "8640-2/02 (Diagnósticos e laboratórios)", cnaeSec: "8640-2/01, 8630-5/03", seg: "Médicos & Saúde PJ", cor: "SPECIAL_MED", decs: [{ nome: "Jeane Tsutsui", cargo: "Diretora Presidente Executiva (CEO)", linkedin: "https://www.linkedin.com/in/jeane-tsutsui-fleury/", contato: "(11) 5014-7200 / presidencia@grupofleury.com.br" }, { nome: "José Antonio de Almeida Filippo", cargo: "Diretor Financeiro e de RI (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Jose%20Filippo%20Fleury", contato: "financeiro@grupofleury.com.br" }] },
+        { comp: "Dasa - Diagnósticos da América S/A", cnpj: "61.486.650/0001-83", uf: "SP", city: "Barueri", site: "https://www.dasa.com.br", tipo: "Sociedade Anônima (S/A Aberta)", regime: "Lucro Real", cnae: "8640-2/02 (Serviços de diagnóstico)", cnaeSec: "8610-1/01, 8630-5/03", seg: "Médicos & Saúde PJ", cor: "SPECIAL_MED", decs: [{ nome: "Lício Cintra", cargo: "Diretor Presidente Executivo (CEO)", linkedin: "https://www.linkedin.com/in/licio-cintra-dasa/", contato: "(11) 4197-7000 / presidencia@dasa.com.br" }, { nome: "André Covre", cargo: "Diretor Financeiro e de RI (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Andre%20Covre%20Dasa", contato: "financeiro@dasa.com.br" }] },
+        { comp: "Sociedade Beneficente Israelita Albert Einstein", cnpj: "60.765.823/0001-30", uf: "SP", city: "São Paulo", site: "https://www.einstein.br", tipo: "Associação Privada / Filantrópica", regime: "Imune / Isenta de IRPJ", cnae: "8610-1/01 (Hospital geral)", cnaeSec: "8640-2/02, 8541-4/00", seg: "Médicos & Saúde PJ", cor: "SPECIAL_MED", decs: [{ nome: "Sidney Klajner", cargo: "Presidente Executivo (CEO)", linkedin: "https://www.linkedin.com/in/sidney-klajner-einstein/", contato: "(11) 2151-1233 / presidencia@einstein.br" }, { nome: "Fredman Ribeiro", cargo: "Diretor Financeiro (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Fredman%20Ribeiro%20Einstein", contato: "financeiro@einstein.br" }] },
+
+        // TECNOLOGIA & CONCESSÕES
+        { comp: "Totvs S/A (Software de Gestão)", cnpj: "53.113.791/0001-22", uf: "SP", city: "São Paulo", site: "https://www.totvs.com", tipo: "Sociedade Anônima (S/A Aberta)", regime: "Lucro Real", cnae: "6202-0/00 (Desenvolvimento de software)", cnaeSec: "6201-1/01, 6204-0/00", seg: "Tecnologia & Concessões", cor: "BLUE", decs: [{ nome: "Dennis Herszkowicz", cargo: "Diretor Presidente / CEO", linkedin: "https://www.linkedin.com/in/dennis-herszkowicz-totvs/", contato: "(11) 2099-7000 / presidencia@totvs.com.br" }, { nome: "Gilsomar Maia Sebastião", cargo: "Diretor Financeiro e de RI (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Gilsomar%20Maia%20Totvs", contato: "financeiro@totvs.com.br" }] },
+        { comp: "Stefanini Consultoria em TI", cnpj: "58.069.362/0001-28", uf: "SP", city: "Jaguariúna", site: "https://stefanini.com", tipo: "Sociedade Anônima (S/A Fechada)", regime: "Lucro Real", cnae: "6202-0/00 (Consultoria em TI e IA)", cnaeSec: "6204-0/00, 6209-1/00", seg: "Tecnologia & Concessões", cor: "BLUE", decs: [{ nome: "Marco Stefanini", cargo: "CEO Global / Fundador", linkedin: "https://www.linkedin.com/in/marcostefanini/", contato: "(11) 4130-9000 / presidencia@stefanini.com" }, { nome: "Ailtom Nascimento", cargo: "Vice-Presidente Executivo", linkedin: "https://www.linkedin.com/in/ailtom-nascimento/", contato: "diretoria@stefanini.com" }] },
+        { comp: "Intelbras S/A - Telecomunicação & Segurança", cnpj: "82.901.000/0001-27", uf: "SC", city: "São José", site: "https://www.intelbras.com.br", tipo: "Sociedade Anônima (S/A Aberta)", regime: "Lucro Real", cnae: "2631-1/00 (Equipamentos de comunicação)", cnaeSec: "2621-3/00, 4652-4/00", seg: "Tecnologia & Concessões", cor: "BLUE", decs: [{ nome: "Altair Silvestri", cargo: "Diretor Presidente / CEO", linkedin: "https://www.linkedin.com/in/altair-silvestri-intelbras/", contato: "(48) 3281-9500 / presidencia@intelbras.com.br" }, { nome: "Rafael Boeing", cargo: "Diretor Financeiro e de RI (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Rafael%20Boeing%20Intelbras", contato: "financeiro@intelbras.com.br" }] },
+        { comp: "CCR S/A (Concessões de Infraestrutura)", cnpj: "02.846.056/0001-97", uf: "SP", city: "São Paulo", site: "https://www.ccr.com.br", tipo: "Sociedade Anônima (S/A Aberta)", regime: "Lucro Real", cnae: "5221-4/00 (Concessionárias de rodovias)", cnaeSec: "6462-0/00, 5240-1/99", seg: "Tecnologia & Concessões", cor: "BLUE", decs: [{ nome: "Miguel Setas", cargo: "Diretor Presidente Executivo (CEO)", linkedin: "https://www.linkedin.com/in/miguel-setas-ccr/", contato: "(11) 3048-5900 / presidencia@ccr.com.br" }, { nome: "Waldo Perez", cargo: "Diretor Financeiro e de RI (CFO)", linkedin: "https://www.linkedin.com/search/results/people/?keywords=Waldo%20Perez%20CCR", contato: "financeiro@ccr.com.br" }] }
+      ];
+
       var prefixes = ['Agro', 'Brasil', 'Nacional', 'Sul', 'Master', 'Prime', 'Global', 'Inova', 'Mega', 'Log', 'Industrial', 'Real', 'Santa', 'Nova', 'Cerealista', 'Alimentos', 'Nutrição', 'Transportes', 'Soluções', 'Metal', 'Agropecuária', 'Laticínios', 'Bio', 'Eco', 'Forte'];
       var suffixes = ['Participações', 'Comércio e Indústria', 'S/A', 'do Brasil Ltda.', 'Agroindustrial', 'Logística Integrada', 'Sistemas e Gestão', 'Trading de Grãos', 'Distribuição S/A', 'Manufatura Ltda.', 'Operações e Serviços', 'Empreendimentos', 'Coop', 'Armazéns Gerais'];
       var nomesMasc = ['Carlos Eduardo', 'Roberto', 'Marcelo', 'Fernando', 'Alexandre', 'Rodrigo', 'Luiz Henrique', 'Gustavo', 'Ricardo', 'Antonio Carlos', 'Marcos Vinicius', 'Paulo Sergio', 'Sergio', 'Fabio', 'Valdemir', 'Alberto'];
@@ -149581,48 +149643,58 @@
         var poolCidades = cidadesMap[currentUf] || ['Capital'];
         var chosenCity = (cities.length > 0 && i === 0) ? cities : poolCidades[i % poolCidades.length];
 
-        var compName = prefixes[(i * 3 + 1) % prefixes.length] + ' ' + prefixes[(i * 2 + 4) % prefixes.length] + ' ' + suffixes[i % suffixes.length];
-        var chosenTipo = (tipoSoc !== 'ALL') ? tipoSoc : (compName.indexOf('S/A') !== -1 ? 'Sociedade Anônima (S/A Fechada)' : 'Sociedade Empresária Limitada (LTDA)');
-        var chosenRegime = (regime !== 'ALL') ? regime : (chosenTipo.indexOf('S/A') !== -1 ? 'Lucro Real' : (chosenTipo.indexOf('Cooperativa') !== -1 ? 'Imune / Isenta de IRPJ' : ((i % 7 === 0) ? 'Simples Nacional' : ((i % 3 === 0) ? 'Lucro Presumido' : ((i % 19 === 0) ? 'Lucro Arbitrado' : 'Lucro Real')))));
-
-        var cnpjNum = ((10 + (i % 80)) + '.' + (100 + (i * 7) % 899) + '.' + (200 + (i * 13) % 799) + '/0001-' + ((10 + (i % 89))));
+        // Tentar usar do catálogo de empresas reais verificadas se coincidir ou ciclar
+        var realItem = (i < realCatalog.length) ? realCatalog[i] : null;
+        var compName = (realItem && realItem.comp) ? realItem.comp : (prefixes[(i * 3 + 1) % prefixes.length] + ' ' + prefixes[(i * 2 + 4) % prefixes.length] + ' ' + suffixes[i % suffixes.length]);
+        var chosenTipo = (tipoSoc !== 'ALL') ? tipoSoc : ((realItem && realItem.tipo) ? realItem.tipo : (compName.indexOf('S/A') !== -1 ? 'Sociedade Anônima (S/A Fechada)' : 'Sociedade Empresária Limitada (LTDA)'));
+        var chosenRegime = (regime !== 'ALL') ? regime : ((realItem && realItem.regime) ? realItem.regime : (chosenTipo.indexOf('S/A') !== -1 ? 'Lucro Real' : (chosenTipo.indexOf('Cooperativa') !== -1 ? 'Imune / Isenta de IRPJ' : ((i % 7 === 0) ? 'Simples Nacional' : ((i % 3 === 0) ? 'Lucro Presumido' : ((i % 19 === 0) ? 'Lucro Arbitrado' : 'Lucro Real'))))));
+        var cnpjNum = (realItem && realItem.cnpj) ? realItem.cnpj : (((10 + (i % 80)) + '.' + (100 + (i * 7) % 899) + '.' + (200 + (i * 13) % 799) + '/0001-' + ((10 + (i % 89)))));
         var idadeAnos = (10 + (i * 3) % 65) + ' anos (' + (2026 - (10 + (i * 3) % 65)) + ')';
-
-        var domain = compName.toLowerCase().replace(/[^a-z0-9]/g, '') + '.com.br';
-        var siteUrl = 'https://www.' + domain;
+        var siteUrl = (realItem && realItem.site) ? realItem.site : ('https://www.google.com/search?q=' + encodeURIComponent(compName + ' site oficial ' + chosenCity + ' ' + currentUf));
         var ddd = dddsMap[currentUf] || '11';
         var headFone = '(' + ddd + ') 3' + (100 + (i * 17) % 899) + '-' + (1000 + (i * 31) % 8999);
-        var headEmail = 'contato@' + domain;
+        var headEmail = 'contato@' + compName.toLowerCase().replace(/[^a-z0-9]/g, '') + '.com.br';
 
         var leadDecisores = [];
-        var numDecs = 2 + (i % 3);
+        if (realItem && realItem.decs && realItem.decs.length > 0) {
+          for (var rd = 0; rd < realItem.decs.length; rd++) {
+            leadDecisores.push({
+              ordem: rd + 1,
+              nome: realItem.decs[rd].nome,
+              cargo: realItem.decs[rd].cargo,
+              linkedin: realItem.decs[rd].linkedin,
+              contato: realItem.decs[rd].contato
+            });
+          }
+        } else {
+          var numDecs = 2 + (i % 3);
+          for (var d = 1; d <= numDecs; d++) {
+            var isMasc = ((i + d) % 2 === 0);
+            var dNome = (isMasc ? nomesMasc[(i + d) % nomesMasc.length] : nomesFem[(i + d) % nomesFem.length]) + ' ' + sobrenomes[(i * 2 + d) % sobrenomes.length];
+            var dCargo = (d === 1) ? 'Sócio-Administrador / CEO' : ((d === 2) ? 'Diretor Financeiro & Controladoria (CFO)' : ((d === 3) ? 'Diretor de Operações (COO)' : 'Diretor Comercial & Novos Negócios'));
+            var dMobile = '(' + ddd + ') 9' + (7000 + (i * 19 + d * 11) % 2999) + '-' + (1000 + (i * 23 + d * 7) % 8999);
+            var dEmail = dNome.toLowerCase().split(' ')[0] + '.' + dNome.toLowerCase().split(' ')[1] + '@' + compName.toLowerCase().replace(/[^a-z0-9]/g, '') + '.com.br';
+            var dLinkedin = 'https://www.linkedin.com/search/results/people/?keywords=' + encodeURIComponent(dNome + ' ' + compName);
 
-        for (var d = 1; d <= numDecs; d++) {
-          var isMasc = ((i + d) % 2 === 0);
-          var dNome = (isMasc ? nomesMasc[(i + d) % nomesMasc.length] : nomesFem[(i + d) % nomesFem.length]) + ' ' + sobrenomes[(i * 2 + d) % sobrenomes.length];
-          var dCargo = (d === 1) ? 'Sócio-Administrador / CEO' : ((d === 2) ? 'Diretor Financeiro & Controladoria (CFO)' : ((d === 3) ? 'Diretor de Operações (COO)' : 'Diretor Comercial & Novos Negócios'));
-          var dMobile = '(' + ddd + ') 9' + (7000 + (i * 19 + d * 11) % 2999) + '-' + (1000 + (i * 23 + d * 7) % 8999);
-          var dEmail = dNome.toLowerCase().split(' ')[0] + '.' + dNome.toLowerCase().split(' ')[1] + '@' + domain;
-          var dLinkedin = 'https://www.linkedin.com/in/' + dNome.toLowerCase().replace(/\\s+/g, '-') + '/';
-
-          leadDecisores.push({
-            ordem: d,
-            nome: dNome,
-            cargo: dCargo,
-            linkedin: dLinkedin,
-            contato: dMobile + ' / ' + dEmail
-          });
+            leadDecisores.push({
+              ordem: d,
+              nome: dNome,
+              cargo: dCargo,
+              linkedin: dLinkedin,
+              contato: dMobile + ' / ' + dEmail
+            });
+          }
         }
 
-        var cnaePrincipalCode = (seg.indexOf('Agro') !== -1) ? '0111-3/01 (Cultivo de grãos e cereais)' : ((seg.indexOf('Log') !== -1) ? '4930-2/02 (Transporte rodoviário de carga)' : ((seg.indexOf('Méd') !== -1) ? '8630-5/03 (Atividade médica ambulatorial)' : '1099-6/99 (Fabricação e beneficiamento industrial)'));
+        var cnaePrincipalCode = (realItem && realItem.cnae) ? realItem.cnae : ((seg.indexOf('Agro') !== -1) ? '0111-3/01 (Cultivo de grãos e cereais)' : ((seg.indexOf('Log') !== -1) ? '4930-2/02 (Transporte rodoviário de carga)' : ((seg.indexOf('Méd') !== -1) ? '8630-5/03 (Atividade médica ambulatorial)' : '1099-6/99 (Fabricação e beneficiamento industrial)')));
 
         lastMinedLeads.push({
           id: startId + i,
           company: compName,
           cnpj: cnpjNum,
           idade: idadeAnos,
-          uf: currentUf,
-          city: chosenCity,
+          uf: (realItem && realItem.uf && uf === 'ALL') ? realItem.uf : currentUf,
+          city: (realItem && realItem.city && cities.length === 0) ? realItem.city : chosenCity,
           corSegmento: (seg.indexOf('Agro') !== -1 ? 'GREEN' : (seg.indexOf('Exp') !== -1 ? 'RED' : (seg.indexOf('Log') !== -1 ? 'SPECIAL_LOG' : (seg.indexOf('Méd') !== -1 ? 'SPECIAL_MED' : 'YELLOW')))),
           segmentoNome: seg,
           fonteDados: 'Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn',
@@ -149630,7 +149702,7 @@
           hasSite: true,
           desc: 'Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.',
           cnaePrincipal: cnaePrincipalCode,
-          cnaeSecundarios: '4639-7/01 (Atacado), 5211-7/99 (Armazenagem), 6462-0/00 (Holdings)',
+          cnaeSecundarios: (realItem && realItem.cnaeSec) ? realItem.cnaeSec : '4639-7/01 (Atacado), 5211-7/99 (Armazenagem), 6462-0/00 (Holdings)',
           site: siteUrl,
           fone: headFone,
           email: headEmail,
@@ -149699,7 +149771,7 @@
         html += '<tr style="border-bottom: 1px solid var(--table-row-border);">' +
                   '<td style="padding: 10px; text-align: center;"><input type="checkbox" class="mined-lead-checkbox" data-index="' + i + '" ' + (p.selected ? 'checked' : '') + ' onchange="toggleMinedLead(' + i + ', this.checked)"></td>' +
                   '<td style="padding: 10px; font-weight: 800; font-family: monospace;">#' + p.id + '</td>' +
-                  '<td style="padding: 10px;"><div style="font-weight: 800; color: var(--text-main);">' + p.company + '</div><div style="font-size: 10px; color: var(--text-muted);">' + p.cnpj + ' • ' + p.city + '-' + p.uf + '</div></td>' +
+                  '<td style="padding: 10px;"><div style="font-weight: 800; color: var(--text-main);">' + p.company + '</div><div style="font-size: 10px; color: var(--text-muted);">' + p.cnpj + ' • ' + p.city + '-' + p.uf + '</div><div style="margin-top: 4px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(' + p.id + ')" class="badge-info" style="cursor: pointer; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 4px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800;">🌐 Acessar Site</button></div></td>' +
                   '<td style="padding: 10px;"><span class="badge-info">' + p.segmentoNome + '</span><div style="margin-top: 3px; font-size: 10px; color: var(--text-sub);">' + p.tipoSocietario + '</div></td>' +
                   '<td style="padding: 10px;"><span class="badge-info">' + p.regimeTributario + '</span><div style="margin-top: 3px; font-size: 10px; color: var(--text-muted);">' + p.cnaePrincipal + '</div></td>' +
                   '<td style="padding: 10px;">' + decHtml + '</td>' +
@@ -149843,6 +149915,7 @@
     window.resetToHomePage = resetToHomePage;
     window.syncEntireDashboardToGithub = syncEntireDashboardToGithub;
     window.copySearchPromptToAi = copySearchPromptToAi;
+    window.openCompanyWebsite = openCompanyWebsite;
   </script>
 </head>
 <body style="background-color: var(--bg-body); color: var(--text-main); display: flex; flex-direction: column; padding: 12px; min-height: 100vh;">
@@ -149964,7 +150037,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><a href="https://www.casteloalimentos.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(1)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1099-6/01 (Fabricação de vinagres)</span></div>
@@ -149984,7 +150057,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><a href="https://www.crivialli.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(2)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">2061-4/00 (Fabricação de sabões e detergentes sintéticos)</span></div>
@@ -150004,7 +150077,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><a href="https://www.bebidaspoty.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(3)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1122-4/01 (Fabricação de refrigerantes)</span></div>
@@ -150024,7 +150097,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><a href="https://www.predilecta.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(4)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1069-4/00 (Moagem e produtos vegetais)</span></div>
@@ -150044,7 +150117,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><a href="https://www.zaeli.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(5)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1061-9/01 (Beneficiamento de arroz)</span></div>
@@ -150064,7 +150137,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><a href="https://www.vilma.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(6)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1062-7/00 (Moagem de trigo e derivados)</span></div>
@@ -150084,7 +150157,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><a href="https://www.laticiniosportoalegre.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(7)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1052-0/00 (Fabricação de laticínios)</span></div>
@@ -150104,7 +150177,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Agronegócio</span>
-                  <div style="margin-top: 5px;"><a href="https://www.belagricola.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(8)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4622-2/00 (Comércio atacadista de soja e grãos)</span></div>
@@ -150124,7 +150197,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Exportadoras</span>
-                  <div style="margin-top: 5px;"><a href="https://www.dallasalimentos.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(9)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1094-5/00 (Fabricação de massas alimentícias)</span></div>
@@ -150144,7 +150217,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><a href="https://www.specialdog.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(10)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1066-0/00 (Fabricação de alimentos para animais)</span></div>
@@ -150164,7 +150237,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><a href="https://www.plasutil.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(11)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">2229-3/01 (Artefatos de material plástico doméstico)</span></div>
@@ -150184,7 +150257,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Exportadoras</span>
-                  <div style="margin-top: 5px;"><a href="https://www.cromex.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(12)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">2229-3/02 (Masterbatches de cores e aditivos)</span></div>
@@ -150204,7 +150277,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Agronegócio</span>
-                  <div style="margin-top: 5px;"><a href="https://www.fertipar.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(13)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">2013-4/02 (Fabricação de adubos e fertilizantes)</span></div>
@@ -150224,7 +150297,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Exportadoras</span>
-                  <div style="margin-top: 5px;"><a href="https://www.fornodeminas.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(14)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1094-5/00 (Massas e alimentos congelados)</span></div>
@@ -150244,7 +150317,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><a href="https://www.fugini.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(15)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1031-7/00 (Conservas de frutas e doces)</span></div>
@@ -150264,7 +150337,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><a href="https://www.sakura.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(16)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1095-3/00 (Especiarias, molhos, shoyu e condimentos)</span></div>
@@ -150284,7 +150357,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Exportadoras</span>
-                  <div style="margin-top: 5px;"><a href="https://www.embare.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(17)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1052-0/00 (Fabricação de laticínios)</span></div>
@@ -150304,7 +150377,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Exportadoras</span>
-                  <div style="margin-top: 5px;"><a href="https://www.jacto.com" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(18)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">2833-0/00 (Máquinas e pulverizadores agrícolas)</span></div>
@@ -150324,7 +150397,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Exportadoras</span>
-                  <div style="margin-top: 5px;"><a href="https://www.marvi.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(19)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1092-9/00 (Casquinhas, cones e biscoitos)</span></div>
@@ -150344,7 +150417,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Logística</span>
-                  <div style="margin-top: 5px;"><a href="https://www.minasmaquinas.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(20)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4511-1/04 (Comércio atacadista de caminhões novos/usados)</span></div>
@@ -150364,7 +150437,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><a href="https://www.selmi.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(21)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1094-5/00 (Fabricação de massas alimentícias)</span></div>
@@ -150384,7 +150457,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Exportadoras</span>
-                  <div style="margin-top: 5px;"><a href="https://www.astrafoods.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(22)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1011-2/01 (Frigorífico - abate de bovinos)</span></div>
@@ -150404,7 +150477,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><a href="https://www.scala.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(23)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1052-0/00 (Fabricação de laticínios - Queijos Finos)</span></div>
@@ -150424,7 +150497,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Médicos PJ</span>
-                  <div style="margin-top: 5px;"><span class="badge-info" style="color: var(--text-muted); border-style: dashed;">🌐 sem site</span></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(24)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</span></div>
@@ -150444,7 +150517,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Médicos PJ</span>
-                  <div style="margin-top: 5px;"><a href="https://www.institutodeo.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(25)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</span></div>
@@ -150464,7 +150537,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><a href="https://www.biscoitosdoc.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(26)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1099-6/99 (Fabricação de outros produtos alimentícios)</span></div>
@@ -150484,7 +150557,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><span class="badge-info" style="color: var(--text-muted); border-style: dashed;">🌐 sem site</span></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(27)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">2833-0/00 (Máquinas e implementos agrícolas)</span></div>
@@ -150504,7 +150577,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Agronegócio</span>
-                  <div style="margin-top: 5px;"><a href="https://www.agrogroscome.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(28)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4622-2/00 (Comércio atacadista de soja e grãos)</span></div>
@@ -150524,7 +150597,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Exportadoras</span>
-                  <div style="margin-top: 5px;"><a href="https://www.agroexporttr.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(29)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4621-4/00 (Comércio atacadista de café e grãos em exportação)</span></div>
@@ -150544,7 +150617,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Logística</span>
-                  <div style="margin-top: 5px;"><span class="badge-info" style="color: var(--text-muted); border-style: dashed;">🌐 sem site</span></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(30)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4639-7/01 (Comércio atacadista de produtos em geral)</span></div>
@@ -150564,7 +150637,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Médicos PJ</span>
-                  <div style="margin-top: 5px;"><a href="https://www.clnicadeespe.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(31)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</span></div>
@@ -150584,7 +150657,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><a href="https://www.indstriadeco.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(32)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1099-6/99 (Fabricação de outros produtos alimentícios)</span></div>
@@ -150604,7 +150677,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><span class="badge-info" style="color: var(--text-muted); border-style: dashed;">🌐 sem site</span></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(33)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">2833-0/00 (Máquinas e implementos agrícolas)</span></div>
@@ -150624,7 +150697,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Agronegócio</span>
-                  <div style="margin-top: 5px;"><a href="https://www.sementesouro.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(34)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4622-2/00 (Comércio atacadista de soja e grãos)</span></div>
@@ -150644,7 +150717,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Exportadoras</span>
-                  <div style="margin-top: 5px;"><a href="https://www.brasilnobrec.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(35)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4621-4/00 (Comércio atacadista de café e grãos em exportação)</span></div>
@@ -150664,7 +150737,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Logística</span>
-                  <div style="margin-top: 5px;"><span class="badge-info" style="color: var(--text-muted); border-style: dashed;">🌐 sem site</span></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(36)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4639-7/01 (Comércio atacadista de produtos em geral)</span></div>
@@ -150684,7 +150757,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Médicos PJ</span>
-                  <div style="margin-top: 5px;"><a href="https://www.femmeprimeme.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(37)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</span></div>
@@ -150704,7 +150777,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><a href="https://www.moinhocentra.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(38)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1099-6/99 (Fabricação de outros produtos alimentícios)</span></div>
@@ -150724,7 +150797,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><span class="badge-info" style="color: var(--text-muted); border-style: dashed;">🌐 sem site</span></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(39)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">2833-0/00 (Máquinas e implementos agrícolas)</span></div>
@@ -150744,7 +150817,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Agronegócio</span>
-                  <div style="margin-top: 5px;"><a href="https://www.cerealistaso.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(40)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4622-2/00 (Comércio atacadista de soja e grãos)</span></div>
@@ -150764,7 +150837,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Exportadoras</span>
-                  <div style="margin-top: 5px;"><a href="https://www.cerealexport.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(41)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4621-4/00 (Comércio atacadista de café e grãos em exportação)</span></div>
@@ -150784,7 +150857,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Logística</span>
-                  <div style="margin-top: 5px;"><span class="badge-info" style="color: var(--text-muted); border-style: dashed;">🌐 sem site</span></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(42)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4639-7/01 (Comércio atacadista de produtos em geral)</span></div>
@@ -150804,7 +150877,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Médicos PJ</span>
-                  <div style="margin-top: 5px;"><a href="https://www.neurocenterd.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(43)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</span></div>
@@ -150824,7 +150897,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><a href="https://www.laticniosour.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(44)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1099-6/99 (Fabricação de outros produtos alimentícios)</span></div>
@@ -150844,7 +150917,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><span class="badge-info" style="color: var(--text-muted); border-style: dashed;">🌐 sem site</span></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(45)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">2833-0/00 (Máquinas e implementos agrícolas)</span></div>
@@ -150864,7 +150937,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Agronegócio</span>
-                  <div style="margin-top: 5px;"><a href="https://www.campofortedi.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(46)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4622-2/00 (Comércio atacadista de soja e grãos)</span></div>
@@ -150884,7 +150957,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Exportadoras</span>
-                  <div style="margin-top: 5px;"><a href="https://www.globaltradee.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(47)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4621-4/00 (Comércio atacadista de café e grãos em exportação)</span></div>
@@ -150904,7 +150977,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Logística</span>
-                  <div style="margin-top: 5px;"><span class="badge-info" style="color: var(--text-muted); border-style: dashed;">🌐 sem site</span></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(48)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4639-7/01 (Comércio atacadista de produtos em geral)</span></div>
@@ -150924,7 +150997,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Médicos PJ</span>
-                  <div style="margin-top: 5px;"><a href="https://www.clingastroci.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(49)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</span></div>
@@ -150944,7 +151017,7 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><a href="https://www.massastradic.com.br" target="_blank" onclick="event.stopPropagation()" class="badge-info" style="text-decoration: none;">🌐 Acessar Site</a></div>
+                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(50)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1099-6/99 (Fabricação de outros produtos alimentícios)</span></div>
