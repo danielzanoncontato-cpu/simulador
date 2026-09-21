@@ -109,7 +109,7 @@
 
     /* BADGES */
     .badge-master { background: var(--badge-active-bg); color: var(--badge-active-text); border: 1px solid var(--badge-active-border); padding: 3px 10px; border-radius: 9999px; font-size: 10px; font-weight: 800; }
-    .badge-github { background: #0f766e; color: #ffffff; border: 1px solid #14b8a6; padding: 3px 10px; border-radius: 9999px; font-size: 10px; font-weight: 800; display: inline-flex; align-items: center; gap: 4px; }
+    .badge-github { background: var(--btn-main-bg); color: var(--btn-main-text); border: 1px solid var(--border-strong); padding: 3px 10px; border-radius: 9999px; font-size: 10px; font-weight: 800; display: inline-flex; align-items: center; gap: 4px; }
     .badge-info { padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: var(--badge-bg); color: var(--badge-text); border: 1px solid var(--badge-border); display: inline-block; }
     .badge-role-adm { font-size: 9px; font-weight: 900; background: var(--btn-main-bg); color: var(--btn-main-text); border: 1px solid var(--border-strong); padding: 1px 6px; border-radius: 4px; display: inline-block; margin-bottom: 2px; }
     .badge-role { font-size: 9px; font-weight: 800; background: var(--badge-bg); color: var(--badge-text); border: 1px solid var(--badge-border); padding: 1px 5px; border-radius: 4px; display: inline-block; margin-bottom: 2px; }
@@ -270,6 +270,24 @@
       } catch (err) {
         console.error('Erro ao conectar ao GitHub REST API:', err);
         return false;
+      }
+    }
+
+    async function syncFullBaseToGithub(commitMsg) {
+      try {
+        var jsonStr = JSON.stringify(prospects, null, 2);
+        var dispatchCsv = generateFullDispatchCsvString();
+        var detailedCsv = generateFullDetailedCsvString();
+        var histStr = JSON.stringify(searchHistory, null, 2);
+
+        await syncFileToGithub('prospects_database.json', jsonStr, '🎯 ' + commitMsg + ' (JSON Base Master)');
+        await syncFileToGithub('base_disparo_prx.csv', dispatchCsv, '🎯 ' + commitMsg + ' (Disparo CSV)');
+        await syncFileToGithub('base_prospeccao_prx.csv', dispatchCsv, '🎯 ' + commitMsg + ' (Prospeccao CSV)');
+        await syncFileToGithub('base_prospeccao_prx_detalhada.csv', detailedCsv, '🎯 ' + commitMsg + ' (Detalhada CSV)');
+        await syncFileToGithub('historico_buscas.json', histStr, '📡 ' + commitMsg + ' (Histórico de Buscas)');
+        console.log('✅ Sincronização Total de Leads no GitHub Concluída (' + prospects.length + ' leads)');
+      } catch (e) {
+        console.error('Erro na sincronização total:', e);
       }
     }
 
@@ -149267,6 +149285,83 @@
       showToast('📥 Base exportada com sucesso (' + count + ' contatos)!');
     }
 
+    function generateFullDispatchCsvString() {
+      var csv = '\uFEFFNome,Empresa,Numero,Email\r\n';
+      var clean = function(str) { return '"' + (str || '').toString().replace(/"/g, '""') + '"'; };
+      for (var i = 0; i < prospects.length; i++) {
+        var p = prospects[i];
+        var decisores = (p.decisores && p.decisores.length > 0) ? p.decisores : [{ nome: 'Sócio-Diretor', contato: p.fone }];
+        for (var d = 0; d < decisores.length; d++) {
+          var dec = decisores[d];
+          var dPhone = formatPhoneJs(getDecisorPhoneJs(dec, p.fone), p.fone);
+          var dEmail = getDecisorEmailJs(dec, p.company, p.email);
+          csv += [clean(dec.nome), clean(p.company), clean(dPhone), clean(dEmail)].join(',') + '\r\n';
+        }
+      }
+      return csv;
+    }
+
+    function generateFullDetailedCsvString() {
+      var headers = ['ID', 'Empresa', 'CNPJ', 'Idade', 'UF', 'Cidade', 'Segmento', 'Cor_Segmento', 'Fonte_Dados', 'Setor', 'Tem_Site', 'Site', 'Descricao', 'CNAE_Principal', 'CNAE_Secundarios', 'Decisor_1_Nome', 'Decisor_1_Cargo', 'Decisor_1_LinkedIn', 'Decisor_1_Contato', 'Decisor_2_Nome', 'Decisor_2_Cargo', 'Decisor_2_LinkedIn', 'Decisor_2_Contato', 'Score_PRX'];
+      var csv = '\uFEFF' + headers.join(',') + '\r\n';
+      var clean = function(str) { return '"' + (str || '').toString().replace(/"/g, '""') + '"'; };
+      for (var i = 0; i < prospects.length; i++) {
+        var p = prospects[i];
+        var d1 = (p.decisores && p.decisores.length > 0) ? p.decisores[0] : null;
+        var d2 = (p.decisores && p.decisores.length > 1) ? p.decisores[1] : null;
+
+        var d1Phone = d1 ? formatPhoneJs(getDecisorPhoneJs(d1, p.fone), p.fone) : '';
+        var d1Email = d1 ? getDecisorEmailJs(d1, p.company, p.email) : '';
+        var d1Contact = d1Phone + (d1Phone && d1Email ? ' / ' : '') + d1Email;
+
+        var d2Phone = d2 ? formatPhoneJs(getDecisorPhoneJs(d2, ''), '') : '';
+        var d2Email = d2 ? getDecisorEmailJs(d2, p.company, '') : '';
+        var d2Contact = d2Phone + (d2Phone && d2Email ? ' / ' : '') + d2Email;
+
+        var row = [
+          p.id,
+          clean(p.company),
+          clean(p.cnpj),
+          clean(p.idade),
+          clean(p.uf),
+          clean(p.city),
+          clean(p.segmentoNome),
+          clean(p.corSegmento),
+          clean(p.fonteDados),
+          clean(p.setor),
+          p.hasSite ? 'Sim' : 'Nao',
+          clean(p.site),
+          clean(p.desc),
+          clean(p.cnaePrincipal),
+          clean(p.cnaeSecundarios),
+          clean(d1 ? d1.nome : ''),
+          clean(d1 ? d1.cargo : ''),
+          clean(d1 ? d1.linkedin : ''),
+          clean(d1Contact),
+          clean(d2 ? d2.nome : ''),
+          clean(d2 ? d2.cargo : ''),
+          clean(d2 ? d2.linkedin : ''),
+          clean(d2Contact),
+          clean(p.scorePrx || 'AAA (High-Ticket)')
+        ];
+        csv += row.join(',') + '\r\n';
+      }
+      return csv;
+    }
+
+    function downloadFullDispatchCsv() {
+      var csv = generateFullDispatchCsvString();
+      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.setAttribute('download', 'base_disparo_prx.csv');
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function() { document.body.removeChild(a); window.URL.revokeObjectURL(url); }, 300);
+      showToast('📥 Base de Disparo Completa (' + prospects.length.toLocaleString('pt-BR') + ' leads) baixada com sucesso!');
+    }
+
     /* FUNÇÕES AUXILIARES DE FORMATAÇÃO E CONTATO DIRETO */
     function formatPhoneJs(raw, fallback) {
       var p = raw || fallback || '';
@@ -149751,8 +149846,8 @@
         showToast('🎯 ' + lastMinedLeads.length + ' novos leads minerados e adicionados à Base de Prospecção! (Total: ' + prospects.length.toLocaleString('pt-BR') + ' leads)');
       }, 700);
 
-      // Sincronizar em segundo plano com o GitHub
-      syncFileToGithub('prospects_database.json', JSON.stringify(prospects, null, 2), '🎯 ' + lastMinedLeads.length + ' novos leads minerados e adicionados à Base Master (' + prospects.length + ' leads)');
+      // Sincronizar em segundo plano toda a base atualizada (JSON + CSVs) com o GitHub
+      syncFullBaseToGithub('Mineração de ' + lastMinedLeads.length + ' novos leads (' + seg + ') - Total: ' + prospects.length + ' leads');
     }
 
     function renderMinedTable() {
@@ -149835,7 +149930,8 @@
       switchMainTab('prospects');
       showToast('🎉 ' + (addedCount > 0 ? addedCount : toConnect.length) + ' novos leads conectados à Base de Prospecção! (Total: ' + prospects.length.toLocaleString('pt-BR') + ' leads)');
 
-      syncFileToGithub('prospects_database.json', JSON.stringify(prospects, null, 2), '✅ Conexão de ' + toConnect.length + ' novos leads minerados (Base Master: ' + prospects.length + ')');
+      // Sincronizar em segundo plano toda a base atualizada (JSON + CSVs) com o GitHub
+      syncFullBaseToGithub('Conexão de ' + toConnect.length + ' novos leads minerados - Total: ' + prospects.length + ' leads');
     }
 
     function exportMinedCsv() {
@@ -149914,6 +150010,9 @@
     window.triggerSegmentFilterChange = triggerSegmentFilterChange;
     window.resetToHomePage = resetToHomePage;
     window.syncEntireDashboardToGithub = syncEntireDashboardToGithub;
+    window.syncFullBaseToGithub = syncFullBaseToGithub;
+    window.downloadFullDispatchCsv = downloadFullDispatchCsv;
+    window.exportCurrentCsv = exportCurrentCsv;
     window.copySearchPromptToAi = copySearchPromptToAi;
     window.openCompanyWebsite = openCompanyWebsite;
   </script>
@@ -149946,7 +150045,7 @@
         <button id="tab-miner-btn" onclick="switchMainTab('miner')" class="tab-btn">
           ⛏️ Minerar Novos Leads
         </button>
-        <button onclick="exportCurrentCsv()" class="btn-main" title="Baixar base em CSV formatada para disparos">
+        <button onclick="downloadFullDispatchCsv()" class="btn-main" title="Baixar base completa de disparos em CSV">
           📥 Baixar Base de Disparo
         </button>
       </div>
@@ -149989,7 +150088,7 @@
           </select>
         </div>
         <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-          <a href="base_disparo_prx.csv" download="base_disparo_prx.csv" class="btn-main" style="padding: 8px 14px; font-size: 12px;">📥 Baixar Base de Disparo</a>
+          <button onclick="downloadFullDispatchCsv()" class="btn-main" style="padding: 8px 14px; font-size: 12px;" title="Baixar base completa de disparos em CSV">📥 Baixar Base de Disparo</button>
           <button onclick="exportCurrentCsv()" class="btn-outline" style="padding: 8px 14px; font-size: 12px;">📥 Baixar Filtro Atual</button>
         </div>
       </div>
