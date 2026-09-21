@@ -8,83 +8,83 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root {
-      --bg-body: #f8fafc;
+      --bg-body: #ffffff;
       --bg-card: #ffffff;
-      --bg-subtle: #f1f5f9;
-      --text-main: #0f172a;
-      --text-sub: #334155;
-      --text-muted: #64748b;
-      --border-color: #cbd5e1;
-      --border-strong: #0f172a;
-      --btn-main-bg: #0f172a;
+      --bg-subtle: #f4f4f4;
+      --text-main: #000000;
+      --text-sub: #1f1f1f;
+      --text-muted: #555555;
+      --border-color: #d1d1d1;
+      --border-strong: #000000;
+      --btn-main-bg: #000000;
       --btn-main-text: #ffffff;
-      --btn-main-hover: #1e293b;
+      --btn-main-hover: #262626;
       --btn-sub-bg: #ffffff;
-      --btn-sub-text: #0f172a;
-      --btn-sub-border: #0f172a;
-      --btn-sub-hover: #f1f5f9;
-      --badge-bg: #f1f5f9;
-      --badge-text: #0f172a;
-      --badge-border: #cbd5e1;
-      --badge-active-bg: #0f172a;
+      --btn-sub-text: #000000;
+      --btn-sub-border: #000000;
+      --btn-sub-hover: #eeeeee;
+      --badge-bg: #f0f0f0;
+      --badge-text: #000000;
+      --badge-border: #cccccc;
+      --badge-active-bg: #000000;
       --badge-active-text: #ffffff;
-      --badge-active-border: #0f172a;
-      --table-header-bg: #0f172a;
+      --badge-active-border: #000000;
+      --table-header-bg: #000000;
       --table-header-text: #ffffff;
-      --table-row-hover: #f1f5f9;
-      --table-row-border: #e2e8f0;
-      --table-alt-col: #f8fafc;
+      --table-row-hover: #f5f5f5;
+      --table-row-border: #e0e0e0;
+      --table-alt-col: #fafafa;
       --input-bg: #ffffff;
-      --input-text: #0f172a;
-      --input-border: #cbd5e1;
+      --input-text: #000000;
+      --input-border: #cccccc;
       --modal-bg: #ffffff;
-      --modal-overlay: rgba(15, 23, 42, 0.7);
-      --linkedin-bg: #0284c7;
+      --modal-overlay: rgba(0, 0, 0, 0.75);
+      --linkedin-bg: #000000;
       --linkedin-text: #ffffff;
-      --linkedin-border: #0284c7;
-      --no-linkedin-bg: #f1f5f9;
-      --no-linkedin-text: #64748b;
-      --no-linkedin-border: #cbd5e1;
+      --linkedin-border: #000000;
+      --no-linkedin-bg: #f5f5f5;
+      --no-linkedin-text: #666666;
+      --no-linkedin-border: #d4d4d4;
     }
 
-    body.dark-mode {
-      --bg-body: #0b132b;
-      --bg-card: #111c35;
-      --bg-subtle: #162342;
-      --text-main: #f8fafc;
-      --text-sub: #94a3b8;
-      --text-muted: #64748b;
-      --border-color: #1e3a8a;
-      --border-strong: #38bdf8;
-      --btn-main-bg: #2563eb;
-      --btn-main-text: #ffffff;
-      --btn-main-hover: #1d4ed8;
-      --btn-sub-bg: #111c35;
-      --btn-sub-text: #f8fafc;
-      --btn-sub-border: #38bdf8;
-      --btn-sub-hover: #1c2a4a;
-      --badge-bg: #162342;
-      --badge-text: #f8fafc;
-      --badge-border: #1e3a8a;
-      --badge-active-bg: #1e3a8a;
-      --badge-active-text: #ffffff;
-      --badge-active-border: #38bdf8;
-      --table-header-bg: #081026;
+    body.dark-mode, html.dark-mode {
+      --bg-body: #000000;
+      --bg-card: #0a0a0a;
+      --bg-subtle: #141414;
+      --text-main: #ffffff;
+      --text-sub: #e5e5e5;
+      --text-muted: #a3a3a3;
+      --border-color: #262626;
+      --border-strong: #ffffff;
+      --btn-main-bg: #ffffff;
+      --btn-main-text: #000000;
+      --btn-main-hover: #e5e5e5;
+      --btn-sub-bg: #0a0a0a;
+      --btn-sub-text: #ffffff;
+      --btn-sub-border: #ffffff;
+      --btn-sub-hover: #1f1f1f;
+      --badge-bg: #141414;
+      --badge-text: #ffffff;
+      --badge-border: #333333;
+      --badge-active-bg: #ffffff;
+      --badge-active-text: #000000;
+      --badge-active-border: #ffffff;
+      --table-header-bg: #0a0a0a;
       --table-header-text: #ffffff;
-      --table-row-hover: #162342;
-      --table-row-border: #1e3a8a;
-      --table-alt-col: #0e172e;
-      --input-bg: #0b132b;
-      --input-text: #f8fafc;
-      --input-border: #1e3a8a;
-      --modal-bg: #111c35;
-      --modal-overlay: rgba(5, 10, 25, 0.85);
-      --linkedin-bg: #0284c7;
+      --table-row-hover: #171717;
+      --table-row-border: #262626;
+      --table-alt-col: #050505;
+      --input-bg: #0a0a0a;
+      --input-text: #ffffff;
+      --input-border: #333333;
+      --modal-bg: #0a0a0a;
+      --modal-overlay: rgba(0, 0, 0, 0.90);
+      --linkedin-bg: #262626;
       --linkedin-text: #ffffff;
-      --linkedin-border: #38bdf8;
-      --no-linkedin-bg: #162342;
-      --no-linkedin-text: #64748b;
-      --no-linkedin-border: #1e3a8a;
+      --linkedin-border: #404040;
+      --no-linkedin-bg: #141414;
+      --no-linkedin-text: #737373;
+      --no-linkedin-border: #262626;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -151076,18 +151076,17 @@
               <option value="EIRELI / Sociedade Unipessoal">EIRELI / Unipessoal</option>
             </select>
           </div>
-
           <!-- REGIME TRIBUTÁRIO -->
           <div>
             <label style="font-size: 11px; font-weight: 800; color: var(--text-main); text-transform: uppercase; margin-bottom: 5px; display: block;">📑 Regime Tributário:</label>
             <select id="minerRegime" style="width: 100%; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 12px; font-size: 12px; font-weight: 700;">
-              <option value="ALL">Todos os Regimes Tributários</option>
-              <option value="Lucro Real">Lucro Real (High-Ticket > R$ 78M / Obrigatório S/A)</option>
-              <option value="Lucro Presumido">Lucro Presumido (Médio Porte até R$ 78M)</option>
-              <option value="Simples Nacional">Simples Nacional (ME / EPP até R$ 4,8M)</option>
-              <option value="Lucro Arbitrado">Lucro Arbitrado (Determinação Fiscal)</option>
-              <option value="Imune / Isenta de IRPJ">Imune / Isenta de IRPJ (Associações, Cooperativas, Fundações)</option>
-              <option value="MEI - Microempreendedor Individual">MEI (Microempreendedor Individual)</option>
+              <option value="ALL">Todos os Regimes</option>
+              <option value="Lucro Real">Lucro Real</option>
+              <option value="Lucro Presumido">Lucro Presumido</option>
+              <option value="Simples Nacional">Simples Nacional</option>
+              <option value="Lucro Arbitrado">Lucro Arbitrado</option>
+              <option value="Imune / Isenta de IRPJ">Imune / Isenta</option>
+              <option value="MEI - Microempreendedor Individual">MEI</option>
             </select>
           </div>
 
