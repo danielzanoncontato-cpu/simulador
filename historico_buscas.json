@@ -1,5 +1,17 @@
 [
   {
+    "id": "search_1790024506286",
+    "data": "21/09/2026, 18:01:46",
+    "timestamp": "2026-09-21T21:01:46.286Z",
+    "tipo": "filtro_segmento",
+    "query": "Filtro de Segmento: Todos os Segmentos",
+    "resultados": 0,
+    "detalhes": {
+      "codSegmento": "ALL"
+    },
+    "status": "enviado_para_ia"
+  },
+  {
     "id": "search_1790024503838",
     "data": "21/09/2026, 18:01:43",
     "timestamp": "2026-09-21T21:01:43.844Z",
@@ -9,6 +21,6 @@
     "detalhes": {
       "codSegmento": "GREEN"
     },
-    "status": "enviado_para_ia"
+    "status": "sincronizado_github"
   }
 ]
