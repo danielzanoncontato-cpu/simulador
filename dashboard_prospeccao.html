@@ -149207,7 +149207,16 @@
         if (tipo !== 'ALL') {
           var pTipo = normStr(p.tipoSocietario || '');
           var filterTipo = normStr(tipo);
-          if (pTipo.indexOf(filterTipo) === -1) return false;
+          if (pTipo.indexOf(filterTipo) === -1) {
+            if (filterTipo.indexOf('fechada') !== -1 && pTipo.indexOf('fechada') !== -1) { /* match */ }
+            else if (filterTipo.indexOf('aberta') !== -1 && pTipo.indexOf('aberta') !== -1) { /* match */ }
+            else if ((filterTipo.indexOf('ltda') !== -1 || filterTipo.indexOf('limitada') !== -1) && (pTipo.indexOf('ltda') !== -1 || pTipo.indexOf('limitada') !== -1)) { /* match */ }
+            else if (filterTipo.indexOf('cooperativa') !== -1 && pTipo.indexOf('cooperativa') !== -1) { /* match */ }
+            else if ((filterTipo.indexOf('simples') !== -1 || filterTipo.indexOf('s/s') !== -1) && (pTipo.indexOf('simples') !== -1 || pTipo.indexOf('s/s') !== -1)) { /* match */ }
+            else if ((filterTipo.indexOf('unipessoal') !== -1 || filterTipo.indexOf('eireli') !== -1) && (pTipo.indexOf('unipessoal') !== -1 || pTipo.indexOf('eireli') !== -1)) { /* match */ }
+            else if ((filterTipo.indexOf('s/a') !== -1 || filterTipo.indexOf('anonima') !== -1) && (pTipo.indexOf('s/a') !== -1 || pTipo.indexOf('anonima') !== -1)) { /* match */ }
+            else return false;
+          }
         }
 
         // 6. Token matching across all fields
@@ -150471,10 +150480,13 @@
             <option value="SEM_SITE">Sem Site</option>
           </select>
           <select id="tipoFilter" onchange="filterData()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 10px; padding: 8px 12px; font-size: 12px; font-weight: 800;">
-            <option value="ALL">Todos os Tipos</option>
-            <option value="SA">Sociedade Anônima (S/A)</option>
-            <option value="LTDA">Sociedade Limitada (LTDA)</option>
-            <option value="Cooperativa">Cooperativa</option>
+            <option value="ALL">Tipos Societários</option>
+            <option value="Sociedade Anônima (S/A Fechada)">Sociedade Anônima (S/A Fechada)</option>
+            <option value="Sociedade Anônima (S/A Aberta)">Sociedade Anônima (S/A Aberta)</option>
+            <option value="Sociedade Empresária Limitada (LTDA)">Sociedade Limitada (LTDA)</option>
+            <option value="Sociedade Cooperativa">Sociedade Cooperativa</option>
+            <option value="Sociedade Simples (S/S)">Sociedade Simples (S/S)</option>
+            <option value="EIRELI / Sociedade Unipessoal">EIRELI / Unipessoal</option>
           </select>
           <select id="perPageFilter" onchange="changePerPage()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 10px; padding: 8px 12px; font-size: 12px; font-weight: 800;">
             <option value="50">50 por página</option>
