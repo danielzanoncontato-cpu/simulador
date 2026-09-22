@@ -44,3 +44,8 @@ Sistema autônomo de inteligência comercial, mineração societária e abordage
 
 9. **PADRÃO OFICIAL DE ABORDAGEM CONSULTIVA PRX CAPITAL:**
    - Abordagem de primeiro contato consultiva com os 6 pilares de atuação da PRX Capital para agendamento de diagnóstico gratuito de 15 minutos.
+
+10. **CONFORMIDADE JURÍDICO-TRIBUTÁRIA BRASILEIRA (LC 123/2006):**
+    - **Simples Nacional:** Exclusivo para Sociedades Limitadas (LTDA), Sociedades Simples (S/S) e SLU. Vedação expressa a Sociedades Anônimas (S/A Aberta ou Fechada) e Cooperativas (Art. 3º, § 4º, VII da LC nº 123/2006).
+    - **Sociedades Anônimas (S/A):** Obrigatoriamente tributadas pelo Lucro Real (ou Presumido até o limite legal). NUNCA Simples Nacional.
+    - **Cooperativas:** Tributação própria (Ato Cooperativo / Isenção IRPJ).
