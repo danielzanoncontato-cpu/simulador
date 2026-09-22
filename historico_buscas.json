@@ -1,5 +1,17 @@
 [
   {
+    "id": "search_1790116982497",
+    "data": "22/09/2026, 19:43:02",
+    "timestamp": "2026-09-22T22:43:02.497Z",
+    "tipo": "filtro_segmento",
+    "query": "Filtro de Segmento: 🚚 Logística & Frotas",
+    "resultados": 131,
+    "detalhes": {
+      "codSegmento": "SPECIAL_LOG"
+    },
+    "status": "enviado_para_ia"
+  },
+  {
     "id": "search_1790116913305",
     "data": "22/09/2026, 19:41:53",
     "timestamp": "2026-09-22T22:41:53.307Z",
@@ -9,7 +21,7 @@
     "detalhes": {
       "codSegmento": "GREEN"
     },
-    "status": "enviado_para_ia"
+    "status": "sincronizado_github"
   },
   {
     "id": "search_init",
