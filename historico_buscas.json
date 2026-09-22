@@ -1,12 +1,39 @@
 [
   {
+    "id": "search_1790083670982",
+    "data": "22/09/2026, 10:27:50",
+    "timestamp": "2026-09-22T13:27:50.993Z",
+    "tipo": "filtro_segmento",
+    "query": "Filtro de Segmento: Exportadoras & Trading",
+    "resultados": 1200,
+    "detalhes": {
+      "codSegmento": "RED"
+    },
+    "status": "enviado_para_ia"
+  },
+  {
+    "id": "search_1790033253390",
+    "data": "21/09/2026, 20:27:33",
+    "timestamp": "2026-09-21T23:27:33.390Z",
+    "tipo": "filtro_segmento",
+    "query": "Filtro de Segmento: Exportadoras & Trading",
+    "resultados": 1200,
+    "detalhes": {
+      "codSegmento": "RED"
+    },
+    "status": "sincronizado_github"
+  },
+  {
     "id": "search_init",
-    "data": "21/09/2026 23:04:16",
-    "timestamp": "2026-09-22T02:04:16.8387299Z",
+    "data": "21/09/2026, 20:27:03",
+    "timestamp": "2026-09-21T23:27:03.764Z",
     "tipo": "sistema_inicializado",
     "query": "Base Master PRX Conectada (3.900 empresas / 7.867 decisores)",
     "resultados": 3900,
-    "detalhes": { "status": "online", "ambiente": "GitHub Pages / Antigravity AI", "totalEmpresas": 3900, "totalLeadsDecisores": 7867 },
+    "detalhes": {
+      "status": "online",
+      "ambiente": "GitHub Pages / Antigravity AI"
+    },
     "status": "sincronizado_github"
   }
 ]
