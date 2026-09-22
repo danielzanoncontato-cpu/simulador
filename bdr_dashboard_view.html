@@ -150341,20 +150341,7 @@
 
     function loadStoredMinedLeads() {
       try {
-        var saved = localStorage.getItem('prx_mined_leads');
-        if (saved) {
-          var arr = JSON.parse(saved);
-          if (Array.isArray(arr) && arr.length > 0) {
-            var existingMap = {};
-            for (var i = 0; i < prospects.length; i++) existingMap[prospects[i].id] = true;
-            for (var j = arr.length - 1; j >= 0; j--) {
-              if (!existingMap[arr[j].id]) {
-                prospects.unshift(arr[j]);
-                existingMap[arr[j].id] = true;
-              }
-            }
-          }
-        }
+        localStorage.removeItem('prx_mined_leads');
       } catch (e) {}
     }
 
