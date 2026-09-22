@@ -149366,10 +149366,10 @@
       var end = Math.min(start + itemsPerPage, filteredDataList.length);
 
       var pInfo = document.getElementById('paginationInfo');
-      if (pInfo) pInfo.innerText = 'Mostrando ' + (filteredDataList.length > 0 ? (start + 1) : 0) + ' - ' + end + ' de ' + filteredDataList.length.toLocaleString('pt-BR') + ' leads';
+      if (pInfo) pInfo.innerText = 'Mostrando ' + (filteredDataList.length > 0 ? (start + 1) : 0) + ' - ' + end;
 
       var topPInfo = document.getElementById('topPaginationInfo');
-      if (topPInfo) topPInfo.innerText = 'Mostrando ' + (filteredDataList.length > 0 ? (start + 1) : 0) + ' - ' + end + ' de ' + filteredDataList.length.toLocaleString('pt-BR') + ' leads';
+      if (topPInfo) topPInfo.innerText = 'Mostrando ' + (filteredDataList.length > 0 ? (start + 1) : 0) + ' - ' + end;
 
       var totalPages = Math.ceil(filteredDataList.length / itemsPerPage) || 1;
       var cpDisplay = document.getElementById('currentPageDisplay');
