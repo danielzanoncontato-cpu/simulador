@@ -334,31 +334,15 @@
     }
 
     function triggerSegmentFilterChange() {
+      currentPage = 1;
+      filterData();
+      var tContainer = document.querySelector('#prospectsTabContent div[style*="overflow-y: auto"]');
+      if (tContainer) tContainer.scrollTop = 0;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
       var sSeg = document.getElementById('segmentFilter');
-      var seg = sSeg ? sSeg.value : 'ALL';
-
-      if (seg === 'ALL') {
-        currentPage = 1;
-        switchMainTab('prospects');
-        var sInp = document.getElementById('searchInput');
-        if (sInp) sInp.value = '';
-        var sReg = document.getElementById('regimeFilter');
-        if (sReg) sReg.value = 'ALL';
-        filterData();
-        var tContainer = document.querySelector('#prospectsTabContent div[style*="overflow-y: auto"]');
-        if (tContainer) tContainer.scrollTop = 0;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        showToast('🏠 Todos os Segmentos - Página Inicial');
-      } else {
-        currentPage = 1;
-        filterData();
-        var tContainer = document.querySelector('#prospectsTabContent div[style*="overflow-y: auto"]');
-        if (tContainer) tContainer.scrollTop = 0;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-
       var segText = (sSeg && sSeg.selectedIndex >= 0) ? sSeg.options[sSeg.selectedIndex].text : 'Todos os Segmentos';
-      dispatchSearchQueryToAi('Filtro de Segmento: ' + segText, 'filtro_segmento', filteredDataList.length, { codSegmento: seg });
+      dispatchSearchQueryToAi('Filtro de Segmento: ' + segText, 'filtro_segmento', filteredDataList.length, { codSegmento: sSeg ? sSeg.value : 'ALL' });
     }
 
     function resetToHomePage() {
@@ -149105,26 +149089,169 @@
       if (tabBadge) tabBadge.innerText = formatted;
     }
 
+    var UF_EXPANSION_MAP = {
+      'AC': 'acre ac',
+      'AL': 'alagoas al',
+      'AP': 'amapa amapá ap',
+      'AM': 'amazonas am amazonense manaus',
+      'BA': 'bahia ba baiano salvador',
+      'CE': 'ceara ceará ce fortalezense fortaleza',
+      'DF': 'distrito federal df brasilia brasília',
+      'ES': 'espirito santo espírito santo es capixaba vitoria vitória',
+      'GO': 'goias goiás go goiano goiania goiânia',
+      'MA': 'maranhao maranhão ma',
+      'MT': 'mato grosso mt mato-grossense cuiaba cuiabá',
+      'MS': 'mato grosso do sul ms sul-mato-grossense campo grande',
+      'MG': 'minas gerais mg mineiro belo horizonte',
+      'PA': 'para pará pa',
+      'PB': 'paraiba paraíba pb',
+      'PR': 'parana paraná pr paranaense curitiba maringa maringá londrina cascavel toledo ponta grossa foz guarapuava',
+      'PE': 'pernambuco pe recife',
+      'PI': 'piaui piauí pi',
+      'RJ': 'rio de janeiro rj carioca fluminense',
+      'RN': 'rio grande do norte rn potiguar',
+      'RS': 'rio grande do sul rs gaucho gaúcho porto alegre caxias',
+      'RO': 'rondonia rondônia ro',
+      'RR': 'roraima rr',
+      'SC': 'santa catarina sc catarinense joinville blumenau florianopolis florianópolis chapeco chapecó criciuma criciúma itajai itajaí',
+      'SP': 'sao paulo são paulo sp paulista paulistano campinas jundiai jundiaí ribeirao ribeirão bauru sorocaba piracicaba',
+      'SE': 'sergipe se aracaju',
+      'TO': 'tocantins to'
+    };
+
+    function normStr(s) {
+      return (s || '').toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+    }
+
+    function clearAllFilters() {
+      var sInp = document.getElementById('searchInput'); if (sInp) sInp.value = '';
+      var sSeg = document.getElementById('segmentFilter'); if (sSeg) sSeg.value = 'ALL';
+      var sUf = document.getElementById('ufFilter'); if (sUf) sUf.value = 'ALL';
+      var sReg = document.getElementById('regimeFilter'); if (sReg) sReg.value = 'ALL';
+      var sSite = document.getElementById('siteFilter'); if (sSite) sSite.value = 'ALL';
+      var sTipo = document.getElementById('tipoFilter'); if (sTipo) sTipo.value = 'ALL';
+      currentPage = 1;
+      filterData();
+      showToast('🔄 Todos os filtros foram limpos!');
+    }
+
     function filterData() {
       var sInp = document.getElementById('searchInput');
       var sSeg = document.getElementById('segmentFilter');
+      var sUf = document.getElementById('ufFilter');
       var sReg = document.getElementById('regimeFilter');
-      var term = sInp ? sInp.value.toLowerCase().trim() : '';
+      var sSite = document.getElementById('siteFilter');
+      var sTipo = document.getElementById('tipoFilter');
+
+      var rawTerm = sInp ? sInp.value : '';
+      var normQuery = normStr(rawTerm);
       var seg = sSeg ? sSeg.value : 'ALL';
+      var uf = sUf ? sUf.value : 'ALL';
       var reg = sReg ? sReg.value : 'ALL';
+      var site = sSite ? sSite.value : 'ALL';
+      var tipo = sTipo ? sTipo.value : 'ALL';
+
+      // Detect explicit boolean clauses in query
+      var requireSemSite = false;
+      var requireComSite = false;
+      var cleanQuery = normQuery;
+
+      if (normQuery.indexOf('sem site') !== -1 || normQuery.indexOf('sem-site') !== -1 || normQuery.indexOf('sem website') !== -1 || normQuery.indexOf('sem dominio') !== -1) {
+        requireSemSite = true;
+        cleanQuery = cleanQuery.replace(/\bsem\s+site\b|\bsem-site\b|\bsem\s+website\b|\bsem\s+dominio\b/g, ' ');
+      } else if (normQuery.indexOf('com site') !== -1 || normQuery.indexOf('com website') !== -1 || normQuery.indexOf('com dominio') !== -1) {
+        requireComSite = true;
+        cleanQuery = cleanQuery.replace(/\bcom\s+site\b|\bcom\s+website\b|\bcom\s+dominio\b/g, ' ');
+      }
+
+      // Split into query tokens, ignoring common stopwords
+      var stopWords = { 'e': 1, 'em': 1, 'de': 1, 'do': 1, 'da': 1, 'dos': 1, 'das': 1, 'para': 1, 'com': 1, 'sem': 1, 'o': 1, 'a': 1, 'os': 1, 'as': 1, 'tipo': 1, 'regime': 1, 'estado': 1, 'uf': 1, 'empresa': 1, 'empresas': 1, 'nicho': 1 };
+      var rawTokens = cleanQuery.split(/[\s,+/|\-]+/);
+      var tokens = [];
+      for (var t = 0; t < rawTokens.length; t++) {
+        var tk = rawTokens[t].trim();
+        if (tk.length > 0 && !stopWords[tk]) {
+          tokens.push(tk);
+        }
+      }
 
       filteredDataList = prospects.filter(function(p) {
-        if (seg !== 'ALL' && p.corSegmento !== seg) return false;
-        if (reg !== 'ALL' && p.regimeTributario !== reg) return false;
-        if (!term) return true;
-
-        var fullText = (p.company || '') + ' ' + (p.cnpj || '') + ' ' + (p.city || '') + ' ' + (p.uf || '') + ' ' + (p.segmentoNome || '') + ' ' + (p.cnaePrincipal || '') + ' ' + (p.tipoSocietario || '') + ' ' + (p.regimeTributario || '');
-        if (p.decisores && p.decisores.length > 0) {
-          for (var i = 0; i < p.decisores.length; i++) {
-            fullText += ' ' + (p.decisores[i].nome || '') + ' ' + (p.decisores[i].cargo || '') + ' ' + (p.decisores[i].contato || '');
+        // 1. Segment Dropdown Filter
+        if (seg !== 'ALL') {
+          if (p.corSegmento !== seg && p.segmentoNome !== seg) {
+            if (seg === 'SPECIAL_MED' && normStr(p.segmentoNome).indexOf('medic') === -1 && normStr(p.segmentoNome).indexOf('saude') === -1) return false;
+            else if (seg !== 'SPECIAL_MED') return false;
           }
         }
-        return fullText.toLowerCase().indexOf(term) !== -1;
+
+        // 2. UF Dropdown Filter
+        if (uf !== 'ALL') {
+          if ((p.uf || '').toUpperCase() !== uf.toUpperCase()) return false;
+        }
+
+        // 3. Regime Tributário Dropdown Filter
+        if (reg !== 'ALL') {
+          var pReg = normStr(p.regimeTributario || '');
+          var filterReg = normStr(reg);
+          if (pReg.indexOf(filterReg) === -1) return false;
+        }
+
+        // 4. Site Presence Filter (Dropdown + Query predicate)
+        var hasValidSite = Boolean(p.hasSite && p.site && p.site.indexOf('sem-site') === -1 && p.site !== '');
+        if (site === 'COM_SITE' && !hasValidSite) return false;
+        if (site === 'SEM_SITE' && hasValidSite) return false;
+        if (requireComSite && !hasValidSite) return false;
+        if (requireSemSite && hasValidSite) return false;
+
+        // 5. Tipo Societário Dropdown Filter
+        if (tipo !== 'ALL') {
+          var pTipo = normStr(p.tipoSocietario || '');
+          var filterTipo = normStr(tipo);
+          if (pTipo.indexOf(filterTipo) === -1) return false;
+        }
+
+        // 6. Token matching across all fields
+        if (tokens.length === 0) return true;
+
+        var ufExt = UF_EXPANSION_MAP[p.uf] || (p.uf || '');
+        var haystack = normStr(
+          (p.company || '') + ' ' +
+          (p.cnpj || '') + ' ' + (p.cnpj ? p.cnpj.replace(/\D/g, '') : '') + ' ' +
+          (p.city || '') + ' ' +
+          (p.uf || '') + ' ' + ufExt + ' ' +
+          (p.segmentoNome || '') + ' ' +
+          (p.setor || '') + ' ' +
+          (p.desc || '') + ' ' +
+          (p.cnaePrincipal || '') + ' ' +
+          (p.cnaeSecundarios || '') + ' ' +
+          (p.tipoSocietario || '') + ' ' +
+          (p.regimeTributario || '') + ' ' +
+          (p.email || '') + ' ' +
+          (p.fone || '')
+        );
+
+        if (p.decisores && p.decisores.length > 0) {
+          for (var d = 0; d < p.decisores.length; d++) {
+            var dec = p.decisores[d];
+            haystack += ' ' + normStr((dec.nome || '') + ' ' + (dec.cargo || '') + ' ' + (dec.contato || '') + ' ' + (dec.linkedin || ''));
+          }
+        }
+
+        // Add site keywords to haystack
+        if (hasValidSite) {
+          haystack += ' com site com website ' + normStr(p.site || '');
+        } else {
+          haystack += ' sem site sem website sem dominio sem link';
+        }
+
+        // Every token must be present in haystack (AND logic)
+        for (var k = 0; k < tokens.length; k++) {
+          if (haystack.indexOf(tokens[k]) === -1) {
+            return false;
+          }
+        }
+
+        return true;
       });
 
       currentPage = 1;
@@ -150252,15 +150379,32 @@
       <!-- PAINEL DE CONTROLE DE FILTROS & BUSCA -->
       <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 14px; padding: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
         <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; flex: 1; min-width: 300px;">
-          <input type="text" id="searchInput" oninput="triggerSearchWithDebounce()" placeholder="🔍 Buscar por Empresa, Sócio-Adm, CFO, COO, CTO, CNPJ, CNAE, Cidade, Cargo..." style="flex: 1; min-width: 240px; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 10px; padding: 8px 14px; font-size: 12px;">
+          <input type="text" id="searchInput" oninput="triggerSearchWithDebounce()" placeholder="🔍 Pesquisa inteligente (Ex: médicos pj sem site, Paraná, S/A, Lucro Real, CNPJ, Sócio)..." style="flex: 2; min-width: 260px; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 10px; padding: 8px 14px; font-size: 12px;">
           <select id="segmentFilter" onchange="triggerSegmentFilterChange()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 10px; padding: 8px 12px; font-size: 12px; font-weight: 800;">
             <option value="ALL">Todos os Segmentos</option>
-            <option value="GREEN">Agronegócio</option>
-            <option value="YELLOW">Fábricas & Indústrias</option>
-            <option value="RED">Exportadoras & Trading</option>
-            <option value="SPECIAL_LOG">Logística & Frotas</option>
-            <option value="SPECIAL_MED">Médicos & Saúde PJ</option>
-            <option value="BLUE">Tecnologia & Concessões</option>
+            <option value="SPECIAL_MED">🩺 Médicos & Saúde PJ</option>
+            <option value="GREEN">🌾 Agronegócio</option>
+            <option value="YELLOW">🏭 Fábricas & Indústrias</option>
+            <option value="RED">🚢 Exportadoras & Trading</option>
+            <option value="SPECIAL_LOG">🚚 Logística & Frotas</option>
+            <option value="SPECIAL_LAW">⚖️ Advocacia & Jurídico</option>
+            <option value="SPECIAL_ACC">📊 Contabilidade & Auditoria</option>
+            <option value="BLUE">💻 Tecnologia & Concessões</option>
+          </select>
+          <select id="ufFilter" onchange="filterData()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 10px; padding: 8px 12px; font-size: 12px; font-weight: 800;">
+            <option value="ALL">Todos os Estados (UF)</option>
+            <option value="PR">PR - Paraná</option>
+            <option value="SP">SP - São Paulo</option>
+            <option value="SC">SC - Santa Catarina</option>
+            <option value="RS">RS - Rio Grande do Sul</option>
+            <option value="MG">MG - Minas Gerais</option>
+            <option value="MS">MS - Mato Grosso do Sul</option>
+            <option value="MT">MT - Mato Grosso</option>
+            <option value="GO">GO - Goiás</option>
+            <option value="RJ">RJ - Rio de Janeiro</option>
+            <option value="BA">BA - Bahia</option>
+            <option value="ES">ES - Espírito Santo</option>
+            <option value="AM">AM - Amazonas</option>
           </select>
           <select id="regimeFilter" onchange="filterData()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 10px; padding: 8px 12px; font-size: 12px; font-weight: 800;">
             <option value="ALL">Todos os Regimes</option>
@@ -150271,12 +150415,24 @@
             <option value="Imune / Isenta de IRPJ">Imune / Isenta</option>
             <option value="MEI - Microempreendedor Individual">MEI</option>
           </select>
+          <select id="siteFilter" onchange="filterData()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 10px; padding: 8px 12px; font-size: 12px; font-weight: 800;">
+            <option value="ALL">Todos os Sites</option>
+            <option value="COM_SITE">🌐 Com Site Oficial</option>
+            <option value="SEM_SITE">❌ Sem Site / Sem Domínio</option>
+          </select>
+          <select id="tipoFilter" onchange="filterData()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 10px; padding: 8px 12px; font-size: 12px; font-weight: 800;">
+            <option value="ALL">Todos os Tipos</option>
+            <option value="SA">Sociedade Anônima (S/A)</option>
+            <option value="LTDA">Sociedade Limitada (LTDA)</option>
+            <option value="Cooperativa">Cooperativa</option>
+          </select>
           <select id="perPageFilter" onchange="changePerPage()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 10px; padding: 8px 12px; font-size: 12px; font-weight: 800;">
             <option value="50">50 por página</option>
             <option value="100">100 por página</option>
             <option value="200">200 por página</option>
             <option value="999999">Ver Todos</option>
           </select>
+          <button type="button" onclick="clearAllFilters()" class="btn-outline" style="padding: 8px 12px; font-size: 12px;" title="Resetar todos os filtros e barra de busca">🔄 Limpar</button>
         </div>
         <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
           <button onclick="downloadFullDispatchCsv()" class="btn-main" style="padding: 8px 14px; font-size: 12px;" title="Baixar base completa de disparos em CSV">📥 Baixar Base de Disparo</button>
