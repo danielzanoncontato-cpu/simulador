@@ -150493,28 +150493,31 @@
           <option value="EIRELI / Sociedade Unipessoal">EIRELI / Unipessoal</option>
         </select>
 
-        <select id="perPageFilter" onchange="changePerPage()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 8px; font-size: 11px; font-weight: 800; white-space: nowrap; cursor: pointer;">
-          <option value="50">50 p/ pág.</option>
-          <option value="100">100 p/ pág.</option>
-          <option value="200">200 p/ pág.</option>
-          <option value="999999">Ver Todos</option>
-        </select>
-
         <button type="button" onclick="clearAllFilters()" class="btn-outline" style="padding: 6px 10px; font-size: 11px; white-space: nowrap;" title="Resetar todos os filtros e barra de busca">🔄 Limpar</button>
-        
+
         <div style="height: 20px; width: 1px; background: var(--border-color); margin: 0 2px; flex-shrink: 0;"></div>
 
         <button onclick="downloadFullDispatchCsv()" class="btn-main" style="padding: 6px 10px; font-size: 11px; white-space: nowrap;" title="Baixar base completa de disparos em CSV">📥 Base Disparo</button>
         <button onclick="exportCurrentCsv()" class="btn-outline" style="padding: 6px 10px; font-size: 11px; white-space: nowrap;" title="Baixar contatos do filtro atual em CSV">📥 Filtro Atual</button>
       </div>
 
-      <!-- BARRA DE PAGINAÇÃO SUPERIOR -->
-      <div style="background: var(--table-header-bg); color: var(--table-header-text); border-radius: 12px; padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 12px; border: 1px solid var(--border-strong);">
+      <!-- BARRA DE PAGINAÇÃO SUPERIOR (COM QUANTIDADE POR PÁGINA ABAIXO DOS BOTÕES DE DOWNLOAD) -->
+      <div style="background: var(--table-header-bg); color: var(--table-header-text); border-radius: 12px; padding: 8px 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 12px; border: 1px solid var(--border-strong);">
         <div style="display: flex; align-items: center; gap: 8px;">
           <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--table-header-text);"></span>
           <span id="topPaginationInfo" style="font-weight: 800;">Mostrando 1 - 50</span>
         </div>
-        <div style="display: flex; align-items: center; gap: 6px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <!-- 50 POR PÁGINA ABAIXO DOS BOTÕES DE DOWNLOAD -->
+          <div style="display: flex; align-items: center; gap: 4px;">
+            <span style="font-size: 11px; opacity: 0.85;">Exibir:</span>
+            <select id="perPageFilter" onchange="changePerPage()" style="background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 6px; padding: 3px 8px; font-size: 11px; font-weight: 800; cursor: pointer;">
+              <option value="50">50 por página</option>
+              <option value="100">100 por página</option>
+              <option value="200">200 por página</option>
+              <option value="999999">Ver Todos</option>
+            </select>
+          </div>
           <button onclick="goToPrevPage()" id="topBtnPrevPage" class="btn-outline" style="padding: 4px 12px; font-size: 11px; border-color: var(--border-color);">◀ Anterior</button>
           <span style="font-family: monospace; font-weight: 800; background: var(--bg-card); color: var(--text-main); padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border-color);">Página <span id="topCurrentPageDisplay">1</span> / <span id="topTotalPagesDisplay">78</span></span>
           <button onclick="goToNextPage()" id="topBtnNextPage" class="btn-outline" style="padding: 4px 12px; font-size: 11px; border-color: var(--border-color);">Próxima ▶</button>
