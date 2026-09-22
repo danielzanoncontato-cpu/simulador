@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -149326,7 +149326,6 @@
       var regimeBadge = '<span class="badge-info" style="margin-left: 4px;">📑 ' + (p.regimeTributario || 'Lucro Real') + '</span>';
       var cnaeSecHtml = p.cnaeSecundarios ? ('<div style="font-size: 10px; color: var(--text-muted); margin-top: 2px; line-height: 1.3;"><span style="font-weight: 700; color: var(--text-sub);">Secundários:</span> ' + p.cnaeSecundarios + '</div>') : '';
 
-      var siteBtnHtml = '<div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(' + p.id + ')" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>';
 
       var actionBtns = '<div style="width: 100%; max-width: 130px; margin: 0 auto;">' + viewBtn + wpp1Btn + wpp2Btn + emailBtn + '</div>';
 
@@ -149344,7 +149343,6 @@
                '</td>' +
                '<td style="padding: 10px 12px; width: 160px;">' +
                  '<span class="badge-info">' + p.segmentoNome + '</span>' +
-                 siteBtnHtml +
                '</td>' +
                '<td style="padding: 10px 12px; width: 230px;">' +
                  '<div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">' + p.cnaePrincipal + '</span></div>' +
@@ -150467,12 +150465,6 @@
           <option value="AM">AM - Amazonas</option>
         </select>
 
-        <select id="siteFilter" onchange="filterData()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 8px; font-size: 11px; font-weight: 800; white-space: nowrap; cursor: pointer;">
-          <option value="ALL">Site</option>
-          <option value="COM_SITE">Com Site</option>
-          <option value="SEM_SITE">Sem Site</option>
-        </select>
-
         <select id="regimeFilter" onchange="filterData()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 8px; font-size: 11px; font-weight: 800; white-space: nowrap; cursor: pointer;">
           <option value="ALL">Todos os Regimes</option>
           <option value="Lucro Real">Lucro Real</option>
@@ -150493,6 +150485,13 @@
           <option value="EIRELI / Sociedade Unipessoal">EIRELI / Unipessoal</option>
         </select>
 
+        <select id="perPageFilter" onchange="changePerPage()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 8px; font-size: 11px; font-weight: 800; white-space: nowrap; cursor: pointer;" title="Quantidade de leads por página">
+          <option value="50">50 por página</option>
+          <option value="100">100 por página</option>
+          <option value="200">200 por página</option>
+          <option value="999999">Ver Todos</option>
+        </select>
+
         <button type="button" onclick="clearAllFilters()" class="btn-outline" style="padding: 6px 10px; font-size: 11px; white-space: nowrap;" title="Resetar todos os filtros e barra de busca">🔄 Limpar</button>
 
         <div style="height: 20px; width: 1px; background: var(--border-color); margin: 0 2px; flex-shrink: 0;"></div>
@@ -150500,7 +150499,7 @@
         <button onclick="exportCurrentCsv()" class="btn-main" style="padding: 6px 12px; font-size: 11px; font-weight: 800; white-space: nowrap;" title="Baixar contatos do filtro atual em CSV">📥 Baixar Filtro Atual</button>
       </div>
 
-      <!-- BARRA DE PAGINAÇÃO SUPERIOR (COM QUANTIDADE POR PÁGINA ABAIXO DOS BOTÕES DE DOWNLOAD) -->
+      <!-- BARRA DE PAGINAÇÃO SUPERIOR -->
       <div style="background: var(--table-header-bg); color: var(--table-header-text); border-radius: 12px; padding: 8px 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 12px; border: 1px solid var(--border-strong);">
         <div style="display: flex; align-items: center; gap: 8px;">
           <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--table-header-text);"></span>
@@ -150510,12 +150509,6 @@
           <button onclick="goToPrevPage()" id="topBtnPrevPage" class="btn-outline" style="padding: 4px 12px; font-size: 11px; border-color: var(--border-color);">◀ Anterior</button>
           <span style="font-family: monospace; font-weight: 800; background: var(--bg-card); color: var(--text-main); padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border-color);">Página <span id="topCurrentPageDisplay">1</span> / <span id="topTotalPagesDisplay">78</span></span>
           <button onclick="goToNextPage()" id="topBtnNextPage" class="btn-outline" style="padding: 4px 12px; font-size: 11px; border-color: var(--border-color);">Próxima ▶</button>
-          <select id="perPageFilter" onchange="changePerPage()" style="background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 6px; padding: 4px 8px; font-size: 11px; font-weight: 800; cursor: pointer;" title="Quantidade de leads por página">
-            <option value="50">50 por página</option>
-            <option value="100">100 por página</option>
-            <option value="200">200 por página</option>
-            <option value="999999">Ver Todos</option>
-          </select>
         </div>
       </div>
 
@@ -150545,7 +150538,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(1)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1099-6/01 (Fabricação de vinagres)</span></div>
@@ -150565,7 +150557,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(2)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">2061-4/00 (Fabricação de sabões e detergentes sintéticos)</span></div>
@@ -150585,7 +150576,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(3)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1122-4/01 (Fabricação de refrigerantes)</span></div>
@@ -150605,7 +150595,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(4)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1069-4/00 (Moagem e produtos vegetais)</span></div>
@@ -150625,7 +150614,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(5)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1061-9/01 (Beneficiamento de arroz)</span></div>
@@ -150645,7 +150633,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(6)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1062-7/00 (Moagem de trigo e derivados)</span></div>
@@ -150665,7 +150652,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(7)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1052-0/00 (Fabricação de laticínios)</span></div>
@@ -150685,7 +150671,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Agronegócio</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(8)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4622-2/00 (Comércio atacadista de soja e grãos)</span></div>
@@ -150705,7 +150690,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Exportadoras</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(9)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1094-5/00 (Fabricação de massas alimentícias)</span></div>
@@ -150725,7 +150709,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(10)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1066-0/00 (Fabricação de alimentos para animais)</span></div>
@@ -150745,7 +150728,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(11)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">2229-3/01 (Artefatos de material plástico doméstico)</span></div>
@@ -150765,7 +150747,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Exportadoras</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(12)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">2229-3/02 (Masterbatches de cores e aditivos)</span></div>
@@ -150785,7 +150766,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Agronegócio</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(13)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">2013-4/02 (Fabricação de adubos e fertilizantes)</span></div>
@@ -150805,7 +150785,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Exportadoras</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(14)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1094-5/00 (Massas e alimentos congelados)</span></div>
@@ -150825,7 +150804,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(15)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1031-7/00 (Conservas de frutas e doces)</span></div>
@@ -150845,7 +150823,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(16)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1095-3/00 (Especiarias, molhos, shoyu e condimentos)</span></div>
@@ -150865,7 +150842,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Exportadoras</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(17)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1052-0/00 (Fabricação de laticínios)</span></div>
@@ -150885,7 +150861,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Exportadoras</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(18)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">2833-0/00 (Máquinas e pulverizadores agrícolas)</span></div>
@@ -150905,7 +150880,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Exportadoras</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(19)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1092-9/00 (Casquinhas, cones e biscoitos)</span></div>
@@ -150925,7 +150899,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Logística</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(20)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4511-1/04 (Comércio atacadista de caminhões novos/usados)</span></div>
@@ -150945,7 +150918,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(21)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1094-5/00 (Fabricação de massas alimentícias)</span></div>
@@ -150965,7 +150937,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Exportadoras</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(22)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1011-2/01 (Frigorífico - abate de bovinos)</span></div>
@@ -150985,7 +150956,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(23)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1052-0/00 (Fabricação de laticínios - Queijos Finos)</span></div>
@@ -151005,7 +150975,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Médicos PJ</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(24)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</span></div>
@@ -151025,7 +150994,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Médicos PJ</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(25)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</span></div>
@@ -151045,7 +151013,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(26)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1099-6/99 (Fabricação de outros produtos alimentícios)</span></div>
@@ -151065,7 +151032,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(27)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">2833-0/00 (Máquinas e implementos agrícolas)</span></div>
@@ -151085,7 +151051,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Agronegócio</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(28)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4622-2/00 (Comércio atacadista de soja e grãos)</span></div>
@@ -151105,7 +151070,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Exportadoras</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(29)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4621-4/00 (Comércio atacadista de café e grãos em exportação)</span></div>
@@ -151125,7 +151089,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Logística</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(30)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4639-7/01 (Comércio atacadista de produtos em geral)</span></div>
@@ -151145,7 +151108,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Médicos PJ</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(31)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</span></div>
@@ -151165,7 +151127,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(32)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1099-6/99 (Fabricação de outros produtos alimentícios)</span></div>
@@ -151185,7 +151146,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(33)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">2833-0/00 (Máquinas e implementos agrícolas)</span></div>
@@ -151205,7 +151165,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Agronegócio</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(34)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4622-2/00 (Comércio atacadista de soja e grãos)</span></div>
@@ -151225,7 +151184,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Exportadoras</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(35)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4621-4/00 (Comércio atacadista de café e grãos em exportação)</span></div>
@@ -151245,7 +151203,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Logística</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(36)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4639-7/01 (Comércio atacadista de produtos em geral)</span></div>
@@ -151265,7 +151222,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Médicos PJ</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(37)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</span></div>
@@ -151285,7 +151241,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(38)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1099-6/99 (Fabricação de outros produtos alimentícios)</span></div>
@@ -151305,7 +151260,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(39)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">2833-0/00 (Máquinas e implementos agrícolas)</span></div>
@@ -151325,7 +151279,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Agronegócio</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(40)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4622-2/00 (Comércio atacadista de soja e grãos)</span></div>
@@ -151345,7 +151298,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Exportadoras</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(41)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4621-4/00 (Comércio atacadista de café e grãos em exportação)</span></div>
@@ -151365,7 +151317,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Logística</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(42)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4639-7/01 (Comércio atacadista de produtos em geral)</span></div>
@@ -151385,7 +151336,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Médicos PJ</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(43)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</span></div>
@@ -151405,7 +151355,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(44)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1099-6/99 (Fabricação de outros produtos alimentícios)</span></div>
@@ -151425,7 +151374,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(45)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">2833-0/00 (Máquinas e implementos agrícolas)</span></div>
@@ -151445,7 +151393,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Agronegócio</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(46)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4622-2/00 (Comércio atacadista de soja e grãos)</span></div>
@@ -151465,7 +151412,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Exportadoras</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(47)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4621-4/00 (Comércio atacadista de café e grãos em exportação)</span></div>
@@ -151485,7 +151431,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Logística</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(48)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">4639-7/01 (Comércio atacadista de produtos em geral)</span></div>
@@ -151505,7 +151450,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Médicos PJ</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(49)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">8630-5/03 (Procedimentos cirúrgicos ambulatoriais)</span></div>
@@ -151525,7 +151469,6 @@
                 </td>
                 <td style="padding: 10px 12px;">
                   <span class="badge-info">Fábricas &amp; Indústrias</span>
-                  <div style="margin-top: 5px;"><button type="button" onclick="event.stopPropagation(); openCompanyWebsite(50)" class="badge-info" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-weight: 800; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 6px;" title="Acessar site oficial verificado">🌐 Acessar Site</button></div>
                 </td>
                 <td style="padding: 10px 12px;">
                   <div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">1099-6/99 (Fabricação de outros produtos alimentícios)</span></div>
