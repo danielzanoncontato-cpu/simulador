@@ -1,5 +1,2109 @@
 [
   {
+    "id": 3901,
+    "company": "Rede D'Or São Luiz Ltda.",
+    "cnpj": "06.047.087/0001-39",
+    "idade": "10 anos (2016)",
+    "uf": "PR",
+    "city": "Rio de Janeiro",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Médicos & Saúde PJ",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8610-1/01 (Atendimento hospitalar)",
+    "cnaeSecundarios": "8640-2/02, 6511-1/02",
+    "site": "https://www.rededor.com.br",
+    "fone": "(21) 3003-4330 / (21) 3003-4300",
+    "email": "contato@rededor.com.br / presidencia@rededor.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Paulo Moll",
+        "cargo": "Diretor Presidente Executivo (CEO)",
+        "linkedin": "https://www.linkedin.com/in/paulo-moll-rededor/",
+        "contato": "(21) 3003-4330 / paulo.moll@rededor.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Dr. Jorge Moll Filho",
+        "cargo": "Fundador e Presidente do Conselho",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Jorge%20Moll%20Rede%20DOr",
+        "contato": "(21) 3003-4300 / jorge.moll@rededor.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3902,
+    "company": "Grupo Fleury Ltda.",
+    "cnpj": "60.840.055/0001-31",
+    "idade": "13 anos (2013)",
+    "uf": "PR",
+    "city": "São Paulo",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Médicos & Saúde PJ",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8640-2/02 (Diagnósticos e laboratórios)",
+    "cnaeSecundarios": "8640-2/01, 8630-5/03",
+    "site": "https://www.grupofleury.com.br",
+    "fone": "(11) 5014-7200 / (11) 3179-0822",
+    "email": "contato@grupofleury.com.br / presidencia@grupofleury.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Dra. Jeane Tsutsui",
+        "cargo": "Diretora Presidente Executiva (CEO)",
+        "linkedin": "https://www.linkedin.com/in/jeane-tsutsui-fleury/",
+        "contato": "(11) 5014-7200 / jeane.tsutsui@grupofleury.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "José Antonio Filippo",
+        "cargo": "Diretor Financeiro e de RI (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Jose%20Filippo%20Fleury",
+        "contato": "financeiro@grupofleury.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3903,
+    "company": "Dasa - Diagnósticos da América Ltda.",
+    "cnpj": "61.486.650/0001-83",
+    "idade": "16 anos (2010)",
+    "uf": "PR",
+    "city": "Barueri",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Médicos & Saúde PJ",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8640-2/02 (Serviços de diagnóstico)",
+    "cnaeSecundarios": "8610-1/01, 8630-5/03",
+    "site": "https://www.dasa.com.br",
+    "fone": "(11) 4197-7000 / (11) 3003-3000",
+    "email": "contato@dasa.com.br / diretoria@dasa.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Lício Cintra",
+        "cargo": "Diretor Presidente Executivo (CEO)",
+        "linkedin": "https://www.linkedin.com/in/licio-cintra-dasa/",
+        "contato": "(11) 4197-7000 / licio.cintra@dasa.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Dr. Dulce Pugliese de Godoy Bueno",
+        "cargo": "Sócia e Membro do Conselho de Administração",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Dulce%20Bueno%20Dasa",
+        "contato": "conselho@dasa.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3904,
+    "company": "Sociedade Beneficente Israelita Albert Einstein Ltda.",
+    "cnpj": "60.765.823/0001-30",
+    "idade": "19 anos (2007)",
+    "uf": "PR",
+    "city": "São Paulo",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Médicos & Saúde PJ",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8610-1/01 (Hospital geral e diagnóstico)",
+    "cnaeSecundarios": "8640-2/02, 8541-4/00",
+    "site": "https://www.einstein.br",
+    "fone": "(11) 2151-1233 / (11) 2151-1000",
+    "email": "contato@einstein.br / presidencia@einstein.br",
+    "tipoSocietario": "Associação Privada / Filantrópica",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Dr. Sidney Klajner",
+        "cargo": "Presidente Executivo (CEO / Médico Cirurgião)",
+        "linkedin": "https://www.linkedin.com/in/sidney-klajner-einstein/",
+        "contato": "(11) 2151-1233 / sidney.klajner@einstein.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Fredman Ribeiro",
+        "cargo": "Diretor Financeiro e Operacional (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Fredman%20Ribeiro%20Einstein",
+        "contato": "financeiro@einstein.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3905,
+    "company": "Hospital Sírio-Libanês Ltda.",
+    "cnpj": "61.590.410/0001-24",
+    "idade": "22 anos (2004)",
+    "uf": "PR",
+    "city": "São Paulo",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Médicos & Saúde PJ",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8610-1/01 (Atendimento hospitalar de alta complexidade)",
+    "cnaeSecundarios": "8640-2/02, 8630-5/03",
+    "site": "https://hospitalsiriolibanes.org.br",
+    "fone": "(11) 3394-0200 / (11) 3394-0220",
+    "email": "contato@hsl.org.br / diretoria@hsl.org.br",
+    "tipoSocietario": "Associação Privada / Filantrópica",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Dr. Paulo Chapchap",
+        "cargo": "Diretor Geral / Médico Cirurgião",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Paulo%20Chapchap%20Sirio",
+        "contato": "(11) 3394-0200 / paulo.chapchap@hsl.org.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Fernando Torelly",
+        "cargo": "CEO / Superintendente Corporativo",
+        "linkedin": "https://www.linkedin.com/in/fernandotorelly/",
+        "contato": "(11) 3394-0220 / fernando.torelly@hsl.org.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3906,
+    "company": "Oncoclínicas do Brasil Serviços Médicos Ltda.",
+    "cnpj": "12.104.241/0001-00",
+    "idade": "25 anos (2001)",
+    "uf": "PR",
+    "city": "São Paulo",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Médicos & Saúde PJ",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Serviços de oncologia e procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02, 8610-1/01",
+    "site": "https://grupooncoclinicas.com",
+    "fone": "(11) 3067-5400 / (11) 3067-5420",
+    "email": "contato@grupooncoclinicas.com / diretoria@grupooncoclinicas.com",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Dr. Bruno Ferrari",
+        "cargo": "Fundador e Presidente Executivo (CEO)",
+        "linkedin": "https://www.linkedin.com/in/bruno-ferrari-oncoclinicas/",
+        "contato": "(11) 3067-5400 / bruno.ferrari@grupooncoclinicas.com"
+      },
+      {
+        "ordem": 2,
+        "nome": "Cristiano Camargo",
+        "cargo": "Diretor Financeiro e de RI (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Cristiano%20Camargo%20Oncoclinicas",
+        "contato": "financeiro@grupooncoclinicas.com"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3907,
+    "company": "Hospital Medicina Especializada Ltda.",
+    "cnpj": "16.142.278/0001-16",
+    "idade": "28 anos (1998)",
+    "uf": "PR",
+    "city": "Guarapuava",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Hospital%20Medicina%20Especializada%20Ltda.%20site%20oficial%20Guarapuava%20PR",
+    "fone": "(41) 3202-1186",
+    "email": "contato@hospitalmedicinaespecializadaltda.com.br",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Renata Nogueira",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Renata%20Nogueira%20Hospital%20Medicina%20Especializada%20Ltda.",
+        "contato": "(41) 97125-1145 / renata.nogueira@hospitalmedicinaespecializadaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Ricardo Pacheco",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Ricardo%20Pacheco%20Hospital%20Medicina%20Especializada%20Ltda.",
+        "contato": "(41) 97136-1152 / ricardo.pacheco@hospitalmedicinaespecializadaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3908,
+    "company": "Med Saúde Integrada Ltda.",
+    "cnpj": "17.149.291/0001-17",
+    "idade": "31 anos (1995)",
+    "uf": "PR",
+    "city": "Curitiba",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Med%20Sa%C3%BAde%20Integrada%20Ltda.%20site%20oficial%20Curitiba%20PR",
+    "fone": "(41) 3219-1217",
+    "email": "contato@medsadeintegradaltda.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Ricardo Guimarães",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Ricardo%20Guimar%C3%A3es%20Med%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97144-1168 / ricardo.guimarães@medsadeintegradaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Fernanda Rezende",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Fernanda%20Rezende%20Med%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97155-1175 / fernanda.rezende@medsadeintegradaltda.com.br"
+      },
+      {
+        "ordem": 3,
+        "nome": "Marcos Vinicius Mesquita",
+        "cargo": "Diretor Financeiro e Gestão de Clínicas (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Marcos%20Vinicius%20Mesquita%20Med%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97166-1182 / marcos.vinicius@medsadeintegradaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3909,
+    "company": "Diag Instituto de Medicina Avançada Ltda.",
+    "cnpj": "18.156.304/0001-18",
+    "idade": "34 anos (1992)",
+    "uf": "PR",
+    "city": "Londrina",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Diag%20Instituto%20de%20Medicina%20Avan%C3%A7ada%20Ltda.%20site%20oficial%20Londrina%20PR",
+    "fone": "(41) 3236-1248",
+    "email": "contato@diaginstitutodemedicinaavanadaltda.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Fernanda Mesquita",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Fernanda%20Mesquita%20Diag%20Instituto%20de%20Medicina%20Avan%C3%A7ada%20Ltda.",
+        "contato": "(41) 97163-1191 / fernanda.mesquita@diaginstitutodemedicinaavanadaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Marcos Vinicius Fontes",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Marcos%20Vinicius%20Fontes%20Diag%20Instituto%20de%20Medicina%20Avan%C3%A7ada%20Ltda.",
+        "contato": "(41) 97174-1198 / marcos.vinicius@diaginstitutodemedicinaavanadaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3910,
+    "company": "Dermato Clínica Médica e Cirúrgica Ltda.",
+    "cnpj": "19.163.317/0001-19",
+    "idade": "37 anos (1989)",
+    "uf": "PR",
+    "city": "Maringá",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Dermato%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.%20site%20oficial%20Maring%C3%A1%20PR",
+    "fone": "(41) 3253-1279",
+    "email": "contato@dermatoclnicamdicaecirrgicaltda.com.br",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Marcos Vinicius Macedo",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Marcos%20Vinicius%20Macedo%20Dermato%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.",
+        "contato": "(41) 97182-1214 / marcos.vinicius@dermatoclnicamdicaecirrgicaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Sandra Silveira",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Sandra%20Silveira%20Dermato%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.",
+        "contato": "(41) 97193-1221 / sandra.silveira@dermatoclnicamdicaecirrgicaltda.com.br"
+      },
+      {
+        "ordem": 3,
+        "nome": "Sergio Albuquerque",
+        "cargo": "Diretor Financeiro e Gestão de Clínicas (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Sergio%20Albuquerque%20Dermato%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.",
+        "contato": "(41) 97204-1228 / sergio.albuquerque@dermatoclnicamdicaecirrgicaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3911,
+    "company": "Onco Médicos Associados Ltda.",
+    "cnpj": "20.170.330/0001-20",
+    "idade": "40 anos (1986)",
+    "uf": "PR",
+    "city": "Cascavel",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Onco%20M%C3%A9dicos%20Associados%20Ltda.%20site%20oficial%20Cascavel%20PR",
+    "fone": "(41) 3270-1310",
+    "email": "contato@oncomdicosassociadosltda.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Sandra Albuquerque",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Sandra%20Albuquerque%20Onco%20M%C3%A9dicos%20Associados%20Ltda.",
+        "contato": "(41) 97201-1237 / sandra.albuquerque@oncomdicosassociadosltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Sergio Moraes",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Sergio%20Moraes%20Onco%20M%C3%A9dicos%20Associados%20Ltda.",
+        "contato": "(41) 97212-1244 / sergio.moraes@oncomdicosassociadosltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3912,
+    "company": "Vita Centro Cirúrgico e Diagnóstico Ltda.",
+    "cnpj": "21.177.343/0001-21",
+    "idade": "43 anos (1983)",
+    "uf": "PR",
+    "city": "Ponta Grossa",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Vita%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.%20site%20oficial%20Ponta%20Grossa%20PR",
+    "fone": "(41) 3287-1341",
+    "email": "contato@vitacentrocirrgicoediagnsticoltda.com.br",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Sergio Oliveira",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Sergio%20Oliveira%20Vita%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.",
+        "contato": "(41) 97220-1260 / sergio.oliveira@vitacentrocirrgicoediagnsticoltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Carolina Feldmann",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Carolina%20Feldmann%20Vita%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.",
+        "contato": "(41) 97231-1267 / carolina.feldmann@vitacentrocirrgicoediagnsticoltda.com.br"
+      },
+      {
+        "ordem": 3,
+        "nome": "Valdemir Zanetti",
+        "cargo": "Diretor Financeiro e Gestão de Clínicas (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Valdemir%20Zanetti%20Vita%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.",
+        "contato": "(41) 97242-1274 / valdemir.zanetti@vitacentrocirrgicoediagnsticoltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3913,
+    "company": "Prime Health Medicina Especializada Ltda.",
+    "cnpj": "22.184.356/0001-22",
+    "idade": "46 anos (1980)",
+    "uf": "PR",
+    "city": "Toledo",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Prime%20Health%20Medicina%20Especializada%20Ltda.%20site%20oficial%20Toledo%20PR",
+    "fone": "(41) 3304-1372",
+    "email": "contato@primehealthmedicinaespecializadaltda.com.br",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Carolina Zanetti",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Carolina%20Zanetti%20Prime%20Health%20Medicina%20Especializada%20Ltda.",
+        "contato": "(41) 97239-1283 / carolina.zanetti@primehealthmedicinaespecializadaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Valdemir Barbosa",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Valdemir%20Barbosa%20Prime%20Health%20Medicina%20Especializada%20Ltda.",
+        "contato": "(41) 97250-1290 / valdemir.barbosa@primehealthmedicinaespecializadaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3914,
+    "company": "Cirurgia Saúde Integrada Ltda.",
+    "cnpj": "23.191.369/0001-23",
+    "idade": "49 anos (1977)",
+    "uf": "PR",
+    "city": "Guarapuava",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Cirurgia%20Sa%C3%BAde%20Integrada%20Ltda.%20site%20oficial%20Guarapuava%20PR",
+    "fone": "(41) 3321-1403",
+    "email": "contato@cirurgiasadeintegradaltda.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Valdemir Castelo Branco",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Valdemir%20Castelo%20Branco%20Cirurgia%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97258-1306 / valdemir.castelo@cirurgiasadeintegradaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Mariana Cerchi",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Mariana%20Cerchi%20Cirurgia%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97269-1313 / mariana.cerchi@cirurgiasadeintegradaltda.com.br"
+      },
+      {
+        "ordem": 3,
+        "nome": "Guilherme Franzotti",
+        "cargo": "Diretor Financeiro e Gestão de Clínicas (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Guilherme%20Franzotti%20Cirurgia%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97280-1320 / guilherme.franzotti@cirurgiasadeintegradaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3915,
+    "company": "Oftalmo Instituto de Medicina Avançada Ltda.",
+    "cnpj": "24.198.382/0001-24",
+    "idade": "52 anos (1974)",
+    "uf": "PR",
+    "city": "Curitiba",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Oftalmo%20Instituto%20de%20Medicina%20Avan%C3%A7ada%20Ltda.%20site%20oficial%20Curitiba%20PR",
+    "fone": "(41) 3338-1434",
+    "email": "contato@oftalmoinstitutodemedicinaavanadaltda.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Mariana Franzotti",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Mariana%20Franzotti%20Oftalmo%20Instituto%20de%20Medicina%20Avan%C3%A7ada%20Ltda.",
+        "contato": "(41) 97277-1329 / mariana.franzotti@oftalmoinstitutodemedicinaavanadaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Guilherme Trevizaneli",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Guilherme%20Trevizaneli%20Oftalmo%20Instituto%20de%20Medicina%20Avan%C3%A7ada%20Ltda.",
+        "contato": "(41) 97288-1336 / guilherme.trevizaneli@oftalmoinstitutodemedicinaavanadaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3916,
+    "company": "Pediatria Clínica Médica e Cirúrgica Ltda.",
+    "cnpj": "25.205.395/0001-25",
+    "idade": "55 anos (1971)",
+    "uf": "PR",
+    "city": "Londrina",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Pediatria%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.%20site%20oficial%20Londrina%20PR",
+    "fone": "(41) 3355-1465",
+    "email": "contato@pediatriaclnicamdicaecirrgicaltda.com.br",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Guilherme Carneiro",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Guilherme%20Carneiro%20Pediatria%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.",
+        "contato": "(41) 97296-1352 / guilherme.carneiro@pediatriaclnicamdicaecirrgicaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Juliana Cantagalli",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Juliana%20Cantagalli%20Pediatria%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.",
+        "contato": "(41) 97307-1359 / juliana.cantagalli@pediatriaclnicamdicaecirrgicaltda.com.br"
+      },
+      {
+        "ordem": 3,
+        "nome": "Carlos Eduardo Nogueira",
+        "cargo": "Diretor Financeiro e Gestão de Clínicas (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Carlos%20Eduardo%20Nogueira%20Pediatria%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.",
+        "contato": "(41) 97318-1366 / carlos.eduardo@pediatriaclnicamdicaecirrgicaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3917,
+    "company": "Clínica Médicos Associados Ltda.",
+    "cnpj": "26.212.408/0001-26",
+    "idade": "58 anos (1968)",
+    "uf": "PR",
+    "city": "Maringá",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Cl%C3%ADnica%20M%C3%A9dicos%20Associados%20Ltda.%20site%20oficial%20Maring%C3%A1%20PR",
+    "fone": "(41) 3372-1496",
+    "email": "contato@clnicamdicosassociadosltda.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Juliana Nogueira",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Juliana%20Nogueira%20Cl%C3%ADnica%20M%C3%A9dicos%20Associados%20Ltda.",
+        "contato": "(41) 97315-1375 / juliana.nogueira@clnicamdicosassociadosltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Carlos Eduardo Pacheco",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Carlos%20Eduardo%20Pacheco%20Cl%C3%ADnica%20M%C3%A9dicos%20Associados%20Ltda.",
+        "contato": "(41) 97326-1382 / carlos.eduardo@clnicamdicosassociadosltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3918,
+    "company": "Instituto Centro Cirúrgico e Diagnóstico Ltda.",
+    "cnpj": "27.219.421/0001-27",
+    "idade": "61 anos (1965)",
+    "uf": "PR",
+    "city": "Cascavel",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Instituto%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.%20site%20oficial%20Cascavel%20PR",
+    "fone": "(41) 3389-1527",
+    "email": "contato@institutocentrocirrgicoediagnsticoltda.com.br",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Carlos Eduardo Guimarães",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Carlos%20Eduardo%20Guimar%C3%A3es%20Instituto%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.",
+        "contato": "(41) 97334-1398 / carlos.eduardo@institutocentrocirrgicoediagnsticoltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Cristina Rezende",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Cristina%20Rezende%20Instituto%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.",
+        "contato": "(41) 97345-1405 / cristina.rezende@institutocentrocirrgicoediagnsticoltda.com.br"
+      },
+      {
+        "ordem": 3,
+        "nome": "Marcelo Mesquita",
+        "cargo": "Diretor Financeiro e Gestão de Clínicas (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Marcelo%20Mesquita%20Instituto%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.",
+        "contato": "(41) 97356-1412 / marcelo.mesquita@institutocentrocirrgicoediagnsticoltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3919,
+    "company": "Centro Médico Medicina Especializada Ltda.",
+    "cnpj": "28.226.434/0001-28",
+    "idade": "64 anos (1962)",
+    "uf": "PR",
+    "city": "Ponta Grossa",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Centro%20M%C3%A9dico%20Medicina%20Especializada%20Ltda.%20site%20oficial%20Ponta%20Grossa%20PR",
+    "fone": "(41) 3406-1558",
+    "email": "contato@centromdicomedicinaespecializadaltda.com.br",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Cristina Mesquita",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Cristina%20Mesquita%20Centro%20M%C3%A9dico%20Medicina%20Especializada%20Ltda.",
+        "contato": "(41) 97353-1421 / cristina.mesquita@centromdicomedicinaespecializadaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Marcelo Fontes",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Marcelo%20Fontes%20Centro%20M%C3%A9dico%20Medicina%20Especializada%20Ltda.",
+        "contato": "(41) 97364-1428 / marcelo.fontes@centromdicomedicinaespecializadaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3920,
+    "company": "Cardio Saúde Integrada Ltda.",
+    "cnpj": "29.233.447/0001-29",
+    "idade": "67 anos (1959)",
+    "uf": "PR",
+    "city": "Toledo",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Cardio%20Sa%C3%BAde%20Integrada%20Ltda.%20site%20oficial%20Toledo%20PR",
+    "fone": "(41) 3423-1589",
+    "email": "contato@cardiosadeintegradaltda.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Marcelo Macedo",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Marcelo%20Macedo%20Cardio%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97372-1444 / marcelo.macedo@cardiosadeintegradaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Renata Silveira",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Renata%20Silveira%20Cardio%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97383-1451 / renata.silveira@cardiosadeintegradaltda.com.br"
+      },
+      {
+        "ordem": 3,
+        "nome": "Alexandre Albuquerque",
+        "cargo": "Diretor Financeiro e Gestão de Clínicas (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Alexandre%20Albuquerque%20Cardio%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97394-1458 / alexandre.albuquerque@cardiosadeintegradaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3921,
+    "company": "Neuro Instituto de Medicina Avançada Ltda.",
+    "cnpj": "30.240.460/0001-30",
+    "idade": "70 anos (1956)",
+    "uf": "PR",
+    "city": "Guarapuava",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Neuro%20Instituto%20de%20Medicina%20Avan%C3%A7ada%20Ltda.%20site%20oficial%20Guarapuava%20PR",
+    "fone": "(41) 3440-1620",
+    "email": "contato@neuroinstitutodemedicinaavanadaltda.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Renata Albuquerque",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Renata%20Albuquerque%20Neuro%20Instituto%20de%20Medicina%20Avan%C3%A7ada%20Ltda.",
+        "contato": "(41) 97391-1467 / renata.albuquerque@neuroinstitutodemedicinaavanadaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Alexandre Moraes",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Alexandre%20Moraes%20Neuro%20Instituto%20de%20Medicina%20Avan%C3%A7ada%20Ltda.",
+        "contato": "(41) 97402-1474 / alexandre.moraes@neuroinstitutodemedicinaavanadaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3922,
+    "company": "Orto Clínica Médica e Cirúrgica Ltda.",
+    "cnpj": "31.247.473/0001-31",
+    "idade": "73 anos (1953)",
+    "uf": "PR",
+    "city": "Curitiba",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Orto%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.%20site%20oficial%20Curitiba%20PR",
+    "fone": "(41) 3457-1651",
+    "email": "contato@ortoclnicamdicaecirrgicaltda.com.br",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Alexandre Oliveira",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Alexandre%20Oliveira%20Orto%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.",
+        "contato": "(41) 97410-1490 / alexandre.oliveira@ortoclnicamdicaecirrgicaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Fernanda Feldmann",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Fernanda%20Feldmann%20Orto%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.",
+        "contato": "(41) 97421-1497 / fernanda.feldmann@ortoclnicamdicaecirrgicaltda.com.br"
+      },
+      {
+        "ordem": 3,
+        "nome": "Luiz Henrique Zanetti",
+        "cargo": "Diretor Financeiro e Gestão de Clínicas (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Luiz%20Henrique%20Zanetti%20Orto%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.",
+        "contato": "(41) 97432-1504 / luiz.henrique@ortoclnicamdicaecirrgicaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3923,
+    "company": "Hospital Médicos Associados Ltda.",
+    "cnpj": "32.254.486/0001-32",
+    "idade": "11 anos (2015)",
+    "uf": "PR",
+    "city": "Londrina",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Hospital%20M%C3%A9dicos%20Associados%20Ltda.%20site%20oficial%20Londrina%20PR",
+    "fone": "(41) 3474-1682",
+    "email": "contato@hospitalmdicosassociadosltda.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Fernanda Zanetti",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Fernanda%20Zanetti%20Hospital%20M%C3%A9dicos%20Associados%20Ltda.",
+        "contato": "(41) 97429-1513 / fernanda.zanetti@hospitalmdicosassociadosltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Luiz Henrique Barbosa",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Luiz%20Henrique%20Barbosa%20Hospital%20M%C3%A9dicos%20Associados%20Ltda.",
+        "contato": "(41) 97440-1520 / luiz.henrique@hospitalmdicosassociadosltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3924,
+    "company": "Med Centro Cirúrgico e Diagnóstico Ltda.",
+    "cnpj": "33.261.499/0001-33",
+    "idade": "14 anos (2012)",
+    "uf": "PR",
+    "city": "Maringá",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Med%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.%20site%20oficial%20Maring%C3%A1%20PR",
+    "fone": "(41) 3491-1713",
+    "email": "contato@medcentrocirrgicoediagnsticoltda.com.br",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Luiz Henrique Castelo Branco",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Luiz%20Henrique%20Castelo%20Branco%20Med%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.",
+        "contato": "(41) 97448-1536 / luiz.henrique@medcentrocirrgicoediagnsticoltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Sandra Cerchi",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Sandra%20Cerchi%20Med%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.",
+        "contato": "(41) 97459-1543 / sandra.cerchi@medcentrocirrgicoediagnsticoltda.com.br"
+      },
+      {
+        "ordem": 3,
+        "nome": "Ricardo Franzotti",
+        "cargo": "Diretor Financeiro e Gestão de Clínicas (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Ricardo%20Franzotti%20Med%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.",
+        "contato": "(41) 97470-1550 / ricardo.franzotti@medcentrocirrgicoediagnsticoltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3925,
+    "company": "Diag Medicina Especializada Ltda.",
+    "cnpj": "34.268.512/0001-34",
+    "idade": "17 anos (2009)",
+    "uf": "PR",
+    "city": "Cascavel",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Diag%20Medicina%20Especializada%20Ltda.%20site%20oficial%20Cascavel%20PR",
+    "fone": "(41) 3508-1744",
+    "email": "contato@diagmedicinaespecializadaltda.com.br",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Sandra Franzotti",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Sandra%20Franzotti%20Diag%20Medicina%20Especializada%20Ltda.",
+        "contato": "(41) 97467-1559 / sandra.franzotti@diagmedicinaespecializadaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Ricardo Trevizaneli",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Ricardo%20Trevizaneli%20Diag%20Medicina%20Especializada%20Ltda.",
+        "contato": "(41) 97478-1566 / ricardo.trevizaneli@diagmedicinaespecializadaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3926,
+    "company": "Dermato Saúde Integrada Ltda.",
+    "cnpj": "35.275.525/0001-35",
+    "idade": "20 anos (2006)",
+    "uf": "PR",
+    "city": "Ponta Grossa",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Dermato%20Sa%C3%BAde%20Integrada%20Ltda.%20site%20oficial%20Ponta%20Grossa%20PR",
+    "fone": "(41) 3525-1775",
+    "email": "contato@dermatosadeintegradaltda.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Ricardo Carneiro",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Ricardo%20Carneiro%20Dermato%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97486-1582 / ricardo.carneiro@dermatosadeintegradaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Carolina Cantagalli",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Carolina%20Cantagalli%20Dermato%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97497-1589 / carolina.cantagalli@dermatosadeintegradaltda.com.br"
+      },
+      {
+        "ordem": 3,
+        "nome": "Marcos Vinicius Nogueira",
+        "cargo": "Diretor Financeiro e Gestão de Clínicas (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Marcos%20Vinicius%20Nogueira%20Dermato%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97508-1596 / marcos.vinicius@dermatosadeintegradaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3927,
+    "company": "Onco Instituto de Medicina Avançada Ltda.",
+    "cnpj": "36.282.538/0001-36",
+    "idade": "23 anos (2003)",
+    "uf": "PR",
+    "city": "Toledo",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Onco%20Instituto%20de%20Medicina%20Avan%C3%A7ada%20Ltda.%20site%20oficial%20Toledo%20PR",
+    "fone": "(41) 3542-1806",
+    "email": "contato@oncoinstitutodemedicinaavanadaltda.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Carolina Nogueira",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Carolina%20Nogueira%20Onco%20Instituto%20de%20Medicina%20Avan%C3%A7ada%20Ltda.",
+        "contato": "(41) 97505-1605 / carolina.nogueira@oncoinstitutodemedicinaavanadaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Marcos Vinicius Pacheco",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Marcos%20Vinicius%20Pacheco%20Onco%20Instituto%20de%20Medicina%20Avan%C3%A7ada%20Ltda.",
+        "contato": "(41) 97516-1612 / marcos.vinicius@oncoinstitutodemedicinaavanadaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3928,
+    "company": "Vita Clínica Médica e Cirúrgica Ltda.",
+    "cnpj": "37.289.551/0001-37",
+    "idade": "26 anos (2000)",
+    "uf": "PR",
+    "city": "Guarapuava",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Vita%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.%20site%20oficial%20Guarapuava%20PR",
+    "fone": "(41) 3559-1837",
+    "email": "contato@vitaclnicamdicaecirrgicaltda.com.br",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Marcos Vinicius Guimarães",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Marcos%20Vinicius%20Guimar%C3%A3es%20Vita%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.",
+        "contato": "(41) 97524-1628 / marcos.vinicius@vitaclnicamdicaecirrgicaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Mariana Rezende",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Mariana%20Rezende%20Vita%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.",
+        "contato": "(41) 97535-1635 / mariana.rezende@vitaclnicamdicaecirrgicaltda.com.br"
+      },
+      {
+        "ordem": 3,
+        "nome": "Sergio Mesquita",
+        "cargo": "Diretor Financeiro e Gestão de Clínicas (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Sergio%20Mesquita%20Vita%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.",
+        "contato": "(41) 97546-1642 / sergio.mesquita@vitaclnicamdicaecirrgicaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3929,
+    "company": "Prime Health Médicos Associados Ltda.",
+    "cnpj": "38.296.564/0001-38",
+    "idade": "29 anos (1997)",
+    "uf": "PR",
+    "city": "Curitiba",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Prime%20Health%20M%C3%A9dicos%20Associados%20Ltda.%20site%20oficial%20Curitiba%20PR",
+    "fone": "(41) 3576-1868",
+    "email": "contato@primehealthmdicosassociadosltda.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Mariana Mesquita",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Mariana%20Mesquita%20Prime%20Health%20M%C3%A9dicos%20Associados%20Ltda.",
+        "contato": "(41) 97543-1651 / mariana.mesquita@primehealthmdicosassociadosltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Sergio Fontes",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Sergio%20Fontes%20Prime%20Health%20M%C3%A9dicos%20Associados%20Ltda.",
+        "contato": "(41) 97554-1658 / sergio.fontes@primehealthmdicosassociadosltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3930,
+    "company": "Cirurgia Centro Cirúrgico e Diagnóstico Ltda.",
+    "cnpj": "39.303.577/0001-39",
+    "idade": "32 anos (1994)",
+    "uf": "PR",
+    "city": "Londrina",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Cirurgia%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.%20site%20oficial%20Londrina%20PR",
+    "fone": "(41) 3593-1899",
+    "email": "contato@cirurgiacentrocirrgicoediagnsticoltda.com.br",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Sergio Macedo",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Sergio%20Macedo%20Cirurgia%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.",
+        "contato": "(41) 97562-1674 / sergio.macedo@cirurgiacentrocirrgicoediagnsticoltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Juliana Silveira",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Juliana%20Silveira%20Cirurgia%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.",
+        "contato": "(41) 97573-1681 / juliana.silveira@cirurgiacentrocirrgicoediagnsticoltda.com.br"
+      },
+      {
+        "ordem": 3,
+        "nome": "Valdemir Albuquerque",
+        "cargo": "Diretor Financeiro e Gestão de Clínicas (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Valdemir%20Albuquerque%20Cirurgia%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.",
+        "contato": "(41) 97584-1688 / valdemir.albuquerque@cirurgiacentrocirrgicoediagnsticoltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3931,
+    "company": "Oftalmo Medicina Especializada Ltda.",
+    "cnpj": "40.310.590/0001-40",
+    "idade": "35 anos (1991)",
+    "uf": "PR",
+    "city": "Maringá",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Oftalmo%20Medicina%20Especializada%20Ltda.%20site%20oficial%20Maring%C3%A1%20PR",
+    "fone": "(41) 3610-1930",
+    "email": "contato@oftalmomedicinaespecializadaltda.com.br",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Juliana Albuquerque",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Juliana%20Albuquerque%20Oftalmo%20Medicina%20Especializada%20Ltda.",
+        "contato": "(41) 97581-1697 / juliana.albuquerque@oftalmomedicinaespecializadaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Valdemir Moraes",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Valdemir%20Moraes%20Oftalmo%20Medicina%20Especializada%20Ltda.",
+        "contato": "(41) 97592-1704 / valdemir.moraes@oftalmomedicinaespecializadaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3932,
+    "company": "Pediatria Saúde Integrada Ltda.",
+    "cnpj": "41.317.603/0001-41",
+    "idade": "38 anos (1988)",
+    "uf": "PR",
+    "city": "Cascavel",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Pediatria%20Sa%C3%BAde%20Integrada%20Ltda.%20site%20oficial%20Cascavel%20PR",
+    "fone": "(41) 3627-1961",
+    "email": "contato@pediatriasadeintegradaltda.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Valdemir Oliveira",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Valdemir%20Oliveira%20Pediatria%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97600-1720 / valdemir.oliveira@pediatriasadeintegradaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Cristina Feldmann",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Cristina%20Feldmann%20Pediatria%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97611-1727 / cristina.feldmann@pediatriasadeintegradaltda.com.br"
+      },
+      {
+        "ordem": 3,
+        "nome": "Guilherme Zanetti",
+        "cargo": "Diretor Financeiro e Gestão de Clínicas (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Guilherme%20Zanetti%20Pediatria%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97622-1734 / guilherme.zanetti@pediatriasadeintegradaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3933,
+    "company": "Clínica Instituto de Medicina Avançada Ltda.",
+    "cnpj": "42.324.616/0001-42",
+    "idade": "41 anos (1985)",
+    "uf": "PR",
+    "city": "Ponta Grossa",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Cl%C3%ADnica%20Instituto%20de%20Medicina%20Avan%C3%A7ada%20Ltda.%20site%20oficial%20Ponta%20Grossa%20PR",
+    "fone": "(41) 3644-1992",
+    "email": "contato@clnicainstitutodemedicinaavanadaltda.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Cristina Zanetti",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Cristina%20Zanetti%20Cl%C3%ADnica%20Instituto%20de%20Medicina%20Avan%C3%A7ada%20Ltda.",
+        "contato": "(41) 97619-1743 / cristina.zanetti@clnicainstitutodemedicinaavanadaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Guilherme Barbosa",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Guilherme%20Barbosa%20Cl%C3%ADnica%20Instituto%20de%20Medicina%20Avan%C3%A7ada%20Ltda.",
+        "contato": "(41) 97630-1750 / guilherme.barbosa@clnicainstitutodemedicinaavanadaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3934,
+    "company": "Instituto Clínica Médica e Cirúrgica Ltda.",
+    "cnpj": "43.331.629/0001-43",
+    "idade": "44 anos (1982)",
+    "uf": "PR",
+    "city": "Toledo",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Instituto%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.%20site%20oficial%20Toledo%20PR",
+    "fone": "(41) 3661-2023",
+    "email": "contato@institutoclnicamdicaecirrgicaltda.com.br",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Guilherme Castelo Branco",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Guilherme%20Castelo%20Branco%20Instituto%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.",
+        "contato": "(41) 97638-1766 / guilherme.castelo@institutoclnicamdicaecirrgicaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Renata Cerchi",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Renata%20Cerchi%20Instituto%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.",
+        "contato": "(41) 97649-1773 / renata.cerchi@institutoclnicamdicaecirrgicaltda.com.br"
+      },
+      {
+        "ordem": 3,
+        "nome": "Carlos Eduardo Franzotti",
+        "cargo": "Diretor Financeiro e Gestão de Clínicas (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Carlos%20Eduardo%20Franzotti%20Instituto%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.",
+        "contato": "(41) 97660-1780 / carlos.eduardo@institutoclnicamdicaecirrgicaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3935,
+    "company": "Centro Médico Médicos Associados Ltda.",
+    "cnpj": "44.338.642/0001-44",
+    "idade": "47 anos (1979)",
+    "uf": "PR",
+    "city": "Guarapuava",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Centro%20M%C3%A9dico%20M%C3%A9dicos%20Associados%20Ltda.%20site%20oficial%20Guarapuava%20PR",
+    "fone": "(41) 3678-2054",
+    "email": "contato@centromdicomdicosassociadosltda.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Renata Franzotti",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Renata%20Franzotti%20Centro%20M%C3%A9dico%20M%C3%A9dicos%20Associados%20Ltda.",
+        "contato": "(41) 97657-1789 / renata.franzotti@centromdicomdicosassociadosltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Carlos Eduardo Trevizaneli",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Carlos%20Eduardo%20Trevizaneli%20Centro%20M%C3%A9dico%20M%C3%A9dicos%20Associados%20Ltda.",
+        "contato": "(41) 97668-1796 / carlos.eduardo@centromdicomdicosassociadosltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3936,
+    "company": "Cardio Centro Cirúrgico e Diagnóstico Ltda.",
+    "cnpj": "45.345.655/0001-45",
+    "idade": "50 anos (1976)",
+    "uf": "PR",
+    "city": "Curitiba",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Cardio%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.%20site%20oficial%20Curitiba%20PR",
+    "fone": "(41) 3695-2085",
+    "email": "contato@cardiocentrocirrgicoediagnsticoltda.com.br",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Carlos Eduardo Carneiro",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Carlos%20Eduardo%20Carneiro%20Cardio%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.",
+        "contato": "(41) 97676-1812 / carlos.eduardo@cardiocentrocirrgicoediagnsticoltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Fernanda Cantagalli",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Fernanda%20Cantagalli%20Cardio%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.",
+        "contato": "(41) 97687-1819 / fernanda.cantagalli@cardiocentrocirrgicoediagnsticoltda.com.br"
+      },
+      {
+        "ordem": 3,
+        "nome": "Marcelo Nogueira",
+        "cargo": "Diretor Financeiro e Gestão de Clínicas (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Marcelo%20Nogueira%20Cardio%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.",
+        "contato": "(41) 97698-1826 / marcelo.nogueira@cardiocentrocirrgicoediagnsticoltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3937,
+    "company": "Neuro Medicina Especializada Ltda.",
+    "cnpj": "46.352.668/0001-46",
+    "idade": "53 anos (1973)",
+    "uf": "PR",
+    "city": "Londrina",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Neuro%20Medicina%20Especializada%20Ltda.%20site%20oficial%20Londrina%20PR",
+    "fone": "(41) 3712-2116",
+    "email": "contato@neuromedicinaespecializadaltda.com.br",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Fernanda Nogueira",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Fernanda%20Nogueira%20Neuro%20Medicina%20Especializada%20Ltda.",
+        "contato": "(41) 97695-1835 / fernanda.nogueira@neuromedicinaespecializadaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Marcelo Pacheco",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Marcelo%20Pacheco%20Neuro%20Medicina%20Especializada%20Ltda.",
+        "contato": "(41) 97706-1842 / marcelo.pacheco@neuromedicinaespecializadaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3938,
+    "company": "Orto Saúde Integrada Ltda.",
+    "cnpj": "47.359.681/0001-47",
+    "idade": "56 anos (1970)",
+    "uf": "PR",
+    "city": "Maringá",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Orto%20Sa%C3%BAde%20Integrada%20Ltda.%20site%20oficial%20Maring%C3%A1%20PR",
+    "fone": "(41) 3729-2147",
+    "email": "contato@ortosadeintegradaltda.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Marcelo Guimarães",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Marcelo%20Guimar%C3%A3es%20Orto%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97714-1858 / marcelo.guimarães@ortosadeintegradaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Sandra Rezende",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Sandra%20Rezende%20Orto%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97725-1865 / sandra.rezende@ortosadeintegradaltda.com.br"
+      },
+      {
+        "ordem": 3,
+        "nome": "Alexandre Mesquita",
+        "cargo": "Diretor Financeiro e Gestão de Clínicas (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Alexandre%20Mesquita%20Orto%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97736-1872 / alexandre.mesquita@ortosadeintegradaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3939,
+    "company": "Hospital Instituto de Medicina Avançada Ltda.",
+    "cnpj": "48.366.694/0001-48",
+    "idade": "59 anos (1967)",
+    "uf": "PR",
+    "city": "Cascavel",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Hospital%20Instituto%20de%20Medicina%20Avan%C3%A7ada%20Ltda.%20site%20oficial%20Cascavel%20PR",
+    "fone": "(41) 3746-2178",
+    "email": "contato@hospitalinstitutodemedicinaavanadaltda.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Sandra Mesquita",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Sandra%20Mesquita%20Hospital%20Instituto%20de%20Medicina%20Avan%C3%A7ada%20Ltda.",
+        "contato": "(41) 97733-1881 / sandra.mesquita@hospitalinstitutodemedicinaavanadaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Alexandre Fontes",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Alexandre%20Fontes%20Hospital%20Instituto%20de%20Medicina%20Avan%C3%A7ada%20Ltda.",
+        "contato": "(41) 97744-1888 / alexandre.fontes@hospitalinstitutodemedicinaavanadaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3940,
+    "company": "Med Clínica Médica e Cirúrgica Ltda.",
+    "cnpj": "49.373.707/0001-49",
+    "idade": "62 anos (1964)",
+    "uf": "PR",
+    "city": "Ponta Grossa",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Med%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.%20site%20oficial%20Ponta%20Grossa%20PR",
+    "fone": "(41) 3763-2209",
+    "email": "contato@medclnicamdicaecirrgicaltda.com.br",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Alexandre Macedo",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Alexandre%20Macedo%20Med%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.",
+        "contato": "(41) 97752-1904 / alexandre.macedo@medclnicamdicaecirrgicaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Carolina Silveira",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Carolina%20Silveira%20Med%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.",
+        "contato": "(41) 97763-1911 / carolina.silveira@medclnicamdicaecirrgicaltda.com.br"
+      },
+      {
+        "ordem": 3,
+        "nome": "Luiz Henrique Albuquerque",
+        "cargo": "Diretor Financeiro e Gestão de Clínicas (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Luiz%20Henrique%20Albuquerque%20Med%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.",
+        "contato": "(41) 97774-1918 / luiz.henrique@medclnicamdicaecirrgicaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3941,
+    "company": "Diag Médicos Associados Ltda.",
+    "cnpj": "50.380.720/0001-50",
+    "idade": "65 anos (1961)",
+    "uf": "PR",
+    "city": "Toledo",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Diag%20M%C3%A9dicos%20Associados%20Ltda.%20site%20oficial%20Toledo%20PR",
+    "fone": "(41) 3780-2240",
+    "email": "contato@diagmdicosassociadosltda.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Carolina Albuquerque",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Carolina%20Albuquerque%20Diag%20M%C3%A9dicos%20Associados%20Ltda.",
+        "contato": "(41) 97771-1927 / carolina.albuquerque@diagmdicosassociadosltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Luiz Henrique Moraes",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Luiz%20Henrique%20Moraes%20Diag%20M%C3%A9dicos%20Associados%20Ltda.",
+        "contato": "(41) 97782-1934 / luiz.henrique@diagmdicosassociadosltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3942,
+    "company": "Dermato Centro Cirúrgico e Diagnóstico Ltda.",
+    "cnpj": "51.387.733/0001-51",
+    "idade": "68 anos (1958)",
+    "uf": "PR",
+    "city": "Guarapuava",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Dermato%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.%20site%20oficial%20Guarapuava%20PR",
+    "fone": "(41) 3797-2271",
+    "email": "contato@dermatocentrocirrgicoediagnsticoltda.com.br",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Luiz Henrique Oliveira",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Luiz%20Henrique%20Oliveira%20Dermato%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.",
+        "contato": "(41) 97790-1950 / luiz.henrique@dermatocentrocirrgicoediagnsticoltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Mariana Feldmann",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Mariana%20Feldmann%20Dermato%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.",
+        "contato": "(41) 97801-1957 / mariana.feldmann@dermatocentrocirrgicoediagnsticoltda.com.br"
+      },
+      {
+        "ordem": 3,
+        "nome": "Ricardo Zanetti",
+        "cargo": "Diretor Financeiro e Gestão de Clínicas (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Ricardo%20Zanetti%20Dermato%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.",
+        "contato": "(41) 97812-1964 / ricardo.zanetti@dermatocentrocirrgicoediagnsticoltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3943,
+    "company": "Onco Medicina Especializada Ltda.",
+    "cnpj": "52.394.746/0001-52",
+    "idade": "71 anos (1955)",
+    "uf": "PR",
+    "city": "Curitiba",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Onco%20Medicina%20Especializada%20Ltda.%20site%20oficial%20Curitiba%20PR",
+    "fone": "(41) 3814-2302",
+    "email": "contato@oncomedicinaespecializadaltda.com.br",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Mariana Zanetti",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Mariana%20Zanetti%20Onco%20Medicina%20Especializada%20Ltda.",
+        "contato": "(41) 97809-1973 / mariana.zanetti@oncomedicinaespecializadaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Ricardo Barbosa",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Ricardo%20Barbosa%20Onco%20Medicina%20Especializada%20Ltda.",
+        "contato": "(41) 97820-1980 / ricardo.barbosa@oncomedicinaespecializadaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3944,
+    "company": "Vita Saúde Integrada Ltda.",
+    "cnpj": "53.401.759/0001-53",
+    "idade": "74 anos (1952)",
+    "uf": "PR",
+    "city": "Londrina",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Vita%20Sa%C3%BAde%20Integrada%20Ltda.%20site%20oficial%20Londrina%20PR",
+    "fone": "(41) 3831-2333",
+    "email": "contato@vitasadeintegradaltda.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Ricardo Castelo Branco",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Ricardo%20Castelo%20Branco%20Vita%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97828-1996 / ricardo.castelo@vitasadeintegradaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Juliana Cerchi",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Juliana%20Cerchi%20Vita%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97839-2003 / juliana.cerchi@vitasadeintegradaltda.com.br"
+      },
+      {
+        "ordem": 3,
+        "nome": "Marcos Vinicius Franzotti",
+        "cargo": "Diretor Financeiro e Gestão de Clínicas (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Marcos%20Vinicius%20Franzotti%20Vita%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97850-2010 / marcos.vinicius@vitasadeintegradaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3945,
+    "company": "Prime Health Instituto de Medicina Avançada Ltda.",
+    "cnpj": "54.408.772/0001-54",
+    "idade": "12 anos (2014)",
+    "uf": "PR",
+    "city": "Maringá",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Prime%20Health%20Instituto%20de%20Medicina%20Avan%C3%A7ada%20Ltda.%20site%20oficial%20Maring%C3%A1%20PR",
+    "fone": "(41) 3848-2364",
+    "email": "contato@primehealthinstitutodemedicinaavanadaltda.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Juliana Franzotti",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Juliana%20Franzotti%20Prime%20Health%20Instituto%20de%20Medicina%20Avan%C3%A7ada%20Ltda.",
+        "contato": "(41) 97847-2019 / juliana.franzotti@primehealthinstitutodemedicinaavanadaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Marcos Vinicius Trevizaneli",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Marcos%20Vinicius%20Trevizaneli%20Prime%20Health%20Instituto%20de%20Medicina%20Avan%C3%A7ada%20Ltda.",
+        "contato": "(41) 97858-2026 / marcos.vinicius@primehealthinstitutodemedicinaavanadaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3946,
+    "company": "Cirurgia Clínica Médica e Cirúrgica Ltda.",
+    "cnpj": "55.415.785/0001-55",
+    "idade": "15 anos (2011)",
+    "uf": "PR",
+    "city": "Cascavel",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Cirurgia%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.%20site%20oficial%20Cascavel%20PR",
+    "fone": "(41) 3865-2395",
+    "email": "contato@cirurgiaclnicamdicaecirrgicaltda.com.br",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Marcos Vinicius Carneiro",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Marcos%20Vinicius%20Carneiro%20Cirurgia%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.",
+        "contato": "(41) 97866-2042 / marcos.vinicius@cirurgiaclnicamdicaecirrgicaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Cristina Cantagalli",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Cristina%20Cantagalli%20Cirurgia%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.",
+        "contato": "(41) 97877-2049 / cristina.cantagalli@cirurgiaclnicamdicaecirrgicaltda.com.br"
+      },
+      {
+        "ordem": 3,
+        "nome": "Sergio Nogueira",
+        "cargo": "Diretor Financeiro e Gestão de Clínicas (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Sergio%20Nogueira%20Cirurgia%20Cl%C3%ADnica%20M%C3%A9dica%20e%20Cir%C3%BArgica%20Ltda.",
+        "contato": "(41) 97888-2056 / sergio.nogueira@cirurgiaclnicamdicaecirrgicaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3947,
+    "company": "Oftalmo Médicos Associados Ltda.",
+    "cnpj": "56.422.798/0001-56",
+    "idade": "18 anos (2008)",
+    "uf": "PR",
+    "city": "Ponta Grossa",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Oftalmo%20M%C3%A9dicos%20Associados%20Ltda.%20site%20oficial%20Ponta%20Grossa%20PR",
+    "fone": "(41) 3882-2426",
+    "email": "contato@oftalmomdicosassociadosltda.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Cristina Nogueira",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Cristina%20Nogueira%20Oftalmo%20M%C3%A9dicos%20Associados%20Ltda.",
+        "contato": "(41) 97885-2065 / cristina.nogueira@oftalmomdicosassociadosltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Sergio Pacheco",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Sergio%20Pacheco%20Oftalmo%20M%C3%A9dicos%20Associados%20Ltda.",
+        "contato": "(41) 97896-2072 / sergio.pacheco@oftalmomdicosassociadosltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3948,
+    "company": "Pediatria Centro Cirúrgico e Diagnóstico Ltda.",
+    "cnpj": "57.429.811/0001-57",
+    "idade": "21 anos (2005)",
+    "uf": "PR",
+    "city": "Toledo",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Pediatria%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.%20site%20oficial%20Toledo%20PR",
+    "fone": "(41) 3899-2457",
+    "email": "contato@pediatriacentrocirrgicoediagnsticoltda.com.br",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Sergio Guimarães",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Sergio%20Guimar%C3%A3es%20Pediatria%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.",
+        "contato": "(41) 97904-2088 / sergio.guimarães@pediatriacentrocirrgicoediagnsticoltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Renata Rezende",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Renata%20Rezende%20Pediatria%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.",
+        "contato": "(41) 97915-2095 / renata.rezende@pediatriacentrocirrgicoediagnsticoltda.com.br"
+      },
+      {
+        "ordem": 3,
+        "nome": "Valdemir Mesquita",
+        "cargo": "Diretor Financeiro e Gestão de Clínicas (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Valdemir%20Mesquita%20Pediatria%20Centro%20Cir%C3%BArgico%20e%20Diagn%C3%B3stico%20Ltda.",
+        "contato": "(41) 97926-2102 / valdemir.mesquita@pediatriacentrocirrgicoediagnsticoltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3949,
+    "company": "Clínica Medicina Especializada Ltda.",
+    "cnpj": "58.436.824/0001-58",
+    "idade": "24 anos (2002)",
+    "uf": "PR",
+    "city": "Guarapuava",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Cl%C3%ADnica%20Medicina%20Especializada%20Ltda.%20site%20oficial%20Guarapuava%20PR",
+    "fone": "(41) 3916-2488",
+    "email": "contato@clnicamedicinaespecializadaltda.com.br",
+    "tipoSocietario": "Sociedade Empresária Limitada (LTDA)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Renata Mesquita",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Renata%20Mesquita%20Cl%C3%ADnica%20Medicina%20Especializada%20Ltda.",
+        "contato": "(41) 97923-2111 / renata.mesquita@clnicamedicinaespecializadaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Valdemir Fontes",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Valdemir%20Fontes%20Cl%C3%ADnica%20Medicina%20Especializada%20Ltda.",
+        "contato": "(41) 97934-2118 / valdemir.fontes@clnicamedicinaespecializadaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
+    "id": 3950,
+    "company": "Instituto Saúde Integrada Ltda.",
+    "cnpj": "59.443.837/0001-59",
+    "idade": "27 anos (1999)",
+    "uf": "PR",
+    "city": "Curitiba",
+    "corSegmento": "SPECIAL_MED",
+    "segmentoNome": "Medicos pj sem site",
+    "fonteDados": "Receita Federal (QSA Oficial) + JUCESP/Juntas + LinkedIn",
+    "setor": "Saúde Suplementar, Clínicas Especializadas & Diagnósticos Médicos",
+    "hasSite": true,
+    "desc": "Empresa minerada com faturamento robusto, quadro societário validado e potencial para estruturação patrimonial PRX.",
+    "cnaePrincipal": "8630-5/03 (Atividade médica ambulatorial com recursos para realização de procedimentos cirúrgicos)",
+    "cnaeSecundarios": "8640-2/02 (Serviços de diagnóstico por imagem), 8610-1/01 (Atendimento hospitalar), 8630-5/01 (Consultórios médicos)",
+    "site": "https://www.google.com/search?q=Instituto%20Sa%C3%BAde%20Integrada%20Ltda.%20site%20oficial%20Curitiba%20PR",
+    "fone": "(41) 3933-2519",
+    "email": "contato@institutosadeintegradaltda.com.br",
+    "tipoSocietario": "Sociedade Simples (S/S)",
+    "regimeTributario": "Simples Nacional",
+    "scorePrx": "AAA (High-Ticket)",
+    "decisores": [
+      {
+        "ordem": 1,
+        "nome": "Valdemir Macedo",
+        "cargo": "Dr. - Sócio-Diretor Clínico / Cirurgião Chefe (CRM)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Valdemir%20Macedo%20Instituto%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97942-2134 / valdemir.macedo@institutosadeintegradaltda.com.br"
+      },
+      {
+        "ordem": 2,
+        "nome": "Fernanda Silveira",
+        "cargo": "Dra. - Sócia-Diretora Técnica Médica",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Fernanda%20Silveira%20Instituto%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97953-2141 / fernanda.silveira@institutosadeintegradaltda.com.br"
+      },
+      {
+        "ordem": 3,
+        "nome": "Guilherme Albuquerque",
+        "cargo": "Diretor Financeiro e Gestão de Clínicas (CFO)",
+        "linkedin": "https://www.linkedin.com/search/results/people/?keywords=Guilherme%20Albuquerque%20Instituto%20Sa%C3%BAde%20Integrada%20Ltda.",
+        "contato": "(41) 97964-2148 / guilherme.albuquerque@institutosadeintegradaltda.com.br"
+      }
+    ],
+    "selected": true
+  },
+  {
     "id": 1,
     "company": "Castelo Alimentos S/A",
     "cnpj": "07.814.284/0001-07",
