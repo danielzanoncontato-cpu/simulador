@@ -1,50 +1,12 @@
 [
   {
-    "id": "search_1790048676395",
-    "data": "22/09/2026, 00:44:36",
-    "timestamp": "2026-09-22T03:44:36.395Z",
-    "tipo": "filtro_segmento",
-    "query": "Filtro de Segmento: Todos os Segmentos",
-    "resultados": 0,
-    "detalhes": {
-      "codSegmento": "ALL"
-    },
-    "status": "enviado_para_ia"
-  },
-  {
-    "id": "search_1790048673795",
-    "data": "22/09/2026, 00:44:33",
-    "timestamp": "2026-09-22T03:44:33.796Z",
-    "tipo": "filtro_segmento",
-    "query": "Filtro de Segmento: 💻 Tecnologia & Concessões",
-    "resultados": 0,
-    "detalhes": {
-      "codSegmento": "BLUE"
-    },
-    "status": "sincronizado_github"
-  },
-  {
-    "id": "search_1790048667516",
-    "data": "22/09/2026, 00:44:27",
-    "timestamp": "2026-09-22T03:44:27.516Z",
-    "tipo": "filtro_segmento",
-    "query": "Filtro de Segmento: Todos os Segmentos",
-    "resultados": 0,
-    "detalhes": {
-      "codSegmento": "ALL"
-    },
-    "status": "sincronizado_github"
-  },
-  {
-    "id": "search_1790048663948",
-    "data": "22/09/2026, 00:44:23",
-    "timestamp": "2026-09-22T03:44:23.957Z",
-    "tipo": "filtro_segmento",
-    "query": "Filtro de Segmento: 🌾 Agronegócio",
-    "resultados": 0,
-    "detalhes": {
-      "codSegmento": "GREEN"
-    },
+    "id": "search_init",
+    "data": "21/09/2026 23:04:16",
+    "timestamp": "2026-09-22T02:04:16.8387299Z",
+    "tipo": "sistema_inicializado",
+    "query": "Base Master PRX Conectada (3.900 empresas / 7.867 decisores)",
+    "resultados": 3900,
+    "detalhes": { "status": "online", "ambiente": "GitHub Pages / Antigravity AI", "totalEmpresas": 3900, "totalLeadsDecisores": 7867 },
     "status": "sincronizado_github"
   }
 ]
