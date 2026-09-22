@@ -1,12 +1,43 @@
 [
   {
+    "id": "search_1790043231246",
+    "data": "21/09/2026, 23:13:51",
+    "timestamp": "2026-09-22T02:13:51.255Z",
+    "tipo": "mineracao_leads",
+    "query": "Mineração Solicitada: Aviação",
+    "resultados": 50,
+    "detalhes": {
+      "tipoSoc": "ALL",
+      "regime": "Lucro Presumido",
+      "uf": "ALL",
+      "cities": "",
+      "quantidade": 50
+    },
+    "status": "enviado_para_ia"
+  },
+  {
+    "id": "search_1790021844454",
+    "data": "21/09/2026, 17:17:24",
+    "timestamp": "2026-09-21T20:17:24.454Z",
+    "tipo": "filtro_segmento",
+    "query": "Filtro de Segmento: Logística & Frotas",
+    "resultados": 600,
+    "detalhes": {
+      "codSegmento": "SPECIAL_LOG"
+    },
+    "status": "sincronizado_github"
+  },
+  {
     "id": "search_init",
-    "data": "21/09/2026 23:04:16",
-    "timestamp": "2026-09-22T02:04:16.8387299Z",
+    "data": "21/09/2026, 17:17:09",
+    "timestamp": "2026-09-21T20:17:09.752Z",
     "tipo": "sistema_inicializado",
     "query": "Base Master PRX Conectada (3.900 empresas / 7.867 decisores)",
     "resultados": 3900,
-    "detalhes": { "status": "online", "ambiente": "GitHub Pages / Antigravity AI", "totalEmpresas": 3900, "totalLeadsDecisores": 7867 },
+    "detalhes": {
+      "status": "online",
+      "ambiente": "GitHub Pages / Antigravity AI"
+    },
     "status": "sincronizado_github"
   }
 ]
