@@ -1,12 +1,12 @@
 [
   {
     "id": "search_init",
-    "data": "21/09/2026 21:12:22",
-    "timestamp": "2026-09-22T00:12:22.3487665Z",
+    "data": "21/09/2026 21:19:54",
+    "timestamp": "2026-09-22T00:19:54.8176895Z",
     "tipo": "sistema_inicializado",
-    "query": "Base Master PRX Conectada (7.867 leads / 3.900 empresas)",
-    "resultados": 7867,
-    "detalhes": { "status": "online", "ambiente": "GitHub Pages / Antigravity AI", "totalEmpresas": 3900, "totalLeadsDecisores": 7867 },
+    "query": "Base Master PRX Conectada (4.400 leads / 4.150 empresas)",
+    "resultados": 4400,
+    "detalhes": { "status": "online", "ambiente": "GitHub Pages / Antigravity AI", "totalEmpresas": 4150, "totalLeadsDecisores": 4400 },
     "status": "sincronizado_github"
   }
 ]
