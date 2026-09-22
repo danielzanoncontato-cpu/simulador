@@ -1,5 +1,17 @@
 [
   {
+    "id": "search_1790051273279",
+    "data": "22/09/2026, 01:27:53",
+    "timestamp": "2026-09-22T04:27:53.279Z",
+    "tipo": "filtro_segmento",
+    "query": "Filtro de Segmento: 🩺 Médicos & Saúde PJ",
+    "resultados": 300,
+    "detalhes": {
+      "codSegmento": "SPECIAL_MED"
+    },
+    "status": "enviado_para_ia"
+  },
+  {
     "id": "search_1790051269186",
     "data": "22/09/2026, 01:27:49",
     "timestamp": "2026-09-22T04:27:49.199Z",
@@ -9,7 +21,7 @@
     "detalhes": {
       "codSegmento": "GREEN"
     },
-    "status": "enviado_para_ia"
+    "status": "sincronizado_github"
   },
   {
     "id": "search_1790046627298",
