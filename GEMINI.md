@@ -1,4 +1,4 @@
-﻿# DIRETRIZES E REGRAS MANDATÓRIAS: BDR - LEAD AI
+# DIRETRIZES E REGRAS MANDATÓRIAS: BDR - LEAD AI
 
 ## 🚨 REGRAS DE OURO INVIOLÁVEIS DO PROJETO
 
@@ -83,3 +83,9 @@
     - O sistema e o agente NUNCA devem inventar, simular proceduralmente ou substituir cadastros reais por dados artificiais/fictícios para inflar contagens.
     - Todos os sócios, diretores e conselheiros mapeados no QSA oficial da Receita Federal e Juntas Comerciais (ex: Castelo Alimentos com Marcelo Cereser, Valmir Cereser, Carlos Alberto Cereser, Maria Thereza Cereser, etc.) DEVEM ser preservados integralmente em cada empresa no array `decisores`, bem como todos os seus dados reais (telefones, e-mails corporativos, LinkedIn verificado e CNAEs).
     - Na tabela do dashboard e nos modais, TODOS os sócios e decisores de cada empresa devem ser exibidos de forma clara e acessível, com seus respectivos cargos e contatos diretos.
+
+12. **RIGOR JURÍDICO E TRIBUTÁRIO BRASILEIRO (LC 123/2006):**
+    - **Simples Nacional:** Empresas optantes pelo Simples Nacional são obrigatoriamente constituídas sob a forma de Sociedade Empresária Limitada (LTDA), Sociedade Simples (S/S) ou Sociedade Limitada Unipessoal (SLU). É expressamente proibido pela legislação brasileira (Art. 3º, § 4º, VII da LC nº 123/2006) enquadrar Sociedades Anônimas (S/A Aberta ou Fechada) ou Sociedades Cooperativas no Simples Nacional.
+    - **Sociedades Anônimas (S/A):** São tributadas pelo Lucro Real (ou Lucro Presumido se fechada até o teto legal). NUNCA Simples Nacional.
+    - **Cooperativas:** São regidas por regime próprio (Isenção / Imunidade tributária sobre o Ato Cooperativo ou Lucro Real). NUNCA Simples Nacional.
+    - Qualquer mineração, enriquecimento ou pesquisa deve obedecer estritamente a essa conformidade legal.
