@@ -149099,10 +149099,23 @@
 ];
 
     function updateDynamicCounts() {
-      var count = prospects.length;
-      var formatted = count.toLocaleString('pt-BR');
+      var totalEmpresas = prospects.length;
+      var totalLeads = 0;
+      for (var i = 0; i < prospects.length; i++) {
+        var decs = prospects[i].decisores;
+        totalLeads += (decs && decs.length > 0) ? decs.length : 1;
+      }
+      var formattedEmpresas = totalEmpresas.toLocaleString('pt-BR');
+      var formattedLeads = totalLeads.toLocaleString('pt-BR');
+
       var tabBadge = document.getElementById('tabProspectsBadge');
-      if (tabBadge) tabBadge.innerText = formatted;
+      if (tabBadge) tabBadge.innerText = formattedLeads + ' Leads (' + formattedEmpresas + ' Empresas)';
+
+      var headerCount = document.getElementById('compHeaderCount');
+      if (headerCount) headerCount.innerText = formattedLeads;
+
+      var headerEmpCount = document.getElementById('compHeaderEmpresasCount');
+      if (headerEmpCount) headerEmpCount.innerText = formattedEmpresas;
     }
 
     function filterData() {
@@ -149140,7 +149153,19 @@
       var end = Math.min(start + itemsPerPage, total);
       var totalPages = Math.ceil(total / itemsPerPage) || 1;
 
-      var infoTxt = 'Mostrando ' + (total === 0 ? 0 : (start + 1)) + ' - ' + end + ' de ' + total.toLocaleString('pt-BR');
+      var totalLeadsFiltered = 0;
+      for (var f = 0; f < filteredDataList.length; f++) {
+        var fDecs = filteredDataList[f].decisores;
+        totalLeadsFiltered += (fDecs && fDecs.length > 0) ? fDecs.length : 1;
+      }
+
+      var totalLeadsGlobal = 0;
+      for (var g = 0; g < prospects.length; g++) {
+        var gDecs = prospects[g].decisores;
+        totalLeadsGlobal += (gDecs && gDecs.length > 0) ? gDecs.length : 1;
+      }
+
+      var infoTxt = 'Mostrando ' + (total === 0 ? 0 : (start + 1)) + ' - ' + end + ' empresas (' + totalLeadsFiltered.toLocaleString('pt-BR') + ' leads no filtro) • Total Ativo: ' + totalLeadsGlobal.toLocaleString('pt-BR') + ' Leads de Decisores (' + prospects.length.toLocaleString('pt-BR') + ' Empresas)';
       var pInfo = document.getElementById('paginationInfo'); if (pInfo) pInfo.innerText = infoTxt;
       var tInfo = document.getElementById('topPaginationInfo'); if (tInfo) tInfo.innerText = infoTxt;
       var cDisp = document.getElementById('currentPageDisplay'); if (cDisp) cDisp.innerText = currentPage;
@@ -150030,7 +150055,7 @@
       <div>
         <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
           <h1 style="font-size: 19px; font-weight: 900; color: var(--text-main); letter-spacing: -0.5px;">BDR - LEAD AI</h1>
-          <span class="badge-master" onclick="resetToHomePage()" style="cursor: pointer;" title="Voltar à Página Inicial / Todos os Segmentos">● BASE MASTER ATIVA</span>
+          <span class="badge-master" id="compHeaderBadge" onclick="resetToHomePage()" style="cursor: pointer;" title="Voltar à Página Inicial / Todos os Segmentos">● BASE MASTER ATIVA: <span id="compHeaderCount">7.867</span> LEADS (<span id="compHeaderEmpresasCount">3.900</span> EMPRESAS)</span>
         </div>
       </div>
 
@@ -150040,7 +150065,7 @@
           🌙 Modo Escuro
         </button>
         <button id="tab-prospects-btn" onclick="resetToHomePage()" class="tab-btn active-tab" title="Voltar à Página Inicial / Todos os Segmentos">
-          📋 Base de Prospecção <span id="tabProspectsBadge" style="background: var(--btn-sub-bg); color: var(--btn-sub-text); padding: 2px 7px; border-radius: 9999px; font-size: 10px; font-family: monospace; border: 1px solid var(--border-strong);">3.900</span>
+          📋 Base de Prospecção <span id="tabProspectsBadge" style="background: var(--btn-sub-bg); color: var(--btn-sub-text); padding: 2px 7px; border-radius: 9999px; font-size: 10px; font-family: monospace; border: 1px solid var(--border-strong);">7.867 Leads (3.900 Empresas)</span>
         </button>
         <button id="tab-miner-btn" onclick="switchMainTab('miner')" class="tab-btn">
           ⛏️ Minerar Novos Leads
