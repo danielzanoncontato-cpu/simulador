@@ -1,5 +1,21 @@
 [
   {
+    "id": "search_1790052119353",
+    "data": "22/09/2026, 01:41:59",
+    "timestamp": "2026-09-22T04:41:59.353Z",
+    "tipo": "mineracao_leads",
+    "query": "Mineração Solicitada: medicos pj sem site",
+    "resultados": 100,
+    "detalhes": {
+      "tipoSoc": "ALL",
+      "regime": "ALL",
+      "uf": "PR",
+      "cities": "",
+      "quantidade": 100
+    },
+    "status": "enviado_para_ia"
+  },
+  {
     "id": "search_1790052106212",
     "data": "22/09/2026, 01:41:46",
     "timestamp": "2026-09-22T04:41:46.213Z",
@@ -13,7 +29,7 @@
       "cities": "",
       "quantidade": 100
     },
-    "status": "enviado_para_ia"
+    "status": "sincronizado_github"
   },
   {
     "id": "search_1790051311231",
