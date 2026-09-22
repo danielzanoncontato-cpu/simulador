@@ -1,4 +1,4 @@
-﻿# DIRETRIZES E REGRAS MANDATÓRIAS: BDR - LEAD AI
+# DIRETRIZES E REGRAS MANDATÓRIAS: BDR - LEAD AI
 
 ## 🚨 REGRAS DE OURO INVIOLÁVEIS DO PROJETO
 
@@ -34,7 +34,7 @@
         - Workspace Ativo Antigravity
         - Pacote Compactado: `PRX_Capital_BDR_Completo.zip` (Desktop e Documentos)
      2. **Nuvem e Repositório GitHub (GitHub Pages):**
-        - Repositório: `https://github.com/danielzanoncontato-cpu.github.io/simulador` -> `https://github.com/danielzanoncontato-cpu/simulador`
+        - Repositório: `https://github.com/danielzanoncontato-cpu/simulador`
         - Dashboard Online: `https://danielzanoncontato-cpu.github.io/simulador/`
 
 7. **PADRÃO DAS 24 COLUNAS DE MINERAÇÃO E ENRIQUECIMENTO:**
@@ -78,3 +78,13 @@
       - **E-mail Oficial (Primeiro Contato):**
         - **Assunto:** `Alinhamento estratégico & multi-family office | Daniel Zanon (PRX Capital)`
         - **Corpo:** Cópia idêntica de alto impacto com os 6 pilares centrais, chamada de diagnóstico e assinatura oficial de Daniel Zanon (`Daniel Zanon | Executivo de Negócios | PRX Capital | daniel@prxcapital.com.br`).
+
+11. **PRESERVAÇÃO INTEGRAL DE TODOS OS SÓCIOS E DECISORES (PROIBIÇÃO DE DADOS SINTÉTICOS / FAKE):**
+    - O sistema e o agente NUNCA devem inventar, simular proceduralmente ou substituir cadastros reais por dados artificiais/fictícios para inflar contagens.
+    - Todos os sócios, diretores e conselheiros mapeados no QSA oficial da Receita Federal e Juntas Comerciais (ex: Castelo Alimentos com Marcelo Cereser, Valmir Cereser, Carlos Alberto Cereser, Maria Thereza Cereser, etc.) DEVEM ser preservados integralmente em cada empresa no array `decisores`, bem como todos os seus dados reais (telefones, e-mails corporativos, LinkedIn verificado e CNAEs).
+    - Na tabela do dashboard e nos modais, TODOS os sócios e decisores de cada empresa devem ser exibidos de forma clara e acessível, com seus respectivos cargos e contatos diretos.
+
+12. **IMUTABILIDADE ESTRUTURAL E BLINDAGEM CONTRA REGRESSÃO DA INTERFACE E DADOS:**
+    - Toda alteração, nova funcionalidade, mineração de novos nichos ou ajuste de código DEVE preservar 100% da integridade da base existente e a arquitetura visual da interface.
+    - É TERMINANTEMENTE PROIBIDO desconfigurar o layout visual (tema monocromático preto e branco puro, cabeçalho, tabela de 8 colunas, cards, modais e botões de ação), apagar/sobrescrever cadastros de leads anteriores ou corromper dados do QSA ao pesquisar novos leads ou anexar novas funções.
+    - Minerações e pesquisas de novos leads DEVEM ser tratadas estritamente como adições incrementais sem modificar, truncar ou resetar os registros e a estrutura pré-existentes.
