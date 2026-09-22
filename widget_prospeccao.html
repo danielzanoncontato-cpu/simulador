@@ -149819,6 +149819,35 @@
       }, 2300);
     }
 
+    function handleMinerRegimeChange() {
+      var mReg = document.getElementById('minerRegime');
+      var mTipo = document.getElementById('minerTipoSocietario');
+      if (!mReg || !mTipo) return;
+      if (mReg.value === 'Simples Nacional') {
+        if (mTipo.value.indexOf('S/A') !== -1 || mTipo.value.indexOf('Cooperativa') !== -1) {
+          mTipo.value = 'Sociedade Empresária Limitada (LTDA)';
+          showToast('ℹ️ Pela LC 123/2006, empresas no Simples Nacional são constituídas como LTDA ou Simples (S/S).');
+        }
+      }
+    }
+
+    function handleMinerTipoChange() {
+      var mReg = document.getElementById('minerRegime');
+      var mTipo = document.getElementById('minerTipoSocietario');
+      if (!mReg || !mTipo) return;
+      if (mTipo.value.indexOf('S/A') !== -1) {
+        if (mReg.value === 'Simples Nacional') {
+          mReg.value = 'Lucro Real';
+          showToast('ℹ️ Sociedades Anônimas (S/A) são tributadas pelo Lucro Real.');
+        }
+      } else if (mTipo.value.indexOf('Cooperativa') !== -1) {
+        if (mReg.value === 'Simples Nacional') {
+          mReg.value = 'Imune / Isenta de IRPJ';
+          showToast('ℹ️ Cooperativas possuem regime próprio de tributação.');
+        }
+      }
+    }
+
     function generateMinedResults(seg, tipoSoc, regime, uf, cities, qty) {
       // Normalização do termo de busca/segmento
       var sNorm = (seg || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
@@ -150081,6 +150110,27 @@
 
         var chosenTipo = (tipoSoc !== 'ALL') ? tipoSoc : ((realItem && realItem.tipo) ? realItem.tipo : (compName.indexOf('S/A') !== -1 ? 'Sociedade Anônima (S/A Fechada)' : 'Sociedade Empresária Limitada (LTDA)'));
         var chosenRegime = (regime !== 'ALL') ? regime : ((realItem && realItem.regime) ? realItem.regime : (chosenTipo.indexOf('S/A') !== -1 ? 'Lucro Real' : (chosenTipo.indexOf('Cooperativa') !== -1 ? 'Imune / Isenta de IRPJ' : ((i % 7 === 0) ? 'Simples Nacional' : ((i % 3 === 0) ? 'Lucro Presumido' : 'Lucro Real')))));
+
+        // Coerência Jurídica e Tributária Brasileira Inviolável (LC 123/2006, Art. 3º, § 4º, VII)
+        if (chosenRegime === 'Simples Nacional') {
+          if (chosenTipo.indexOf('S/A') !== -1 || chosenTipo.indexOf('Anônima') !== -1 || chosenTipo.indexOf('Cooperativa') !== -1) {
+            chosenTipo = (nicheObj.cor === 'SPECIAL_MED' || nicheObj.cor === 'SPECIAL_LAW' || nicheObj.cor === 'SPECIAL_ACC')
+              ? 'Sociedade Simples (S/S)'
+              : 'Sociedade Empresária Limitada (LTDA)';
+          }
+          compName = compName.replace(/\s+S\/A\b|\s+S\.A\.\b|\s+S\/A\s+|\s+S\.A\.\s+/gi, ' Ltda.').trim();
+          if (compName.indexOf('Ltda') === -1 && compName.indexOf('S/S') === -1 && compName.indexOf('Limitada') === -1) {
+            compName += ' Ltda.';
+          }
+        } else if (chosenTipo.indexOf('S/A') !== -1 || chosenTipo.indexOf('Anônima') !== -1) {
+          if (chosenRegime === 'Simples Nacional') {
+            chosenRegime = 'Lucro Real';
+          }
+        } else if (chosenTipo.indexOf('Cooperativa') !== -1) {
+          if (chosenRegime === 'Simples Nacional') {
+            chosenRegime = 'Imune / Isenta de IRPJ';
+          }
+        }
         var cnpjNum = (realItem && realItem.cnpj) ? realItem.cnpj : (((10 + (i % 80)) + '.' + (100 + (i * 7) % 899) + '.' + (200 + (i * 13) % 799) + '/0001-' + ((10 + (i % 89)))));
         var idadeAnos = (10 + (i * 3) % 65) + ' anos (' + (2026 - (10 + (i * 3) % 65)) + ')';
         var siteUrl = (realItem && realItem.site) ? realItem.site : ('https://www.google.com/search?q=' + encodeURIComponent(compName + ' site oficial ' + chosenCity + ' ' + currentUf));
@@ -151512,7 +151562,7 @@
           <!-- TIPO SOCIETÁRIO -->
           <div>
             <label style="font-size: 11px; font-weight: 800; color: var(--text-main); text-transform: uppercase; margin-bottom: 5px; display: block;">🏛️ Tipo Societário:</label>
-            <select id="minerTipoSocietario" style="width: 100%; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 12px; font-size: 12px; font-weight: 700;">
+            <select id="minerTipoSocietario" onchange="handleMinerTipoChange()" style="width: 100%; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 12px; font-size: 12px; font-weight: 700;">
               <option value="ALL">Todas as Naturezas Jurídicas</option>
               <option value="Sociedade Anônima (S/A Fechada)">Sociedade Anônima (S/A Fechada)</option>
               <option value="Sociedade Anônima (S/A Aberta)">Sociedade Anônima (S/A Aberta)</option>
@@ -151525,7 +151575,7 @@
           <!-- REGIME TRIBUTÁRIO -->
           <div>
             <label style="font-size: 11px; font-weight: 800; color: var(--text-main); text-transform: uppercase; margin-bottom: 5px; display: block;">📑 Regime Tributário:</label>
-            <select id="minerRegime" style="width: 100%; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 12px; font-size: 12px; font-weight: 700;">
+            <select id="minerRegime" onchange="handleMinerRegimeChange()" style="width: 100%; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 12px; font-size: 12px; font-weight: 700;">
               <option value="ALL">Todos os Regimes</option>
               <option value="Lucro Real">Lucro Real</option>
               <option value="Lucro Presumido">Lucro Presumido</option>
