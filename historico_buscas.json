@@ -1,32 +1,20 @@
 [
   {
-    "id": "search_1790116982497",
-    "data": "22/09/2026, 19:43:02",
-    "timestamp": "2026-09-22T22:43:02.497Z",
-    "tipo": "filtro_segmento",
-    "query": "Filtro de Segmento: 🚚 Logística & Frotas",
-    "resultados": 131,
+    "id": "search_1790353588050",
+    "data": "25/09/2026, 13:26:28",
+    "timestamp": "2026-09-25T16:26:28.050Z",
+    "tipo": "pesquisa_texto",
+    "query": "avião",
+    "resultados": 0,
     "detalhes": {
-      "codSegmento": "SPECIAL_LOG"
+      "segmentoFiltro": "ALL"
     },
     "status": "enviado_para_ia"
   },
   {
-    "id": "search_1790116913305",
-    "data": "22/09/2026, 19:41:53",
-    "timestamp": "2026-09-22T22:41:53.307Z",
-    "tipo": "filtro_segmento",
-    "query": "Filtro de Segmento: 🌾 Agronegócio",
-    "resultados": 600,
-    "detalhes": {
-      "codSegmento": "GREEN"
-    },
-    "status": "sincronizado_github"
-  },
-  {
     "id": "search_init",
-    "data": "22/09/2026, 19:34:01",
-    "timestamp": "2026-09-22T22:34:01.109Z",
+    "data": "25/09/2026, 13:25:48",
+    "timestamp": "2026-09-25T16:25:48.513Z",
     "tipo": "sistema_inicializado",
     "query": "Base Master PRX Conectada (3.900 empresas / 7.867 decisores)",
     "resultados": 3900,
