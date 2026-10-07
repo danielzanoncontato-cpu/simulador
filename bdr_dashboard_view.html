@@ -150197,6 +150197,8 @@ function triggerSegmentFilterChange() {
       var sGrp = document.getElementById('grupoFilter'); if (sGrp) sGrp.value = 'ALL';
       var sCls = document.getElementById('classeFilter'); if (sCls) sCls.value = 'ALL';
       var sSub = document.getElementById('subclasseFilter'); if (sSub) sSub.value = 'ALL';
+      var sCnae = document.getElementById('cnaeFilter'); if (sCnae) sCnae.value = 'ALL';
+      var sCnae = document.getElementById('cnaeFilter'); if (sCnae) sCnae.value = 'ALL';
       var sUf = document.getElementById('ufFilter'); if (sUf) sUf.value = 'ALL';
       var sReg = document.getElementById('regimeFilter'); if (sReg) sReg.value = 'ALL';
       var sSite = document.getElementById('siteFilter'); if (sSite) sSite.value = 'ALL';
@@ -150253,6 +150255,7 @@ function triggerSegmentFilterChange() {
         var sGrpVal = document.getElementById('grupoFilter') ? document.getElementById('grupoFilter').value : 'ALL';
         var sClsVal = document.getElementById('classeFilter') ? document.getElementById('classeFilter').value : 'ALL';
         var sSubVal = document.getElementById('subclasseFilter') ? document.getElementById('subclasseFilter').value : 'ALL';
+        var sCnaeVal = document.getElementById('cnaeFilter') ? document.getElementById('cnaeFilter').value : 'ALL';
 
         if (sDivVal !== 'ALL') {
           var divMatch = false;
@@ -150291,6 +150294,13 @@ function triggerSegmentFilterChange() {
           var leadCnaesS = (p.cnaePrincipal || '') + ' ' + (p.cnaeSecundarios || '');
           if (leadCnaesS.indexOf(sSubVal) !== -1) subMatch = true;
           if (!subMatch) return false;
+        }
+
+        if (sCnaeVal !== 'ALL') {
+          var cnaeMatch = false;
+          var leadCnaesExact = (p.cnaePrincipal || '') + ' ' + (p.cnaeSecundarios || '');
+          if (leadCnaesExact.indexOf(sCnaeVal) !== -1) cnaeMatch = true;
+          if (!cnaeMatch) return false;
         }
 
         if (seg !== 'ALL') {
@@ -151985,6 +151995,145 @@ function triggerSegmentFilterChange() {
   <option value="8640-2/08">Subclasse 8640-2/08 - Diagnósticos por imagem</option>
   <option value="8650-0/02">Subclasse 8650-0/02 - Nutrição</option>
   <option value="8650-0/03">Subclasse 8650-0/03 - Psicologia clínica</option>
+        </select>
+        <select id="cnaeFilter" onchange="triggerHierarchyFilterChange('cnae')" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 8px; font-size: 11px; font-weight: 800; white-space: nowrap; cursor: pointer; max-width: 220px;">
+  <option value="ALL">Todos os CNAEs</option>
+  <option value="0111-3/01">CNAE 0111-3/01 - Cultivo de arroz e milho</option>
+  <option value="0111-3/02">CNAE 0111-3/02 - Cultivo de soja</option>
+  <option value="0113-0/00">CNAE 0113-0/00 - Cana-de-açúcar</option>
+  <option value="0115-6/00">CNAE 0115-6/00 - Cultivo de soja para sementes</option>
+  <option value="0134-2/00">CNAE 0134-2/00 - Café</option>
+  <option value="0141-5/01">CNAE 0141-5/01 - Produção de sementes certificadas de soja e milho</option>
+  <option value="0151-2/01">CNAE 0151-2/01 - Criação de bovinos para corte</option>
+  <option value="0151-2/02">CNAE 0151-2/02 - Criação de bovinos</option>
+  <option value="0163-6/00">CNAE 0163-6/00 - Pós-colheita</option>
+  <option value="1011-2/01">CNAE 1011-2/01 - Frigorífico - abate de bovinos</option>
+  <option value="1013-9/01">CNAE 1013-9/01 - Fabricação de produtos de carne e charcutaria</option>
+  <option value="1031-7/00">CNAE 1031-7/00 - Fabricação de conservas de frutas e legumes</option>
+  <option value="1032-5/99">CNAE 1032-5/99 - Molhos de tomate e conservas vegetais</option>
+  <option value="1033-3/02">CNAE 1033-3/02 - Fabricação de sucos de frutas concentrados e integrais</option>
+  <option value="1051-1/00">CNAE 1051-1/00 - Preparação e pasteurização do leite</option>
+  <option value="1052-0/00">CNAE 1052-0/00 - Fabricação de produtos alimentícios industriais</option>
+  <option value="1053-8/00">CNAE 1053-8/00 - Sobremesas lácteas</option>
+  <option value="1061-9/01">CNAE 1061-9/01 - Beneficiamento de arroz</option>
+  <option value="1062-7/00">CNAE 1062-7/00 - Moagem de trigo e fabricação de derivados</option>
+  <option value="1064-3/00">CNAE 1064-3/00 - Farinha de milho</option>
+  <option value="1066-0/00">CNAE 1066-0/00 - Fabricação de alimentos para animais</option>
+  <option value="1069-4/00">CNAE 1069-4/00 - Moagem e produtos vegetais</option>
+  <option value="1081-3/02">CNAE 1081-3/02 - Torrefação</option>
+  <option value="1091-1/02">CNAE 1091-1/02 - Confeitaria e padaria industrial</option>
+  <option value="1092-9/00">CNAE 1092-9/00 - Fabricação de biscoitos e bolachas</option>
+  <option value="1093-7/01">CNAE 1093-7/01 - Chocolates e caramelos Embaré</option>
+  <option value="1094-5/00">CNAE 1094-5/00 - Fabricação de massas alimentícias</option>
+  <option value="1095-3/00">CNAE 1095-3/00 - Especiarias, molhos, shoyu e condimentos</option>
+  <option value="1099-6/01">CNAE 1099-6/01 - Fabricação de vinagres</option>
+  <option value="1099-6/99">CNAE 1099-6/99 - Fabricação de outros produtos alimentícios</option>
+  <option value="1113-5/02">CNAE 1113-5/02 - Cervejas e chopes</option>
+  <option value="1121-6/00">CNAE 1121-6/00 - Águas envasadas</option>
+  <option value="1122-4/01">CNAE 1122-4/01 - Fabricação de refrigerantes</option>
+  <option value="1122-4/03">CNAE 1122-4/03 - Fabricação de bebidas não alcoólicas</option>
+  <option value="1931-4/00">CNAE 1931-4/00 - Fabricação de etanol</option>
+  <option value="2013-4/02">CNAE 2013-4/02 - Fabricação de adubos e fertilizantes organominerais</option>
+  <option value="2014-2/00">CNAE 2014-2/00 - Químicos inorgânicos</option>
+  <option value="2051-7/00">CNAE 2051-7/00 - Fabricação de bioinsumos e defensivos</option>
+  <option value="2061-4/00">CNAE 2061-4/00 - Fabricação de sabões e detergentes sintéticos</option>
+  <option value="2062-2/00">CNAE 2062-2/00 - Produtos de limpeza e polimento</option>
+  <option value="2063-1/00">CNAE 2063-1/00 - Cosméticos e higiene pessoal</option>
+  <option value="2099-9/99">CNAE 2099-9/99 - Produtos químicos industriais</option>
+  <option value="2222-6/00">CNAE 2222-6/00 - Embalagens plásticas</option>
+  <option value="2229-3/01">CNAE 2229-3/01 - Fabricação de artefatos de material plástico</option>
+  <option value="2229-3/02">CNAE 2229-3/02 - Masterbatches de cores e aditivos</option>
+  <option value="2229-3/99">CNAE 2229-3/99 - Plásticos industriais diversos</option>
+  <option value="2451-2/00">CNAE 2451-2/00 - Fundição de ferro e aço</option>
+  <option value="2511-0/00">CNAE 2511-0/00 - Fabricação de estruturas metálicas</option>
+  <option value="2513-5/00">CNAE 2513-5/00 - Fabricação de caldeiraria pesada</option>
+  <option value="2532-2/01">CNAE 2532-2/01 - Produção de forjados de aço</option>
+  <option value="2539-0/01">CNAE 2539-0/01 - Serviços de usinagem, tornearia e solda</option>
+  <option value="2651-5/00">CNAE 2651-5/00 - Telemetria e sensores agrícolas</option>
+  <option value="2812-7/00">CNAE 2812-7/00 - Fabricação de equipamentos hidráulicos e pneumáticos</option>
+  <option value="2833-0/00">CNAE 2833-0/00 - Fabricação de máquinas e equipamentos para a agricultura e pecuária</option>
+  <option value="2869-8/00">CNAE 2869-8/00</option>
+  <option value="2949-2/99">CNAE 2949-2/99 - Peças automotivas</option>
+  <option value="3314-7/02">CNAE 3314-7/02 - Manutenção de equipamentos hidráulicos</option>
+  <option value="3314-7/99">CNAE 3314-7/99 - Manutenção de máquinas</option>
+  <option value="3321-0/00">CNAE 3321-0/00 - Instalação de máquinas</option>
+  <option value="3511-5/01">CNAE 3511-5/01 - Cogeração de energia</option>
+  <option value="4120-4/00">CNAE 4120-4/00 - Construção de edifícios industriais</option>
+  <option value="4292-8/01">CNAE 4292-8/01 - Montagem de estruturas metálicas</option>
+  <option value="4511-1/04">CNAE 4511-1/04 - Comércio atacadista de caminhões novos e usados</option>
+  <option value="4511-1/06">CNAE 4511-1/06 - Atacado de ônibus</option>
+  <option value="4520-0/01">CNAE 4520-0/01 - Serviços de manutenção de veículos pesados</option>
+  <option value="4530-7/01">CNAE 4530-7/01 - Atacado de peças e implementos</option>
+  <option value="4619-2/00">CNAE 4619-2/00 - Representantes comerciais e agentes do comércio de mercadorias em geral</option>
+  <option value="4621-4/00">CNAE 4621-4/00 - Comércio atacadista de café em grão para exportação</option>
+  <option value="4622-2/00">CNAE 4622-2/00 - Comércio atacadista de soja e cereais - exportação</option>
+  <option value="4623-1/06">CNAE 4623-1/06 - Atacado de sementes</option>
+  <option value="4623-1/08">CNAE 4623-1/08 - Matérias-primas agrícolas</option>
+  <option value="4623-1/09">CNAE 4623-1/09 - Atacado de alimentos para animais</option>
+  <option value="4623-1/99">CNAE 4623-1/99 - Comércio de matérias-primas agrícolas</option>
+  <option value="4631-1/00">CNAE 4631-1/00 - Atacado de leite e laticínios</option>
+  <option value="4631-1/01">CNAE 4631-1/01 - Atacado de leite e laticínios</option>
+  <option value="4632-0/01">CNAE 4632-0/01 - Atacado de cereais e leguminosas</option>
+  <option value="4632-0/02">CNAE 4632-0/02 - Atacado de farinhas e amidos</option>
+  <option value="4634-6/01">CNAE 4634-6/01 - Comércio atacadista de carnes para o mercado externo</option>
+  <option value="4635-4/02">CNAE 4635-4/02 - Atacado de cerveja e refrigerante</option>
+  <option value="4635-4/99">CNAE 4635-4/99 - Atacado de bebidas</option>
+  <option value="4637-1/04">CNAE 4637-1/04 - Atacado de pães</option>
+  <option value="4637-1/07">CNAE 4637-1/07 - Atacado de confeitos</option>
+  <option value="4637-1/99">CNAE 4637-1/99 - Atacado de produtos alimentícios especiais</option>
+  <option value="4639-7/01">CNAE 4639-7/01 - Comércio atacadista de produtos alimentícios exportáveis</option>
+  <option value="4644-3/02">CNAE 4644-3/02 - Medicamentos veterinários</option>
+  <option value="4645-1/01">CNAE 4645-1/01</option>
+  <option value="4646-0/01">CNAE 4646-0/01 - Atacado de cosméticos</option>
+  <option value="4649-4/08">CNAE 4649-4/08 - Comércio atacadista de produtos manufaturados e bens de capital</option>
+  <option value="4649-4/99">CNAE 4649-4/99 - Atacado de artigos domésticos</option>
+  <option value="4661-3/00">CNAE 4661-3/00 - Comércio atacadista de máquinas</option>
+  <option value="4669-9/99">CNAE 4669-9/99 - Comércio atacadista de outras máquinas e equipamentos não especificados anteriormente</option>
+  <option value="4671-1/00">CNAE 4671-1/00 - Comércio atacadista de madeira e derivados para exportação</option>
+  <option value="4672-9/00">CNAE 4672-9/00 - Atacado de ferragens</option>
+  <option value="4682-6/00">CNAE 4682-6/00 - Gás/Combustíveis</option>
+  <option value="4683-4/00">CNAE 4683-4/00 - Comércio atacadista de defensivos agrícolas, adubos e fertilizantes</option>
+  <option value="4684-2/01">CNAE 4684-2/01 - Atacado de resinas plásticas</option>
+  <option value="4684-2/99">CNAE 4684-2/99 - Comércio atacadista de outros produtos químicos e insumos de importação</option>
+  <option value="4685-1/00">CNAE 4685-1/00 - Atacado de produtos siderúrgicos</option>
+  <option value="4686-9/02">CNAE 4686-9/02 - Atacado de embalagens</option>
+  <option value="4689-3/01">CNAE 4689-3/01 - Atacado de couros e subprodutos</option>
+  <option value="4689-3/99">CNAE 4689-3/99 - Químicos/Matérias-primas</option>
+  <option value="4693-1/00">CNAE 4693-1/00 - Comércio atacadista de mercadorias - importação</option>
+  <option value="4930-2/01">CNAE 4930-2/01 - Transporte rodoviário de carga municipal</option>
+  <option value="4930-2/02">CNAE 4930-2/02 - Transporte rodoviário de carga intermunicipal e interestadual</option>
+  <option value="4930-2/03">CNAE 4930-2/03 - Transporte de produtos perigosos</option>
+  <option value="5211-7/01">CNAE 5211-7/01 - Armazéns gerais e estruturas de apoio ao agronegócio</option>
+  <option value="5211-7/99">CNAE 5211-7/99 - Armazenamento e depósito de mercadorias</option>
+  <option value="5212-5/00">CNAE 5212-5/00 - Serviços e operações portuárias</option>
+  <option value="5250-8/01">CNAE 5250-8/01 - Comissária de despachos e assessoria em comércio exterior</option>
+  <option value="5250-8/03">CNAE 5250-8/03 - Agenciamento de transporte de cargas</option>
+  <option value="5250-8/04">CNAE 5250-8/04 - Organização logística do transporte de carga internacional</option>
+  <option value="5250-8/05">CNAE 5250-8/05 - Operador de transporte multimodal internacional</option>
+  <option value="6422-1/00">CNAE 6422-1/00 - Câmbio</option>
+  <option value="6462-0/00">CNAE 6462-0/00 - Holdings não-financeiras</option>
+  <option value="6499-9/99">CNAE 6499-9/99 - Hedge cambial</option>
+  <option value="6619-3/99">CNAE 6619-3/99 - Serviços financeiros e F&I</option>
+  <option value="6911-7/01">CNAE 6911-7/01 - Serviços advocatícios e assessoria jurídica</option>
+  <option value="6920-6/01">CNAE 6920-6/01 - Atividades de contabilidade e auditoria</option>
+  <option value="6920-6/02">CNAE 6920-6/02</option>
+  <option value="7020-4/00">CNAE 7020-4/00</option>
+  <option value="7112-0/00">CNAE 7112-0/00 - Engenharia e tecnologia</option>
+  <option value="7490-1/03">CNAE 7490-1/03 - Agronomia</option>
+  <option value="7490-1/04">CNAE 7490-1/04 - Consultoria agronômica em gestão de lavouras</option>
+  <option value="7711-0/00">CNAE 7711-0/00 - Locação de frotas comerciais</option>
+  <option value="7719-5/99">CNAE 7719-5/99 - Locação de carretas</option>
+  <option value="8610-1/01">CNAE 8610-1/01 - Internação ambulatorial</option>
+  <option value="8630-5/01">CNAE 8630-5/01 - Atividade médica ambulatorial com recursos para realização de procedimentos</option>
+  <option value="8630-5/02">CNAE 8630-5/02 - Atividade médica ambulatorial especializada</option>
+  <option value="8630-5/03">CNAE 8630-5/03 - Procedimentos cirúrgicos ambulatoriais e infusão</option>
+  <option value="8640-2/01">CNAE 8640-2/01 - Laboratórios de reprodução humana</option>
+  <option value="8640-2/02">CNAE 8640-2/02 - Laboratórios clínicos</option>
+  <option value="8640-2/05">CNAE 8640-2/05 - Serviços de diagnóstico por imagem</option>
+  <option value="8640-2/07">CNAE 8640-2/07 - Serviços de eletroencefalografia e ressonância</option>
+  <option value="8640-2/08">CNAE 8640-2/08 - Diagnósticos por tomografia e ultrassom</option>
+  <option value="8650-0/02">CNAE 8650-0/02 - Nutrição</option>
+  <option value="8650-0/03">CNAE 8650-0/03 - Psicologia clínica</option>
         </select>
 
                         <select id="ufFilter" onchange="filterData()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 8px; font-size: 11px; font-weight: 800; white-space: nowrap; cursor: pointer;">
