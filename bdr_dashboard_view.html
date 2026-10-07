@@ -150194,6 +150194,29 @@
       showToast('🔄 Todos os filtros foram limpos!');
     }
 
+        function setUfPill(uf) {
+      var sUf = document.getElementById('ufFilter');
+      if (sUf) sUf.value = uf;
+      syncUfPillsUI(uf);
+      currentPage = 1;
+      filterData();
+    }
+
+    function syncUfPillsUI(selectedUf) {
+      var pills = document.querySelectorAll('.uf-pill');
+      pills.forEach(function(btn) {
+        btn.style.background = 'var(--input-bg)';
+        btn.style.color = 'var(--text-main)';
+        btn.style.border = '1px solid var(--border-color)';
+      });
+      var target = document.getElementById('uf-pill-' + (selectedUf || 'ALL'));
+      if (target) {
+        target.style.background = 'var(--btn-main-bg)';
+        target.style.color = 'var(--btn-main-text)';
+        target.style.border = '1px solid var(--border-strong)';
+      }
+    }
+
     function filterData() {
       var sInp = document.getElementById('searchInput');
       var sSeg = document.getElementById('segmentFilter');
@@ -151563,6 +151586,39 @@
 
     <!-- ABA 1: TABELA MASTER DE PROSPECÇÃO -->
     <div id="prospectsTabContent" style="display: flex; flex-direction: column; gap: 10px; flex: 1;">
+
+            <!-- BARRA VISUAL DE SELEÇÃO RÁPIDA DE TODOS OS ESTADOS DO BRASIL (27 UFs) -->
+      <div id="visualUfBar" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 6px 10px; display: flex; align-items: center; gap: 4px; overflow-x: auto; white-space: nowrap; box-shadow: 0 1px 4px rgba(0,0,0,0.03);">
+        <span style="font-size: 11px; font-weight: 900; color: var(--text-main); display: inline-flex; align-items: center; gap: 3px; margin-right: 2px; flex-shrink: 0;">📍 ESTADOS (UF):</span>
+        <button type="button" onclick="setUfPill('ALL')" id="uf-pill-ALL" class="uf-pill" style="padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-strong); background: var(--btn-main-bg); color: var(--btn-main-text); cursor: pointer; flex-shrink: 0;">🌐 Todos</button>
+        <button type="button" onclick="setUfPill('SP')" id="uf-pill-SP" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="São Paulo">SP</button>
+        <button type="button" onclick="setUfPill('MG')" id="uf-pill-MG" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Minas Gerais">MG</button>
+        <button type="button" onclick="setUfPill('MT')" id="uf-pill-MT" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Mato Grosso">MT</button>
+        <button type="button" onclick="setUfPill('PR')" id="uf-pill-PR" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Paraná">PR</button>
+        <button type="button" onclick="setUfPill('SC')" id="uf-pill-SC" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Santa Catarina">SC</button>
+        <button type="button" onclick="setUfPill('MS')" id="uf-pill-MS" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Mato Grosso do Sul">MS</button>
+        <button type="button" onclick="setUfPill('GO')" id="uf-pill-GO" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Goiás">GO</button>
+        <button type="button" onclick="setUfPill('RS')" id="uf-pill-RS" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Rio Grande do Sul">RS</button>
+        <button type="button" onclick="setUfPill('RJ')" id="uf-pill-RJ" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Rio de Janeiro">RJ</button>
+        <button type="button" onclick="setUfPill('ES')" id="uf-pill-ES" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Espírito Santo">ES</button>
+        <button type="button" onclick="setUfPill('BA')" id="uf-pill-BA" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Bahia">BA</button>
+        <button type="button" onclick="setUfPill('AM')" id="uf-pill-AM" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Amazonas">AM</button>
+        <button type="button" onclick="setUfPill('AC')" id="uf-pill-AC" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Acre">AC</button>
+        <button type="button" onclick="setUfPill('AL')" id="uf-pill-AL" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Alagoas">AL</button>
+        <button type="button" onclick="setUfPill('AP')" id="uf-pill-AP" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Amapá">AP</button>
+        <button type="button" onclick="setUfPill('CE')" id="uf-pill-CE" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Ceará">CE</button>
+        <button type="button" onclick="setUfPill('DF')" id="uf-pill-DF" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Distrito Federal">DF</button>
+        <button type="button" onclick="setUfPill('MA')" id="uf-pill-MA" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Maranhão">MA</button>
+        <button type="button" onclick="setUfPill('PA')" id="uf-pill-PA" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Pará">PA</button>
+        <button type="button" onclick="setUfPill('PB')" id="uf-pill-PB" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Paraíba">PB</button>
+        <button type="button" onclick="setUfPill('PE')" id="uf-pill-PE" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Pernambuco">PE</button>
+        <button type="button" onclick="setUfPill('PI')" id="uf-pill-PI" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Piauí">PI</button>
+        <button type="button" onclick="setUfPill('RN')" id="uf-pill-RN" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Rio Grande do Norte">RN</button>
+        <button type="button" onclick="setUfPill('RO')" id="uf-pill-RO" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Rondônia">RO</button>
+        <button type="button" onclick="setUfPill('RR')" id="uf-pill-RR" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Roraima">RR</button>
+        <button type="button" onclick="setUfPill('SE')" id="uf-pill-SE" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Sergipe">SE</button>
+        <button type="button" onclick="setUfPill('TO')" id="uf-pill-TO" class="uf-pill" style="padding: 4px 7px; border-radius: 8px; font-size: 11px; font-weight: 800; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); cursor: pointer; flex-shrink: 0;" title="Tocantins">TO</button>
+      </div>
 
       <!-- PAINEL DE CONTROLE DE FILTROS & BUSCA -->
       <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 8px 12px; display: flex; align-items: center; gap: 6px; flex-wrap: nowrap; overflow-x: auto; white-space: nowrap; box-shadow: 0 1px 4px rgba(0,0,0,0.04);">
