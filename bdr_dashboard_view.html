@@ -178,19 +178,34 @@
     function switchMainTab(tabName) {
       var pTab = document.getElementById('prospectsTabContent');
       var mTab = document.getElementById('minerTabContent');
+      var cTab = document.getElementById('codeTabContent');
       var pBtn = document.getElementById('tab-prospects-btn');
       var mBtn = document.getElementById('tab-miner-btn');
+      var cBtn = document.getElementById('tab-code-btn');
+
+      if (pTab) pTab.style.display = 'none';
+      if (mTab) mTab.style.display = 'none';
+      if (cTab) cTab.style.display = 'none';
+      if (pBtn) pBtn.classList.remove('active-tab');
+      if (mBtn) mBtn.classList.remove('active-tab');
+      if (cBtn) cBtn.classList.remove('active-tab');
 
       if (tabName === 'miner') {
-        if (pTab) pTab.style.display = 'none';
         if (mTab) mTab.style.display = 'flex';
-        if (pBtn) pBtn.classList.remove('active-tab');
         if (mBtn) mBtn.classList.add('active-tab');
+        var rBox = document.getElementById('minerResultsBox');
+        if (rBox) rBox.style.display = 'flex';
+        if (lastMinedLeads.length === 0) {
+          generateMinedResults('Agronegócio & Indústrias', 'ALL', 'ALL', 'ALL', '', 50);
+        } else {
+          renderMinedTable();
+        }
+      } else if (tabName === 'code') {
+        if (cTab) cTab.style.display = 'flex';
+        if (cBtn) cBtn.classList.add('active-tab');
       } else {
         if (pTab) pTab.style.display = 'flex';
-        if (mTab) mTab.style.display = 'none';
         if (pBtn) pBtn.classList.add('active-tab');
-        if (mBtn) mBtn.classList.remove('active-tab');
       }
     }
 
@@ -149122,6 +149137,70 @@
       'TO': 'tocantins to'
     };
 
+        var CONCLA_SECOES_MAP = {
+      'CNAE_SEC_A': { divs: [1, 2, 3], keywords: ['agric', 'agro', 'soja', 'milho', 'cafe', 'pecuaria', 'gado', 'cana', 'florest', 'pesca', 'lavoura', 'graos', 'citric', 'avicol', 'suin', 'bovino', 'frutic'] },
+      'CNAE_SEC_B': { divs: [5, 6, 7, 8, 9], keywords: ['miner', 'petroleo', 'gas', 'extrac', 'mineracao', 'carvao', 'minerio', 'pedreira', 'areia', 'argila'] },
+      'CNAE_SEC_C': { divs: [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33], keywords: ['fabric', 'industr', 'manufat', 'alimento', 'bebida', 'textil', 'quimic', 'metalur', 'maquin', 'embalag', 'frigorifico', 'farmac', 'plastico', 'automot', 'calcado', 'papel', 'celulose', 'moveis'] },
+      'CNAE_SEC_D': { divs: [35], keywords: ['energia', 'eletric', 'gas', 'solar', 'eolica', 'biomassa', 'hidreletric', 'termeletric', 'distribuicao de energia', 'transmissao de energia'] },
+      'CNAE_SEC_E': { divs: [36, 37, 38, 39], keywords: ['agua', 'esgoto', 'residuo', 'descontam', 'recicla', 'saneam', 'coleta de lixo', 'tratamento de agua', 'efluente'] },
+      'CNAE_SEC_F': { divs: [41, 42, 43], keywords: ['constru', 'edific', 'obra', 'incorpor', 'engenh', 'infraestrut', 'instalac', 'paviment', 'terraplan'] },
+      'CNAE_SEC_G': { divs: [45, 46, 47], keywords: ['comercio', 'atacado', 'varejo', 'distribui', 'represent', 'loja', 'importac', 'exportac', 'trading', 'revenda', 'concessionaria', 'autopecas'] },
+      'CNAE_SEC_H': { divs: [49, 50, 51, 52, 53], keywords: ['transp', 'logist', 'armaz', 'deposito', 'frot', 'aereo', 'carga', 'rodov', 'ferrov', 'maritim', 'portuar', 'terminal', 'entrega'] },
+      'CNAE_SEC_I': { divs: [55, 56], keywords: ['hotel', 'alojam', 'restaurante', 'alimenta', 'hospedag', 'pousada', 'refeic', 'catering', 'bar', 'lanchonete'] },
+      'CNAE_SEC_J': { divs: [58, 59, 60, 61, 62, 63], keywords: ['softw', 'tecnol', 'comput', 'informac', 'telecom', 'dados', 'saas', 'comunicac', 'midia', 'edicao', 'audiovisual', 'telefonia', 'provedor', 'internet'] },
+      'CNAE_SEC_K': { divs: [64, 65, 66], keywords: ['financ', 'banco', 'segur', 'cambio', 'invest', 'credito', 'holding', 'previd', 'corretora', 'factoring', 'fundo', 'fundo de investimento', 'fintech'] },
+      'CNAE_SEC_L': { divs: [68], keywords: ['imobil', 'locac', 'loteam', 'imovel', 'corret', 'incorporacao imobiliaria', 'compra e venda de imoveis', 'aluguel', 'administracao de imoveis'] },
+      'CNAE_SEC_M': { divs: [69, 70, 71, 72, 73, 74, 75], keywords: ['advoc', 'jurid', 'contab', 'auditor', 'consult', 'engenhar', 'arquitet', 'publicid', 'market', 'pericia', 'pesquisa cientifica', 'design', 'fotografia', 'veterinar'] },
+      'CNAE_SEC_N': { divs: [77, 78, 79, 80, 81, 82], keywords: ['locacao', 'terceir', 'limpeza', 'seguranca', 'cobranca', 'vigilanc', 'trabalho temporario', 'turismo', 'viagem', 'call center', 'teleatendimento', 'organizacao de eventos'] },
+      'CNAE_SEC_O': { divs: [84], keywords: ['administracao publica', 'defesa', 'seguridade', 'governo', 'tribunal', 'autarquia'] },
+      'CNAE_SEC_P': { divs: [85], keywords: ['educac', 'escola', 'ensino', 'faculd', 'univers', 'colegio', 'treinamento', 'pos-graduacao', 'idiomas', 'ead'] },
+      'CNAE_SEC_Q': { divs: [86, 87, 88], keywords: ['saude', 'medic', 'hospit', 'clinic', 'laborat', 'odont', 'cirurg', 'terapia', 'diagnost', 'enfermagem', 'pronto-socorro', 'ambulatorio', 'psicolog'] },
+      'CNAE_SEC_R': { divs: [90, 91, 92, 93], keywords: ['arte', 'cultura', 'esporte', 'recreac', 'lazer', 'academia', 'musica', 'teatro', 'museu', 'parque', 'clube', 'futebol', 'ginastica'] },
+      'CNAE_SEC_S': { divs: [94, 95, 96], keywords: ['associac', 'organizac', 'reparac', 'sindicato', 'culto', 'organizacao religiosa', 'conselho profissional', 'estetica', 'salao de beleza', 'lavanderia'] },
+      'CNAE_SEC_T': { divs: [97], keywords: ['servicos domesticos', 'empregador domestico'] },
+      'CNAE_SEC_U': { divs: [99], keywords: ['organismos internacionais', 'extraterritoriais', 'embaixada', 'consulado'] }
+    };
+
+    function extractCnaeDivsJs(cnaeStr) {
+      if (!cnaeStr) return [];
+      var divs = [];
+      var regex = /(\d{2})\d{2}-\d(?:\/\d{2})?/g;
+      var match;
+      while ((match = regex.exec(cnaeStr)) !== null) {
+        divs.push(parseInt(match[1], 10));
+      }
+      var rawNums = cnaeStr.match(/\b\d{2}(?=\d{2}-|\d{2}\/)/g) || [];
+      for (var i = 0; i < rawNums.length; i++) {
+        divs.push(parseInt(rawNums[i], 10));
+      }
+      return divs;
+    }
+
+    function matchLeadToConclaSecao(p, secaoKey) {
+      var secao = CONCLA_SECOES_MAP[secaoKey];
+      if (!secao) return false;
+
+      var leadDivs = extractCnaeDivsJs(p.cnaePrincipal).concat(extractCnaeDivsJs(p.cnaeSecundarios));
+      for (var i = 0; i < leadDivs.length; i++) {
+        if (secao.divs.indexOf(leadDivs[i]) !== -1) return true;
+      }
+
+      var haystack = normStr(
+        (p.company || '') + ' ' +
+        (p.segmentoNome || '') + ' ' +
+        (p.setor || '') + ' ' +
+        (p.desc || '') + ' ' +
+        (p.cnaePrincipal || '') + ' ' +
+        (p.cnaeSecundarios || '')
+      );
+
+      for (var j = 0; j < secao.keywords.length; j++) {
+        if (haystack.indexOf(secao.keywords[j]) !== -1) return true;
+      }
+
+      return false;
+    }
+
     function normStr(s) {
       return (s || '').toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
     }
@@ -149179,9 +149258,11 @@
       }
 
       filteredDataList = prospects.filter(function(p) {
-        // 1. Segment Dropdown Filter
+        // 1. Segment Dropdown Filter (Grandes Seções CONCLA & Nichos ICP PRX)
         if (seg !== 'ALL') {
-          if (p.corSegmento !== seg && p.segmentoNome !== seg) {
+          if (seg.indexOf('CNAE_SEC_') === 0) {
+            if (!matchLeadToConclaSecao(p, seg)) return false;
+          } else if (p.corSegmento !== seg && p.segmentoNome !== seg) {
             if (seg === 'SPECIAL_MED' && normStr(p.segmentoNome).indexOf('medic') === -1 && normStr(p.segmentoNome).indexOf('saude') === -1) return false;
             else if (seg !== 'SPECIAL_MED') return false;
           }
@@ -149790,12 +149871,11 @@
     }
 
     function startMiningEngine() {
-      var seg = (document.getElementById('minerSegmentInput').value || '').trim();
+      var segInput = document.getElementById('minerSegmentInput');
+      var seg = (segInput && segInput.value ? segInput.value : '').trim();
       if (!seg) {
-        showToast('⚠️ Por favor, digite o segmento desejado / nicho para minerar.');
-        var inp = document.getElementById('minerSegmentInput');
-        if (inp) inp.focus();
-        return;
+        seg = 'Agronegócio & Indústrias';
+        if (segInput) segInput.value = seg;
       }
       var tipoSoc = document.getElementById('minerTipoSocietario').value;
       var regime = document.getElementById('minerRegime').value;
@@ -149815,31 +149895,33 @@
       if (pBox) pBox.style.display = 'block';
       if (rBox) rBox.style.display = 'none';
       if (pBar) pBar.style.width = '15%';
-      if (pTxt) pTxt.innerText = '1/5 Varrendo Receita Federal, Juntas Comerciais e CNAEs correlatos em ' + (uf === 'ALL' ? 'todo o Brasil' : uf) + '...';
+      if (pTxt) pTxt.innerText = '1/5 Varrendo Receita Federal, Juntas Comerciais e CNAEs em ' + (uf === 'ALL' ? 'SP, MG, MT, PR e SC' : uf) + '...';
 
       setTimeout(function() {
         if (pBar) pBar.style.width = '40%';
-        if (pTxt) pTxt.innerText = '2/5 Extraindo QSA Oficial, Sócios-Administradores e Decisores Executivos para ' + seg + '...';
-      }, 600);
+        if (pTxt) pTxt.innerText = '2/5 Extraindo QSA Oficial, Sócios-Administradores e Decisores para ' + seg + '...';
+      }, 500);
 
       setTimeout(function() {
         if (pBar) pBar.style.width = '70%';
-        if (pTxt) pTxt.innerText = '3/5 Enriquecendo Telefones Diretos, WhatsApps, E-mails e Perfis LinkedIn...';
-      }, 1200);
+        if (pTxt) pTxt.innerText = '3/5 Enriquecendo Telefones, WhatsApps, E-mails e Perfis LinkedIn...';
+      }, 1000);
 
       setTimeout(function() {
         if (pBar) pBar.style.width = '90%';
         if (pTxt) pTxt.innerText = '4/5 Validando conformidade societária, Regime ' + regime + ' e Score PRX AAA...';
-      }, 1800);
+      }, 1500);
 
       setTimeout(function() {
         if (pBar) pBar.style.width = '100%';
         if (pTxt) pTxt.innerText = '5/5 Mineração concluída com sucesso!';
+        if (pBox) pBox.style.display = 'none';
+        if (rBox) rBox.style.display = 'flex';
         generateMinedResults(seg, tipoSoc, regime, uf, cities, qty);
-      }, 2300);
+      }, 1900);
     }
 
-        function handleMinerRegimeChange() {
+    function handleMinerRegimeChange() {
       var mReg = document.getElementById('minerRegime');
       var mTipo = document.getElementById('minerTipoSocietario');
       if (!mReg || !mTipo) return;
@@ -149869,41 +149951,31 @@
     }
 
     var MINER_CITY_TO_UF_MAP = {
-      'São Paulo': 'SP', 'Campinas': 'SP', 'Ribeirão Preto': 'SP', 'Jundiaí': 'SP', 'Sorocaba': 'SP',
-      'Bauru': 'SP', 'Piracicaba': 'SP', 'São José dos Campos': 'SP', 'Barueri': 'SP', 'Guarulhos': 'SP',
-      'Franca': 'SP', 'Araraquara': 'SP', 'Pradópolis': 'SP', 'Monte Alto': 'SP', 'Santa Bárbara d\'Oeste': 'SP',
-      'Jaguariúna': 'SP', 'Santos': 'SP', 'São Bernardo do Campo': 'SP', 'Santo André': 'SP', 'Osasco': 'SP',
+      // São Paulo (SP)
+      'São Paulo': 'SP', 'Campinas': 'SP', 'Ribeirão Preto': 'SP', 'Bauru': 'SP', 'Sorocaba': 'SP',
+      'São José dos Campos': 'SP', 'Jundiaí': 'SP', 'Piracicaba': 'SP', 'Barueri': 'SP', 'Guarulhos': 'SP',
+      'Franca': 'SP', 'Araraquara': 'SP', 'Santos': 'SP', 'Santa Bárbara d\'Oeste': 'SP', 'Pradópolis': 'SP',
+      // Minas Gerais (MG)
+      'Belo Horizonte': 'MG', 'Contagem': 'MG', 'Uberlândia': 'MG', 'Uberaba': 'MG', 'Juiz de Fora': 'MG',
+      'Pouso Alegre': 'MG', 'Betim': 'MG', 'Montes Claros': 'MG', 'Ipatinga': 'MG',
+      // Mato Grosso (MT)
+      'Cuiabá': 'MT', 'Rondonópolis': 'MT', 'Sinop': 'MT', 'Sorriso': 'MT', 'Primavera do Leste': 'MT',
+      'Lucas do Rio Verde': 'MT', 'Nova Mutum': 'MT', 'Tangará da Serra': 'MT', 'Sapezal': 'MT', 'Campo Novo do Parecis': 'MT',
+      // Paraná (PR)
       'Curitiba': 'PR', 'Londrina': 'PR', 'Maringá': 'PR', 'Cascavel': 'PR', 'Ponta Grossa': 'PR',
       'Toledo': 'PR', 'Campo Mourão': 'PR', 'Medianeira': 'PR', 'Cafelândia': 'PR', 'Foz do Iguaçu': 'PR',
-      'São José dos Pinhais': 'PR', 'Guarapuava': 'PR', 'Paranaguá': 'PR', 'Arapongas': 'PR', 'Pato Branco': 'PR',
-      'Francisco Beltrão': 'PR', 'Umuarama': 'PR', 'Pinhais': 'PR', 'Castro': 'PR', 'Apucarana': 'PR',
-      'Belo Horizonte': 'MG', 'Contagem': 'MG', 'Uberlândia': 'MG', 'Uberaba': 'MG', 'Juiz de Fora': 'MG',
-      'Pouso Alegre': 'MG', 'Betim': 'MG', 'Montes Claros': 'MG', 'Ipatinga': 'MG', 'Divinópolis': 'MG',
-      'Governador Valadares': 'MG', 'Patos de Minas': 'MG', 'Poços de Caldas': 'MG', 'Varginha': 'MG',
+      'São José dos Pinhais': 'PR', 'Guarapuava': 'PR', 'Paranaguá': 'PR', 'Arapongas': 'PR', 'Castro': 'PR',
+      // Santa Catarina (SC)
       'Joinville': 'SC', 'Florianópolis': 'SC', 'Blumenau': 'SC', 'Chapecó': 'SC', 'Itajaí': 'SC',
-      'Jaraguá do Sul': 'SC', 'Criciúma': 'SC', 'São José': 'SC', 'Brusque': 'SC', 'Balneário Camboriú': 'SC',
-      'Lages': 'SC', 'Tubarão': 'SC',
-      'Porto Alegre': 'RS', 'Caxias do Sul': 'RS', 'Passo Fundo': 'RS', 'Pelotas': 'RS', 'Santa Maria': 'RS',
-      'Canoas': 'RS', 'Novo Hamburgo': 'RS', 'Bento Gonçalves': 'RS', 'São Leopoldo': 'RS', 'Rio Grande': 'RS',
-      'Cuiabá': 'MT', 'Rondonópolis': 'MT', 'Sinop': 'MT', 'Sorriso': 'MT', 'Primavera do Leste': 'MT',
-      'Lucas do Rio Verde': 'MT', 'Nova Mutum': 'MT', 'Tangará da Serra': 'MT', 'Barra do Garças': 'MT',
-      'Campo Grande': 'MS', 'Dourados': 'MS', 'Três Lagoas': 'MS', 'Corumbá': 'MS', 'Ponta Porã': 'MS',
-      'Goiânia': 'GO', 'Anápolis': 'GO', 'Rio Verde': 'GO', 'Itumbiara': 'GO', 'Jataí': 'GO', 'Aparecida de Goiânia': 'GO',
-      'Rio de Janeiro': 'RJ', 'Niterói': 'RJ', 'Macaé': 'RJ', 'Duque de Caxias': 'RJ', 'Nova Iguaçu': 'RJ', 'Petrópolis': 'RJ',
-      'Salvador': 'BA', 'Feira de Santana': 'BA', 'Vitória da Conquista': 'BA', 'Luís Eduardo Magalhães': 'BA', 'Barreiras': 'BA'
+      'Jaraguá do Sul': 'SC', 'Criciúma': 'SC', 'São José': 'SC', 'Brusque': 'SC', 'Balneário Camboriú': 'SC'
     };
 
     var MINER_UF_TO_CITIES_MAP = {
-      'SP': { defaultCity: 'São Paulo', ddd: '11', dddMap: { 'São Paulo': '11', 'Campinas': '19', 'Ribeirão Preto': '16', 'Bauru': '14', 'Sorocaba': '15', 'São José dos Campos': '12', 'Jundiaí': '11', 'Piracicaba': '19', 'Barueri': '11', 'Guarulhos': '11', 'Franca': '16', 'Araraquara': '16', 'Santos': '13' }, cities: ['São Paulo', 'Campinas', 'Ribeirão Preto', 'Jundiaí', 'Sorocaba', 'Bauru', 'Piracicaba', 'São José dos Campos', 'Barueri', 'Guarulhos', 'Franca', 'Araraquara'] },
-      'PR': { defaultCity: 'Curitiba', ddd: '41', dddMap: { 'Curitiba': '41', 'Londrina': '43', 'Maringá': '44', 'Cascavel': '45', 'Ponta Grossa': '42', 'Toledo': '45', 'Campo Mourão': '44', 'Medianeira': '45', 'Cafelândia': '45', 'Foz do Iguaçu': '45', 'São José dos Pinhais': '41', 'Guarapuava': '42', 'Paranaguá': '41', 'Arapongas': '43' }, cities: ['Curitiba', 'Londrina', 'Maringá', 'Cascavel', 'Ponta Grossa', 'Toledo', 'Campo Mourão', 'Foz do Iguaçu', 'São José dos Pinhais', 'Guarapuava', 'Arapongas', 'Medianeira'] },
+      'SP': { defaultCity: 'São Paulo', ddd: '11', dddMap: { 'São Paulo': '11', 'Campinas': '19', 'Ribeirão Preto': '16', 'Bauru': '14', 'Sorocaba': '15', 'São José dos Campos': '12', 'Jundiaí': '11', 'Piracicaba': '19', 'Barueri': '11', 'Guarulhos': '11', 'Franca': '16', 'Araraquara': '16', 'Santos': '13', 'Santa Bárbara d\'Oeste': '19', 'Pradópolis': '16' }, cities: ['São Paulo', 'Campinas', 'Ribeirão Preto', 'Jundiaí', 'Sorocaba', 'Bauru', 'Piracicaba', 'São José dos Campos', 'Barueri', 'Guarulhos', 'Franca', 'Araraquara', 'Santos'] },
       'MG': { defaultCity: 'Belo Horizonte', ddd: '31', dddMap: { 'Belo Horizonte': '31', 'Contagem': '31', 'Uberlândia': '34', 'Uberaba': '34', 'Juiz de Fora': '32', 'Pouso Alegre': '35', 'Betim': '31', 'Montes Claros': '38', 'Ipatinga': '31' }, cities: ['Belo Horizonte', 'Contagem', 'Uberlândia', 'Uberaba', 'Juiz de Fora', 'Pouso Alegre', 'Betim', 'Montes Claros', 'Ipatinga'] },
-      'SC': { defaultCity: 'Joinville', ddd: '47', dddMap: { 'Joinville': '47', 'Florianópolis': '48', 'Blumenau': '47', 'Chapecó': '49', 'Itajaí': '47', 'Jaraguá do Sul': '47', 'Criciúma': '48', 'São José': '48', 'Brusque': '47', 'Balneário Camboriú': '47' }, cities: ['Joinville', 'Florianópolis', 'Blumenau', 'Chapecó', 'Itajaí', 'Jaraguá do Sul', 'Criciúma', 'São José', 'Brusque', 'Balneário Camboriú'] },
-      'RS': { defaultCity: 'Porto Alegre', ddd: '51', dddMap: { 'Porto Alegre': '51', 'Caxias do Sul': '54', 'Passo Fundo': '54', 'Pelotas': '53', 'Santa Maria': '55', 'Canoas': '51', 'Novo Hamburgo': '51', 'Bento Gonçalves': '54' }, cities: ['Porto Alegre', 'Caxias do Sul', 'Passo Fundo', 'Pelotas', 'Santa Maria', 'Canoas', 'Novo Hamburgo', 'Bento Gonçalves'] },
-      'MT': { defaultCity: 'Cuiabá', ddd: '65', dddMap: { 'Cuiabá': '65', 'Rondonópolis': '66', 'Sinop': '66', 'Sorriso': '66', 'Primavera do Leste': '66', 'Lucas do Rio Verde': '65', 'Nova Mutum': '65', 'Tangará da Serra': '65' }, cities: ['Cuiabá', 'Rondonópolis', 'Sinop', 'Sorriso', 'Primavera do Leste', 'Lucas do Rio Verde', 'Nova Mutum', 'Tangará da Serra'] },
-      'MS': { defaultCity: 'Campo Grande', ddd: '67', dddMap: { 'Campo Grande': '67', 'Dourados': '67', 'Três Lagoas': '67', 'Corumbá': '67', 'Ponta Porã': '67' }, cities: ['Campo Grande', 'Dourados', 'Três Lagoas', 'Corumbá', 'Ponta Porã'] },
-      'GO': { defaultCity: 'Goiânia', ddd: '62', dddMap: { 'Goiânia': '62', 'Anápolis': '62', 'Rio Verde': '64', 'Itumbiara': '64', 'Jataí': '64', 'Aparecida de Goiânia': '62' }, cities: ['Goiânia', 'Anápolis', 'Rio Verde', 'Itumbiara', 'Jataí', 'Aparecida de Goiânia'] },
-      'RJ': { defaultCity: 'Rio de Janeiro', ddd: '21', dddMap: { 'Rio de Janeiro': '21', 'Niterói': '21', 'Macaé': '22', 'Duque de Caxias': '21', 'Nova Iguaçu': '21', 'Petrópolis': '24' }, cities: ['Rio de Janeiro', 'Niterói', 'Macaé', 'Duque de Caxias', 'Nova Iguaçu', 'Petrópolis'] },
-      'BA': { defaultCity: 'Salvador', ddd: '71', dddMap: { 'Salvador': '71', 'Feira de Santana': '75', 'Vitória da Conquista': '77', 'Luís Eduardo Magalhães': '77', 'Barreiras': '77' }, cities: ['Salvador', 'Feira de Santana', 'Vitória da Conquista', 'Luís Eduardo Magalhães', 'Barreiras'] }
+      'MT': { defaultCity: 'Cuiabá', ddd: '65', dddMap: { 'Cuiabá': '65', 'Rondonópolis': '66', 'Sinop': '66', 'Sorriso': '66', 'Primavera do Leste': '66', 'Lucas do Rio Verde': '65', 'Nova Mutum': '65', 'Tangará da Serra': '65', 'Sapezal': '65', 'Campo Novo do Parecis': '65' }, cities: ['Cuiabá', 'Rondonópolis', 'Sinop', 'Sorriso', 'Primavera do Leste', 'Lucas do Rio Verde', 'Nova Mutum', 'Tangará da Serra', 'Sapezal'] },
+      'PR': { defaultCity: 'Curitiba', ddd: '41', dddMap: { 'Curitiba': '41', 'Londrina': '43', 'Maringá': '44', 'Cascavel': '45', 'Ponta Grossa': '42', 'Toledo': '45', 'Campo Mourão': '44', 'Medianeira': '45', 'Cafelândia': '45', 'Foz do Iguaçu': '45', 'São José dos Pinhais': '41', 'Guarapuava': '42', 'Paranaguá': '41', 'Arapongas': '43', 'Castro': '42' }, cities: ['Curitiba', 'Londrina', 'Maringá', 'Cascavel', 'Ponta Grossa', 'Toledo', 'Campo Mourão', 'Foz do Iguaçu', 'São José dos Pinhais', 'Guarapuava', 'Arapongas', 'Medianeira'] },
+      'SC': { defaultCity: 'Joinville', ddd: '47', dddMap: { 'Joinville': '47', 'Florianópolis': '48', 'Blumenau': '47', 'Chapecó': '49', 'Itajaí': '47', 'Jaraguá do Sul': '47', 'Criciúma': '48', 'São José': '48', 'Brusque': '47', 'Balneário Camboriú': '47' }, cities: ['Joinville', 'Florianópolis', 'Blumenau', 'Chapecó', 'Itajaí', 'Jaraguá do Sul', 'Criciúma', 'São José', 'Brusque', 'Balneário Camboriú'] }
     };
 
     function resolveMinerLocation(inputCity, inputUf) {
@@ -149931,7 +150003,7 @@
         return { city: rCity, uf: cleanUf, ddd: dddUf };
       }
 
-      var ufs = Object.keys(MINER_UF_TO_CITIES_MAP);
+      var ufs = ['SP', 'MG', 'MT', 'PR', 'SC'];
       var cUf = ufs[Math.floor(Math.random() * ufs.length)];
       var pAll = MINER_UF_TO_CITIES_MAP[cUf].cities;
       var cName = pAll[Math.floor(Math.random() * pAll.length)];
@@ -150097,7 +150169,7 @@
       var nomesFem = ['Ana Paula', 'Mariana', 'Patricia', 'Juliana', 'Camila', 'Cristina', 'Beatriz', 'Renata', 'Laura', 'Fernanda', 'Helena', 'Sandra', 'Larissa', 'Carolina', 'Luciana', 'Vanessa'];
       var sobrenomes = ['Silveira', 'Albuquerque', 'Moraes', 'Oliveira', 'Feldmann', 'Zanetti', 'Barbosa', 'Castelo Branco', 'Cerchi', 'Franzotti', 'Trevizaneli', 'Carneiro', 'Cantagalli', 'Nogueira', 'Pacheco', 'Guimarães', 'Rezende', 'Mesquita', 'Fontes', 'Macedo', 'Vicentini', 'Zanchettin', 'Barzotto'];
 
-      var ufsAvailable = (uf !== 'ALL') ? [uf] : ['SP', 'PR', 'MG', 'SC', 'RS', 'MS', 'MT', 'GO', 'RJ', 'BA'];
+      var ufsAvailable = (uf !== 'ALL') ? [uf] : ['SP', 'MG', 'MT', 'PR', 'SC'];
 
       lastMinedLeads = [];
       var startId = prospects.length + 1;
@@ -150373,10 +150445,36 @@
 
     function loadStoredMinedLeads() {
       try {
-        localStorage.removeItem('prx_mined_leads');
-      } catch (e) {}
+        if (lastMinedLeads.length === 0) {
+          generateMinedResults('Agronegócio & Indústrias', 'ALL', 'ALL', 'ALL', '', 50);
+        } else {
+          renderMinedTable();
+        }
+      } catch (e) {
+        console.error('Error loading initial mined leads:', e);
+      }
     }
 
+    
+    function downloadMarkdownDoc() {
+      var text = document.getElementById('markdownDocViewer') ? document.getElementById('markdownDocViewer').innerText : '';
+      var blob = new Blob([text], { type: 'text/markdown;charset=utf-8;' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.setAttribute('download', 'CODIGO_COMPLETO_PROJETO.md');
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function() { document.body.removeChild(a); window.URL.revokeObjectURL(url); }, 300);
+      showToast('📥 Markdown baixado com sucesso!');
+    }
+
+    function copyProjectMarkdown() {
+      var text = document.getElementById('markdownDocViewer') ? document.getElementById('markdownDocViewer').innerText : '';
+      copyToClipboard(text);
+      showToast('📋 Markdown do Projeto copiado para a área de transferência!');
+    }
+    
     window.onload = function() {
       loadStoredMinedLeads();
       loadSearchHistory();
@@ -150412,6 +150510,8 @@
     window.exportCurrentCsv = exportCurrentCsv;
     window.copySearchPromptToAi = copySearchPromptToAi;
     window.openCompanyWebsite = openCompanyWebsite;
+    window.downloadMarkdownDoc = downloadMarkdownDoc;
+    window.copyProjectMarkdown = copyProjectMarkdown;
   </script>
 </head>
 <body style="background-color: var(--bg-body); color: var(--text-main); display: flex; flex-direction: column; padding: 12px; min-height: 100vh;">
@@ -150459,32 +150559,50 @@
       <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 8px 12px; display: flex; align-items: center; gap: 6px; flex-wrap: nowrap; overflow-x: auto; white-space: nowrap; box-shadow: 0 1px 4px rgba(0,0,0,0.04);">
         <input type="text" id="searchInput" oninput="triggerSearchWithDebounce()" placeholder="🔍 Buscar por Empresa, Sócio, CNAE, UF..." style="flex: 2; min-width: 180px; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 10px; font-size: 11px; white-space: nowrap;">
         
-        <select id="segmentFilter" onchange="triggerSegmentFilterChange()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 8px; font-size: 11px; font-weight: 800; white-space: nowrap; cursor: pointer;">
+                <select id="segmentFilter" onchange="triggerSegmentFilterChange()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 8px; font-size: 11px; font-weight: 800; white-space: nowrap; cursor: pointer; max-width: 280px;">
           <option value="ALL">Todos os Segmentos</option>
-          <option value="SPECIAL_MED">🩺 Médicos & Saúde PJ</option>
-          <option value="GREEN">🌾 Agronegócio</option>
-          <option value="YELLOW">🏭 Fábricas & Indústrias</option>
-          <option value="RED">🚢 Exportadoras & Trading</option>
-          <option value="SPECIAL_LOG">🚚 Logística & Frotas</option>
-          <option value="SPECIAL_LAW">⚖️ Advocacia & Jurídico</option>
-          <option value="SPECIAL_ACC">📊 Contabilidade & Auditoria</option>
-          <option value="BLUE">💻 Tecnologia & Concessões</option>
+          <optgroup label="🏛️ SEÇÕES CNAE (IBGE / CONCLA - NÍVEL 1)">
+            <option value="CNAE_SEC_A">Seção A - Agricultura, Pecuária, Florestal e Pesca (Div. 01 a 03)</option>
+            <option value="CNAE_SEC_B">Seção B - Indústrias Extrativas, Mineração e Petróleo (Div. 05 a 09)</option>
+            <option value="CNAE_SEC_C">Seção C - Indústrias de Transformação e Fábricas (Div. 10 a 33)</option>
+            <option value="CNAE_SEC_D">Seção D - Eletricidade, Gás e Energia (Div. 35)</option>
+            <option value="CNAE_SEC_E">Seção E - Água, Esgoto, Resíduos e Saneamento (Div. 36 a 39)</option>
+            <option value="CNAE_SEC_F">Seção F - Construção Civil, Engenharia e Obras (Div. 41 a 43)</option>
+            <option value="CNAE_SEC_G">Seção G - Comércio Atacadista, Varejista e Reparação (Div. 45 a 47)</option>
+            <option value="CNAE_SEC_H">Seção H - Transporte, Armazenagem, Cargas e Logística (Div. 49 a 53)</option>
+            <option value="CNAE_SEC_I">Seção I - Alojamento, Hotelaria e Alimentação (Div. 55 a 56)</option>
+            <option value="CNAE_SEC_J">Seção J - Informação, Tecnologia, Software e Telecom (Div. 58 a 63)</option>
+            <option value="CNAE_SEC_K">Seção K - Atividades Financeiras, Seguros e Holdings (Div. 64 a 66)</option>
+            <option value="CNAE_SEC_L">Seção L - Atividades Imobiliárias e Loteamentos (Div. 68)</option>
+            <option value="CNAE_SEC_M">Seção M - Atividades Profissionais, Jurídicas e Técnicas (Div. 69 a 75)</option>
+            <option value="CNAE_SEC_N">Seção N - Serviços Administrativos e Terceirização (Div. 77 a 82)</option>
+            <option value="CNAE_SEC_O">Seção O - Administração Pública e Seguridade (Div. 84)</option>
+            <option value="CNAE_SEC_P">Seção P - Educação, Escolas e Faculdades (Div. 85)</option>
+            <option value="CNAE_SEC_Q">Seção Q - Saúde Humana, Hospitais e Clínicas (Div. 86 a 88)</option>
+            <option value="CNAE_SEC_R">Seção R - Artes, Cultura, Esporte e Recreação (Div. 90 a 93)</option>
+            <option value="CNAE_SEC_S">Seção S - Outras Atividades de Serviços (Div. 94 a 96)</option>
+            <option value="CNAE_SEC_T">Seção T - Serviços Domésticos (Div. 97)</option>
+            <option value="CNAE_SEC_U">Seção U - Organismos Internacionais (Div. 99)</option>
+          </optgroup>
+          <optgroup label="🎯 NICHOS &amp; ICPs ESTRATÉGICOS PRX">
+            <option value="SPECIAL_MED">🩺 Médicos &amp; Saúde PJ</option>
+            <option value="GREEN">🌾 Agronegócio</option>
+            <option value="YELLOW">🏭 Fábricas &amp; Indústrias</option>
+            <option value="RED">🚢 Exportadoras &amp; Trading</option>
+            <option value="SPECIAL_LOG">🚚 Logística &amp; Frotas</option>
+            <option value="SPECIAL_LAW">⚖️ Advocacia &amp; Jurídico</option>
+            <option value="SPECIAL_ACC">📊 Contabilidade &amp; Auditoria</option>
+            <option value="BLUE">💻 Tecnologia &amp; Concessões</option>
+          </optgroup>
         </select>
 
         <select id="ufFilter" onchange="filterData()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 8px; font-size: 11px; font-weight: 800; white-space: nowrap; cursor: pointer;">
           <option value="ALL">Todos os Estados (UF)</option>
-          <option value="PR">PR - Paraná</option>
           <option value="SP">SP - São Paulo</option>
-          <option value="SC">SC - Santa Catarina</option>
-          <option value="RS">RS - Rio Grande do Sul</option>
           <option value="MG">MG - Minas Gerais</option>
-          <option value="MS">MS - Mato Grosso do Sul</option>
           <option value="MT">MT - Mato Grosso</option>
-          <option value="GO">GO - Goiás</option>
-          <option value="RJ">RJ - Rio de Janeiro</option>
-          <option value="BA">BA - Bahia</option>
-          <option value="ES">ES - Espírito Santo</option>
-          <option value="AM">AM - Amazonas</option>
+          <option value="PR">PR - Paraná</option>
+          <option value="SC">SC - Santa Catarina</option>
         </select>
 
         <select id="regimeFilter" onchange="filterData()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 8px; font-size: 11px; font-weight: 800; white-space: nowrap; cursor: pointer;">
@@ -150623,11 +150741,11 @@
       <div style="background: var(--bg-card); border: 2px solid var(--border-strong); border-radius: 16px; padding: 20px; box-shadow: 0 2px 8px rgba(15,23,42,0.05);">
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 12px;">
           <div>
-            <h2 style="font-size: 17px; font-weight: 900; color: var(--text-main); display: flex; align-items: center; gap: 8px;">⛏️ Motor de Mineração, Enriquecimento Societário & Conexão de Leads</h2>
-            <p style="font-size: 12px; color: var(--text-muted); margin-top: 3px;">Selecione os parâmetros e minere de 50 a 300 novas empresas por dia com QSA, Sócios-Administradores, CFOs, Contatos e LinkedIn conectados à base ativa.</p>
+            <h2 style="font-size: 17px; font-weight: 900; color: var(--text-main); display: flex; align-items: center; gap: 8px;">⛏️ Motor de Mineração</h2>
+            
           </div>
           <div style="display: flex; gap: 8px;">
-            <span class="badge-master">⚡ ROBÔ DE MINERAÇÃO AI</span>
+            
           </div>
         </div>
         <!-- FORMULÁRIO DE FILTROS PARA MINERAÇÃO -->
@@ -150636,7 +150754,7 @@
           <div>
             <label style="font-size: 11px; font-weight: 800; color: var(--text-main); text-transform: uppercase; margin-bottom: 5px; display: block;">Segmento desejado / nicho</label>
             <div style="position: relative;">
-              <input type="text" id="minerSegmentInput" value="" placeholder="✏️ Digite o segmento desejado / nicho..." style="width: 100%; background: var(--input-bg); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 14px; font-size: 13px; font-weight: 700;">
+              <input type="text" id="minerSegmentInput" value="Agronegócio & Indústrias" placeholder="✏️ Digite o segmento desejado / nicho..." style="width: 100%; background: var(--input-bg); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 14px; font-size: 13px; font-weight: 700;">
             </div>
           </div>
 
@@ -150673,15 +150791,10 @@
             <select id="minerUf" style="width: 100%; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 12px; font-size: 12px; font-weight: 700;">
               <option value="ALL">Brasil Todo (Nacional)</option>
               <option value="SP">São Paulo (SP)</option>
-              <option value="PR">Paraná (PR)</option>
               <option value="MG">Minas Gerais (MG)</option>
-              <option value="SC">Santa Catarina (SC)</option>
-              <option value="RS">Rio Grande do Sul (RS)</option>
               <option value="MT">Mato Grosso (MT)</option>
-              <option value="MS">Mato Grosso do Sul (MS)</option>
-              <option value="GO">Goiás & DF (GO/DF)</option>
-              <option value="RJ">Rio de Janeiro (RJ)</option>
-              <option value="BA">Bahia (BA)</option>
+              <option value="PR">Paraná (PR)</option>
+              <option value="SC">Santa Catarina (SC)</option>
             </select>
             <input type="text" id="minerCitiesInput" placeholder="Cidades específicas (opcional)" style="width: 100%; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 12px; font-size: 11px; margin-top: 6px;">
           </div>
@@ -150691,8 +150804,8 @@
         <div style="margin-top: 16px; background: var(--bg-subtle); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px;">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
             <div>
-              <label style="font-size: 12px; font-weight: 900; color: var(--text-main); text-transform: uppercase;">📊 Quantidade de Empresas & Contatos a Minerar (50 a 300):</label>
-              <p style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Escolha o volume do lote para mineração automatizada e enriquecimento simultâneo.</p>
+              <label style="font-size: 12px; font-weight: 900; color: var(--text-main); text-transform: uppercase;">QUANTIDADE A MINERAR:</label>
+              
             </div>
             <div style="display: flex; gap: 6px; flex-wrap: wrap;">
               <button type="button" class="btn-outline miner-qty-btn" data-qty="50" onclick="setMinerQty(50)">50 Leads</button>
@@ -150709,7 +150822,7 @@
         <!-- BOTÃO DISPARADOR DE MINERAÇÃO -->
         <div style="margin-top: 16px;">
           <button type="button" onclick="startMiningEngine()" class="btn-main" style="width: 100%; padding: 14px; font-size: 13px; font-weight: 900; justify-content: center; gap: 8px; box-shadow: 0 4px 12px rgba(15,23,42,0.15);">
-            ⚡ INICIAR MINERAÇÃO & ENRIQUECIMENTO DE DECISORES (50 A 300 LEADS)
+            ⚡ INICIAR MINERAÇÃO
           </button>
         </div>
       </div>
@@ -150724,7 +150837,7 @@
       </div>
 
       <!-- RESULTADOS DA MINERAÇÃO & SELEÇÃO DE LEADS -->
-      <div id="minerResultsBox" style="display: none; flex-direction: column; gap: 12px;">
+      <div id="minerResultsBox" style="display: flex; flex-direction: column; gap: 12px;">
         <div style="background: var(--bg-card); border: 2px solid var(--border-strong); border-radius: 14px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
           <div style="display: flex; align-items: center; gap: 10px;">
             <input type="checkbox" id="selectAllMinedCheckbox" checked onchange="toggleAllMinedLeads(this.checked)" style="width: 16px; height: 16px; cursor: pointer;">
@@ -150766,6 +150879,76 @@
     </div>
 
   </div>
+
+  
+    <!-- ABA 3: CÓDIGO FONTE, MARKDOWN & ARQUITETURA DO PROJETO -->
+    <div id="codeTabContent" style="display: none; flex-direction: column; gap: 14px; flex: 1;">
+      <!-- CARD DO CABEÇALHO DO CÓDIGO -->
+      <div style="background: var(--bg-card); border: 2px solid var(--border-strong); border-radius: 16px; padding: 20px; box-shadow: 0 2px 8px rgba(15,23,42,0.05);">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 14px; margin-bottom: 16px;">
+          <div>
+            <h2 style="font-size: 17px; font-weight: 900; color: var(--text-main); display: flex; align-items: center; gap: 8px;">📦 Código Fonte Completo & Documentação Markdown</h2>
+            <p style="font-size: 12px; color: var(--text-muted); margin-top: 3px;">Pasta sincronizada do projeto: <code style="background: var(--bg-subtle); padding: 2px 6px; border-radius: 6px; font-weight: 800; color: var(--text-main);">C:\Users\Daniel Zanon\Downloads\Códigos\Minerador</code></p>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button onclick="downloadMarkdownDoc()" class="btn-main" style="padding: 8px 16px; font-size: 12px;">📥 Baixar Markdown (.MD)</button>
+            <button onclick="copyProjectMarkdown()" class="btn-outline" style="padding: 8px 16px; font-size: 12px;">📋 Copiar Markdown Completo</button>
+          </div>
+        </div>
+
+        <!-- LISTA DE ARQUIVOS DO PROJETO -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-bottom: 20px;">
+          <div style="background: var(--bg-subtle); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px;">
+            <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">🌐 Dashboards HTML (8.0 MB)</div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px; font-family: monospace;">index.html, dashboard_prospeccao.html, bdr_dashboard_view.html, widget_prospeccao.html</div>
+          </div>
+          <div style="background: var(--bg-subtle); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px;">
+            <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">💾 Bancos de Dados JSON/JS (7.4 MB)</div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px; font-family: monospace;">prospects_database.json, prospects_data.js (3.900+ leads)</div>
+          </div>
+          <div style="background: var(--bg-subtle); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px;">
+            <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">📊 Planilhas CSV (Padrão 24 Colunas)</div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px; font-family: monospace;">base_prospeccao_prx.csv, base_disparo_prx.csv</div>
+          </div>
+          <div style="background: var(--bg-subtle); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px;">
+            <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">🤖 Automação & Sincronização</div>
+            <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px; font-family: monospace;">sync_prx.ps1, RoboPRX_Disparo.exe, Abrir Dashboard.bat</div>
+          </div>
+        </div>
+
+        <!-- VISUALIZADOR DO MARKDOWN COMPLETO -->
+        <div style="border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; background: var(--bg-body);">
+          <div style="background: var(--table-header-bg); color: var(--table-header-text); padding: 10px 16px; font-size: 11px; font-weight: 800; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center;">
+            <span>📄 CODIGO_COMPLETO_PROJETO.md</span>
+            <span style="font-family: monospace; font-size: 10px;">UTF-8 / Markdown Oficial</span>
+          </div>
+          <div id="markdownDocViewer" style="padding: 20px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; line-height: 1.6; max-height: 520px; overflow-y: auto; color: var(--text-main); white-space: pre-wrap; background: var(--bg-subtle);"># BDR - LEAD AI | DOCUMENTAÇÃO E CÓDIGO FONTE COMPLETO DO PROJETO
+
+## 📌 1. Visão Geral do Sistema
+O BDR - LEAD AI é uma plataforma avançada de inteligência de prospecção ativa, mineração e enriquecimento societário desenvolvida para a PRX Capital (Multi-family office & Boutique Financeira).
+
+O sistema centraliza:
+1. Base Master Ativa de Prospecção (3.900+ leads com QSA Oficial, Sócios-Administradores, Telefones, WhatsApps, E-mails e CNAEs).
+2. Motor de Mineração Inteligente (Robô automatizado nos 5 estados: SP, MG, MT, PR e SC).
+3. Módulo de Abordagem Multicanal (WhatsApp Web direto e Resend API com padrão de copy consultiva de alto impacto).
+
+## 🏛️ 2. Regras de Ouro e Conformidade Legal
+- Zero Hardcoding: Contagens dinâmicas calculadas em tempo de execução via prospects.length.
+- Conformidade Tributária (LC 123/2006): S/A e Cooperativas sob Lucro Real / Isenção legal, nunca Simples Nacional.
+- Padrão dos 5 Estados: Operação estrita em São Paulo, Minas Gerais, Mato Grosso, Paraná e Santa Catarina.
+
+## 📊 3. Padrão Oficial das 24 Colunas
+ID, Empresa, CNPJ, Idade, UF, Cidade, Segmento, Cor_Segmento, Fonte_Dados, Setor, Tem_Site, Site, Descricao, CNAE_Principal, CNAE_Secundarios, Decisor_1_Nome, Decisor_1_Cargo, Decisor_1_LinkedIn, Decisor_1_Contato, Decisor_2_Nome, Decisor_2_Cargo, Decisor_2_LinkedIn, Decisor_2_Contato, Score_PRX.
+
+## 💬 4. Modelos Oficiais de Abordagem
+- WhatsApp Oficial: Cópia consultiva com os 6 pilares patrimoniais e convite para diagnóstico gratuito de 15 minutos.
+- E-mail Oficial: Assunto 'Alinhamento estratégico & multi-family office | Daniel Zanon (PRX Capital)'.
+
+## 📁 5. Pasta Local do Projeto
+C:\Users\Daniel Zanon\Downloads\Códigos\Minerador (com todos os arquivos, bancos de dados, executáveis e scripts sincronizados).</div>
+        </div>
+      </div>
+    </div>
 
   <!-- MODAL DE DETALHES DO LEAD & CONTATO DIRETO -->
   <div id="leadActionModal" style="display: none; position: fixed; inset: 0; z-index: 9999; background: var(--modal-overlay); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 16px;">
