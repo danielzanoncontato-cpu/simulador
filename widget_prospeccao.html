@@ -150912,6 +150912,14 @@
       }
     }
 
+        function handleMinerSegmentChange() {
+      var sel = document.getElementById('minerSegmentSelect');
+      var inp = document.getElementById('minerSegmentInput');
+      if (sel && inp) {
+        inp.value = sel.value;
+      }
+    }
+
     function handleMinerTipoChange() {
       var mReg = document.getElementById('minerRegime');
       var mTipo = document.getElementById('minerTipoSocietario');
@@ -151560,8 +151568,31 @@
       <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 8px 12px; display: flex; align-items: center; gap: 6px; flex-wrap: nowrap; overflow-x: auto; white-space: nowrap; box-shadow: 0 1px 4px rgba(0,0,0,0.04);">
         <input type="text" id="searchInput" oninput="triggerSearchWithDebounce()" placeholder="🔍 Buscar por Empresa, Sócio, CNAE, UF..." style="flex: 2; min-width: 180px; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 10px; font-size: 11px; white-space: nowrap;">
         
-                        <select id="segmentFilter" onchange="triggerSegmentFilterChange()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 8px; font-size: 11px; font-weight: 800; white-space: nowrap; cursor: pointer; max-width: 320px;">
-          <option value="ALL">Todos os Segmentos (CNAE Oficial IBGE / CONCLA)</option>
+                                <select id="segmentFilter" onchange="triggerSegmentFilterChange()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 8px; font-size: 11px; font-weight: 800; white-space: nowrap; cursor: pointer; max-width: 340px;">
+          <option value="ALL">🌐 Todos os Segmentos (Todas as Seções CNAE IBGE / CONCLA)</option>
+          <optgroup label="🏛️ AS 21 GRANDES SEÇÕES CNAE (IBGE / CONCLA OFICIAL - NÍVEL 1)">
+            <option value="CNAE_SEC_A">Seção A - Agricultura, Pecuária, Produção Florestal, Pesca e Aqüicultura (Div. 01 a 03)</option>
+            <option value="CNAE_SEC_B">Seção B - Indústrias Extrativas, Mineração, Petróleo e Gás (Div. 05 a 09)</option>
+            <option value="CNAE_SEC_C">Seção C - Indústrias de Transformação e Fábricas (Div. 10 a 33)</option>
+            <option value="CNAE_SEC_D">Seção D - Eletricidade, Gás e Energia (Div. 35)</option>
+            <option value="CNAE_SEC_E">Seção E - Água, Esgoto, Gestão de Resíduos e Descontaminação (Div. 36 a 39)</option>
+            <option value="CNAE_SEC_F">Seção F - Construção Civil, Engenharia, Edificações e Obras (Div. 41 a 43)</option>
+            <option value="CNAE_SEC_G">Seção G - Comércio Atacadista, Varejista e Reparação de Veículos (Div. 45 a 47)</option>
+            <option value="CNAE_SEC_H">Seção H - Transporte, Armazenagem, Cargas, Frotas e Correio (Div. 49 a 53)</option>
+            <option value="CNAE_SEC_I">Seção I - Alojamento, Hotelaria e Alimentação (Restaurantes e Bares) (Div. 55 a 56)</option>
+            <option value="CNAE_SEC_J">Seção J - Informação, Tecnologia, Software, Telecom e Mídia (Div. 58 a 63)</option>
+            <option value="CNAE_SEC_K">Seção K - Atividades Financeiras, Seguros, Previdência e Holdings (Div. 64 a 66)</option>
+            <option value="CNAE_SEC_L">Seção L - Atividades Imobiliárias, Loteamentos e Incorporação (Div. 68)</option>
+            <option value="CNAE_SEC_M">Seção M - Atividades Profissionais, Científicas, Técnicas e Jurídicas (Div. 69 a 75)</option>
+            <option value="CNAE_SEC_N">Seção N - Serviços Administrativos, Apoio e Terceirização (Div. 77 a 82)</option>
+            <option value="CNAE_SEC_O">Seção O - Administração Pública, Defesa e Seguridade Social (Div. 84)</option>
+            <option value="CNAE_SEC_P">Seção P - Educação, Escolas, Faculdades e Treinamento (Div. 85)</option>
+            <option value="CNAE_SEC_Q">Seção Q - Saúde Humana, Hospitais, Clínicas e Laboratórios (Div. 86 a 88)</option>
+            <option value="CNAE_SEC_R">Seção R - Artes, Cultura, Esporte e Recreação (Div. 90 a 93)</option>
+            <option value="CNAE_SEC_S">Seção S - Outras Atividades de Serviços, Associações e Sindicatos (Div. 94 a 96)</option>
+            <option value="CNAE_SEC_T">Seção T - Serviços Domésticos (Div. 97)</option>
+            <option value="CNAE_SEC_U">Seção U - Organismos Internacionais e Instituições Extraterritoriais (Div. 99)</option>
+          </optgroup>
           <optgroup label="🎯 NICHOS &amp; ICPs ESTRATÉGICOS PRX">
             <option value="SPECIAL_MED">🩺 Médicos &amp; Saúde PJ</option>
             <option value="GREEN">🌾 Agronegócio &amp; Pecuária</option>
@@ -151571,156 +151602,6 @@
             <option value="SPECIAL_LAW">⚖️ Advocacia &amp; Jurídico</option>
             <option value="SPECIAL_ACC">📊 Contabilidade &amp; Auditoria</option>
             <option value="BLUE">💻 Tecnologia &amp; Concessões</option>
-          </optgroup>
-          <optgroup label="Seção A - AGRICULTURA, PECUÁRIA, PRODUÇÃO FLORESTAL, PESCA E AQÜICULTURA">
-            <option value="CNAE_SEC_A">➡️ TODA Seção A - AGRICULTURA, PECUÁRIA, PRODUÇÃO FLORESTAL, PESCA E AQÜICULTURA</option>
-            <option value="CNAE_DIV_01">🔹 Divisão 01 - Agricultura, Pecuária e Serviços Relacionados</option>
-            <option value="CNAE_DIV_02">🔹 Divisão 02 - Produção Florestal</option>
-            <option value="CNAE_DIV_03">🔹 Divisão 03 - Pesca e Aqüicultura</option>
-          </optgroup>
-          <optgroup label="Seção B - INDÚSTRIAS EXTRATIVAS (Mineração, Gás e Petróleo)">
-            <option value="CNAE_SEC_B">➡️ TODA Seção B - INDÚSTRIAS EXTRATIVAS (Mineração, Gás e Petróleo)</option>
-            <option value="CNAE_DIV_05">🔹 Divisão 05 - Extração de Carvão Mineral</option>
-            <option value="CNAE_DIV_06">🔹 Divisão 06 - Extração de Petróleo e Gás Natural</option>
-            <option value="CNAE_DIV_07">🔹 Divisão 07 - Extração de Minerais Metálicos</option>
-            <option value="CNAE_DIV_08">🔹 Divisão 08 - Extração de Minerais Não-Metálicos</option>
-            <option value="CNAE_DIV_09">🔹 Divisão 09 - Atividades de Apoio à Extração de Minerais</option>
-          </optgroup>
-          <optgroup label="Seção C - INDÚSTRIAS DE TRANSFORMAÇÃO (Fábricas e Manufatura)">
-            <option value="CNAE_SEC_C">➡️ TODA Seção C - INDÚSTRIAS DE TRANSFORMAÇÃO (Fábricas e Manufatura)</option>
-            <option value="CNAE_DIV_10">🔹 Divisão 10 - Fabricação de Produtos Alimentícios</option>
-            <option value="CNAE_DIV_11">🔹 Divisão 11 - Fabricação de Bebidas</option>
-            <option value="CNAE_DIV_12">🔹 Divisão 12 - Fabricação de Produtos do Fumo</option>
-            <option value="CNAE_DIV_13">🔹 Divisão 13 - Fabricação de Produtos Têxteis</option>
-            <option value="CNAE_DIV_14">🔹 Divisão 14 - Confecção de Vestuário e Acessórios</option>
-            <option value="CNAE_DIV_15">🔹 Divisão 15 - Preparação de Couros, Calçados e Artefatos</option>
-            <option value="CNAE_DIV_16">🔹 Divisão 16 - Fabricação de Produtos de Madeira</option>
-            <option value="CNAE_DIV_17">🔹 Divisão 17 - Fabricação de Celulose, Papel e Derivados</option>
-            <option value="CNAE_DIV_18">🔹 Divisão 18 - Impressão e Reprodução de Gravações</option>
-            <option value="CNAE_DIV_19">🔹 Divisão 19 - Fabricação de Coque, Derivados de Petróleo e Biocombustíveis</option>
-            <option value="CNAE_DIV_20">🔹 Divisão 20 - Fabricação de Produtos Químicos</option>
-            <option value="CNAE_DIV_21">🔹 Divisão 21 - Fabricação de Farmoquímicos e Farmacêuticos</option>
-            <option value="CNAE_DIV_22">🔹 Divisão 22 - Fabricação de Produtos de Borracha e Plástico</option>
-            <option value="CNAE_DIV_23">🔹 Divisão 23 - Fabricação de Produtos de Minerais Não-Metálicos</option>
-            <option value="CNAE_DIV_24">🔹 Divisão 24 - Metalurgia Básica</option>
-            <option value="CNAE_DIV_25">🔹 Divisão 25 - Fabricação de Produtos de Metal (Usinagem/Caldeiraria)</option>
-            <option value="CNAE_DIV_26">🔹 Divisão 26 - Fabricação de Equipamentos de Informática, Eletrônicos e Ópticos</option>
-            <option value="CNAE_DIV_27">🔹 Divisão 27 - Fabricação de Máquinas, Aparelhos e Materiais Elétricos</option>
-            <option value="CNAE_DIV_28">🔹 Divisão 28 - Fabricação de Máquinas e Equipamentos</option>
-            <option value="CNAE_DIV_29">🔹 Divisão 29 - Fabricação de Veículos Automotores, Reboques e Carrocerias</option>
-            <option value="CNAE_DIV_30">🔹 Divisão 30 - Fabricação de Outros Equipamentos de Transporte (Aeroespacial/Naval)</option>
-            <option value="CNAE_DIV_31">🔹 Divisão 31 - Fabricação de Móveis</option>
-            <option value="CNAE_DIV_32">🔹 Divisão 32 - Fabricação de Produtos Diversos</option>
-            <option value="CNAE_DIV_33">🔹 Divisão 33 - Manutenção, Reparação e Instalação de Máquinas</option>
-          </optgroup>
-          <optgroup label="Seção D - ELETRICIDADE E GÁS">
-            <option value="CNAE_SEC_D">➡️ TODA Seção D - ELETRICIDADE E GÁS</option>
-            <option value="CNAE_DIV_35">🔹 Divisão 35 - Eletricidade, Gás e Outras Utilidades</option>
-          </optgroup>
-          <optgroup label="Seção E - ÁGUA, ESGOTO, GESTÃO DE RESÍDUOS E DESCONTAMINAÇÃO">
-            <option value="CNAE_SEC_E">➡️ TODA Seção E - ÁGUA, ESGOTO, GESTÃO DE RESÍDUOS E DESCONTAMINAÇÃO</option>
-            <option value="CNAE_DIV_36">🔹 Divisão 36 - Captação, Tratamento e Distribuição de Água</option>
-            <option value="CNAE_DIV_37">🔹 Divisão 37 - Esgoto e Atividades Relacionadas</option>
-            <option value="CNAE_DIV_38">🔹 Divisão 38 - Coleta, Tratamento e Disposição de Resíduos; Reciclagem</option>
-            <option value="CNAE_DIV_39">🔹 Divisão 39 - Descontaminação e Serviços de Gestão de Resíduos</option>
-          </optgroup>
-          <optgroup label="Seção F - CONSTRUÇÃO (Construção Civil e Engenharia)">
-            <option value="CNAE_SEC_F">➡️ TODA Seção F - CONSTRUÇÃO (Construção Civil e Engenharia)</option>
-            <option value="CNAE_DIV_41">🔹 Divisão 41 - Construção de Edifícios e Incorporação</option>
-            <option value="CNAE_DIV_42">🔹 Divisão 42 - Obras de Infraestrutura (Rodovias, Pontes, Túneis)</option>
-            <option value="CNAE_DIV_43">🔹 Divisão 43 - Serviços Especializados para Construção</option>
-          </optgroup>
-          <optgroup label="Seção G - COMÉRCIO; REPARAÇÃO DE VEÍCULOS E MOTOCICLETAS">
-            <option value="CNAE_SEC_G">➡️ TODA Seção G - COMÉRCIO; REPARAÇÃO DE VEÍCULOS E MOTOCICLETAS</option>
-            <option value="CNAE_DIV_45">🔹 Divisão 45 - Comércio e Reparação de Veículos Automotores</option>
-            <option value="CNAE_DIV_46">🔹 Divisão 46 - Comércio por Atacado (Atacadistas e Trading)</option>
-            <option value="CNAE_DIV_47">🔹 Divisão 47 - Comércio Varejista (Lojas e Redes)</option>
-          </optgroup>
-          <optgroup label="Seção H - TRANSPORTE, ARMAZENAGEM E CORREIO">
-            <option value="CNAE_SEC_H">➡️ TODA Seção H - TRANSPORTE, ARMAZENAGEM E CORREIO</option>
-            <option value="CNAE_DIV_49">🔹 Divisão 49 - Transporte Terrestre (Rodoviário e Ferroviário)</option>
-            <option value="CNAE_DIV_50">🔹 Divisão 50 - Transporte Aquaviário (Marítimo e Fluvial)</option>
-            <option value="CNAE_DIV_51">🔹 Divisão 51 - Transporte Aéreo (Aviação e Fretamento)</option>
-            <option value="CNAE_DIV_52">🔹 Divisão 52 - Armazenamento e Atividades Auxiliares dos Transportes</option>
-            <option value="CNAE_DIV_53">🔹 Divisão 53 - Correio e Outras Atividades de Entrega</option>
-          </optgroup>
-          <optgroup label="Seção I - ALOJAMENTO E ALIMENTAÇÃO">
-            <option value="CNAE_SEC_I">➡️ TODA Seção I - ALOJAMENTO E ALIMENTAÇÃO</option>
-            <option value="CNAE_DIV_55">🔹 Divisão 55 - Alojamento (Hotéis, Resorts e Pousadas)</option>
-            <option value="CNAE_DIV_56">🔹 Divisão 56 - Alimentação (Restaurantes, Bares e Catering)</option>
-          </optgroup>
-          <optgroup label="Seção J - INFORMAÇÃO E COMUNICAÇÃO (Software, TI e Telecom)">
-            <option value="CNAE_SEC_J">➡️ TODA Seção J - INFORMAÇÃO E COMUNICAÇÃO (Software, TI e Telecom)</option>
-            <option value="CNAE_DIV_58">🔹 Divisão 58 - Edição e Edição Integrada à Impressão</option>
-            <option value="CNAE_DIV_59">🔹 Divisão 59 - Audiovisual, Cinema, Vídeo e Música</option>
-            <option value="CNAE_DIV_60">🔹 Divisão 60 - Atividades de Rádio e Televisão</option>
-            <option value="CNAE_DIV_61">🔹 Divisão 61 - Telecomunicações</option>
-            <option value="CNAE_DIV_62">🔹 Divisão 62 - Serviços de Tecnologia da Informação (Software/SaaS)</option>
-            <option value="CNAE_DIV_63">🔹 Divisão 63 - Prestação de Serviços de Informação e Dados</option>
-          </optgroup>
-          <optgroup label="Seção K - ATIVIDADES FINANCEIRAS, DE SEGUROS E HOLDINGS">
-            <option value="CNAE_SEC_K">➡️ TODA Seção K - ATIVIDADES FINANCEIRAS, DE SEGUROS E HOLDINGS</option>
-            <option value="CNAE_DIV_64">🔹 Divisão 64 - Serviços Financeiros, Bancos e Holdings</option>
-            <option value="CNAE_DIV_65">🔹 Divisão 65 - Seguros, Resseguros, Previdência e Planos de Saúde</option>
-            <option value="CNAE_DIV_66">🔹 Divisão 66 - Atividades Auxiliares dos Serviços Financeiros e Seguros</option>
-          </optgroup>
-          <optgroup label="Seção L - ATIVIDADES IMOBILIÁRIAS">
-            <option value="CNAE_SEC_L">➡️ TODA Seção L - ATIVIDADES IMOBILIÁRIAS</option>
-            <option value="CNAE_DIV_68">🔹 Divisão 68 - Atividades Imobiliárias, Loteamentos e Locação</option>
-          </optgroup>
-          <optgroup label="Seção M - ATIVIDADES PROFISSIONAIS, CIENTÍFICAS E TÉCNICAS">
-            <option value="CNAE_SEC_M">➡️ TODA Seção M - ATIVIDADES PROFISSIONAIS, CIENTÍFICAS E TÉCNICAS</option>
-            <option value="CNAE_DIV_69">🔹 Divisão 69 - Atividades Jurídicas, de Contabilidade e Auditoria</option>
-            <option value="CNAE_DIV_70">🔹 Divisão 70 - Sedes de Empresas e Consultoria em Gestão</option>
-            <option value="CNAE_DIV_71">🔹 Divisão 71 - Arquitetura, Engenharia, Testes e Análises Técnicas</option>
-            <option value="CNAE_DIV_72">🔹 Divisão 72 - Pesquisa e Desenvolvimento Científico</option>
-            <option value="CNAE_DIV_73">🔹 Divisão 73 - Publicidade e Pesquisa de Mercado</option>
-            <option value="CNAE_DIV_74">🔹 Divisão 74 - Outras Atividades Profissionais, Científicas e Técnicas</option>
-            <option value="CNAE_DIV_75">🔹 Divisão 75 - Atividades Veterinárias</option>
-          </optgroup>
-          <optgroup label="Seção N - ATIVIDADES ADMINISTRATIVAS E SERVIÇOS COMPLEMENTARES">
-            <option value="CNAE_SEC_N">➡️ TODA Seção N - ATIVIDADES ADMINISTRATIVAS E SERVIÇOS COMPLEMENTARES</option>
-            <option value="CNAE_DIV_77">🔹 Divisão 77 - Locação de Bens Móveis e Máquinas</option>
-            <option value="CNAE_DIV_78">🔹 Divisão 78 - Seleção, Agenciamento e Locação de Mão-de-Obra</option>
-            <option value="CNAE_DIV_79">🔹 Divisão 79 - Agências de Viagens e Operadores Turísticos</option>
-            <option value="CNAE_DIV_80">🔹 Divisão 80 - Vigilância, Segurança Privada e Investigação</option>
-            <option value="CNAE_DIV_81">🔹 Divisão 81 - Serviços para Edifícios, Limpeza e Paisagismo</option>
-            <option value="CNAE_DIV_82">🔹 Divisão 82 - Apoio Administrativo, Escritórios e Call Center</option>
-          </optgroup>
-          <optgroup label="Seção O - ADMINISTRAÇÃO PÚBLICA, DEFESA E SEGURIDADE SOCIAL">
-            <option value="CNAE_SEC_O">➡️ TODA Seção O - ADMINISTRAÇÃO PÚBLICA, DEFESA E SEGURIDADE SOCIAL</option>
-            <option value="CNAE_DIV_84">🔹 Divisão 84 - Administração Pública, Defesa e Seguridade Social</option>
-          </optgroup>
-          <optgroup label="Seção P - EDUCAÇÃO (Ensino e Faculdades)">
-            <option value="CNAE_SEC_P">➡️ TODA Seção P - EDUCAÇÃO (Ensino e Faculdades)</option>
-            <option value="CNAE_DIV_85">🔹 Divisão 85 - Educação (Escolas, Universidades e Cursos)</option>
-          </optgroup>
-          <optgroup label="Seção Q - SAÚDE HUMANA E SERVIÇOS SOCIAIS">
-            <option value="CNAE_SEC_Q">➡️ TODA Seção Q - SAÚDE HUMANA E SERVIÇOS SOCIAIS</option>
-            <option value="CNAE_DIV_86">🔹 Divisão 86 - Atividades de Atenção à Saúde Humana (Hospitais/Clínicas)</option>
-            <option value="CNAE_DIV_87">🔹 Divisão 87 - Assistência à Saúde com Alojamento</option>
-            <option value="CNAE_DIV_88">🔹 Divisão 88 - Serviços de Assistência Social sem Alojamento</option>
-          </optgroup>
-          <optgroup label="Seção R - ARTES, CULTURA, ESPORTE E RECREAÇÃO">
-            <option value="CNAE_SEC_R">➡️ TODA Seção R - ARTES, CULTURA, ESPORTE E RECREAÇÃO</option>
-            <option value="CNAE_DIV_90">🔹 Divisão 90 - Atividades Artísticas, Criativas e de Espetáculos</option>
-            <option value="CNAE_DIV_91">🔹 Divisão 91 - Patrimônio Cultural e Ambiental (Museus/Parques)</option>
-            <option value="CNAE_DIV_92">🔹 Divisão 92 - Jogos de Azar e Apostas</option>
-            <option value="CNAE_DIV_93">🔹 Divisão 93 - Atividades Esportivas, Clubes, Academias e Recreação</option>
-          </optgroup>
-          <optgroup label="Seção S - OUTRAS ATIVIDADES DE SERVIÇOS">
-            <option value="CNAE_SEC_S">➡️ TODA Seção S - OUTRAS ATIVIDADES DE SERVIÇOS</option>
-            <option value="CNAE_DIV_94">🔹 Divisão 94 - Atividades de Organizações Associativas e Sindicatos</option>
-            <option value="CNAE_DIV_95">🔹 Divisão 95 - Reparação de Informática e Bens Pessoais/Domésticos</option>
-            <option value="CNAE_DIV_96">🔹 Divisão 96 - Outras Atividades de Serviços Pessoais</option>
-          </optgroup>
-          <optgroup label="Seção T - SERVIÇOS DOMÉSTICOS">
-            <option value="CNAE_SEC_T">➡️ TODA Seção T - SERVIÇOS DOMÉSTICOS</option>
-            <option value="CNAE_DIV_97">🔹 Divisão 97 - Serviços Domésticos</option>
-          </optgroup>
-          <optgroup label="Seção U - ORGANISMOS INTERNACIONAIS E EXTRATERRITORIAIS">
-            <option value="CNAE_SEC_U">➡️ TODA Seção U - ORGANISMOS INTERNACIONAIS E EXTRATERRITORIAIS</option>
-            <option value="CNAE_DIV_99">🔹 Divisão 99 - Organismos Internacionais e Outras Instituições</option>
           </optgroup>
         </select>
 
@@ -151904,175 +151785,46 @@
         </div>
         <!-- FORMULÁRIO DE FILTROS PARA MINERAÇÃO -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;">
-          <!-- SEGMENTO DESEJADO / NICHO -->
+                    <!-- SEGMENTO DESEJADO / NICHO -->
           <div>
-            <label style="font-size: 11px; font-weight: 800; color: var(--text-main); text-transform: uppercase; margin-bottom: 5px; display: block;">Segmento desejado / nicho</label>
-            <div style="position: relative;">
-              <select id="minerSegmentSelect" onchange="handleMinerSegmentSelectChange(this)" style="width: 100%; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 12px; font-size: 12px; font-weight: 700; margin-bottom: 6px;">
-              <option value="ALL">Selecione uma Grande Seção ou Divisão CNAE (Opcional)</option>
+            <label style="font-size: 11px; font-weight: 800; color: var(--text-main); text-transform: uppercase; margin-bottom: 5px; display: block;">🏛️ Segmento / Grande Seção CNAE (IBGE / CONCLA):</label>
+            <select id="minerSegmentSelect" onchange="handleMinerSegmentChange()" style="width: 100%; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 12px; font-size: 12px; font-weight: 700;">
+              <option value="ALL">Todas as Seções & Segmentos</option>
+              <optgroup label="🏛️ AS 21 GRANDES SEÇÕES CNAE (IBGE / CONCLA OFICIAL)">
+                <option value="Seção A - Agricultura, Pecuária, Florestal e Pesca">Seção A - Agricultura, Pecuária, Florestal e Pesca (Div. 01 a 03)</option>
+                <option value="Seção B - Indústrias Extrativas, Mineração e Petróleo">Seção B - Indústrias Extrativas, Mineração e Petróleo (Div. 05 a 09)</option>
+                <option value="Seção C - Indústrias de Transformação e Fábricas" selected>Seção C - Indústrias de Transformação e Fábricas (Div. 10 a 33)</option>
+                <option value="Seção D - Eletricidade, Gás e Energia">Seção D - Eletricidade, Gás e Energia (Div. 35)</option>
+                <option value="Seção E - Água, Esgoto, Resíduos e Saneamento">Seção E - Água, Esgoto, Resíduos e Saneamento (Div. 36 a 39)</option>
+                <option value="Seção F - Construção Civil, Engenharia e Obras">Seção F - Construção Civil, Engenharia e Obras (Div. 41 a 43)</option>
+                <option value="Seção G - Comércio Atacadista, Varejista e Reparação">Seção G - Comércio Atacadista, Varejista e Reparação (Div. 45 a 47)</option>
+                <option value="Seção H - Transporte, Armazenagem, Cargas e Logística">Seção H - Transporte, Armazenagem, Cargas e Logística (Div. 49 a 53)</option>
+                <option value="Seção I - Alojamento, Hotelaria e Alimentação">Seção I - Alojamento, Hotelaria e Alimentação (Div. 55 a 56)</option>
+                <option value="Seção J - Informação, Tecnologia, Software e Telecom">Seção J - Informação, Tecnologia, Software e Telecom (Div. 58 a 63)</option>
+                <option value="Seção K - Atividades Financeiras, Seguros e Holdings">Seção K - Atividades Financeiras, Seguros e Holdings (Div. 64 a 66)</option>
+                <option value="Seção L - Atividades Imobiliárias e Loteamentos">Seção L - Atividades Imobiliárias e Loteamentos (Div. 68)</option>
+                <option value="Seção M - Atividades Profissionais, Jurídicas e Técnicas">Seção M - Atividades Profissionais, Jurídicas e Técnicas (Div. 69 a 75)</option>
+                <option value="Seção N - Serviços Administrativos e Terceirização">Seção N - Serviços Administrativos e Terceirização (Div. 77 a 82)</option>
+                <option value="Seção O - Administração Pública e Seguridade">Seção O - Administração Pública e Seguridade (Div. 84)</option>
+                <option value="Seção P - Educação, Escolas e Faculdades">Seção P - Educação, Escolas e Faculdades (Div. 85)</option>
+                <option value="Seção Q - Saúde Humana, Hospitais e Clínicas">Seção Q - Saúde Humana, Hospitais e Clínicas (Div. 86 a 88)</option>
+                <option value="Seção R - Artes, Cultura, Esporte e Recreação">Seção R - Artes, Cultura, Esporte e Recreação (Div. 90 a 93)</option>
+                <option value="Seção S - Outras Atividades de Serviços">Seção S - Outras Atividades de Serviços (Div. 94 a 96)</option>
+                <option value="Seção T - Serviços Domésticos">Seção T - Serviços Domésticos (Div. 97)</option>
+                <option value="Seção U - Organismos Internacionais">Seção U - Organismos Internacionais (Div. 99)</option>
+              </optgroup>
               <optgroup label="🎯 NICHOS &amp; ICPs ESTRATÉGICOS PRX">
-                <option value="Médicos &amp; Saúde PJ">🩺 Médicos &amp; Saúde PJ</option>
-                <option value="Agronegócio &amp; Indústrias">🌾 Agronegócio &amp; Indústrias</option>
-                <option value="Fábricas &amp; Indústrias">🏭 Fábricas &amp; Indústrias</option>
-                <option value="Exportadoras &amp; Trading">🚢 Exportadoras &amp; Trading</option>
-                <option value="Logística &amp; Frotas">🚚 Logística &amp; Frotas</option>
-                <option value="Advocacia &amp; Jurídico">⚖️ Advocacia &amp; Jurídico</option>
-                <option value="Contabilidade &amp; Auditoria">📊 Contabilidade &amp; Auditoria</option>
-                <option value="Tecnologia &amp; Software">💻 Tecnologia &amp; Software</option>
-              </optgroup>
-              <optgroup label="Seção A - AGRICULTURA, PECUÁRIA, PRODUÇÃO FLORESTAL, PESCA E AQÜICULTURA">
-                <option value="Seção A - AGRICULTURA, PECUÁRIA, PRODUÇÃO FLORESTAL, PESCA E AQÜICULTURA">➡️ Seção A - AGRICULTURA, PECUÁRIA, PRODUÇÃO FLORESTAL, PESCA E AQÜICULTURA</option>
-                <option value="Divisão 01 - Agricultura, Pecuária e Serviços Relacionados">🔹 Divisão 01 - Agricultura, Pecuária e Serviços Relacionados</option>
-                <option value="Divisão 02 - Produção Florestal">🔹 Divisão 02 - Produção Florestal</option>
-                <option value="Divisão 03 - Pesca e Aqüicultura">🔹 Divisão 03 - Pesca e Aqüicultura</option>
-              </optgroup>
-              <optgroup label="Seção B - INDÚSTRIAS EXTRATIVAS (Mineração, Gás e Petróleo)">
-                <option value="Seção B - INDÚSTRIAS EXTRATIVAS (Mineração, Gás e Petróleo)">➡️ Seção B - INDÚSTRIAS EXTRATIVAS (Mineração, Gás e Petróleo)</option>
-                <option value="Divisão 05 - Extração de Carvão Mineral">🔹 Divisão 05 - Extração de Carvão Mineral</option>
-                <option value="Divisão 06 - Extração de Petróleo e Gás Natural">🔹 Divisão 06 - Extração de Petróleo e Gás Natural</option>
-                <option value="Divisão 07 - Extração de Minerais Metálicos">🔹 Divisão 07 - Extração de Minerais Metálicos</option>
-                <option value="Divisão 08 - Extração de Minerais Não-Metálicos">🔹 Divisão 08 - Extração de Minerais Não-Metálicos</option>
-                <option value="Divisão 09 - Atividades de Apoio à Extração de Minerais">🔹 Divisão 09 - Atividades de Apoio à Extração de Minerais</option>
-              </optgroup>
-              <optgroup label="Seção C - INDÚSTRIAS DE TRANSFORMAÇÃO (Fábricas e Manufatura)">
-                <option value="Seção C - INDÚSTRIAS DE TRANSFORMAÇÃO (Fábricas e Manufatura)">➡️ Seção C - INDÚSTRIAS DE TRANSFORMAÇÃO (Fábricas e Manufatura)</option>
-                <option value="Divisão 10 - Fabricação de Produtos Alimentícios">🔹 Divisão 10 - Fabricação de Produtos Alimentícios</option>
-                <option value="Divisão 11 - Fabricação de Bebidas">🔹 Divisão 11 - Fabricação de Bebidas</option>
-                <option value="Divisão 12 - Fabricação de Produtos do Fumo">🔹 Divisão 12 - Fabricação de Produtos do Fumo</option>
-                <option value="Divisão 13 - Fabricação de Produtos Têxteis">🔹 Divisão 13 - Fabricação de Produtos Têxteis</option>
-                <option value="Divisão 14 - Confecção de Vestuário e Acessórios">🔹 Divisão 14 - Confecção de Vestuário e Acessórios</option>
-                <option value="Divisão 15 - Preparação de Couros, Calçados e Artefatos">🔹 Divisão 15 - Preparação de Couros, Calçados e Artefatos</option>
-                <option value="Divisão 16 - Fabricação de Produtos de Madeira">🔹 Divisão 16 - Fabricação de Produtos de Madeira</option>
-                <option value="Divisão 17 - Fabricação de Celulose, Papel e Derivados">🔹 Divisão 17 - Fabricação de Celulose, Papel e Derivados</option>
-                <option value="Divisão 18 - Impressão e Reprodução de Gravações">🔹 Divisão 18 - Impressão e Reprodução de Gravações</option>
-                <option value="Divisão 19 - Fabricação de Coque, Derivados de Petróleo e Biocombustíveis">🔹 Divisão 19 - Fabricação de Coque, Derivados de Petróleo e Biocombustíveis</option>
-                <option value="Divisão 20 - Fabricação de Produtos Químicos">🔹 Divisão 20 - Fabricação de Produtos Químicos</option>
-                <option value="Divisão 21 - Fabricação de Farmoquímicos e Farmacêuticos">🔹 Divisão 21 - Fabricação de Farmoquímicos e Farmacêuticos</option>
-                <option value="Divisão 22 - Fabricação de Produtos de Borracha e Plástico">🔹 Divisão 22 - Fabricação de Produtos de Borracha e Plástico</option>
-                <option value="Divisão 23 - Fabricação de Produtos de Minerais Não-Metálicos">🔹 Divisão 23 - Fabricação de Produtos de Minerais Não-Metálicos</option>
-                <option value="Divisão 24 - Metalurgia Básica">🔹 Divisão 24 - Metalurgia Básica</option>
-                <option value="Divisão 25 - Fabricação de Produtos de Metal (Usinagem/Caldeiraria)">🔹 Divisão 25 - Fabricação de Produtos de Metal (Usinagem/Caldeiraria)</option>
-                <option value="Divisão 26 - Fabricação de Equipamentos de Informática, Eletrônicos e Ópticos">🔹 Divisão 26 - Fabricação de Equipamentos de Informática, Eletrônicos e Ópticos</option>
-                <option value="Divisão 27 - Fabricação de Máquinas, Aparelhos e Materiais Elétricos">🔹 Divisão 27 - Fabricação de Máquinas, Aparelhos e Materiais Elétricos</option>
-                <option value="Divisão 28 - Fabricação de Máquinas e Equipamentos">🔹 Divisão 28 - Fabricação de Máquinas e Equipamentos</option>
-                <option value="Divisão 29 - Fabricação de Veículos Automotores, Reboques e Carrocerias">🔹 Divisão 29 - Fabricação de Veículos Automotores, Reboques e Carrocerias</option>
-                <option value="Divisão 30 - Fabricação de Outros Equipamentos de Transporte (Aeroespacial/Naval)">🔹 Divisão 30 - Fabricação de Outros Equipamentos de Transporte (Aeroespacial/Naval)</option>
-                <option value="Divisão 31 - Fabricação de Móveis">🔹 Divisão 31 - Fabricação de Móveis</option>
-                <option value="Divisão 32 - Fabricação de Produtos Diversos">🔹 Divisão 32 - Fabricação de Produtos Diversos</option>
-                <option value="Divisão 33 - Manutenção, Reparação e Instalação de Máquinas">🔹 Divisão 33 - Manutenção, Reparação e Instalação de Máquinas</option>
-              </optgroup>
-              <optgroup label="Seção D - ELETRICIDADE E GÁS">
-                <option value="Seção D - ELETRICIDADE E GÁS">➡️ Seção D - ELETRICIDADE E GÁS</option>
-                <option value="Divisão 35 - Eletricidade, Gás e Outras Utilidades">🔹 Divisão 35 - Eletricidade, Gás e Outras Utilidades</option>
-              </optgroup>
-              <optgroup label="Seção E - ÁGUA, ESGOTO, GESTÃO DE RESÍDUOS E DESCONTAMINAÇÃO">
-                <option value="Seção E - ÁGUA, ESGOTO, GESTÃO DE RESÍDUOS E DESCONTAMINAÇÃO">➡️ Seção E - ÁGUA, ESGOTO, GESTÃO DE RESÍDUOS E DESCONTAMINAÇÃO</option>
-                <option value="Divisão 36 - Captação, Tratamento e Distribuição de Água">🔹 Divisão 36 - Captação, Tratamento e Distribuição de Água</option>
-                <option value="Divisão 37 - Esgoto e Atividades Relacionadas">🔹 Divisão 37 - Esgoto e Atividades Relacionadas</option>
-                <option value="Divisão 38 - Coleta, Tratamento e Disposição de Resíduos; Reciclagem">🔹 Divisão 38 - Coleta, Tratamento e Disposição de Resíduos; Reciclagem</option>
-                <option value="Divisão 39 - Descontaminação e Serviços de Gestão de Resíduos">🔹 Divisão 39 - Descontaminação e Serviços de Gestão de Resíduos</option>
-              </optgroup>
-              <optgroup label="Seção F - CONSTRUÇÃO (Construção Civil e Engenharia)">
-                <option value="Seção F - CONSTRUÇÃO (Construção Civil e Engenharia)">➡️ Seção F - CONSTRUÇÃO (Construção Civil e Engenharia)</option>
-                <option value="Divisão 41 - Construção de Edifícios e Incorporação">🔹 Divisão 41 - Construção de Edifícios e Incorporação</option>
-                <option value="Divisão 42 - Obras de Infraestrutura (Rodovias, Pontes, Túneis)">🔹 Divisão 42 - Obras de Infraestrutura (Rodovias, Pontes, Túneis)</option>
-                <option value="Divisão 43 - Serviços Especializados para Construção">🔹 Divisão 43 - Serviços Especializados para Construção</option>
-              </optgroup>
-              <optgroup label="Seção G - COMÉRCIO; REPARAÇÃO DE VEÍCULOS E MOTOCICLETAS">
-                <option value="Seção G - COMÉRCIO; REPARAÇÃO DE VEÍCULOS E MOTOCICLETAS">➡️ Seção G - COMÉRCIO; REPARAÇÃO DE VEÍCULOS E MOTOCICLETAS</option>
-                <option value="Divisão 45 - Comércio e Reparação de Veículos Automotores">🔹 Divisão 45 - Comércio e Reparação de Veículos Automotores</option>
-                <option value="Divisão 46 - Comércio por Atacado (Atacadistas e Trading)">🔹 Divisão 46 - Comércio por Atacado (Atacadistas e Trading)</option>
-                <option value="Divisão 47 - Comércio Varejista (Lojas e Redes)">🔹 Divisão 47 - Comércio Varejista (Lojas e Redes)</option>
-              </optgroup>
-              <optgroup label="Seção H - TRANSPORTE, ARMAZENAGEM E CORREIO">
-                <option value="Seção H - TRANSPORTE, ARMAZENAGEM E CORREIO">➡️ Seção H - TRANSPORTE, ARMAZENAGEM E CORREIO</option>
-                <option value="Divisão 49 - Transporte Terrestre (Rodoviário e Ferroviário)">🔹 Divisão 49 - Transporte Terrestre (Rodoviário e Ferroviário)</option>
-                <option value="Divisão 50 - Transporte Aquaviário (Marítimo e Fluvial)">🔹 Divisão 50 - Transporte Aquaviário (Marítimo e Fluvial)</option>
-                <option value="Divisão 51 - Transporte Aéreo (Aviação e Fretamento)">🔹 Divisão 51 - Transporte Aéreo (Aviação e Fretamento)</option>
-                <option value="Divisão 52 - Armazenamento e Atividades Auxiliares dos Transportes">🔹 Divisão 52 - Armazenamento e Atividades Auxiliares dos Transportes</option>
-                <option value="Divisão 53 - Correio e Outras Atividades de Entrega">🔹 Divisão 53 - Correio e Outras Atividades de Entrega</option>
-              </optgroup>
-              <optgroup label="Seção I - ALOJAMENTO E ALIMENTAÇÃO">
-                <option value="Seção I - ALOJAMENTO E ALIMENTAÇÃO">➡️ Seção I - ALOJAMENTO E ALIMENTAÇÃO</option>
-                <option value="Divisão 55 - Alojamento (Hotéis, Resorts e Pousadas)">🔹 Divisão 55 - Alojamento (Hotéis, Resorts e Pousadas)</option>
-                <option value="Divisão 56 - Alimentação (Restaurantes, Bares e Catering)">🔹 Divisão 56 - Alimentação (Restaurantes, Bares e Catering)</option>
-              </optgroup>
-              <optgroup label="Seção J - INFORMAÇÃO E COMUNICAÇÃO (Software, TI e Telecom)">
-                <option value="Seção J - INFORMAÇÃO E COMUNICAÇÃO (Software, TI e Telecom)">➡️ Seção J - INFORMAÇÃO E COMUNICAÇÃO (Software, TI e Telecom)</option>
-                <option value="Divisão 58 - Edição e Edição Integrada à Impressão">🔹 Divisão 58 - Edição e Edição Integrada à Impressão</option>
-                <option value="Divisão 59 - Audiovisual, Cinema, Vídeo e Música">🔹 Divisão 59 - Audiovisual, Cinema, Vídeo e Música</option>
-                <option value="Divisão 60 - Atividades de Rádio e Televisão">🔹 Divisão 60 - Atividades de Rádio e Televisão</option>
-                <option value="Divisão 61 - Telecomunicações">🔹 Divisão 61 - Telecomunicações</option>
-                <option value="Divisão 62 - Serviços de Tecnologia da Informação (Software/SaaS)">🔹 Divisão 62 - Serviços de Tecnologia da Informação (Software/SaaS)</option>
-                <option value="Divisão 63 - Prestação de Serviços de Informação e Dados">🔹 Divisão 63 - Prestação de Serviços de Informação e Dados</option>
-              </optgroup>
-              <optgroup label="Seção K - ATIVIDADES FINANCEIRAS, DE SEGUROS E HOLDINGS">
-                <option value="Seção K - ATIVIDADES FINANCEIRAS, DE SEGUROS E HOLDINGS">➡️ Seção K - ATIVIDADES FINANCEIRAS, DE SEGUROS E HOLDINGS</option>
-                <option value="Divisão 64 - Serviços Financeiros, Bancos e Holdings">🔹 Divisão 64 - Serviços Financeiros, Bancos e Holdings</option>
-                <option value="Divisão 65 - Seguros, Resseguros, Previdência e Planos de Saúde">🔹 Divisão 65 - Seguros, Resseguros, Previdência e Planos de Saúde</option>
-                <option value="Divisão 66 - Atividades Auxiliares dos Serviços Financeiros e Seguros">🔹 Divisão 66 - Atividades Auxiliares dos Serviços Financeiros e Seguros</option>
-              </optgroup>
-              <optgroup label="Seção L - ATIVIDADES IMOBILIÁRIAS">
-                <option value="Seção L - ATIVIDADES IMOBILIÁRIAS">➡️ Seção L - ATIVIDADES IMOBILIÁRIAS</option>
-                <option value="Divisão 68 - Atividades Imobiliárias, Loteamentos e Locação">🔹 Divisão 68 - Atividades Imobiliárias, Loteamentos e Locação</option>
-              </optgroup>
-              <optgroup label="Seção M - ATIVIDADES PROFISSIONAIS, CIENTÍFICAS E TÉCNICAS">
-                <option value="Seção M - ATIVIDADES PROFISSIONAIS, CIENTÍFICAS E TÉCNICAS">➡️ Seção M - ATIVIDADES PROFISSIONAIS, CIENTÍFICAS E TÉCNICAS</option>
-                <option value="Divisão 69 - Atividades Jurídicas, de Contabilidade e Auditoria">🔹 Divisão 69 - Atividades Jurídicas, de Contabilidade e Auditoria</option>
-                <option value="Divisão 70 - Sedes de Empresas e Consultoria em Gestão">🔹 Divisão 70 - Sedes de Empresas e Consultoria em Gestão</option>
-                <option value="Divisão 71 - Arquitetura, Engenharia, Testes e Análises Técnicas">🔹 Divisão 71 - Arquitetura, Engenharia, Testes e Análises Técnicas</option>
-                <option value="Divisão 72 - Pesquisa e Desenvolvimento Científico">🔹 Divisão 72 - Pesquisa e Desenvolvimento Científico</option>
-                <option value="Divisão 73 - Publicidade e Pesquisa de Mercado">🔹 Divisão 73 - Publicidade e Pesquisa de Mercado</option>
-                <option value="Divisão 74 - Outras Atividades Profissionais, Científicas e Técnicas">🔹 Divisão 74 - Outras Atividades Profissionais, Científicas e Técnicas</option>
-                <option value="Divisão 75 - Atividades Veterinárias">🔹 Divisão 75 - Atividades Veterinárias</option>
-              </optgroup>
-              <optgroup label="Seção N - ATIVIDADES ADMINISTRATIVAS E SERVIÇOS COMPLEMENTARES">
-                <option value="Seção N - ATIVIDADES ADMINISTRATIVAS E SERVIÇOS COMPLEMENTARES">➡️ Seção N - ATIVIDADES ADMINISTRATIVAS E SERVIÇOS COMPLEMENTARES</option>
-                <option value="Divisão 77 - Locação de Bens Móveis e Máquinas">🔹 Divisão 77 - Locação de Bens Móveis e Máquinas</option>
-                <option value="Divisão 78 - Seleção, Agenciamento e Locação de Mão-de-Obra">🔹 Divisão 78 - Seleção, Agenciamento e Locação de Mão-de-Obra</option>
-                <option value="Divisão 79 - Agências de Viagens e Operadores Turísticos">🔹 Divisão 79 - Agências de Viagens e Operadores Turísticos</option>
-                <option value="Divisão 80 - Vigilância, Segurança Privada e Investigação">🔹 Divisão 80 - Vigilância, Segurança Privada e Investigação</option>
-                <option value="Divisão 81 - Serviços para Edifícios, Limpeza e Paisagismo">🔹 Divisão 81 - Serviços para Edifícios, Limpeza e Paisagismo</option>
-                <option value="Divisão 82 - Apoio Administrativo, Escritórios e Call Center">🔹 Divisão 82 - Apoio Administrativo, Escritórios e Call Center</option>
-              </optgroup>
-              <optgroup label="Seção O - ADMINISTRAÇÃO PÚBLICA, DEFESA E SEGURIDADE SOCIAL">
-                <option value="Seção O - ADMINISTRAÇÃO PÚBLICA, DEFESA E SEGURIDADE SOCIAL">➡️ Seção O - ADMINISTRAÇÃO PÚBLICA, DEFESA E SEGURIDADE SOCIAL</option>
-                <option value="Divisão 84 - Administração Pública, Defesa e Seguridade Social">🔹 Divisão 84 - Administração Pública, Defesa e Seguridade Social</option>
-              </optgroup>
-              <optgroup label="Seção P - EDUCAÇÃO (Ensino e Faculdades)">
-                <option value="Seção P - EDUCAÇÃO (Ensino e Faculdades)">➡️ Seção P - EDUCAÇÃO (Ensino e Faculdades)</option>
-                <option value="Divisão 85 - Educação (Escolas, Universidades e Cursos)">🔹 Divisão 85 - Educação (Escolas, Universidades e Cursos)</option>
-              </optgroup>
-              <optgroup label="Seção Q - SAÚDE HUMANA E SERVIÇOS SOCIAIS">
-                <option value="Seção Q - SAÚDE HUMANA E SERVIÇOS SOCIAIS">➡️ Seção Q - SAÚDE HUMANA E SERVIÇOS SOCIAIS</option>
-                <option value="Divisão 86 - Atividades de Atenção à Saúde Humana (Hospitais/Clínicas)">🔹 Divisão 86 - Atividades de Atenção à Saúde Humana (Hospitais/Clínicas)</option>
-                <option value="Divisão 87 - Assistência à Saúde com Alojamento">🔹 Divisão 87 - Assistência à Saúde com Alojamento</option>
-                <option value="Divisão 88 - Serviços de Assistência Social sem Alojamento">🔹 Divisão 88 - Serviços de Assistência Social sem Alojamento</option>
-              </optgroup>
-              <optgroup label="Seção R - ARTES, CULTURA, ESPORTE E RECREAÇÃO">
-                <option value="Seção R - ARTES, CULTURA, ESPORTE E RECREAÇÃO">➡️ Seção R - ARTES, CULTURA, ESPORTE E RECREAÇÃO</option>
-                <option value="Divisão 90 - Atividades Artísticas, Criativas e de Espetáculos">🔹 Divisão 90 - Atividades Artísticas, Criativas e de Espetáculos</option>
-                <option value="Divisão 91 - Patrimônio Cultural e Ambiental (Museus/Parques)">🔹 Divisão 91 - Patrimônio Cultural e Ambiental (Museus/Parques)</option>
-                <option value="Divisão 92 - Jogos de Azar e Apostas">🔹 Divisão 92 - Jogos de Azar e Apostas</option>
-                <option value="Divisão 93 - Atividades Esportivas, Clubes, Academias e Recreação">🔹 Divisão 93 - Atividades Esportivas, Clubes, Academias e Recreação</option>
-              </optgroup>
-              <optgroup label="Seção S - OUTRAS ATIVIDADES DE SERVIÇOS">
-                <option value="Seção S - OUTRAS ATIVIDADES DE SERVIÇOS">➡️ Seção S - OUTRAS ATIVIDADES DE SERVIÇOS</option>
-                <option value="Divisão 94 - Atividades de Organizações Associativas e Sindicatos">🔹 Divisão 94 - Atividades de Organizações Associativas e Sindicatos</option>
-                <option value="Divisão 95 - Reparação de Informática e Bens Pessoais/Domésticos">🔹 Divisão 95 - Reparação de Informática e Bens Pessoais/Domésticos</option>
-                <option value="Divisão 96 - Outras Atividades de Serviços Pessoais">🔹 Divisão 96 - Outras Atividades de Serviços Pessoais</option>
-              </optgroup>
-              <optgroup label="Seção T - SERVIÇOS DOMÉSTICOS">
-                <option value="Seção T - SERVIÇOS DOMÉSTICOS">➡️ Seção T - SERVIÇOS DOMÉSTICOS</option>
-                <option value="Divisão 97 - Serviços Domésticos">🔹 Divisão 97 - Serviços Domésticos</option>
-              </optgroup>
-              <optgroup label="Seção U - ORGANISMOS INTERNACIONAIS E EXTRATERRITORIAIS">
-                <option value="Seção U - ORGANISMOS INTERNACIONAIS E EXTRATERRITORIAIS">➡️ Seção U - ORGANISMOS INTERNACIONAIS E EXTRATERRITORIAIS</option>
-                <option value="Divisão 99 - Organismos Internacionais e Outras Instituições">🔹 Divisão 99 - Organismos Internacionais e Outras Instituições</option>
+                <option value="Médicos & Saúde PJ">🩺 Médicos & Saúde PJ</option>
+                <option value="Agronegócio & Pecuária">🌾 Agronegócio & Pecuária</option>
+                <option value="Fábricas & Indústrias">🏭 Fábricas & Indústrias</option>
+                <option value="Exportadoras & Trading">🚢 Exportadoras & Trading</option>
+                <option value="Logística & Frotas">🚚 Logística & Frotas</option>
+                <option value="Advocacia & Jurídico">⚖️ Advocacia & Jurídico</option>
+                <option value="Contabilidade & Auditoria">📊 Contabilidade & Auditoria</option>
+                <option value="Tecnologia & Concessões">💻 Tecnologia & Concessões</option>
               </optgroup>
             </select>
-              <input type="text" id="minerSegmentInput" value="Agronegócio & Indústrias" placeholder="✏️ Digite o segmento desejado / nicho..." style="width: 100%; background: var(--input-bg); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 14px; font-size: 13px; font-weight: 700;">
-            </div>
+            <input type="hidden" id="minerSegmentInput" value="Seção C - Indústrias de Transformação e Fábricas">
           </div>
 
           <!-- TIPO SOCIETÁRIO -->
