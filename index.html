@@ -151568,76 +151568,68 @@
       <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 8px 12px; display: flex; align-items: center; gap: 6px; flex-wrap: nowrap; overflow-x: auto; white-space: nowrap; box-shadow: 0 1px 4px rgba(0,0,0,0.04);">
         <input type="text" id="searchInput" oninput="triggerSearchWithDebounce()" placeholder="🔍 Buscar por Empresa, Sócio, CNAE, UF..." style="flex: 2; min-width: 180px; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 10px; font-size: 11px; white-space: nowrap;">
         
-                                <select id="segmentFilter" onchange="triggerSegmentFilterChange()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 8px; font-size: 11px; font-weight: 800; white-space: nowrap; cursor: pointer; max-width: 340px;">
+                                        <select id="segmentFilter" onchange="triggerSegmentFilterChange()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 8px; font-size: 11px; font-weight: 800; white-space: nowrap; cursor: pointer; max-width: 340px;">
           <option value="ALL">🌐 Todos os Segmentos (Todas as Seções CNAE IBGE / CONCLA)</option>
-          <optgroup label="🏛️ AS 21 GRANDES SEÇÕES CNAE (IBGE / CONCLA OFICIAL - NÍVEL 1)">
-            <option value="CNAE_SEC_A">Seção A - Agricultura, Pecuária, Produção Florestal, Pesca e Aqüicultura (Div. 01 a 03)</option>
-            <option value="CNAE_SEC_B">Seção B - Indústrias Extrativas, Mineração, Petróleo e Gás (Div. 05 a 09)</option>
-            <option value="CNAE_SEC_C">Seção C - Indústrias de Transformação e Fábricas (Div. 10 a 33)</option>
-            <option value="CNAE_SEC_D">Seção D - Eletricidade, Gás e Energia (Div. 35)</option>
-            <option value="CNAE_SEC_E">Seção E - Água, Esgoto, Gestão de Resíduos e Descontaminação (Div. 36 a 39)</option>
-            <option value="CNAE_SEC_F">Seção F - Construção Civil, Engenharia, Edificações e Obras (Div. 41 a 43)</option>
-            <option value="CNAE_SEC_G">Seção G - Comércio Atacadista, Varejista e Reparação de Veículos (Div. 45 a 47)</option>
-            <option value="CNAE_SEC_H">Seção H - Transporte, Armazenagem, Cargas, Frotas e Correio (Div. 49 a 53)</option>
-            <option value="CNAE_SEC_I">Seção I - Alojamento, Hotelaria e Alimentação (Restaurantes e Bares) (Div. 55 a 56)</option>
-            <option value="CNAE_SEC_J">Seção J - Informação, Tecnologia, Software, Telecom e Mídia (Div. 58 a 63)</option>
-            <option value="CNAE_SEC_K">Seção K - Atividades Financeiras, Seguros, Previdência e Holdings (Div. 64 a 66)</option>
-            <option value="CNAE_SEC_L">Seção L - Atividades Imobiliárias, Loteamentos e Incorporação (Div. 68)</option>
-            <option value="CNAE_SEC_M">Seção M - Atividades Profissionais, Científicas, Técnicas e Jurídicas (Div. 69 a 75)</option>
-            <option value="CNAE_SEC_N">Seção N - Serviços Administrativos, Apoio e Terceirização (Div. 77 a 82)</option>
-            <option value="CNAE_SEC_O">Seção O - Administração Pública, Defesa e Seguridade Social (Div. 84)</option>
-            <option value="CNAE_SEC_P">Seção P - Educação, Escolas, Faculdades e Treinamento (Div. 85)</option>
-            <option value="CNAE_SEC_Q">Seção Q - Saúde Humana, Hospitais, Clínicas e Laboratórios (Div. 86 a 88)</option>
-            <option value="CNAE_SEC_R">Seção R - Artes, Cultura, Esporte e Recreação (Div. 90 a 93)</option>
-            <option value="CNAE_SEC_S">Seção S - Outras Atividades de Serviços, Associações e Sindicatos (Div. 94 a 96)</option>
-            <option value="CNAE_SEC_T">Seção T - Serviços Domésticos (Div. 97)</option>
-            <option value="CNAE_SEC_U">Seção U - Organismos Internacionais e Instituições Extraterritoriais (Div. 99)</option>
-          </optgroup>
-          <optgroup label="🎯 NICHOS &amp; ICPs ESTRATÉGICOS PRX">
-            <option value="SPECIAL_MED">🩺 Médicos &amp; Saúde PJ</option>
-            <option value="GREEN">🌾 Agronegócio &amp; Pecuária</option>
-            <option value="YELLOW">🏭 Fábricas &amp; Indústrias</option>
-            <option value="RED">🚢 Exportadoras &amp; Trading</option>
-            <option value="SPECIAL_LOG">🚚 Logística &amp; Frotas</option>
-            <option value="SPECIAL_LAW">⚖️ Advocacia &amp; Jurídico</option>
-            <option value="SPECIAL_ACC">📊 Contabilidade &amp; Auditoria</option>
-            <option value="BLUE">💻 Tecnologia &amp; Concessões</option>
-          </optgroup>
+          <option value="CNAE_SEC_A">Seção A - Agricultura, Pecuária, Produção Florestal, Pesca e Aqüicultura (Div. 01 a 03)</option>
+          <option value="CNAE_SEC_B">Seção B - Indústrias Extrativas, Mineração, Petróleo e Gás (Div. 05 a 09)</option>
+          <option value="CNAE_SEC_C">Seção C - Indústrias de Transformação e Fábricas (Div. 10 a 33)</option>
+          <option value="CNAE_SEC_D">Seção D - Eletricidade, Gás e Energia (Div. 35)</option>
+          <option value="CNAE_SEC_E">Seção E - Água, Esgoto, Gestão de Resíduos e Descontaminação (Div. 36 a 39)</option>
+          <option value="CNAE_SEC_F">Seção F - Construção Civil, Engenharia, Edificações e Obras (Div. 41 a 43)</option>
+          <option value="CNAE_SEC_G">Seção G - Comércio Atacadista, Varejista e Reparação de Veículos (Div. 45 a 47)</option>
+          <option value="CNAE_SEC_H">Seção H - Transporte, Armazenagem, Cargas, Frotas e Correio (Div. 49 a 53)</option>
+          <option value="CNAE_SEC_I">Seção I - Alojamento, Hotelaria e Alimentação (Restaurantes e Bares) (Div. 55 a 56)</option>
+          <option value="CNAE_SEC_J">Seção J - Informação, Tecnologia, Software, Telecom e Mídia (Div. 58 a 63)</option>
+          <option value="CNAE_SEC_K">Seção K - Atividades Financeiras, Seguros, Previdência e Holdings (Div. 64 a 66)</option>
+          <option value="CNAE_SEC_L">Seção L - Atividades Imobiliárias, Loteamentos e Incorporação (Div. 68)</option>
+          <option value="CNAE_SEC_M">Seção M - Atividades Profissionais, Científicas, Técnicas e Jurídicas (Div. 69 a 75)</option>
+          <option value="CNAE_SEC_N">Seção N - Serviços Administrativos, Apoio e Terceirização (Div. 77 a 82)</option>
+          <option value="CNAE_SEC_O">Seção O - Administração Pública, Defesa e Seguridade Social (Div. 84)</option>
+          <option value="CNAE_SEC_P">Seção P - Educação, Escolas, Faculdades e Treinamento (Div. 85)</option>
+          <option value="CNAE_SEC_Q">Seção Q - Saúde Humana, Hospitais, Clínicas e Laboratórios (Div. 86 a 88)</option>
+          <option value="CNAE_SEC_R">Seção R - Artes, Cultura, Esporte e Recreação (Div. 90 a 93)</option>
+          <option value="CNAE_SEC_S">Seção S - Outras Atividades de Serviços, Associações e Sindicatos (Div. 94 a 96)</option>
+          <option value="CNAE_SEC_T">Seção T - Serviços Domésticos (Div. 97)</option>
+          <option value="CNAE_SEC_U">Seção U - Organismos Internacionais e Instituições Extraterritoriais (Div. 99)</option>
+          <option value="SPECIAL_MED">🩺 Médicos &amp; Saúde PJ</option>
+          <option value="GREEN">🌾 Agronegócio &amp; Pecuária</option>
+          <option value="YELLOW">🏭 Fábricas &amp; Indústrias</option>
+          <option value="RED">🚢 Exportadoras &amp; Trading</option>
+          <option value="SPECIAL_LOG">🚚 Logística &amp; Frotas</option>
+          <option value="SPECIAL_LAW">⚖️ Advocacia &amp; Jurídico</option>
+          <option value="SPECIAL_ACC">📊 Contabilidade &amp; Auditoria</option>
+          <option value="BLUE">💻 Tecnologia &amp; Concessões</option>
         </select>
 
-                <select id="ufFilter" onchange="filterData()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 8px; font-size: 11px; font-weight: 800; white-space: nowrap; cursor: pointer;">
-          <option value="ALL">Todos os Estados (UF)</option>
-          <optgroup label="⭐ ESTADOS PRINCIPAIS (BASE &amp; MINERAÇÃO)">
-            <option value="SP">SP - São Paulo</option>
-            <option value="MG">MG - Minas Gerais</option>
-            <option value="MT">MT - Mato Grosso</option>
-            <option value="PR">PR - Paraná</option>
-            <option value="SC">SC - Santa Catarina</option>
-          </optgroup>
-          <optgroup label="📍 DEMAIS ESTADOS (BRASIL)">
-            <option value="MS">MS - Mato Grosso do Sul</option>
-            <option value="GO">GO - Goiás</option>
-            <option value="RS">RS - Rio Grande do Sul</option>
-            <option value="RJ">RJ - Rio de Janeiro</option>
-            <option value="ES">ES - Espírito Santo</option>
-            <option value="BA">BA - Bahia</option>
-            <option value="AM">AM - Amazonas</option>
-            <option value="AC">AC - Acre</option>
-            <option value="AL">AL - Alagoas</option>
-            <option value="AP">AP - Amapá</option>
-            <option value="CE">CE - Ceará</option>
-            <option value="DF">DF - Distrito Federal</option>
-            <option value="MA">MA - Maranhão</option>
-            <option value="PA">PA - Pará</option>
-            <option value="PB">PB - Paraíba</option>
-            <option value="PE">PE - Pernambuco</option>
-            <option value="PI">PI - Piauí</option>
-            <option value="RN">RN - Rio Grande do Norte</option>
-            <option value="RO">RO - Rondônia</option>
-            <option value="RR">RR - Roraima</option>
-            <option value="SE">SE - Sergipe</option>
-            <option value="TO">TO - Tocantins</option>
-          </optgroup>
+                        <select id="ufFilter" onchange="filterData()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 8px; font-size: 11px; font-weight: 800; white-space: nowrap; cursor: pointer;">
+          <option value="ALL">Todos os Estados (27 UFs do Brasil)</option>
+          <option value="SP">SP - São Paulo</option>
+          <option value="MG">MG - Minas Gerais</option>
+          <option value="MT">MT - Mato Grosso</option>
+          <option value="PR">PR - Paraná</option>
+          <option value="SC">SC - Santa Catarina</option>
+          <option value="MS">MS - Mato Grosso do Sul</option>
+          <option value="GO">GO - Goiás</option>
+          <option value="RS">RS - Rio Grande do Sul</option>
+          <option value="RJ">RJ - Rio de Janeiro</option>
+          <option value="ES">ES - Espírito Santo</option>
+          <option value="BA">BA - Bahia</option>
+          <option value="AM">AM - Amazonas</option>
+          <option value="AC">AC - Acre</option>
+          <option value="AL">AL - Alagoas</option>
+          <option value="AP">AP - Amapá</option>
+          <option value="CE">CE - Ceará</option>
+          <option value="DF">DF - Distrito Federal</option>
+          <option value="MA">MA - Maranhão</option>
+          <option value="PA">PA - Pará</option>
+          <option value="PB">PB - Paraíba</option>
+          <option value="PE">PE - Pernambuco</option>
+          <option value="PI">PI - Piauí</option>
+          <option value="RN">RN - Rio Grande do Norte</option>
+          <option value="RO">RO - Rondônia</option>
+          <option value="RR">RR - Roraima</option>
+          <option value="SE">SE - Sergipe</option>
+          <option value="TO">TO - Tocantins</option>
         </select>
 
         <select id="regimeFilter" onchange="filterData()" style="background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 8px; font-size: 11px; font-weight: 800; white-space: nowrap; cursor: pointer;">
@@ -151857,39 +151849,35 @@
           <!-- REGIÃO / ESTADOS & CIDADES -->
           <div>
             <label style="font-size: 11px; font-weight: 800; color: var(--text-main); text-transform: uppercase; margin-bottom: 5px; display: block;">📍 Região / Estados (UF):</label>
-                        <select id="minerUf" style="width: 100%; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 12px; font-size: 12px; font-weight: 700;">
-              <option value="ALL">Brasil Todo (Nacional)</option>
-              <optgroup label="⭐ ESTADOS PRINCIPAIS (BASE &amp; MINERAÇÃO)">
-                <option value="SP">São Paulo (SP)</option>
-                <option value="MG">Minas Gerais (MG)</option>
-                <option value="MT">Mato Grosso (MT)</option>
-                <option value="PR">Paraná (PR)</option>
-                <option value="SC">Santa Catarina (SC)</option>
-              </optgroup>
-              <optgroup label="📍 DEMAIS ESTADOS (BRASIL)">
-                <option value="MS">Mato Grosso do Sul (MS)</option>
-                <option value="GO">Goiás (GO)</option>
-                <option value="RS">Rio Grande do Sul (RS)</option>
-                <option value="RJ">Rio de Janeiro (RJ)</option>
-                <option value="ES">Espírito Santo (ES)</option>
-                <option value="BA">Bahia (BA)</option>
-                <option value="AM">Amazonas (AM)</option>
-                <option value="AC">Acre (AC)</option>
-                <option value="AL">Alagoas (AL)</option>
-                <option value="AP">Amapá (AP)</option>
-                <option value="CE">Ceará (CE)</option>
-                <option value="DF">Distrito Federal (DF)</option>
-                <option value="MA">Maranhão (MA)</option>
-                <option value="PA">Pará (PA)</option>
-                <option value="PB">Paraíba (PB)</option>
-                <option value="PE">Pernambuco (PE)</option>
-                <option value="PI">Piauí (PI)</option>
-                <option value="RN">Rio Grande do Norte (RN)</option>
-                <option value="RO">Rondônia (RO)</option>
-                <option value="RR">Roraima (RR)</option>
-                <option value="SE">Sergipe (SE)</option>
-                <option value="TO">Tocantins (TO)</option>
-              </optgroup>
+                                    <select id="minerUf" style="width: 100%; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 12px; font-size: 12px; font-weight: 700;">
+              <option value="ALL">Brasil Todo (Todas as 27 UFs)</option>
+              <option value="SP">São Paulo (SP)</option>
+              <option value="MG">Minas Gerais (MG)</option>
+              <option value="MT">Mato Grosso (MT)</option>
+              <option value="PR">Paraná (PR)</option>
+              <option value="SC">Santa Catarina (SC)</option>
+              <option value="MS">Mato Grosso do Sul (MS)</option>
+              <option value="GO">Goiás (GO)</option>
+              <option value="RS">Rio Grande do Sul (RS)</option>
+              <option value="RJ">Rio de Janeiro (RJ)</option>
+              <option value="ES">Espírito Santo (ES)</option>
+              <option value="BA">Bahia (BA)</option>
+              <option value="AM">Amazonas (AM)</option>
+              <option value="AC">Acre (AC)</option>
+              <option value="AL">Alagoas (AL)</option>
+              <option value="AP">Amapá (AP)</option>
+              <option value="CE">Ceará (CE)</option>
+              <option value="DF">Distrito Federal (DF)</option>
+              <option value="MA">Maranhão (MA)</option>
+              <option value="PA">Pará (PA)</option>
+              <option value="PB">Paraíba (PB)</option>
+              <option value="PE">Pernambuco (PE)</option>
+              <option value="PI">Piauí (PI)</option>
+              <option value="RN">Rio Grande do Norte (RN)</option>
+              <option value="RO">Rondônia (RO)</option>
+              <option value="RR">Roraima (RR)</option>
+              <option value="SE">Sergipe (SE)</option>
+              <option value="TO">Tocantins (TO)</option>
             </select>
             <input type="text" id="minerCitiesInput" placeholder="Cidades específicas (opcional)" style="width: 100%; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 12px; font-size: 11px; margin-top: 6px;">
           </div>
