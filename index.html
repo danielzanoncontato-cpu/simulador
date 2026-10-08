@@ -149108,11 +149108,49 @@ function triggerSegmentFilterChange() {
   }
 ];
 
-    function updateDynamicCounts() {
+        function updateDynamicCounts() {
       var count = prospects.length;
       var formatted = count.toLocaleString('pt-BR');
       var tabBadge = document.getElementById('tabProspectsBadge');
       if (tabBadge) tabBadge.innerText = formatted;
+
+      // Calcular contagem de empresas por Seção CNAE em tempo de execução
+      var secaoCounts = {};
+      if (typeof CONCLA_SECOES_MAP !== 'undefined') {
+        Object.keys(CONCLA_SECOES_MAP).forEach(function(k) { secaoCounts[k] = 0; });
+        for (var i = 0; i < prospects.length; i++) {
+          var p = prospects[i];
+          Object.keys(CONCLA_SECOES_MAP).forEach(function(k) {
+            if (matchLeadToConclaSecao(p, k)) {
+              secaoCounts[k]++;
+            }
+          });
+        }
+      }
+
+      // Atualizar rótulos das opções do seletor de Seções com os números exatos
+      var segSelect = document.getElementById('segmentFilter');
+      if (segSelect && segSelect.options) {
+        for (var s = 0; s < segSelect.options.length; s++) {
+          var opt = segSelect.options[s];
+          if (opt.value === 'ALL') {
+            opt.text = 'Todos os Segmentos (Seções) • ' + formatted + ' empresas';
+          } else if (secaoCounts[opt.value] !== undefined) {
+            var rawText = opt.text.split(' • ')[0].split(' (')[0].trim();
+            opt.text = rawText + ' • ' + secaoCounts[opt.value].toLocaleString('pt-BR') + ' empresas';
+          }
+        }
+      }
+
+      var minerSegSelect = document.getElementById('minerSegmentSelect');
+      if (minerSegSelect && minerSegSelect.options) {
+        for (var ms = 0; ms < minerSegSelect.options.length; ms++) {
+          var mOpt = minerSegSelect.options[ms];
+          if (mOpt.value === 'ALL') {
+            mOpt.text = 'Todas as Seções CNAE • ' + formatted + ' empresas';
+          }
+        }
+      }
     }
 
     var UF_EXPANSION_MAP = {

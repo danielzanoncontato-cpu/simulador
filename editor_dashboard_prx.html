@@ -1687,148 +1687,36 @@
 
     function updateDynamicCounts() {
       const total = prospects.length;
-      document.getElementById('editorHeaderCount').innerText = total.toLocaleString('pt-BR');
-      document.getElementById('editorTabLeadsCount').innerText = total.toLocaleString('pt-BR');
+      const formatted = total.toLocaleString('pt-BR');
+      const hCount = document.getElementById('editorHeaderCount');
+      if (hCount) hCount.innerText = formatted;
+      const tCount = document.getElementById('editorTabLeadsCount');
+      if (tCount) tCount.innerText = formatted;
+
+      const secaoCounts = {};
+      if (typeof CONCLA_SECOES_MAP !== 'undefined') {
+        Object.keys(CONCLA_SECOES_MAP).forEach(k => { secaoCounts[k] = 0; });
+        prospects.forEach(p => {
+          Object.keys(CONCLA_SECOES_MAP).forEach(k => {
+            if (matchLeadToConclaSecao(p, k)) secaoCounts[k]++;
+          });
+        });
+      }
+
       const segFilter = document.getElementById('segmentFilter');
-      if (segFilter && segFilter.options.length >= 8) {
-        segFilter.options[0].text = `🌐 Todos os Segmentos (${total.toLocaleString('pt-BR')})`;
-      }
-    }
-
-    function switchTab(tab) {
-      document.getElementById('tabContentLeads').classList.toggle('hidden', tab !== 'leads');
-      document.getElementById('tabContentConnect').classList.toggle('hidden', tab !== 'connect');
-      document.getElementById('tabContentAdd').classList.toggle('hidden', tab !== 'add');
-      document.getElementById('tabContentPitches').classList.toggle('hidden', tab !== 'pitches');
-
-      document.getElementById('tabBtnLeads').className = (tab === 'leads') ? 'px-3 py-1.5 rounded-xl font-bold text-[11px] bg-[var(--card)] text-[var(--foreground)] shadow-sm border border-[var(--border)] transition' : 'px-3 py-1.5 rounded-xl font-bold text-[11px] text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition';
-      document.getElementById('tabBtnConnect').className = (tab === 'connect') ? 'px-3 py-1.5 rounded-xl font-extrabold text-[11px] bg-emerald-600 text-white shadow-sm transition' : 'px-3 py-1.5 rounded-xl font-extrabold text-[11px] text-emerald-400 hover:text-emerald-300 transition flex items-center gap-1';
-      document.getElementById('tabBtnAdd').className = (tab === 'add') ? 'px-3 py-1.5 rounded-xl font-bold text-[11px] bg-[var(--card)] text-[var(--foreground)] shadow-sm border border-[var(--border)] transition' : 'px-3 py-1.5 rounded-xl font-bold text-[11px] text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition';
-      document.getElementById('tabBtnPitches').className = (tab === 'pitches') ? 'px-3 py-1.5 rounded-xl font-bold text-[11px] bg-[var(--card)] text-[var(--foreground)] shadow-sm border border-[var(--border)] transition' : 'px-3 py-1.5 rounded-xl font-bold text-[11px] text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition';
-
-      if (tab === 'connect') syncEditorForm();
-    }
-
-    
-    const CONCLA_SECOES_MAP = {
-      'CNAE_SEC_A': { divs: [1, 2, 3], keywords: ['agric', 'agro', 'soja', 'milho', 'cafe', 'pecuaria', 'gado', 'cana', 'florest', 'pesca', 'lavoura', 'graos'] },
-      'CNAE_SEC_B': { divs: [5, 6, 7, 8, 9], keywords: ['miner', 'petroleo', 'gas', 'extrac', 'mineracao'] },
-      'CNAE_SEC_C': { divs: [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33], keywords: ['fabric', 'industr', 'manufat', 'alimento', 'bebida', 'textil', 'quimic', 'metalur', 'maquin', 'embalag', 'frigorifico'] },
-      'CNAE_SEC_D': { divs: [35], keywords: ['energia', 'eletric', 'gas', 'solar', 'eolica', 'biomassa'] },
-      'CNAE_SEC_E': { divs: [36, 37, 38, 39], keywords: ['agua', 'esgoto', 'residuo', 'descontam', 'recicla', 'saneam'] },
-      'CNAE_SEC_F': { divs: [41, 42, 43], keywords: ['constru', 'edific', 'obra', 'incorpor', 'engenh', 'infraestrut'] },
-      'CNAE_SEC_G': { divs: [45, 46, 47], keywords: ['comercio', 'atacado', 'varejo', 'distribui', 'represent', 'loja', 'importac', 'exportac', 'trading'] },
-      'CNAE_SEC_H': { divs: [49, 50, 51, 52, 53], keywords: ['transp', 'logist', 'armaz', 'deposito', 'frot', 'aereo', 'carga', 'rodov', 'armaz'] },
-      'CNAE_SEC_I': { divs: [55, 56], keywords: ['hotel', 'alojam', 'restaurante', 'alimenta', 'hospedag'] },
-      'CNAE_SEC_J': { divs: [58, 59, 60, 61, 62, 63], keywords: ['softw', 'tecnol', 'comput', 'informac', 'telecom', 'dados', 'saas', 'comunicac', 'midia'] },
-      'CNAE_SEC_K': { divs: [64, 65, 66], keywords: ['financ', 'banco', 'segur', 'cambio', 'invest', 'credito', 'holding', 'previd'] },
-      'CNAE_SEC_L': { divs: [68], keywords: ['imobil', 'locac', 'loteam', 'imovel', 'corret'] },
-      'CNAE_SEC_M': { divs: [69, 70, 71, 72, 73, 74, 75], keywords: ['advoc', 'jurid', 'contab', 'auditor', 'consult', 'engenhar', 'arquitet', 'publicid', 'market', 'pericia'] },
-      'CNAE_SEC_N': { divs: [77, 78, 79, 80, 81, 82], keywords: ['locacao', 'terceir', 'limpeza', 'seguranca', 'cobranca', 'vigilanc'] },
-      'CNAE_SEC_O': { divs: [84], keywords: ['administracao publica', 'defesa', 'seguridade'] },
-      'CNAE_SEC_P': { divs: [85], keywords: ['educac', 'escola', 'ensino', 'faculd', 'univers', 'colegio'] },
-      'CNAE_SEC_Q': { divs: [86, 87, 88], keywords: ['saude', 'medic', 'hospit', 'clinic', 'laborat', 'odont', 'cirurg', 'terapia'] },
-      'CNAE_SEC_R': { divs: [90, 91, 92, 93], keywords: ['arte', 'cultura', 'esporte', 'recreac', 'lazer', 'academia'] },
-      'CNAE_SEC_S': { divs: [94, 95, 96], keywords: ['associac', 'organizac', 'reparac', 'sindicato', 'culto'] },
-      'CNAE_SEC_T': { divs: [97], keywords: ['servicos domesticos'] },
-      'CNAE_SEC_U': { divs: [99], keywords: ['organismos internacionais', 'extraterritoriais'] }
-    };
-
-    function extractCnaeDivsJs(cnaeStr) {
-      if (!cnaeStr) return [];
-      var divs = [];
-      var regex = /(\d{2})\d{2}-\d(?:\/\d{2})?/g;
-      var match;
-      while ((match = regex.exec(cnaeStr)) !== null) {
-        divs.push(parseInt(match[1], 10));
-      }
-      var rawNums = cnaeStr.match(/\b\d{2}(?=\d{2}-|\d{2}\/)/g) || [];
-      for (var i = 0; i < rawNums.length; i++) {
-        divs.push(parseInt(rawNums[i], 10));
-      }
-      return divs;
-    }
-
-    function matchLeadToConclaSecao(p, secaoKey) {
-      var secao = CONCLA_SECOES_MAP[secaoKey];
-      if (!secao) return false;
-
-      var leadDivs = extractCnaeDivsJs(p.cnaePrincipal).concat(extractCnaeDivsJs(p.cnaeSecundarios));
-      for (var i = 0; i < leadDivs.length; i++) {
-        if (secao.divs.indexOf(leadDivs[i]) !== -1) return true;
-      }
-
-      var haystack = (
-        (p.company || '') + ' ' +
-        (p.segmentoNome || '') + ' ' +
-        (p.setor || '') + ' ' +
-        (p.desc || '') + ' ' +
-        (p.cnaePrincipal || '') + ' ' +
-        (p.cnaeSecundarios || '')
-      ).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
-
-      for (var j = 0; j < secao.keywords.length; j++) {
-        if (haystack.indexOf(secao.keywords[j]) !== -1) return true;
-      }
-
-      return false;
-    }
-  
-    function filterLeads() {
-      const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
-      const segVal = document.getElementById('segmentFilter').value;
-      const siteVal = document.getElementById('siteFilter').value;
-      const stateVal = document.getElementById('stateFilter').value;
-
-      const sDivVal = document.getElementById('divisaoFilter') ? document.getElementById('divisaoFilter').value : 'ALL';
-      const sGrpVal = document.getElementById('grupoFilter') ? document.getElementById('grupoFilter').value : 'ALL';
-      const sClsVal = document.getElementById('classeFilter') ? document.getElementById('classeFilter').value : 'ALL';
-      const sSubVal = document.getElementById('subclasseFilter') ? document.getElementById('subclasseFilter').value : 'ALL';
-      const sCnaeVal = document.getElementById('cnaeFilter') ? document.getElementById('cnaeFilter').value : 'ALL';
-
-      const filtered = prospects.filter(p => {
-        if (sDivVal && sDivVal !== 'ALL') {
-          const cMatches = ((p.cnaePrincipal || '') + ' ' + (p.cnaeSecundarios || '')).match(/\d{4}-\d\/\d{2}/g) || [];
-          if (!cMatches.some(c => c.substring(0, 2) === sDivVal)) return false;
-        }
-        if (sGrpVal && sGrpVal !== 'ALL') {
-          const cMatchesG = ((p.cnaePrincipal || '') + ' ' + (p.cnaeSecundarios || '')).match(/\d{4}-\d\/\d{2}/g) || [];
-          if (!cMatchesG.some(c => (c.substring(0, 2) + '.' + c.substring(2, 3)) === sGrpVal)) return false;
-        }
-        if (sClsVal && sClsVal !== 'ALL') {
-          const cMatchesC = ((p.cnaePrincipal || '') + ' ' + (p.cnaeSecundarios || '')).match(/\d{4}-\d\/\d{2}/g) || [];
-          if (!cMatchesC.some(c => c.substring(0, 6) === sClsVal)) return false;
-        }
-        if (sSubVal && sSubVal !== 'ALL') {
-          if (((p.cnaePrincipal || '') + ' ' + (p.cnaeSecundarios || '')).indexOf(sSubVal) === -1) return false;
-        }
-        if (sCnaeVal && sCnaeVal !== 'ALL') {
-          if (((p.cnaePrincipal || '') + ' ' + (p.cnaeSecundarios || '')).indexOf(sCnaeVal) === -1) return false;
-        }
-        
-        if (segVal && segVal !== 'ALL') {
-          if (segVal.indexOf('CNAE_SEC_') === 0) {
-            if (!matchLeadToConclaSecao(p, segVal)) return false;
-          } else if (p.corSegmento !== segVal && p.segmentoNome !== segVal) {
-            return false;
+      if (segFilter && segFilter.options) {
+        for (let s = 0; s < segFilter.options.length; s++) {
+          const opt = segFilter.options[s];
+          if (opt.value === 'ALL') {
+            opt.text = 'Todos os Segmentos (Seções) • ' + formatted + ' empresas';
+          } else if (secaoCounts[opt.value] !== undefined) {
+            const rawText = opt.text.split(' • ')[0].split(' (')[0].trim();
+            opt.text = rawText + ' • ' + secaoCounts[opt.value].toLocaleString('pt-BR') + ' empresas';
           }
         }
-        if (stateVal && p.uf !== stateVal) return false;
-        if (siteVal === 'WITH_SITE' && (!p.hasSite || p.site.indexOf('Sem Site') !== -1)) return false;
-        if (siteVal === 'NO_SITE' && p.hasSite && p.site.indexOf('Sem Site') === -1) return false;
-        if (!query) return true;
-
-        const d1 = (p.decisores && p.decisores[0]) ? p.decisores[0].nome.toLowerCase() : '';
-        return (p.company && p.company.toLowerCase().indexOf(query) !== -1) ||
-               (p.cnpj && p.cnpj.indexOf(query) !== -1) ||
-               (p.city && p.city.toLowerCase().indexOf(query) !== -1) ||
-               (p.uf && p.uf.toLowerCase().indexOf(query) !== -1) ||
-               (p.segmentoNome && p.segmentoNome.toLowerCase().indexOf(query) !== -1) ||
-               d1.indexOf(query) !== -1;
-      renderTableBody(filtered.slice(0, 500));
+      }
     }
 
-    // CLASSIFICAÇÃO RIGOROSA DE CONTATOS (CELULAR/WHATSAPP VS FONE/PABX EMPRESA)
     function isMobilePhone(phoneStr) {
       if (!phoneStr || phoneStr.indexOf('Sem Telefone') !== -1 || phoneStr.indexOf('Não informado') !== -1) return false;
       const digits = phoneStr.replace(/\D/g, '').replace(/^55/, '');
