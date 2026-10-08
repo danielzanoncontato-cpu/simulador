@@ -150476,9 +150476,9 @@ function triggerSegmentFilterChange() {
 
       return '<div style="display: flex; flex-direction: column; gap: 4px;">' +
              statusBadge +
-             '  <button type="button" onclick="event.stopPropagation(); pesquisarDividaPgfn(\'' + clean + '\', \'' + safeCompName + '\')" style="display: inline-flex; align-items: center; justify-content: space-between; padding: 4px 6px; border-radius: 6px; background: var(--bg-card); border: 1px solid #2563eb; color: #2563eb; font-weight: 800; font-size: 10px; cursor: pointer; text-decoration: none;" title="Copiar CNPJ e pesquisar débitos ativos no portal oficial Dívida Aberta PGFN">' +
+             '  <button type="button" onclick="event.stopPropagation(); pesquisarDividaPgfn(\'' + clean + '\', \'' + safeCompName + '\')" style="display: inline-flex; align-items: center; justify-content: space-between; padding: 4px 6px; border-radius: 6px; background: var(--bg-card); border: 1px solid var(--border-strong); color: var(--text-main); font-weight: 800; font-size: 10px; cursor: pointer; text-decoration: none;" title="Copiar CNPJ e pesquisar débitos ativos no portal oficial Dívida Aberta PGFN">' +
              '    <span>🔍 Pesquisar na PGFN</span>' +
-             '    <span style="font-size: 8px; color: #fff; background: #2563eb; padding: 1px 4px; border-radius: 4px;">CNPJ</span>' +
+             '    <span style="font-size: 8px; color: var(--text-muted); background: var(--badge-bg); padding: 1px 4px; border-radius: 4px;">CNPJ</span>' +
              '  </button>' +
              '  <div style="display: flex; gap: 4px;">' +
              '    <a href="https://www.listadevedores.pgfn.gov.br/" target="_blank" onclick="event.stopPropagation()" title="Lista de Devedores da PGFN (Dívida Ativa da União)" style="flex: 1; text-align: center; padding: 2px 4px; border-radius: 4px; background: var(--table-alt-col); border: 1px solid var(--border-color); color: var(--text-muted); text-decoration: none; font-size: 9px; font-weight: 600;">🏛️ Devedores</a>' +
@@ -150582,7 +150582,7 @@ function triggerSegmentFilterChange() {
                  '<div><span class="badge-role-adm" style="margin-right: 4px;">CNAE</span><span style="font-family: monospace; font-weight: 800; color: var(--text-main);">' + p.cnaePrincipal + '</span></div>' +
                  cnaeSecHtml +
                '</td>' +
-               '<td style="padding: 10px 12px; width: 230px; min-width: 230px; background: rgba(37, 99, 235, 0.06); border-left: 2px solid #2563eb; border-right: 2px solid #2563eb; font-size: 10px;">' +
+               '<td style="padding: 10px 12px; width: 230px; min-width: 230px; font-size: 10px; vertical-align: top;">' +
                  buildDividasLinksHtml(p.cnpj, p.company, p.dividaPgfn) +
                '</td>' +
                '<td style="padding: 10px 12px; width: 290px; background: var(--table-alt-col); border-left: 1px solid var(--border-color); border-right: 1px solid var(--border-color);">' + decHtml + '</td>' +
@@ -154255,7 +154255,7 @@ function triggerSegmentFilterChange() {
                 <th style="padding: 10px 12px; width: 280px; border-bottom: 2px solid var(--border-strong);">🏢 Empresa, CNPJ, Idade & Natureza</th>
                 <th style="padding: 10px 12px; width: 160px; border-bottom: 2px solid var(--border-strong);">Segmento & Setor</th>
                 <th style="padding: 10px 12px; width: 230px; border-bottom: 2px solid var(--border-strong);">🏭 CNAE Principal & Atividades</th>
-                <th style="padding: 10px 12px; width: 230px; min-width: 230px; border-bottom: 2px solid var(--border-strong); text-align: center; background: #2563eb; color: #ffffff;">🏛️ Débitos PGFN (Dívida Aberta)</th>
+                <th style="padding: 10px 12px; width: 230px; min-width: 230px; border-bottom: 2px solid var(--border-strong);">🏛️ Débitos PGFN (Dívida Aberta)</th>
                 <th style="padding: 10px 12px; width: 290px; border-bottom: 2px solid var(--border-strong); border-left: 1px solid var(--border-color); border-right: 1px solid var(--border-color);">👥 Sócios & Decisores (QSA Oficial)</th>
                 <th style="padding: 10px 12px; width: 160px; border-bottom: 2px solid var(--border-strong);">🏢 Sede & Empresa</th>
                 <th style="padding: 10px 12px; width: 270px; border-bottom: 2px solid var(--border-strong); border-left: 1px solid var(--border-color); border-right: 1px solid var(--border-color);">👤 Contatos dos Sócios & Decisores</th>
@@ -154503,7 +154503,7 @@ function triggerSegmentFilterChange() {
                   <th style="padding: 10px 12px; width: 280px; border-bottom: 2px solid var(--border-strong);">🏢 Empresa, CNPJ, Idade & Natureza</th>
                   <th style="padding: 10px 12px; width: 160px; border-bottom: 2px solid var(--border-strong);">Segmento & Setor</th>
                   <th style="padding: 10px 12px; width: 230px; border-bottom: 2px solid var(--border-strong);">🏭 CNAE Principal & Atividades</th>
-                <th style="padding: 10px 12px; width: 230px; min-width: 230px; border-bottom: 2px solid var(--border-strong); text-align: center; background: #2563eb; color: #ffffff;">🏛️ Débitos PGFN (Dívida Aberta)</th>
+                <th style="padding: 10px 12px; width: 230px; min-width: 230px; border-bottom: 2px solid var(--border-strong);">🏛️ Débitos PGFN (Dívida Aberta)</th>
                   <th style="padding: 10px 12px; width: 290px; border-bottom: 2px solid var(--border-strong); border-left: 1px solid var(--border-color); border-right: 1px solid var(--border-color);">👥 Sócios & Decisores (QSA Oficial)</th>
                   <th style="padding: 10px 12px; width: 160px; border-bottom: 2px solid var(--border-strong);">🏢 Sede & Empresa</th>
                   <th style="padding: 10px 12px; width: 270px; border-bottom: 2px solid var(--border-strong); border-left: 1px solid var(--border-color); border-right: 1px solid var(--border-color);">👤 Contatos dos Sócios & Decisores</th>
