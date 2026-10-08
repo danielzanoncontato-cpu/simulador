@@ -150397,6 +150397,35 @@ function triggerSegmentFilterChange() {
       renderTable();
     }
 
+    
+    function buildDividasLinksHtml(cnpjRaw, compName) {
+      var clean = (cnpjRaw || '').replace(/\D/g, '');
+      var cnpjQuery = clean || encodeURIComponent(compName || '');
+
+      return '<div style="display: flex; flex-direction: column; gap: 4px;">' +
+             '  <a href="https://www.listadevedores.pgfn.gov.br/" target="_blank" onclick="event.stopPropagation()" title="Lista de Devedores da PGFN (Dívida Ativa da União)" style="display: inline-flex; align-items: center; justify-content: space-between; padding: 3px 6px; border-radius: 6px; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-main); text-decoration: none; font-weight: 700;">' +
+             '    <span>🏛️ PGFN Dívida Ativa</span>' +
+             '    <span style="font-size: 8px; color: var(--text-muted); background: var(--badge-bg); padding: 1px 4px; border-radius: 4px;">Consultar</span>' +
+             '  </a>' +
+             '  <a href="https://site.cenprotnacional.org.br/" target="_blank" onclick="event.stopPropagation()" title="Pesquisa Nacional de Protestos (CENPROT)" style="display: inline-flex; align-items: center; justify-content: space-between; padding: 3px 6px; border-radius: 6px; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-main); text-decoration: none; font-weight: 700;">' +
+             '    <span>📜 Protestos CENPROT</span>' +
+             '    <span style="font-size: 8px; color: var(--text-muted); background: var(--badge-bg); padding: 1px 4px; border-radius: 4px;">Cartório</span>' +
+             '  </a>' +
+             '  <a href="https://solucoes.receita.fazenda.gov.br/Servicos/certidaointernet/PJ/Emitir" target="_blank" onclick="event.stopPropagation()" title="Certidão Negativa de Débitos (CND) - Receita Federal" style="display: inline-flex; align-items: center; justify-content: space-between; padding: 3px 6px; border-radius: 6px; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-main); text-decoration: none; font-weight: 700;">' +
+             '    <span>📑 CND Receita Federal</span>' +
+             '    <span style="font-size: 8px; color: var(--text-muted); background: var(--badge-bg); padding: 1px 4px; border-radius: 4px;">Fiscal</span>' +
+             '  </a>' +
+             '  <a href="https://www.tst.jus.br/certidao1" target="_blank" onclick="event.stopPropagation()" title="Certidão Negativa de Débitos Trabalhistas (CNDT) - TST" style="display: inline-flex; align-items: center; justify-content: space-between; padding: 3px 6px; border-radius: 6px; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-main); text-decoration: none; font-weight: 700;">' +
+             '    <span>⚖️ CNDT Déb. Trabalhistas</span>' +
+             '    <span style="font-size: 8px; color: var(--text-muted); background: var(--badge-bg); padding: 1px 4px; border-radius: 4px;">TST</span>' +
+             '  </a>' +
+             '  <a href="https://consulta-crf.caixa.gov.br/consultacrf/pages/consultaEmpregador.jsf" target="_blank" onclick="event.stopPropagation()" title="Consulta de Regularidade do FGTS (CRF) - Caixa" style="display: inline-flex; align-items: center; justify-content: space-between; padding: 3px 6px; border-radius: 6px; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-main); text-decoration: none; font-weight: 700;">' +
+             '    <span>🏦 CRF FGTS (Caixa)</span>' +
+             '    <span style="font-size: 8px; color: var(--text-muted); background: var(--badge-bg); padding: 1px 4px; border-radius: 4px;">FGTS</span>' +
+             '  </a>' +
+             '</div>';
+    }
+
     function buildLeadRowHtml(p, isMinedTab, index) {
       var decisores = (p.decisores && p.decisores.length > 0) ? p.decisores : [{ nome: 'Decisor QSA', cargo: 'Sócio-Administrador', contato: p.fone }];
 
@@ -150479,6 +150508,9 @@ function triggerSegmentFilterChange() {
                  '<div style="font-weight: 800; font-size: 13px; color: var(--text-main);">' + p.company + idadeBadge + '</div>' +
                  '<div style="color: var(--text-muted); font-family: monospace; font-size: 10px; margin-top: 2px;"><span style="font-weight: 800; color: var(--text-main);">' + p.cnpj + '</span> • <span>' + p.city + '-' + p.uf + '</span></div>' +
                  '<div style="margin-top: 4px;">' + tipoBadge + regimeBadge + '</div>' +
+               '</td>' +
+               '<td style="padding: 10px 12px; width: 210px; background: var(--table-alt-col); font-size: 10px;">' +
+                 buildDividasLinksHtml(p.cnpj, p.company) +
                '</td>' +
                '<td style="padding: 10px 12px; width: 160px;">' +
                  '<span class="badge-info">' + p.segmentoNome + '</span>' +
