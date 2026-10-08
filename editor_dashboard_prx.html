@@ -59,7 +59,7 @@
         <input type="text" id="searchInput" placeholder="Filtrar leads por Empresa, CNPJ, Cidade, Sócio..." class="bg-[var(--background)] border border-[var(--border)] rounded-xl px-3 py-1.5 text-xs text-[var(--foreground)] focus:outline-none w-full sm:w-80" oninput="filterLeads()">
         <div class="flex items-center gap-2 flex-wrap">
                                             <select id="segmentFilter" onchange="filterLeads()" class="bg-[var(--background)] border border-[var(--border)] rounded-xl px-3 py-1.5 text-xs text-[var(--foreground)]" style="max-width: 340px;">
-  <option value="ALL">Todos os Segmentos (21 Seções CNAE A-U)</option>
+  <option value="ALL">1º Nível: 21 Seções (A a U)</option>
   <option value="CNAE_SEC_A">Seção A - Agricultura, Pecuária, Florestal e Pesca</option>
   <option value="CNAE_SEC_B">Seção B - Indústrias Extrativas e Mineração</option>
   <option value="CNAE_SEC_C">Seção C - Indústrias de Transformação</option>
@@ -83,7 +83,7 @@
   <option value="CNAE_SEC_U">Seção U - Organismos Internacionais e Outras Instituições Extraterritoriais</option>
         </select>
         <select id="divisaoFilter" onchange="filterLeads()" class="bg-[var(--background)] border border-[var(--border)] rounded-xl px-3 py-1.5 text-xs text-[var(--foreground)]" style="max-width: 220px;">
-  <option value="ALL">Todas as Divisões</option>
+  <option value="ALL">2º Nível: 87 Divisões</option>
   <option value="01">Divisão 01 - Agricultura, pecuária e serviços relacionados</option>
   <option value="02">Divisão 02 - Produção florestal</option>
   <option value="03">Divisão 03 - Pesca e aqüicultura</option>
@@ -173,7 +173,7 @@
   <option value="99">Divisão 99 - Organismos internacionais e outras instituições</option>
         </select>
         <select id="grupoFilter" onchange="filterLeads()" class="bg-[var(--background)] border border-[var(--border)] rounded-xl px-3 py-1.5 text-xs text-[var(--foreground)]" style="max-width: 220px;">
-  <option value="ALL">Todos os Grupos</option>
+  <option value="ALL">3º Nível: 285 Grupos</option>
   <option value="01.1">Grupo 01.1 - Produção de lavouras temporárias</option>
   <option value="01.2">Grupo 01.2 - Horticultura e floricultura</option>
   <option value="01.3">Grupo 01.3 - Produção de lavouras permanentes</option>
@@ -461,7 +461,7 @@
   <option value="99.0">Grupo 99.0 - Organismos internacionais e outras instituições extraterritoriais</option>
         </select>
         <select id="classeFilter" onchange="filterLeads()" class="bg-[var(--background)] border border-[var(--border)] rounded-xl px-3 py-1.5 text-xs text-[var(--foreground)]" style="max-width: 200px;">
-  <option value="ALL">Todas as Classes (673 Classes)</option>
+  <option value="ALL">4º Nível: 673 Classes</option>
   <option value="0111-3">Classe 0111-3 - Cultivo de Cereais</option>
   <option value="0112-1">Classe 0112-1 - Cultivo de Algodão Herbáceo e de Outras Fibras de Lavoura Temporária</option>
   <option value="0113-0">Classe 0113-0 - Cultivo de Cana-de-Açúcar</option>
@@ -1137,7 +1137,7 @@
   <option value="9900-8">Classe 9900-8 - Organismos Internacionais e Outras Instituições Extraterritoriais</option>
         </select>
         <select id="subclasseFilter" onchange="filterLeads()" class="bg-[var(--background)] border border-[var(--border)] rounded-xl px-3 py-1.5 text-xs text-[var(--foreground)]" style="max-width: 200px;">
-  <option value="ALL">Todas as Subclasses (1332 Subclasses)</option>
+  <option value="ALL">5º Nível: 1.301 Subclasses (IBGE/CONCLA)</option>
   <option value="0111-3/01">Subclasse 0111-3/01 - Cultivo de Arroz</option>
   <option value="0111-3/02">Subclasse 0111-3/02 - Cultivo de Milho</option>
   <option value="0111-3/03">Subclasse 0111-3/03 - Cultivo de Trigo</option>
@@ -3621,7 +3621,7 @@
         for (let s = 0; s < segFilter.options.length; s++) {
           const opt = segFilter.options[s];
           if (opt.value === 'ALL') {
-            opt.text = 'Todos os Segmentos (Seções) • ' + formatted + ' empresas';
+            opt.text = '1º Nível: 21 Seções (A a U) • ' + formatted + ' empresas';
           } else if (secaoCounts[opt.value] !== undefined) {
             const rawText = opt.text.split(' • ')[0].split(' (')[0].trim();
             opt.text = rawText + ' • ' + secaoCounts[opt.value].toLocaleString('pt-BR') + ' empresas';
