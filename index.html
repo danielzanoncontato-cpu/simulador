@@ -150435,31 +150435,58 @@ function triggerSegmentFilterChange() {
     }
 
     
-    function buildDividasLinksHtml(cnpjRaw, compName) {
+        function pesquisarDividaPgfn(cnpjClean, compName) {
+      var formattedCnpj = cnpjClean.length === 14
+        ? cnpjClean.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, '$1.$2.$3/$4-$5')
+        : cnpjClean;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(cnpjClean).catch(function() {});
+      }
+
+      var toast = document.getElementById('inlineToast');
+      var toastMsg = document.getElementById('inlineToastMsg');
+      if (toast && toastMsg) {
+        toastMsg.innerHTML = '📋 CNPJ <b>' + formattedCnpj + '</b> copiado! Abrindo Dívida Aberta PGFN para consulta imediata...';
+        toast.classList.remove('hidden');
+        setTimeout(function() { toast.classList.add('hidden'); }, 5000);
+      } else {
+        alert('📋 CNPJ ' + formattedCnpj + ' copiado com sucesso!\n\nAbrindo https://www.dividaaberta.pgfn.gov.br/consultar-devedores para consulta...');
+      }
+
+      window.open('https://www.dividaaberta.pgfn.gov.br/consultar-devedores', '_blank');
+    }
+
+    function buildDividasLinksHtml(cnpjRaw, compName, dividaInfo) {
       var clean = (cnpjRaw || '').replace(/\D/g, '');
-      var cnpjQuery = clean || encodeURIComponent(compName || '');
+      var temDebito = (dividaInfo && dividaInfo.temDebito) || false;
+      var valorDebito = (dividaInfo && dividaInfo.valor) ? dividaInfo.valor : 0;
+      var valorFormatado = (valorDebito > 0)
+        ? ('R$ ' + valorDebito.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }))
+        : 'R$ 0,00';
+
+      var statusBadge = temDebito
+        ? ('<div style="display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 3px 6px; border-radius: 6px; background: rgba(239, 68, 68, 0.15); color: #dc2626; font-size: 10px; font-weight: 800; border: 1px solid rgba(239, 68, 68, 0.3); width: 100%; box-sizing: border-box;">' +
+           '🔴 Débito Ativo: ' + valorFormatado + '</div>')
+        : ('<div style="display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 3px 6px; border-radius: 6px; background: rgba(16, 185, 129, 0.15); color: #059669; font-size: 10px; font-weight: 800; border: 1px solid rgba(16, 185, 129, 0.3); width: 100%; box-sizing: border-box;">' +
+           '🟢 Sem Débitos (' + valorFormatado + ')</div>');
+
+      var safeCompName = (compName || '').replace(/'/g, "\\'");
 
       return '<div style="display: flex; flex-direction: column; gap: 4px;">' +
-             '  <a href="https://www.listadevedores.pgfn.gov.br/" target="_blank" onclick="event.stopPropagation()" title="Lista de Devedores da PGFN (Dívida Ativa da União)" style="display: inline-flex; align-items: center; justify-content: space-between; padding: 3px 6px; border-radius: 6px; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-main); text-decoration: none; font-weight: 700;">' +
-             '    <span>🏛️ PGFN Dívida Ativa</span>' +
-             '    <span style="font-size: 8px; color: var(--text-muted); background: var(--badge-bg); padding: 1px 4px; border-radius: 4px;">Consultar</span>' +
-             '  </a>' +
-             '  <a href="https://site.cenprotnacional.org.br/" target="_blank" onclick="event.stopPropagation()" title="Pesquisa Nacional de Protestos (CENPROT)" style="display: inline-flex; align-items: center; justify-content: space-between; padding: 3px 6px; border-radius: 6px; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-main); text-decoration: none; font-weight: 700;">' +
-             '    <span>📜 Protestos CENPROT</span>' +
-             '    <span style="font-size: 8px; color: var(--text-muted); background: var(--badge-bg); padding: 1px 4px; border-radius: 4px;">Cartório</span>' +
-             '  </a>' +
-             '  <a href="https://solucoes.receita.fazenda.gov.br/Servicos/certidaointernet/PJ/Emitir" target="_blank" onclick="event.stopPropagation()" title="Certidão Negativa de Débitos (CND) - Receita Federal" style="display: inline-flex; align-items: center; justify-content: space-between; padding: 3px 6px; border-radius: 6px; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-main); text-decoration: none; font-weight: 700;">' +
-             '    <span>📑 CND Receita Federal</span>' +
-             '    <span style="font-size: 8px; color: var(--text-muted); background: var(--badge-bg); padding: 1px 4px; border-radius: 4px;">Fiscal</span>' +
-             '  </a>' +
-             '  <a href="https://www.tst.jus.br/certidao1" target="_blank" onclick="event.stopPropagation()" title="Certidão Negativa de Débitos Trabalhistas (CNDT) - TST" style="display: inline-flex; align-items: center; justify-content: space-between; padding: 3px 6px; border-radius: 6px; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-main); text-decoration: none; font-weight: 700;">' +
-             '    <span>⚖️ CNDT Déb. Trabalhistas</span>' +
-             '    <span style="font-size: 8px; color: var(--text-muted); background: var(--badge-bg); padding: 1px 4px; border-radius: 4px;">TST</span>' +
-             '  </a>' +
-             '  <a href="https://consulta-crf.caixa.gov.br/consultacrf/pages/consultaEmpregador.jsf" target="_blank" onclick="event.stopPropagation()" title="Consulta de Regularidade do FGTS (CRF) - Caixa" style="display: inline-flex; align-items: center; justify-content: space-between; padding: 3px 6px; border-radius: 6px; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-main); text-decoration: none; font-weight: 700;">' +
-             '    <span>🏦 CRF FGTS (Caixa)</span>' +
-             '    <span style="font-size: 8px; color: var(--text-muted); background: var(--badge-bg); padding: 1px 4px; border-radius: 4px;">FGTS</span>' +
-             '  </a>' +
+             statusBadge +
+             '  <button type="button" onclick="event.stopPropagation(); pesquisarDividaPgfn(\'' + clean + '\', \'' + safeCompName + '\')" style="display: inline-flex; align-items: center; justify-content: space-between; padding: 4px 6px; border-radius: 6px; background: var(--bg-card); border: 1px solid #2563eb; color: #2563eb; font-weight: 800; font-size: 10px; cursor: pointer; text-decoration: none;" title="Copiar CNPJ e pesquisar débitos ativos no portal oficial Dívida Aberta PGFN">' +
+             '    <span>🔍 Pesquisar na PGFN</span>' +
+             '    <span style="font-size: 8px; color: #fff; background: #2563eb; padding: 1px 4px; border-radius: 4px;">CNPJ</span>' +
+             '  </button>' +
+             '  <div style="display: flex; gap: 4px;">' +
+             '    <a href="https://www.listadevedores.pgfn.gov.br/" target="_blank" onclick="event.stopPropagation()" title="Lista de Devedores da PGFN (Dívida Ativa da União)" style="flex: 1; text-align: center; padding: 2px 4px; border-radius: 4px; background: var(--table-alt-col); border: 1px solid var(--border-color); color: var(--text-muted); text-decoration: none; font-size: 9px; font-weight: 600;">🏛️ Devedores</a>' +
+             '    <a href="https://solucoes.receita.fazenda.gov.br/Servicos/certidaointernet/PJ/Emitir" target="_blank" onclick="event.stopPropagation()" title="Certidão Negativa de Débitos (CND) - Receita Federal" style="flex: 1; text-align: center; padding: 2px 4px; border-radius: 4px; background: var(--table-alt-col); border: 1px solid var(--border-color); color: var(--text-muted); text-decoration: none; font-size: 9px; font-weight: 600;">📑 CND</a>' +
+             '  </div>' +
+             '  <div style="display: flex; gap: 4px;">' +
+             '    <a href="https://site.cenprotnacional.org.br/" target="_blank" onclick="event.stopPropagation()" title="Pesquisa Nacional de Protestos em Cartório (CENPROT)" style="flex: 1; text-align: center; padding: 2px 4px; border-radius: 4px; background: var(--table-alt-col); border: 1px solid var(--border-color); color: var(--text-muted); text-decoration: none; font-size: 9px; font-weight: 600;">📜 Protestos</a>' +
+             '    <a href="https://www.tst.jus.br/certidao1" target="_blank" onclick="event.stopPropagation()" title="Certidão Negativa de Débitos Trabalhistas (CNDT) - TST" style="flex: 1; text-align: center; padding: 2px 4px; border-radius: 4px; background: var(--table-alt-col); border: 1px solid var(--border-color); color: var(--text-muted); text-decoration: none; font-size: 9px; font-weight: 600;">⚖️ CNDT</a>' +
+             '  </div>' +
              '</div>';
     }
 
@@ -150547,7 +150574,7 @@ function triggerSegmentFilterChange() {
                  '<div style="margin-top: 4px;">' + tipoBadge + regimeBadge + '</div>' +
                '</td>' +
                '<td style="padding: 10px 12px; width: 210px; background: var(--table-alt-col); font-size: 10px;">' +
-                 buildDividasLinksHtml(p.cnpj, p.company) +
+                 buildDividasLinksHtml(p.cnpj, p.company, p.dividaPgfn) +
                '</td>' +
                '<td style="padding: 10px 12px; width: 160px;">' +
                  '<span class="badge-info">' + p.segmentoNome + '</span>' +
@@ -150892,6 +150919,27 @@ function triggerSegmentFilterChange() {
       var mTipo = document.getElementById('modalTipoSocietario'); if (mTipo) mTipo.innerText = p.tipoSocietario || 'LTDA';
       var mReg = document.getElementById('modalRegime'); if (mReg) mReg.innerText = p.regimeTributario || 'Lucro Real';
       var mCnae = document.getElementById('modalCnaePrincipal'); if (mCnae) mCnae.innerText = p.cnaePrincipal || '-';
+      var mPgfnDiv = document.getElementById('modalPgfnDebitos');
+      if (mPgfnDiv) {
+        var cleanCnpj = (p.cnpj || '').replace(/\D/g, '');
+        var safeComp = (p.company || '').replace(/'/g, "\\'");
+        var temDeb = (p.dividaPgfn && p.dividaPgfn.temDebito) || false;
+        var valDeb = (p.dividaPgfn && p.dividaPgfn.valor) ? p.dividaPgfn.valor : 0;
+        var valFormat = (valDeb > 0) ? ('R$ ' + valDeb.toLocaleString('pt-BR', { minimumFractionDigits: 2 })) : 'R$ 0,00';
+        var badgeStatus = temDeb
+          ? '<span style="background: rgba(239, 68, 68, 0.15); color: #dc2626; border: 1px solid rgba(239, 68, 68, 0.3); padding: 4px 8px; border-radius: 6px; font-weight: 800; font-size: 11px;">🔴 Possui Débito Ativo Inscrito: ' + valFormat + '</span>'
+          : '<span style="background: rgba(16, 185, 129, 0.15); color: #059669; border: 1px solid rgba(16, 185, 129, 0.3); padding: 4px 8px; border-radius: 6px; font-weight: 800; font-size: 11px;">🟢 Regular / Sem Débitos Ativos (' + valFormat + ')</span>';
+
+        mPgfnDiv.innerHTML = '<div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 12px;">' +
+                             '  <div>' +
+                             '    <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); margin-bottom: 4px;">Situação na Dívida Ativa da União (PGFN):</div>' +
+                             '    ' + badgeStatus +
+                             '  </div>' +
+                             '  <button type="button" onclick="pesquisarDividaPgfn(\'' + cleanCnpj + '\', \'' + safeComp + '\')" class="btn-main" style="padding: 6px 12px; font-size: 11px; font-weight: 800; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">' +
+                             '    <span>🔍 Pesquisar CNPJ no Dívida Aberta PGFN</span>' +
+                             '  </button>' +
+                             '</div>';
+      }
       var mSite = document.getElementById('modalSite');
       if (mSite) {
         var isDirect = p.site && p.site.indexOf('http') === 0 && p.site.indexOf('google.com') === -1 && p.site.indexOf('sem site') === -1 && p.site.indexOf('Rastreio via') === -1;
@@ -154204,6 +154252,7 @@ function triggerSegmentFilterChange() {
               <tr>
                 <th style="padding: 10px 12px; text-align: center; width: 48px; border-bottom: 2px solid var(--border-strong);">ID</th>
                 <th style="padding: 10px 12px; width: 280px; border-bottom: 2px solid var(--border-strong);">🏢 Empresa, CNPJ, Idade & Natureza</th>
+                <th style="padding: 10px 12px; width: 230px; border-bottom: 2px solid var(--border-strong); text-align: center;">🏛️ Débitos PGFN (Dívida Aberta)</th>
                 <th style="padding: 10px 12px; width: 160px; border-bottom: 2px solid var(--border-strong);">Segmento & Setor</th>
                 <th style="padding: 10px 12px; width: 230px; border-bottom: 2px solid var(--border-strong);">🏭 CNAE Principal & Atividades</th>
                 <th style="padding: 10px 12px; width: 290px; border-bottom: 2px solid var(--border-strong); border-left: 1px solid var(--border-color); border-right: 1px solid var(--border-color);">👥 Sócios & Decisores (QSA Oficial)</th>
@@ -154451,6 +154500,7 @@ function triggerSegmentFilterChange() {
                   <th style="padding: 10px 12px; text-align: center; width: 48px; border-bottom: 2px solid var(--border-strong);">Sel.</th>
                   <th style="padding: 10px 12px; text-align: center; width: 48px; border-bottom: 2px solid var(--border-strong);">ID</th>
                   <th style="padding: 10px 12px; width: 280px; border-bottom: 2px solid var(--border-strong);">🏢 Empresa, CNPJ, Idade & Natureza</th>
+                <th style="padding: 10px 12px; width: 230px; border-bottom: 2px solid var(--border-strong); text-align: center;">🏛️ Débitos PGFN (Dívida Aberta)</th>
                   <th style="padding: 10px 12px; width: 160px; border-bottom: 2px solid var(--border-strong);">Segmento & Setor</th>
                   <th style="padding: 10px 12px; width: 230px; border-bottom: 2px solid var(--border-strong);">🏭 CNAE Principal & Atividades</th>
                   <th style="padding: 10px 12px; width: 290px; border-bottom: 2px solid var(--border-strong); border-left: 1px solid var(--border-color); border-right: 1px solid var(--border-color);">👥 Sócios & Decisores (QSA Oficial)</th>
