@@ -151112,6 +151112,8 @@ function triggerSegmentFilterChange() {
         seg = 'Agronegócio & Indústrias';
         if (segInput) segInput.value = seg;
       }
+      var specificInp = document.getElementById('minerSpecificInput');
+      var specific = (specificInp && specificInp.value ? specificInp.value : '').trim();
       var tipoSoc = document.getElementById('minerTipoSocietario').value;
       var regime = document.getElementById('minerRegime').value;
       var uf = document.getElementById('minerUf').value;
@@ -151120,7 +151122,8 @@ function triggerSegmentFilterChange() {
       if (isNaN(qty) || qty < 50) qty = 50;
       if (qty > 300) qty = 300;
 
-      dispatchSearchQueryToAi('Mineração Solicitada: ' + seg, 'mineracao_leads', qty, { tipoSoc: tipoSoc, regime: regime, uf: uf, cities: cities, quantidade: qty });
+      var fullSearchTerm = specific ? (specific + ' (' + seg + ')') : seg;
+      dispatchSearchQueryToAi('Mineração Solicitada: ' + fullSearchTerm, 'mineracao_leads', qty, { segmento: seg, especifico: specific, tipoSoc: tipoSoc, regime: regime, uf: uf, cities: cities, quantidade: qty });
 
       var pBar = document.getElementById('minerProgressBar');
       var pBox = document.getElementById('minerProgressBox');
@@ -151152,7 +151155,7 @@ function triggerSegmentFilterChange() {
         if (pTxt) pTxt.innerText = '5/5 Mineração concluída com sucesso!';
         if (pBox) pBox.style.display = 'none';
         if (rBox) rBox.style.display = 'flex';
-        generateMinedResults(seg, tipoSoc, regime, uf, cities, qty);
+        generateMinedResults(seg, tipoSoc, regime, uf, cities, qty, specific);
       }, 1900);
     }
 
@@ -151394,8 +151397,10 @@ function triggerSegmentFilterChange() {
       }
     };
 
-    function generateMinedResults(seg, tipoSoc, regime, uf, cities, qty) {
-      var sNorm = (seg || '').toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").trim();
+    function generateMinedResults(seg, tipoSoc, regime, uf, cities, qty, specificTerm) {
+      var fullTerm = (specificTerm ? (specificTerm + ' ' + seg) : (seg || ''));
+      var sNorm = fullTerm.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+      
 
       var activeNicheKey = 'industria';
       if (sNorm.indexOf('aviac') !== -1 || sNorm.indexOf('pilot') !== -1 || sNorm.indexOf('aereo') !== -1 || sNorm.indexOf('hangar') !== -1 || sNorm.indexOf('jato') !== -1 || sNorm.indexOf('helicopter') !== -1) {
@@ -151517,7 +151522,8 @@ function triggerSegmentFilterChange() {
             }
           }
 
-          var titleCaseSeg = seg.charAt(0).toUpperCase() + seg.slice(1);
+          var displaySpecific = (specificTerm && specificTerm.trim().length > 0) ? specificTerm.trim() : seg;
+          var titleCaseSeg = displaySpecific.charAt(0).toUpperCase() + displaySpecific.slice(1);
           var prefixWord = ['Grupo', 'Prime', 'Nacional', 'Brasil', 'Master', 'Global', 'Inova', 'Elite', 'Alpha', 'Vanguarda', 'Horizonte', 'Planalto', 'Sul', 'Paulista', 'Paranaense', 'Mineira', 'Catarinense', 'Gaúcha'][i % 18];
           var suffixWord = (generatedTipo.indexOf('S/A') !== -1) ? 'S/A' : (generatedTipo.indexOf('S/S') !== -1 ? 'S/S' : 'Ltda.');
           var compName = prefixWord + ' ' + titleCaseSeg + ' ' + loc.city + ' ' + suffixWord;
@@ -154456,6 +154462,20 @@ function triggerSegmentFilterChange() {
   <option value="Seção U - Organismos Internacionais e Outras Instituições Extraterritoriais">Seção U - Organismos Internacionais e Outras Instituições Extraterritoriais</option>
             </select>
             <input type="hidden" id="minerSegmentInput" value="Seção C - Indústrias de Transformação e Fábricas">
+            
+            <!-- ESPECIFICAR ATIVIDADE / NICHO / PALAVRA-CHAVE NA SEÇÃO -->
+            <div style="margin-top: 8px;">
+              <label style="font-size: 10px; font-weight: 800; color: var(--text-sub); display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                <span>🎯 Especificar na Seção (Nicho, CNAE ou Atividade Específica):</span>
+                <span style="font-size: 9px; color: var(--text-muted); font-weight: 600;">(Opcional)</span>
+              </label>
+              <div style="display: flex; gap: 6px;">
+                <input type="text" id="minerSpecificInput" placeholder="Ex: Caldeiraria, Frigorífico, Clínica Médica, Software, Soja..." onkeydown="if(event.key === 'Enter') { startMiningEngine(); event.preventDefault(); }" style="flex: 1; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 7px 12px; font-size: 11px; font-weight: 600;" title="Digite exatamente a especialidade, nicho ou palavra-chave desejada antes de minerar">
+                <button type="button" onclick="startMiningEngine()" class="btn-main" style="padding: 6px 12px; font-size: 11px; font-weight: 800; border-radius: 8px; white-space: nowrap; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;" title="Iniciar mineração com o nicho específico definido">
+                  <span>⛏️ Definir</span>
+                </button>
+              </div>
+            </div>
           </div>
 
           <!-- TIPO SOCIETÁRIO -->
