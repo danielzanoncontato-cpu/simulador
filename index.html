@@ -355,17 +355,22 @@
     function triggerSearchNow() {
       clearTimeout(searchDebounceTimer);
       currentPage = 1;
+      switchMainTab('prospects');
       filterData();
       var sInp = document.getElementById('searchInput');
       var query = sInp ? (sInp.value || '').trim() : '';
       var sSeg = document.getElementById('segmentFilter');
       var seg = sSeg ? sSeg.value : 'ALL';
-      if (query.length > 1) {
+      if (query.length > 0) {
+        showToast('🔍 Filtrado: ' + filteredDataList.length + ' leads encontrados');
         dispatchSearchQueryToAi(query, 'pesquisa_texto', filteredDataList.length, { segmentoFiltro: seg });
+      } else {
+        showToast('📋 Exibindo todos os leads (' + filteredDataList.length + ')');
       }
       var tContainer = document.querySelector('#prospectsTabContent div[style*="overflow-y: auto"]');
       if (tContainer) tContainer.scrollTop = 0;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      var tbl = document.getElementById('tableBody');
+      if (tbl) tbl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
     function triggerHierarchyFilterChange(sourceLevel) {
@@ -151763,6 +151768,14 @@ function triggerSegmentFilterChange() {
     window.exportMinedCsv = exportMinedCsv;
     window.triggerSearchWithDebounce = triggerSearchWithDebounce;
     window.triggerSearchNow = triggerSearchNow;
+    window.filterData = filterData;
+    window.renderTable = renderTable;
+    window.triggerHierarchyFilterChange = triggerHierarchyFilterChange;
+    window.changePerPage = changePerPage;
+    window.prevPage = prevPage;
+    window.nextPage = nextPage;
+    window.clearAllFilters = clearAllFilters;
+    window.pesquisarDividaPgfn = pesquisarDividaPgfn;
     window.triggerSegmentFilterChange = triggerSegmentFilterChange;
     window.resetToHomePage = resetToHomePage;
     window.syncEntireDashboardToGithub = syncEntireDashboardToGithub;
