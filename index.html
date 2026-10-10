@@ -147,6 +147,9 @@
       transition: all 0.2s ease;
       overflow: hidden;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+      height: 32px;
+      min-height: 32px;
+      cursor: text;
     }
     .combobox-control:hover {
       border-color: var(--border-strong);
@@ -150424,6 +150427,7 @@ function triggerSegmentFilterChange() {
       var sSite = document.getElementById('siteFilter'); if (sSite) sSite.value = 'ALL';
       var sTipo = document.getElementById('tipoFilter'); if (sTipo) sTipo.value = 'ALL';
       currentPage = 1;
+      if (typeof updateAllSearchableComboboxes === "function") updateAllSearchableComboboxes();
       filterData();
       showToast('🔄 Todos os filtros foram limpos!');
     }
@@ -152061,12 +152065,34 @@ function triggerSegmentFilterChange() {
       wrapper.className = 'searchable-combobox';
       wrapper.id = 'combobox_wrapper_' + selectId;
 
-      // Herda largura e estilo do select original
-      if (select.style.width) wrapper.style.width = select.style.width;
-      if (select.style.maxWidth) wrapper.style.maxWidth = select.style.maxWidth;
-      if (select.style.flex) wrapper.style.flex = select.style.flex;
+      // Herda e garante larguras responsivas generosas para cada filtro
       if (selectId.indexOf('miner') !== -1) {
         wrapper.style.width = '100%';
+        wrapper.style.display = 'block';
+      } else {
+        wrapper.style.flex = '1';
+        wrapper.style.display = 'inline-block';
+        if (selectId === 'segmentFilter') {
+          wrapper.style.minWidth = '220px';
+          wrapper.style.maxWidth = '340px';
+        } else if (selectId === 'divisaoFilter') {
+          wrapper.style.minWidth = '180px';
+          wrapper.style.maxWidth = '260px';
+        } else if (selectId === 'grupoFilter') {
+          wrapper.style.minWidth = '180px';
+          wrapper.style.maxWidth = '260px';
+        } else if (selectId === 'classeFilter') {
+          wrapper.style.minWidth = '170px';
+          wrapper.style.maxWidth = '240px';
+        } else if (selectId === 'subclasseFilter') {
+          wrapper.style.minWidth = '170px';
+          wrapper.style.maxWidth = '240px';
+        } else if (selectId === 'ufFilter') {
+          wrapper.style.minWidth = '150px';
+          wrapper.style.maxWidth = '200px';
+        } else {
+          wrapper.style.minWidth = '160px';
+        }
       }
 
       // Cria a barra de controle
@@ -152078,7 +152104,17 @@ function triggerSegmentFilterChange() {
       input.className = 'combobox-input';
       input.autocomplete = 'off';
       input.spellcheck = false;
-      input.placeholder = (select.options.length > 0) ? select.options[0].text : 'Selecione ou digite...';
+      
+      var customPlaceholder = '🔍 Digite para buscar...';
+      if (selectId === 'segmentFilter' || selectId === 'minerSegmentSelect') customPlaceholder = '🔍 1º Nível: 21 Seções (digite...)';
+      else if (selectId === 'divisaoFilter' || selectId === 'minerDivisaoSelect') customPlaceholder = '🔍 2º Nível: 87 Divisões (digite...)';
+      else if (selectId === 'grupoFilter' || selectId === 'minerGrupoSelect') customPlaceholder = '🔍 3º Nível: 285 Grupos (digite...)';
+      else if (selectId === 'classeFilter' || selectId === 'minerClasseSelect') customPlaceholder = '🔍 4º Nível: 673 Classes (digite...)';
+      else if (selectId === 'subclasseFilter' || selectId === 'minerSubclasseSelect') customPlaceholder = '🔍 5º Nível: 1.301 Subclasses (digite...)';
+      else if (selectId === 'ufFilter' || selectId === 'minerUf') customPlaceholder = '🔍 Estados / UFs (digite...)';
+      
+      input.placeholder = customPlaceholder;
+      input.title = 'Clique e digite qualquer letra ou termo para filtrar as opções mais próximas';
 
       var clearBtn = document.createElement('span');
       clearBtn.className = 'combobox-clear';
@@ -152352,6 +152388,7 @@ function triggerSegmentFilterChange() {
     window.onload = function() {
       loadStoredMinedLeads();
       loadSearchHistory();
+      if (typeof initAllSearchableComboboxes === "function") initAllSearchableComboboxes();
       filterData();
       updateDynamicCounts();
     };
@@ -155387,5 +155424,23 @@ C:\Users\Daniel Zanon\Downloads\Códigos\Minerador (com todos os arquivos, banco
     </div>
   </div>
 
+  <!-- INICIALIZAÇÃO AUTOMÁTICA DAS SEARCHABLE COMBOBOXES -->
+  <script>
+    (function() {
+      function runComboboxInit() {
+        if (typeof initAllSearchableComboboxes === 'function') {
+          initAllSearchableComboboxes();
+        }
+      }
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        runComboboxInit();
+      } else {
+        document.addEventListener('DOMContentLoaded', runComboboxInit);
+        window.addEventListener('load', runComboboxInit);
+      }
+      setTimeout(runComboboxInit, 100);
+      setTimeout(runComboboxInit, 500);
+    })();
+  </script>
 </body>
 </html>
