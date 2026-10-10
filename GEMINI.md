@@ -27,7 +27,7 @@
    - Caso um nicho específico, base restrita ou segmento não possa ser minerado ou extraído automaticamente de fontes públicas, o agente DEVE **solicitar explicitamente ao usuário o envio de uma planilha Excel/CSV exportada** para que o sistema realize o enriquecimento, cruzamento societário e padronização nas 24 colunas.
 
 6. **SINCRONIZAÇÃO BILATERAL COMPLETA E OBRIGATÓRIA:**
-   - Sempre que houver mineração, adição, exclusão ou edição de leads, o agente DEVE atualizar automaticamente:
+   - Sempre que houver mineração, adição, exclusão, edição de leads ou ajustes de interface/código, o agente DEVE atualizar automaticamente:
      1. **Locais Físicos do Computador:**
         - Área de Trabalho: `C:\Users\Daniel Zanon\Desktop\PRX Capital - Base de Prospeccao BDR`
         - Documentos: `C:\Users\Daniel Zanon\Documents\PRX Capital BDR`
@@ -89,3 +89,42 @@
     - **Sociedades Anônimas (S/A):** São tributadas pelo Lucro Real (ou Lucro Presumido se fechada até o teto legal). NUNCA Simples Nacional.
     - **Cooperativas:** São regidas por regime próprio (Isenção / Imunidade tributária sobre o Ato Cooperativo ou Lucro Real). NUNCA Simples Nacional.
     - Qualquer mineração, enriquecimento ou pesquisa deve obedecer estritamente a essa conformidade legal.
+
+13. **ARQUITETURA INVIOLÁVEL DAS 8 COLUNAS DO DASHBOARD (ZERO DESLOCAMENTO):**
+    - O cabeçalho (`<thead>`) e todas as linhas (`<tbody>`), tanto estáticas pré-renderizadas quanto geradas dinamicamente via `buildLeadRowHtml`, DEVEM possuir **rigorosamente a mesma quantidade e ordem de 8 colunas**:
+      1. `ID` (48px, centralizado)
+      2. `🏢 Empresa, CNPJ, Idade & Natureza` (280px)
+      3. `Segmento & Setor` (160px)
+      4. `🏭 CNAE Principal & Atividades` (230px)
+      5. `🏛️ Débitos PGFN (Dívida Aberta)` (230px) — com badge de status e os 5 botões de consulta
+      6. `👥 Sócios & Decisores (QSA Oficial)` (290px) — QSA oficial com LinkedIn
+      7. `🏢 Sede & Empresa` (160px) — telefones e e-mails gerais
+      8. `👤 Contatos dos Sócios & Decisores` (270px) — WhatsApp direto e e-mails pessoais
+    - A coluna de "Abordagem Direta" foi permanentemente excluída da tabela; o acesso ao modal de detalhes do lead é acionado pelo clique na linha (`<tr>`), e os botões de contato direto por WhatsApp e E-mail de cada sócio residem na coluna 8.
+    - Na aba de mineração (`isMinedTab = true`), adiciona-se exclusivamente a coluna de checkbox no índice 0 (`Sel.`, 48px), totalizando 9 colunas simétricas.
+    - É terminantemente proibido qualquer divergência de contagem entre `<th>` e `<td>` em qualquer arquivo HTML.
+
+14. **PAINEL DE FILTROS EM 5 NÍVEIS HIERÁRQUICOS & GATILHO INSTANTÂNEO (ENTER + BOTÃO BUSCAR):**
+    - **Gatilho de Busca Instantâneo:** O campo `searchInput` possui o botão dedicado `🔍 Buscar` e manipulador `onkeydown="if(event.key === 'Enter'){ triggerSearchNow(); event.preventDefault(); }"` para aplicar a filtragem na hora (com reset de página e scroll para o topo).
+    - **Hierarquia CONCLA/IBGE em Cascata Completa:**
+      - **1º Nível:** 21 Seções (A a U) (`segmentFilter`)
+      - **2º Nível:** 87 Divisões (`divisaoFilter`)
+      - **3º Nível:** 285 Grupos (`grupoFilter`)
+      - **4º Nível:** 673 Classes (`classeFilter`)
+      - **5º Nível:** 1.301 Subclasses (`subclasseFilter`)
+    - **Filtros Adicionais:** Estado/UF (`ufFilter`), Regime Tributário (`regimeFilter`), Tipo Societário (`tipoFilter`), Site Oficial (`siteFilter`) e Paginação dinâmica (`perPageFilter`).
+    - Todos os filtros disparam `filterData()` com atualização instantânea de contagem e preservação de paginação.
+
+15. **COLUNA DE DÉBITOS PGFN COM CÓPIA AUTOMÁTICA DE CNPJ & 5 BOTÕES DE REDIRECIONAMENTO OFICIAL:**
+    - Toda célula de Débitos PGFN possui:
+      1. **Badge de Situação Fiscal:** `🟢 Sem Débitos Inscritos`, `🔴 Débito Ativo: R$ X` ou `⚪ Ainda não consultado`.
+      2. **Botão Principal `🔍 Pesquisar na PGFN`:** Copia o CNPJ limpo para o clipboard e abre `https://www.dividaaberta.pgfn.gov.br/consultar-devedores`.
+      3. **Botão `🏛️ Devedores`:** Abre `https://www.dividaaberta.pgfn.gov.br/consultar-devedores` com CNPJ copiado.
+      4. **Botão `📑 CND`:** Abre o emissor de Certidão Negativa de Débitos da Receita Federal: `https://servicos.receitafederal.gov.br/servico/certidoes/#/home` com CNPJ copiado.
+      5. **Botão `📜 Protestos`:** Abre o portal oficial do CENPROT Nacional (Pesquisa Nacional de Protestos): `https://www.pesquisaprotesto.com.br/` com CNPJ copiado.
+      6. **Botão `⚖️ CNDT`:** Abre a Certidão Negativa de Débitos Trabalhistas do TST: `https://www.tst.jus.br/certidao` com CNPJ copiado.
+    - Todos os botões utilizam a função `abrirLinkDebitos(tipo, cleanCnpj, compName)` como elementos `<button type="button">` com `event.stopPropagation()`, garantindo compatibilidade total com navegadores e sandboxes/webviews do Antigravity.
+
+16. **BLINDAGEM TÉCNICA CONTRA RESTRIÇÕES DE SANDBOX / WEBVIEW (TRY/CATCH EM STORAGE):**
+    - Todo acesso a `localStorage` (`initTheme`, `toggleTheme`, `loadSearchHistory`, `loadStoredMinedLeads`) DEVE estar envolvido em blocos `try...catch`.
+    - Isso impede que restrições de permissão em iframes ou webviews bloqueiem a inicialização do JavaScript, assegurando que o script carregue e renderize dinamicamente as tabelas em 100% dos ambientes.
