@@ -196,6 +196,7 @@
         if (mBtn) mBtn.classList.add('active-tab');
         var rBox = document.getElementById('minerResultsBox');
         if (rBox) rBox.style.display = 'flex';
+        syncMinerHierarchyOptions();
         if (lastMinedLeads.length === 0) {
           generateMinedResults('Agronegócio & Indústrias', 'ALL', 'ALL', 'ALL', '', 50);
         } else {
@@ -151108,10 +151109,31 @@ function triggerSegmentFilterChange() {
     function startMiningEngine() {
       var segInput = document.getElementById('minerSegmentInput');
       var seg = (segInput && segInput.value ? segInput.value : '').trim();
+
+      var sSec = document.getElementById('minerSegmentSelect');
+      var sDiv = document.getElementById('minerDivisaoSelect');
+      var sGrp = document.getElementById('minerGrupoSelect');
+      var sCls = document.getElementById('minerClasseSelect');
+      var sSub = document.getElementById('minerSubclasseSelect');
+
+      var secVal = sSec ? sSec.value : 'ALL';
+      var divVal = sDiv ? sDiv.value : 'ALL';
+      var grpVal = sGrp ? sGrp.value : 'ALL';
+      var clsVal = sCls ? sCls.value : 'ALL';
+      var subVal = sSub ? sSub.value : 'ALL';
+
+      var secText = (sSec && sSec.selectedIndex >= 0 && secVal !== 'ALL') ? sSec.options[sSec.selectedIndex].text : '';
+      var divText = (sDiv && sDiv.selectedIndex >= 0 && divVal !== 'ALL') ? sDiv.options[sDiv.selectedIndex].text : '';
+      var grpText = (sGrp && sGrp.selectedIndex >= 0 && grpVal !== 'ALL') ? sGrp.options[sGrp.selectedIndex].text : '';
+      var clsText = (sCls && sCls.selectedIndex >= 0 && clsVal !== 'ALL') ? sCls.options[sCls.selectedIndex].text : '';
+      var subText = (sSub && sSub.selectedIndex >= 0 && subVal !== 'ALL') ? sSub.options[sSub.selectedIndex].text : '';
+
+      var mostSpecificLabel = subText || clsText || grpText || divText || secText || seg;
       if (!seg) {
-        seg = 'Agronegócio & Indústrias';
+        seg = mostSpecificLabel || 'Agronegócio & Indústrias';
         if (segInput) segInput.value = seg;
       }
+
       var specificInp = document.getElementById('minerSpecificInput');
       var specific = (specificInp && specificInp.value ? specificInp.value : '').trim();
       var tipoSoc = document.getElementById('minerTipoSocietario').value;
@@ -151122,8 +151144,22 @@ function triggerSegmentFilterChange() {
       if (isNaN(qty) || qty < 50) qty = 50;
       if (qty > 300) qty = 300;
 
-      var fullSearchTerm = specific ? (specific + ' (' + seg + ')') : seg;
-      dispatchSearchQueryToAi('Mineração Solicitada: ' + fullSearchTerm, 'mineracao_leads', qty, { segmento: seg, especifico: specific, tipoSoc: tipoSoc, regime: regime, uf: uf, cities: cities, quantidade: qty });
+      var hierarchyData = {
+        secao: secVal,
+        secaoText: secText,
+        divisao: divVal,
+        divisaoText: divText,
+        grupo: grpVal,
+        grupoText: grpText,
+        classe: clsVal,
+        classeText: clsText,
+        subclasse: subVal,
+        subclasseText: subText,
+        mostSpecificLabel: mostSpecificLabel
+      };
+
+      var fullSearchTerm = specific ? (specific + ' [' + mostSpecificLabel + ']') : mostSpecificLabel;
+      dispatchSearchQueryToAi('Mineração Solicitada: ' + fullSearchTerm, 'mineracao_leads', qty, { segmento: seg, especifico: specific, hierarquia: hierarchyData, tipoSoc: tipoSoc, regime: regime, uf: uf, cities: cities, quantidade: qty });
 
       var pBar = document.getElementById('minerProgressBar');
       var pBox = document.getElementById('minerProgressBox');
@@ -151155,7 +151191,7 @@ function triggerSegmentFilterChange() {
         if (pTxt) pTxt.innerText = '5/5 Mineração concluída com sucesso!';
         if (pBox) pBox.style.display = 'none';
         if (rBox) rBox.style.display = 'flex';
-        generateMinedResults(seg, tipoSoc, regime, uf, cities, qty, specific);
+        generateMinedResults(seg, tipoSoc, regime, uf, cities, qty, specific, hierarchyData);
       }, 1900);
     }
 
@@ -151171,12 +151207,71 @@ function triggerSegmentFilterChange() {
       }
     }
 
-        function handleMinerSegmentChange() {
-      var sel = document.getElementById('minerSegmentSelect');
+        function syncMinerHierarchyOptions() {
+      var pairs = [
+        ['divisaoFilter', 'minerDivisaoSelect', '2º Nível: Todas as 87 Divisões'],
+        ['grupoFilter', 'minerGrupoSelect', '3º Nível: Todos os 285 Grupos'],
+        ['classeFilter', 'minerClasseSelect', '4º Nível: Todas as 673 Classes'],
+        ['subclasseFilter', 'minerSubclasseSelect', '5º Nível: Todas as 1.301 Subclasses']
+      ];
+      pairs.forEach(function(p) {
+        var src = document.getElementById(p[0]);
+        var dst = document.getElementById(p[1]);
+        if (src && dst) {
+          if (dst.options.length <= 1) {
+            dst.innerHTML = src.innerHTML;
+            if (dst.options.length > 0) {
+              dst.options[0].text = p[2];
+              dst.options[0].value = 'ALL';
+            }
+          }
+        }
+      });
+    }
+
+    function handleMinerHierarchyChange(level) {
+      var sSec = document.getElementById('minerSegmentSelect');
+      var sDiv = document.getElementById('minerDivisaoSelect');
+      var sGrp = document.getElementById('minerGrupoSelect');
+      var sCls = document.getElementById('minerClasseSelect');
+      var sSub = document.getElementById('minerSubclasseSelect');
       var inp = document.getElementById('minerSegmentInput');
-      if (sel && inp) {
-        inp.value = sel.value;
+
+      var secVal = sSec ? sSec.value : 'ALL';
+      var divVal = sDiv ? sDiv.value : 'ALL';
+      var grpVal = sGrp ? sGrp.value : 'ALL';
+      var clsVal = sCls ? sCls.value : 'ALL';
+      var subVal = sSub ? sSub.value : 'ALL';
+
+      var secText = (sSec && sSec.selectedIndex >= 0 && secVal !== 'ALL') ? sSec.options[sSec.selectedIndex].text : '';
+      var divText = (sDiv && sDiv.selectedIndex >= 0 && divVal !== 'ALL') ? sDiv.options[sDiv.selectedIndex].text : '';
+      var grpText = (sGrp && sGrp.selectedIndex >= 0 && grpVal !== 'ALL') ? sGrp.options[sGrp.selectedIndex].text : '';
+      var clsText = (sCls && sCls.selectedIndex >= 0 && clsVal !== 'ALL') ? sCls.options[sCls.selectedIndex].text : '';
+      var subText = (sSub && sSub.selectedIndex >= 0 && subVal !== 'ALL') ? sSub.options[sSub.selectedIndex].text : '';
+
+      var activeHierarchyLabel = subText || clsText || grpText || divText || secText || 'Agronegócio & Indústrias';
+      if (inp) {
+        inp.value = activeHierarchyLabel;
       }
+
+      var specInp = document.getElementById('minerSpecificInput');
+      if (specInp && !specInp.value.trim() && (subText || clsText || grpText)) {
+        var rawClean = (subText || clsText || grpText).replace(/^[\d\.\-\/]+\s*-\s*/, '').trim();
+        if (rawClean) specInp.placeholder = 'Sugerido: ' + rawClean;
+      }
+
+      var msg = '';
+      if (level === 'subclasse' && subVal !== 'ALL') msg = '🎯 5º Nível (Subclasse): ' + subText;
+      else if (level === 'classe' && clsVal !== 'ALL') msg = '🎯 4º Nível (Classe): ' + clsText;
+      else if (level === 'grupo' && grpVal !== 'ALL') msg = '🎯 3º Nível (Grupo): ' + grpText;
+      else if (level === 'divisao' && divVal !== 'ALL') msg = '🎯 2º Nível (Divisão): ' + divText;
+      else if (level === 'secao' && secVal !== 'ALL') msg = '🎯 1º Nível (Seção): ' + secText;
+
+      if (msg) showToast(msg);
+    }
+
+    function handleMinerSegmentChange() {
+      handleMinerHierarchyChange('secao');
     }
 
     function handleMinerTipoChange() {
@@ -151397,8 +151492,9 @@ function triggerSegmentFilterChange() {
       }
     };
 
-    function generateMinedResults(seg, tipoSoc, regime, uf, cities, qty, specificTerm) {
-      var fullTerm = (specificTerm ? (specificTerm + ' ' + seg) : (seg || ''));
+    function generateMinedResults(seg, tipoSoc, regime, uf, cities, qty, specificTerm, hierarchyData) {
+      hierarchyData = hierarchyData || {};
+      var fullTerm = (specificTerm ? (specificTerm + ' ' + (hierarchyData.mostSpecificLabel || seg)) : ((hierarchyData.mostSpecificLabel || seg) || ''));
       var sNorm = fullTerm.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
       
 
@@ -151768,6 +151864,8 @@ function triggerSegmentFilterChange() {
     window.setMinerSegmentChip = setMinerSegmentChip;
     window.setMinerQty = setMinerQty;
     window.startMiningEngine = startMiningEngine;
+    window.syncMinerHierarchyOptions = syncMinerHierarchyOptions;
+    window.handleMinerHierarchyChange = handleMinerHierarchyChange;
     window.toggleMinedLead = toggleMinedLead;
     window.toggleAllMinedLeads = toggleAllMinedLeads;
     window.connectMinedLeadsToActiveBase = connectMinedLeadsToActiveBase;
@@ -154434,44 +154532,88 @@ function triggerSegmentFilterChange() {
         </div>
         <!-- FORMULÁRIO DE FILTROS PARA MINERAÇÃO -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;">
-                    <!-- SEGMENTO DESEJADO / NICHO -->
-          <div>
-            <label style="font-size: 11px; font-weight: 800; color: var(--text-main); text-transform: uppercase; margin-bottom: 5px; display: block;">🏛️ Segmento / Grande Seção CNAE (IBGE / CONCLA):</label>
-            <select id="minerSegmentSelect" onchange="handleMinerSegmentChange()" style="width: 100%; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 12px; font-size: 12px; font-weight: 700;">
-  <option value="ALL">Todas as Seções CNAE</option>
-  <option value="Seção A - Agricultura, Pecuária, Florestal e Pesca">Seção A - Agricultura, Pecuária, Florestal e Pesca</option>
-  <option value="Seção B - Indústrias Extrativas e Mineração">Seção B - Indústrias Extrativas e Mineração</option>
-  <option value="Seção C - Indústrias de Transformação" selected>Seção C - Indústrias de Transformação</option>
-  <option value="Seção D - Eletricidade e Gás">Seção D - Eletricidade e Gás</option>
-  <option value="Seção E - Água, Esgoto e Gestão de Resíduos">Seção E - Água, Esgoto e Gestão de Resíduos</option>
-  <option value="Seção F - Construção Civil">Seção F - Construção Civil</option>
-  <option value="Seção G - Comércio e Reparação de Veículos">Seção G - Comércio e Reparação de Veículos</option>
-  <option value="Seção H - Transporte, Armazenagem e Correio">Seção H - Transporte, Armazenagem e Correio</option>
-  <option value="Seção I - Alojamento e Alimentação">Seção I - Alojamento e Alimentação</option>
-  <option value="Seção J - Informação e Comunicação (Tecnologia e Mídia)">Seção J - Informação e Comunicação (Tecnologia e Mídia)</option>
-  <option value="Seção K - Atividades Financeiras, Seguros e Holdings">Seção K - Atividades Financeiras, Seguros e Holdings</option>
-  <option value="Seção L - Atividades Imobiliárias">Seção L - Atividades Imobiliárias</option>
-  <option value="Seção M - Atividades Profissionais, Científicas e Técnicas">Seção M - Atividades Profissionais, Científicas e Técnicas</option>
-  <option value="Seção N - Serviços Administrativos e Serviços Complementares">Seção N - Serviços Administrativos e Serviços Complementares</option>
-  <option value="Seção O - Administração Pública, Defesa e Seguridade Social">Seção O - Administração Pública, Defesa e Seguridade Social</option>
-  <option value="Seção P - Educação">Seção P - Educação</option>
-  <option value="Seção Q - Saúde Humana e Serviços Sociais">Seção Q - Saúde Humana e Serviços Sociais</option>
-  <option value="Seção R - Artes, Cultura, Esporte e Recreação">Seção R - Artes, Cultura, Esporte e Recreação</option>
-  <option value="Seção S - Outras Atividades de Serviços">Seção S - Outras Atividades de Serviços</option>
-  <option value="Seção T - Serviços Domésticos">Seção T - Serviços Domésticos</option>
-  <option value="Seção U - Organismos Internacionais e Outras Instituições Extraterritoriais">Seção U - Organismos Internacionais e Outras Instituições Extraterritoriais</option>
-            </select>
-            <input type="hidden" id="minerSegmentInput" value="Seção C - Indústrias de Transformação e Fábricas">
+                    <!-- FILTROS HIERÁRQUICOS CONCLA / IBGE (NÍVEIS 1 A 5) -->
+          <div style="grid-column: 1 / -1; background: var(--bg-subtle); border: 1px solid var(--border-color); border-radius: 12px; padding: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+              <label style="font-size: 11px; font-weight: 900; color: var(--text-main); text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
+                <span>🌳 Hierarquia CONCLA / IBGE (Filtros de CNAE em 5 Níveis):</span>
+              </label>
+              <span style="font-size: 10px; color: var(--text-muted); font-weight: 600;">Refine em múltiplos níveis hierárquicos antes de iniciar a mineração</span>
+            </div>
             
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px;">
+              <!-- 1º NÍVEL: 21 SEÇÕES -->
+              <div>
+                <label style="font-size: 10px; font-weight: 800; color: var(--text-sub); display: block; margin-bottom: 4px;">1º Nível: 21 Seções (A a U):</label>
+                <select id="minerSegmentSelect" onchange="handleMinerHierarchyChange('secao')" style="width: 100%; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 10px; font-size: 11px; font-weight: 700;">
+                  <option value="ALL">1º Nível: Todas as 21 Seções (A a U)</option>
+                  <option value="Seção A - Agricultura, Pecuária, Florestal e Pesca">Seção A - Agricultura, Pecuária, Florestal e Pesca</option>
+                  <option value="Seção B - Indústrias Extrativas e Mineração">Seção B - Indústrias Extrativas e Mineração</option>
+                  <option value="Seção C - Indústrias de Transformação" selected>Seção C - Indústrias de Transformação</option>
+                  <option value="Seção D - Eletricidade e Gás">Seção D - Eletricidade e Gás</option>
+                  <option value="Seção E - Água, Esgoto e Gestão de Resíduos">Seção E - Água, Esgoto e Gestão de Resíduos</option>
+                  <option value="Seção F - Construção Civil">Seção F - Construção Civil</option>
+                  <option value="Seção G - Comércio e Reparação de Veículos">Seção G - Comércio e Reparação de Veículos</option>
+                  <option value="Seção H - Transporte, Armazenagem e Correio">Seção H - Transporte, Armazenagem e Correio</option>
+                  <option value="Seção I - Alojamento e Alimentação">Seção I - Alojamento e Alimentação</option>
+                  <option value="Seção J - Informação e Comunicação (Tecnologia e Mídia)">Seção J - Informação e Comunicação (Tecnologia e Mídia)</option>
+                  <option value="Seção K - Atividades Financeiras, Seguros e Holdings">Seção K - Atividades Financeiras, Seguros e Holdings</option>
+                  <option value="Seção L - Atividades Imobiliárias">Seção L - Atividades Imobiliárias</option>
+                  <option value="Seção M - Atividades Profissionais, Científicas e Técnicas">Seção M - Atividades Profissionais, Científicas e Técnicas</option>
+                  <option value="Seção N - Serviços Administrativos e Serviços Complementares">Seção N - Serviços Administrativos e Serviços Complementares</option>
+                  <option value="Seção O - Administração Pública, Defesa e Seguridade Social">Seção O - Administração Pública, Defesa e Seguridade Social</option>
+                  <option value="Seção P - Educação">Seção P - Educação</option>
+                  <option value="Seção Q - Saúde Humana e Serviços Sociais">Seção Q - Saúde Humana e Serviços Sociais</option>
+                  <option value="Seção R - Artes, Cultura, Esporte e Recreação">Seção R - Artes, Cultura, Esporte e Recreação</option>
+                  <option value="Seção S - Outras Atividades de Serviços">Seção S - Outras Atividades de Serviços</option>
+                  <option value="Seção T - Serviços Domésticos">Seção T - Serviços Domésticos</option>
+                  <option value="Seção U - Organismos Internacionais e Outras Instituições Extraterritoriais">Seção U - Organismos Internacionais e Outras Instituições Extraterritoriais</option>
+                </select>
+                <input type="hidden" id="minerSegmentInput" value="Seção C - Indústrias de Transformação">
+              </div>
+
+              <!-- 2º NÍVEL: 87 DIVISÕES -->
+              <div>
+                <label style="font-size: 10px; font-weight: 800; color: var(--text-sub); display: block; margin-bottom: 4px;">2º Nível: 87 Divisões:</label>
+                <select id="minerDivisaoSelect" onchange="handleMinerHierarchyChange('divisao')" style="width: 100%; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 10px; font-size: 11px; font-weight: 700;">
+                  <option value="ALL">2º Nível: Todas as 87 Divisões</option>
+                </select>
+              </div>
+
+              <!-- 3º NÍVEL: 285 GRUPOS -->
+              <div>
+                <label style="font-size: 10px; font-weight: 800; color: var(--text-sub); display: block; margin-bottom: 4px;">3º Nível: 285 Grupos:</label>
+                <select id="minerGrupoSelect" onchange="handleMinerHierarchyChange('grupo')" style="width: 100%; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 10px; font-size: 11px; font-weight: 700;">
+                  <option value="ALL">3º Nível: Todos os 285 Grupos</option>
+                </select>
+              </div>
+
+              <!-- 4º NÍVEL: 673 CLASSES -->
+              <div>
+                <label style="font-size: 10px; font-weight: 800; color: var(--text-sub); display: block; margin-bottom: 4px;">4º Nível: 673 Classes:</label>
+                <select id="minerClasseSelect" onchange="handleMinerHierarchyChange('classe')" style="width: 100%; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 10px; font-size: 11px; font-weight: 700;">
+                  <option value="ALL">4º Nível: Todas as 673 Classes</option>
+                </select>
+              </div>
+
+              <!-- 5º NÍVEL: 1.301 SUBCLASSES -->
+              <div>
+                <label style="font-size: 10px; font-weight: 800; color: var(--text-sub); display: block; margin-bottom: 4px;">5º Nível: 1.301 Subclasses:</label>
+                <select id="minerSubclasseSelect" onchange="handleMinerHierarchyChange('subclasse')" style="width: 100%; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 10px; font-size: 11px; font-weight: 700;">
+                  <option value="ALL">5º Nível: Todas as 1.301 Subclasses</option>
+                </select>
+              </div>
+            </div>
+
             <!-- ESPECIFICAR ATIVIDADE / NICHO / PALAVRA-CHAVE NA SEÇÃO -->
-            <div style="margin-top: 8px;">
+            <div style="margin-top: 10px; border-top: 1px dashed var(--border-color); padding-top: 10px;">
               <label style="font-size: 10px; font-weight: 800; color: var(--text-sub); display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
                 <span>🎯 Especificar na Seção (Nicho, CNAE ou Atividade Específica):</span>
-                <span style="font-size: 9px; color: var(--text-muted); font-weight: 600;">(Opcional)</span>
+                <span style="font-size: 9px; color: var(--text-muted); font-weight: 600;">(Opcional - refine por termo, produto ou especialidade)</span>
               </label>
               <div style="display: flex; gap: 6px;">
-                <input type="text" id="minerSpecificInput" placeholder="Ex: Caldeiraria, Frigorífico, Clínica Médica, Software, Soja..." onkeydown="if(event.key === 'Enter') { startMiningEngine(); event.preventDefault(); }" style="flex: 1; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 7px 12px; font-size: 11px; font-weight: 600;" title="Digite exatamente a especialidade, nicho ou palavra-chave desejada antes de minerar">
-                <button type="button" onclick="startMiningEngine()" class="btn-main" style="padding: 6px 12px; font-size: 11px; font-weight: 800; border-radius: 8px; white-space: nowrap; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;" title="Iniciar mineração com o nicho específico definido">
+                <input type="text" id="minerSpecificInput" placeholder="Ex: Caldeiraria, Frigorífico, Clínica Médica, Software, Soja, Usinagem, Consultoria..." onkeydown="if(event.key === 'Enter') { startMiningEngine(); event.preventDefault(); }" style="flex: 1; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 7px 12px; font-size: 11px; font-weight: 600;" title="Digite exatamente a especialidade, nicho ou palavra-chave desejada antes de minerar">
+                <button type="button" onclick="startMiningEngine()" class="btn-main" style="padding: 6px 14px; font-size: 11px; font-weight: 800; border-radius: 8px; white-space: nowrap; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;" title="Iniciar mineração com o nicho específico definido">
                   <span>⛏️ Definir</span>
                 </button>
               </div>
