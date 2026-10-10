@@ -126,6 +126,165 @@
     .btn-table-outline:hover { background: var(--btn-sub-hover); }
     .chip-btn { padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); cursor: pointer; transition: 0.15s; }
     .chip-btn:hover { background: var(--btn-main-bg); color: var(--btn-main-text); border-color: var(--border-strong); }
+
+    /* ==========================================================
+       SEARCHABLE COMBOBOX COMPONENT (FILTROS INTELIGENTES 1 A 5 & UFS)
+       ========================================================== */
+    .searchable-combobox {
+      position: relative;
+      display: inline-block;
+      vertical-align: middle;
+      font-family: inherit;
+    }
+    .combobox-control {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: var(--input-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0;
+      transition: all 0.2s ease;
+      overflow: hidden;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .combobox-control:hover {
+      border-color: var(--border-strong);
+    }
+    .searchable-combobox.open .combobox-control,
+    .combobox-control:focus-within {
+      border-color: var(--primary-accent, #2563eb);
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+    }
+    .combobox-input {
+      width: 100%;
+      background: transparent;
+      color: var(--input-text);
+      border: none;
+      outline: none;
+      padding: 6px 30px 6px 9px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: text;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+    .combobox-input::placeholder {
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .combobox-clear {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      line-height: 16px;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 900;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-radius: 50%;
+      transition: all 0.15s ease;
+      user-select: none;
+      display: none;
+      z-index: 2;
+    }
+    .combobox-clear:hover {
+      color: #ef4444;
+      background: rgba(239, 68, 68, 0.15);
+    }
+    .combobox-arrow {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 8px;
+      color: var(--text-muted);
+      pointer-events: none;
+      transition: transform 0.2s ease;
+      user-select: none;
+      z-index: 1;
+    }
+    .searchable-combobox.open .combobox-arrow {
+      transform: translateY(-50%) rotate(180deg);
+      color: var(--primary-accent, #2563eb);
+    }
+    .combobox-dropdown {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      min-width: 100%;
+      min-width: 280px;
+      max-width: 540px;
+      max-height: 280px;
+      overflow-y: auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      z-index: 999999;
+      display: none;
+      padding: 4px;
+      box-sizing: border-box;
+    }
+    .combobox-dropdown.open {
+      display: block;
+    }
+    .combobox-item {
+      padding: 7px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-main);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.1s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      user-select: none;
+    }
+    .combobox-item:hover,
+    .combobox-item.highlighted {
+      background: var(--hover-bg, rgba(59, 130, 246, 0.12));
+      color: var(--primary-accent, #2563eb);
+    }
+    .combobox-item.selected {
+      font-weight: 800;
+      background: var(--hover-bg, rgba(59, 130, 246, 0.18));
+      color: var(--primary-accent, #2563eb);
+    }
+    .combobox-item-badge {
+      font-size: 9px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--bg-subtle);
+      color: var(--text-sub);
+      white-space: nowrap;
+      border: 1px solid var(--border-color);
+    }
+    .combobox-empty {
+      padding: 14px 10px;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .combobox-more {
+      padding: 6px 10px;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      border-top: 1px dashed var(--border-color);
+      margin-top: 4px;
+    }
+
   </style>
 
   <!-- CONTROLLER CRÍTICO DEFINIDO NO HEAD COM CONEXÃO TOTAL AO GITHUB E ABERTURA DIRETA DE CONTATOS -->
@@ -197,6 +356,8 @@
         var rBox = document.getElementById('minerResultsBox');
         if (rBox) rBox.style.display = 'flex';
         syncMinerHierarchyOptions();
+        if (typeof initAllSearchableComboboxes === 'function') initAllSearchableComboboxes();
+        if (typeof updateAllSearchableComboboxes === 'function') updateAllSearchableComboboxes();
         if (lastMinedLeads.length === 0) {
           generateMinedResults('Agronegócio & Indústrias', 'ALL', 'ALL', 'ALL', '', 50);
         } else {
@@ -357,6 +518,7 @@
       clearTimeout(searchDebounceTimer);
       currentPage = 1;
       switchMainTab('prospects');
+      updateAllSearchableComboboxes();
       filterData();
       var sInp = document.getElementById('searchInput');
       var query = sInp ? (sInp.value || '').trim() : '';
@@ -151226,6 +151388,9 @@ function triggerSegmentFilterChange() {
             }
           }
         }
+        if (typeof refreshSearchableCombobox === 'function') {
+          refreshSearchableCombobox(p[1]);
+        }
       });
     }
 
@@ -151842,6 +152007,348 @@ function triggerSegmentFilterChange() {
       showToast('📋 Markdown do Projeto copiado para a área de transferência!');
     }
     
+
+    /* ==========================================================
+       SEARCHABLE COMBOBOX ENGINE (AUTOCOMPLETE COM FILTRAGEM INTELIGENTE)
+       ========================================================== */
+    var SEARCHABLE_SELECT_IDS = [
+      'segmentFilter',
+      'divisaoFilter',
+      'grupoFilter',
+      'classeFilter',
+      'subclasseFilter',
+      'ufFilter',
+      'minerSegmentSelect',
+      'minerDivisaoSelect',
+      'minerGrupoSelect',
+      'minerClasseSelect',
+      'minerSubclasseSelect',
+      'minerUf'
+    ];
+
+    var comboboxInstances = {};
+
+    function escapeHtmlSimple(str) {
+      return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function highlightMatchesInText(text, query) {
+      if (!query || query.length < 2) return escapeHtmlSimple(text);
+      var qNorm = normStr(query);
+      var tNorm = normStr(text);
+      var idx = tNorm.indexOf(qNorm);
+      if (idx === -1) return escapeHtmlSimple(text);
+      var before = text.substring(0, idx);
+      var matched = text.substring(idx, idx + query.length);
+      var after = text.substring(idx + query.length);
+      return escapeHtmlSimple(before) + '<span style="background: rgba(234,179,8,0.25); color: var(--text-main); font-weight: 900; border-radius: 2px; padding: 0 1px;">' + escapeHtmlSimple(matched) + '</span>' + escapeHtmlSimple(after);
+    }
+
+    function initSearchableCombobox(selectId) {
+      var select = document.getElementById(selectId);
+      if (!select) return;
+
+      if (comboboxInstances[selectId]) {
+        refreshSearchableCombobox(selectId);
+        return;
+      }
+
+      // Oculta visualmente o select original (mantendo-o no DOM para compatibilidade 100%)
+      select.style.display = 'none';
+
+      // Cria o wrapper do combobox
+      var wrapper = document.createElement('div');
+      wrapper.className = 'searchable-combobox';
+      wrapper.id = 'combobox_wrapper_' + selectId;
+
+      // Herda largura e estilo do select original
+      if (select.style.width) wrapper.style.width = select.style.width;
+      if (select.style.maxWidth) wrapper.style.maxWidth = select.style.maxWidth;
+      if (select.style.flex) wrapper.style.flex = select.style.flex;
+      if (selectId.indexOf('miner') !== -1) {
+        wrapper.style.width = '100%';
+      }
+
+      // Cria a barra de controle
+      var control = document.createElement('div');
+      control.className = 'combobox-control';
+
+      var input = document.createElement('input');
+      input.type = 'text';
+      input.className = 'combobox-input';
+      input.autocomplete = 'off';
+      input.spellcheck = false;
+      input.placeholder = (select.options.length > 0) ? select.options[0].text : 'Selecione ou digite...';
+
+      var clearBtn = document.createElement('span');
+      clearBtn.className = 'combobox-clear';
+      clearBtn.innerHTML = '✕';
+      clearBtn.title = 'Limpar seleção';
+
+      var arrowBtn = document.createElement('span');
+      arrowBtn.className = 'combobox-arrow';
+      arrowBtn.innerHTML = '▼';
+
+      control.appendChild(input);
+      control.appendChild(clearBtn);
+      control.appendChild(arrowBtn);
+
+      // Cria o dropdown de opções
+      var dropdown = document.createElement('div');
+      dropdown.className = 'combobox-dropdown';
+
+      wrapper.appendChild(control);
+      wrapper.appendChild(dropdown);
+
+      // Insere o wrapper no DOM no mesmo local do select
+      select.parentNode.insertBefore(wrapper, select);
+
+      var highlightedIndex = -1;
+
+      function getOptions() {
+        var list = [];
+        for (var i = 0; i < select.options.length; i++) {
+          var o = select.options[i];
+          list.push({
+            value: o.value,
+            text: o.text.trim(),
+            normText: normStr(o.text),
+            normVal: normStr(o.value)
+          });
+        }
+        return list;
+      }
+
+      function updateDisplay() {
+        var curOpt = (select.selectedIndex >= 0) ? select.options[select.selectedIndex] : null;
+        if (curOpt) {
+          input.value = curOpt.text.trim();
+          if (curOpt.value !== 'ALL' && curOpt.value !== '') {
+            clearBtn.style.display = 'block';
+            input.style.fontWeight = '800';
+            input.style.color = 'var(--text-main)';
+          } else {
+            clearBtn.style.display = 'none';
+            input.style.fontWeight = '700';
+            input.style.color = 'var(--text-sub)';
+          }
+        }
+      }
+
+      function openDropdown() {
+        // Fecha outros comboboxes abertos
+        document.querySelectorAll('.combobox-dropdown.open').forEach(function(d) {
+          if (d !== dropdown) {
+            d.classList.remove('open');
+            if (d.parentNode) d.parentNode.classList.remove('open');
+          }
+        });
+        dropdown.classList.add('open');
+        wrapper.classList.add('open');
+        highlightedIndex = -1;
+      }
+
+      function closeDropdown() {
+        dropdown.classList.remove('open');
+        wrapper.classList.remove('open');
+        highlightedIndex = -1;
+      }
+
+      function selectOption(val) {
+        select.value = val;
+        updateDisplay();
+        closeDropdown();
+
+        // Dispara evento de change para acionar toda a inteligência existente
+        var evt = new Event('change', { bubbles: true });
+        select.dispatchEvent(evt);
+        if (typeof select.onchange === 'function') {
+          select.onchange(evt);
+        }
+      }
+
+      function renderDropdown(filterQuery) {
+        var opts = getOptions();
+        var q = normStr(filterQuery || '');
+        var matches = [];
+
+        if (!q) {
+          matches = opts.slice(0, 100);
+        } else {
+          for (var i = 0; i < opts.length; i++) {
+            var o = opts[i];
+            var score = 0;
+            if (o.normVal === q || o.normText.startsWith(q)) {
+              score = 4;
+            } else if (o.normVal.startsWith(q)) {
+              score = 3;
+            } else {
+              var words = o.normText.split(/[\s,./\-_]+/);
+              var wordStart = false;
+              for (var w = 0; w < words.length; w++) {
+                if (words[w].startsWith(q)) { wordStart = true; break; }
+              }
+              if (wordStart) score = 2;
+              else if (o.normText.indexOf(q) !== -1 || o.normVal.indexOf(q) !== -1) score = 1;
+            }
+
+            if (score > 0) {
+              matches.push({ opt: o, score: score, index: i });
+            }
+          }
+
+          matches.sort(function(a, b) {
+            if (b.score !== a.score) return b.score - a.score;
+            return a.index - b.index;
+          });
+          matches = matches.map(function(m) { return m.opt; }).slice(0, 100);
+        }
+
+        dropdown.innerHTML = '';
+        if (matches.length === 0) {
+          var empty = document.createElement('div');
+          empty.className = 'combobox-empty';
+          empty.innerHTML = '🔍 Nenhuma opção semelhante a "<b>' + escapeHtmlSimple(filterQuery) + '</b>"';
+          dropdown.appendChild(empty);
+          return;
+        }
+
+        matches.forEach(function(item) {
+          var itemEl = document.createElement('div');
+          itemEl.className = 'combobox-item' + (item.value === select.value ? ' selected' : '');
+          itemEl.dataset.value = item.value;
+
+          var labelSpan = document.createElement('span');
+          labelSpan.style.flex = '1';
+          labelSpan.style.overflow = 'hidden';
+          labelSpan.style.textOverflow = 'ellipsis';
+          labelSpan.style.whiteSpace = 'nowrap';
+          labelSpan.title = item.text;
+          labelSpan.innerHTML = highlightMatchesInText(item.text, filterQuery);
+
+          itemEl.appendChild(labelSpan);
+
+          if (item.value !== 'ALL' && item.value !== '') {
+            var badgeSpan = document.createElement('span');
+            badgeSpan.className = 'combobox-item-badge';
+            badgeSpan.innerText = item.value;
+            itemEl.appendChild(badgeSpan);
+          }
+
+          itemEl.addEventListener('mousedown', function(e) {
+            e.preventDefault();
+            selectOption(item.value);
+          });
+
+          dropdown.appendChild(itemEl);
+        });
+
+        if (opts.length > 100 && !q) {
+          var more = document.createElement('div');
+          more.className = 'combobox-more';
+          more.innerText = '💡 Exibindo 100 de ' + opts.length + ' opções. Digite para filtrar o que mais se assemelha...';
+          dropdown.appendChild(more);
+        }
+      }
+
+      // Eventos do Input
+      input.addEventListener('focus', function() {
+        openDropdown();
+        input.select();
+        renderDropdown('');
+      });
+
+      input.addEventListener('click', function() {
+        if (!dropdown.classList.contains('open')) {
+          openDropdown();
+          input.select();
+          renderDropdown('');
+        }
+      });
+
+      input.addEventListener('input', function() {
+        openDropdown();
+        renderDropdown(input.value);
+      });
+
+      input.addEventListener('keydown', function(e) {
+        var items = dropdown.querySelectorAll('.combobox-item');
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          if (!dropdown.classList.contains('open')) { openDropdown(); renderDropdown(''); return; }
+          highlightedIndex = Math.min(highlightedIndex + 1, items.length - 1);
+          items.forEach(function(el, i) { el.classList.toggle('highlighted', i === highlightedIndex); });
+          if (items[highlightedIndex]) items[highlightedIndex].scrollIntoView({ block: 'nearest' });
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          if (!dropdown.classList.contains('open')) return;
+          highlightedIndex = Math.max(highlightedIndex - 1, 0);
+          items.forEach(function(el, i) { el.classList.toggle('highlighted', i === highlightedIndex); });
+          if (items[highlightedIndex]) items[highlightedIndex].scrollIntoView({ block: 'nearest' });
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          if (highlightedIndex >= 0 && items[highlightedIndex]) {
+            selectOption(items[highlightedIndex].dataset.value);
+          } else if (items.length > 0) {
+            selectOption(items[0].dataset.value);
+          }
+        } else if (e.key === 'Escape') {
+          closeDropdown();
+          updateDisplay();
+        }
+      });
+
+      // Botão Limpar (✕)
+      clearBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        selectOption('ALL');
+      });
+
+      // Clique fora fecha o dropdown
+      document.addEventListener('click', function(e) {
+        if (!wrapper.contains(e.target)) {
+          if (dropdown.classList.contains('open')) {
+            closeDropdown();
+            updateDisplay();
+          }
+        }
+      });
+
+      updateDisplay();
+
+      comboboxInstances[selectId] = {
+        wrapper: wrapper,
+        input: input,
+        updateDisplay: updateDisplay,
+        refresh: function() {
+          updateDisplay();
+        }
+      };
+    }
+
+    function refreshSearchableCombobox(selectId) {
+      if (comboboxInstances[selectId]) {
+        comboboxInstances[selectId].refresh();
+      } else {
+        initSearchableCombobox(selectId);
+      }
+    }
+
+    function updateAllSearchableComboboxes() {
+      SEARCHABLE_SELECT_IDS.forEach(function(id) {
+        if (comboboxInstances[id]) {
+          comboboxInstances[id].updateDisplay();
+        }
+      });
+    }
+
+    function initAllSearchableComboboxes() {
+      SEARCHABLE_SELECT_IDS.forEach(function(id) {
+        initSearchableCombobox(id);
+      });
+    }
+
+
     window.onload = function() {
       loadStoredMinedLeads();
       loadSearchHistory();
@@ -151866,6 +152373,9 @@ function triggerSegmentFilterChange() {
     window.startMiningEngine = startMiningEngine;
     window.syncMinerHierarchyOptions = syncMinerHierarchyOptions;
     window.handleMinerHierarchyChange = handleMinerHierarchyChange;
+    window.initAllSearchableComboboxes = initAllSearchableComboboxes;
+    window.refreshSearchableCombobox = refreshSearchableCombobox;
+    window.updateAllSearchableComboboxes = updateAllSearchableComboboxes;
     window.toggleMinedLead = toggleMinedLead;
     window.toggleAllMinedLeads = toggleAllMinedLeads;
     window.connectMinedLeadsToActiveBase = connectMinedLeadsToActiveBase;
