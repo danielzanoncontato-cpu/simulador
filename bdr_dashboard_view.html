@@ -11,43 +11,44 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root {
-      --bg-body: #ffffff;
+      --bg-body: #f8fafc;
       --bg-card: #ffffff;
-      --bg-subtle: #f4f4f4;
-      --text-main: #000000;
-      --text-sub: #1f1f1f;
-      --text-muted: #555555;
-      --border-color: #d1d1d1;
-      --border-strong: #000000;
-      --btn-main-bg: #000000;
-      --btn-main-text: #ffffff;
-      --btn-main-hover: #262626;
+      --bg-subtle: #f1f5f9;
+      --text-main: #0f172a;
+      --text-sub: #334155;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --border-strong: #0f172a;
+      --btn-main-bg: #ffffff;
+      --btn-main-text: #0f172a;
+      --btn-main-border: #0f172a;
+      --btn-main-hover: #f8fafc;
       --btn-sub-bg: #ffffff;
-      --btn-sub-text: #000000;
-      --btn-sub-border: #000000;
-      --btn-sub-hover: #eeeeee;
-      --badge-bg: #f0f0f0;
-      --badge-text: #000000;
-      --badge-border: #cccccc;
-      --badge-active-bg: #000000;
-      --badge-active-text: #ffffff;
-      --badge-active-border: #000000;
-      --table-header-bg: #000000;
+      --btn-sub-text: #0f172a;
+      --btn-sub-border: #cbd5e1;
+      --btn-sub-hover: #f1f5f9;
+      --badge-bg: #f1f5f9;
+      --badge-text: #0f172a;
+      --badge-border: #cbd5e1;
+      --badge-active-bg: #ffffff;
+      --badge-active-text: #0f172a;
+      --badge-active-border: #0f172a;
+      --table-header-bg: #0f172a;
       --table-header-text: #ffffff;
-      --table-row-hover: #f5f5f5;
-      --table-row-border: #e0e0e0;
-      --table-alt-col: #fafafa;
+      --table-row-hover: #f8fafc;
+      --table-row-border: #e2e8f0;
+      --table-alt-col: #f8fafc;
       --input-bg: #ffffff;
-      --input-text: #000000;
-      --input-border: #cccccc;
+      --input-text: #0f172a;
+      --input-border: #cbd5e1;
       --modal-bg: #ffffff;
-      --modal-overlay: rgba(0, 0, 0, 0.75);
-      --linkedin-bg: #000000;
-      --linkedin-text: #ffffff;
-      --linkedin-border: #000000;
-      --no-linkedin-bg: #f5f5f5;
-      --no-linkedin-text: #666666;
-      --no-linkedin-border: #d4d4d4;
+      --modal-overlay: rgba(15, 23, 42, 0.65);
+      --linkedin-bg: #ffffff;
+      --linkedin-text: #0284c7;
+      --linkedin-border: #0284c7;
+      --no-linkedin-bg: #f8fafc;
+      --no-linkedin-text: #64748b;
+      --no-linkedin-border: #e2e8f0;
     }
 
     body.dark-mode, html.dark-mode {
@@ -100,15 +101,19 @@
     input, select, textarea { font-family: inherit; }
 
     /* BOTÕES & ABAS */
-    .tab-btn { transition: all 0.15s ease-in-out; cursor: pointer; user-select: none; border-radius: 10px; font-weight: 800; font-size: 12px; padding: 8px 16px; border: 1px solid var(--border-strong); background: var(--btn-sub-bg); color: var(--btn-sub-text); display: inline-flex; align-items: center; gap: 6px; }
+    .tab-btn { transition: all 0.15s ease-in-out; cursor: pointer; user-select: none; border-radius: 10px; font-weight: 800; font-size: 12px; padding: 8px 16px; border: 1.5px solid var(--border-strong); background: #ffffff; color: var(--text-main); display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
     .tab-btn:hover { background: var(--btn-sub-hover); }
-    .tab-btn.active-tab { background-color: var(--btn-main-bg) !important; color: var(--btn-main-text) !important; border-color: var(--btn-main-bg) !important; }
-    .btn-main { background: var(--btn-main-bg); color: var(--btn-main-text); border: 1px solid var(--btn-main-bg); border-radius: 10px; font-weight: 800; font-size: 12px; padding: 8px 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; transition: 0.15s; }
-    .btn-main:hover { opacity: 0.9; }
-    .btn-outline { background: var(--btn-sub-bg); color: var(--btn-sub-text); border: 1px solid var(--border-strong); border-radius: 10px; font-weight: 800; font-size: 12px; padding: 8px 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; transition: 0.15s; }
+    .tab-btn.active-tab { background-color: #ffffff !important; color: var(--text-main) !important; border: 2px solid var(--border-strong) !important; box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important; }
+    body.dark-mode .tab-btn.active-tab, html.dark-mode .tab-btn.active-tab { background-color: #ffffff !important; color: #000000 !important; border-color: #ffffff !important; }
+    .btn-main { background: #ffffff; color: var(--text-main); border: 1.5px solid var(--border-strong); border-radius: 10px; font-weight: 800; font-size: 12px; padding: 8px 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; transition: 0.15s; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+    .btn-main:hover { background: var(--bg-subtle); border-color: var(--border-strong); }
+    body.dark-mode .btn-main, html.dark-mode .btn-main { background: #ffffff; color: #000000; border-color: #ffffff; }
+    .btn-outline { background: #ffffff; color: var(--text-main); border: 1.5px solid var(--border-strong); border-radius: 10px; font-weight: 800; font-size: 12px; padding: 8px 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; transition: 0.15s; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
     .btn-outline:hover { background: var(--btn-sub-hover); }
-    .theme-toggle-btn { background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-strong); border-radius: 10px; font-weight: 800; font-size: 12px; padding: 8px 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: 0.15s; }
+    body.dark-mode .btn-outline, html.dark-mode .btn-outline { background: #0a0a0a; color: #ffffff; border-color: #ffffff; }
+    .theme-toggle-btn { background: #ffffff; color: var(--text-main); border: 1.5px solid var(--border-strong); border-radius: 10px; font-weight: 800; font-size: 12px; padding: 8px 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: 0.15s; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
     .theme-toggle-btn:hover { background: var(--bg-subtle); }
+    body.dark-mode .theme-toggle-btn, html.dark-mode .theme-toggle-btn { background: #0a0a0a; color: #ffffff; border-color: #ffffff; }
 
     /* BADGES */
     .badge-master { background: var(--badge-active-bg); color: var(--badge-active-text); border: 1px solid var(--badge-active-border); padding: 3px 10px; border-radius: 9999px; font-size: 10px; font-weight: 800; }
@@ -120,8 +125,9 @@
     .badge-linkedin-none { font-size: 9px; font-weight: 700; color: var(--no-linkedin-text); background: var(--no-linkedin-bg); border: 1px dashed var(--no-linkedin-border); padding: 1px 5px; border-radius: 4px; display: inline-flex; align-items: center; gap: 2px; }
     .btn-contact { font-family: monospace; font-size: 10px; font-weight: 800; color: var(--text-main); background: var(--bg-card); border: 1px solid var(--border-color); padding: 2px 6px; border-radius: 4px; text-decoration: none; display: inline-flex; align-items: center; gap: 3px; }
     .btn-contact:hover { border-color: var(--border-strong); }
-    .btn-table-action { width: 100%; padding: 5px 8px; background: var(--btn-main-bg); color: var(--btn-main-text); border: 1px solid var(--border-strong); border-radius: 6px; font-size: 10px; font-weight: 800; margin-bottom: 3px; cursor: pointer; transition: 0.15s; }
-    .btn-table-action:hover { opacity: 0.85; }
+    .btn-table-action { width: 100%; padding: 5px 8px; background: #ffffff; color: var(--text-main); border: 1.5px solid var(--border-strong); border-radius: 6px; font-size: 10px; font-weight: 800; margin-bottom: 3px; cursor: pointer; transition: 0.15s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .btn-table-action:hover { background: var(--bg-subtle); }
+    body.dark-mode .btn-table-action, html.dark-mode .btn-table-action { background: #ffffff; color: #000000; border-color: #ffffff; }
     .btn-table-outline { width: 100%; padding: 5px 8px; background: var(--btn-sub-bg); color: var(--btn-sub-text); border: 1px solid var(--border-strong); border-radius: 6px; font-size: 10px; font-weight: 800; margin-bottom: 3px; cursor: pointer; transition: 0.15s; }
     .btn-table-outline:hover { background: var(--btn-sub-hover); }
     .chip-btn { padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); cursor: pointer; transition: 0.15s; }
