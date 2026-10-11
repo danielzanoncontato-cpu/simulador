@@ -589,7 +589,7 @@
       var sSeg = document.getElementById('segmentFilter');
       var seg = sSeg ? sSeg.value : 'ALL';
       if (query.length > 0) {
-        showToast('🔍 Filtrado: ' + filteredDataList.length + ' leads encontrados');
+        showToast('Filtrado: ' + filteredDataList.length + ' leads encontrados');
         dispatchSearchQueryToAi(query, 'pesquisa_texto', filteredDataList.length, { segmentoFiltro: seg });
       } else {
         showToast('📋 Exibindo todos os leads (' + filteredDataList.length + ')');
@@ -226779,7 +226779,7 @@ function triggerSegmentFilterChange() {
       return '<div style="display: flex; flex-direction: column; gap: 4px;">' +
              statusBadge +
              '  <button type="button" onclick="event.stopPropagation(); pesquisarDividaPgfn(\'' + clean + '\', \'' + safeCompName + '\')" style="display: inline-flex; align-items: center; justify-content: space-between; padding: 4px 6px; border-radius: 6px; background: var(--bg-card); border: 1px solid var(--border-strong); color: var(--text-main); font-weight: 800; font-size: 10px; cursor: pointer; text-decoration: none;" title="Copiar CNPJ e pesquisar débitos ativos no portal oficial Dívida Aberta PGFN">' +
-             '    <span>🔍 Pesquisar na PGFN</span>' +
+             '    <span>Pesquisar na PGFN</span>' +
              '    <span style="font-size: 8px; color: var(--text-muted); background: var(--badge-bg); padding: 1px 4px; border-radius: 4px;">CNPJ</span>' +
              '  </button>' +
              '  <div style="display: flex; gap: 4px;">' +
@@ -227182,7 +227182,7 @@ function triggerSegmentFilterChange() {
         var q = (p.company || '') + ' ' + (p.city || '') + ' ' + (p.uf || '') + ' site oficial';
         var searchUrl = 'https://www.google.com/search?q=' + encodeURIComponent(q);
         window.open(searchUrl, '_blank', 'noopener,noreferrer');
-        showToast('🔍 Localizando site oficial de ' + p.company + ' no Google...');
+        showToast('Localizando site oficial de ' + p.company + ' no Google...');
       }
     }
 
@@ -227237,7 +227237,7 @@ function triggerSegmentFilterChange() {
                              '      ' + badgeStatus +
                              '    </div>' +
                              '    <button type="button" onclick="pesquisarDividaPgfn(\'' + cleanCnpj + '\', \'' + safeComp + '\')" class="btn-main" style="padding: 6px 12px; font-size: 11px; font-weight: 800; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">' +
-                             '      <span>🔍 Pesquisar CNPJ no Dívida Aberta PGFN</span>' +
+                             '      <span>Pesquisar CNPJ no Dívida Aberta PGFN</span>' +
                              '    </button>' +
                              '  </div>' +
                              '  <div style="display: flex; gap: 6px; flex-wrap: wrap;">' +
@@ -227253,7 +227253,7 @@ function triggerSegmentFilterChange() {
         var isDirect = p.site && p.site.indexOf('http') === 0 && p.site.indexOf('google.com') === -1 && p.site.indexOf('sem site') === -1 && p.site.indexOf('Rastreio via') === -1;
         mSite.innerHTML = '<div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">' +
                           '  <button type="button" onclick="openCompanyWebsite(' + p.id + ')" class="btn-main" style="padding: 4px 10px; font-size: 11px;">🌐 ' + (isDirect ? 'Abrir Site Oficial' : 'Buscar Site no Google') + '</button>' +
-                          '  <a href="https://www.google.com/search?q=' + encodeURIComponent(p.company + ' ' + (p.cnpj || '') + ' ' + (p.city || '') + ' ' + (p.uf || '')) + '" target="_blank" class="btn-outline" style="padding: 4px 10px; font-size: 11px; text-decoration: none;">🔍 Google / CNPJ</a>' +
+                          '  <a href="https://www.google.com/search?q=' + encodeURIComponent(p.company + ' ' + (p.cnpj || '') + ' ' + (p.city || '') + ' ' + (p.uf || '')) + '" target="_blank" class="btn-outline" style="padding: 4px 10px; font-size: 11px; text-decoration: none;">Google / CNPJ</a>' +
                           '</div>';
       }
 
