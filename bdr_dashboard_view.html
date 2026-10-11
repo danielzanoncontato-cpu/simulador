@@ -14,35 +14,35 @@
       --bg-body: #f8fafc;
       --bg-card: #ffffff;
       --bg-subtle: #f1f5f9;
-      --text-main: #0f172a;
-      --text-sub: #334155;
-      --text-muted: #64748b;
-      --border-color: #e2e8f0;
-      --border-strong: #0f172a;
+      --text-main: #000000;
+      --text-sub: #1e293b;
+      --text-muted: #475569;
+      --border-color: #cbd5e1;
+      --border-strong: #000000;
       --btn-main-bg: #ffffff;
-      --btn-main-text: #0f172a;
-      --btn-main-border: #0f172a;
-      --btn-main-hover: #f8fafc;
+      --btn-main-text: #000000;
+      --btn-main-border: #000000;
+      --btn-main-hover: #f1f5f9;
       --btn-sub-bg: #ffffff;
-      --btn-sub-text: #0f172a;
-      --btn-sub-border: #cbd5e1;
+      --btn-sub-text: #000000;
+      --btn-sub-border: #000000;
       --btn-sub-hover: #f1f5f9;
-      --badge-bg: #f1f5f9;
-      --badge-text: #0f172a;
-      --badge-border: #cbd5e1;
+      --badge-bg: #f8fafc;
+      --badge-text: #000000;
+      --badge-border: #000000;
       --badge-active-bg: #ffffff;
-      --badge-active-text: #0f172a;
-      --badge-active-border: #0f172a;
+      --badge-active-text: #000000;
+      --badge-active-border: #000000;
       --table-header-bg: #0f172a;
       --table-header-text: #ffffff;
       --table-row-hover: #f8fafc;
       --table-row-border: #e2e8f0;
       --table-alt-col: #f8fafc;
       --input-bg: #ffffff;
-      --input-text: #0f172a;
-      --input-border: #cbd5e1;
+      --input-text: #000000;
+      --input-border: #000000;
       --modal-bg: #ffffff;
-      --modal-overlay: rgba(15, 23, 42, 0.65);
+      --modal-overlay: rgba(15, 23, 42, 0.70);
       --linkedin-bg: #ffffff;
       --linkedin-text: #0284c7;
       --linkedin-border: #0284c7;
@@ -101,18 +101,18 @@
     input, select, textarea { font-family: inherit; }
 
     /* BOTÕES & ABAS */
-    .tab-btn { transition: all 0.15s ease-in-out; cursor: pointer; user-select: none; border-radius: 10px; font-weight: 800; font-size: 12px; padding: 8px 16px; border: 1.5px solid var(--border-strong); background: #ffffff; color: var(--text-main); display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
-    .tab-btn:hover { background: var(--btn-sub-hover); }
-    .tab-btn.active-tab { background-color: #ffffff !important; color: var(--text-main) !important; border: 2px solid var(--border-strong) !important; box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important; }
+    .tab-btn { transition: all 0.15s ease-in-out; cursor: pointer; user-select: none; border-radius: 10px; font-weight: 800; font-size: 12px; padding: 8px 16px; border: 1px solid #000000; background: #ffffff; color: #000000; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+    .tab-btn:hover { background: #f1f5f9; border-color: #000000; }
+    .tab-btn.active-tab { background-color: #ffffff !important; color: #000000 !important; border: 1.5px solid #000000 !important; box-shadow: 0 2px 5px rgba(0,0,0,0.12) !important; font-weight: 900; }
     body.dark-mode .tab-btn.active-tab, html.dark-mode .tab-btn.active-tab { background-color: #ffffff !important; color: #000000 !important; border-color: #ffffff !important; }
-    .btn-main { background: #ffffff; color: var(--text-main); border: 1.5px solid var(--border-strong); border-radius: 10px; font-weight: 800; font-size: 12px; padding: 8px 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; transition: 0.15s; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
-    .btn-main:hover { background: var(--bg-subtle); border-color: var(--border-strong); }
+    .btn-main { background: #ffffff; color: #000000; border: 1px solid #000000; border-radius: 10px; font-weight: 800; font-size: 12px; padding: 8px 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; transition: 0.15s; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+    .btn-main:hover { background: #f1f5f9; border-color: #000000; }
     body.dark-mode .btn-main, html.dark-mode .btn-main { background: #ffffff; color: #000000; border-color: #ffffff; }
-    .btn-outline { background: #ffffff; color: var(--text-main); border: 1.5px solid var(--border-strong); border-radius: 10px; font-weight: 800; font-size: 12px; padding: 8px 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; transition: 0.15s; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-    .btn-outline:hover { background: var(--btn-sub-hover); }
+    .btn-outline { background: #ffffff; color: #000000; border: 1px solid #000000; border-radius: 10px; font-weight: 800; font-size: 12px; padding: 8px 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; transition: 0.15s; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .btn-outline:hover { background: #f1f5f9; border-color: #000000; }
     body.dark-mode .btn-outline, html.dark-mode .btn-outline { background: #0a0a0a; color: #ffffff; border-color: #ffffff; }
-    .theme-toggle-btn { background: #ffffff; color: var(--text-main); border: 1.5px solid var(--border-strong); border-radius: 10px; font-weight: 800; font-size: 12px; padding: 8px 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: 0.15s; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-    .theme-toggle-btn:hover { background: var(--bg-subtle); }
+    .theme-toggle-btn { background: #ffffff; color: #000000; border: 1px solid #000000; border-radius: 10px; font-weight: 800; font-size: 12px; padding: 8px 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: 0.15s; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .theme-toggle-btn:hover { background: #f1f5f9; border-color: #000000; }
     body.dark-mode .theme-toggle-btn, html.dark-mode .theme-toggle-btn { background: #0a0a0a; color: #ffffff; border-color: #ffffff; }
 
     /* BADGES */
@@ -125,11 +125,12 @@
     .badge-linkedin-none { font-size: 9px; font-weight: 700; color: var(--no-linkedin-text); background: var(--no-linkedin-bg); border: 1px dashed var(--no-linkedin-border); padding: 1px 5px; border-radius: 4px; display: inline-flex; align-items: center; gap: 2px; }
     .btn-contact { font-family: monospace; font-size: 10px; font-weight: 800; color: var(--text-main); background: var(--bg-card); border: 1px solid var(--border-color); padding: 2px 6px; border-radius: 4px; text-decoration: none; display: inline-flex; align-items: center; gap: 3px; }
     .btn-contact:hover { border-color: var(--border-strong); }
-    .btn-table-action { width: 100%; padding: 5px 8px; background: #ffffff; color: var(--text-main); border: 1.5px solid var(--border-strong); border-radius: 6px; font-size: 10px; font-weight: 800; margin-bottom: 3px; cursor: pointer; transition: 0.15s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
-    .btn-table-action:hover { background: var(--bg-subtle); }
+    .btn-table-action { width: 100%; padding: 5px 8px; background: #ffffff; color: #000000; border: 1px solid #000000; border-radius: 6px; font-size: 10px; font-weight: 800; margin-bottom: 3px; cursor: pointer; transition: 0.15s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .btn-table-action:hover { background: #f1f5f9; border-color: #000000; }
     body.dark-mode .btn-table-action, html.dark-mode .btn-table-action { background: #ffffff; color: #000000; border-color: #ffffff; }
-    .btn-table-outline { width: 100%; padding: 5px 8px; background: var(--btn-sub-bg); color: var(--btn-sub-text); border: 1px solid var(--border-strong); border-radius: 6px; font-size: 10px; font-weight: 800; margin-bottom: 3px; cursor: pointer; transition: 0.15s; }
-    .btn-table-outline:hover { background: var(--btn-sub-hover); }
+    .btn-table-outline { width: 100%; padding: 5px 8px; background: #ffffff; color: #000000; border: 1px solid #000000; border-radius: 6px; font-size: 10px; font-weight: 800; margin-bottom: 3px; cursor: pointer; transition: 0.15s; }
+    .btn-table-outline:hover { background: #f1f5f9; border-color: #000000; }
+    body.dark-mode .btn-table-outline, html.dark-mode .btn-table-outline { background: #0a0a0a; color: #ffffff; border-color: #ffffff; }
     .chip-btn { padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); cursor: pointer; transition: 0.15s; }
     .chip-btn:hover { background: var(--btn-main-bg); color: var(--btn-main-text); border-color: var(--border-strong); }
 
@@ -148,7 +149,7 @@
       display: flex;
       align-items: center;
       background: var(--input-bg);
-      border: 1px solid var(--border-color);
+      border: 1px solid #000000;
       border-radius: 8px;
       padding: 0;
       transition: all 0.2s ease;
@@ -228660,7 +228661,7 @@ function triggerSegmentFilterChange() {
       <!-- PAINEL DE CONTROLE DE FILTROS & BUSCA -->
       <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; box-shadow: 0 1px 4px rgba(0,0,0,0.04);">
         <div style="display: flex; align-items: center; gap: 6px; flex: 2; min-width: 250px;">
-          <input type="text" id="searchInput" oninput="triggerSearchWithDebounce()" onkeydown="if(event.key === 'Enter') { triggerSearchNow(); event.preventDefault(); }" placeholder="🔍 Buscar por Empresa, Sócio, CNAE, UF..." style="flex: 1; min-width: 160px; background: var(--input-bg); color: var(--input-text); border: 1px solid var(--border-color); border-radius: 8px; padding: 6px 10px; font-size: 11px; white-space: nowrap;">
+          <input type="text" id="searchInput" oninput="triggerSearchWithDebounce()" onkeydown="if(event.key === 'Enter') { triggerSearchNow(); event.preventDefault(); }" placeholder="🔍 Buscar por Empresa, Sócio, CNAE, UF..." style="flex: 1; min-width: 160px; background: var(--input-bg); color: var(--input-text); border: 1px solid #000000; border-radius: 8px; padding: 6px 10px; font-size: 11px; white-space: nowrap;">
           <button type="button" id="btnSearchSubmit" onclick="triggerSearchNow()" class="btn-main" style="padding: 6px 14px; font-size: 11px; font-weight: 800; border-radius: 8px; white-space: nowrap; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);" title="Buscar e configurar filtro imediatamente (Enter)">
             <span>🔍 Buscar</span>
           </button>
