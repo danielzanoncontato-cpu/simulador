@@ -228098,24 +228098,24 @@ function triggerSegmentFilterChange() {
        ========================================================== */
     var MULTISELECT_CONFIG = {
       // Base de Prospecção
-      'segmentFilter': { label: '1º Nível: 21 Seções', placeholder: '🔍 1º Nível: 21 Seções (digite...)' },
-      'divisaoFilter': { label: '2º Nível: 87 Divisões', placeholder: '🔍 2º Nível: 87 Divisões (digite...)' },
-      'grupoFilter': { label: '3º Nível: 285 Grupos', placeholder: '🔍 3º Nível: 285 Grupos (digite...)' },
-      'classeFilter': { label: '4º Nível: 673 Classes', placeholder: '🔍 4º Nível: 673 Classes (digite...)' },
-      'subclasseFilter': { label: '5º Nível: 1.301 Subclasses', placeholder: '🔍 5º Nível: 1.301 Subclasses (digite...)' },
-      'ufFilter': { label: 'Estados (UFs)', placeholder: '🔍 Estados / UFs (digite...)' },
-      'regimeFilter': { label: 'Regime Tributário', placeholder: '🔍 Regime Tributário (digite...)' },
-      'tipoFilter': { label: 'Tipo Societário', placeholder: '🔍 Tipo Societário (digite...)' },
+      'segmentFilter': { label: '1º Nível: 21 Seções', placeholder: '1º Nível: 21 Seções (digite...)' },
+      'divisaoFilter': { label: '2º Nível: 87 Divisões', placeholder: '2º Nível: 87 Divisões (digite...)' },
+      'grupoFilter': { label: '3º Nível: 285 Grupos', placeholder: '3º Nível: 285 Grupos (digite...)' },
+      'classeFilter': { label: '4º Nível: 673 Classes', placeholder: '4º Nível: 673 Classes (digite...)' },
+      'subclasseFilter': { label: '5º Nível: 1.301 Subclasses', placeholder: '5º Nível: 1.301 Subclasses (digite...)' },
+      'ufFilter': { label: 'Estados (UFs)', placeholder: 'Estados / UFs (digite...)' },
+      'regimeFilter': { label: 'Regime Tributário', placeholder: 'Regime Tributário (digite...)' },
+      'tipoFilter': { label: 'Tipo Societário', placeholder: 'Tipo Societário (digite...)' },
 
       // Minerar Novos Leads
-      'minerSegmentSelect': { label: '1º Nível: 21 Seções', placeholder: '🔍 1º Nível: 21 Seções (digite...)' },
-      'minerDivisaoSelect': { label: '2º Nível: 87 Divisões', placeholder: '🔍 2º Nível: 87 Divisões (digite...)' },
-      'minerGrupoSelect': { label: '3º Nível: 285 Grupos', placeholder: '🔍 3º Nível: 285 Grupos (digite...)' },
-      'minerClasseSelect': { label: '4º Nível: 673 Classes', placeholder: '🔍 4º Nível: 673 Classes (digite...)' },
-      'minerSubclasseSelect': { label: '5º Nível: 1.301 Subclasses', placeholder: '🔍 5º Nível: 1.301 Subclasses (digite...)' },
-      'minerUf': { label: 'Região / Estados (UF)', placeholder: '🔍 Região / Estados (digite...)' },
-      'minerRegime': { label: 'Regime Tributário', placeholder: '🔍 Regime Tributário (digite...)' },
-      'minerTipoSocietario': { label: 'Tipo Societário', placeholder: '🔍 Tipo Societário (digite...)' }
+      'minerSegmentSelect': { label: '1º Nível: 21 Seções', placeholder: '1º Nível: 21 Seções (digite...)' },
+      'minerDivisaoSelect': { label: '2º Nível: 87 Divisões', placeholder: '2º Nível: 87 Divisões (digite...)' },
+      'minerGrupoSelect': { label: '3º Nível: 285 Grupos', placeholder: '3º Nível: 285 Grupos (digite...)' },
+      'minerClasseSelect': { label: '4º Nível: 673 Classes', placeholder: '4º Nível: 673 Classes (digite...)' },
+      'minerSubclasseSelect': { label: '5º Nível: 1.301 Subclasses', placeholder: '5º Nível: 1.301 Subclasses (digite...)' },
+      'minerUf': { label: 'Região / Estados (UF)', placeholder: 'Região / Estados (digite...)' },
+      'minerRegime': { label: 'Regime Tributário', placeholder: 'Regime Tributário (digite...)' },
+      'minerTipoSocietario': { label: 'Tipo Societário', placeholder: 'Tipo Societário (digite...)' }
     };
 
     var SEARCHABLE_SELECT_IDS = Object.keys(MULTISELECT_CONFIG);
@@ -228174,7 +228174,7 @@ function triggerSegmentFilterChange() {
       wrapper.className = 'searchable-combobox';
       wrapper.id = 'combobox_wrapper_' + selectId;
 
-      var cfg = MULTISELECT_CONFIG[selectId] || { label: 'Filtro', placeholder: '🔍 Digite para buscar...' };
+      var cfg = MULTISELECT_CONFIG[selectId] || { label: 'Filtro', placeholder: 'Digite para buscar...' };
 
       if (selectId.indexOf('miner') !== -1) {
         wrapper.style.width = '100%';
@@ -228424,7 +228424,7 @@ function triggerSegmentFilterChange() {
         if (matches.length === 0) {
           var empty = document.createElement('div');
           empty.className = 'combobox-empty';
-          empty.innerHTML = '🔍 Nenhuma opção semelhante a "<b>' + escapeHtmlSimple(filterQuery) + '</b>"';
+          empty.innerHTML = 'Nenhuma opção semelhante a "<b>' + escapeHtmlSimple(filterQuery) + '</b>"';
           dropdown.appendChild(empty);
           return;
         }
@@ -228667,7 +228667,7 @@ function triggerSegmentFilterChange() {
       <!-- PAINEL DE CONTROLE DE FILTROS & BUSCA -->
       <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; box-shadow: 0 1px 4px rgba(0,0,0,0.04);">
         <div style="display: flex; align-items: center; gap: 6px; flex: 2; min-width: 250px;">
-          <input type="text" id="searchInput" oninput="triggerSearchWithDebounce()" onkeydown="if(event.key === 'Enter') { triggerSearchNow(); event.preventDefault(); }" placeholder="🔍 Buscar por Empresa, Sócio, CNAE, UF..." style="flex: 1; min-width: 160px; background: var(--input-bg); color: var(--input-text); border: 1px solid #000000; border-radius: 8px; padding: 6px 10px; font-size: 11px; white-space: nowrap;">
+          <input type="text" id="searchInput" oninput="triggerSearchWithDebounce()" onkeydown="if(event.key === 'Enter') { triggerSearchNow(); event.preventDefault(); }" placeholder="Buscar por Empresa, Sócio, CNAE, UF..." style="flex: 1; min-width: 160px; background: var(--input-bg); color: var(--input-text); border: 1px solid #000000; border-radius: 8px; padding: 6px 10px; font-size: 11px; white-space: nowrap;">
           <button type="button" id="btnSearchSubmit" onclick="triggerSearchNow()" class="btn-main" style="padding: 6px 14px; font-size: 11px; font-weight: 800; border-radius: 8px; white-space: nowrap; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);" title="Buscar e configurar filtro imediatamente (Enter)">
             <span>🔍 Buscar</span>
           </button>
