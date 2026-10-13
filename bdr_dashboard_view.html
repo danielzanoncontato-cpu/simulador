@@ -60,13 +60,13 @@
       --text-muted: #a3a3a3;
       --border-color: #262626;
       --border-strong: #ffffff;
-      --btn-main-bg: #ffffff;
-      --btn-main-text: #000000;
-      --btn-main-hover: #e5e5e5;
-      --btn-sub-bg: #0a0a0a;
+      --btn-main-bg: #000000;
+      --btn-main-text: #ffffff;
+      --btn-main-hover: #1a1a1a;
+      --btn-sub-bg: #000000;
       --btn-sub-text: #ffffff;
       --btn-sub-border: #ffffff;
-      --btn-sub-hover: #1f1f1f;
+      --btn-sub-hover: #1a1a1a;
       --badge-bg: #141414;
       --badge-text: #ffffff;
       --badge-border: #333333;
@@ -104,10 +104,10 @@
     .tab-btn { transition: all 0.15s ease-in-out; cursor: pointer; user-select: none; border-radius: 10px; font-weight: 800; font-size: 12px; padding: 8px 16px; border: 1px solid #000000; background: #ffffff; color: #000000; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
     .tab-btn:hover { background: #f1f5f9; border-color: #000000; }
     .tab-btn.active-tab { background-color: #ffffff !important; color: #000000 !important; border: 1.5px solid #000000 !important; box-shadow: 0 2px 5px rgba(0,0,0,0.12) !important; font-weight: 900; }
-    body.dark-mode .tab-btn.active-tab, html.dark-mode .tab-btn.active-tab { background-color: #ffffff !important; color: #000000 !important; border-color: #ffffff !important; }
+    body.dark-mode .tab-btn.active-tab, html.dark-mode .tab-btn.active-tab { background-color: #000000 !important; color: #ffffff !important; border: 1.5px solid #ffffff !important; font-weight: 900; }
     .btn-main { background: #ffffff; color: #000000; border: 1px solid #000000; border-radius: 10px; font-weight: 800; font-size: 12px; padding: 8px 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; transition: 0.15s; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
     .btn-main:hover { background: #f1f5f9; border-color: #000000; }
-    body.dark-mode .btn-main, html.dark-mode .btn-main { background: #ffffff; color: #000000; border-color: #ffffff; }
+    
     .btn-outline { background: #ffffff; color: #000000; border: 1px solid #000000; border-radius: 10px; font-weight: 800; font-size: 12px; padding: 8px 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; transition: 0.15s; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
     .btn-outline:hover { background: #f1f5f9; border-color: #000000; }
     body.dark-mode .btn-outline, html.dark-mode .btn-outline { background: #0a0a0a; color: #ffffff; border-color: #ffffff; }
@@ -127,7 +127,7 @@
     .btn-contact:hover { border-color: var(--border-strong); }
     .btn-table-action { width: 100%; padding: 5px 8px; background: #ffffff; color: #000000; border: 1px solid #000000; border-radius: 6px; font-size: 10px; font-weight: 800; margin-bottom: 3px; cursor: pointer; transition: 0.15s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
     .btn-table-action:hover { background: #f1f5f9; border-color: #000000; }
-    body.dark-mode .btn-table-action, html.dark-mode .btn-table-action { background: #ffffff; color: #000000; border-color: #ffffff; }
+    
     .btn-table-outline { width: 100%; padding: 5px 8px; background: #ffffff; color: #000000; border: 1px solid #000000; border-radius: 6px; font-size: 10px; font-weight: 800; margin-bottom: 3px; cursor: pointer; transition: 0.15s; }
     .btn-table-outline:hover { background: #f1f5f9; border-color: #000000; }
     body.dark-mode .btn-table-outline, html.dark-mode .btn-table-outline { background: #0a0a0a; color: #ffffff; border-color: #ffffff; }
@@ -348,6 +348,161 @@
 [data-theme="dark"] .badge-role-adm { background: #18181b !important; color: #ffffff !important; border: 1px solid #ffffff !important; }
 [data-theme="dark"] .badge-linkedin-found { background: #18181b !important; color: #ffffff !important; border: 1px solid #ffffff !important; }
 [data-theme="dark"] .badge-linkedin-none { background: #18181b !important; color: #aaaaaa !important; border: 1px solid #ffffff !important; }
+
+
+    /* MODO ESCURO PADRONIZADO: TODOS OS BOTÕES E FILTROS EM PRETO COM LETRAS BRANCAS E BORDA BRANCA */
+    body.dark-mode .tab-btn, 
+    html.dark-mode .tab-btn { 
+      background: #000000 !important; 
+      color: #ffffff !important; 
+      border: 1px solid #ffffff !important; 
+    }
+    body.dark-mode .tab-btn:hover, 
+    html.dark-mode .tab-btn:hover { 
+      background: #1a1a1a !important; 
+      color: #ffffff !important; 
+      border-color: #ffffff !important; 
+    }
+    body.dark-mode .tab-btn.active-tab, 
+    html.dark-mode .tab-btn.active-tab { 
+      background: #000000 !important; 
+      color: #ffffff !important; 
+      border: 1.5px solid #ffffff !important; 
+      box-shadow: 0 0 0 1px #ffffff !important; 
+    }
+    body.dark-mode .btn-main, 
+    html.dark-mode .btn-main { 
+      background: #000000 !important; 
+      color: #ffffff !important; 
+      border: 1px solid #ffffff !important; 
+    }
+    body.dark-mode .btn-main:hover, 
+    html.dark-mode .btn-main:hover { 
+      background: #1a1a1a !important; 
+      color: #ffffff !important; 
+      border-color: #ffffff !important; 
+    }
+    body.dark-mode .btn-outline, 
+    html.dark-mode .btn-outline { 
+      background: #000000 !important; 
+      color: #ffffff !important; 
+      border: 1px solid #ffffff !important; 
+    }
+    body.dark-mode .btn-outline:hover, 
+    html.dark-mode .btn-outline:hover { 
+      background: #1a1a1a !important; 
+      color: #ffffff !important; 
+      border-color: #ffffff !important; 
+    }
+    body.dark-mode .btn-table-action, 
+    html.dark-mode .btn-table-action { 
+      background: #000000 !important; 
+      color: #ffffff !important; 
+      border: 1px solid #ffffff !important; 
+    }
+    body.dark-mode .btn-table-action:hover, 
+    html.dark-mode .btn-table-action:hover { 
+      background: #1a1a1a !important; 
+      color: #ffffff !important; 
+      border-color: #ffffff !important; 
+    }
+    body.dark-mode .btn-table-outline, 
+    html.dark-mode .btn-table-outline { 
+      background: #000000 !important; 
+      color: #ffffff !important; 
+      border: 1px solid #ffffff !important; 
+    }
+    body.dark-mode .btn-table-outline:hover, 
+    html.dark-mode .btn-table-outline:hover { 
+      background: #1a1a1a !important; 
+      color: #ffffff !important; 
+      border-color: #ffffff !important; 
+    }
+    body.dark-mode .theme-toggle-btn, 
+    html.dark-mode .theme-toggle-btn { 
+      background: #000000 !important; 
+      color: #ffffff !important; 
+      border: 1px solid #ffffff !important; 
+    }
+    body.dark-mode .theme-toggle-btn:hover, 
+    html.dark-mode .theme-toggle-btn:hover { 
+      background: #1a1a1a !important; 
+      border-color: #ffffff !important; 
+    }
+
+    /* BOTÕES DE FILTRO / COMBOBOX NO MODO ESCURO */
+    body.dark-mode .combobox-control, 
+    html.dark-mode .combobox-control { 
+      background: #000000 !important; 
+      color: #ffffff !important; 
+      border: 1px solid #ffffff !important; 
+    }
+    body.dark-mode .combobox-control:hover, 
+    html.dark-mode .combobox-control:hover,
+    body.dark-mode .searchable-combobox.open .combobox-control, 
+    html.dark-mode .searchable-combobox.open .combobox-control { 
+      border-color: #ffffff !important; 
+      box-shadow: 0 0 0 1px #ffffff !important; 
+    }
+    body.dark-mode .combobox-input, 
+    html.dark-mode .combobox-input { 
+      background: #000000 !important; 
+      color: #ffffff !important; 
+    }
+    body.dark-mode .combobox-input::placeholder, 
+    html.dark-mode .combobox-input::placeholder { 
+      color: #a3a3a3 !important; 
+    }
+    body.dark-mode .combobox-arrow, 
+    html.dark-mode .combobox-arrow { 
+      color: #ffffff !important; 
+    }
+    body.dark-mode .combobox-dropdown, 
+    html.dark-mode .combobox-dropdown { 
+      background: #000000 !important; 
+      color: #ffffff !important; 
+      border: 1px solid #ffffff !important; 
+    }
+    body.dark-mode .combobox-dropdown-header, 
+    html.dark-mode .combobox-dropdown-header { 
+      background: #0a0a0a !important; 
+      color: #ffffff !important; 
+      border-bottom: 1px solid #333333 !important; 
+    }
+    body.dark-mode .combobox-dropdown-header button, 
+    html.dark-mode .combobox-dropdown-header button { 
+      background: #000000 !important; 
+      color: #ffffff !important; 
+      border: 1px solid #ffffff !important; 
+    }
+    body.dark-mode .combobox-item, 
+    html.dark-mode .combobox-item { 
+      color: #ffffff !important; 
+    }
+    body.dark-mode .combobox-item:hover, 
+    html.dark-mode .combobox-item.highlighted, 
+    html.dark-mode .combobox-item.selected { 
+      background: #1f1f1f !important; 
+      color: #ffffff !important; 
+    }
+    body.dark-mode .badge-role,
+    html.dark-mode .badge-role {
+      background: #000000 !important;
+      color: #ffffff !important;
+      border: 1px solid #ffffff !important;
+    }
+    body.dark-mode .badge-role-adm,
+    html.dark-mode .badge-role-adm {
+      background: #000000 !important;
+      color: #ffffff !important;
+      border: 1px solid #ffffff !important;
+    }
+    body.dark-mode #searchInput,
+    html.dark-mode #searchInput {
+      background: #000000 !important;
+      color: #ffffff !important;
+      border: 1px solid #ffffff !important;
+    }
 
 </style>
 
