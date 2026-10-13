@@ -121,7 +121,7 @@
     .badge-info { padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 800; background: var(--badge-bg); color: var(--badge-text); border: 1px solid var(--badge-border); display: inline-block; }
     .badge-role-adm { display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 4px; font-size: 10px; font-weight: 800; background: #ffffff !important; color: #000000 !important; border: 1px solid #000000 !important; box-shadow: none !important; }
     .badge-role { display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 4px; font-size: 10px; font-weight: 700; background: #ffffff !important; color: #000000 !important; border: 1px solid #000000 !important; box-shadow: none !important; }
-    .badge-linkedin-found { display: inline-flex; align-items: center; gap: 4px; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; background: #ffffff !important; color: #000000 !important; border: 1px solid #000000 !important; text-decoration: none !important; }
+    .badge-linkedin-found { display: inline-flex; align-items: center; gap: 4px; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; background: #ffffff !important; color: #000000 !important; border: 1px solid #000000 !important; text-decoration: none !important; transition: 0.15s; }
     .badge-linkedin-none { display: inline-flex; align-items: center; gap: 4px; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600; background: #ffffff !important; color: #666666 !important; border: 1px solid #000000 !important; }
     .btn-contact { font-family: monospace; font-size: 10px; font-weight: 800; color: var(--text-main); background: var(--bg-card); border: 1px solid var(--border-color); padding: 2px 6px; border-radius: 4px; text-decoration: none; display: inline-flex; align-items: center; gap: 3px; }
     .btn-contact:hover { border-color: var(--border-strong); }
@@ -346,8 +346,8 @@
   
 [data-theme="dark"] .badge-role { display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 4px; font-size: 10px; font-weight: 700; background: #ffffff !important; color: #000000 !important; border: 1px solid #000000 !important; box-shadow: none !important; }
 [data-theme="dark"] .badge-role-adm { background: #18181b !important; color: #ffffff !important; border: 1px solid #ffffff !important; }
-[data-theme="dark"] .badge-linkedin-found { background: #18181b !important; color: #ffffff !important; border: 1px solid #ffffff !important; }
-[data-theme="dark"] .badge-linkedin-none { background: #18181b !important; color: #aaaaaa !important; border: 1px solid #ffffff !important; }
+
+
 
 
     /* MODO ESCURO PADRONIZADO: TODOS OS BOTÕES E FILTROS EM PRETO COM LETRAS BRANCAS E BORDA BRANCA */
@@ -501,6 +501,28 @@
     html.dark-mode #searchInput {
       background: #000000 !important;
       color: #ffffff !important;
+      border: 1px solid #ffffff !important;
+    }
+
+
+    /* LINKEDIN NO MODO ESCURO: PRETO COM LETRAS BRANCAS E BORDA BRANCA */
+    body.dark-mode .badge-linkedin-found,
+    html.dark-mode .badge-linkedin-found {
+      background: #000000 !important;
+      color: #ffffff !important;
+      border: 1px solid #ffffff !important;
+      text-decoration: none !important;
+    }
+    body.dark-mode .badge-linkedin-found:hover,
+    html.dark-mode .badge-linkedin-found:hover {
+      background: #1a1a1a !important;
+      color: #ffffff !important;
+      border-color: #ffffff !important;
+    }
+    body.dark-mode .badge-linkedin-none,
+    html.dark-mode .badge-linkedin-none {
+      background: #000000 !important;
+      color: #a3a3a3 !important;
       border: 1px solid #ffffff !important;
     }
 
